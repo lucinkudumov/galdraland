@@ -1,0 +1,71 @@
+<div class="settings" ng-controller="profileSettingsController">
+    <p><a href="#" ng-click="goBack()"><span class="glyphicon glyphicon-chevron-left"></span> Back</a></p>
+    <blockquote>
+        <p>Main information</p>
+        <div class="form-group">
+            <input class="form-control" type="text" ng-model="username" ng-change="checkUsername()" placeholder="Your username">
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="text" ng-model="fullname" placeholder="Your full name">
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="email" ng-model="email" ng-change="checkEmail()" placeholder="Your email">
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="text" ng-model="location" placeholder="Your location">
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="text" ng-model="skype" placeholder="Your skype">
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="text" ng-model="goals" placeholder="Provide your goals">
+        </div>
+        <button class="btn btn-default pull-right" ng-disabled="username.length == 0 || invalidUsername || fullname.length == 0 || email.length == 0 || invalidEmail || location.length == 0" ng-click="saveMainInformation()">Save</button>
+    </blockquote>
+    <blockquote>
+        <p>Experience</p>
+        <textarea class="form-control" ng-model="experience" placeholder="Provide your experience..."></textarea>
+        <br>
+        <button class="btn btn-default pull-right" ng-click="saveExperience()">Save</button>
+    </blockquote>
+    <blockquote>
+        <p>Education</p>
+        <div ng-repeat="e in educations" style="margin-bottom: 20px;">
+            <div class="input-group">
+              <input type="text" ng-model="e.school.name" class="form-control" placeholder="Name of institution">
+              <div class="input-group-btn">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">{{ e.type || "Choose type" }} <span class="caret"></span></button>
+                <ul class="dropdown-menu pull-right">
+                  <li><a href="" ng-click="setType(e, 'School')">School</a></li>
+                  <li><a href="" ng-click="setType(e, 'College')">College</a></li>
+                  <li><a href="" ng-click="setType(e, 'University')">University</a></li>
+                </ul>
+              </div>
+              <span class="input-group-btn">
+                <button class="btn btn-default btn-remove" type="button" ng-click="removeEducation(e)">Remove</button>
+              </span>
+            </div>
+            <input class="form-control year" type="text" ng-model="e.year.name" placeholder="Year">
+        </div>
+        <button class="btn btn-default pull-left add" ng-click="addSchool()">Add</button>
+        <button class="btn btn-default pull-right" ng-disabled="validateEducation()" ng-click="saveEducations()">Save</button>
+    </blockquote>
+    <blockquote>
+        <p>Links</p>
+        <div ng-repeat="l in links" style="margin-bottom: 20px;">
+            <div class="input-group">
+              <input type="text" ng-model="l.link" placeholder="Link" class="form-control">
+              <span class="input-group-btn">
+                <button class="btn btn-default btn-remove" type="button" ng-click="removeLink(l)">Remove</button>
+              </span>
+            </div>
+            <input class="form-control" type="text" ng-model="l.name" placeholder="Name of link">
+        </div>
+        <button class="btn btn-default pull-left add" ng-click="addLink()">Add</button>
+        <button class="btn btn-default pull-right" ng-disabled="validateLinks()" ng-click="saveLinks()">Save</button>
+    </blockquote>
+    <blockquote ng-show="false">
+        <p>Interests</p>
+        <button class="btn btn-default pull-right" ng-disabled="validateLinks()" ng-click="saveLinks()">Save</button>
+    </blockquote>
+</div>

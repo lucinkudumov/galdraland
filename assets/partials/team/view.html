@@ -1,0 +1,21 @@
+<div ng-controller="teamViewController">
+    <div class="row">
+        <div class="col-md-2 user-container">
+            <h4>{{ team.name }}</h4>
+            <p class="description" style="font-size: 13px;">{{ team.description }}</p>
+            <hr>
+            <div class="avatar" style="background: url('{{ team.owner.photo }}large')"></div>
+            <p class="title">Manager</p>
+            <p class="name">{{ team.owner.fullname }}</p>
+            <p class="username"><i>{{ team.owner.username }}</i></p>
+        </div>
+        <div class="col-md-8" ng-show="!loading && team">
+            <h5>Team members</h5>
+            <p>No members, invite new members now.</p>
+            <ul ng-show="team.teamMembers.length > 0">
+                <li ng-repeat="member in team.teamMembers"></li>
+            </ul>
+            <button class="btn btn-success" ng-click="inviteUser()" ng-show="isManager">Invite user to team.</button>
+        </div>
+    </div>
+</div>

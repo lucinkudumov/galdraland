@@ -1,0 +1,426 @@
+html {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+html body {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  font-weight: 300;
+  font-size: 16px;
+}
+html body .badge-primary {
+  background: #34495E;
+}
+html body a:hover,
+html body a:focus {
+  text-decoration: none;
+}
+html body .login {
+  position: relative;
+}
+html body .login header {
+  padding: 120px 70px 20px;
+  text-align: center;
+}
+html body .login header h1 {
+  color: #34495E;
+  font-family: "Grand Hotel", cursive;
+  font-weight: 400;
+  font-size: 200px;
+}
+html body .login .sign-in {
+  text-align: center;
+}
+html body .login .sign-in .link {
+  color: #FF5D57;
+  font-weight: bold;
+  font-size: 20px;
+  text-transform: uppercase;
+  transition: color 0.2s ease-in;
+  -webkit-transition: color 0.2s ease-in;
+  -moz-transition: color 0.2s ease-in;
+  -o-transition: color 0.2s ease-in;
+}
+html body .login .sign-in .link:hover {
+  color: #41505E;
+  text-decoration: none;
+}
+html body .main .header {
+  padding: 10px 0px 0px;
+}
+html body .main .header h3 {
+  margin-top: 10px;
+  color: #34495E;
+  font-family: "Grand Hotel", cursive;
+  font-weight: 400;
+}
+html body .main .header .logout {
+  text-align: right;
+  padding-top: 12.5px;
+  font-size: 15px;
+  font-weight: 300;
+}
+html body .main .header .logout a {
+  color: #34495E;
+  text-transform: lowercase;
+}
+html body .main .header .logout a:hover {
+  text-decoration: none;
+}
+html body .main .line {
+  margin-top: 5px;
+}
+html body .main .avatar {
+  display: block;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 50px;
+  width: 100px;
+  height: 100px;
+  background-repeat: no-repeat;
+}
+html body .main pre {
+  word-break: break-all;
+  word-wrap: break-word;
+  white-space: -moz-pre-wrap;
+  white-space: pre-wrap;
+  white-space: pre;
+}
+html body .left-side p {
+  margin-top: 15px;
+}
+html body .left-side p:first-child {
+  margin-top: 25px;
+}
+html body .left-side small {
+  color: #999;
+  font-size: 85%;
+}
+html body .settings h2 {
+  font-weight: 300;
+  margin-top: 0px;
+}
+html body .settings blockquote {
+  margin-top: 20px;
+  padding-bottom: 40px;
+}
+html body .settings blockquote hr {
+  margin: 10px 0px;
+}
+html body .settings input {
+  box-shadow: none;
+  border: none;
+  border-bottom: 1px solid #cccccc;
+  border-radius: 0px;
+  padding-left: 0px;
+}
+html body .settings input:focus {
+  box-shadow: none;
+}
+html body .settings .dropdown-toggle {
+  border: none;
+  border-radius: 0px;
+  border-bottom: 1px solid #cccccc;
+  padding-bottom: 7px;
+}
+html body .settings .year {
+  width: 100px;
+  text-align: center;
+}
+html body .settings .newCollege {
+  position: relative;
+  height: 120px;
+}
+html body .settings .newCollege .add {
+  margin-top: 20px;
+}
+html body .settings textarea {
+  border-radius: 0px;
+  border: none;
+  border-bottom: 1px solid #cccccc;
+  box-shadow: none;
+  resize: none;
+  height: 200px;
+}
+html body .settings textarea:focus {
+  box-shadow: none;
+}
+html body .settings .btn-remove {
+  border: none;
+  border-bottom: 1px solid #cccccc;
+  border-radius: 0px;
+  padding-bottom: 7px;
+}
+html body .main-menu ul {
+  list-style: none;
+  height: 100%;
+  margin-bottom: 0px;
+}
+html body .main-menu ul li {
+  display: inline-block;
+  padding: 15px 10px 5px;
+  height: 100%;
+}
+html body .main-menu ul li a {
+  color: #000;
+  font-size: 15px;
+  font-weight: 300;
+}
+html body .teams tr td {
+  text-align: center;
+}
+html body .teams tr td.err-msg {
+  text-align: center !important;
+  font-size: 15px;
+  color: #999;
+}
+html body .teams tr td:first-child {
+  text-align: left;
+}
+html body .teams tr td:last-child {
+  text-align: right;
+}
+html body ul.left-side-menu {
+  list-style: none;
+}
+html body ul.left-side-menu li {
+  font-size: 14px;
+  border-right: 2px solid #34495E;
+  cursor: pointer;
+  padding: 7px 0px;
+  -webkit-transition: padding 0.2s ease-out;
+  -moz-transition: padding 0.2s ease-out;
+  -o-transition: padding 0.2s ease-out;
+  transition: padding 0.2s ease-out;
+}
+html body ul.left-side-menu li:hover {
+  padding-left: 20px;
+}
+html body .user-container {
+  text-align: center;
+}
+html body .user-container .title {
+  margin-top: 10px;
+}
+html body .user-container .name,
+html body .user-container .username {
+  font-size: 14px;
+  color: #999;
+  margin-bottom: 0px;
+}
+
+.email .form-container {
+  padding-top: 50px;
+}
+.email .form-container h2 {
+  color: #34495E;
+  font-weight: 300;
+}
+.email .form-container .btn-primary {
+  background: #34495E;
+}
+
+ul.left-side-menu {
+  list-style: none;
+}
+ul.left-side-menu li {
+  font-size: 14px;
+  border-right: 2px solid #34495E;
+  cursor: pointer;
+  padding: 7px 0px;
+  -webkit-transition: padding 0.2s ease-out;
+  -moz-transition: padding 0.2s ease-out;
+  -o-transition: padding 0.2s ease-out;
+  transition: padding 0.2s ease-out;
+}
+ul.left-side-menu li:hover {
+  padding-left: 20px;
+}
+
+.left-side p {
+  margin-top: 15px;
+}
+.left-side p:first-child {
+  margin-top: 25px;
+}
+.left-side small {
+  color: #999;
+  font-size: 85%;
+}
+
+.login {
+  position: relative;
+}
+.login header {
+  padding: 120px 70px 20px;
+  text-align: center;
+}
+.login header h1 {
+  color: #34495E;
+  font-family: "Grand Hotel", cursive;
+  font-weight: 400;
+  font-size: 200px;
+}
+.login .sign-in {
+  text-align: center;
+}
+.login .sign-in .link {
+  color: #FF5D57;
+  font-weight: bold;
+  font-size: 20px;
+  text-transform: uppercase;
+  transition: color 0.2s ease-in;
+  -webkit-transition: color 0.2s ease-in;
+  -moz-transition: color 0.2s ease-in;
+  -o-transition: color 0.2s ease-in;
+}
+.login .sign-in .link:hover {
+  color: #41505E;
+  text-decoration: none;
+}
+
+.main-menu ul {
+  list-style: none;
+  height: 100%;
+  margin-bottom: 0px;
+}
+.main-menu ul li {
+  display: inline-block;
+  padding: 15px 10px 5px;
+  height: 100%;
+}
+.main-menu ul li a {
+  color: #000;
+  font-size: 15px;
+  font-weight: 300;
+}
+
+.main .header {
+  padding: 10px 0px 0px;
+}
+.main .header h3 {
+  margin-top: 10px;
+  color: #34495E;
+  font-family: "Grand Hotel", cursive;
+  font-weight: 400;
+}
+.main .header .logout {
+  text-align: right;
+  padding-top: 12.5px;
+  font-size: 15px;
+  font-weight: 300;
+}
+.main .header .logout a {
+  color: #34495E;
+  text-transform: lowercase;
+}
+.main .header .logout a:hover {
+  text-decoration: none;
+}
+.main .line {
+  margin-top: 5px;
+}
+.main .avatar {
+  display: block;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 50px;
+  width: 100px;
+  height: 100px;
+  background-repeat: no-repeat;
+}
+.main pre {
+  word-break: break-all;
+  word-wrap: break-word;
+  white-space: -moz-pre-wrap;
+  white-space: pre-wrap;
+  white-space: pre;
+}
+
+.settings h2 {
+  font-weight: 300;
+  margin-top: 0px;
+}
+.settings blockquote {
+  margin-top: 20px;
+  padding-bottom: 40px;
+}
+.settings blockquote hr {
+  margin: 10px 0px;
+}
+.settings input {
+  box-shadow: none;
+  border: none;
+  border-bottom: 1px solid #cccccc;
+  border-radius: 0px;
+  padding-left: 0px;
+}
+.settings input:focus {
+  box-shadow: none;
+}
+.settings .dropdown-toggle {
+  border: none;
+  border-radius: 0px;
+  border-bottom: 1px solid #cccccc;
+  padding-bottom: 7px;
+}
+.settings .year {
+  width: 100px;
+  text-align: center;
+}
+.settings .newCollege {
+  position: relative;
+  height: 120px;
+}
+.settings .newCollege .add {
+  margin-top: 20px;
+}
+.settings textarea {
+  border-radius: 0px;
+  border: none;
+  border-bottom: 1px solid #cccccc;
+  box-shadow: none;
+  resize: none;
+  height: 200px;
+}
+.settings textarea:focus {
+  box-shadow: none;
+}
+.settings .btn-remove {
+  border: none;
+  border-bottom: 1px solid #cccccc;
+  border-radius: 0px;
+  padding-bottom: 7px;
+}
+
+.teams tr td {
+  text-align: center;
+}
+.teams tr td.err-msg {
+  text-align: center !important;
+  font-size: 15px;
+  color: #999;
+}
+.teams tr td:first-child {
+  text-align: left;
+}
+.teams tr td:last-child {
+  text-align: right;
+}
+
+.user-container {
+  text-align: center;
+}
+.user-container .title {
+  margin-top: 10px;
+}
+.user-container .name,
+.user-container .username {
+  font-size: 14px;
+  color: #999;
+  margin-bottom: 0px;
+}

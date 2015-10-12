@@ -1,0 +1,25 @@
+<div class="container main" ng-controller="profileController">
+    <div class="row header">
+        <div class="col-md-4">
+            <h3>GaldbarLand</h3>
+        </div>
+        <div class="col-md-8 logout">
+            <a href="#" ng-click="logout()">Logout</a>
+        </div>
+    </div>
+    <div class="row">
+        <hr class="line">
+    </div>
+    <div class="row">
+        <div class="col-md-2 left-side">
+            <div class="avatar" style="background: url('{{ user.photo }}large')"></div>
+            <p>Teams</p>
+            <small>No teams, <a href="#">search</a> new team now.</small>
+            <p ng-show="recomendation.length > 0">Complete your profile</p>
+            <ul ng-show="recomendation.length > 0">
+                <li ng-repeat="r in recomendation"><small>{{ r }}</small></li>
+            </ul>
+        </div>
+        <div class="col-md-5" ui-view="profile-main"></div>
+    </div>
+</div>
