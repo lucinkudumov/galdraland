@@ -1,0 +1,29 @@
+<div class="container main" ng-controller="profileController">
+    <div class="row header">
+        <div class="col-md-4">
+            <h3>GaldbarLand</h3>
+        </div>
+        <div class="col-md-8 logout">
+            <a href="#" ng-click="logout()">Logout</a>
+        </div>
+    </div>
+    <div class="row">
+        <hr class="line">
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+            <div class="avatar" style="background: url('{{ $root.user.photo }}large')"></div>
+        </div>
+        <div class="col-md-5">
+            <blockquote>
+                <p>{{ $root.user.firstName }} {{ $root.user.lastName }}</p> <small><cite title="Location">{{ $root.user.location }}  <i class="glyphicon glyphicon-map-marker"></i></cite></small>
+                <br>
+                <p ng-show="$root.user.educations.length > 0">Education</p>
+                <small ng-repeat="e in $root.user.educations" title="Education-{{ e.school.id }}">{{ e.type }}, {{ e.school.name }}, {{ e.year.name }}</small>
+                <br>
+                <p>Links</p>
+                <small><a href="{{ $root.user.link }}" target="_blank">Facebook</a></small>
+            </blockquote>
+        </div>
+    </div>
+</div>

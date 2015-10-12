@@ -1,0 +1,144 @@
+html {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+html body {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  font-weight: 300;
+  font-size: 16px;
+}
+html body .login {
+  position: relative;
+}
+html body .login header {
+  padding: 120px 70px 20px;
+  text-align: center;
+}
+html body .login header h1 {
+  color: #34495E;
+  font-family: "Grand Hotel", cursive;
+  font-weight: 400;
+  font-size: 200px;
+}
+html body .login .sign-in {
+  text-align: center;
+}
+html body .login .sign-in .link {
+  color: #FF5D57;
+  font-weight: bold;
+  font-size: 20px;
+  text-transform: uppercase;
+  transition: color 0.2s ease-in;
+  -webkit-transition: color 0.2s ease-in;
+  -moz-transition: color 0.2s ease-in;
+  -o-transition: color 0.2s ease-in;
+}
+html body .login .sign-in .link:hover {
+  color: #41505E;
+  text-decoration: none;
+}
+html body .main .header {
+  padding: 10px 0px 0px;
+}
+html body .main .header h3 {
+  margin-top: 10px;
+  color: #34495E;
+  font-family: "Grand Hotel", cursive;
+  font-weight: 400;
+}
+html body .main .header .logout {
+  text-align: right;
+  padding-top: 12.5px;
+  font-size: 15px;
+  font-weight: 300;
+}
+html body .main .header .logout a {
+  color: #34495E;
+  text-transform: lowercase;
+}
+html body .main .header .logout a:hover {
+  text-decoration: none;
+}
+html body .main .line {
+  margin-top: 5px;
+}
+html body .main .avatar {
+  display: block;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 50px;
+  width: 100px;
+  height: 100px;
+  background-repeat: no-repeat;
+}
+
+.login {
+  position: relative;
+}
+.login header {
+  padding: 120px 70px 20px;
+  text-align: center;
+}
+.login header h1 {
+  color: #34495E;
+  font-family: "Grand Hotel", cursive;
+  font-weight: 400;
+  font-size: 200px;
+}
+.login .sign-in {
+  text-align: center;
+}
+.login .sign-in .link {
+  color: #FF5D57;
+  font-weight: bold;
+  font-size: 20px;
+  text-transform: uppercase;
+  transition: color 0.2s ease-in;
+  -webkit-transition: color 0.2s ease-in;
+  -moz-transition: color 0.2s ease-in;
+  -o-transition: color 0.2s ease-in;
+}
+.login .sign-in .link:hover {
+  color: #41505E;
+  text-decoration: none;
+}
+
+.main .header {
+  padding: 10px 0px 0px;
+}
+.main .header h3 {
+  margin-top: 10px;
+  color: #34495E;
+  font-family: "Grand Hotel", cursive;
+  font-weight: 400;
+}
+.main .header .logout {
+  text-align: right;
+  padding-top: 12.5px;
+  font-size: 15px;
+  font-weight: 300;
+}
+.main .header .logout a {
+  color: #34495E;
+  text-transform: lowercase;
+}
+.main .header .logout a:hover {
+  text-decoration: none;
+}
+.main .line {
+  margin-top: 5px;
+}
+.main .avatar {
+  display: block;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 50px;
+  width: 100px;
+  height: 100px;
+  background-repeat: no-repeat;
+}
