@@ -1,0 +1,45 @@
+<div class="modal-header">
+    <h4>Send invite</h4>
+</div>
+<div class="modal-body">
+    <!--<div class="form-group">
+        <input class="form-control" type="text" ng-model="values.to" placeholder="Username or email">
+    </div>-->
+    <div class="form-group">
+        <input class="form-control" type="text" ng-model="values.title" placeholder="Title of member">
+    </div>
+    <div class="form-group">
+        <input class="form-control" type="text" ng-model="values.roles" placeholder="Roles (separated by commas)">
+    </div>
+    <div class="form-group">
+        <textarea class="form-control" ng-model="values.msg" placeholder="Message to user"></textarea>
+    </div>
+    <div class="form-group">
+        <ul class="unstyled invites">
+            <li>
+                <h5>Invites: </h5>
+                <form role="form" class="form-inline">
+                    <div class="form-group">
+                        <input type="text" class="form-control" ng-model="values.newMember" placeholder="Email, username or name on facebook" ng-change="findUser(values.newMember)">
+                        <ul class="dropdown-menu users-list" ng-show="values.users.length > 0">
+                            <li ng-repeat="user in values.users"><a href="#" ng-click="addInvite(user)">{{ user.username }}</a></li>
+                        </ul>
+                    </div>
+                    <!--<button type="submit" class="btn btn-primary" ng-click="addInvite()" ng-disabled="!values.newMember">+</button>-->
+                </form>
+            </li>
+            <li ng-repeat="i in values.invites">
+                <form role="form" class="form-inline">
+                    <div class="form-group">
+                        <input type="text" class="form-control" ng-model="i.user" readonly>
+                    </div>
+                    <button type="submit" class="btn btn-danger" ng-click="removeInvite($index)">-</button>
+                </form>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" ng-disabled="values.invites.length <= 0 || !values.title" ng-click="send()">Send</button>
+    <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+</div>

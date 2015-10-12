@@ -1,0 +1,60 @@
+<div class="row" ng-controller="createAdventureController">
+    <div class="col-md-8">
+        <p>Create new adventure</p>
+        <div class="form-group">
+            <input class="form-control" type="text" ng-model="name" placeholder="Provide adventure name">
+        </div>
+        <div class="form-group">
+            <textarea ng-model="description" class="form-control" placeholder="Provide adventure description (optional)"></textarea>
+        </div>
+		<div class="form-group">
+            <input class="form-control" type="text" ng-model="tags" placeholder="Tags(optional)">
+        </div>
+		<div class="form-group">
+			<ul class="unstyled invites">
+				<li ng-hide = "values.team">
+					<form role="form" class="form-inline">
+						<input class="form-control" type="text" placeholder="Provide team name"  ng-model="values.newTeam" ng-change="findTeam(values.newTeam)">
+						<ul class="dropdown-menu users-list" ng-show="values.teams.length > 0">
+							<li ng-repeat="team in values.teams"><a href="#" ng-click="attachTeam(team)">{{ team.name }}</a></li>
+						</ul>
+						<!--<button type="submit" class="btn btn-primary" ng-click="addInvite()" ng-disabled="!values.newMember">+</button>-->
+					</form>
+				</li>
+				<li ng-hide = "values.teamCount">
+					No teams of your own, <a href="/teams/create">add</a> new team now.
+				</li>
+				<li ng-show = "values.team">
+					<form role="form" class="form-inline">
+						<div class="form-group">
+							<input type="text" class="form-control" ng-model="values.team.name" readonly>
+						</div>
+						<button type="submit" class="btn btn-danger" ng-click="removeTeam()">-</button>
+					</form>
+				</li>
+			</ul>
+		</div>
+		<div class='col-md-5 adv-date'>
+			<div class="form-group">
+				<div class='input-group date'>
+					<input type='text' class="form-control" placeholder = "Adventure start date" datepicker-popup="{{format}}" ng-model="start" is-open="start_opend" min-date="today" datepicker-options="dateOptions" />
+					<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+					</span>
+				</div>
+			</div>
+		</div>
+		<div class='col-md-5 adv-date'>
+			<div class="form-group">
+				<div class='input-group date'>
+					<input type='text' class="form-control" placeholder = "Adventure end date"  datepicker-popup="{{format}}" ng-model="end" is-open="end_opend" min-date="start" datepicker-options="dateOptions" />
+					<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+					</span>
+				</div>
+			</div>
+		</div>
+		<div class="form-group col-md-12">
+            <input type="checkbox" ng-model="fb_post">Would like to post it on your Facebook Page?
+        </div>
+        <button class="btn btn-primary" ng-disabled="!name || !start || !end || !values.team || start >= end" ng-click="createAdventure()">Create adventure</button>
+    </div>
+</div>

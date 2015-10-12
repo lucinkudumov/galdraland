@@ -1,0 +1,15 @@
+{
+  "name": "galdraland",
+  "version": "0.0.0",
+  "moduleType": [
+    "amd"
+  ],
+  "authors": [
+    "wu guang cheng"
+  ],
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "raty": "~2.7.0"
+  }
+}

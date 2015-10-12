@@ -1,0 +1,36 @@
+<div ng-controller="profileViewController">
+    <blockquote>
+        <p>{{ user.fullname }} <a href="/settings"><span class="badge badge-primary">Settings</span></a></p>
+        <small><cite title="Username">{{ user.username}}  <i class="glyphicon glyphicon-user"></i></cite></small>
+        <small><cite title="Email">{{ user.email.email }} <i class="glyphicon glyphicon-pencil"></i></cite></small> 
+        <small ng-show="user.location"><cite title="Location">{{ user.location }}  <i class="glyphicon glyphicon-map-marker"></i></cite></small>
+        <small ng-show="user.skype">Skype: <cite title="Skype">{{ user.skype }}</cite></small>
+        <small ng-show="user.goals">Goals: <cite title="Goals">{{ user.goals }}</cite></small>
+        <br>
+        <p ng-show="user.educations.length > 0">Education</p>
+        <small ng-show="!user.educations || user.educations.length == 0">No educations, <a href="/settings">add</a> now.</small>
+        <small ng-repeat="e in user.educations" title="Education-{{ e.school.id }}">{{ e.type }}, {{ e.school.name }}, {{ e.year.name }}</small>
+        <br>
+        <p>Links</p>
+        <small ng-show="!user.links || user.link.length == 0">No links, <a href="/settings">add</a> now.</small>
+        <small ng-repeat="l in user.links"><a href="{{ l.link }}" target="_blank">{{ l.name || l.link }}</a></small>
+        <br>
+        <p>Experience</p>
+        <small ng-show="!user.experience || user.experience.length == 0">No experience, <a href="/settings">add</a> now.</small>
+        <pre ng-show="user.experience">{{ user.experience }}</pre>
+        <br>
+		<p>Biography</p>
+        <small ng-show="!user.bio">No biography, <a href="/settings">add</a> now.</small>
+        <pre ng-show="user.bio">{{ user.bio }}</pre>
+        <br>
+		<p>Interests</p>
+        <small ng-show="!user.interests || user.interests.length == 0">No interests, join to team and create new adventure to add your interests.</small>
+        <pre ng-show="user.interests">
+		<div class = "interest" ng-repeat="item in user.interests  | orderBy:'topic.topic' | groupBy:['topic.topic']" style = "padding: 0;">
+			<p ng-show="item.group_by_CHANGED">{{item.topic.topic}}</p>
+			<small>{{item.information}}</small>
+		</div>
+		</pre>
+        <br>  
+    </blockquote>
+</div>

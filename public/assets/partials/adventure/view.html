@@ -1,0 +1,40 @@
+<div ng-controller="adventureViewController" class="adventureMembers">
+    <div class="row">
+        <div class="col-md-3 user-container">
+            <h4 ng-bind="adventure.name"></h4>
+            <p class="description" style="font-size: 13px;" ng-bind="adventure.description"></p>
+			<td><rating-widget ref="adventure._id" ></rating-widget></td>
+            <hr>
+            <div ng-show="isManager" class="btn-group btn-group-justified">
+                <a href="/adventures/edit/{{ adventure._id }}" class="btn btn-primary">Edit</a>
+                <a href="#" ng-click="modal()" class="btn btn-danger">Remove</a>
+            </div>
+        </div>
+        <div class="col-md-8" ng-show="!loading && adventure">
+            <ul class="members-list">
+				<li>
+                    <p>Description</p>
+                    <p class="name">{{adventure.description}}</p>
+                </li>
+                <li>
+                    <p>Team</p>
+                    <p class="name">{{adventure.team.name}}</p>
+                </li>
+				<li>
+                    <p>Timeline</p>
+                    <p class="name">{{adventure.start + " - " + adventure.end}}</p>
+                </li>
+				<li>
+                    <p>Tags</p>
+                    <p class="name">{{adventure.tags.join(" ")}}</p>
+                </li>
+				<li>
+                    <p>Status</p>
+                    <p class="name">{{adventure.status}}</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+	
+	<comment-widget ref="adventure._id" ></comment-widget>
+</div>

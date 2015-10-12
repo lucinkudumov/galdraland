@@ -1,0 +1,17 @@
+
+> contextify@0.1.9 install e:\work\galdra\galdraland\galdraland-1-0\node_modules\email-templates\node_modules\juice\node_modules\jsdom\node_modules\contextify
+> node-gyp rebuild
+
+
+e:\work\galdra\galdraland\galdraland-1-0\node_modules\email-templates\node_modules\juice\node_modules\jsdom\node_modules\contextify>node "c:\Program Files\nodejs\node_modules\npm\bin\node-gyp-bin\\..\..\node_modules\node-gyp\bin\node-gyp.js" rebuild 
+
+> node-sass@0.8.6 install e:\work\galdra\galdraland\galdraland-1-0\node_modules\email-templates\node_modules\node-sass
+> node build.js
+
+`win32-x64-v8-3.14` exists; testing
+
+  [90m.[0m[90m.[0m[90m.[0m[90m.[0m[90m.[0m[90m.[0m[90m.[0m[90m.[0m[90m.[0m[90m.[0m[90m.[0m[90m.[0m[90m.[0m[90m.[0m[90m.[0m[90m.[0m[90m.[0m[90m.[0m[90m.[0m[90m.[0m[90m.[0m[90m.[0m
+
+[92m [0m[32m 22 passing[0m[90m (23ms)[0m
+
+Binary is fine; exiting

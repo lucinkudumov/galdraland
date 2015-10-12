@@ -1,0 +1,51 @@
+<div ng-controller="headerController">
+    <div class="col-md-4">
+        <h3>GaldraLand</h3>
+    </div>
+    <div class="col-md-8 main-menu">
+        <ul class="pull-right">
+            <li class="dropdown">
+              <a class="dropdown-toggle">
+                  feed <span class="badge">{{ feeds.length }}</span>
+              </a>
+              <ul class="dropdown-menu" ui-toggle>
+                  <li ng-show="feeds.length == 0" style="text-align: center;">
+                      <h5>No feeds now.</h5>
+                  </li>
+                  <!--li ng-repeat="i in invites">
+                      <h5>Your recived invite to "{{ i.team }}" team</h5>
+                      <p>Role: {{ i.title }}</p>
+                      <p ng-show="i.message">{{ i.message }}</p>
+                      <div class="view">
+                          <button class="btn btn-primary" ng-click="showInvite(i)">View</button>
+                      </div>
+                  </li-->
+				  <li ng-repeat="i in feeds">
+					  <h5>{{i.alert}}</h5>
+                      <p>Role: {{ i.title }}</p>
+                      <p ng-show="i.message">{{ i.message }}</p>
+                      <div class="view">
+                          <button class="btn btn-primary" ng-click="showApply(i)" ng-show="i.category == 1">View</button>
+						  <button class="btn btn-primary" ng-click="showInvite(i)" ng-show="i.category == 0">View</button>
+                      </div>
+                  </li>
+              </ul>
+            </li>
+            <li><a href="/profile">profile</a></li>
+            <li><a href="/teams">teams</a></li>
+			<li><a href="/adventures">adventures</a></li>
+            <li><a href="#" ng-click="logout()">logout</a></li>
+        </ul>
+    </div>
+	<div class="col-md-12 search-menu">
+		<ul class="pull-right">
+            <li><select ng-model="scategory">
+				<option value="a">Adventure</option>
+				<option value="t">Team</option>
+				<option value="p">People</option>
+				</select></li>
+            <li><input type="text" ng-model="stext" /></li>
+            <li><a href="#" ng-click="search()">Search</a></li>
+        </ul>
+	</div>
+</div>

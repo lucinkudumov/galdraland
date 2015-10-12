@@ -1,0 +1,13 @@
+<div ng-controller="profileLeftSideController" class="profile-left-side">
+    <div class="avatar" style="background-image: url('{{ user.photo }}')"></div>
+    <p>Teams</p>
+    <small ng-show="teams.length == 0">No teams, <a href="/teams">search</a> or <a href="/teams/create">add</a> new team now.</small> 
+    <ul ng-show="teams.length > 0"> 
+        <li ng-repeat="t in teams"><a href="/teams/view/{{ t._id }}">{{ t.name }}</a></li>
+    </ul>
+    <hr ng-show="recomendation.length > 0">
+    <p ng-show="recomendation.length > 0">Complete your profile</p>
+    <ul ng-show="recomendation.length > 0">
+        <li ng-repeat="r in recomendation">{{ r }}</li>
+    </ul>
+</div>

@@ -1,0 +1,41 @@
+<div ng-controller="teamViewController" class="teamMembers">
+    <div class="row">
+        <div class="col-md-3 user-container">
+            <h4 ng-bind="team.name"></h4>
+            <p class="description" style="font-size: 13px;" ng-bind="team.description"></p>
+			<rating-widget ref="team._id" ></rating-widget>
+            <hr>
+            <div ng-show="isManager" class="btn-group btn-group-justified">
+                <a href="/teams/edit/{{ team._id }}" class="btn btn-primary">Edit</a>
+                <a href="#" ng-click="modal()" class="btn btn-danger">Remove</a>
+            </div>
+            <div ng-hide="isManager" class="btn-group btn-group-justified">
+                <a href="#" class="btn btn-danger" ng-click="leave();">Leave</a>
+            </div>
+        </div>
+        <div class="col-md-8" ng-show="!loading && team">
+            <p ng-show="team.teamMembers.length == 0">No members, invite new members now.</p>
+            <ul ng-show="team.teamMembers.length > 0" class="members-list">
+                <li ng-repeat="member in team.teamMembers" ng-click="showMember(member)">
+                    <p ng-bind="member.title"></p>
+                    <p class="name" ng-bind="member.user.fullname"></p>
+                </li>
+            </ul>
+            <button ng-show="isManager" class="btn btn-success pull-right" ng-click="sendInvite()">Add member</button>
+			<button ng-show="!isMember && !isManager" class="btn btn-success pull-right" ng-click="applyTeam()">Apply for this team</button>
+			<!--button class="btn btn-success pull-right" ng-click="applyTeam()">Apply for this team</button-->
+        </div>
+    </div>
+	<div class="row">
+		<div class="user-container">
+            <h4>Adventures of the team</h4>
+			<hr>
+		</div>
+		<ul ng-show="adventures.length > 0" class="members-list">
+			<li ng-repeat="adv in adventures" ng-click="viewAdventure(adv)">
+				<p class="name" ng-bind="adv.name"></p>
+			</li>
+		</ul>
+	</div>
+	<comment-widget ref="team._id" ></comment-widget>
+</div>

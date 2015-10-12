@@ -1,0 +1,35 @@
+<div class="modal-header">
+    <h4>Request for joining "{{ apply.team.name }}"</h4>
+</div>
+<div class="modal-body">
+    <table class="table" ng-hide="apply.ownerApproved || apply.ownerRejected">
+        <tr>
+            <td style="border-top: none;">From: </td>
+            <td style="border-top: none;">{{ apply.fromName }}</td>
+        </tr>
+        <tr>
+            <td>Team: </td>
+            <td><a href="#">{{ apply.team.name }}</a></td>
+        </tr>
+        <tr>
+            <td>Title: </td>
+            <td>{{ apply.title }}</td>
+        </tr>
+        <tr ng-show="invite.roles.length > 0">
+            <td>Roles: </td>
+            <td>{{ apply.roles.join(" ,") }}</td>
+        </tr>
+        <tr ng-show="invite.message">
+            <td>Message: </td>
+            <td class="msg">{{ apply.message }}</td>
+        </tr>
+    </table>
+	<h5 ng-show="apply.ownerApproved">You request has been approved.</h5>
+	<h5 ng-show="apply.ownerRejected">You request has been rejected.</h5>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" ng-click="approve()" ng-hide="apply.ownerApproved || apply.ownerRejected">Approve</button>
+    <button class="btn btn-warning" ng-click="reject()" ng-hide="apply.ownerApproved || apply.ownerRejected">Reject</button>
+	<button class="btn btn-primary" ng-click="publish()" ng-show="apply.ownerApproved">Publish To FB</button>
+	<button class="btn btn-warning" ng-click="close()" ng-show="apply.ownerApproved || apply.ownerRejected">Close</button>
+</div>

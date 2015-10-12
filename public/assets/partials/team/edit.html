@@ -1,0 +1,13 @@
+<div class="row" ng-controller="editTeamController">
+    <div class="col-md-8">
+        <p><a href="#" ng-click="goBack()"><span class="glyphicon glyphicon-chevron-left"></span> Back</a></p>
+        <p>Edit team</p>
+        <div class="form-group">
+            <input class="form-control" type="text" ng-model="name" placeholder="Provide team name">
+        </div>
+        <div class="form-group">
+            <textarea ng-model="description" class="form-control" placeholder="Provide team description (optional)"></textarea>
+        </div>
+        <button class="btn btn-primary" ng-disabled="!name" ng-click="editTeam()">Save team</button>
+    </div>
+</div>

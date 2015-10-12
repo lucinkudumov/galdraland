@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html ng-app="galdra">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <title>Galdra</title>
+        <link href='http://fonts.googleapis.com/css?family=Grand+Hotel' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" type="text/css" href="/assets/css/app.css" media="screen">
+        <script type="text/javascript" src="/assets/js/libs.js"></script>
+        <script type="text/javascript" src="/assets/js/app.js"></script>
+    </head>
+    <body>
+		<script>
+			window.fbAsyncInit = function() {
+				FB.init({
+//					appId      : '1406306389669359',
+					appId	   : '110469289012320',
+					xfbml      : true,
+					version    : 'v2.1'
+				});
+			};
+
+			(function(d, s, id){
+				var js, fjs = d.getElementsByTagName(s)[0];
+				if (d.getElementById(id)) {return;}
+					js = d.createElement(s); js.id = id;
+					js.src = "//connect.facebook.net/en_US/sdk.js";
+					fjs.parentNode.insertBefore(js, fjs);
+			}(document, 'script', 'facebook-jssdk'));
+		</script>
+        <div ui-view="main"></div>
+    </body>
+</html>

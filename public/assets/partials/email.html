@@ -1,0 +1,17 @@
+<div class="container email" ng-controller="emailController">
+    <div class="row form-container">
+        <div class="col-md-6 col-md-offset-3">
+            <h2>Please, provide your email address: </h2>
+            <div class="form-group">
+                <input class="form-control" type="email" ng-model="email" ng-change="validateEmail()" placeholder="Your email address">
+                <p class="error" ng-show="errors['email']">errors['email']</p>
+            </div>
+            <h2>Confirm your username:</h2>
+            <div class="form-group">
+                <input class="form-control" type="username" ng-model="username" placeholder="Your username">
+                <p class="error" ng-show="errors['username']">{{ errors['username'] }}</p>
+            </div>
+            <button type="submit" class="btn btn-primary" ng-click="saveInformation()">Save &amp; Continue</button>
+        </div>
+    </div>
+</div>

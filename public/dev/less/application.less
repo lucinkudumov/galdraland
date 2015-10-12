@@ -1,0 +1,61 @@
+html {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  
+  body {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    font-weight: 300;
+    font-size: 16px;
+    
+    .badge-primary {
+      background: #34495E;
+    }
+    
+    a {
+      &:hover, &:focus { 
+        text-decoration: none;
+      }
+    }
+    
+    .modal-body {
+      padding: 10px 20px;
+    }
+    
+    .msg {
+      color: #999;
+    }
+    
+    .unstyled {
+      list-style: none;
+    }
+    
+    
+    
+    @import "login.less";
+    @import "main.less";
+    @import "left-side.less";
+    @import "settings.less";
+    @import "main-menu.less";
+    @import "teams.less";
+    @import "left-side-menu.less";
+    @import "user-container.less";
+    @import "profile-left-side.less";
+    @import "teamMembers.less";
+  }
+  
+  .error {
+    color: red;
+    font-size: 11px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+  
+  .users-list {
+    display: block;
+    top: 90%;
+    left: 20px;
+  }
+}

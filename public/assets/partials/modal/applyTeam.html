@@ -1,0 +1,21 @@
+<div class="modal-header">
+    <h4>Apply for this team</h4>
+</div>
+<div class="modal-body">
+    <!--<div class="form-group">
+        <input class="form-control" type="text" ng-model="values.to" placeholder="Username or email">
+    </div>-->
+    <div class="form-group">
+        <input class="form-control" type="text" ng-model="values.title" placeholder="Your desired title">
+    </div>
+    <div class="form-group">
+        <input class="form-control" type="text" ng-model="values.roles" placeholder="Your roles (separated by commas)">
+    </div>
+    <div class="form-group">
+        <textarea class="form-control" ng-model="values.msg" placeholder="Message to team owner"></textarea>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" ng-disabled="values.invites.length <= 0 || !values.title" ng-click="send()">Send</button>
+    <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+</div>

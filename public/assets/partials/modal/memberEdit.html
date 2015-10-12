@@ -1,0 +1,21 @@
+<div class="modal-header">
+    <h4>Edit member "{{ user.user.fullname }}"</h4>
+</div>
+<div class="modal-body">
+    <div class="form-group">
+        <input class="form-control" type="text" ng-model="user.title" placeholder="Member title">
+    </div>
+    <div class="form-group">
+        <input class="form-control" type="text" ng-model="user.description" placeholder="Description">
+    </div>
+    <div class="form-group">
+        <input class="form-control" type="text" ng-model="user.status" placeholder="Status">
+    </div>
+    <div class="form-group">
+        <input class="form-control" type="text" ng-model="user.roles" placeholder="Roles (separated by commas)">
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" ng-click="save()">Save</button>
+    <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+</div>
