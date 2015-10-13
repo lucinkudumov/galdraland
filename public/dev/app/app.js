@@ -1,7 +1,7 @@
 var app = angular.module("galdra", ["ngRoute", "ui.router", "ngCookies", "ui.bootstrap"]);
 var config = {
-	//siteurl : 'http://kkkalyosha.wix.com/galdraland/'
-	siteurl : 'http://galdralandapp.herokuapp.com/'
+	//siteurl : 'http://galdraland.com:9010/'
+	siteurl : 'http://galdraland-1-0.herokuapp.com/'
 }
 
 app.config(["$urlRouterProvider", "$locationProvider", "$stateProvider", "$httpProvider", function ($urlRouterProvider, $locationProvider, $stateProvider, $httpProvider) {

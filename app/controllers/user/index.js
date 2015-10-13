@@ -66,11 +66,11 @@ module.exports = function (opts) {
         "get#cookie" : function (req, res) {
 			if(req.session.returnTo) var returnTo = req.session.returnTo;
             if (process.env.HEROKU) {
-                var redirect = "http://galdralandapp.herokuapp.com",
-                    failRedirect = "http://galdralandapp.herokuapp.com/";
+                var redirect = "http://galdraland-1-0.herokuapp.com",
+                    failRedirect = "http://galdraland-1-0.herokuapp.com/";
             } else {
-                var redirect = "http://kkkalyosha.wix.com/galdraland",
-                    failRedirect = "http://kkkalyosha.wix.com/galdraland";
+                var redirect = "http://galdraland.com:9010",
+                    failRedirect = "http://galdraland.com:9010/";
             }
 
 			if(req.session.returnTo) redirect = redirect + req.session.returnTo;

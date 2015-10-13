@@ -22,16 +22,16 @@ module.exports.facebook = function (opts, cb) {
 	if (process.env.HEROKU) {
         var clientID ="110469289012320",
             clientSecret = "1409e3c1451756d7c2ce7be7e78a20ea",
-            callback = "https://galdralandapp.herokuapp.com/api/callback/facebook";
+            callback = "https://galdraland-1-0.herokuapp.com/api/callback/facebook";
     } else {
 		var clientID ="1406306389669359",
             clientSecret = "fa79806ce48dd6051d257b2679d566d7",
-            callback = "http://kkkalyosha.wix.com/galdraland/api/callback/facebook";
+            callback = "http://galdraland.com:9010/api/callback/facebook";
     }
 /*
 	var clientID ="1496374667309040",
             clientSecret = "e49ac222948c70b2afdede016dbacb22",
-            callback = "https://galdralandapp.herokuapp.com/api/callback/facebook";
+            callback = "https://galdraland-1-0.herokuapp.com/api/callback/facebook";
 */
     passport.use(new FacebookStrategy({
         clientID: clientID, // need change to real id (this is test clientID)

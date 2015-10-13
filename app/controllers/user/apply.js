@@ -57,11 +57,11 @@ module.exports = function (opts) {
 								subject: "Team member request to " + team.name, // Subject line
 								text: "Hello, " + username + ", \n" + 
 									  "You have received a request from " + req.user.username + " for the member role " + roles.join(",") + " to \"" + team.name + "\" team as " + title + ".\n" +
-									  "If you want to accept it, please, use next link: http://kkkalyosha.wix.com/galdraland \n" + 
+									  "If you want to accept it, please, use next link: http://galdraland.com \n" + 
 									  "Thanks, Galdraland team.",
 								html: "Hello, " + username + ", <br>" + 
 									  "You have received a request from " + req.user.username + " for the member role " + roles.join(",") + " to \"" + team.name + "\" team as " + title + ".<br>" +
-									  "If you want to accept it, please, use next link: http://kkkalyosha.wix.com/galdraland <br>" + 
+									  "If you want to accept it, please, use next link: http://galdraland.com/ <br>" + 
 									  "Thanks, Galdraland team.",
 							}, function (err) {
 								console.log(err);
