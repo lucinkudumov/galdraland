@@ -77,11 +77,11 @@ module.exports = function (opts) {
 											subject: "Invite to " + team.name, // Subject line
 											text: "Hello, " + username + ", \n" + 
 												  "You recived invite to \"" + team.name + "\" team as " + title + ".\n" +
-												  "If you want to accept it, please, use next link: http://galdraland.com \n" + 
+												  "If you want to accept it, please, use next link: http://kkkalyosha.wix.com/galdraland \n" + 
 												  "Thanks, Galdraland team.",
 											html: "Hello, " + username + ", <br>" + 
 												  "You recived invite to " + team.name + " as " + title + ".<br>" +
-												  "If you want to accept it, please, use next link: http://galdraland.com/ <br>" + 
+												  "If you want to accept it, please, use next link: http://kkkalyosha.wix.com/galdraland <br>" + 
 												  "Thanks, Galdraland team.",
 										}, function (err) {
 											cb(err);
