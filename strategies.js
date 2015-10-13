@@ -26,7 +26,8 @@ module.exports.facebook = function (opts, cb) {
     } else {
 		var clientID ="1406306389669359",
             clientSecret = "fa79806ce48dd6051d257b2679d566d7",
-            callback = "http://galdraland.com:9010/api/callback/facebook";
+            //callback = "http://galdraland.com:9010/api/callback/facebook";
+            callback = "https://galdraland-1-0.herokuapp.com/api/callback/facebook";
     }
 /*
 	var clientID ="1496374667309040",

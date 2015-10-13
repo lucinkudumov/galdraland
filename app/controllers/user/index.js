@@ -69,8 +69,10 @@ module.exports = function (opts) {
                 var redirect = "http://galdraland-1-0.herokuapp.com",
                     failRedirect = "http://galdraland-1-0.herokuapp.com/";
             } else {
-                var redirect = "http://galdraland.com:9010",
-                    failRedirect = "http://galdraland.com:9010/";
+                var redirect = "http://galdraland-1-0.herokuapp.com",
+                    failRedirect = "http://galdraland-1-0.herokuapp.com/";
+                /*var redirect = "http://galdraland.com:9010",
+                    failRedirect = "http://galdraland.com:9010/";*/
             }
 
 			if(req.session.returnTo) redirect = redirect + req.session.returnTo;
