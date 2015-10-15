@@ -1,6 +1,6 @@
 <div ng-controller="profileLeftSideController" class="profile-left-side">
     <div class="avatar" style="background-image: url('{{ user.photo }}')"></div>
-    <p>Teams</p>
+    <p>Teams {{ teams.length }}</p>
     <small ng-show="teams.length == 0">No teams, <a href="/teams">search</a> or <a href="/teams/create">add</a> new team now.</small> 
     <ul ng-show="teams.length > 0"> 
         <li ng-repeat="t in teams"><a href="/teams/view/{{ t._id }}">{{ t.name }}</a></li>
