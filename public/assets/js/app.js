@@ -1227,7 +1227,7 @@ app.controller("createTeamController", ["$scope", "$rootScope", "$http", "$locat
 			if ($rootScope.return2Adventure == "return")
 			{
 				$rootScope.return2Adventure = "normal";
-				$location.path("/adventures/create/");
+				$location.path("/adventures/create");
 			}
 			else
 				$location.path("/teams/view/" + data.id);
