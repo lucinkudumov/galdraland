@@ -180,6 +180,7 @@ app.config(["$urlRouterProvider", "$locationProvider", "$stateProvider", "$httpP
 }]);
 
 app.run(["$rootScope", "$http", "$location", "User", function ($rootScope, $http, $location, User) {
+	$rootScope.return2Adventure = "normal";
     $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) { 
         if (toState.requireLogin && !User.isLoggedIn()) {
 			var url = "/redirect/?r=" + $location.path();
@@ -227,7 +228,7 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "U
     $scope.refresh();
 }]);
 
-app.controller("createAdventureController", ["$scope", "$http", "$location", "User", function ($scope, $http, $location, User) {
+app.controller("createAdventureController", ["$scope", "$rootScope", "$http", "$location", "User", function ($scope, $rootScope, $http, $location, User) {
 	$scope.user = User.isLoggedIn();
 	$scope.values = {};
 	$scope.values.team = null;
@@ -237,7 +238,11 @@ app.controller("createAdventureController", ["$scope", "$http", "$location", "Us
 	$scope.refresh = function () {
         var request = $http({ method : "GET", url : "myOwnTeams", api : true });
         request.success(function (data) {
-            $scope.values.teamCount = data.teams;
+            $scope.values.teamCount = data.teams.length;
+			if ($scope.values.teamCount == 0)
+				$rootScope.return2Adventure = "return";
+			else 
+				$rootScope.return2Adventure = "normal";
         });
     }
 	
@@ -1214,12 +1219,18 @@ app.controller("searchController", ["$scope", "$http", "$location", "$stateParam
     
     $scope.refresh();
 }]);
-app.controller("createTeamController", ["$scope", "$http", "$location", function ($scope, $http, $location) {
+app.controller("createTeamController", ["$scope", "$rootScope", "$http", "$location", function ($scope, $rootScope, $http, $location) {
     $scope.createTeam = function () {
         var request = $http({ method : "POST", url : "createTeam", api : true, data : { name : $scope.name, description : $scope.description } });
         request.success(function (data) {
             console.log(data.id);
-            $location.path("/teams/view/" + data.id);
+			if ($rootScope.return2Adventure == "return")
+			{
+				$rootScope.return2Adventure = "normal";
+				$location.path("/adventures/create/");
+			}
+			else
+				$location.path("/teams/view/" + data.id);
         });
     }
 }]);
