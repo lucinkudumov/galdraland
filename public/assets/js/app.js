@@ -913,15 +913,9 @@ app.controller("profileLeftSideController", ["$scope", "$http", "User", function
     }
 	
 	$scope.getAdventures = function () {
-        var request = $http({ method : "GET", url : "myTeams", api : true });
-        request.success(function (data) {
-            $scope.teams = data.teams;
-        }).then(function(r){
-			if( $scope.teams.length ){
-				return $http({ method : "POST", url : "adventure/list", api : true, data : { teams : $scope.teams } });
-			}
-		}).then(function (r){
-			$scope.adventures = r.data.adventures;
+        var request = $http({ method : "POST", url : "adventure/list", api : true, data : { teams : $scope.teams } });
+        request.success(function (r) {
+			$scope.adventures = r.adventures;
 		});
 	}
     
