@@ -6,6 +6,12 @@
         <li ng-repeat="t in teams"><a href="/teams/view/{{ t._id }}">{{ t.name }}</a></li>
     </ul>
     <hr ng-show="recomendation.length > 0">
+    <p>Adventures</p>
+    <small ng-show="adventures.length == 0">No adventures, <a href="/adventures">search</a> or <a href="/adventures/create">add</a> new adventure now.</small> 
+    <ul ng-show="adventures.length > 0"> 
+        <li ng-repeat="a in adventures"><a href="/adventures/view/{{ a._id }}">{{ a.name }}</a></li>
+    </ul>
+    <hr ng-show="recomendation.length > 0">
     <p ng-show="recomendation.length > 0">Complete your profile</p>
     <ul ng-show="recomendation.length > 0">
         <li ng-repeat="r in recomendation">{{ r }}</li>
