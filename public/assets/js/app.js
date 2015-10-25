@@ -55,6 +55,13 @@ app.config(["$urlRouterProvider", "$locationProvider", "$stateProvider", "$httpP
             "search-result@search" : { templateUrl : "/assets/partials/search/list.html" }
         },
         requireLogin: true
+	}).state("advancedSearch", {
+		url: "/adsearch",
+		views: {
+			"main" : { templateUrl : "/assets/partials/search.html" },
+			"search-result@advancedSearch" : { templateUrl : "/assets/partials/search/search.html" }
+		},
+		requireLogin: true
     }).state("teamList", {
         url: "/teams",
         views: {
@@ -87,12 +94,6 @@ app.config(["$urlRouterProvider", "$locationProvider", "$stateProvider", "$httpP
             "right-side@teamEdit" : { templateUrl : "/assets/partials/team/edit.html" }
         },
         requireLogin: true
-	}).state("advancedSearch", {
-		url: "/adsearch",
-		views: {
-			"main" : { templateUrl : "/assets/partials/search.html" },
-			"search-result@advancedSearch" : { templateUrl : "/assets/partials/search/search.html" }
-		},
     }).state("adventureList", {
         url: "/adventures",
         views: {
