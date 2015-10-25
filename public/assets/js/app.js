@@ -91,7 +91,7 @@ app.config(["$urlRouterProvider", "$locationProvider", "$stateProvider", "$httpP
 		url: "/adsearch",
 		views: {
 			"main" : { templateUrl : "/assets/partials/search.html" },
-			"search-result@search" : { templateUrl : "/assets/partials/search/search.html" }
+			"search-result@advancedSearch" : { templateUrl : "/assets/partials/search/search.html" }
 		},
     }).state("adventureList", {
         url: "/adventures",
