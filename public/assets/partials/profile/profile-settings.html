@@ -88,6 +88,20 @@
         <button class="btn btn-default pull-left add" ng-click="addLink()">Add</button>
         <button class="btn btn-default pull-right" ng-disabled="validateLinks()" ng-click="saveLinks()">Save</button>
     </blockquote>
+    <blockquote>
+        <p>Categories</p>
+        <div ng-repeat="c in categories" style="margin-bottom: 20px;">
+            <div class="input-group">
+              <input type="text" ng-model="c.username" placeholder="User Name" class="form-control">
+              <span class="input-group-btn">
+                <button class="btn btn-default btn-remove" type="button" ng-click="removeCategory(c)">Remove</button>
+              </span>
+            </div>
+            <input class="form-control" type="text" ng-model="c.goals" placeholder="Goals">
+        </div>
+        <button class="btn btn-default pull-left add" ng-click="addCategory()">Add</button>
+        <button class="btn btn-default pull-right" ng-disabled="validateCategory()" ng-click="saveCategories()">Save</button>
+    </blockquote>
     <blockquote ng-show="false">
         <p>Interests</p>
         <button class="btn btn-default pull-right" ng-disabled="validateLinks()" ng-click="saveLinks()">Save</button>
