@@ -87,6 +87,12 @@ app.config(["$urlRouterProvider", "$locationProvider", "$stateProvider", "$httpP
             "right-side@teamEdit" : { templateUrl : "/assets/partials/team/edit.html" }
         },
         requireLogin: true
+	}).state("advancedSearch", {
+		url: "/adsearch",
+		views: {
+			"main" : { templateUrl : "/assets/partials/search.html" },
+			"search-result@search" : { templateUrl : "/assets/partials/search/search.html" }
+		},
     }).state("adventureList", {
         url: "/adventures",
         views: {
@@ -907,6 +913,10 @@ app.controller("profileLeftSideController", ["$scope", "$http", "User", function
         
         if (!$scope.teams || $scope.teams.length == 0) {
             $scope.recomendation.push("Add new team now.");
+        }
+
+        if (!$scope.categories) {
+            $scope.recomendation.push("Add category.");
         }
     }
     
