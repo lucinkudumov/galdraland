@@ -49,7 +49,7 @@ app.config(["$urlRouterProvider", "$locationProvider", "$stateProvider", "$httpP
         },
         requireLogin: true
     }).state("search", {
-        url: "/search/:scategory/:sterm/:sdescription/:stag",
+        url: "/search/:scategory/:sterm/:sname/:sdescription/:stag",
         views: {
             "main" : { templateUrl : "/assets/partials/search.html" },
             "search-result@search" : { templateUrl : "/assets/partials/search/list.html" }
@@ -1167,7 +1167,7 @@ app.controller("profileViewController", ["$scope", "$http", "User", function ($s
 
 app.controller("advancedSearchController", ["$scope", "$http", "$location", "User", function ($scope, $http, $location, User) {
 	$scope.advancedSearch = function () {
-		$location.path("/search/" + $scope.scategory + "/" + $scope.name + "/" + $scope.description + "/" + $scope.tag);
+		$location.path("/search/" + $scope.scategory + "/sterm/" + $scope.name + "/" + $scope.description + "/" + $scope.tag);
 	}
 }]);
 
@@ -1182,7 +1182,7 @@ app.controller("searchController", ["$scope", "$http", "$location", "$stateParam
 		switch($stateParams.scategory){
 			case "aa":
 				console.log ($stateParams.sterm);
-				request = $http({ method : "POST", url : "adventure/adsearch", api : true, data : { name : $stateParams.sterm, description : $stateParams.sdescription, tag : $stateParams.stag } });
+				request = $http({ method : "POST", url : "adventure/adsearch", api : true, data : { name : $stateParams.sname, description : $stateParams.sdescription, tag : $stateParams.stag } });
 				request.success($scope.parse_adventures);
 				break;
 			case "a":
