@@ -1164,6 +1164,14 @@ app.controller("profileViewController", ["$scope", "$http", "User", function ($s
 		$scope.user = data.user;
 	});
 }]);
+
+app.controller("advancedSearchController", ["$scope", "$http", "$location", "User", function ($scope, $http, $location, User) {
+	$scope.advancedSearch = function () {
+		$scope.param = { name : $scope.name, description : $scope.description, tag : $scope.tag };
+		$location.path("/search/" + $scope.scategory + "/" + $scope.param);
+	}
+}]);
+
 app.controller("searchController", ["$scope", "$http", "$location", "$stateParams",  "User", function ($scope, $http, $location, $stateParams, User) {
     $scope.user = User.isLoggedIn();
 	$scope.results = [];
@@ -1173,6 +1181,11 @@ app.controller("searchController", ["$scope", "$http", "$location", "$stateParam
         $scope.loading = true;
 		var request = null;
 		switch($stateParams.scategory){
+			case "aa":
+				console.log ($stateParams.sterm);
+				request = $http({ method : "POST", url : "adventure/adsearch", api : true, data : { term : $stateParams.sterm } });
+				request.success($scope.parse_adventures);
+				break;
 			case "a":
 				request = $http({ method : "POST", url : "adventure/search", api : true, data : { term : $stateParams.sterm } });
 				request.success($scope.parse_adventures);

@@ -73,6 +73,10 @@ module.exports = function (opts) {
                 }
             });
         },
+
+		"post#adventure/adsearch" : function (req, res) {
+			return res.json({ adventures : [] });
+        },
         
         "post#adventure/update" : function (req, res) {
             var id = req.body.id,
