@@ -78,8 +78,16 @@ module.exports = function (opts) {
 			var name = req.body.name;
 			var description = req.body.description;
 			var tag = req.body.tag;
+			
+			if (name.length == 0) name = ".";
+			if (description.length == 0) description = ".";
+			if (tag.length == 0) tag = ".";
+			
 			var tags = tag.split(" ");
 			
+			console.log(name);
+			console.log(description);
+			console.log(tag);
             adventureModel.find({ $and : [ {name : new RegExp(name, 'i')}, {description : new RegExp(description, 'i')}, {tags : { $in : tags } } ] }, function (err, adventures) {
 			console.log(adventures);
                 if (err) {
