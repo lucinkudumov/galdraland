@@ -605,7 +605,7 @@ app.controller("headerController", ["$scope", "$http", "$location", "User", "$mo
     }
 	
 	$scope.search = function(){
-		$location.path("/search/" + $scope.scategory + "/" + $scope.stext);
+		$location.path("/search/" + $scope.scategory + "/" + $scope.stext + "/ / / ");
 	}
     
     $scope.showInvite = function (invite) {
