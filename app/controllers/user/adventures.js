@@ -62,7 +62,8 @@ module.exports = function (opts) {
 		"post#adventure/search" : function (req, res) {
             var term = req.body.term;
 			var tags = term.split(" ");
-                
+            
+			console.log(term);
             adventureModel.find({ $or : [ {name : new RegExp(term, 'i')}, {description : new RegExp(term, 'i')}, {tags : { $in : tags } } ] }, function (err, adventures) {
 			console.log(adventures);
                 if (err) {
