@@ -79,9 +79,9 @@ module.exports = function (opts) {
 			var description = req.body.description;
 			var tag = req.body.tag;
 			
-			if (name.length == 0) name = ".";
-			if (description.length == 0) description = ".";
-			if (tag.length == 0) tag = ".";
+			if (name.length == 0) name = "^";
+			if (description.length == 0) description = "^";
+			if (tag.length == 0) tag = "^";
 			
 			var tags = tag.split(" ");
 			
