@@ -1182,6 +1182,9 @@ app.controller("searchController", ["$scope", "$http", "$location", "$stateParam
 		var request = null;
 		switch($stateParams.scategory){
 			case "aa":
+				if ($stateParams.sname == "undefined") $stateParams.sname = "^";
+				if ($stateParams.sdescription == "undefined") $stateParams.sdescription = "^";
+				if ($stateParams.stag == "undefined") $stateParams.stag = "^";
 				request = $http({ method : "POST", url : "adventure/adsearch", api : true, data : { name : $stateParams.sname, description : $stateParams.sdescription, tag : $stateParams.stag } });
 				request.success($scope.parse_adventures);
 				break;
