@@ -1166,6 +1166,7 @@ app.controller("profileViewController", ["$scope", "$http", "User", function ($s
 }]);
 
 app.controller("advancedSearchController", ["$scope", "$http", "$location", "User", function ($scope, $http, $location, User) {
+	$scope.scategory = "aa";
 	$scope.advancedSearch = function () {
 		//$location.path("/search/" + $scope.scategory + "/ /" + $scope.name + "/" + $scope.description + "/" + $scope.tag);
 	}
