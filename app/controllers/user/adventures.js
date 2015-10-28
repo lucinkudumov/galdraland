@@ -80,21 +80,37 @@ module.exports = function (opts) {
 			var description = req.body.description;
 			var tag = req.body.tag;
 			
-			var tags = tag.split(" ");
-			
-            adventureModel.find({
-				name : new RegExp(name, 'i'),
-				description : new RegExp(description, 'i'),
-				tags : { $in : tags }
-			}, function (err, adventures) {
-			console.log(adventures);
-                if (err) {
-                    console.log(err);
-                    return res.json({ adventures : [] });
-                } else {
-                    return res.json({ adventures : adventures });
-                }
-            });
+			if (tag == "undefined") {
+				adventureModel.find({
+					name : new RegExp(name, 'i'),
+					description : new RegExp(description, 'i')
+				}, function (err, adventures) {
+				console.log(adventures);
+					if (err) {
+						console.log(err);
+						return res.json({ adventures : [] });
+					} else {
+						return res.json({ adventures : adventures });
+					}
+				});
+			}
+			else {
+				var tags = tag.split(" ");
+				
+				adventureModel.find({
+					name : new RegExp(name, 'i'),
+					description : new RegExp(description, 'i'),
+					tags : { $in : tags }
+				}, function (err, adventures) {
+				console.log(adventures);
+					if (err) {
+						console.log(err);
+						return res.json({ adventures : [] });
+					} else {
+						return res.json({ adventures : adventures });
+					}
+				});
+			}
         },
         
         "post#adventure/update" : function (req, res) {
