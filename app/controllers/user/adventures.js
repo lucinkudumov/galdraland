@@ -93,7 +93,7 @@ module.exports = function (opts) {
             adventureModel.find({
 				name : new RegExp(name, 'i'),
 				description : new RegExp(description, 'i'),
-				$and : [{tags : { $in : tags }}]
+				tags : { $in : tags }
 			}, function (err, adventures) {
 			console.log(adventures);
                 if (err) {
