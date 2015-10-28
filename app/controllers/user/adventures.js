@@ -91,9 +91,9 @@ module.exports = function (opts) {
 				{ $or : [{ tags : { $in : tags } }] }
 			] }, function (err, adventures) {*/
             adventureModel.find({
-				name : new RegExp(name, 'i'),
+				name : new RegExp(name, 'i')/*,
 				description : new RegExp(description, 'i'),
-				tags : { $in : tags }
+				tags : { $in : tags }*/
 			}, function (err, adventures) {
 			console.log(adventures);
                 if (err) {
