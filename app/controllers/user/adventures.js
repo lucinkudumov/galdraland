@@ -81,7 +81,7 @@ module.exports = function (opts) {
 			var tag = req.body.tag;
 			name = "adv";
 			description = "de";
-			tag = "tag";
+			tag = "Tag";
 			
 			var tags = tag.split(" ");
 			
