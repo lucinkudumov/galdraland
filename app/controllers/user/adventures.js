@@ -80,36 +80,51 @@ module.exports = function (opts) {
 			var description = req.body.description;
 			var tag = req.body.tag;
 			
-			if (tag == "undefined") {
-				adventureModel.find({
-					name : new RegExp(name, 'i'),
-					description : new RegExp(description, 'i')
-				}, function (err, adventures) {
+			function callback (err, adventure) {
 				console.log(adventures);
-					if (err) {
-						console.log(err);
-						return res.json({ adventures : [] });
-					} else {
-						return res.json({ adventures : adventures });
-					}
-				});
+				if (err) {
+					console.log(err);
+					return res.json({ adventures : [] });
+				} else {
+					return res.json({ adventures : adventures });
+				}
 			}
-			else {
+			
+			if (name && description && tag) {
 				var tags = tag.split(" ");
 				
 				adventureModel.find({
 					name : new RegExp(name, 'i'),
 					description : new RegExp(description, 'i'),
 					tags : { $in : tags }
-				}, function (err, adventures) {
-				console.log(adventures);
-					if (err) {
-						console.log(err);
-						return res.json({ adventures : [] });
-					} else {
-						return res.json({ adventures : adventures });
-					}
-				});
+				}, callback);
+			} else if (name && description) {
+				adventureModel.find({
+					name : new RegExp(name, 'i'),
+					description : new RegExp(description, 'i')
+				}, callback);
+			} else if (name && tag) {
+				adventureModel.find({
+					name : new RegExp(name, 'i'),
+					tags : { $in : tags }
+				}, callback);
+			} else if (description && tag) {
+				adventureModel.find({
+					description : new RegExp(description, 'i'),
+					tags : { $in : tags }
+				}, callback);
+			} else if (name) {
+				adventureModel.find({
+					name : new RegExp(name, 'i')
+				}, callback);
+			} else if (description) {
+				adventureModel.find({
+					description : new RegExp(description, 'i')
+				}, callback);
+			} else {
+				adventureModel.find({
+					tags : { $in : tags }
+				}, callback);
 			}
         },
         
