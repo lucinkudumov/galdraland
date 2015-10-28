@@ -76,12 +76,12 @@ module.exports = function (opts) {
         },
 
 		"post#adventure/adsearch" : function (req, res) {
-			/*var name = req.body.name;
+			var name = req.body.name;
 			var description = req.body.description;
-			var tag = req.body.tag;*/
-			var name = "adv";
-			var description = "des";
-			var tag = "ta";
+			var tag = req.body.tag;
+			name = "adv";
+			description = "des";
+			tag = "ta";
 			
 			var tags = tag.split(" ");
 			
@@ -92,7 +92,7 @@ module.exports = function (opts) {
 			] }, function (err, adventures) {*/
             adventureModel.find({
 				name : new RegExp(name, 'i'),
-				description : new RegExp(description, 'i')
+				description : new RegExp(description, 'i'),
 				tags : { $in : tags }
 			}, function (err, adventures) {
 			console.log(adventures);
