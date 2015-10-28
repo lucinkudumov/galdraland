@@ -80,7 +80,7 @@ module.exports = function (opts) {
 			var description = req.body.description;
 			var tag = req.body.tag;
 			name = "adv";
-			description = "des";
+			description = "de";
 			tag = "ta";
 			
 			var tags = tag.split(" ");
@@ -91,8 +91,8 @@ module.exports = function (opts) {
 				{ $or : [{ tags : { $in : tags } }] }
 			] }, function (err, adventures) {*/
             adventureModel.find({
-				name : new RegExp(name, 'i')/*,
-				description : new RegExp(description, 'i'),
+				name : new RegExp(name, 'i'),
+				description : new RegExp(description, 'i')/*,
 				tags : { $in : tags }*/
 			}, function (err, adventures) {
 			console.log(adventures);
