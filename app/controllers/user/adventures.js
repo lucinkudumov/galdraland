@@ -82,10 +82,22 @@ module.exports = function (opts) {
 			
 			var tags = tag.split(" ");
 			
-			console.log(name);
-			console.log(description);
-			console.log(tag);
-            adventureModel.find( { name : new RegExp(name, 'i'), description : new RegExp(description, 'i'), tags : { $in : tags }  }, function (err, adventures) {
+            adventureModel.find({ $and : [
+				{
+					$or : [
+						{ name : new RegExp(name, 'i') }
+					]
+				},
+				{
+					$or : [
+						{ description : new RegExp(description, 'i') }
+					]
+				},
+				{
+					$or : [
+						{ tags : { $in : tags } }
+					]
+				}] }, function (err, adventures) {
 			console.log(adventures);
                 if (err) {
                     console.log(err);
