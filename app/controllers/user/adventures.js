@@ -76,28 +76,25 @@ module.exports = function (opts) {
         },
 
 		"post#adventure/adsearch" : function (req, res) {
-			var name = req.body.name;
+			/*var name = req.body.name;
 			var description = req.body.description;
-			var tag = req.body.tag;
+			var tag = req.body.tag;*/
+			var name = "adv";
+			var description = "des";
+			var tag = "ta";
 			
 			var tags = tag.split(" ");
 			
-            adventureModel.find({ $and : [
-				{
-					$or : [
-						{ name : new RegExp(name, 'i') }
-					]
-				},
-				{
-					$or : [
-						{ description : new RegExp(description, 'i') }
-					]
-				},
-				{
-					$or : [
-						{ tags : { $in : tags } }
-					]
-				}] }, function (err, adventures) {
+            /*adventureModel.find({ $and : [
+				{ $or : [{ name : new RegExp(name, 'i') }] },
+				{ $or : [{ description : new RegExp(description, 'i') }] },
+				{ $or : [{ tags : { $in : tags } }] }
+			] }, function (err, adventures) {*/
+            adventureModel.find({
+				name : new RegExp(name, 'i'),
+				description : new RegExp(description, 'i')
+				tags : { $in : tags }
+			}, function (err, adventures) {
 			console.log(adventures);
                 if (err) {
                     console.log(err);
