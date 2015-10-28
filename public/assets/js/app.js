@@ -537,7 +537,9 @@ app.controller("emailController", ["$scope", "$location", "$http", "User", funct
 }]);
 app.controller("headerController", ["$scope", "$http", "$location", "User", "$modal", "$stateParams", function ($scope, $http, $location, User, $modal, $stateParams) {
 	$scope.user = User.isLoggedIn();
-	$scope.scategory = ($stateParams.scategory)?$stateParams.scategory:"a";
+	$temp = $stateParams.scategory;
+	if ($temp == "aa") $temp = "a";
+	$scope.scategory = ($temp)?$temp:"a";
 	$scope.stext = ($stateParams.sterm)?$stateParams.sterm:"";
 	
 	
