@@ -79,17 +79,9 @@ module.exports = function (opts) {
 			var name = req.body.name;
 			var description = req.body.description;
 			var tag = req.body.tag;
-			name = "adv";
-			description = "de";
-			tag = "Tag";
 			
 			var tags = tag.split(" ");
 			
-            /*adventureModel.find({ $and : [
-				{ $or : [{ name : new RegExp(name, 'i') }] },
-				{ $or : [{ description : new RegExp(description, 'i') }] },
-				{ $or : [{ tags : { $in : tags } }] }
-			] }, function (err, adventures) {*/
             adventureModel.find({
 				name : new RegExp(name, 'i'),
 				description : new RegExp(description, 'i'),
