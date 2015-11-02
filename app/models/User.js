@@ -50,6 +50,9 @@ module.exports = function (opts) {
         goals : {
             type: String
         },
+		categories : {
+			type: String
+		},
 		bio : {
 			type: String
 		},

@@ -7,7 +7,7 @@ module.exports = function (opts) {
         
     return {
         "get#getUser" : function (req, res) {
-            userModel.findOne({_id: req.user._id}).select("_id profileId fullname username email signin photo skype experience goals").exec(function (err, user) {
+            userModel.findOne({_id: req.user._id}).select("_id profileId fullname username email signin photo skype experience goals categories").exec(function (err, user) {
                if (err) {
                    console.log(err);
                    return res.json({ success : false });
@@ -411,7 +411,7 @@ module.exports = function (opts) {
                 location = req.body.location,
                 skype = req.body.skype,
                 goals = req.body.goals;
-            
+				categories = req.body.categories;
             
             userModel.findById(req.user._id, function (err, user) {
                if (err) {
@@ -423,7 +423,7 @@ module.exports = function (opts) {
                    user.location = location;
                    user.skype = skype;
                    user.goals = goals;
-                   
+                   user.categories = categories;
                    
                    user.save(function (err, user) {
                       if (err) {

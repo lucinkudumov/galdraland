@@ -6,6 +6,7 @@
         <small ng-show="user.location"><cite title="Location">{{ user.location }}  <i class="glyphicon glyphicon-map-marker"></i></cite></small>
         <small ng-show="user.skype">Skype: <cite title="Skype">{{ user.skype }}</cite></small>
         <small ng-show="user.goals">Goals: <cite title="Goals">{{ user.goals }}</cite></small>
+		<small ng-show="user.categories">Categories: <cite title="Categories">{{ user.categories }}</cite></small>
         <br>
         <p ng-show="user.educations.length > 0">Education</p>
         <small ng-show="!user.educations || user.educations.length == 0">No educations, <a href="/settings">add</a> now.</small>

@@ -951,6 +951,7 @@ app.controller("profileSettingsController", ["$scope", "$rootScope", "$location"
 	$scope.location = "";
 	$scope.skype = "";
 	$scope.goals = "";
+	$scope.categories = "";
 	$scope.educations = [];
 	$scope.links = [];
 	$scope.experience = "";
@@ -965,6 +966,7 @@ app.controller("profileSettingsController", ["$scope", "$rootScope", "$location"
 		$scope.location = data.user.location;
 		$scope.skype = data.user.skype;
 		$scope.goals = data.user.goals;
+		$scope.categories = data.user.categories;
 		$scope.educations = data.user.educations;
 		$scope.links = data.user.links;
 		$scope.experience = data.user.experience;
@@ -992,7 +994,7 @@ app.controller("profileSettingsController", ["$scope", "$rootScope", "$location"
     }
     
     $scope.saveMainInformation = function () {
-        var request = $http({ method : "POST", url : "saveMainInformation", api : true,  data : { username : $scope.username, fullname : $scope.fullname, email : $scope.email, location : $scope.location, skype : $scope.skype, goals : $scope.goals }});
+        var request = $http({ method : "POST", url : "saveMainInformation", api : true,  data : { username : $scope.username, fullname : $scope.fullname, email : $scope.email, location : $scope.location, skype : $scope.skype, goals : $scope.goals, categories : $scope.categories }});
         
         request.success(function (data) {
             if (data.success) {
