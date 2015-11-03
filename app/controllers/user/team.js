@@ -89,7 +89,6 @@ module.exports = function (opts) {
 		
 		"post#searchTeam" : function (req, res) {
             var term = req.body.term;
-			var tags = term.split(" ");
                 
             //teamModel.find({ $or : [ {name : new RegExp(term, 'i')}, {description : new RegExp(term, 'i')}, {tags : { $in : tags } } ] }, function (err, teams) {
 			teamModel.find({ $or : [ {name : new RegExp(term, 'i')}, {description : new RegExp(term, 'i')} ] }).populate("owner teamMembers").exec(function (err, teams) {
