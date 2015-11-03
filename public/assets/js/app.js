@@ -540,6 +540,7 @@ app.controller("headerController", ["$scope", "$http", "$location", "User", "$mo
 	$temp = $stateParams.scategory;
 	if ($temp == "aa") $temp = "a";
 	if ($temp == "tt") $temp = "t";
+	if ($temp == "pp") $temp = "p";
 	$scope.scategory = ($temp)?$temp:"a";
 	$scope.stext = ($stateParams.sterm)?$stateParams.sterm:"";
 	
@@ -1193,6 +1194,10 @@ app.controller("searchController", ["$scope", "$http", "$location", "$stateParam
 			case "tt":
 				request = $http({ method : "POST", url : "adsearchTeam", api : true, data : { name : $stateParams.sname, description : $stateParams.sdescription } });
 				request.success($scope.parse_teams);
+				break;
+			case "pp":
+				request = $http({ method : "POST", url : "searchUser", api : true, data : { term : $stateParams.sname } });
+				request.success($scope.parse_users);
 				break;
 			case "a":
 				request = $http({ method : "POST", url : "adventure/search", api : true, data : { term : $stateParams.sterm } });

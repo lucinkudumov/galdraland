@@ -50,10 +50,8 @@ module.exports = function (opts) {
         },
 		"post#searchUser" : function (req, res) {
             var term = req.body.term;
-//			var tags = term.split(" ");  To Be Changed Based On User Model
                 
-//            userModel.find({ $or : [ {usernamename : new RegExp(term, 'i')}, {bio : new RegExp(term, 'i')}, {interests : new RegExp(term, 'i') } ] }, function (err, users) {
-            userModel.find({ $or : [ {usernamename : new RegExp(term, 'i')}, {bio : new RegExp(term, 'i')} ] }, function (err, users) {
+            userModel.find( {username : new RegExp(term, 'i') }, function (err, users) {
                 if (err) {
                     console.log(err);
                     return res.json({ users : [] });
