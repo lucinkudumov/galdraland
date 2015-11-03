@@ -82,7 +82,6 @@ module.exports = function (opts) {
 			var tags = tag.split(" ");
 			
 			if (name != "undefined" && description != "undefined" && tag != "undefined") {
-				console.log ("name && description && tag");
 				adventureModel.find({ name : new RegExp(name, 'i'), description : new RegExp(description, 'i'), tags : { $in : tags } }, function (err, adventures) {
 				console.log(adventures);
 					if (err) {
@@ -93,8 +92,47 @@ module.exports = function (opts) {
 					}
 				});
 			} else if (name != "undefined" && description != "undefined") {
-				console.log ("name && description");
 				adventureModel.find({ name : new RegExp(name, 'i'), description : new RegExp(description, 'i') }, function (err, adventures) {
+				console.log(adventures);
+					if (err) {
+						console.log(err);
+						return res.json({ adventures : [] });
+					} else {
+						return res.json({ adventures : adventures });
+					}
+				});
+			} else if (description != "undefined" && tag != "undefined") {
+				adventureModel.find({ description : new RegExp(description, 'i'), tags : { $in : tags } }, function (err, adventures) {
+				console.log(adventures);
+					if (err) {
+						console.log(err);
+						return res.json({ adventures : [] });
+					} else {
+						return res.json({ adventures : adventures });
+					}
+				});
+			} else if (name != "undefined") {
+				adventureModel.find({ name : new RegExp(name, 'i') }, function (err, adventures) {
+				console.log(adventures);
+					if (err) {
+						console.log(err);
+						return res.json({ adventures : [] });
+					} else {
+						return res.json({ adventures : adventures });
+					}
+				});
+			} else if (description != "undefined") {
+				adventureModel.find({ description : new RegExp(description, 'i') }, function (err, adventures) {
+				console.log(adventures);
+					if (err) {
+						console.log(err);
+						return res.json({ adventures : [] });
+					} else {
+						return res.json({ adventures : adventures });
+					}
+				});
+			} else if (tag != "undefined") {
+				adventureModel.find({ tags : { $in : tags } }, function (err, adventures) {
 				console.log(adventures);
 					if (err) {
 						console.log(err);
