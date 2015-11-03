@@ -106,7 +106,7 @@ module.exports = function (opts) {
             var name = req.body.name;
 			var description = req.body.description;
                 
-			if (name != "undefined" && description != "undefined") }
+			if (name != "undefined" && description != "undefined") {
 				teamModel.find({ name : new RegExp(name, 'i'), description : new RegExp(description, 'i') }).populate("owner teamMembers").exec(function (err, teams) {
 					if (err) {
 						console.log(err);
