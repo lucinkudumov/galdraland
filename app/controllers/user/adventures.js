@@ -81,7 +81,7 @@ module.exports = function (opts) {
 			var tag = req.body.tag;
 			var tags = tag.split(" ");
 			
-			if (name && description && tag) {
+			if (name != "undefined" && description != "undefined" && tag != "undefined") {
 				console.log ("name && description && tag");
 				adventureModel.find({ name : new RegExp(name, 'i'), description : new RegExp(description, 'i'), tags : { $in : tags } }, function (err, adventures) {
 				console.log(adventures);
@@ -92,7 +92,7 @@ module.exports = function (opts) {
 						return res.json({ adventures : adventures });
 					}
 				});
-			} else if (name && description) {
+			} else if (name != "undefined" && description != "undefined") {
 				console.log ("name && description");
 				adventureModel.find({ name : new RegExp(name, 'i'), description : new RegExp(description, 'i') }, function (err, adventures) {
 				console.log(adventures);
