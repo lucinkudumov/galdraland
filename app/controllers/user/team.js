@@ -102,6 +102,39 @@ module.exports = function (opts) {
             });
         },
 
+		"post#adsearchTeam" : function (req, res) {
+            var name = req.body.name;
+			var description = req.body.description;
+                
+			if (name != "undefined" && description != "undefined") }
+				teamModel.find({ name : new RegExp(name, 'i'), description : new RegExp(description, 'i') }).populate("owner teamMembers").exec(function (err, teams) {
+					if (err) {
+						console.log(err);
+						return res.json({ teams : [] });
+					} else {
+						return res.json({ teams : teams });
+					}
+				});
+			} else if (name != "undefined") {
+				teamModel.find({ name : new RegExp(name, 'i') }).populate("owner teamMembers").exec(function (err, teams) {
+					if (err) {
+						console.log(err);
+						return res.json({ teams : [] });
+					} else {
+						return res.json({ teams : teams });
+					}
+				});
+			} else if (description != "undefined") {
+				teamModel.find({ description : new RegExp(description, 'i') }).populate("owner teamMembers").exec(function (err, teams) {
+					if (err) {
+						console.log(err);
+						return res.json({ teams : [] });
+					} else {
+						return res.json({ teams : teams });
+					}
+				});
+			}
+        },
         
         "get#myTeams" : function (req, res) {
 			teamMemberModel.find( { user : req.user._id }, function(err, members){

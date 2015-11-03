@@ -1189,6 +1189,10 @@ app.controller("searchController", ["$scope", "$http", "$location", "$stateParam
 				request = $http({ method : "POST", url : "adventure/adsearch", api : true, data : { name : $stateParams.sname, description : $stateParams.sdescription, tag : $stateParams.stag } });
 				request.success($scope.parse_adventures);
 				break;
+			case "tt":
+				request = $http({ method : "POST", url : "searchTeam", api : true, data : { name : $stateParams.sname, description : $stateParams.sdescription } });
+				request.success($scope.parse_teams);
+				break;
 			case "a":
 				request = $http({ method : "POST", url : "adventure/search", api : true, data : { term : $stateParams.sterm } });
 				request.success($scope.parse_adventures);
