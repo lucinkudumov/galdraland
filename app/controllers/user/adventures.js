@@ -80,7 +80,7 @@ module.exports = function (opts) {
 			var description = req.body.description;
 			var tag = req.body.tag;
 			
-            adventureModel.find({ {name : new RegExp(term, 'i')}, {description : new RegExp(term, 'i')}, {tags : { $in : tags } } }, function (err, adventures) {
+            adventureModel.find({ name : new RegExp(term, 'i'), description : new RegExp(term, 'i'), tags : { $in : tags } }, function (err, adventures) {
 			console.log(adventures);
                 if (err) {
                     console.log(err);
