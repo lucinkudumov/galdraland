@@ -70,6 +70,14 @@ app.config(["$urlRouterProvider", "$locationProvider", "$stateProvider", "$httpP
             "right-side@teamList" : { templateUrl : "/assets/partials/team/list.html" }
         },
         requireLogin: true
+    }).state("news", {
+        url: "/news",
+        views: {
+            "main" : { templateUrl : "/assets/partials/main.html" },
+            "left-side@news" : { templateUrl : "/assets/partials/news/left-side.html" },
+            "right-side@news" : { templateUrl : "/assets/partials/news/list.html" }
+        },
+        requireLogin: true
     }).state("teamCreate", {
         url: "/teams/create",
         views: {
