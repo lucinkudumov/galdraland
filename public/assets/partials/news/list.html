@@ -1,27 +1,19 @@
 <div ng-controller="myTeamsController">
     <div class="row">
-        <div class="col-md-8">
-            <a class="btn btn-success pull-right" href="/teams/create">Create team</a>
+        <div class="col-md-4">
+			<div class="row">
+				Peoples
+			</div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-md-8">
-            <br>
-            <table class="table teams">
-                <tr ng-show="!loading && teams.length == 0">
-                    <td class="err-msg">No teams, <a href="/teams/create">add</a> new team now.</td>
-                </tr>
-                <tr ng-repeat="t in teams">
-                    <td>{{ t.name }}</td>
-					<td><rating-widget isstatic="1" ref="t._id" ></rating-widget></td>
-                    <td>{{ t.teamMembers.length }} members</td>
-                    <td>
-                        <a href="/teams/view/{{ t._id }}" class="btn btn-primary" ng-show="user._id != t.owner._id">View</a>
-                        <a href="#" class="btn btn-danger" ng-show="user._id != t.owner._id">Leave</a>
-                        <a href="/teams/view/{{ t._id }}" class="btn btn-primary" ng-show="user._id == t.owner._id">Manage</a>
-                    </td>
-                </tr>
-            </table>
+        <div class="col-md-4">
+			<div class="row">
+				Teams
+			</div>
+        </div>
+        <div class="col-md-4">
+			<div class="row">
+				Adventures
+			</div>
         </div>
     </div>
 </div>
