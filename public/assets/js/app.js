@@ -1316,6 +1316,70 @@ app.controller("myTeamsController", ["$scope", "$http", "$location",  "User", fu
     
     $scope.refresh();
 }]);
+
+app.controller("newsController", ["$scope", "$http", "$location", "User", function ($scope, $http, $location, User) {
+	$scope.user = User.isLoggedIn();
+	$scope.adventures = [];
+	$scope.teams = [];
+	$scope.peoples = [];
+	$scope.loading = true;
+    
+    $scope.refresh = function () {
+        $scope.loading = true;
+		
+		request = $http({ method : "POST", url : "adventure/search", api : true, data : { term : "" } });
+		request.success($scope.parse_adventures);
+
+		request = $http({ method : "POST", url : "searchTeam", api : true, data : { term : "" } });
+		request.success($scope.parse_teams);
+
+		request = $http({ method : "POST", url : "searchUser", api : true, data : { term : "" } });
+		request.success($scope.parse_users);
+		
+		request.then(function(){
+			$scope.loading = false;
+		});
+    }
+	
+	$scope.parse_adventures = function(data){
+		$scope.adventures = [];
+		for(var i = 0; i < data.adventures.length; i++){
+			var result = {};
+			result._id = data.adventures[i]._id;
+			result.name = data.adventures[i].name;
+			result.text1 = data.adventures[i].tags.join(" ");
+			result.text2 = data.adventures[i].start + " - " + data.adventures[i].end;
+			result.href = "/adventures/view/" + data.adventures[i]._id;
+			$scope.adventures.push(result);
+		}
+	}
+	
+	$scope.parse_teams = function(data){
+		$scope.teams = [];
+		for(var i = 0; i < data.teams.length; i++){
+			var result = {};
+			result._id = data.teams[i]._id;
+			result.name = data.teams[i].name;
+			result.text1 = data.teams[i].teamMembers.length + " Members";
+			result.href = "/teams/view/" + data.teams[i]._id;
+			$scope.teams.push(result);
+		}
+	}
+	
+	$scope.parse_users = function(data){
+		$scope.peoples = [];
+		for(var i = 0; i < data.users.length; i++){
+			var result = {};
+			result.name = data.users[i].username;
+			result.text1 = data.users[i].fullname;
+			result.photo = data.users[i].photo;
+			$scope.peoples.push(result);
+		}
+	}
+    
+    $scope.refresh();
+}]);
+
 app.controller("teamViewController", ["$scope", "$http", "$stateParams", "User", "$modal", "$location", function ($scope, $http, $stateParams, User, $modal, $location) {
     $scope.user = User.isLoggedIn();
     
