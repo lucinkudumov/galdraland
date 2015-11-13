@@ -1,74 +1,68 @@
 <div ng-controller="newsController">
-    <div class="row">
-		<div class="col-md-10 col-md-offset-1">
+	<div class="row">
+		<div class="col-md-4" style="text-align: center;">
 			<div class="row">
-				<div class="col-md-4" style="text-align: center;">
-					<div class="row">
-						Peoples
-					</div>
-					<div class="row">
-						<br>
-						<table class="table teams">
-							<tr ng-show="!loading && peoples.length == 0">
-								<td class="err-msg">No recent login people.</td>
-							</tr>
-							<tr ng-repeat="p in peoples">
-								<td ng-show="p.photo"><div class="avatar" style="background-image: url('{{ p.photo }}')"></div></td>
-								<td>{{ p.name }}</td>
-								<td>{{ p.text1 }}</td>
-							</tr>
-						</table>
-					</div>
-					
-					<div class="row">
-						<br>
-						<table class="table teams">
-							<tr ng-show="!loading && results.length == 0">
-								<td class="err-msg">No results, please search another.</td>
-							</tr>
-							<tr ng-repeat="r in results">
-								<td ng-show="r.photo"><div class="avatar" style="background-image: url('{{ r.photo }}')"></div></td>
-								<td>{{ r.name }}</td>
-								<td ng-show="r._id"><rating-widget isstatic="1" ref="r._id" ></rating-widget></td>
-								<td>{{ r.text1 }}</td>
-								<td>{{ r.text2 }}</td>
-								<td ng-show="r.href">
-									<a href="{{r.href}}" class="btn btn-primary">View</a>
-								</td>
-							</tr>
-						</table>
-					</div>
-				</div>
-				
-				<div class="col-md-4" style="text-align: center;">
-					<div class="row">
-						Teams
-					</div>
-				</div>
-				<div class="col-md-4" style="text-align: center;">
-					<div class="row">
-						Adventures
-					</div>
-					<div class="row">
-						<br>
-						<table class="table teams">
-							<tr ng-show="!loading && results.length == 0">
-								<td class="err-msg">No results, please search another.</td>
-							</tr>
-							<tr ng-repeat="r in results">
-								<td ng-show="r.photo"><div class="avatar" style="background-image: url('{{ r.photo }}')"></div></td>
-								<td>{{ r.name }}</td>
-								<td ng-show="r._id"><rating-widget isstatic="1" ref="r._id" ></rating-widget></td>
-								<td>{{ r.text1 }}</td>
-								<td>{{ r.text2 }}</td>
-								<td ng-show="r.href">
-									<a href="{{r.href}}" class="btn btn-primary">View</a>
-								</td>
-							</tr>
-						</table>
-					</div>
-				</div>
+				Peoples
+			</div>
+			<div class="row">
+				<br>
+				<table class="table teams">
+					<tr ng-show="!loading && peoples.length == 0">
+						<td class="err-msg">No recent login people.</td>
+					</tr>
+					<tr ng-repeat="p in peoples">
+						<td ng-show="p.photo"><div class="avatar" style="background-image: url('{{ p.photo }}')"></div></td>
+						<td>{{ p.name }}</td>
+						<td>{{ p.text1 }}</td>
+					</tr>
+				</table>
 			</div>
 		</div>
-    </div>
+		
+		<div class="col-md-4" style="text-align: center;">
+			<div class="row">
+				Teams
+			</div>
+			<div class="row">
+				<br>
+				<table class="table teams">
+					<tr ng-show="!loading && results.length == 0">
+						<td class="err-msg">No results, please search another.</td>
+					</tr>
+					<tr ng-repeat="r in results">
+						<td ng-show="r.photo"><div class="avatar" style="background-image: url('{{ r.photo }}')"></div></td>
+						<td>{{ r.name }}</td>
+						<td ng-show="r._id"><rating-widget isstatic="1" ref="r._id" ></rating-widget></td>
+						<td>{{ r.text1 }}</td>
+						<td>{{ r.text2 }}</td>
+						<td ng-show="r.href">
+							<a href="{{r.href}}" class="btn btn-primary">View</a>
+						</td>
+					</tr>
+				</table>
+			</div>				</div>
+		<div class="col-md-4" style="text-align: center;">
+			<div class="row">
+				Adventures
+			</div>
+			<div class="row">
+				<br>
+				<table class="table teams">
+					<tr ng-show="!loading && results.length == 0">
+						<td class="err-msg">No results, please search another.</td>
+					</tr>
+					<tr ng-repeat="r in results">
+						<td ng-show="r.photo"><div class="avatar" style="background-image: url('{{ r.photo }}')"></div></td>
+						<td>{{ r.name }}</td>
+						<td ng-show="r._id"><rating-widget isstatic="1" ref="r._id" ></rating-widget></td>
+						<td>{{ r.text1 }}</td>
+						<td>{{ r.text2 }}</td>
+						<td ng-show="r.href">
+							<a href="{{r.href}}" class="btn btn-primary">View</a>
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
 </div>
