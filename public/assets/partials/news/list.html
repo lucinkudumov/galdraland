@@ -11,9 +11,7 @@
 						<td class="err-msg">No recent login peoples.</td>
 					</tr>
 					<tr ng-repeat="p in peoples">
-						<td ng-show="p.photo"><div class="avatar" style="background-image: url('{{ p.photo }}')"></div></td>
 						<td>{{ p.name }}</td>
-						<td>{{ p.text1 }}</td>
 					</tr>
 				</table>
 			</div>
@@ -31,11 +29,6 @@
 					</tr>
 					<tr ng-repeat="t in teams">
 						<td>{{ t.name }}</td>
-						<td ng-show="t._id"><rating-widget isstatic="1" ref="t._id" ></rating-widget></td>
-						<td>{{ t.text1 }}</td>
-						<td ng-show="t.href">
-							<a href="{{t.href}}" class="btn btn-primary">View</a>
-						</td>
 					</tr>
 				</table>
 			</div>				</div>
@@ -51,12 +44,6 @@
 					</tr>
 					<tr ng-repeat="a in adventures">
 						<td>{{ a.name }}</td>
-						<td ng-show="a._id"><rating-widget isstatic="1" ref="r._id" ></rating-widget></td>
-						<td>{{ a.text1 }}</td>
-						<td>{{ a.text2 }}</td>
-						<td ng-show="a.href">
-							<a href="{{a.href}}" class="btn btn-primary">View</a>
-						</td>
 					</tr>
 				</table>
 			</div>
