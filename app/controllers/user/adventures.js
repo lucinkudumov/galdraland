@@ -79,7 +79,7 @@ module.exports = function (opts) {
 			var date = new Date();
 			date.setDate(date.getDate() - 7);
 			console.log(date);
-            adventureModel.find({"createdAt": {$gte: date}}, function (err, adventures) {
+            adventureModel.find({"createdAt": {$gt: date}}, function (err, adventures) {
                 if (err) {
                     console.log(err);
                     return res.json({ adventures : [] });

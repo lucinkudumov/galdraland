@@ -1343,7 +1343,7 @@ app.controller("newsController", ["$scope", "$http", "$location", "User", functi
 	
 	function prettyDate(startDate) {
 		var date = new Date();
-		var secs = Math.floor((date.getTime() - startDate.getTime()) / 1000);
+		var secs = Math.floor((date.getTime() - Date.parse(startDate)) / 1000);
 		if (secs < 60) return secs + " sec(s) ago";
 		if (secs < 3600) return Math.floor(secs / 60) + " min(s) ago";
 		if (secs < 86400) return Math.floor(secs / 3600) + " hour(s) ago";
