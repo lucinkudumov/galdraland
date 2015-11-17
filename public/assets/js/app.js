@@ -1341,6 +1341,16 @@ app.controller("newsController", ["$scope", "$http", "$location", "User", functi
 		});
     }
 	
+	function prettyDate(startDate) {
+		var date = new Date();
+		var secs = Math.floor((date.getTime() - startDate.getTime()) / 1000);
+		if (secs < 60) return secs + " sec(s) ago";
+		if (secs < 3600) return Math.floor(secs / 60) + " min(s) ago";
+		if (secs < 86400) return Math.floor(secs / 3600) + " hour(s) ago";
+		if (secs < 604800) return Math.floor(secs / 86400) + " day(s) ago";
+		return date.toDateString();
+	}
+	
 	$scope.parse_adventures = function(data){
 		$scope.adventures = [];
 		for(var i = 0; i < data.adventures.length; i++){
@@ -1350,7 +1360,7 @@ app.controller("newsController", ["$scope", "$http", "$location", "User", functi
 			result.text1 = data.adventures[i].tags.join(" ");
 			result.text2 = data.adventures[i].start + " - " + data.adventures[i].end;
 			result.href = "/adventures/view/" + data.adventures[i]._id;
-			result.createdAt = data.adventures[i].createdAt;
+			result.createdAt = prettyDate(data.adventures[i].createdAt);
 			$scope.adventures.push(result);
 		}
 	}
@@ -1363,7 +1373,7 @@ app.controller("newsController", ["$scope", "$http", "$location", "User", functi
 			result.name = data.teams[i].name;
 			result.text1 = data.teams[i].teamMembers.length + " Members";
 			result.href = "/teams/view/" + data.teams[i]._id;
-			result.createdAt = data.teams[i].createdAt;
+			result.createdAt = prettyDate(data.teams[i].createdAt);
 			$scope.teams.push(result);
 		}
 	}
@@ -1375,7 +1385,7 @@ app.controller("newsController", ["$scope", "$http", "$location", "User", functi
 			result.name = data.users[i].username;
 			result.text1 = data.users[i].fullname;
 			result.photo = data.users[i].photo;
-			result.signin = data.users[i].signin;
+			result.signin = prettyDate(data.users[i].signin);
 			$scope.peoples.push(result);
 		}
 	}
