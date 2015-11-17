@@ -105,7 +105,7 @@ module.exports = function (opts) {
 			var date = new Date();
 			date.setDate(date.getDate() - 7);
 			console.log(date);
-			teamModel.find({"createdAt": {$gte: date}, sort: {"createdAt": "asc"}}, function (err, teams) {
+			teamModel.find({"createdAt": {$gte: date}, $orderby: {"createdAt": -1}}, function (err, teams) {
                 if (err) {
                     console.log(err);
                     return res.json({ teams : [] });
