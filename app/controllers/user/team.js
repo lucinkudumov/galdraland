@@ -101,6 +101,20 @@ module.exports = function (opts) {
             });
         },
 
+		"post#newTeam" : function (req, res) {
+			var date = new Date();
+			date.setDate(date.getDate() - 7);
+			console.log(date);
+			teamModel.find({"createdAt": {$gte: date}, $orderby: {"createdAt": 1}}, function (err, teams) {
+                if (err) {
+                    console.log(err);
+                    return res.json({ teams : [] });
+                } else {
+                    return res.json({ teams : teams });
+                }
+            });
+		},
+		
 		"post#adsearchTeam" : function (req, res) {
             var name = req.body.name;
 			var description = req.body.description;

@@ -48,10 +48,25 @@ module.exports = function (opts) {
                }
             });
         },
+		
 		"post#searchUser" : function (req, res) {
             var term = req.body.term;
                 
             userModel.find( {username : new RegExp(term, 'i') }, function (err, users) {
+                if (err) {
+                    console.log(err);
+                    return res.json({ users : [] });
+                } else {
+                    return res.json({ users : users });
+                }
+            });
+        },
+		
+		"post#newUser" : function (req, res) {
+			var date = new Date();
+			date.setDate(date.getDate() - 7);
+			console.log(date);
+            userModel.find({"signin": {$gte: date}, $orderby: {"signin": 1}}, function (err, users) {
                 if (err) {
                     console.log(err);
                     return res.json({ users : [] });

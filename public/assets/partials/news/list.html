@@ -12,6 +12,7 @@
 					</tr>
 					<tr ng-repeat="p in peoples">
 						<td>{{ p.name }}</td>
+						<td>SignIn: {{ p.signin }}</td>
 					</tr>
 				</table>
 			</div>
@@ -29,6 +30,7 @@
 					</tr>
 					<tr ng-repeat="t in teams">
 						<td>{{ t.name }}</td>
+						<td>CreatedAt: {{ t.createdAt }}</td>
 					</tr>
 				</table>
 			</div>				</div>
@@ -44,6 +46,7 @@
 					</tr>
 					<tr ng-repeat="a in adventures">
 						<td>{{ a.name }}</td>
+						<td>CreatedAt: {{ a.createdAt }}</td>
 					</tr>
 				</table>
 			</div>

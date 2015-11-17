@@ -1327,13 +1327,13 @@ app.controller("newsController", ["$scope", "$http", "$location", "User", functi
     $scope.refresh = function () {
         $scope.loading = true;
 		
-		request = $http({ method : "POST", url : "adventure/search", api : true, data : { term : "" } });
+		request = $http({ method : "POST", url : "newAdventure", api : true, data : { term : "" } });
 		request.success($scope.parse_adventures);
 
-		request = $http({ method : "POST", url : "searchTeam", api : true, data : { term : "" } });
+		request = $http({ method : "POST", url : "newTeam", api : true, data : { term : "" } });
 		request.success($scope.parse_teams);
 
-		request = $http({ method : "POST", url : "searchUser", api : true, data : { term : "" } });
+		request = $http({ method : "POST", url : "newUser", api : true, data : { term : "" } });
 		request.success($scope.parse_users);
 		
 		request.then(function(){
@@ -1350,6 +1350,7 @@ app.controller("newsController", ["$scope", "$http", "$location", "User", functi
 			result.text1 = data.adventures[i].tags.join(" ");
 			result.text2 = data.adventures[i].start + " - " + data.adventures[i].end;
 			result.href = "/adventures/view/" + data.adventures[i]._id;
+			result.createdAt = data.adventures[i].createdAt;
 			$scope.adventures.push(result);
 		}
 	}
@@ -1362,6 +1363,7 @@ app.controller("newsController", ["$scope", "$http", "$location", "User", functi
 			result.name = data.teams[i].name;
 			result.text1 = data.teams[i].teamMembers.length + " Members";
 			result.href = "/teams/view/" + data.teams[i]._id;
+			result.createdAt = data.teams[i].createdAt;
 			$scope.teams.push(result);
 		}
 	}
@@ -1373,6 +1375,7 @@ app.controller("newsController", ["$scope", "$http", "$location", "User", functi
 			result.name = data.users[i].username;
 			result.text1 = data.users[i].fullname;
 			result.photo = data.users[i].photo;
+			result.signin = data.users[i].signin;
 			$scope.peoples.push(result);
 		}
 	}

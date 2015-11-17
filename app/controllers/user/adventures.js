@@ -74,6 +74,20 @@ module.exports = function (opts) {
                 }
             });
         },
+		
+		"post#newAdventure" : function (req, res) {
+			var date = new Date();
+			date.setDate(date.getDate() - 7);
+			console.log(date);
+            adventureModel.find({"createdAt": {$gte: date}, $orderby: {"createdAt": 1}}, function (err, adventures) {
+                if (err) {
+                    console.log(err);
+                    return res.json({ adventures : [] });
+                } else {
+                    return res.json({ adventures : adventures });
+                }
+            });
+		},
 
 		"post#adventure/adsearch" : function (req, res) {
 			var name = req.body.name;
