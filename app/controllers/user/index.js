@@ -66,7 +66,7 @@ module.exports = function (opts) {
 			var date = new Date();
 			date.setDate(date.getDate() - 7);
 			console.log(date);
-            userModel.find({"signin": {$gte: date}, $orderby: {"signin": -1}}, function (err, users) {
+            userModel.find({"signin": {$gte: date}}, function (err, users) {
                 if (err) {
                     console.log(err);
                     return res.json({ users : [] });
