@@ -29,7 +29,7 @@
     "redis": "~0.10.0",
     "nodemailer": "~0.6.0",
     "request": "~2.34.0",
-    "tester": "~0.0.4",
+    "tester": "0.0.4",
     "validator": "~3.7.0",
     "hat": "0.0.3",
     "cloudinary": "~1.0.8",
