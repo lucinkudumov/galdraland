@@ -19,15 +19,14 @@
 	background:url('../images/bg01.jpg') no-repeat;
 	height: 572px;
 	margin-bottom:5%;
+	background-size: cover;
 }
 .featured-adventure-1 {
 	height: 180px;
-	margin-right:1px;
 	background:#FA8E6A;
 }
 .featured-adventure-2 {
 	height: 180px;
-	margin-right:1px;
 	background:#384D62;
 }
 label {

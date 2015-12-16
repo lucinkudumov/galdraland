@@ -8,37 +8,19 @@
         <a href="/api/login/facebook{{(r)?'?r='+r:''}}" target="_self" class="link">Sign in</a>
     </div>
 </div-->
-<div class="container main ng-scope">
-	<div class="row header ng-scope" ng-include="'/assets/partials/header.html'">
-		<div>
-			<div class="col-md-2 logo">
-				<h3>GaldraLand</h3>
-			</div>
-			<div class="col-md-10 main-menu login" ng-controller="indexController">
-				<ul class="pull-right">
-					<li class="dropdown">
-						<a class="dropdown-toggle">
-						feed <span class="badge ng-binding">0</span>
-						</a>
-						<ul class="dropdown-menu" ui-toggle="">
-							<li>
-								<a class="btn btn-login" href="/api/login/facebook" target="_self">Sign in</a>
-							</li>
-						</ul>
-					</li>
-				</ul>
-			</div>
-			<div class="col-md-12 search-menu darkblue" ng-controller="headerController">
-				<ul class="pull-right">
-					<li><select ng-model="scategory" class="ng-pristine ng-valid">
-						<option value="a">Adventure</option>
-						<option value="t">Team</option>
-						<option value="p">People</option>
-						</select></li>
-					<li><input type="text" ng-model="stext" class="ng-pristine ng-valid"></li>
-					<li><a class="btn btn-search" href="#" ng-click="search()">Search</a></li>
-				</ul>
-			</div>
+<div class="container main ng-scope" ng-controller="indexController">
+	<div>
+		<div class="col-md-2 logo">
+			<h3>GaldraLand</h3>
+		</div>
+		<div class="col-md-10 main-menu login">
+			<ul class="pull-right">
+				<li>
+					<a href="/api/login/facebook{{(r)?'?r='+r:''}}" target="_self" class="link">Sign in</a>
+				</li>
+			</ul>
+		</div>
+		<div class="col-md-12 search-menu darkblue">
 		</div>
 	</div>
 	
