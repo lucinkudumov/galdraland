@@ -687,7 +687,7 @@ app.controller("headerController", ["$scope", "$http", "$location", "User", "$mo
     }    
 }]);
 
-app.controller("indexController", ["$scope", "$location", "$window", "$stateParams", function ($scope, $location, $window, $stateParams) {
+app.controller("indexController", ["$scope", "$location", "$window", "$stateParams", "$http", function ($scope, $location, $window, $stateParams, $http) {
 	$scope.r = "";
 	$scope.adventures = [];
 	$scope.teams = [];
@@ -699,7 +699,7 @@ app.controller("indexController", ["$scope", "$location", "$window", "$statePara
         $scope.loading = true;
 		console.log("kamil2");
 		
-		request = $http({ method : "POST", url : "lastAdventure", api : true, data : { term : "" } });
+		var request = $http({ method : "POST", url : "lastAdventure", api : true, data : { term : "" } });
 		request.success($scope.parse_adventures);
 		console.log("kamil3");
 
