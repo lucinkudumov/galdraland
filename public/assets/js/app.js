@@ -710,9 +710,9 @@ app.controller("indexController", ["$scope", "$location", "$window", "$statePara
 	
 	$scope.compare = function(a, b) {
 		if (a.createAt < b.createAt)
-			return 1;
-		if (a.createAt > b.createAt)
 			return -1;
+		if (a.createAt > b.createAt)
+			return 1;
 		return 0;
 	}
 	
@@ -739,7 +739,7 @@ app.controller("indexController", ["$scope", "$location", "$window", "$statePara
 			data.teams.length = 4;
 		}
 		
-		data.teams.reverse();		
+		data.teams.sort($scope.compare);		
 		for(var i = 0; i < data.teams.length; i++){
 			var result = {};
 			result._id = data.teams[i]._id;

@@ -114,6 +114,19 @@ module.exports = function (opts) {
                 }
             });
 		},
+
+		"post#lastTeam" : function (req, res) {
+			console.log("getting last teams");
+            adventureModel.find({}, function (err, teams) {
+                if (err) {
+                    console.log(err);
+                    return res.json({ teams : [] });
+                } else {
+					console.log(teams.length);
+                    return res.json({ teams : teams });
+                }
+            });
+		},
 		
 		"post#adsearchTeam" : function (req, res) {
             var name = req.body.name;
