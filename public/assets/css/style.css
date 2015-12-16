@@ -16,7 +16,7 @@
     width: 100%;
 }
 .hero {
-	background:url('images/bg01.jpg') no-repeat;
+	background:url('../images/bg01.jpg') no-repeat;
 	height: 572px;
 	margin-bottom:5%;
 }

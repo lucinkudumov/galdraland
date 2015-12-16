@@ -35,7 +35,117 @@
 					fjs.parentNode.insertBefore(js, fjs);
 			}(document, 'script', 'facebook-jssdk'));
 		</script>
-        <div ui-view="main"></div>
+        <div ui-view="main">
+			<div class="container main ng-scope">
+				<div class="row header ng-scope" ng-include="'/assets/partials/header.html'">
+					<div ng-controller="headerController" class="ng-scope">
+						<div class="col-md-2 logo">
+							<h3>GaldraLand</h3>
+						</div>
+						<div class="col-md-10 main-menu">
+							<ul class="pull-right">
+								<li class="dropdown">
+									<a class="dropdown-toggle">
+									feed <span class="badge ng-binding">0</span>
+									</a>
+									<ul class="dropdown-menu" ui-toggle="">
+										<li>
+											<a class="btn btn-login" href="/api/login/facebook" target="_self">Sign in</a>
+										</li>
+									</ul>
+								</li>
+							</ul>
+						</div>
+						<div class="col-md-12 search-menu darkblue">
+							<ul class="pull-right">
+								<li><select ng-model="scategory" class="ng-pristine ng-valid">
+									<option value="a">Adventure</option>
+									<option value="t">Team</option>
+									<option value="p">People</option>
+									</select></li>
+								<li><input type="text" ng-model="stext" class="ng-pristine ng-valid"></li>
+								<li><a class="btn btn-search" href="#" ng-click="search()">Search</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				
+				<div class="fullwidth hero">
+						Aqui vai foto
+				</div>
+
+				<div id="wrapper" >
+					<section id="adventures" class="row homepage"> 
+						<div class="row"> 
+							<h1> Featured Adventures </h1>
+								<div class="col-md-3 featured-adventure-1" >
+								   <label>adventure 1 </label>
+								</div> 
+								<div class="col-md-3 featured-adventure-2" >
+								   <label>adventure 2 </label>
+								</div>  
+								<div class="col-md-3 featured-adventure-1" >
+								   <label>adventure 3 </label>
+								</div>  
+								<div class="col-md-3 featured-adventure-2" >
+								   <label>adventure 4 </label>
+								</div> 
+						</div>
+						<div class="row padtop"> 
+							
+								<div class="col-md-3 featured-adventure-1" >
+								   <label>adventure 1 </label>
+								</div> 
+								<div class="col-md-3 featured-adventure-2" >
+								   <label>adventure 2 </label>
+								</div>  
+								<div class="col-md-3 featured-adventure-1" >
+								   <label>adventure 3 </label>
+								</div>  
+								<div class="col-md-3 featured-adventure-2" >
+								   <label>adventure 4 </label>
+								</div> 
+						</div>
+					</section>
+				</div> <!-- .wrapper -->
+				<div class="fullwidth lightgray padbot5">
+					<div id="wrapper" >	
+						<section id="teams" class="homepage">
+							<div class="row"> 
+								<h1> Teams </h1>
+									<div class="col-md-3 featured-adventure-1" >
+									   <label>team A </label>
+									</div> 
+									<div class="col-md-3 featured-adventure-2" >
+									   <label>team B				   </label>
+									</div>  
+									<div class="col-md-3 featured-adventure-1" >
+									   <label>team C </label>
+									</div>  
+									<div class="col-md-3 featured-adventure-2" >
+									   <label>team D </label>
+									</div> 
+							</div>
+							<div class="row padtop"> 
+								
+									<div class="col-md-3 featured-adventure-1" >
+									   <label>team A </label>
+									</div> 
+									<div class="col-md-3 featured-adventure-2" >
+									   <label>team A </label>
+									</div>  
+									<div class="col-md-3 featured-adventure-1" >
+									   <label>team A </label>
+									</div>  
+									<div class="col-md-3 featured-adventure-2" >
+									   <label>team A </label>
+									</div> 
+							</div>
+						</section>
+					</div> <!-- .wrapper -->
+				</div> <!-- fullwidth -->
+			</div>
+		</div>
 		<footer>
 			<div id="wrapper" class="row">
 				<div class="col-md-4">
