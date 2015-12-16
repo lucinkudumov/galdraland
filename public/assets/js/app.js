@@ -710,6 +710,9 @@ app.controller("indexController", ["$scope", "$location", "$window", "$statePara
 	
 	$scope.parse_adventures = function(data){
 		$scope.adventures = [];
+		if (data.adventures.length > 4) {
+			data.adventures.length = 4;
+		}
 		for(var i = 0; i < data.adventures.length; i++){
 			var result = {};
 			result._id = data.adventures[i]._id;
