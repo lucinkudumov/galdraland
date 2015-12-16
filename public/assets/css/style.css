@@ -46,6 +46,7 @@ footer {
 	padding:2%;
 	color: #fff;
 	background: #384D62;
+	overflow: auto;
 }
 footer h2 {
 	font-size: 15px;
