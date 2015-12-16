@@ -96,6 +96,7 @@ module.exports = function (opts) {
                     console.log(err);
                     return res.json({ adventures : [] });
                 } else {
+					console.log("getting last adventures success");
                     return res.json({ adventures : adventures });
                 }
             });

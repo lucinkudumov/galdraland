@@ -694,18 +694,14 @@ app.controller("indexController", ["$scope", "$location", "$window", "$statePara
 	$scope.loading = true;
 	var search = $location.search();
 	
-	console.log("kamil1");
     $scope.refresh = function () {
         $scope.loading = true;
-		console.log("kamil2");
 		
 		var request = $http({ method : "POST", url : "lastAdventure", api : true, data : { term : "" } });
 		request.success($scope.parse_adventures);
-		console.log("kamil3");
 
 		request = $http({ method : "POST", url : "newTeam", api : true, data : { term : "" } });
 		request.success($scope.parse_teams);
-		console.log("kamil4");
 
 		request.then(function(){
 			$scope.loading = false;
@@ -735,9 +731,7 @@ app.controller("indexController", ["$scope", "$location", "$window", "$statePara
 		}
 	}
 	
-	console.log("kamil5");
     $scope.refresh();
-	console.log("kamil6");
     
 	if(search !== null ) $scope.r = search.r;
 }]);
