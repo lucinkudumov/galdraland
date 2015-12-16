@@ -700,7 +700,7 @@ app.controller("indexController", ["$scope", "$location", "$window", "$statePara
 		var request = $http({ method : "POST", url : "lastAdventure", api : true, data : { term : "" } });
 		request.success($scope.parse_adventures);
 
-		request = $http({ method : "POST", url : "newTeam", api : true, data : { term : "" } });
+		request = $http({ method : "POST", url : "lastTeam", api : true, data : { term : "" } });
 		request.success($scope.parse_teams);
 
 		request.then(function(){
