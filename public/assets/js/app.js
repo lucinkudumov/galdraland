@@ -692,9 +692,7 @@ app.controller("indexController", ["$scope", "$location", "$window", "$statePara
 	$scope.adventures = [];
 	$scope.teams = [];
 	$scope.loading = true;
-    
 	var search = $location.search();
-	if(search !== null ) $scope.r = search.r;
 	
     $scope.refresh = function () {
         $scope.loading = true;
@@ -734,6 +732,8 @@ app.controller("indexController", ["$scope", "$location", "$window", "$statePara
 	}
 	
     $scope.refresh();
+    
+	if(search !== null ) $scope.r = search.r;
 }]);
 
 app.controller("leftMenuController", ["$scope", "$location", function ($scope, $location) {
