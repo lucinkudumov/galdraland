@@ -708,13 +708,21 @@ app.controller("indexController", ["$scope", "$location", "$window", "$statePara
 		});
     }
 	
+	$scope.compare = function(a, b) {
+		if (a.createAt < b.createAt)
+			return 1;
+		if (a.createAt > b.createAt)
+			return -1;
+		return 0;
+	}
+	
 	$scope.parse_adventures = function(data){
 		$scope.adventures = [];
 		if (data.adventures.length > 4) {
 			data.adventures.length = 4;
 		}
 		
-		data.adventures.reverse();		
+		data.adventures.sort($scope.compare);
 		for(var i = 0; i < data.adventures.length; i++){
 			var result = {};
 			result._id = data.adventures[i]._id;
