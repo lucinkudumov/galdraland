@@ -718,12 +718,13 @@ app.controller("indexController", ["$scope", "$location", "$window", "$statePara
 	
 	$scope.parse_adventures = function(data){
 		$scope.adventures = [];
-		if (data.adventures.length > 4) {
-			data.adventures.length = 4;
-		}
 		
 		data.adventures.sort($scope.compare);
 		data.adventures.reverse();
+		if (data.adventures.length > 4) {
+			data.adventures.length = 4;
+		}
+
 		for(var i = 0; i < data.adventures.length; i++){
 			var result = {};
 			result._id = data.adventures[i]._id;
@@ -736,12 +737,13 @@ app.controller("indexController", ["$scope", "$location", "$window", "$statePara
 	
 	$scope.parse_teams = function(data){
 		$scope.teams = [];
+
+		data.teams.sort($scope.compare);	
+		data.teams.reverse();
 		if (data.teams.length > 4) {
 			data.teams.length = 4;
 		}
 		
-		data.teams.sort($scope.compare);	
-		data.teams.reverse();
 		for(var i = 0; i < data.teams.length; i++){
 			var result = {};
 			result._id = data.teams[i]._id;
