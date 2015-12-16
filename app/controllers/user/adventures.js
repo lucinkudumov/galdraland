@@ -90,8 +90,8 @@ module.exports = function (opts) {
 		},
 
 		"post#lastAdventure" : function (req, res) {
-			var date = new Date();
-            adventureModel.find({"limit": 4, "sort": ['createdAt', 'desc']}, function (err, adventures) {
+			console.log("getting last adventures");
+            adventureModel.find({"limit": 4}, function (err, adventures) {
                 if (err) {
                     console.log(err);
                     return res.json({ adventures : [] });
