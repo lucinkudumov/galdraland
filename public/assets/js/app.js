@@ -748,7 +748,6 @@ app.controller("indexController", ["$scope", "$location", "$window", "$statePara
 			var result = {};
 			result._id = data.teams[i]._id;
 			result.name = data.teams[i].name;
-			result.text1 = data.teams[i].teamMembers.length + " Members";
 			$scope.teams.push(result);
 		}
 	}
