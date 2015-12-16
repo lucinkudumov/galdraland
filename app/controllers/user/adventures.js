@@ -89,6 +89,18 @@ module.exports = function (opts) {
             });
 		},
 
+		"post#lastAdventure" : function (req, res) {
+			var date = new Date();
+            adventureModel.find({"limit": 4, "sort": ['createdAt', 'desc']}, function (err, adventures) {
+                if (err) {
+                    console.log(err);
+                    return res.json({ adventures : [] });
+                } else {
+                    return res.json({ adventures : adventures });
+                }
+            });
+		},
+
 		"post#adventure/adsearch" : function (req, res) {
 			var name = req.body.name;
 			var description = req.body.description;

@@ -689,8 +689,51 @@ app.controller("headerController", ["$scope", "$http", "$location", "User", "$mo
 
 app.controller("indexController", ["$scope", "$location", "$window", "$stateParams", function ($scope, $location, $window, $stateParams) {
 	$scope.r = "";
+	$scope.adventures = [];
+	$scope.teams = [];
+	$scope.loading = true;
+    
 	var search = $location.search();
 	if(search !== null ) $scope.r = search.r;
+	
+    $scope.refresh = function () {
+        $scope.loading = true;
+		
+		request = $http({ method : "POST", url : "lastAdventure", api : true, data : { term : "" } });
+		request.success($scope.parse_adventures);
+
+		request = $http({ method : "POST", url : "newTeam", api : true, data : { term : "" } });
+		request.success($scope.parse_teams);
+
+		request.then(function(){
+			$scope.loading = false;
+		});
+    }
+	
+	$scope.parse_adventures = function(data){
+		$scope.adventures = [];
+		for(var i = 0; i < data.adventures.length; i++){
+			var result = {};
+			result._id = data.adventures[i]._id;
+			result.name = data.adventures[i].name;
+			result.text1 = data.adventures[i].tags.join(" ");
+			result.text2 = data.adventures[i].start + " - " + data.adventures[i].end;
+			$scope.adventures.push(result);
+		}
+	}
+	
+	$scope.parse_teams = function(data){
+		$scope.teams = [];
+		for(var i = 0; i < data.teams.length; i++){
+			var result = {};
+			result._id = data.teams[i]._id;
+			result.name = data.teams[i].name;
+			result.text1 = data.teams[i].teamMembers.length + " Members";
+			$scope.teams.push(result);
+		}
+	}
+	
+    $scope.refresh();
 }]);
 
 app.controller("leftMenuController", ["$scope", "$location", function ($scope, $location) {

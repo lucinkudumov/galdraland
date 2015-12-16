@@ -31,33 +31,9 @@
 		<section id="adventures" class="row homepage"> 
 			<div class="row"> 
 				<h1> Featured Adventures </h1>
-					<div class="col-md-3 featured-adventure-1" >
-					   <label>adventure 1 </label>
-					</div> 
-					<div class="col-md-3 featured-adventure-2" >
-					   <label>adventure 2 </label>
-					</div>  
-					<div class="col-md-3 featured-adventure-1" >
-					   <label>adventure 3 </label>
-					</div>  
-					<div class="col-md-3 featured-adventure-2" >
-					   <label>adventure 4 </label>
-					</div> 
-			</div>
-			<div class="row padtop"> 
-				
-					<div class="col-md-3 featured-adventure-1" >
-					   <label>adventure 1 </label>
-					</div> 
-					<div class="col-md-3 featured-adventure-2" >
-					   <label>adventure 2 </label>
-					</div>  
-					<div class="col-md-3 featured-adventure-1" >
-					   <label>adventure 3 </label>
-					</div>  
-					<div class="col-md-3 featured-adventure-2" >
-					   <label>adventure 4 </label>
-					</div> 
+				<div class="col-md-3" ng-repeat="a in adventures" ng-class-odd="'featured-adventure-1'"  ng-class-odd="'featured-adventure-2'">
+				   <label>{{ a.name }}</label>
+				</div> 
 			</div>
 		</section>
 	</div> <!-- .wrapper -->
@@ -77,21 +53,6 @@
 						</div>  
 						<div class="col-md-3 featured-adventure-2" >
 						   <label>team D </label>
-						</div> 
-				</div>
-				<div class="row padtop"> 
-					
-						<div class="col-md-3 featured-adventure-1" >
-						   <label>team A </label>
-						</div> 
-						<div class="col-md-3 featured-adventure-2" >
-						   <label>team A </label>
-						</div>  
-						<div class="col-md-3 featured-adventure-1" >
-						   <label>team A </label>
-						</div>  
-						<div class="col-md-3 featured-adventure-2" >
-						   <label>team A </label>
 						</div> 
 				</div>
 			</section>
