@@ -713,6 +713,8 @@ app.controller("indexController", ["$scope", "$location", "$window", "$statePara
 		if (data.adventures.length > 4) {
 			data.adventures.length = 4;
 		}
+		
+		data.adventures.reverse();		
 		for(var i = 0; i < data.adventures.length; i++){
 			var result = {};
 			result._id = data.adventures[i]._id;
@@ -725,6 +727,11 @@ app.controller("indexController", ["$scope", "$location", "$window", "$statePara
 	
 	$scope.parse_teams = function(data){
 		$scope.teams = [];
+		if (data.teams.length > 4) {
+			data.teams.length = 4;
+		}
+		
+		data.teams.reverse();		
 		for(var i = 0; i < data.teams.length; i++){
 			var result = {};
 			result._id = data.teams[i]._id;
