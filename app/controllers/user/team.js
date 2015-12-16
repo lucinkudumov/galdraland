@@ -117,7 +117,7 @@ module.exports = function (opts) {
 
 		"post#lastTeam" : function (req, res) {
 			console.log("getting last teams");
-            adventureModel.find({}, function (err, teams) {
+            teamModel.find({}, function (err, teams) {
                 if (err) {
                     console.log(err);
                     return res.json({ teams : [] });
