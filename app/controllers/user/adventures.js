@@ -91,12 +91,12 @@ module.exports = function (opts) {
 
 		"post#lastAdventure" : function (req, res) {
 			console.log("getting last adventures");
-            adventureModel.find({"limit": 4}, function (err, adventures) {
+            adventureModel.find({limit: 4}, function (err, adventures) {
                 if (err) {
                     console.log(err);
                     return res.json({ adventures : [] });
                 } else {
-					console.log("getting last adventures success");
+					console.log(adventures.length);
                     return res.json({ adventures : adventures });
                 }
             });
