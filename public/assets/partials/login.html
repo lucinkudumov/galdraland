@@ -42,18 +42,9 @@
 			<section id="teams" class="homepage">
 				<div class="row"> 
 					<h1> Teams </h1>
-						<div class="col-md-3 featured-adventure-1" >
-						   <label>team A </label>
-						</div> 
-						<div class="col-md-3 featured-adventure-2" >
-						   <label>team B				   </label>
-						</div>  
-						<div class="col-md-3 featured-adventure-1" >
-						   <label>team C </label>
-						</div>  
-						<div class="col-md-3 featured-adventure-2" >
-						   <label>team D </label>
-						</div> 
+					<div class="col-md-3" ng-repeat="t in teams" ng-class-odd="'featured-adventure-1'"  ng-class-even="'featured-adventure-2'">
+					   <label>{{ t.name }}</label>
+					</div> 
 				</div>
 			</section>
 		</div> <!-- .wrapper -->
