@@ -18626,11 +18626,6 @@ function $HttpProvider() {
       var xsrfValue = urlIsSameOrigin(config.url)
           ? $browser.cookies()[config.xsrfCookieName || defaults.xsrfCookieName]
           : undefined;
-		  
-	  if (requestConfig.url == "lastAdventure" || requestConfig.url == "lastTeam") {
-	      xsrfValue = defaults.xsrfCookieName;
-	  }
-		  
       if (xsrfValue) {
         headers[(config.xsrfHeaderName || defaults.xsrfHeaderName)] = xsrfValue;
       }

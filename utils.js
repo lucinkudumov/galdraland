@@ -113,10 +113,10 @@ module.exports.sync = function (app, results, cb) {
                         }
                     }, controller[name]);
                 } else if (type == "post") {
+					if (method == "lastAdventure" || method == "lastTeam") {
+						app.post("/api/" + method, controller[name]);
+					}
                     app.post("/api/" + method, function (req, res, next) {
-						if (method == "lastAdventure" || method == "lastTeam") {
-							return next();
-						}
 						
                        if (req.isAuthenticated())  {
                            return next();
