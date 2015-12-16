@@ -1,8 +1,8 @@
 <div ng-controller="headerController">
-    <div class="col-md-4">
+    <div class="col-md-2 logo">
         <h3>GaldraLand</h3>
     </div>
-    <div class="col-md-8 main-menu">
+    <div class="col-md-10 main-menu">
         <ul class="pull-right">
             <li class="dropdown">
               <a class="dropdown-toggle">
@@ -39,15 +39,15 @@
             <li><a href="#" ng-click="logout()">logout</a></li>
         </ul>
     </div>
-	<div class="col-md-12 search-menu">
+	<div class="col-md-12 search-menu darkblue">
 		<ul class="pull-right">
             <li><select ng-model="scategory">
 				<option value="a">Adventure</option>
 				<option value="t">Team</option>
 				<option value="p">People</option>
 				</select></li>
-            <li><input type="text" ng-model="stext" /></li>
-            <li><a href="#" ng-click="search()">Search</a></li>
+            <li><input type="text" ng-model="stext" placeholder="search for"/></li>
+            <li><a class="btn btn-search" href="#" ng-click="search()">Search</a></li>
         </ul>
 	</div>
 </div>
