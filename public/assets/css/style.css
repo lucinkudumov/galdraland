@@ -22,11 +22,11 @@
 	background-size: cover;
 }
 .featured-adventure-1 {
-	height: 180px;
+	min-height: 180px;
 	background:#FA8E6A;
 }
 .featured-adventure-2 {
-	height: 180px;
+	min-height: 180px;
 	background:#384D62;
 }
 label {
