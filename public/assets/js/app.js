@@ -1468,15 +1468,18 @@ app.controller("newsController", ["$scope", "$http", "$location", "User", functi
 app.controller("userViewController", ["$scope", "$http", "$stateParams", "User", "$modal", "$location", function ($scope, $http, $stateParams, User, $modal, $location) {
     $scope.user = User.isLoggedIn();
     
+	console.log("user view controller start");
     $scope.refresh = function () {
         var request = $http({ method : "POST", url : "getUser", api : true, data : { userid : $stateParams.id }});
         request.success(function (data) {
             $scope.user = data.user;
+			console.log("user view controller get data");
 			console.log(data);
         });
     }
 	
     $scope.refresh();
+	console.log("user view controller end");
 }]);
 
 app.controller("teamViewController", ["$scope", "$http", "$stateParams", "User", "$modal", "$location", function ($scope, $http, $stateParams, User, $modal, $location) {
