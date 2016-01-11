@@ -44,6 +44,7 @@ module.exports = function (opts) {
                     console.log(err);
                     return res.json({ user : [] });
                 } else {
+					console.log(user);
                     return res.json({ user : user });
                 }
 			});
