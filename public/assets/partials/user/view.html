@@ -3,67 +3,59 @@
     <blockquote>
         <p>Main information</p>
         <div class="form-group">
-            <input class="form-control" type="text" ng-model="username" disabled>
+			<p>User Name : {{ username }}</p>
         </div>
         <div class="form-group">
-            <input class="form-control" type="email" ng-model="email" disabled>
+			<p>eMail Address : {{ email }}</p>
         </div>
         <div class="form-group">
-            <input class="form-control" type="text" ng-model="location" disabled>
+			<p>Location : {{ location }}</p>
         </div>
         <div class="form-group">
-            <input class="form-control" type="text" ng-model="skype" disabled>
+			<p>Skype : {{ skype }}</p>
         </div>
         <div class="form-group">
-            <input class="form-control" type="text" ng-model="goals" disabled>
+			<p>Goals : {{ goals }}</p>
         </div>
         <div class="form-group">
-            <input class="form-control" type="text" ng-model="categories" disabled>
+			<p>Categories : {{ categories }}</p>
         </div>
     </blockquote>
 	<blockquote>
         <p>Biography</p>
-        <textarea class="form-control" ng-model="bio" disabled></textarea>
+		<p>{{ bio }}</p>
     </blockquote>
 	<blockquote>
         <p>Interests</p>
         <div ng-repeat="i in interests" style="margin-bottom: 20px;">
             <div class="input-group">
-				<input type="text" ng-model="i.topic.topic" class="form-control" disabled>
+				<p>Topic : {{ i.topic.topic }}</p>
             </div>
 			<div class="input-group">
-				<input type="text" ng-model="i.information" class="form-control" disabled>
+				<p>Information : {{ i.information }}</p>
 			</div>
         </div>		
     </blockquote>
     <blockquote>
         <p>Experience</p>
-        <textarea class="form-control" ng-model="experience" disabled></textarea>
+		<p>{{ experience }}</p>
     </blockquote>
     <blockquote>
         <p>Education</p>
         <div ng-repeat="e in educations" style="margin-bottom: 20px;">
             <div class="input-group">
-              <input type="text" ng-model="e.school.name" class="form-control" disabled>
-              <div class="input-group-btn">
-                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">{{ e.type || "Choose type" }} <span class="caret"></span></button>
-                <ul class="dropdown-menu pull-right">
-                  <li><a href="" ng-click="setType(e, 'School')">School</a></li>
-                  <li><a href="" ng-click="setType(e, 'College')">College</a></li>
-                  <li><a href="" ng-click="setType(e, 'University')">University</a></li>
-                </ul>
-              </div>
+				<p>School : {{ e.school.name }}</p>
             </div>
-            <input class="form-control year" type="text" ng-model="e.year.name" disabled>
+			<p>Year : {{ e.year.name }}</p>
         </div>
     </blockquote>
     <blockquote>
         <p>Links</p>
         <div ng-repeat="l in links" style="margin-bottom: 20px;">
             <div class="input-group">
-              <input type="text" ng-model="l.link" class="form-control" disabled>
+				<p>Link : {{ l.link }}</p>
             </div>
-            <input class="form-control" type="text" ng-model="l.name" disabled>
+			<p>Link Name : {{ l.name }}</p>
         </div>
     </blockquote>
 </div>
