@@ -93,6 +93,7 @@ app.config(["$urlRouterProvider", "$locationProvider", "$stateProvider", "$httpP
             "left-side@userView" : { templateUrl : "/assets/partials/user/left-side.html" },
             "right-side@userView" : { templateUrl : "/assets/partials/user/view.html" }
 		},
+		requireLogin: true
     }).state("teamView", {
         url: "/teams/view/:id",
         views: {
