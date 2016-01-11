@@ -1485,6 +1485,7 @@ app.controller("userViewController", ["$scope", "$http", "$stateParams", "User",
 			$scope.experience = data.user.experience;
 			$scope.bio = data.user.bio;
 			$scope.interests = data.user.interests;
+			$scope.photo = data.user.photo;
 		});
 	}
 	
