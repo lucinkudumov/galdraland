@@ -1474,7 +1474,7 @@ app.controller("userViewController", ["$scope", "$http", "$stateParams", "User",
 
 	var request = $http({ method : "POST", url : "getUser", api : true, data : { userid : $stateParams.id }});
 	request.success(function (data) {
-		$scope.values.user = data.user;
+		$scope.values.user = data.users;
 		console.log(data.user);
 	});
 	

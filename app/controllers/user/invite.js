@@ -36,6 +36,19 @@ module.exports = function (opts) {
             });
         },
 		
+		"post#getViewUser" : function (req, res) {
+			var userid = req.body.userid;
+			
+			userModel.findById(userid).exec(function (err, user) {
+                if (err) {
+                    console.log(err);
+                    return res.json({ user : [] });
+                } else {
+                    return res.json({ user : user });
+                }
+			});
+		},
+		
 		"post#getUser" : function (req, res) {
 			var userid = req.body.userid;
 			
