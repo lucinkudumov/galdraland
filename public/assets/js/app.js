@@ -86,6 +86,13 @@ app.config(["$urlRouterProvider", "$locationProvider", "$stateProvider", "$httpP
             "right-side@teamCreate" : { templateUrl : "/assets/partials/team/create.html" }
         },
         requireLogin: true
+	}).state("userView", {
+		url: "/users/view/:id",
+		views: {
+            "main" : { templateUrl : "/assets/partials/main.html" },
+            "left-side@userView" : { templateUrl : "/assets/partials/user/left-side.html" },
+            "right-side@userView" : { templateUrl : "/assets/partials/user/view.html" }
+		},
     }).state("teamView", {
         url: "/teams/view/:id",
         views: {
@@ -1322,6 +1329,7 @@ app.controller("searchController", ["$scope", "$http", "$location", "$stateParam
 			result.name = data.users[i].username;
 			result.text1 = data.users[i].fullname;
 			result.photo = data.users[i].photo;
+			result.href = "/users/view/" + data.users[i]._id;
 			$scope.results.push(result);
 		}
 	}
@@ -1454,6 +1462,20 @@ app.controller("newsController", ["$scope", "$http", "$location", "User", functi
 		}
 	}
     
+    $scope.refresh();
+}]);
+
+app.controller("userViewController", ["$scope", "$http", "$stateParams", "User", "$modal", "$location", function ($scope, $http, $stateParams, User, $modal, $location) {
+    $scope.user = User.isLoggedIn();
+    
+    $scope.refresh = function () {
+        var request = $http({ method : "POST", url : "getUser", api : true, data : { userid : $stateParams.id }});
+        request.success(function (data) {
+            $scope.user = data.user;
+			console.log(data);
+        });
+    }
+	
     $scope.refresh();
 }]);
 

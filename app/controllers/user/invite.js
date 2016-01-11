@@ -35,6 +35,19 @@ module.exports = function (opts) {
                 }
             });
         },
+		
+		"post#getUser" : function (req, res) {
+			var userid = req.body.userid;
+			
+            userModel.find({ id : userid }, function (err, users) {
+                if (err) {
+                    console.log(err);
+                    return res.json({ users : [] });
+                } else {
+                    return res.json({ users : users });
+                }
+            });
+		},
         
         "post#sendInvite" : function (req, res) {
             var invites = req.body.invites,
