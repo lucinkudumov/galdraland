@@ -3,51 +3,48 @@
     <blockquote>
         <p>Main information</p>
         <div class="form-group">
-            <input class="form-control" type="text" ng-model="username" ng-change="checkUsername()">
+            <input class="form-control" type="text" ng-model="username" disabled>
         </div>
         <div class="form-group">
-            <input class="form-control" type="text" ng-model="fullname">
+            <input class="form-control" type="email" ng-model="email" disabled>
         </div>
         <div class="form-group">
-            <input class="form-control" type="email" ng-model="email" ng-change="checkEmail()">
+            <input class="form-control" type="text" ng-model="location" disabled>
         </div>
         <div class="form-group">
-            <input class="form-control" type="text" ng-model="location">
+            <input class="form-control" type="text" ng-model="skype" disabled>
         </div>
         <div class="form-group">
-            <input class="form-control" type="text" ng-model="skype">
+            <input class="form-control" type="text" ng-model="goals" disabled>
         </div>
         <div class="form-group">
-            <input class="form-control" type="text" ng-model="goals">
-        </div>
-        <div class="form-group">
-            <input class="form-control" type="text" ng-model="categories">
+            <input class="form-control" type="text" ng-model="categories" disabled>
         </div>
     </blockquote>
 	<blockquote>
         <p>Biography</p>
-        <textarea class="form-control" ng-model="bio"></textarea>
+        <textarea class="form-control" ng-model="bio" disabled></textarea>
     </blockquote>
 	<blockquote>
         <p>Interests</p>
         <div ng-repeat="i in interests" style="margin-bottom: 20px;">
             <div class="input-group">
-				<input type="text" ng-model="i.topic.topic" class="form-control">
+				<input type="text" ng-model="i.topic.topic" class="form-control" disabled>
             </div>
 			<div class="input-group">
-				<input type="text" ng-model="i.information" class="form-control">
+				<input type="text" ng-model="i.information" class="form-control" disabled>
 			</div>
         </div>		
     </blockquote>
     <blockquote>
         <p>Experience</p>
-        <textarea class="form-control" ng-model="experience"></textarea>
+        <textarea class="form-control" ng-model="experience" disabled></textarea>
     </blockquote>
     <blockquote>
         <p>Education</p>
         <div ng-repeat="e in educations" style="margin-bottom: 20px;">
             <div class="input-group">
-              <input type="text" ng-model="e.school.name" class="form-control">
+              <input type="text" ng-model="e.school.name" class="form-control" disabled>
               <div class="input-group-btn">
                 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">{{ e.type || "Choose type" }} <span class="caret"></span></button>
                 <ul class="dropdown-menu pull-right">
@@ -57,16 +54,16 @@
                 </ul>
               </div>
             </div>
-            <input class="form-control year" type="text" ng-model="e.year.name">
+            <input class="form-control year" type="text" ng-model="e.year.name" disabled>
         </div>
     </blockquote>
     <blockquote>
         <p>Links</p>
         <div ng-repeat="l in links" style="margin-bottom: 20px;">
             <div class="input-group">
-              <input type="text" ng-model="l.link" class="form-control">
+              <input type="text" ng-model="l.link" class="form-control" disabled>
             </div>
-            <input class="form-control" type="text" ng-model="l.name">
+            <input class="form-control" type="text" ng-model="l.name" disabled>
         </div>
     </blockquote>
 </div>

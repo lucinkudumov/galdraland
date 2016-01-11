@@ -1473,7 +1473,18 @@ app.controller("userViewController", ["$scope", "$http", "$stateParams", "User",
 		var request = $http({ method : "POST", url : "getViewUser", api : true, data : { userid : $stateParams.id }});
 		request.success(function (data) {
 			console.log(data);
+			$scope.username = data.user.username;
 			$scope.fullname = data.user.fullname;
+			$scope.email = data.user.email.email;
+			$scope.location = data.user.location;
+			$scope.skype = data.user.skype;
+			$scope.goals = data.user.goals;
+			$scope.categories = data.user.categories;
+			$scope.educations = data.user.educations;
+			$scope.links = data.user.links;
+			$scope.experience = data.user.experience;
+			$scope.bio = data.user.bio;
+			$scope.interests = data.user.interests;
 		});
 	}
 	
