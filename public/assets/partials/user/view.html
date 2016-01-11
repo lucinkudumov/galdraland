@@ -1,4 +1,72 @@
 <div class="view-user" ng-controller="userViewController">
-	<p>fdsafdsafdsafdsafdsa</p>
-
+	<p>{{ values.user.fullname }}</p>
+    <blockquote>
+        <p>Main information</p>
+        <div class="form-group">
+            <input class="form-control" type="text" ng-model="username" ng-change="checkUsername()">
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="text" ng-model="fullname">
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="email" ng-model="email" ng-change="checkEmail()">
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="text" ng-model="location">
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="text" ng-model="skype">
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="text" ng-model="goals">
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="text" ng-model="categories">
+        </div>
+    </blockquote>
+	<blockquote>
+        <p>Biography</p>
+        <textarea class="form-control" ng-model="bio"></textarea>
+    </blockquote>
+	<blockquote>
+        <p>Interests</p>
+        <div ng-repeat="i in interests" style="margin-bottom: 20px;">
+            <div class="input-group">
+				<input type="text" ng-model="i.topic.topic" class="form-control">
+            </div>
+			<div class="input-group">
+				<input type="text" ng-model="i.information" class="form-control">
+			</div>
+        </div>		
+    </blockquote>
+    <blockquote>
+        <p>Experience</p>
+        <textarea class="form-control" ng-model="experience"></textarea>
+    </blockquote>
+    <blockquote>
+        <p>Education</p>
+        <div ng-repeat="e in educations" style="margin-bottom: 20px;">
+            <div class="input-group">
+              <input type="text" ng-model="e.school.name" class="form-control">
+              <div class="input-group-btn">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">{{ e.type || "Choose type" }} <span class="caret"></span></button>
+                <ul class="dropdown-menu pull-right">
+                  <li><a href="" ng-click="setType(e, 'School')">School</a></li>
+                  <li><a href="" ng-click="setType(e, 'College')">College</a></li>
+                  <li><a href="" ng-click="setType(e, 'University')">University</a></li>
+                </ul>
+              </div>
+            </div>
+            <input class="form-control year" type="text" ng-model="e.year.name">
+        </div>
+    </blockquote>
+    <blockquote>
+        <p>Links</p>
+        <div ng-repeat="l in links" style="margin-bottom: 20px;">
+            <div class="input-group">
+              <input type="text" ng-model="l.link" class="form-control">
+            </div>
+            <input class="form-control" type="text" ng-model="l.name">
+        </div>
+    </blockquote>
 </div>
