@@ -1,62 +1,62 @@
 <div class="view-user" ng-controller="userViewController">
 	<div class="avatar" style="background-image: url('{{ photo }}')"></div>
-	<p>{{ fullname }}</p>
+	<h1>{{ fullname }}</h1>
     <blockquote>
         <p>Main information</p>
         <div class="form-group">
-			<p>User Name : {{ username }}</p>
+			<small>User Name : {{ username }}</small>
         </div>
         <div class="form-group">
-			<p>eMail Address : {{ email }}</p>
+			<small>eMail Address : {{ email }}</small>
         </div>
         <div class="form-group">
-			<p>Location : {{ location }}</p>
+			<small>Location : {{ location }}</small>
         </div>
         <div class="form-group">
-			<p>Skype : {{ skype }}</p>
+			<small>Skype : {{ skype }}</small>
         </div>
         <div class="form-group">
-			<p>Goals : {{ goals }}</p>
+			<small>Goals : {{ goals }}</small>
         </div>
         <div class="form-group">
-			<p>Categories : {{ categories }}</p>
+			<small>Categories : {{ categories }}</small>
         </div>
     </blockquote>
 	<blockquote>
         <p>Biography</p>
-		<p>{{ bio }}</p>
+		<small>{{ bio }}</small>
     </blockquote>
 	<blockquote>
         <p>Interests</p>
         <div ng-repeat="i in interests" style="margin-bottom: 20px;">
             <div class="input-group">
-				<p>Topic : {{ i.topic.topic }}</p>
+				<small>Topic : {{ i.topic.topic }}</small>
             </div>
 			<div class="input-group">
-				<p>Information : {{ i.information }}</p>
+				<small>Information : {{ i.information }}</small>
 			</div>
         </div>		
     </blockquote>
     <blockquote>
         <p>Experience</p>
-		<p>{{ experience }}</p>
+		<small>{{ experience }}</small>
     </blockquote>
     <blockquote>
         <p>Education</p>
         <div ng-repeat="e in educations" style="margin-bottom: 20px;">
             <div class="input-group">
-				<p>School : {{ e.school.name }}</p>
+				<small>School : {{ e.school.name }}</small>
             </div>
-			<p>Year : {{ e.year.name }}</p>
+			<small>Year : {{ e.year.name }}</small>
         </div>
     </blockquote>
     <blockquote>
         <p>Links</p>
         <div ng-repeat="l in links" style="margin-bottom: 20px;">
             <div class="input-group">
-				<p>Link : {{ l.link }}</p>
+				<small>Link : {{ l.link }}</small>
             </div>
-			<p>Link Name : {{ l.name }}</p>
+			<small>Link Name : {{ l.name }}</small>
         </div>
     </blockquote>
 </div>
