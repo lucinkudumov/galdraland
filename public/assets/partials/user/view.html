@@ -24,16 +24,16 @@
     </blockquote>
 	<blockquote>
         <p>Teams</p>
-		<small ng-show="data.teams.length == 0">No teams</small> 
-		<ul ng-show="data.teams.length > 0"> 
-			<li ng-repeat="t in data.teams"><a href="/teams/view/{{ t._id }}">{{ t.name }}</a></li>
+		<small ng-show="teams.length == 0">No teams</small> 
+		<ul ng-show="teams.length > 0"> 
+			<li ng-repeat="t in teams"><a href="/teams/view/{{ t._id }}">{{ t.name }}</a></li>
 		</ul>
     </blockquote>
 	<blockquote>
 		<p>Adventures</p>
-		<small ng-show="data.adventures.length == 0">No adventures</small> 
-		<ul ng-show="data.adventures.length > 0"> 
-			<li ng-repeat="a in data.adventures"><a href="/adventures/view/{{ a._id }}">{{ a.name }}</a></li>
+		<small ng-show="adventures.length == 0">No adventures</small> 
+		<ul ng-show="adventures.length > 0"> 
+			<li ng-repeat="a in adventures"><a href="/adventures/view/{{ a._id }}">{{ a.name }}</a></li>
 		</ul>
     </blockquote>
 	<blockquote>
