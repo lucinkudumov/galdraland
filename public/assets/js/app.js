@@ -1474,7 +1474,8 @@ app.controller("userViewController", ["$scope", "$http", "$stateParams", "User",
     $scope.user = User.isLoggedIn();
     
 	$scope.refresh = function () {
-		var request = $http({ method : "POST", url : "getViewUser", api : true, data : { userid : $stateParams.id }});
+		var userid = $stateParams.id;
+		var request = $http({ method : "POST", url : "getViewUser", api : true, data : { userid : userid }});
 		request.success(function (data) {
 			console.log(data);
 			$scope.username = data.user.username;
@@ -1491,7 +1492,7 @@ app.controller("userViewController", ["$scope", "$http", "$stateParams", "User",
 			$scope.interests = data.user.interests;
 			$scope.photo = data.user.photo;
 
-			req1 = $http({ method : "GET", url : "userTeams", api : true, data : { userid : $stateParams.id } });
+			req1 = $http({ method : "GET", url : "userTeams", api : true, data : { userid : userid } });
 			req1.success(function (data) {
 				$scope.teams = data.teams;
 			
