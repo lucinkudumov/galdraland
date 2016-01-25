@@ -1495,7 +1495,7 @@ app.controller("userViewController", ["$scope", "$http", "$stateParams", "User",
 			request.success(function (data) {
 				$scope.teams = data.teams;
 			
-				request = $http({ method : "POST", url : "adventure/list", api : true, data : { teams : $scope.teams } });
+				request = $http({ method : "POST", url : "adventure/list", api : true, data : { teams : data.teams } });
 				request.success(function (r) {
 					$scope.adventures = r.adventures;
 				});

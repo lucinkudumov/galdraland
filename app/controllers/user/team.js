@@ -187,7 +187,7 @@ module.exports = function (opts) {
         },
 		
         "get#userTeams" : function (req, res) {
-			teamMemberModel.find( { owner : req.body.userid }, function(err, teams){
+			teamMemberModel.find( { user : req.body.userid }, function(err, teams){
 				if (err) {
 					console.log(err);
 					return res.json({ success : false });
