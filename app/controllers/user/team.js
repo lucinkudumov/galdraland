@@ -203,6 +203,7 @@ module.exports = function (opts) {
 							console.log(err);
 							return res.json({ success : false });
 						} else {
+							console.log(teams);
 							return res.json({ success : true, teams : teams });
 						}
 					});
