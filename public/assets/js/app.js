@@ -1474,8 +1474,7 @@ app.controller("userViewController", ["$scope", "$http", "$stateParams", "User",
     $scope.user = User.isLoggedIn();
     
 	$scope.refresh = function () {
-		var userid = $stateParams.id;
-		var request = $http({ method : "POST", url : "getViewUser", api : true, data : { userid : userid }});
+		var request = $http({ method : "POST", url : "getViewUser", api : true, data : { userid : $stateParams.id }});
 		request.success(function (data) {
 			console.log(data);
 			$scope.username = data.user.username;
@@ -1491,16 +1490,16 @@ app.controller("userViewController", ["$scope", "$http", "$stateParams", "User",
 			$scope.bio = data.user.bio;
 			$scope.interests = data.user.interests;
 			$scope.photo = data.user.photo;
-
-			req1 = $http({ method : "GET", url : "userTeams", api : true, data : { userid : userid } });
-			req1.success(function (data) {
-				$scope.teams = data.teams;
-			
-				req2 = $http({ method : "POST", url : "adventure/list", api : true, data : { teams : data.teams } });
-				req2.success(function (r) {
-					$scope.adventures = r.adventures;
-				});
-			});
+		});
+		
+		request = $http({ method : "GET", url : "userTeams", api : true, data : { userid : $stateParams.id } });
+		request.success(function (data) {
+			$scope.teams = data.teams;
+		});
+		
+		request = $http({ method : "POST", url : "adventure/list", api : true, data : { teams : $scope.teams } });
+		request.success(function (r) {
+			$scope.adventures = r.adventures;
 		});
 	}
 	
