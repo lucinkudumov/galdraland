@@ -24,7 +24,7 @@
     </blockquote>
 	<blockquote>
         <p>Biography</p>
-		<small>{{ bio }}</small>
+		<small ng-show="bio">{{ bio }}</small>
     </blockquote>
 	<blockquote>
         <p>Interests</p>
@@ -39,7 +39,7 @@
     </blockquote>
     <blockquote>
         <p>Experience</p>
-		<small>{{ experience }}</small>
+		<small ng-show="experience">{{ experience }}</small>
     </blockquote>
     <blockquote>
         <p>Education</p>
@@ -54,9 +54,8 @@
         <p>Links</p>
         <div ng-repeat="l in links" style="margin-bottom: 20px;">
             <div class="input-group">
-				<small>Link : {{ l.link }}</small>
+				<small><a href="{{ l.link }}">Link : {{ l.name }}</a></small>
             </div>
-			<small>Link Name : {{ l.name }}</small>
         </div>
     </blockquote>
 </div>
