@@ -976,6 +976,10 @@ app.controller("viewInviteController", ["$scope", "invite", "$modalInstance", "U
 }]);
 app.controller("profileLeftSideController", ["$scope", "$http", "User", function ($scope, $http, User) {
     $scope.user = User.isLoggedIn();
+
+	$http.get("/api/getUserDetail").success(function (data) {
+		$scope.user = data.user;
+	});
     
     $scope.calculateRecomendation = function () {
         if (!$scope.user) {
@@ -984,7 +988,7 @@ app.controller("profileLeftSideController", ["$scope", "$http", "User", function
         
         $scope.recomendation = [];
         
-        if ($scope.user.educations.length == 0) {
+        if (!$scope.user.educations || $scope.user.educations.length == 0) {
             $scope.recomendation.push("Add education: college or university.");
         }
         
