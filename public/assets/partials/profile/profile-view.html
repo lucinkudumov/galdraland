@@ -28,8 +28,7 @@
         <small ng-show="!user.interests || user.interests.length == 0">No interests, join to team and create new adventure to add your interests.</small>
         <pre ng-show="user.interests">
 		<div class = "interest" ng-repeat="item in user.interests  | orderBy:'topic.topic' | groupBy:['topic.topic']" style = "padding: 0;">
-			<p ng-show="item.group_by_CHANGED">{{item.topic.topic}}</p>
-			<small>{{item.information}}</small>
+			<small>{{item.topic.topic}}, {{item.information}}</small>
 		</div>
 		</pre>
         <br>  
