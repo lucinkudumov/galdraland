@@ -23,6 +23,25 @@
         </div>
     </blockquote>
 	<blockquote>
+        <p>Teams</p>
+		<small ng-show="teams.length == 0">No teams</small> 
+		<ul ng-show="teams.length > 0"> 
+			<li ng-repeat="t in teams"><a href="/teams/view/{{ t._id }}">{{ t.name }}</a></li>
+		</ul>
+    </blockquote>
+	<blockquote>
+        <p>Teams</p>
+		<small ng-show="teams.length == 0">No teams</small> 
+		<ul ng-show="teams.length > 0"> 
+			<li ng-repeat="t in teams"><a href="/teams/view/{{ t._id }}">{{ t.name }}</a></li>
+		</ul>
+		<p>Adventures</p>
+		<small ng-show="adventures.length == 0">No adventures</small> 
+		<ul ng-show="adventures.length > 0"> 
+			<li ng-repeat="a in adventures"><a href="/adventures/view/{{ a._id }}">{{ a.name }}</a></li>
+		</ul>
+    </blockquote>
+	<blockquote>
         <p>Biography</p>
 		<small ng-show="bio">{{ bio }}</small>
     </blockquote>

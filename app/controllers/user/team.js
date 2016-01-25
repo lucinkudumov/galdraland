@@ -186,6 +186,30 @@ module.exports = function (opts) {
 			});
         },
 		
+        "get#userTeams" : function (req, res) {
+			teamMemberModel.find( { user : req.body.userid }, function(err, members){
+				console.log(members);
+				if(err){
+					console.log(err);
+					return res.json({ success : false });
+				} else {
+					var member_ids = [];
+					if( !members ) member_ids = [];
+					else {
+						for(var i = 0; i < members.length; i++) member_ids.push(members[i]._id);
+					}
+					teamModel.find({ $or : [ { owner : req.user._id }, { teamMembers : { $in : member_ids } } ] }).populate("owner teamMembers").exec(function (err, teams) {
+						if (err) {
+							console.log(err);
+							return res.json({ success : false });
+						} else {
+							return res.json({ success : true, teams : teams });
+						}
+					});
+				}
+			});
+        },
+		
 		"post#leaveTeam" : function (req, res) {
 			var id = req.body.id;
 				

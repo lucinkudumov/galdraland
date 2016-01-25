@@ -1490,6 +1490,16 @@ app.controller("userViewController", ["$scope", "$http", "$stateParams", "User",
 			$scope.bio = data.user.bio;
 			$scope.interests = data.user.interests;
 			$scope.photo = data.user.photo;
+
+			var request = $http({ method : "GET", url : "userTeams", api : true, data : { userid : $stateParams.id } });
+			request.success(function (data) {
+				$scope.teams = data.teams;
+			
+				request = $http({ method : "POST", url : "adventure/list", api : true, data : { teams : $scope.teams } });
+				request.success(function (r) {
+					$scope.adventures = r.adventures;
+				});
+			});
 		});
 	}
 	
