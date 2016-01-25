@@ -165,6 +165,7 @@ module.exports = function (opts) {
         "get#myTeams" : function (req, res) {
 			teamMemberModel.find( { user : req.user._id }, function(err, members){
 				console.log(members);
+				console.log(req.user._id);
 				if(err){
 					console.log(err);
 					return res.json({ success : false });
@@ -179,6 +180,7 @@ module.exports = function (opts) {
 							console.log(err);
 							return res.json({ success : false });
 						} else {
+							console.log(teams);
 							return res.json({ success : true, teams : teams });
 						}
 					});
@@ -189,6 +191,7 @@ module.exports = function (opts) {
         "get#userTeams" : function (req, res) {
 			teamMemberModel.find( { user : req.body.userid }, function(err, members){
 				console.log(members);
+				console.log(req.body.userid);
 				if(err){
 					console.log(err);
 					return res.json({ success : false });

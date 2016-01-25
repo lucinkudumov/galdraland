@@ -1510,7 +1510,7 @@ app.controller("teamViewController", ["$scope", "$http", "$stateParams", "User",
     $scope.user = User.isLoggedIn();
     
     $scope.refresh = function () {
-        var request = $http({ method : "POST", url : "getTeam", api : true, data : { id : $stateParams.id }});
+        var request = $http({ method : "POST", url : "getTeam", api : true, data : { userid : $stateParams.id }});
         request.success(function (data) {
             $scope.team = data.team;
 			$scope.adventures = data.advs;
