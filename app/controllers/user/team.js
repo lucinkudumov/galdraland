@@ -189,9 +189,10 @@ module.exports = function (opts) {
         },
 		
         "get#userTeams" : function (req, res) {
-			teamMemberModel.find( { user : req.body.userid }, function(err, members){
+			var userid = req.body.userid;
+			teamMemberModel.find( { user : userid }, function(err, members){
 				console.log(members);
-				console.log(req.body.userid);
+				console.log(userid);
 				if(err){
 					console.log(err);
 					return res.json({ success : false });
@@ -201,7 +202,7 @@ module.exports = function (opts) {
 					else {
 						for(var i = 0; i < members.length; i++) member_ids.push(members[i]._id);
 					}
-					teamModel.find({ $or : [ { owner : req.body.userid }, { teamMembers : { $in : member_ids } } ] }).populate("owner teamMembers").exec(function (err, teams) {
+					teamModel.find({ $or : [ { owner : userid }, { teamMembers : { $in : member_ids } } ] }).populate("owner teamMembers").exec(function (err, teams) {
 						if (err) {
 							console.log(err);
 							return res.json({ success : false });

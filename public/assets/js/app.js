@@ -1491,12 +1491,12 @@ app.controller("userViewController", ["$scope", "$http", "$stateParams", "User",
 			$scope.interests = data.user.interests;
 			$scope.photo = data.user.photo;
 
-			request = $http({ method : "GET", url : "userTeams", api : true, data : { userid : $stateParams.id } });
-			request.success(function (data) {
+			req1 = $http({ method : "GET", url : "userTeams", api : true, data : { userid : $stateParams.id } });
+			req1.success(function (data) {
 				$scope.teams = data.teams;
 			
-				request = $http({ method : "POST", url : "adventure/list", api : true, data : { teams : data.teams } });
-				request.success(function (r) {
+				req2 = $http({ method : "POST", url : "adventure/list", api : true, data : { teams : data.teams } });
+				req2.success(function (r) {
 					$scope.adventures = r.adventures;
 				});
 			});
@@ -1510,7 +1510,7 @@ app.controller("teamViewController", ["$scope", "$http", "$stateParams", "User",
     $scope.user = User.isLoggedIn();
     
     $scope.refresh = function () {
-        var request = $http({ method : "POST", url : "getTeam", api : true, data : { userid : $stateParams.id }});
+        var request = $http({ method : "POST", url : "getTeam", api : true, data : { id : $stateParams.id }});
         request.success(function (data) {
             $scope.team = data.team;
 			$scope.adventures = data.advs;
