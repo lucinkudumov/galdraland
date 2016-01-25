@@ -1491,7 +1491,7 @@ app.controller("userViewController", ["$scope", "$http", "$stateParams", "User",
 			$scope.interests = data.user.interests;
 			$scope.photo = data.user.photo;
 
-			var request = $http({ method : "GET", url : "userTeams", api : true, data : { userid : data.user._id } });
+			request = $http({ method : "GET", url : "userTeams", api : true, data : { userid : $stateParams.id } });
 			request.success(function (data) {
 				$scope.teams = data.teams;
 			
