@@ -26,7 +26,7 @@
         <br>
 		<p>Interests</p>
         <small ng-show="!user.interests || user.interests.length == 0">No interests, join to team and create new adventure to add your interests.</small>
-		<small ng-repeat="item in user.interests  | orderBy:'topic.topic' | groupBy:['topic.topic']">{{item.topic.topic}}, {{item.information}}</small>
+		<small ng-repeat="item in user.interests  | orderBy:'topic.topic' | groupBy:['topic.topic']">{{item.topic.topic}}: {{item.information}}</small>
         <br>  
     </blockquote>
 </div>
