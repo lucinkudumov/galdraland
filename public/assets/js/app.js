@@ -984,7 +984,7 @@ app.controller("profileLeftSideController", ["$scope", "$http", "User", function
         
         $scope.recomendation = [];
         
-        if (!$scope.user.educations || $scope.user.educations.length == 0) {
+        if ($scope.user.educations.length == 0) {
             $scope.recomendation.push("Add education: college or university.");
         }
         
