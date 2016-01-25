@@ -198,7 +198,7 @@ module.exports = function (opts) {
 					else {
 						for(var i = 0; i < members.length; i++) member_ids.push(members[i]._id);
 					}
-					teamModel.find({ $or : [ { owner : req.body.userid }, { teamMembers : { $in : member_ids } } ] }).populate("owner teamMembers").exec(function (err, teams) {
+					teamModel.find({ $or : [ { teamMembers : { $in : member_ids } } ] }).populate("owner teamMembers").exec(function (err, teams) {
 						if (err) {
 							console.log(err);
 							return res.json({ success : false });
