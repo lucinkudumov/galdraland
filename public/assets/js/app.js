@@ -1493,7 +1493,7 @@ app.controller("userViewController", ["$scope", "$http", "$stateParams", "User",
 		});
 		
 		$scope.teams = [];
-		request = $http({ method : "GET", url : "userTeams", api : true, data : { userid : $stateParams.id } });
+		request = $http({ method : "POST", url : "userTeams", api : true, data : { userid : $stateParams.id } });
 		request.success(function (data) {
 			$scope.teams = data.teams;
 		});

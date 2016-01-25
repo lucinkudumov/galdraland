@@ -188,7 +188,7 @@ module.exports = function (opts) {
 			});
         },
 		
-        "get#userTeams" : function (req, res) {
+        "post#userTeams" : function (req, res) {
 			teamMemberModel.find( { user : req.body.userid }, function(err, members){
 				console.log(members);
 				console.log(req.body.userid);
