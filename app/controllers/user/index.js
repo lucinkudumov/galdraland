@@ -10,6 +10,7 @@ module.exports = function (opts) {
 			var defaultUser = new userModel();
 			defaultUser.profileId = "000000000000000000000000";
 			defaultUser.fullname = "Default User";
+			defaultUser.links = [];
 
 			console.log(defaultUser);
 			
