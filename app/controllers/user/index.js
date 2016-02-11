@@ -20,6 +20,7 @@ module.exports = function (opts) {
 					console.log(err);
 					return res.json({ success : false });
 				} else {
+					console.log('create');
 					console.log(defaultUser);
 					return res.json({ success : true });
 				}
@@ -32,8 +33,8 @@ module.exports = function (opts) {
 					console.log(err);
 					return res.json({ success : false });
 				} else {
+					console.log('get');
 					console.log(user);
-					user.remove();
 					return res.json({ success : true, user : user });
 				}
 			});
