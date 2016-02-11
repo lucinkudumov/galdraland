@@ -29,7 +29,8 @@ module.exports = function (opts) {
 					console.log(err);
 					return res.json({ success : false });
 				} else {
-					user = user.toObject();
+					if (user)
+						user = user.toObject();
 					return res.json({ success : true, user : user });
 				}
 			});
