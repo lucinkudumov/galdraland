@@ -10,7 +10,7 @@ module.exports = function (opts) {
         "post#createTeam" : function (req, res) {
             var name = req.body.name,
                 description = req.body.description,
-				roles = req.body.roles.split(" "),
+				roles = req.body.roles.split(","),
                 image = req.body.image,
                 team = new teamModel();
                 
@@ -45,19 +45,20 @@ module.exports = function (opts) {
 			
 			var i = 0;
 			for (i = 0;i < roles.length;i++) {
-				var role = new teamMemberModel();
-				role.title = roles[i];
-				role.user = "";
-				role.save(function (err, role) {
+				var member = new teamMemberModel();
+				member.title = roles[i];
+				member.roles = roles[i];
+				member.user = "";
+				member.save(function (err, member) {
 					if (err) {
 						console.log(err);
 						return res.json({ success : false });
 					} else {
-						team.teamMembers.push(role._id);
+						team.teamMembers.push(member._id);
 						team.save(function (err, team) {
 							if (err) {
 								console.log(err);
-								role.remove(function () {
+								member.remove(function () {
 									return res.json({ success : false });
 								});
 							}
