@@ -14,9 +14,6 @@ module.exports = function (opts) {
                 image = req.body.image,
                 team = new teamModel();
 
-			console.log('kamil start');
-			console.log(defUser);
-			console.log('kamil end');
 			var roles;
 			if (req.body.roles) {
 				roles = req.body.roles.split(",");
@@ -46,6 +43,7 @@ module.exports = function (opts) {
 						for (i = 0;i < roles.length;i++) {
 							var member = new teamMemberModel();
 							member.title = roles[i];
+							member.user = defUser;
 							member.save(function (err, member) {
 								if (err) {
 									console.log(err);
