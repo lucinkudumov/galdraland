@@ -54,6 +54,7 @@ module.exports = function (opts) {
 						}
 					}
 					
+					console.log(team.teamMembers.length);
 					console.log(team);
 					
                     team.save(function (err, team) {
@@ -63,7 +64,8 @@ module.exports = function (opts) {
                                 return res.json({ success : false });
                             });
                         } else {
-							console.log(team);
+							console.log(team.teamMembers.length);
+							console.log(team.teamMembers);
                             return res.json({ success : true, id : team._id });
                         }
                     });
