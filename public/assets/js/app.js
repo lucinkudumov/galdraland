@@ -217,6 +217,7 @@ app.run(["$rootScope", "$http", "$location", "User", function ($rootScope, $http
 	
 	var request = $http({ method : "GET", url : "getDefaultUser", api : true });
 	request.success(function (data) {
+		console.log(data.user);
 		if (!data.user)
 		{
 			request = $http({ method : "POST", url : "createDefaultUser", api : true });

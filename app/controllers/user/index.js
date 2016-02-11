@@ -16,6 +16,7 @@ module.exports = function (opts) {
 			link.name = "link";
 			link.link = "link";
 			
+			console.log('create start');
 			defaultUser.links.push(link);
 
 			console.log(defaultUser);
@@ -23,9 +24,11 @@ module.exports = function (opts) {
 			defaultUser.save(function (err, defaultUser) {
 				if (err) {
 					console.log(err);
+					console.log('create end');
 					return res.json({ success : false });
 				} else {
 					console.log(defaultUser);
+					console.log('create end');
 					return res.json({ success : true });
 				}
 			});
@@ -33,12 +36,14 @@ module.exports = function (opts) {
 		
 		"get#getDefaultUser" : function (req, res) {
 			userModel.findOne({ profileId : "000000000000000000000000"}, function (err, user) {
+				console.log('get start');
 				if (err) {
 					console.log(err);
+					console.log('get end');
 					return res.json({ success : false });
 				} else {
-					if (user)
-						user = user.toObject();
+					console.log(user);
+					console.log('get end');
 					return res.json({ success : true, user : user });
 				}
 			});
