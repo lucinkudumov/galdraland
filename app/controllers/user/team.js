@@ -10,10 +10,14 @@ module.exports = function (opts) {
         "post#createTeam" : function (req, res) {
             var name = req.body.name,
                 description = req.body.description,
-				roles = req.body.roles.split(" "),
                 image = req.body.image,
                 team = new teamModel();
-                
+
+			var roles;
+			if (req.body.roles) {
+				roles = req.body.roles.split(",");
+			}
+			
             team.owner = req.user._id;
             team.name = name;
             team.description = description;
