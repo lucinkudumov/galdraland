@@ -1343,7 +1343,7 @@ app.controller("searchController", ["$scope", "$http", "$location", "$stateParam
 }]);
 app.controller("createTeamController", ["$scope", "$rootScope", "$http", "$location", function ($scope, $rootScope, $http, $location) {
     $scope.createTeam = function () {
-        var request = $http({ method : "POST", url : "createTeam", api : true, data : { name : $scope.name, description : $scope.description } });
+        var request = $http({ method : "POST", url : "createTeam", api : true, data : { name : $scope.name, description : $scope.description, roles : $scope.roles } });
         request.success(function (data) {
             console.log(data.id);
 			if ($rootScope.return2Adventure == "return")

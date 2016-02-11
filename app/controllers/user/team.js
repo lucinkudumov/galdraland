@@ -10,6 +10,7 @@ module.exports = function (opts) {
         "post#createTeam" : function (req, res) {
             var name = req.body.name,
                 description = req.body.description,
+				roles = req.body.roles.split(" "),
                 image = req.body.image,
                 team = new teamModel();
                 
@@ -37,12 +38,35 @@ module.exports = function (opts) {
                             founder.remove(function () {
                                 return res.json({ success : false });
                             });
-                        } else {
-                            return res.json({ success : true, id : team._id });
                         }
                     });
                 }
             });
+			
+			var i = 0;
+			for (i = 0;i < roles.length;i++) {
+				var role = new teamMemberModel();
+				role.title = roles[i];
+				role.user = "";
+				role.save(function (err, role) {
+					if (err) {
+						console.log(err);
+						return res.json({ success : false });
+					} else {
+						team.teamMembers.push(role._id);
+						team.save(function (err, team) {
+							if (err) {
+								console.log(err);
+								role.remove(function () {
+									return res.json({ success : false });
+								});
+							}
+						});
+					}
+				});
+			}
+			
+			return res.json({ success : true, id : team._id });
         },
         
         "post#getTeam" : function (req, res) {
