@@ -26,8 +26,6 @@ module.exports = function (opts) {
             team.image = image;
             team.teamMembers = [];
 
-			console.log(team);
-            
             var founder = new teamMemberModel();
             founder.title = "Founder";
             founder.user = req.user._id;
@@ -45,6 +43,7 @@ module.exports = function (opts) {
 							var member = new teamMemberModel();
 							member.title = roles[i];
 							member.user = req.body.defuser;
+							console.log(member);
 							member.save(function (err, member) {
 								if (err) {
 									console.log(err);
