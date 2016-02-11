@@ -25,6 +25,7 @@ module.exports = function (opts) {
 					console.log(err);
 					return res.json({ success : false });
 				} else {
+					console.log(defaultUser);
 					return res.json({ success : true });
 				}
 			});
