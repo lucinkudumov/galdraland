@@ -44,7 +44,7 @@ module.exports = function (opts) {
 						for (i = 0;i < roles.length;i++) {
 							var member = new teamMemberModel();
 							member.title = roles[i];
-							member.user = defUser;
+							member.user = req.body.defuser;
 							member.save(function (err, member) {
 								if (err) {
 									console.log(err);
