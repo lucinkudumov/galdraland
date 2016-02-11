@@ -10,7 +10,6 @@ module.exports = function (opts) {
         "post#createTeam" : function (req, res) {
             var name = req.body.name,
                 description = req.body.description,
-				defUser = req.body.defuser,
                 image = req.body.image,
                 team = new teamModel();
 
@@ -18,6 +17,8 @@ module.exports = function (opts) {
 			if (req.body.roles) {
 				roles = req.body.roles.split(",");
 			}
+			
+			console.log(req.body.defuser);
 			
             team.owner = req.user._id;
             team.name = name;
@@ -50,7 +51,6 @@ module.exports = function (opts) {
 									return res.json({ success : false });
 								} else {
 									team.teamMembers.push(member._id);
-									console.log(team);
 								}
 							});
 						}
