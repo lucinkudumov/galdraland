@@ -38,18 +38,20 @@ module.exports = function (opts) {
                     team.teamMembers.push(founder._id);
 					console.log(team);
 					var i = 0;
-					for (i = 0;i < roles.length;i++) {
-						var member = new teamMemberModel();
-						member.title = roles[i];
-						member.save(function (err, member) {
-							if (err) {
-								console.log(err);
-								return res.json({ success : false });
-							} else {
-								team.teamMembers.push(member._id);
-								console.log(team);
-							}
-						});
+					if (roles) {
+						for (i = 0;i < roles.length;i++) {
+							var member = new teamMemberModel();
+							member.title = roles[i];
+							member.save(function (err, member) {
+								if (err) {
+									console.log(err);
+									return res.json({ success : false });
+								} else {
+									team.teamMembers.push(member._id);
+									console.log(team);
+								}
+							});
+						}
 					}
 					
                     team.save(function (err, team) {
