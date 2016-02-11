@@ -43,7 +43,6 @@ module.exports = function (opts) {
 							var member = new teamMemberModel();
 							member.title = roles[i];
 							member.user = req.body.defuser;
-							console.log(member);
 							member.save(function (err, member) {
 								if (err) {
 									console.log(err);
@@ -55,14 +54,16 @@ module.exports = function (opts) {
 						}
 					}
 					
+					console.log(team);
+					
                     team.save(function (err, team) {
-						console.log(team);
                         if (err) {
                             console.log(err);
                             founder.remove(function () {
                                 return res.json({ success : false });
                             });
                         } else {
+							console.log(team);
                             return res.json({ success : true, id : team._id });
                         }
                     });
