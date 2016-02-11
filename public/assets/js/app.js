@@ -217,9 +217,9 @@ app.run(["$rootScope", "$http", "$location", "User", function ($rootScope, $http
 	
 	var request = $http({ method : "GET", url : "getDefaultUser", api : true });
 	request.success(function (data) {
-		console.log(data.user);
-		if (!data.user)
-		{
+		if (data.user) {
+			$rootScope.defUser = data.user._id;
+		} else {
 			request = $http({ method : "POST", url : "createDefaultUser", api : true });
 			request.success(function (data) {
 				console.log(data);
@@ -1355,7 +1355,7 @@ app.controller("searchController", ["$scope", "$http", "$location", "$stateParam
 }]);
 app.controller("createTeamController", ["$scope", "$rootScope", "$http", "$location", function ($scope, $rootScope, $http, $location) {
     $scope.createTeam = function () {
-        var request = $http({ method : "POST", url : "createTeam", api : true, data : { name : $scope.name, description : $scope.description, roles : $scope.roles } });
+        request = $http({ method : "POST", url : "createTeam", api : true, data : { name : $scope.name, description : $scope.description, roles : $scope.roles, defuser : $rootScope.defUser } });
         request.success(function (data) {
             console.log(data.id);
 			if ($rootScope.return2Adventure == "return")

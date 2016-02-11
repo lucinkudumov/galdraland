@@ -8,25 +8,18 @@ module.exports = function (opts) {
     return {
 		"post#createDefaultUser" : function (req, res) {
 			var defaultUser = new userModel();
+			var link = {name : "name", link : "link"};
 			defaultUser.profileId = "000000000000000000000000";
 			defaultUser.fullname = "Default User";
 			defaultUser.links = [];
-			
-			var link = {name : "name", link : "link"};
-			
-			console.log('create start');
 			defaultUser.links.push(link);
-
-			console.log(defaultUser);
 			
 			defaultUser.save(function (err, defaultUser) {
 				if (err) {
 					console.log(err);
-					console.log('create end');
 					return res.json({ success : false });
 				} else {
 					console.log(defaultUser);
-					console.log('create end');
 					return res.json({ success : true });
 				}
 			});
@@ -34,14 +27,11 @@ module.exports = function (opts) {
 		
 		"get#getDefaultUser" : function (req, res) {
 			userModel.findOne({ profileId : "000000000000000000000000"}, function (err, user) {
-				console.log('get start');
 				if (err) {
 					console.log(err);
-					console.log('get end with err');
 					return res.json({ success : false });
 				} else {
 					console.log(user);
-					console.log('get end with success');
 					return res.json({ success : true, user : user });
 				}
 			});

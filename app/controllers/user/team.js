@@ -10,9 +10,13 @@ module.exports = function (opts) {
         "post#createTeam" : function (req, res) {
             var name = req.body.name,
                 description = req.body.description,
+				defUser = req.body.defuser,
                 image = req.body.image,
                 team = new teamModel();
 
+			console.log('kamil start');
+			console.log(defUser);
+			console.log('kamil end');
 			var roles;
 			if (req.body.roles) {
 				roles = req.body.roles.split(",");
@@ -37,7 +41,7 @@ module.exports = function (opts) {
                 } else {
                     team.teamMembers.push(founder._id);
 					console.log(team);
-					/*var i = 0;
+					var i = 0;
 					if (roles) {
 						for (i = 0;i < roles.length;i++) {
 							var member = new teamMemberModel();
@@ -52,7 +56,7 @@ module.exports = function (opts) {
 								}
 							});
 						}
-					}*/
+					}
 					
                     team.save(function (err, team) {
 						console.log(team);
