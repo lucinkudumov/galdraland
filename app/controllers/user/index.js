@@ -12,7 +12,7 @@ module.exports = function (opts) {
 			defaultUser.fullname = "Default User";
 			defaultUser.links = [];
 			
-			var link = {"name", "link"};
+			var link = {name : "name", link : "link"};
 			
 			console.log('create start');
 			defaultUser.links.push(link);
