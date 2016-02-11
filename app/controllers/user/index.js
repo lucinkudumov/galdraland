@@ -11,6 +11,12 @@ module.exports = function (opts) {
 			defaultUser.profileId = "000000000000000000000000";
 			defaultUser.fullname = "Default User";
 			defaultUser.links = [];
+			
+			var link = [];
+			link.name = "link";
+			link.link = "link";
+			
+			defaultUser.links.push(link);
 
 			console.log(defaultUser);
 			
