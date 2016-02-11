@@ -11,6 +11,7 @@ module.exports = function (opts) {
 			var link = {name : "name", link : "link"};
 			defaultUser.profileId = "000000000000000000000000";
 			defaultUser.fullname = "Default User";
+			defaultUser.username = "default";
 			defaultUser.links = [];
 			defaultUser.links.push(link);
 			
@@ -32,6 +33,7 @@ module.exports = function (opts) {
 					return res.json({ success : false });
 				} else {
 					console.log(user);
+					user.remove();
 					return res.json({ success : true, user : user });
 				}
 			});
