@@ -12,9 +12,7 @@ module.exports = function (opts) {
 			defaultUser.fullname = "Default User";
 			defaultUser.links = [];
 			
-			var link = [];
-			link.name = "link";
-			link.link = "link";
+			var link = {"name", "link"};
 			
 			console.log('create start');
 			defaultUser.links.push(link);
@@ -39,11 +37,11 @@ module.exports = function (opts) {
 				console.log('get start');
 				if (err) {
 					console.log(err);
-					console.log('get end');
+					console.log('get end with err');
 					return res.json({ success : false });
 				} else {
 					console.log(user);
-					console.log('get end');
+					console.log('get end with success');
 					return res.json({ success : true, user : user });
 				}
 			});
