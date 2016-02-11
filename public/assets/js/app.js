@@ -214,6 +214,17 @@ app.run(["$rootScope", "$http", "$location", "User", function ($rootScope, $http
             $location.path("/emailVerification");
         }
     });
+	
+	var request = $http({ method : "GET", url : "getDefaultUser", api : true });
+	request.success(function (data) {
+		if (!data.user)
+		{
+			request = $http({ method : "POST", url : "createDefaultUser", api : true });
+			request.success(function (data) {
+				console.log(data);
+			});
+		}
+	});
 }]);
 app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "User", "$modal", "$location", function ($scope, $http, $stateParams, User, $modal, $location) {
     $scope.user = User.isLoggedIn();

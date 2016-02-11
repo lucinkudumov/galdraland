@@ -6,6 +6,35 @@ module.exports = function (opts) {
 		topicModel = opts.models.Topic;
         
     return {
+		"post#createDefaultUser" : function (req, res) {
+			var defaultUser = new userModel();
+			defaultUser.profileId = "000000000000000000000000";
+			defaultUser.fullname = "Default User";
+
+			console.log(defaultUser);
+			
+			defaultUser.save(function (err, defaultUser) {
+				if (err) {
+					console.log(err);
+					return res.json({ success : false });
+				} else {
+					return res.json({ success : true });
+				}
+			});
+		},
+		
+		"get#getDefaultUser" : function (req, res) {
+			userModel.findOne({ profileId : "000000000000000000000000"}, function (err, user) {
+				if (err) {
+					console.log(err);
+					return res.json({ success : false });
+				} else {
+					user = user.toObject();
+					return res.json({ success : true, user : user });
+				}
+			});
+		},
+	
         "get#getUser" : function (req, res) {
             userModel.findOne({_id: req.user._id}).select("_id profileId fullname username email signin photo skype experience goals categories").exec(function (err, user) {
                if (err) {

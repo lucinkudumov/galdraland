@@ -37,7 +37,7 @@ module.exports = function (opts) {
                 } else {
                     team.teamMembers.push(founder._id);
 					console.log(team);
-					var i = 0;
+					/*var i = 0;
 					if (roles) {
 						for (i = 0;i < roles.length;i++) {
 							var member = new teamMemberModel();
@@ -52,7 +52,7 @@ module.exports = function (opts) {
 								}
 							});
 						}
-					}
+					}*/
 					
                     team.save(function (err, team) {
 						console.log(team);
