@@ -41,7 +41,6 @@ module.exports = function (opts) {
 					for (i = 0;i < roles.length;i++) {
 						var member = new teamMemberModel();
 						member.title = roles[i];
-						member.user = "";
 						member.save(function (err, member) {
 							if (err) {
 								console.log(err);
