@@ -64,8 +64,8 @@ module.exports = function (opts) {
                                 return res.json({ success : false });
                             });
                         } else {
-							console.log(team.teamMembers.length);
-							console.log(team.teamMembers);
+							//console.log(team.teamMembers.length);
+							//console.log(team.teamMembers);
                             return res.json({ success : true, id : team._id });
                         }
                     });
