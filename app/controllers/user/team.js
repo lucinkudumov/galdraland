@@ -26,36 +26,35 @@ module.exports = function (opts) {
             team.image = image;
             team.teamMembers = [];
 
+			console.log(req.body.defuser._id);
+			var i = 0;
+			if (roles) {
+				for (i = 0;i < roles.length;i++) {
+					var member = new teamMemberModel();
+					member.title = roles[i];
+					member.user = req.body.defuser._id;
+					member.save(function (err, member) {
+						if (err) {
+							console.log(err);
+							return res.json({ success : false });
+						} else {
+							console.log(member._id);
+							team.teamMembers.push(member._id);
+						}
+					});
+				}
+			}
+
             var founder = new teamMemberModel();
             founder.title = "Founder";
             founder.user = req.user._id;
-            
+			
             founder.save(function (err, founder) {
                 if (err) {
                     console.log(err);
                     return res.json({ success : false });
                 } else {
                     team.teamMembers.push(founder._id);
-					console.log(team);
-					var i = 0;
-					if (roles) {
-						for (i = 0;i < roles.length;i++) {
-							var member = new teamMemberModel();
-							member.title = roles[i];
-							member.user = req.body.defuser._id;
-							member.save(function (err, member) {
-								if (err) {
-									console.log(err);
-									return res.json({ success : false });
-								} else {
-									team.teamMembers.push(member._id);
-								}
-							});
-						}
-					}
-					
-					//console.log(team.teamMembers.length);
-					//console.log(team);
 					
                     team.save(function (err, team) {
                         if (err) {
