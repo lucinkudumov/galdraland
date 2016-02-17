@@ -19,7 +19,7 @@
 				<p ng-bind="team.teamMembers.length"></p>
                 <li ng-repeat="member in team.teamMembers" ng-click="showMember(member)">
                     <p ng-bind="member.title"></p>
-					<p ng-show="member.user.profileId == 000000000000000000000000" class="name">Empty</p>
+					<p ng-show="member.user.profileId == 000000000000000000000000" class="name"></p>
                     <p ng-hide="member.user.profileId == 000000000000000000000000" class="name" ng-bind="member.user.fullname"></p>
                 </li>
             </ul>
