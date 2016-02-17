@@ -1522,6 +1522,8 @@ app.controller("userViewController", ["$scope", "$http", "$stateParams", "User",
 app.controller("teamViewController", ["$scope", "$http", "$stateParams", "User", "$modal", "$location", function ($scope, $http, $stateParams, User, $modal, $location) {
     $scope.user = User.isLoggedIn();
     
+	$scope.emptyMemberList = [];
+	
     $scope.refresh = function () {
         var request = $http({ method : "POST", url : "getTeam", api : true, data : { id : $stateParams.id }});
         request.success(function (data) {
@@ -1530,8 +1532,9 @@ app.controller("teamViewController", ["$scope", "$http", "$stateParams", "User",
             $scope.isManager = data.team.owner._id == $scope.user._id;
 			$scope.isMember = false;
 			for(var i = 0; i < data.team.teamMembers.length; i++){
-				
-				if(data.team.teamMembers[i].user._id == $scope.user._id)
+				if (data.team.teamMembers[i].user.profileId == '000000000000000000000000')
+					$scope.emptyMemberList.push(data.team.teamMembers[i]._id);
+				if (data.team.teamMembers[i].user._id == $scope.user._id)
 					$scope.isMember = true;
 			}
 			console.log(data);

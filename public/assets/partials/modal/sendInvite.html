@@ -9,6 +9,9 @@
         <input class="form-control" type="text" ng-model="values.title" placeholder="Title of member">
     </div>
     <div class="form-group">
+		<select class="form-control">
+			<option ng-repeat="empty in emptyMemberList" value="empty">{{ empty }}</option>
+		</select>
         <input class="form-control" type="text" ng-model="values.roles" placeholder="Roles (separated by commas)">
     </div>
     <div class="form-group">
