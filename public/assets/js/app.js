@@ -831,6 +831,7 @@ app.controller("sendInviteController", ["$scope", "$modalInstance", "values",  "
 	$scope.values.fb_friends = null;
 	$scope.user = User.isLoggedIn();
 	$scope.team = values.team;
+	$scope.values.emptyMembers = values.emptyMembers;
 	console.log(values);
 
 	FB.login(function(){
