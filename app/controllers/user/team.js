@@ -54,7 +54,7 @@ module.exports = function (opts) {
                     console.log(err);
                     return res.json({ success : false });
                 } else {
-                    team.teamMembers.push(founder._id);
+                    team.teamMembers.unshift(founder._id);
 					
                     team.save(function (err, team) {
                         if (err) {
