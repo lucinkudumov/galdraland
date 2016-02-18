@@ -7,6 +7,7 @@
     </div>-->
     <div class="form-group">
 		<select class="form-control" ng-model="values.title">
+			<option value="0" selected>Title of a member</option>
 			<option ng-repeat="member in values.emptyMembers" value="{{ member._id }}">{{ member.title }}</option>
 		</select>
     </div>
