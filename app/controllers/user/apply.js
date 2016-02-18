@@ -104,18 +104,20 @@ module.exports = function (opts) {
                                     console.log(err);
                                     return res.json({ success : false });
                                 } else {
-									var teamMember = new teamMemberModel;
-									teamMember.title = apply.title;
-									teamMember.user = apply.from;
-									teamMember.roles = apply.roles;
-									teamMember.save(function (err, member) {
-										if(err){
+									teamMemberModel.findOne({ _id : apply.memberId }, function (err, teamMember) {
+										if (err) {
 											console.log(err);
 											return res.json({ success : false });
-										} else if( member ) {
-											team.teamMembers.push(member);
-											team.save(function(err, uTeam){
-												if(err){
+										} else {
+											if (teamMember.user.profileId != '000000000000000000000000') {
+												console.log(err);
+												return res.json({ success : false });
+											}
+											
+											teamMember.user = apply.from;
+											teamMember.roles = apply.roles;
+											teamMember.save(function (err, member) {
+												if (err) {
 													console.log(err);
 													return res.json({ success : false });
 												} else {
