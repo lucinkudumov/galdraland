@@ -65,11 +65,11 @@ module.exports = function (opts) {
 								to: toEmail, // list of receivers
 								subject: "Team member request to " + team.name, // Subject line
 								text: "Hello, " + username + ", \n" + 
-									  "You have received a request from " + req.user.username + " for the member role " + roles.join(",") + " to \"" + team.name + "\" team as " + title + ".\n" +
+									  "You have received a request from " + req.user.username + " for the member role " + roles.join(",") + " to \"" + team.name + "\" team as " + apply.title + ".\n" +
 									  "If you want to accept it, please, use next link: http://galdraland.com \n" + 
 									  "Thanks, Galdraland team.",
 								html: "Hello, " + username + ", <br>" + 
-									  "You have received a request from " + req.user.username + " for the member role " + roles.join(",") + " to \"" + team.name + "\" team as " + title + ".<br>" +
+									  "You have received a request from " + req.user.username + " for the member role " + roles.join(",") + " to \"" + team.name + "\" team as " + apply.title + ".<br>" +
 									  "If you want to accept it, please, use next link: http://galdraland.com/ <br>" + 
 									  "Thanks, Galdraland team.",
 							}, function (err) {
