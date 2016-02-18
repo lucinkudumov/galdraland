@@ -43,6 +43,6 @@
     </div>
 </div>
 <div class="modal-footer">
-    <button class="btn btn-primary" ng-disabled="values.invites.length <= 0 || !values.title" ng-click="send()">Send</button>
+    <button class="btn btn-primary" ng-disabled="values.invites.length <= 0 || !values.title || values.title == '0'" ng-click="send()">Send</button>
     <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
 </div>
