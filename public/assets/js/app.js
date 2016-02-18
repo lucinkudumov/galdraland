@@ -1605,7 +1605,7 @@ app.controller("teamViewController", ["$scope", "$http", "$stateParams", "User",
 			templateUrl: "/assets/partials/modal/sendInvite.html",
 			controller: "sendInviteController",
 			resolve : {
-				values : function () { return { to : "", msg : "", title : "", roles : "", team : $scope.team, emptyMembers : $scope.emptyMembers }}
+				values : function () { return { to : "", msg : "", title : "0", roles : "", team : $scope.team, emptyMembers : $scope.emptyMembers }}
 			}
 		});
         
@@ -1662,7 +1662,7 @@ app.controller("teamViewController", ["$scope", "$http", "$stateParams", "User",
             templateUrl: "/assets/partials/modal/applyTeam.html",
             controller: "applyTeamController",
             resolve : {
-                values : function () { return { to : "", msg : "", title : "", emptyMembers : $scope.emptyMembers }}
+                values : function () { return { to : "", msg : "", title : "0", emptyMembers : $scope.emptyMembers }}
             }
         });       
         
