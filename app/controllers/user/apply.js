@@ -113,6 +113,7 @@ module.exports = function (opts) {
 										} else {
 											console.log('hahaha');
 											console.log(teamMember);
+											console.log(teamMember.user.profileId);
 											if (teamMember.user.profileId != '000000000000000000000000') {
 												console.log(err);
 												return res.json({ success : false });
