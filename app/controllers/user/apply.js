@@ -104,11 +104,15 @@ module.exports = function (opts) {
                                     console.log(err);
                                     return res.json({ success : false });
                                 } else {
+									console.log('haha');
+									console.log(apply.memberId);
 									teamMemberModel.findOne({ _id : apply.memberId }, function (err, teamMember) {
 										if (err) {
 											console.log(err);
 											return res.json({ success : false });
 										} else {
+											console.log('hahaha');
+											console.log(teamMember);
 											if (teamMember.user.profileId != '000000000000000000000000') {
 												console.log(err);
 												return res.json({ success : false });
