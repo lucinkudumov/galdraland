@@ -125,6 +125,9 @@ module.exports = function (opts) {
 													console.log(err);
 													return res.json({ success : false });
 												} else {
+													console.log('hahahaha');
+													console.log(teamMember);
+													console.log(teamMember.user);
 													smtpTransport.sendMail({
 														from: "noreply@holomathics.com",
 														to: user.email,
