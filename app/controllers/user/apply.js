@@ -24,8 +24,9 @@ module.exports = function (opts) {
     return {
         "post#sendApply" : function (req, res) {
             var msg   = req.body.msg,
-                title = req.body.title,
+                memberId = req.body.title,
                 roles = req.body.roles,
+				memberList = req.body.memberList,
                 team  = req.body.team;
             
             teamModel.findOne({ _id : team }).populate("owner").exec( function (err, team) {
@@ -40,11 +41,19 @@ module.exports = function (opts) {
 					toEmail = team.owner.email;
 					username = team.owner.username;
 					
+					for(var i = 0; i < memberList.length; i++) {
+						if (memberList[i]._id == memberId) {
+							apply.title = memberList[i].title;
+							break;
+						}
+					}
 					apply.from = req.user._id;
-					apply.title = title;
 					apply.roles = roles;
 					apply.message = msg;
 					apply.team = team;
+					apply.memberId = memberId;
+					
+					console.log(apply);
 						
 					apply.save(function (err, apply) {
 						if (err) {

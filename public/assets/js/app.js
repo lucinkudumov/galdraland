@@ -1672,7 +1672,7 @@ app.controller("teamViewController", ["$scope", "$http", "$stateParams", "User",
                     result.roles = result.roles.split(/\s*,\s*/);
                 }
                 
-                var request = $http({ method : "POST", url : "sendApply", api : true, data : { team : $scope.team._id, msg : result.msg, title : result.title, roles : result.roles }});
+                var request = $http({ method : "POST", url : "sendApply", api : true, data : { team : $scope.team._id, msg : result.msg, title : result.title, roles : result.roles, memberList : $scope.emptyMembers }});
                 request.success(function (data) {
                     console.log(data);
                 });
