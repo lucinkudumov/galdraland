@@ -6,7 +6,10 @@
         <input class="form-control" type="text" ng-model="values.to" placeholder="Username or email">
     </div>-->
     <div class="form-group">
-        <input class="form-control" type="text" ng-model="values.title" placeholder="Your desired title">
+		<select class="form-control" ng-model="values.title">
+			<option ng-repeat="member in values.emptyMembers" value="0">Your desired title</option>
+			<option ng-repeat="member in values.emptyMembers" value="{{ member._id }}">{{ member.title }}</option>
+		</select>
     </div>
     <div class="form-group">
         <input class="form-control" type="text" ng-model="values.roles" placeholder="Your roles (separated by commas)">
