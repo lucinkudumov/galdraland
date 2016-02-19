@@ -23,7 +23,7 @@
                 </li>
             </ul>
             <button ng-show="isManager && emptyMembers.length > 0" class="btn btn-success pull-right" ng-click="sendInvite()">Add member</button>
-			<button ng-show="isManager" class="btn btn-success pull-right" ng-click="addMemberTitle()">Add Member Title</button>
+			<button ng-show="isManager" class="btn btn-success pull-right" ng-click="addMemberTitle()" style="margin-right: 5px;">Add member title</button>
 			<button ng-show="!isMember && !isManager && emptyMembers.length > 0" class="btn btn-success pull-right" ng-click="applyTeam()">Apply for this team</button>
 			<!--button class="btn btn-success pull-right" ng-click="applyTeam()">Apply for this team</button-->
         </div>
