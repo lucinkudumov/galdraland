@@ -290,6 +290,7 @@ module.exports = function (opts) {
 						for(var j = 0; j < member_ids.length; j++){
 							if(team.teamMembers[i].toString() === member_ids[j].toString()){
 								remove_id = team.teamMembers[i];
+								//team.teamMembers.splice(i, 1);
 							}
 						}
 					}
@@ -437,6 +438,39 @@ module.exports = function (opts) {
                                    return res.json({ success : true });
                                }
                            });
+                       } else {
+                           return res.json({ success : false });
+                       }
+                    });
+                } else {
+                    return res.json({ success : false });
+                }
+            });
+        },
+		
+        "post#removeTeamMember" : function (req, res) {
+            var id = req.body._id,
+                title = req.body.title,
+                status = req.body.status,
+                description = req.body.description,
+                roles = req.body.roles;
+            
+            teamModel.findOne({ teamMembers : id, owner : req.user._id }, function (err, team) {
+                if (err) {
+                    console.log(err);
+                    return res.json({ success : false });
+                } else if (team) {
+                    teamMemberModel.findById(id, function (err, member) {
+                       if (err) {
+                           console.log(err);
+                           return res.json({ success : false });
+                       } else if (member) {
+							for(var i = team.teamMembers.length - 1; i >= 0; i--){
+								if(team.teamMembers[i].toString() === member.toString()){
+									team.teamMembers.splice(i, 1);
+								}
+							}
+							teamMemberModel.findOneAndRemove({_id : member._id}, function(){});
                        } else {
                            return res.json({ success : false });
                        }

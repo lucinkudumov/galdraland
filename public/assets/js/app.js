@@ -795,8 +795,12 @@ app.controller("MemberEditController", ["$scope", "user", "$modalInstance", func
     }
     
     $scope.save = function () {
-        $modalInstance.close($scope.user);
+        $modalInstance.close({ type : "SAVE", user : $scope.user });
     }
+	
+	$scope.remove = function () {
+		$modalInstance.close({ type : "REMOVE", user : $scope.user });
+	}
 }]);
 
 app.controller("YesAndNoController", ["$scope", "msg", "title", "$modalInstance", function ($scope, msg, title, $modalInstance) {
@@ -1580,16 +1584,26 @@ app.controller("teamViewController", ["$scope", "$http", "$stateParams", "User",
               }
             });
             
-            modalInstance.result.then(function (model) {
-                 if (model) {
-                     model.roles = model.roles.split(/\s*,\s*/);
-                     $scope.activeMember.title = model.title;
-                     $scope.activeMember.description = model.description;
-                     $scope.activeMember.roles = model.roles;
-                     $scope.activeMember.status = model.status;
-                     
-                     var request = $http({ method : "POST", url : "updateTeamMember", api : true, data : model });
-                 }
+            modalInstance.result.then(function (result) {
+				model = result.user;
+				if (model) {
+					model.roles = model.roles.split(/\s*,\s*/);
+					$scope.activeMember.title = model.title;
+					$scope.activeMember.description = model.description;
+					$scope.activeMember.roles = model.roles;
+					$scope.activeMember.status = model.status;
+
+					var request = $http({ method : "POST", url : "updateTeamMember", api : true, data : model });
+				}
+				if (result.type == "SAVE") {
+					if (model) {
+						var request = $http({ method : "POST", url : "updateTeamMember", api : true, data : model });
+					}
+				} else if (result.type == "REMOVE") {
+					if (model) {
+						var request = $http({ method : "POST", url : "removeTeamMember", api : true, data : model });
+					}
+				}
             });
         } else {
             
