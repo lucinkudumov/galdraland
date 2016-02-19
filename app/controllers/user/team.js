@@ -290,7 +290,6 @@ module.exports = function (opts) {
 						for(var j = 0; j < member_ids.length; j++){
 							if(team.teamMembers[i].toString() === member_ids[j].toString()){
 								remove_id = team.teamMembers[i];
-								team.teamMembers.splice(i, 1);
 							}
 						}
 					}
