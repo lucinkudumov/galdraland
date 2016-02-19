@@ -827,6 +827,19 @@ app.controller("applyTeamController", ["$scope", "$modalInstance", "values", "$h
         $modalInstance.close({ type : "SEND", msg : $scope.values.msg, title : $scope.values.title, roles : $scope.values.roles });
     }
 }]);
+
+app.controller("addMemberTitleController", ["$scope", "$modalInstance", "values", "$http", function ($scope, $modalInstance, values, $http) {
+    $scope.values = angular.copy(values);
+    
+    $scope.cancel = function () {
+        $modalInstance.close({ type : "CLOSE" });
+    }
+    
+    $scope.create = function () {
+        $modalInstance.close({ type : "CREATE", titles : $scope.values.titles, team : $scope.values.team });
+    }
+}]);
+
 app.controller("sendInviteController", ["$scope", "$modalInstance", "values",  "$http", "User", function ($scope, $modalInstance, values, $http, User) {
     $scope.values = angular.copy(values);
     $scope.values.invites = [];
@@ -1614,6 +1627,21 @@ app.controller("teamViewController", ["$scope", "$http", "$stateParams", "User",
 		$http({ method : "POST", url : "leaveTeam", api : true, data : { id : $scope.team._id }});
 	}
     
+	$scope.addMemberTitle = function () {
+		var modalInstance = $modal.open({
+			templateUrl: "/assets/partials/modal/addMemberTitle.html",
+			controller: "addMemberTitleController",
+			resolve : {
+				values : function () { return { titles : "", team : $scope.team }}
+			}
+		});
+		
+		modalInstance.result.then(function (result) {
+			if (result.type == "CREATE") {
+			}
+		});
+	}
+	
     $scope.sendInvite = function () {
 	   var modalInstance = $modal.open({
 			templateUrl: "/assets/partials/modal/sendInvite.html",

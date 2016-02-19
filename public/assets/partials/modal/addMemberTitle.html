@@ -1,0 +1,12 @@
+<div class="modal-header">
+    <h4>Add member title</h4>
+</div>
+<div class="modal-body">
+    <div class="form-group">
+        <input class="form-control" type="text" ng-model="values.titles" placeholder="Provide member titles (separated by commas)">
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" ng-disabled="!values.titles" ng-click="create()">Create</button>
+    <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+</div>
