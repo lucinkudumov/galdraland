@@ -1602,9 +1602,7 @@ app.controller("teamViewController", ["$scope", "$http", "$stateParams", "User",
 				} else if (result.type == "REMOVE") {
 					if (model) {
 						var request = $http({ method : "POST", url : "removeTeamMember", api : true, data : model });
-						request.success(function (data) {
-							$scope.refresh();
-						});
+						$scope.refresh();
 					}
 				}
             });
