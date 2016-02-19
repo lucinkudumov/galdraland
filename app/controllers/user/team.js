@@ -300,7 +300,18 @@ module.exports = function (opts) {
 							if(err){
 								return res.json({ success : false });
 							} else {
-								teamMemberModel.findOneAndRemove({_id : remove_id}, function(){});
+								teamMemberModel.findOne({_id : remove_id}, function(err, teamMember){
+									userModel.findOne({ profileId : "000000000000000000000000"}, function (err, user) {
+										if (err) {
+											console.log(err);
+											return res.json({ success : false });
+										} else {
+											teamMember.user = user._id;
+											teamMember.save();
+											return res.json({ success : true });
+										}
+									});
+								});
 							}
 						});
 					}
