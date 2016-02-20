@@ -1638,6 +1638,7 @@ app.controller("teamViewController", ["$scope", "$http", "$stateParams", "User",
 		
 		modalInstance.result.then(function (result) {
 			if (result.type == "CREATE") {
+				location.reload();
 			}
 		});
 	}
