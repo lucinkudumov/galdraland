@@ -340,7 +340,7 @@ module.exports = function (opts) {
 			console.log('haha');
 			teamModel.findOne({ _id : team_id, owner : req.user._id }, function (err, team) {
 				if (err) {
-					console.log('haha');
+					console.log('hahaerror');
 					console.log(err);
 					return res.json({ success : false });
 				} else if (team) {
@@ -351,7 +351,7 @@ module.exports = function (opts) {
 					for (i = 0;i < title_list.length;i++) {
 						var member = new teamMemberModel();
 						member.title = title_list[i];
-						member.user = req.body.defuser._id;
+						member.user = defuser._id;
 						member.save(function (err, member) {
 							if (err) {
 								console.log(err);
