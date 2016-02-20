@@ -358,6 +358,8 @@ module.exports = function (opts) {
 						});
 					}
 					
+					console.log('hahahahaha');
+					console.log(team.teamMembers);
 					team.save(function (err, team) {
 						if (err) {
 							console.log(err);
