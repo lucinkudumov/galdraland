@@ -331,6 +331,44 @@ module.exports = function (opts) {
                 }
             });
         },
+		
+		"post#addMemberTitle" : function (req, res) {
+			var team_id = req.body.team_id,
+				titles = req.body.titles;
+				
+			teamModel.findOne({ _id : team_id, owner : req.user._id }, function (err, team) {
+				if (err) {
+					console.log(err);
+					return res.json({ success : false });
+				} else if (team) {
+					var title_list = titles.split(",");
+					
+					for (i = 0;i < roles.length;i++) {
+						var member = new teamMemberModel();
+						member.title = roles[i];
+						member.user = req.body.defuser._id;
+						member.save(function (err, member) {
+							if (err) {
+								console.log(err);
+								return res.json({ success : false });
+							} else {
+								console.log(member._id);
+								team.teamMembers.push(member._id);
+							}
+						});
+					}
+					
+					team.save(function (err, team) {
+						if (err) {
+							console.log(err);
+							return res.json({ success : false });
+						} else {
+							return res.json({ success : true });
+						}
+					});
+				}
+			});
+		},
         
         "post#editTeam" : function (req, res) {
             var id = req.body.id,
