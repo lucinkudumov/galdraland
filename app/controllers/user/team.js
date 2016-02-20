@@ -334,6 +334,7 @@ module.exports = function (opts) {
 		
 		"post#addMemberTitle" : function (req, res) {
 			var team_id = req.body.team_id,
+				defuser = req.body.defuser,
 				titles = req.body.titles;
 				
 			console.log('haha');
