@@ -336,16 +336,20 @@ module.exports = function (opts) {
 			var team_id = req.body.team_id,
 				titles = req.body.titles;
 				
+			console.log('haha');
 			teamModel.findOne({ _id : team_id, owner : req.user._id }, function (err, team) {
 				if (err) {
+					console.log('haha');
 					console.log(err);
 					return res.json({ success : false });
 				} else if (team) {
+					console.log('hahaha');
 					var title_list = titles.split(",");
+					console.log(title_list);
 					
-					for (i = 0;i < roles.length;i++) {
+					for (i = 0;i < title_list.length;i++) {
 						var member = new teamMemberModel();
-						member.title = roles[i];
+						member.title = title_list[i];
 						member.user = req.body.defuser._id;
 						member.save(function (err, member) {
 							if (err) {
