@@ -331,11 +331,16 @@ module.exports = function (opts) {
 					console.log(err);
 					return res.json({ success : false });
 				} else if (team) {
+					team.teamMembers = [];
 					userModel.populate(team.teamMembers, { path : "user" }, function (err, teamMembers) {
 						if (err) {
 							console.log(err);	
 						} else {
 							team.teamMembers = teamMembers;
+							var j = 0;
+							for (j = 0;j < teamMembers.length;j++) {
+								team.teamMembers.push(teamMembers.user);
+							}
 						}
 					});
 
