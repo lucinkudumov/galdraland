@@ -349,8 +349,8 @@ module.exports = function (opts) {
 								console.log(err);
 								return res.json({ success : false });
 							} else {
-								console.log('add member to list');
-								team.teamMembers.splice(team.teamMembers.length, 0, member);
+								console.log('add member to list' + team.teamMembers.length);
+								team.teamMembers.push(member);
 							}
 						});
 					}
