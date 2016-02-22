@@ -335,6 +335,7 @@ module.exports = function (opts) {
 					var title_list = titles.split(",");
 					console.log(title_list.length);
 					
+					var i = 0;
 					for (i = 0;i < title_list.length;i++) {
 						var member = new teamMemberModel();
 						member.title = title_list[i];
@@ -350,13 +351,12 @@ module.exports = function (opts) {
 					}
 					
 					console.log('hahahahaha');
-					console.log('kamil' + team.teamMembers.length);
 					team.save(function (err, team) {
 						if (err) {
 							console.log(err);
 							return res.json({ success : false });
 						} else {
-							console.log('kamil' + team.teamMembers.length);
+							console.log(team.teamMembers);
 							return res.json({ success : true });
 						}
 					});
