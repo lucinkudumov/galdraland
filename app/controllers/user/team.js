@@ -338,7 +338,6 @@ module.exports = function (opts) {
 
 					console.log('hahaha');
 					var title_list = titles.split(",");
-					console.log(team.teamMembers);
 					
 					var i = 0;
 					for (i = 0;i < title_list.length;i++) {
@@ -350,6 +349,7 @@ module.exports = function (opts) {
 								console.log(err);
 								return res.json({ success : false });
 							} else {
+								console.log('add member to list');
 								team.teamMembers.splice(team.teamMembers.length, 0, member);
 							}
 						});
