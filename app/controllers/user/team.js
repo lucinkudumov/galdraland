@@ -333,7 +333,7 @@ module.exports = function (opts) {
 				} else if (team) {
 					console.log('hahaha');
 					var title_list = titles.split(",");
-					console.log(title_list);
+					console.log(title_list.length);
 					
 					for (i = 0;i < title_list.length;i++) {
 						var member = new teamMemberModel();
@@ -344,6 +344,7 @@ module.exports = function (opts) {
 								console.log(err);
 								return res.json({ success : false });
 							} else {
+								console.log(member._id);
 								team.teamMembers.push(member._id);
 							}
 						});
