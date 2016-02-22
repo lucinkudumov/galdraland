@@ -322,7 +322,6 @@ module.exports = function (opts) {
 				titles = req.body.titles;
 				
 			console.log('haha');
-			var member_ids = [];
 			teamModel.findById(team_id).populate("owner teamMembers").exec(function (err, team) {
 				if (err) {
 					console.log('hahaerror');
@@ -334,10 +333,6 @@ module.exports = function (opts) {
 							console.log(err);	
 						} else {
 							team.teamMembers = teamMembers;
-							var j = 0;
-							for (j = 0;j < teamMembers.length;j++) {
-								member_ids.push(teamMembers[j].user);
-							}
 						}
 					});
 
@@ -355,13 +350,12 @@ module.exports = function (opts) {
 								console.log(err);
 								return res.json({ success : false });
 							} else {
-								member_ids.push(member._id);
+								team.teamMembers.splice(team.teamMembers.length, 0, member);
 							}
 						});
 					}
 					
 					console.log('hahahahaha');
-					team.teamMembers = member_ids;
 					console.log(team.teamMembers.length);
 					team.save(function (err, team) {
 						if (err) {
