@@ -336,6 +336,7 @@ module.exports = function (opts) {
 						member_ids.push(team.teamMembers[i]._id);
 					}
 					
+					var new_member_ids = [];
 					for (i = 0;i < title_list.length;i++) {
 						var member = new teamMemberModel();
 						member.title = title_list[i];
@@ -345,15 +346,15 @@ module.exports = function (opts) {
 								console.log(err);
 								return res.json({ success : false });
 							} else {
-								member_ids.push(member._id);
+								new_member_ids.push(member._id);
 							}
 						});
 					}
 
 					console.log('hahahahaha');
-					console.log(member_ids);
+					console.log(new_member_ids);
 					team.teamMembers = [];
-					team.teamMembers = member_ids;
+					team.teamMembers = member_ids.concat(new_member_ids);
 					console.log(team.teamMembers);
 					team.save(function (err, team) {
 						if (err) {
