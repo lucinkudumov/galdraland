@@ -1632,6 +1632,9 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$statePa
 			if (result.type == "CREATE") {
 				console.log('send request : create member title');
 				var request = $http({ method : "POST", url : "addMemberTitle", api : true, data : { team_id : result.team._id, titles : result.titles, defuser : $rootScope.defUser }});
+                request.success(function (data) {
+                    location.reload();
+                });
 			}
 		});
 	}

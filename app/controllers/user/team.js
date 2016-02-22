@@ -348,7 +348,15 @@ module.exports = function (opts) {
 								member_ids.push(member._id);
 								team.teamMembers = [];
 								team.teamMembers = member_ids;
-								team.save();
+								team.save(function (err, team) {
+									if (err) {
+										console.log(err);
+										console.log('error kamil');
+										return res.json({ success : false });
+									} else {
+										return res.json({ success : true });
+									}
+								});
 							}
 						});
 					}
