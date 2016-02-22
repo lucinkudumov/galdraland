@@ -333,7 +333,7 @@ module.exports = function (opts) {
 				} else if (team) {
 					console.log('hahaha');
 					var title_list = titles.split(",");
-					console.log(title_list.length);
+					console.log(title_list);
 					
 					var i = 0;
 					for (i = 0;i < title_list.length;i++) {
@@ -351,9 +351,11 @@ module.exports = function (opts) {
 					}
 					
 					console.log('hahahahaha');
+					console.log(team.teamMembers.length);
 					team.save(function (err, team) {
 						if (err) {
 							console.log(err);
+							console.log('error kamil');
 							return res.json({ success : false });
 						} else {
 							console.log(team.teamMembers);
