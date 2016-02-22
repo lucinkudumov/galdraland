@@ -338,6 +338,9 @@ module.exports = function (opts) {
 				titles = req.body.titles;
 				
 			console.log('haha');
+			console.log(team_id);
+			console.log(defuser);
+			console.log(titles);
 			teamModel.findOne({ _id : team_id, owner : req.user._id }, function (err, team) {
 				if (err) {
 					console.log('hahaerror');
