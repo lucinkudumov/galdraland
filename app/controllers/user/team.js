@@ -351,6 +351,8 @@ module.exports = function (opts) {
 					}
 
 					console.log('hahahahaha');
+					console.log(member_ids);
+					team.teamMembers = [];
 					team.teamMembers = member_ids;
 					console.log(team.teamMembers);
 					team.save(function (err, team) {
