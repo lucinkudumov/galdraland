@@ -333,7 +333,7 @@ module.exports = function (opts) {
 				} else if (team) {
 					console.log('hahaha');
 					var title_list = titles.split(",");
-					console.log(title_list);
+					console.log(team.teamMembers);
 					
 					var i = 0;
 					for (i = 0;i < title_list.length;i++) {
