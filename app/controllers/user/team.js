@@ -348,7 +348,6 @@ module.exports = function (opts) {
 								member_ids.push(member._id);
 								team.teamMembers = [];
 								team.teamMembers = member_ids;
-								console.log(team.teamMembers);
 							}
 						});
 					}
