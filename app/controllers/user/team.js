@@ -325,12 +325,20 @@ module.exports = function (opts) {
 			console.log(team_id);
 			console.log(defuser);
 			console.log(titles);
-			teamModel.findOne({ _id : team_id, owner : req.user._id }, function (err, team) {
+			teamModel.findById(team_id).populate("owner teamMembers").exec(function (err, team) {
 				if (err) {
 					console.log('hahaerror');
 					console.log(err);
 					return res.json({ success : false });
 				} else if (team) {
+					userModel.populate(team.teamMembers, { path : "user" }, function (err, teamMembers) {
+						if (err) {
+							console.log(err);	
+						} else {
+							team.teamMembers = teamMembers;
+						}
+					});
+
 					console.log('hahaha');
 					var title_list = titles.split(",");
 					console.log(team.teamMembers);
