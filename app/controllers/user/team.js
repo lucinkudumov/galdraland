@@ -328,31 +328,24 @@ module.exports = function (opts) {
 					console.log(err);
 					return res.json({ success : false });
 				} else if (team) {
-					userModel.populate(team.teamMembers, { path : "user" }, function (err, teamMembers) {
-						if (err) {
-							console.log(err);	
-						} else {
-							console.log('hahaha');
-							var title_list = titles.split(",");
-							
-							for (i = 0;i < title_list.length;i++) {
-								var member = new teamMemberModel();
-								member.title = title_list[i];
-								member.user = defuser;
-								member.save(function (err, member) {
-									if (err) {
-										console.log(err);
-										return res.json({ success : false });
-									} else {
-										teamMembers.push(member);
-										console.log(teamMembers);
-									}
-								});
-							}
-							team.teamMembers = teamMembers;
-						}
-					});
+					console.log('hahaha');
+					var title_list = titles.split(",");
 					
+					for (i = 0;i < title_list.length;i++) {
+						var member = new teamMemberModel();
+						member.title = title_list[i];
+						member.user = defuser._id;
+						member.save(function (err, member) {
+							if (err) {
+								console.log(err);
+								return res.json({ success : false });
+							} else {
+								team.teamMembers.push(member._id);
+								console.log(team.teamMembers);
+							}
+						});
+					}
+
 					console.log('hahahahaha');
 					team.save(function (err, team) {
 						if (err) {
