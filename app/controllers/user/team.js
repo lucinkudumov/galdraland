@@ -356,6 +356,7 @@ module.exports = function (opts) {
 							console.log(err);
 							return res.json({ success : false });
 						} else {
+							console.log(team);
 							return res.json({ success : true });
 						}
 					});
