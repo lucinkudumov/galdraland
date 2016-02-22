@@ -336,7 +336,7 @@ module.exports = function (opts) {
 						if (err) {
 							console.log(err);	
 						} else {
-							team.teamMembers = teamMembers;
+							//team.teamMembers = teamMembers;
 							var j = 0;
 							for (j = 0;j < teamMembers.length;j++) {
 								team.teamMembers.push(teamMembers.user);
