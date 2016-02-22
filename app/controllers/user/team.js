@@ -338,7 +338,7 @@ module.exports = function (opts) {
 							for (i = 0;i < title_list.length;i++) {
 								var member = new teamMemberModel();
 								member.title = title_list[i];
-								member.user = defuser._id;
+								member.user = defuser;
 								member.save(function (err, member) {
 									if (err) {
 										console.log(err);
