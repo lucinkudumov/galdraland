@@ -340,7 +340,7 @@ module.exports = function (opts) {
 								console.log(err);
 								return res.json({ success : false });
 							} else {
-								team.teamMembers.push(member._id);
+								team.teamMembers.push(member);
 								console.log(team.teamMembers);
 							}
 						});
