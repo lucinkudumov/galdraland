@@ -831,12 +831,12 @@ app.controller("addMemberTitleController", ["$scope", "$modalInstance", "values"
     
     $scope.cancel = function () {
 		console.log('close member title action');
-        //$modalInstance.close({ type : "CLOSE" });
+        $modalInstance.close({ type : "CLOSE" });
     }
     
     $scope.create = function () {
 		console.log('create member title action');
-        //$modalInstance.close({ type : "CREATE", titles : $scope.values.titles, team : $scope.values.team });
+        $modalInstance.close({ type : "CREATE", titles : $scope.values.titles, team : $scope.values.team });
     }
 }]);
 
