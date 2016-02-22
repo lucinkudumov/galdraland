@@ -344,20 +344,19 @@ module.exports = function (opts) {
 								console.log(err);
 								return res.json({ success : false });
 							} else {
-								console.log(member._id);
 								team.teamMembers.push(member._id);
 							}
 						});
 					}
 					
 					console.log('hahahahaha');
-					console.log(team.teamMembers);
+					console.log('kamil' + team.teamMembers.length);
 					team.save(function (err, team) {
 						if (err) {
 							console.log(err);
 							return res.json({ success : false });
 						} else {
-							console.log(team);
+							console.log('kamil' + team.teamMembers.length);
 							return res.json({ success : true });
 						}
 					});
