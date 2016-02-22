@@ -322,9 +322,6 @@ module.exports = function (opts) {
 				titles = req.body.titles;
 				
 			console.log('haha');
-			console.log(team_id);
-			console.log(defuser);
-			console.log(titles);
 			var member_ids = [];
 			teamModel.findById(team_id).populate("owner teamMembers").exec(function (err, team) {
 				if (err) {
@@ -332,7 +329,6 @@ module.exports = function (opts) {
 					console.log(err);
 					return res.json({ success : false });
 				} else if (team) {
-					team.teamMembers = [];
 					userModel.populate(team.teamMembers, { path : "user" }, function (err, teamMembers) {
 						if (err) {
 							console.log(err);	
