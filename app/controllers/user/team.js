@@ -341,12 +341,12 @@ module.exports = function (opts) {
 								return res.json({ success : false });
 							} else {
 								team.teamMembers.push(member);
-								console.log(team.teamMembers);
 							}
 						});
 					}
 
 					console.log('hahahahaha');
+					console.log(team.teamMembers);
 					team.save(function (err, team) {
 						if (err) {
 							console.log(err);
