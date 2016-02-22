@@ -348,13 +348,15 @@ module.exports = function (opts) {
 								member_ids.push(member._id);
 								team.teamMembers = [];
 								team.teamMembers = member_ids;
+								team.save();
 							}
 						});
 					}
 
 					console.log('hahahahaha');
 					console.log(team.teamMembers);
-					team.save(function (err, team) {
+					return res.json({ success : true });
+					/*team.save(function (err, team) {
 						if (err) {
 							console.log(err);
 							console.log('error kamil');
@@ -363,7 +365,7 @@ module.exports = function (opts) {
 							console.log(team.teamMembers);
 							return res.json({ success : true });
 						}
-					});
+					});*/
 				}
 			});
 		},
