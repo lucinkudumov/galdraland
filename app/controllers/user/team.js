@@ -332,31 +332,28 @@ module.exports = function (opts) {
 						if (err) {
 							console.log(err);	
 						} else {
+							console.log('hahaha');
+							var title_list = titles.split(",");
+							
+							for (i = 0;i < title_list.length;i++) {
+								var member = new teamMemberModel();
+								member.title = title_list[i];
+								member.user = defuser._id;
+								member.save(function (err, member) {
+									if (err) {
+										console.log(err);
+										return res.json({ success : false });
+									} else {
+										teamMembers.push(member);
+										console.log(teamMembers);
+									}
+								});
+							}
 							team.teamMembers = teamMembers;
 						}
 					});
-
-					console.log('hahaha');
-					var title_list = titles.split(",");
-					
-					var i = 0;
-					for (i = 0;i < title_list.length;i++) {
-						var member = new teamMemberModel();
-						member.title = title_list[i];
-						member.user = defuser._id;
-						member.save(function (err, member) {
-							if (err) {
-								console.log(err);
-								return res.json({ success : false });
-							} else {
-								console.log('add member to list' + team.teamMembers.length);
-								team.teamMembers.push(member);
-							}
-						});
-					}
 					
 					console.log('hahahahaha');
-					console.log(team.teamMembers.length);
 					team.save(function (err, team) {
 						if (err) {
 							console.log(err);
