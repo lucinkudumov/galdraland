@@ -830,10 +830,12 @@ app.controller("addMemberTitleController", ["$scope", "$modalInstance", "values"
     $scope.values = angular.copy(values);
     
     $scope.cancel = function () {
+		console.log('close member title action');
         $modalInstance.close({ type : "CLOSE" });
     }
     
     $scope.create = function () {
+		console.log('create member title action');
         $modalInstance.close({ type : "CREATE", titles : $scope.values.titles, team : $scope.values.team });
     }
 }]);
@@ -1628,6 +1630,7 @@ app.controller("teamViewController", ["$scope", "$http", "$stateParams", "User",
 		
 		modalInstance.result.then(function (result) {
 			if (result.type == "CREATE") {
+				console.log('send request : create member title');
 				var request = $http({ method : "POST", url : "addMemberTitle", api : true, data : { team_id : result.team._id, titles : result.titles, defuser : $rootScope.defUser }});
                 request.success(function (data) {
                     $location.path("/teams/view/" + $scope.team._id);
