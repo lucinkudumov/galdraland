@@ -1639,6 +1639,9 @@ app.controller("teamViewController", ["$scope", "$http", "$stateParams", "User",
 		modalInstance.result.then(function (result) {
 			if (result.type == "CREATE") {
 				var request = $http({ method : "POST", url : "addMemberTitle", api : true, data : { team_id : result.team._id, titles : result.titles, defuser : $rootScope.defUser }});
+                request.success(function () {
+                    $location.path("/teams/view/" + $scope.team._id);
+                });
 			}
 		});
 	}
