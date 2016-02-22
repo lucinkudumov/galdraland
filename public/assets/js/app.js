@@ -370,7 +370,6 @@ app.controller("editAdventureController", ["$scope", "$http", "$location", "$sta
 			$scope.end = new Date(Date.parse(data.adventure.end));
 			$scope.status = data.adventure.status;
 			$scope.team = data.adventure.team;
-			console.log($scope.status);
 		});
 	}
 	
@@ -519,7 +518,6 @@ app.controller("emailController", ["$scope", "$location", "$http", "User", funct
                 
         var request = $http({ method : "POST", url : "saveMainInfo", api : true, data : { username : $scope.username, email : $scope.email } });
         request.then(function (r) {
-            console.log(r);
             if (r.data.success) {
                 User.update(function () {
                     $location.path("/profile");
@@ -849,7 +847,6 @@ app.controller("sendInviteController", ["$scope", "$modalInstance", "values",  "
 	$scope.user = User.isLoggedIn();
 	$scope.team = values.team;
 	$scope.values.emptyMembers = values.emptyMembers;
-	console.log(values);
 
 	FB.login(function(){
 		FB.api(
@@ -858,7 +855,6 @@ app.controller("sendInviteController", ["$scope", "$modalInstance", "values",  "
 			function (response) {
 				if (response && !response.error) {
 					$scope.values.fb_friends = response.data;
-					console.log(response);
 				}
 			}
 		);
@@ -922,8 +918,6 @@ app.controller("sendInviteController", ["$scope", "$modalInstance", "values",  "
 					for(j = 0; j < $scope.values.invites.length; j++){
 						if( $scope.values.invites[j].fb_id == user.is_fb_friend ) add = false;
 					}
-				
-				console.log(add);
 				
 				if(!add) continue;
 				
@@ -1375,7 +1369,6 @@ app.controller("createTeamController", ["$scope", "$rootScope", "$http", "$locat
     $scope.createTeam = function () {
         request = $http({ method : "POST", url : "createTeam", api : true, data : { name : $scope.name, description : $scope.description, roles : $scope.roles, defuser : $rootScope.defUser } });
         request.success(function (data) {
-            console.log(data.id);
 			if ($rootScope.return2Adventure == "return")
 			{
 				$rootScope.return2Adventure = "normal";
@@ -1417,7 +1410,6 @@ app.controller("myTeamsController", ["$scope", "$http", "$location",  "User", fu
         request.success(function (data) {
             $scope.teams = data.teams;
             $scope.loading = false;
-			console.log($scope.teams);
         });
     }
     
@@ -1506,7 +1498,6 @@ app.controller("userViewController", ["$scope", "$http", "$stateParams", "User",
 	$scope.refresh = function () {
 		var request = $http({ method : "POST", url : "getViewUser", api : true, data : { userid : $stateParams.id }});
 		request.success(function (data) {
-			console.log(data);
 			$scope.username = data.user.username;
 			$scope.fullname = data.user.fullname;
 			$scope.email = data.user.email.email;
@@ -1555,7 +1546,6 @@ app.controller("teamViewController", ["$scope", "$http", "$stateParams", "User",
 				if (data.team.teamMembers[i].user._id == $scope.user._id)
 					$scope.isMember = true;
 			}
-			console.log(data);
         });
     }
     
@@ -1678,9 +1668,7 @@ app.controller("teamViewController", ["$scope", "$http", "$stateParams", "User",
 							for(i = 0; i < fb_ids.length; i++){
 								for(var j = result.invites.length - 1; j >= 0; j--){
 									if(result.invites[j].fb_id == fb_ids[i]){
-										console.log(result.invites);
 										result.invites.splice(j, 1);
-										console.log(result.invites);
 									}
 								}
 							}
@@ -1691,8 +1679,6 @@ app.controller("teamViewController", ["$scope", "$http", "$stateParams", "User",
 				} else send_invite();
 				
 				function send_invite(){		
-					console.log('haha');
-					console.log(result.invites.length);
 					if(result.invites.length == 0) return;
 					var request = $http({ method : "POST", url : "sendInvite", api : true, data : { team : $scope.team._id, invites : result.invites, msg : result.msg, title : result.title, roles : result.roles }});
 					request.success(function (data) {
@@ -1745,12 +1731,10 @@ app.directive('commentWidget', function ($http, User) {
 			scope.refresh = function(){
 				var request = $http({ method : "POST", url : "getCommentByRefId", api : true, data : { id : scope.ref, fromMe : false }});
 				request.success(function (data) {
-					console.log(data);
 					if( !data.success || data.comments.length == 0 ){
 						scope.comments = [];
 					} else {
 						scope.comments = data.comments;
-						console.log(scope.comments);						
 					}
 				});
 			}
@@ -1799,7 +1783,6 @@ app.directive('ratingWidget', function ($http, User) {
 				var request = $http({ method : "POST", url : "getRatingByRefId", api : true, data : { id : scope.ref, fromMe : false }});
 				request.success(function (data) {
 					scope.myrating = null;
-					console.log(data);
 					if( !data.success || data.ratings.length == 0 ){
 						scope.count = 0;
 						scope.average = 0;
@@ -1815,7 +1798,6 @@ app.directive('ratingWidget', function ($http, User) {
 					}
 					
 					$("#rating-elem" + scope.ref).rating();
-					console.log(scope.isstatic + 'asdfasdf');
 					if(scope.isstatic){
 						$("#rating-elem" + scope.ref).rating('refresh', {"stars":5, "size":'xs', "showClear": false, "readonly": true, starCaptions: function(val) {
 							return scope.count + ' ratings, ' + scope.average + ' stars';

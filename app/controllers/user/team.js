@@ -18,15 +18,12 @@ module.exports = function (opts) {
 				roles = req.body.roles.split(",");
 			}
 			
-			console.log(req.body.defuser);
-			
             team.owner = req.user._id;
             team.name = name;
             team.description = description;
             team.image = image;
             team.teamMembers = [];
 
-			console.log(req.body.defuser._id);
 			var i = 0;
 			if (roles) {
 				for (i = 0;i < roles.length;i++) {
@@ -38,7 +35,6 @@ module.exports = function (opts) {
 							console.log(err);
 							return res.json({ success : false });
 						} else {
-							console.log(member._id);
 							team.teamMembers.push(member._id);
 						}
 					});
@@ -63,9 +59,6 @@ module.exports = function (opts) {
                                 return res.json({ success : false });
                             });
                         } else {
-							console.log(team.teamMembers.length);
-							console.log(team.teamMembers);
-							console.log(team);
                             return res.json({ success : true, id : team._id });
                         }
                     });
@@ -102,7 +95,6 @@ module.exports = function (opts) {
 							});
 						}],
 						function (err, vals) {
-							console.log(team);
 							if (err) {
 								return res.json({ success : false });
 							} else {
@@ -132,7 +124,6 @@ module.exports = function (opts) {
 		"post#newTeam" : function (req, res) {
 			var date = new Date();
 			date.setDate(date.getDate() - 7);
-			console.log(date);
 			teamModel.find({"createdAt": {$gt: date}}, function (err, teams) {
                 if (err) {
                     console.log(err);
@@ -144,13 +135,11 @@ module.exports = function (opts) {
 		},
 
 		"post#lastTeam" : function (req, res) {
-			console.log("getting last teams");
             teamModel.find({}, function (err, teams) {
                 if (err) {
                     console.log(err);
                     return res.json({ teams : [] });
                 } else {
-					console.log(teams.length);
                     return res.json({ teams : teams });
                 }
             });
@@ -192,8 +181,6 @@ module.exports = function (opts) {
         
         "get#myTeams" : function (req, res) {
 			teamMemberModel.find( { user : req.user._id }, function(err, members){
-				console.log(members);
-				console.log(req.user._id);
 				if(err){
 					console.log(err);
 					return res.json({ success : false });
@@ -208,7 +195,6 @@ module.exports = function (opts) {
 							console.log(err);
 							return res.json({ success : false });
 						} else {
-							console.log(teams);
 							return res.json({ success : true, teams : teams });
 						}
 					});
@@ -218,8 +204,6 @@ module.exports = function (opts) {
 		
         "post#userTeams" : function (req, res) {
 			teamMemberModel.find( { user : req.body.userid }, function(err, members){
-				console.log(members);
-				console.log(req.body.userid);
 				if(err){
 					console.log(err);
 					return res.json({ success : false });
@@ -234,7 +218,6 @@ module.exports = function (opts) {
 							console.log(err);
 							return res.json({ success : false });
 						} else {
-							console.log(teams);
 							return res.json({ success : true, teams : teams });
 						}
 					});
@@ -360,7 +343,6 @@ module.exports = function (opts) {
 								console.log(err);
 								return res.json({ success : false });
 							} else {
-								console.log(member._id);
 								team.teamMembers.push(member._id);
 							}
 						});
