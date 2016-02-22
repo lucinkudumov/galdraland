@@ -331,6 +331,11 @@ module.exports = function (opts) {
 					console.log('hahaha');
 					var title_list = titles.split(",");
 					
+					var member_ids = [];
+					for (i = 0;i < team.teamMembers.length;i++) {
+						member_ids.push(team.teamMembers[i]._id);
+					}
+					
 					for (i = 0;i < title_list.length;i++) {
 						var member = new teamMemberModel();
 						member.title = title_list[i];
@@ -340,12 +345,13 @@ module.exports = function (opts) {
 								console.log(err);
 								return res.json({ success : false });
 							} else {
-								team.teamMembers.push(member);
+								member_ids.push(member._id);
 							}
 						});
 					}
 
 					console.log('hahahahaha');
+					team.teamMembers = member_ids;
 					console.log(team.teamMembers);
 					team.save(function (err, team) {
 						if (err) {
