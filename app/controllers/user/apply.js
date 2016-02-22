@@ -53,8 +53,6 @@ module.exports = function (opts) {
 					apply.team = team;
 					apply.memberId = memberId;
 					
-					console.log(apply);
-						
 					apply.save(function (err, apply) {
 						if (err) {
 							console.log(err);
@@ -80,7 +78,6 @@ module.exports = function (opts) {
 					});
                 }
                 else {
-					console.log('here');
                     return res.json({ success : false });
                 }
             }); 
@@ -104,16 +101,11 @@ module.exports = function (opts) {
                                     console.log(err);
                                     return res.json({ success : false });
                                 } else {
-									console.log('haha');
-									console.log(apply.memberId);
 									teamMemberModel.findOne({ _id : apply.memberId }, function (err, teamMember) {
 										if (err) {
 											console.log(err);
 											return res.json({ success : false });
 										} else {
-											console.log('hahaha');
-											console.log(teamMember);
-											
 											teamMember.user = apply.from;
 											teamMember.roles = apply.roles;
 											teamMember.save(function (err, member) {
@@ -121,9 +113,6 @@ module.exports = function (opts) {
 													console.log(err);
 													return res.json({ success : false });
 												} else {
-													console.log('hahahaha');
-													console.log(member);
-													console.log(member.user);
 													smtpTransport.sendMail({
 														from: "noreply@holomathics.com",
 														to: user.email,
@@ -237,7 +226,6 @@ module.exports = function (opts) {
                                            item.team = team;
                                            item.teamId = team._id;
 										   item.fromName = from.username;                                            
-										   console.log(item);
                                            applyObjs.push(item);
                                            callback();
                                        }

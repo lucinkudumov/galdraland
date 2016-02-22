@@ -20,8 +20,6 @@ module.exports = function (opts) {
 					console.log(err);
 					return res.json({ success : false });
 				} else {
-					console.log('create');
-					console.log(defaultUser);
 					return res.json({ success : true });
 				}
 			});
@@ -33,8 +31,6 @@ module.exports = function (opts) {
 					console.log(err);
 					return res.json({ success : false });
 				} else {
-					console.log('get');
-					console.log(user);
 					return res.json({ success : true, user : user });
 				}
 			});
@@ -99,7 +95,6 @@ module.exports = function (opts) {
 		"post#newUser" : function (req, res) {
 			var date = new Date();
 			date.setDate(date.getDate() - 7);
-			console.log(date);
             userModel.find({"signin": {$gt: date}}, function (err, users) {
                 if (err) {
                     console.log(err);
@@ -382,7 +377,6 @@ module.exports = function (opts) {
 			}
 
 			function save_interests(){
-				console.log(interests);
 				userModel.findById(req.user._id, function (err, user) {
 				   if (err) {
 					   console.log(err);

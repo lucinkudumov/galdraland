@@ -15,7 +15,6 @@ app.controller("editAdventureController", ["$scope", "$http", "$location", "$sta
 			$scope.end = new Date(Date.parse(data.adventure.end));
 			$scope.status = data.adventure.status;
 			$scope.team = data.adventure.team;
-			console.log($scope.status);
 		});
 	}
 	

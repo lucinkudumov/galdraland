@@ -6,7 +6,6 @@ app.controller("sendInviteController", ["$scope", "$modalInstance", "values",  "
 	$scope.values.fb_friends = null;
 	$scope.user = User.isLoggedIn();
 	$scope.team = values.team;
-	console.log(values);
 
 	FB.login(function(){
 		FB.api(
@@ -15,7 +14,6 @@ app.controller("sendInviteController", ["$scope", "$modalInstance", "values",  "
 			function (response) {
 				if (response && !response.error) {
 					$scope.values.fb_friends = response.data;
-					console.log(response);
 				}
 			}
 		);

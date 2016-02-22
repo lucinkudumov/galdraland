@@ -63,9 +63,7 @@ module.exports = function (opts) {
             var term = req.body.term;
 			var tags = term.split(" ");
             
-			console.log(term);
             adventureModel.find({ $or : [ {name : new RegExp(term, 'i')}, {description : new RegExp(term, 'i')}, {tags : { $in : tags } } ] }, function (err, adventures) {
-			console.log(adventures);
                 if (err) {
                     console.log(err);
                     return res.json({ adventures : [] });
@@ -78,7 +76,6 @@ module.exports = function (opts) {
 		"post#newAdventure" : function (req, res) {
 			var date = new Date();
 			date.setDate(date.getDate() - 7);
-			console.log(date);
             adventureModel.find({"createdAt": {$gt: date}}, function (err, adventures) {
                 if (err) {
                     console.log(err);
@@ -90,13 +87,11 @@ module.exports = function (opts) {
 		},
 
 		"post#lastAdventure" : function (req, res) {
-			console.log("getting last adventures");
             adventureModel.find({}, function (err, adventures) {
                 if (err) {
                     console.log(err);
                     return res.json({ adventures : [] });
                 } else {
-					console.log(adventures.length);
                     return res.json({ adventures : adventures });
                 }
             });
@@ -110,7 +105,6 @@ module.exports = function (opts) {
 			
 			if (name != "undefined" && description != "undefined" && tag != "undefined") {
 				adventureModel.find({ name : new RegExp(name, 'i'), description : new RegExp(description, 'i'), tags : { $in : tags } }, function (err, adventures) {
-				console.log(adventures);
 					if (err) {
 						console.log(err);
 						return res.json({ adventures : [] });
@@ -120,7 +114,6 @@ module.exports = function (opts) {
 				});
 			} else if (name != "undefined" && description != "undefined") {
 				adventureModel.find({ name : new RegExp(name, 'i'), description : new RegExp(description, 'i') }, function (err, adventures) {
-				console.log(adventures);
 					if (err) {
 						console.log(err);
 						return res.json({ adventures : [] });
@@ -130,7 +123,6 @@ module.exports = function (opts) {
 				});
 			} else if (description != "undefined" && tag != "undefined") {
 				adventureModel.find({ description : new RegExp(description, 'i'), tags : { $in : tags } }, function (err, adventures) {
-				console.log(adventures);
 					if (err) {
 						console.log(err);
 						return res.json({ adventures : [] });
@@ -140,7 +132,6 @@ module.exports = function (opts) {
 				});
 			} else if (name != "undefined") {
 				adventureModel.find({ name : new RegExp(name, 'i') }, function (err, adventures) {
-				console.log(adventures);
 					if (err) {
 						console.log(err);
 						return res.json({ adventures : [] });
@@ -150,7 +141,6 @@ module.exports = function (opts) {
 				});
 			} else if (description != "undefined") {
 				adventureModel.find({ description : new RegExp(description, 'i') }, function (err, adventures) {
-				console.log(adventures);
 					if (err) {
 						console.log(err);
 						return res.json({ adventures : [] });
@@ -160,7 +150,6 @@ module.exports = function (opts) {
 				});
 			} else if (tag != "undefined") {
 				adventureModel.find({ tags : { $in : tags } }, function (err, adventures) {
-				console.log(adventures);
 					if (err) {
 						console.log(err);
 						return res.json({ adventures : [] });
@@ -255,7 +244,6 @@ module.exports = function (opts) {
         
         "post#adventure/get" : function (req, res) {
             adventureModel.findOne({ _id : req.body.id }).populate("team team").exec(function (err, adventure) {
-				console.log(adventure);
                 if (err) {
                     console.log(err);
                     return res.json({ success : false, adventure : null });

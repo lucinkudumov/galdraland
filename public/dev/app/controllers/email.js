@@ -42,7 +42,6 @@ app.controller("emailController", ["$scope", "$location", "$http", "User", funct
                 
         var request = $http({ method : "POST", url : "saveMainInfo", api : true, data : { username : $scope.username, email : $scope.email } });
         request.then(function (r) {
-            console.log(r);
             if (r.data.success) {
                 User.update(function () {
                     $location.path("/profile");

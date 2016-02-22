@@ -273,7 +273,6 @@ module.exports = function (opts) {
                                            item.team = team;
                                            item.teamId = team._id;
 										   item.fromName = from.username;                                            
-										   console.log(item);
                                            inviteObjs.push(item);
                                            callback();
                                        }
