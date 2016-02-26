@@ -9,7 +9,7 @@
                 <a href="/teams/edit/{{ team._id }}" class="btn btn-primary">Edit</a>
                 <a href="#" ng-click="modal()" class="btn btn-danger">Remove</a>
             </div>
-            <div ng-hide="isManager" class="btn-group btn-group-justified">
+            <div ng-show="isMember" class="btn-group btn-group-justified">
                 <a href="#" class="btn btn-danger" ng-click="leave();">Leave</a>
             </div>
         </div>
