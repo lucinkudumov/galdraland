@@ -33,6 +33,9 @@ module.exports = function (opts) {
         status: {
             type : String,
 			"default" : "Active"
+        },
+        link: {
+            type : String
         }
     });
     
