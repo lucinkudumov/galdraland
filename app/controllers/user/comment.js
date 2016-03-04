@@ -2,76 +2,70 @@ var validator = require('validator');
 
 module.exports = function (opts) {
     var userModel = opts.models.User,
-		commentModel = opts.models.Comment;
-        
+            commentModel = opts.models.Comment;
+
     return {
-        "get#getComment" : function (req, res) {
-			var id = req.body.id;
+        "get#getComment": function (req, res) {
+            var id = req.body.id;
             commentModel.findById({_id: id}, function (err, comment) {
-               if (err) {
-                   console.log(err);
-                   return res.json({ success : false });
-               } else if (comment) {
-                   return res.json({ success : true, comment : comment });
-               } else {
-                   return res.json({ success : false });
-               }
+                if (err) {
+                    console.log(err);
+                    return res.json({success: false});
+                } else if (comment) {
+                    return res.json({success: true, comment: comment});
+                } else {
+                    return res.json({success: false});
+                }
             });
         },
-		"post#getCommentByRefId" : function (req, res) {
-			var id = req.body.id;
-			var user_id = req.user._id;
-			var query;
-			
-			query = commentModel.find({refId: id}).populate('from').exec(function (err, comments) {
-               if (err) {
-                   console.log(err);
-                   return res.json({ success : false });
-               } else if (comments) {
-                   return res.json({ success : true, comments : comments });
-               } else {
-                   return res.json({ success : false });
-               }
-            });
-        },
-		
-        
-        "post#insertComment" : function (req, res) {
+        "post#getCommentByRefId": function (req, res) {
+            var id = req.body.id;
+            var user_id = req.user._id;
+            var query;
+
+            query = commentModel.find({refId: id}).populate('from').exec(function (err, comments) {
+                if (err) {
+                    console.log(err);
+                    return res.json({success: false});
+                } else if (comments) {
+                    return res.json({success: true, comments: comments});
+                } else {
+                    return res.json({success: false});
+                }
+            });       },
+        "post#insertComment": function (req, res) {
             var ref_id = req.body.ref_id;
-			var from = req.user._id;
-			var commentVal = req.body.comment;          
-			var comment = new commentModel;
-			
-			comment.refId = ref_id;
-			comment.from = from;
-			comment.comment = commentVal;
-			
-			comment.save(function (err, r) {
-			   if (err) {
-				   console.log(err);
-				   return res.json({ success : false });
-			   } else {
-				   return res.json({ success : true });
-			   }
-			});
+            var from = req.user._id;
+            var commentVal = req.body.comment;
+            var comment = new commentModel;
+
+            comment.refId = ref_id;
+            comment.from = from;
+            comment.comment = commentVal;
+
+            comment.save(function (err, r) {
+                if (err) {
+                    console.log(err);
+                    return res.json({success: false});
+                } else {
+                    return res.json({success: true});
+                }
+            });
+      },
+        "post#updateComment": function (req, res) {
+            var id = req.body.id;
+            var commentVal = req.body.comment;
+            var comment = new commentModel;
+
+            commentModel.findOneAndUpdate({_id: id}, {comment: commentVal}, function (err, comment) {
+                if (err) {
+                    return res.json({success: false});
+                } else if (comment) {
+                    return res.json({success: true, comment: comment});
+                } else {
+                    return res.json({success: false});
+                }
+            });
         },
-		
-		
-		"post#updateComment" : function (req, res) {
-			var id = req.body.id;
-			var commentVal = req.body.comment;          
-			var comment = new commentModel;
-			
-			commentModel.findOneAndUpdate({_id : id}, {comment : commentVal}, function(err, comment){
-				if(err){
-					return res.json({ success: false });
-				} else if( comment ){
-					return res.json({ success: true, comment : comment });
-				} else {
-					return res.json({ success: false });
-				}
-			});
-        },
-       
     }
 }

@@ -12,14 +12,14 @@
                     <td class="err-msg">No results, please search another.</td>
                 </tr>
                 <tr ng-repeat="r in results">
-					<td ng-show="r.photo"><div class="avatar" style="background-image: url('{{ r.photo }}')"></div></td>
-                    <td>{{ r.name }}</td>
-					<td ng-show="r._id"><rating-widget isstatic="1" ref="r._id" ></rating-widget></td>
-                    <td>{{ r.text1 }}</td>
-					<td>{{ r.text2 }}</td>
-                    <td ng-show="r.href">
-                        <a href="{{r.href}}" class="btn btn-primary">View</a>
-                    </td>
+                    <td ng-show="r.photo"><div class="avatar" style="background-image: url('{{ r.photo}}')"></div></td>
+                    <td>{{ r.name}}</td>
+                    <td ng-show="r._id"><rating-widget isstatic="1" ref="r._id" ></rating-widget></td>
+                <td>{{ r.text1}}</td>
+                <td>{{ r.text2}}</td>
+                <td ng-show="r.href">
+                    <a href="{{r.href}}" class="btn btn-primary">View</a>
+                </td>
                 </tr>
             </table>
         </div>

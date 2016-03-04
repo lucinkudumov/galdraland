@@ -175,7 +175,7 @@ module.exports = function (opts) {
             if (description) {
                 updateInfo.description = description;
             }
-            
+
             if (link) {
                 updateInfo.link = link;
             }

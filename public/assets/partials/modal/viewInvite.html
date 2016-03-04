@@ -1,35 +1,35 @@
 <div class="modal-header">
-    <h4>Invitation to join "{{ invite.team.name }}" as {{invite.title}}</h4>
+    <h4>Invitation to join "{{ invite.team.name}}" as {{invite.title}}</h4>
 </div>
 <div class="modal-body">
     <table class="table" ng-hide="invite.accepted || invite.rejected">
         <tr>
             <td style="border-top: none;">From: </td>
-            <td style="border-top: none;">{{ invite.fromName }}</td>
+            <td style="border-top: none;">{{ invite.fromName}}</td>
         </tr>
         <tr>
             <td>Team: </td>
-            <td><a href="#">{{ invite.team.name }}</a></td>
+            <td><a href="#">{{ invite.team.name}}</a></td>
         </tr>
         <tr>
             <td>Title: </td>
-            <td>{{ invite.title }}</td>
+            <td>{{ invite.title}}</td>
         </tr>
         <tr ng-show="invite.roles.length > 0">
             <td>Roles: </td>
-            <td>{{ invite.roles.join(" ,") }}</td>
+            <td>{{ invite.roles.join(" ,")}}</td>
         </tr>
         <tr ng-show="invite.message">
             <td>Message: </td>
-            <td class="msg">{{ invite.message }}</td>
+            <td class="msg">{{ invite.message}}</td>
         </tr>
     </table>
-	<h5 ng-show="invite.accepted">{{invite.to}} has accepted your invitation.</h5>
-	<h5 ng-show="invite.rejected">{{invite.to}} has declined your invitation.</h5>
+    <h5 ng-show="invite.accepted">{{invite.to}} has accepted your invitation.</h5>
+    <h5 ng-show="invite.rejected">{{invite.to}} has declined your invitation.</h5>
 </div>
 <div class="modal-footer">
     <button class="btn btn-primary" ng-click="accept()" ng-hide="invite.accepted || invite.rejected">Accept</button>
     <button class="btn btn-warning" ng-click="decline()" ng-hide="invite.accepted || invite.rejected">Decline</button>
-	<!--button class="btn btn-primary" ng-click="publish()" ng-show="invite.accepted">Publish To FB</button-->
-	<button class="btn btn-warning" ng-click="close()" ng-show="invite.accepted || invite.rejected">Close</button>
+    <!--button class="btn btn-primary" ng-click="publish()" ng-show="invite.accepted">Publish To FB</button-->
+    <button class="btn btn-warning" ng-click="close()" ng-show="invite.accepted || invite.rejected">Close</button>
 </div>

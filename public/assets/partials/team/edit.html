@@ -5,16 +5,16 @@
         <div class="form-group">
             <input class="form-control" type="text" ng-model="name" placeholder="Provide team name">
         </div>
-		<div class="form-group">
-			<div  ng-repeat="member in teamMembers">
-				<input type="text" ng-model="member" class="form-control">
-				<span class="input-group-btn">
-					<button class="btn btn-default btn-remove" type="button" ng-click="removeMember(member)">Remove</button>
-				</span>
-				<button class="btn btn-default add" ng-click="addMember()">Add</button>
-				<button class="btn btn-default save" ng-click="saveMember()">Save</button>
-			</div>
-		</div>
+        <div class="form-group">
+            <div  ng-repeat="member in teamMembers">
+                <input type="text" ng-model="member" class="form-control">
+                <span class="input-group-btn">
+                    <button class="btn btn-default btn-remove" type="button" ng-click="removeMember(member)">Remove</button>
+                </span>
+                <button class="btn btn-default add" ng-click="addMember()">Add</button>
+                <button class="btn btn-default save" ng-click="saveMember()">Save</button>
+            </div>
+        </div>
         <div class="form-group">
             <textarea ng-model="description" class="form-control" placeholder="Provide team description (optional)"></textarea>
         </div>

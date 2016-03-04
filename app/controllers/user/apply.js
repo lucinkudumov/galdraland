@@ -141,7 +141,7 @@ module.exports = function (opts) {
 
                 }
             });
-      },
+        },
         "post#rejectApply": function (req, res) {
             var id = req.body.id;
 
@@ -185,7 +185,7 @@ module.exports = function (opts) {
 
                 }
             });
-      },
+        },
         "post#closeApply": function (req, res) {
             var id = req.body.id;
 

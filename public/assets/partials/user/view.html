@@ -1,74 +1,74 @@
 <div class="view-user" ng-controller="userViewController">
-	<div class="avatar" style="background-image: url('{{ photo }}')"></div>
-	<h1>{{ fullname }}</h1>
+    <div class="avatar" style="background-image: url('{{ photo}}')"></div>
+    <h1>{{ fullname}}</h1>
     <blockquote>
         <p>Main information</p>
         <div class="form-group">
-			<small>User Name : {{ username }}</small>
+            <small>User Name : {{ username}}</small>
         </div>
         <div class="form-group">
-			<small>eMail Address : {{ email }}</small>
+            <small>eMail Address : {{ email}}</small>
         </div>
         <div class="form-group">
-			<small>Location : {{ location }}</small>
+            <small>Location : {{ location}}</small>
         </div>
         <div class="form-group">
-			<small>Skype : {{ skype }}</small>
+            <small>Skype : {{ skype}}</small>
         </div>
         <div class="form-group">
-			<small>Goals : {{ goals }}</small>
+            <small>Goals : {{ goals}}</small>
         </div>
         <div class="form-group">
-			<small>Categories : {{ categories }}</small>
+            <small>Categories : {{ categories}}</small>
         </div>
     </blockquote>
-	<blockquote>
+    <blockquote>
         <p>Teams</p>
-		<small ng-show="teams.length == 0">No teams</small> 
-		<ul ng-show="teams.length > 0"> 
-			<li ng-repeat="t in teams"><a href="/teams/view/{{ t._id }}">{{ t.name }}</a></li>
-		</ul>
+        <small ng-show="teams.length == 0">No teams</small> 
+        <ul ng-show="teams.length > 0"> 
+            <li ng-repeat="t in teams"><a href="/teams/view/{{ t._id}}">{{ t.name}}</a></li>
+        </ul>
     </blockquote>
-	<blockquote>
-		<p>Adventures</p>
-		<small ng-show="adventures.length == 0">No adventures</small> 
-		<ul ng-show="adventures.length > 0"> 
-			<li ng-repeat="a in adventures"><a href="/adventures/view/{{ a._id }}">{{ a.name }}</a></li>
-		</ul>
+    <blockquote>
+        <p>Adventures</p>
+        <small ng-show="adventures.length == 0">No adventures</small> 
+        <ul ng-show="adventures.length > 0"> 
+            <li ng-repeat="a in adventures"><a href="/adventures/view/{{ a._id}}">{{ a.name}}</a></li>
+        </ul>
     </blockquote>
-	<blockquote>
+    <blockquote>
         <p>Biography</p>
-		<small ng-show="bio">{{ bio }}</small>
+        <small ng-show="bio">{{ bio}}</small>
     </blockquote>
-	<blockquote>
+    <blockquote>
         <p>Interests</p>
         <div ng-repeat="i in interests" style="margin-bottom: 20px;">
             <div class="input-group">
-				<small>Topic : {{ i.topic.topic }}</small>
+                <small>Topic : {{ i.topic.topic}}</small>
             </div>
-			<div class="input-group">
-				<small>Information : {{ i.information }}</small>
-			</div>
+            <div class="input-group">
+                <small>Information : {{ i.information}}</small>
+            </div>
         </div>		
     </blockquote>
     <blockquote>
         <p>Experience</p>
-		<small ng-show="experience">{{ experience }}</small>
+        <small ng-show="experience">{{ experience}}</small>
     </blockquote>
     <blockquote>
         <p>Education</p>
         <div ng-repeat="e in educations" style="margin-bottom: 20px;">
             <div class="input-group">
-				<small>School : {{ e.school.name }}</small>
+                <small>School : {{ e.school.name}}</small>
             </div>
-			<small>Year : {{ e.year.name }}</small>
+            <small>Year : {{ e.year.name}}</small>
         </div>
     </blockquote>
     <blockquote>
         <p>Links</p>
         <div ng-repeat="l in links" style="margin-bottom: 20px;">
             <div class="input-group">
-				<small><a href="{{ l.link }}">Link : {{ l.name }}</a></small>
+                <small><a href="{{ l.link}}">Link : {{ l.name}}</a></small>
             </div>
         </div>
     </blockquote>
