@@ -12,7 +12,7 @@
                     </tr>
                     <tr ng-repeat="p in peoples">
                         <td>
-                            <p>{{ p.name}}</p>
+                            <a href="/users/view/{{p._id}}">{{ p.name}}</a>
                             <small>SignIn: {{ p.signin}}</small>
                         </td>
                     </tr>
@@ -32,7 +32,7 @@
                     </tr>
                     <tr ng-repeat="t in teams">
                         <td>
-                            <p>{{ t.name}}</p>
+                            <a href="/teams/view/{{t._id}}">{{ t.name}}</a>
                             <small>CreatedAt: {{ t.createdAt}}</small>
                         </td>
                     </tr>
@@ -50,7 +50,7 @@
                     </tr>
                     <tr ng-repeat="a in adventures">
                         <td>
-                            <p>{{ a.name}}</p>
+                            <a href="/adventures/view/{{a._id}}">{{ a.name}}</a>
                             <small>CreatedAt: {{ a.createdAt}}</small>
                         </td>
                     </tr>

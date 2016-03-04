@@ -1514,6 +1514,7 @@ app.controller("newsController", ["$scope", "$http", "$location", "User", functi
             $scope.peoples = [];
             for (var i = 0; i < data.users.length; i++) {
                 var result = {};
+                result._id = data.users[i]._id;
                 result.name = data.users[i].username;
                 result.text1 = data.users[i].fullname;
                 result.photo = data.users[i].photo;
