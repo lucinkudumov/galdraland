@@ -1052,10 +1052,6 @@ app.controller("profileLeftSideController", ["$scope", "$http", "User", function
             if (!$scope.teams || $scope.teams.length == 0) {
                 $scope.recomendation.push("Add new team now.");
             }
-
-            if (!$scope.categories) {
-                $scope.recomendation.push("Add category.");
-            }
         }
 
         $scope.getTeams = function () {
