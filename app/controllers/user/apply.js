@@ -25,7 +25,7 @@ module.exports = function (opts) {
         "post#sendApply": function (req, res) {
             var msg = req.body.msg,
                     memberId = req.body.title,
-                    roles = req.body.roles,
+                    roles = [],
                     memberList = req.body.memberList,
                     team = req.body.team;
 
@@ -63,11 +63,11 @@ module.exports = function (opts) {
                                 to: toEmail, // list of receivers
                                 subject: "Team member request to " + team.name, // Subject line
                                 text: "Hello, " + username + ", \n" +
-                                        "You have received a request from " + req.user.username + " for the member role " + roles.join(",") + " to \"" + team.name + "\" team as " + apply.title + ".\n" +
+                                        "You have received a request from " + req.user.username + " for the member role " + " to \"" + team.name + "\" team as " + apply.title + ".\n" +
                                         "If you want to accept it, please, use next link: http://galdraland.com \n" +
                                         "Thanks, Galdraland team.",
                                 html: "Hello, " + username + ", <br>" +
-                                        "You have received a request from " + req.user.username + " for the member role " + roles.join(",") + " to \"" + team.name + "\" team as " + apply.title + ".<br>" +
+                                        "You have received a request from " + req.user.username + " for the member role " + " to \"" + team.name + "\" team as " + apply.title + ".<br>" +
                                         "If you want to accept it, please, use next link: http://galdraland.com/ <br>" +
                                         "Thanks, Galdraland team.",
                             }, function (err) {
