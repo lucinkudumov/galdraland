@@ -304,23 +304,23 @@ app.controller("createAdventureController", ["$scope", "$rootScope", "Upload", "
             var fd = new FormData();
             fd.append('file', image);
             
-            var request = {
-                method: 'POST',
+            $scope.upload = Upload.upload({
                 url: 'upload/image',
-                data: fd,
+                method: 'POST',
                 api: true,
-                headers: {
-                    'Content-Type': undefined
-                }
-            };
-            
-            $http(request)
-                    .success(function(data) {
-                        console.log(data);
-                    })
-                    .error(function(err) {
-                        console.log(err);
-                    });
+                file: image
+            }).progress(function (event) {
+                $scope.uploadProgress = Math.floor(event.loaded / event.total);
+                $scope.$apply();
+            }).success(function (data, status, headers, config) {
+                $scope.uploadInProgress = false;
+                // If you need uploaded file immediately 
+                console.log(data);
+                $scope.uploadedImage = JSON.parse(data);
+            }).error(function (err) {
+                $scope.uploadInProgress = false;
+                console.log('Error uploading file: ' + err.message || err);
+            });
         };
 
         $scope.createAdventure = function () {

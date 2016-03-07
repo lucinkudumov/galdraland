@@ -12,7 +12,6 @@ module.exports = function (opts) {
 
     return {
         "post#upload/image": function (req, res) {
-            console.log(req);
             var form = new multiparty.Form();
             form.parse(req, function (err, fields, files) {
                 var file = files.file[0];
