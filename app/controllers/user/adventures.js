@@ -13,6 +13,24 @@ module.exports = function (opts) {
     return {
         "post#upload/image": function (req, res) {
             console.log(req.files);
+            var file = req.files[0];
+            if (file) {
+                if (file.type !== 'image/png' && file.type !== 'image/jpep') {
+                    return res.json({success: false, error: "Image file type error"});
+                }
+                
+                fs.readFile(file.path, function(err, data) {
+                    var newPath = "/upload/" + req.use._id + "/" + new Date().toISOString() + file.name;
+                    fs.writeFile(newPath, data, function(err) {
+                        if (!err) {
+                            return res.json({success: true, data: newPath});
+                        } else {
+                            console.log(err);
+                            return res.json({success: false, error: "File Save error"});
+                        }
+                    });
+                });
+            }
         },
         "post#adventure/create": function (req, res) {
             var name = req.body.name,
