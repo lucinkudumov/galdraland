@@ -285,7 +285,7 @@ app.controller("createAdventureController", ["$scope", "$rootScope", "Upload", "
             });
         }
 
-        $scope.onFileSelect = function(image) {
+        $scope.onFileSelect = function (image) {
             console.log(image);
             image = image.files[0];
             if (angular.isArray(image)) {
@@ -301,27 +301,37 @@ app.controller("createAdventureController", ["$scope", "$rootScope", "Upload", "
             $scope.uploadInProgress = true;
             $scope.uploadProgress = 0;
 
-            $scope.upload = Upload.upload({
-                url: 'upload/image',
+            var fd = new FormData();
+            fd.append('file', image);
+            
+            var request = {
                 method: 'POST',
-                file: image
-            }).progress(function(event) {
-                $scope.uploadProgress = Math.floor(event.loaded / event.total);
-                $scope.$apply();
-            }).success(function(data, status, headers, config) {
-                $scope.uploadInProgress = false;
-                // If you need uploaded file immediately 
-                $scope.uploadedImage = JSON.parse(data);      
-            }).error(function(err) {
-                $scope.uploadInProgress = false;
-                console.log('Error uploading file: ' + err.message || err);
-            });
+                url: 'upload/image',
+                data: fd,
+                api: true,
+                headers: {
+                    'Content-Type': undefined
+                }
+            };
+            
+            $http(request)
+                    .success(function(data) {
+                        console.log(data);
+                    })
+                    .error(function(err) {
+                        console.log(err);
+                    });
         };
 
         $scope.createAdventure = function () {
             var post = $scope.fb_post;
             console.log($scope.image);
-            var request = $http({method: "POST", url: "adventure/create", api: true, data: {name: $scope.name, description: $scope.description, link: $scope.link,team: $scope.team, start: $scope.formatDate($scope.start), end: $scope.formatDate($scope.end), tags: ($scope.tags) ? $scope.tags.split(' ') : []}});
+            var request = $http({
+                method: "POST",
+                url: "adventure/create",
+                api: true,
+                data: {name: $scope.name, description: $scope.description, link: $scope.link, team: $scope.team, start: $scope.formatDate($scope.start), end: $scope.formatDate($scope.end), tags: ($scope.tags) ? $scope.tags.split(' ') : []}
+            });
             request.success(function (data) {
                 $location.path("/adventures/view/" + data.id);
                 if (post)
