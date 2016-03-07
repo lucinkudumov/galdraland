@@ -43,8 +43,6 @@ module.exports = function (opts) {
                     });
                 });
             }
-
-            return res.json({success: false, error: "No file error"});
         },
         "post#adventure/create": function (req, res) {
             var name = req.body.name,
