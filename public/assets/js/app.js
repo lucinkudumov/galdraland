@@ -313,7 +313,7 @@ app.controller("createAdventureController", ["$scope", "$rootScope", "Upload", "
                 $scope.uploadInProgress = false;
                 // If you need uploaded file immediately 
                 console.log(data);
-                $scope.uploadedImage = "assets/images/upload/" + data.data;
+                $scope.uploadedImage = "/assets/images/upload/" + data.data;
             }).error(function (err) {
                 $scope.uploadInProgress = false;
                 console.log('Error uploading file: ' + err.message || err);
@@ -327,7 +327,7 @@ app.controller("createAdventureController", ["$scope", "$rootScope", "Upload", "
                 method: "POST",
                 url: "adventure/create",
                 api: true,
-                data: {name: $scope.name, description: $scope.description, link: $scope.link, team: $scope.team, start: $scope.formatDate($scope.start), end: $scope.formatDate($scope.end), tags: ($scope.tags) ? $scope.tags.split(' ') : []}
+                data: {name: $scope.name, description: $scope.description, link: $scope.link, image: $scope.uploadedImage, team: $scope.team, start: $scope.formatDate($scope.start), end: $scope.formatDate($scope.end), tags: ($scope.tags) ? $scope.tags.split(' ') : []}
             });
             request.success(function (data) {
                 $location.path("/adventures/view/" + data.id);

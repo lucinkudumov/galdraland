@@ -2,11 +2,11 @@ var mongoose = require("mongoose");
 
 module.exports = function (opts) {
     var Schema = mongoose.Schema({
-        name : {
+        name: {
             type: String,
             required: true
         },
-        owner : {
+        owner: {
             type: mongoose.Schema.ObjectId,
             ref: "User"
         },
@@ -14,30 +14,33 @@ module.exports = function (opts) {
             type: mongoose.Schema.ObjectId,
             ref: "Team",
         },
-        description : {
+        description: {
             type: String
         },
-		tags : {
-			type: [String]
-		},
+        image: {
+            type: String
+        },
+        tags: {
+            type: [String]
+        },
         createdAt: {
-            type : Date,
-            "default" : Date.now
+            type: Date,
+            "default": Date.now
         },
-		start: {
-            type : String
+        start: {
+            type: String
         },
-		end: {
-            type : String
+        end: {
+            type: String
         },
         status: {
-            type : String,
-			"default" : "Active"
+            type: String,
+            "default": "Active"
         },
         link: {
-            type : String
+            type: String
         }
     });
-    
+
     return Schema;
 }
