@@ -267,7 +267,7 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "U
         $scope.refresh();
     }]);
 
-app.controller("createAdventureController", ["$scope", "$rootScope", "$http", "$location", "User", function ($scope, $rootScope, $http, $location, User) {
+app.controller("createAdventureController", ["$scope", "$rootScope", , "$upload", "$http", "$location", "User", function ($scope, $rootScope, $upload, $http, $location, User) {
         $scope.user = User.isLoggedIn();
         $scope.values = {};
         $scope.values.team = null;
