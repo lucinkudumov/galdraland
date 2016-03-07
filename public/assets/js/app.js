@@ -267,7 +267,7 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "U
         $scope.refresh();
     }]);
 
-app.controller("createAdventureController", ["$scope", "$rootScope", "$upload", "$http", "$location", "User", function ($scope, $rootScope, $upload, $http, $location, User) {
+app.controller("createAdventureController", ["$scope", "$rootScope", "Upload", "$http", "$location", "User", function ($scope, $rootScope, Upload, $http, $location, User) {
         $scope.user = User.isLoggedIn();
         $scope.values = {};
         $scope.values.team = null;
@@ -300,7 +300,7 @@ app.controller("createAdventureController", ["$scope", "$rootScope", "$upload", 
             $scope.uploadInProgress = true;
             $scope.uploadProgress = 0;
 
-            $scope.upload = $upload.upload({
+            $scope.upload = Upload.upload({
                 url: 'upload/image',
                 method: 'POST',
                 file: image
