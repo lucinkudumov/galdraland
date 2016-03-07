@@ -14,13 +14,13 @@ module.exports = function (opts) {
         "post#upload/image": function (req, res) {
             var file = req.files.file;
             console.log(file);
-            if (file) {
+            if (file !== 'undefined') {
                 if (file.type !== 'image/png' && file.type !== 'image/jpep') {
                     return res.json({success: false, error: "Image file type error"});
                 }
                 
                 fs.readFile(file.path, function(err, data) {
-                    var newPath = "/upload/" + req.use._id + "/" + new Date().toISOString() + file.name;
+                    var newPath = "/upload/" + req.user._id + "/" + new Date().toISOString() + file.name;
                     fs.writeFile(newPath, data, function(err) {
                         if (!err) {
                             return res.json({success: true, data: newPath});
