@@ -309,9 +309,6 @@ app.controller("createAdventureController", ["$scope", "$rootScope", "Upload", "
                 method: 'POST',
                 api: true,
                 file: image
-            }).progress(function (event) {
-                $scope.uploadProgress = Math.floor(event.loaded / event.total);
-                $scope.$apply();
             }).success(function (data, status, headers, config) {
                 $scope.uploadInProgress = false;
                 // If you need uploaded file immediately 
