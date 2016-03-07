@@ -23,6 +23,9 @@ module.exports = function (opts) {
                 var fileName = uuid.v4() + extension;
                 var destPath = 'upload/' + req.user._id + '/files/' + fileName;
 
+                console.log('kamil');
+                console.log(file);
+                console.log('grabowski');
                 // Server side file type checker.
                 if (contentType !== 'image/png' && contentType !== 'image/jpeg') {
                     fs.unlink(tmpPath);
