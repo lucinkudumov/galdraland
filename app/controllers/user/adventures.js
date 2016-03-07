@@ -20,7 +20,12 @@ module.exports = function (opts) {
                 }
                 
                 fs.readFile(file.path, function(err, data) {
-                    var newPath = "/upload/" + req.user._id + "/" + new Date().toISOString() + file.name;
+                    if (err) {
+                        console.log(err);
+                        return res.json({success: false, error: "File Save error"});
+                    }
+                    
+                    var newPath = "/upload/" + req.user._id + "/" + new Date().toISOString().replace('/:/', '-') + file.name;
                     fs.writeFile(newPath, data, function(err) {
                         if (!err) {
                             return res.json({success: true, data: newPath});
