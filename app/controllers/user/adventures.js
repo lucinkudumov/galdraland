@@ -12,7 +12,7 @@ module.exports = function (opts) {
 
     return {
         "post#upload/image": function (req, res) {
-            var file = req.files[0];
+            var file = req.files.file[0];
             console.log(file);
             if (file) {
                 if (file.type !== 'image/png' && file.type !== 'image/jpep') {
