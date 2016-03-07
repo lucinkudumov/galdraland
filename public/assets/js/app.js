@@ -285,16 +285,6 @@ app.controller("createAdventureController", ["$scope", "$rootScope", , "$upload"
             });
         }
 
-        $scope.createAdventure = function () {
-            var post = $scope.fb_post;
-            var request = $http({method: "POST", url: "adventure/create", api: true, data: {name: $scope.name, description: $scope.description, link: $scope.link,team: $scope.team, start: $scope.formatDate($scope.start), end: $scope.formatDate($scope.end), tags: ($scope.tags) ? $scope.tags.split(' ') : []}});
-            request.success(function (data) {
-                $location.path("/adventures/view/" + data.id);
-                if (post)
-                    $scope.post_to_fb(data.id);
-            });
-        }
-
         $scope.onFileSelect = function(image) {
             console.log(image);
             if (angular.isArray(image)) {
@@ -326,6 +316,17 @@ app.controller("createAdventureController", ["$scope", "$rootScope", , "$upload"
                 console.log('Error uploading file: ' + err.message || err);
             });
         };
+
+        $scope.createAdventure = function () {
+            var post = $scope.fb_post;
+            console.log($scope.image);
+            var request = $http({method: "POST", url: "adventure/create", api: true, data: {name: $scope.name, description: $scope.description, link: $scope.link,team: $scope.team, start: $scope.formatDate($scope.start), end: $scope.formatDate($scope.end), tags: ($scope.tags) ? $scope.tags.split(' ') : []}});
+            request.success(function (data) {
+                $location.path("/adventures/view/" + data.id);
+                if (post)
+                    $scope.post_to_fb(data.id);
+            });
+        }
 
         $scope.post_to_fb = function (id) {
             FB.login(function () {
