@@ -13,7 +13,6 @@ module.exports = function (opts) {
     return {
         "post#upload/image": function (req, res) {
             var file = req.files.file;
-            console.log(file);
             if (file !== 'undefined') {
                 if (file.type !== 'image/png' && file.type !== 'image/jpep') {
                     return res.json({success: false, error: "Image file type error"});
@@ -25,7 +24,7 @@ module.exports = function (opts) {
                         return res.json({success: false, error: "File Save error"});
                     }
 
-                    var newPath = "assets/images/upload/";
+                    var newPath = "/app/public/assets/images/upload/";
                     var newName = new Date().toISOString().replace(':', '-').replace(':', '-') + file.name;
                     if (!fs.exists(newPath)) {
                         fs.mkdir(newPath, function (error) {
@@ -36,7 +35,7 @@ module.exports = function (opts) {
                     fs.writeFile(newPath + newName, data, function (err) {
                         if (!err) {
                             console.log(newPath + newName);
-                            return res.json({success: true, data: newPath + newName});
+                            return res.json({success: true, data: newName});
                         } else {
                             console.log(err);
                             return res.json({success: false, error: "File Save error"});
