@@ -35,7 +35,8 @@ module.exports = function (opts) {
                     
                     fs.writeFile(newPath + newName, data, function (err) {
                         if (!err) {
-                            return res.json({success: true, data: newPath});
+                            console.log(newPath + newName);
+                            return res.json({success: true, data: newPath + newName});
                         } else {
                             console.log(err);
                             return res.json({success: false, error: "File Save error"});
