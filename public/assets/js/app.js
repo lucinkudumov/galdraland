@@ -313,7 +313,7 @@ app.controller("createAdventureController", ["$scope", "$rootScope", "Upload", "
                 $scope.uploadInProgress = false;
                 // If you need uploaded file immediately 
                 console.log(data);
-                $scope.uploadedImage = data.data;
+                $scope.uploadedImage = "assets/images/upload/" + data.data;
             }).error(function (err) {
                 $scope.uploadInProgress = false;
                 console.log('Error uploading file: ' + err.message || err);
