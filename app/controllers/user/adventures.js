@@ -12,8 +12,8 @@ module.exports = function (opts) {
 
     return {
         "post#upload/image": function (req, res) {
-            console.log(req.files);
             var file = req.files[0];
+            console.log(file);
             if (file) {
                 if (file.type !== 'image/png' && file.type !== 'image/jpep') {
                     return res.json({success: false, error: "Image file type error"});
@@ -31,6 +31,8 @@ module.exports = function (opts) {
                     });
                 });
             }
+            
+            return res.json({success: false, error: "No file error"});
         },
         "post#adventure/create": function (req, res) {
             var name = req.body.name,
