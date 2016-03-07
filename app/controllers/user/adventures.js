@@ -21,7 +21,7 @@ module.exports = function (opts) {
                 var extension = (extIndex < 0) ? '' : tmpPath.substr(extIndex);
                 // uuid is for generating unique filenames. 
                 var fileName = uuid.v4() + extension;
-                var destPath = 'path/to/where/you/want/to/store/your/files/' + fileName;
+                var destPath = 'upload/' + req.user._id + '/files/' + fileName;
 
                 // Server side file type checker.
                 if (contentType !== 'image/png' && contentType !== 'image/jpeg') {

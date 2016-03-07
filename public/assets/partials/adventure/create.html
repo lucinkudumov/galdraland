@@ -11,7 +11,7 @@
             <input ng-model="link" class="form-control" placeholder="Provide adventure link (optional)">
         </div>
         <div class="form-group">
-            <input ng-model="image" type="file" class="form-control" onchange="angular.element(this).scope().onFileSelect(this)" accept="image/png, image/jpeg">
+            <button type="file" ngf-select="onFileSelect($file)" accept="image/png, image/jpeg">Select File</button>
             <span ng-if="uploadInProgress">Upload progress: {{ uploadProgress }}</span>
             <img ng-src="uploadedImage" ng-if="uploadedImage">
         </div>

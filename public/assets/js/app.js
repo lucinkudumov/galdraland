@@ -297,7 +297,6 @@ app.controller("createAdventureController", ["$scope", "$rootScope", , "$upload"
 
         $scope.onFileSelect = function(image) {
             console.log(image);
-            image = image.files[0];
             if (angular.isArray(image)) {
                 image = image[0];
             }
