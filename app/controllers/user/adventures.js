@@ -18,15 +18,28 @@ module.exports = function (opts) {
                 if (file.type !== 'image/png' && file.type !== 'image/jpep') {
                     return res.json({success: false, error: "Image file type error"});
                 }
-                
-                fs.readFile(file.path, function(err, data) {
+
+                fs.readFile(file.path, function (err, data) {
                     if (err) {
                         console.log(err);
                         return res.json({success: false, error: "File Save error"});
                     }
-                    
+
                     var newPath = "/upload/" + req.user._id + "/" + new Date().toISOString().replace('/:/', '-') + file.name;
-                    fs.writeFile(newPath, data, function(err) {
+                    var newDir = __dirname;
+                    var dirs = newPath.split('/');
+                    for (var i = 0; i < dirs.length; i++) {
+                        newDir += dirs[i] + '/';
+                        console.log(newDir);
+
+                        if (!fs.exists(newDir)) {
+                            fs.mkdir(newDir, function (error) {
+                                console.log(error);
+                            })
+                        }
+                    }
+                    
+                    fs.writeFile(newPath, data, function (err) {
                         if (!err) {
                             return res.json({success: true, data: newPath});
                         } else {
@@ -36,7 +49,7 @@ module.exports = function (opts) {
                     });
                 });
             }
-            
+
             return res.json({success: false, error: "No file error"});
         },
         "post#adventure/create": function (req, res) {
