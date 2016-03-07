@@ -25,21 +25,15 @@ module.exports = function (opts) {
                         return res.json({success: false, error: "File Save error"});
                     }
 
-                    var newPath = "/upload/" + req.user._id + "/" + new Date().toISOString().replace('/:/', '-') + file.name;
-                    var newDir = __dirname;
-                    var dirs = newPath.split('/');
-                    for (var i = 0; i < dirs.length; i++) {
-                        newDir += dirs[i] + '/';
-                        console.log(newDir);
-
-                        if (!fs.exists(newDir)) {
-                            fs.mkdir(newDir, function (error) {
-                                console.log(error);
-                            })
-                        }
+                    var newPath = "/upload/";
+                    var newName = new Date().toISOString().replace(':', '-').replace(':', '-') + file.name;
+                    if (!fs.exists(newPath)) {
+                        fs.mkdir(newPath, function (error) {
+                            console.log(error);
+                        })
                     }
                     
-                    fs.writeFile(newPath, data, function (err) {
+                    fs.writeFile(newPath + newName, data, function (err) {
                         if (!err) {
                             return res.json({success: true, data: newPath});
                         } else {
