@@ -19,8 +19,9 @@
                 <li ng-repeat="member in team.teamMembers" ng-click="showMember(member)">
                     <p ng-bind="member.title"></p>
                     <p ng-show="member.user.profileId == 000000000000000000000000" class="name">Empty</p>
+                    <p ng-show="member.user.profileId == 000000000000000000000000" class="avatar" style="background-image: url(../images/unknown.png)"></p>
                     <a ng-hide="member.user.profileId == 000000000000000000000000" class="name" href="/users/view/{{member.user._id}}">{{member.user.fullname}}</a>
-                    <p class="avatar" style="background-image: url('{{ member.user.photo}}')"></p>
+                    <p ng-hide="member.user.profileId == 000000000000000000000000" class="avatar" style="background-image: url('{{ member.user.photo}}')"></p>
                 </li>
             </ul>
             <button ng-show="isManager" class="btn btn-success pull-right" ng-click="addMemberTitle()" style="margin-right: 5px;">Add member title</button>
