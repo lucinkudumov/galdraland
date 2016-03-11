@@ -14,7 +14,7 @@ module.exports = function (opts) {
         "post#upload/image": function (req, res) {
             var file = req.files.file;
             if (file !== 'undefined') {
-                if (file.type !== 'image/png' && file.type !== 'image/jpep') {
+                if (file.type !== 'image/png' && file.type !== 'image/jpeg') {
                     return res.json({success: false, error: "Image file type error"});
                 }
 
