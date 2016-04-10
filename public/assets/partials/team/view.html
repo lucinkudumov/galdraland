@@ -4,6 +4,7 @@
             <h4 ng-bind="team.name"></h4>
             <p class="description" style="font-size: 13px;" ng-bind="team.description"></p>
             <rating-widget ref="team._id" ></rating-widget>
+            <img src="{{team.image}}" alt="image" style="width:25px; height:25px;" ng-show="team.image">
             <hr>
             <div ng-show="isManager" class="btn-group btn-group-justified">
                 <a href="/teams/edit/{{ team._id}}" class="btn btn-primary">Edit</a>

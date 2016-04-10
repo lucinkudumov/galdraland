@@ -1437,7 +1437,7 @@ app.controller("searchController", ["$scope", "$http", "$location", "$stateParam
     }]);
 app.controller("createTeamController", ["$scope", "$rootScope", "$http", "$location", function ($scope, $rootScope, $http, $location) {
         $scope.createTeam = function () {
-            request = $http({method: "POST", url: "createTeam", api: true, data: {name: $scope.name, description: $scope.description, roles: $scope.roles, defuser: $rootScope.defUser}});
+            request = $http({method: "POST", url: "createTeam", api: true, data: {name: $scope.name, description: $scope.description, roles: $scope.roles, defuser: $rootScope.defUser, image: $scope.uploadedImage}});
             request.success(function (data) {
                 if ($rootScope.return2Adventure == "return")
                 {
@@ -1446,6 +1446,41 @@ app.controller("createTeamController", ["$scope", "$rootScope", "$http", "$locat
                 }
                 else
                     $location.path("/teams/view/" + data.id);
+            });
+        }
+        
+        $scope.onFileSelect = function (image) {
+            console.log(image);
+            image = image.files[0];
+            if (angular.isArray(image)) {
+                image = image[0];
+            }
+
+            // This is how I handle file types in client side
+            if (image.type !== 'image/png' && image.type !== 'image/jpeg') {
+                alert('Only PNG and JPEG are accepted.');
+                return;
+            }
+
+            $scope.uploadInProgress = true;
+            $scope.uploadProgress = 0;
+
+            var fd = new FormData();
+            fd.append('file', image);
+            
+            $scope.upload = Upload.upload({
+                url: 'upload/image',
+                method: 'POST',
+                api: true,
+                file: image
+            }).success(function (data, status, headers, config) {
+                $scope.uploadInProgress = false;
+                // If you need uploaded file immediately 
+                console.log(data);
+                $scope.uploadedImage = "/assets/images/upload/" + data.data;
+            }).error(function (err) {
+                $scope.uploadInProgress = false;
+                console.log('Error uploading file: ' + err.message || err);
             });
         }
     }]);

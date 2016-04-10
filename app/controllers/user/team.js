@@ -7,6 +7,39 @@ module.exports = function (opts) {
     adventureModel = opts.models.Adventure;
 
     return {
+        "post#upload/image": function (req, res) {
+            var file = req.files.file;
+            if (file !== 'undefined') {
+                if (file.type !== 'image/png' && file.type !== 'image/jpeg') {
+                    return res.json({success: false, error: "Image file type error"});
+                }
+
+                fs.readFile(file.path, function (err, data) {
+                    if (err) {
+                        console.log(err);
+                        return res.json({success: false, error: "File Save error"});
+                    }
+
+                    var newPath = "/app/public/assets/images/upload/";
+                    var newName = new Date().toISOString().replace(':', '-').replace(':', '-') + file.name;
+                    if (!fs.exists(newPath)) {
+                        fs.mkdir(newPath, function (error) {
+                            console.log(error);
+                        })
+                    }
+                    
+                    fs.writeFile(newPath + newName, data, function (err) {
+                        if (!err) {
+                            console.log(newPath + newName);
+                            return res.json({success: true, data: newName});
+                        } else {
+                            console.log(err);
+                            return res.json({success: false, error: "File Save error"});
+                        }
+                    });
+                });
+            }
+        },        
         "post#createTeam": function (req, res) {
             var name = req.body.name,
                     description = req.body.description,
