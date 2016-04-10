@@ -32,7 +32,10 @@
 			<div class="row"> 
 				<h1> Featured Adventures </h1>
 				<div class="col-md-3" ng-repeat="a in adventures" ng-class-odd="'featured-adventure-1'"  ng-class-even="'featured-adventure-2'">
+                                    <!--
 				   <label>{{ a.name }}</label>
+                                    -->
+                                    <label><a href="/api/login/facebook{{(r)?'?r='+r:''}}" target="_self" class="link">{{ a.name }}</a></label>
 				</div> 
 			</div>
 		</section>
