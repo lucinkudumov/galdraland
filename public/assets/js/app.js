@@ -1435,7 +1435,7 @@ app.controller("searchController", ["$scope", "$http", "$location", "$stateParam
 
         $scope.refresh();
     }]);
-app.controller("createTeamController", ["$scope", "$rootScope", "$http", "$location", function ($scope, $rootScope, $http, $location) {
+app.controller("createTeamController", ["$scope", "$rootScope", "Upload", "$http", "$location", function ($scope, $rootScope, Upload, $http, $location) {
         $scope.createTeam = function () {
             request = $http({method: "POST", url: "createTeam", api: true, data: {name: $scope.name, description: $scope.description, roles: $scope.roles, defuser: $rootScope.defUser, image: $scope.uploadedImage}});
             request.success(function (data) {
