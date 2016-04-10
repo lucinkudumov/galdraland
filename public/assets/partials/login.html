@@ -46,7 +46,10 @@
 				<div class="row"> 
 					<h1> Teams </h1>
 					<div class="col-md-3" ng-repeat="t in teams" ng-class-odd="'featured-adventure-1'"  ng-class-even="'featured-adventure-2'">
+                                            <!--
 					   <label>{{ t.name }}</label>
+                                            -->
+                                            <label><a href="/api/login/facebook?type=teams" target="_self" class="link">{{ t.name }}</a></label>
 					</div> 
 				</div>
 			</section>
