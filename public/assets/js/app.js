@@ -313,7 +313,8 @@ app.controller("createAdventureController", ["$scope", "$rootScope", "Upload", "
                 $scope.uploadInProgress = false;
                 // If you need uploaded file immediately 
                 console.log(data);
-                $scope.uploadedImage = "/assets/images/upload/" + data.data;
+//                $scope.uploadedImage = "/app/public/assets/images/upload/" + data.data;
+                $scope.uploadedImage = "/upload/" + data.data;
             }).error(function (err) {
                 $scope.uploadInProgress = false;
                 console.log('Error uploading file: ' + err.message || err);
@@ -1477,7 +1478,8 @@ app.controller("createTeamController", ["$scope", "$rootScope", "Upload", "$http
                 $scope.uploadInProgress = false;
                 // If you need uploaded file immediately 
                 console.log(data);
-                $scope.uploadedImage = "/assets/images/upload/" + data.data;
+//                $scope.uploadedImage = "/app/public/assets/images/upload/" + data.data;
+                $scope.uploadedImage = "/upload/" + data.data;
             }).error(function (err) {
                 $scope.uploadInProgress = false;
                 console.log('Error uploading file: ' + err.message || err);

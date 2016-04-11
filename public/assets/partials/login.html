@@ -32,9 +32,6 @@
 			<div class="row"> 
 				<h1> Featured Adventures </h1>
 				<div class="col-md-3" ng-repeat="a in adventures" ng-class-odd="'featured-adventure-1'"  ng-class-even="'featured-adventure-2'">
-                                    <!--
-				   <label>{{ a.name }}</label>
-                                    -->
                                     <label><a href="/api/login/facebook{{(r)?'?r='+r+'&type=adventures&id='+a._id:'?type=adventures&id='+a._id}}" target="_self" class="link">{{ a.name }}</a></label>
 				</div> 
 			</div>
@@ -46,9 +43,6 @@
 				<div class="row"> 
 					<h1> Teams </h1>
 					<div class="col-md-3" ng-repeat="t in teams" ng-class-odd="'featured-adventure-1'"  ng-class-even="'featured-adventure-2'">
-                                            <!--
-					   <label>{{ t.name }}</label>
-                                            -->
                                             <label><a href="/api/login/facebook{{(r)?'?r='+r+'&type=teams&id='+t._id:'?type=teams&id='+t._id}}" target="_self" class="link">{{ t.name }}</a></label>
 					</div> 
 				</div>
