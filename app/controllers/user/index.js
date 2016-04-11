@@ -115,7 +115,7 @@ module.exports = function (opts) {
                 redirect = redirect + req.session.returnTo;
             else
                 redirect = redirect + "/profile";
-
+            alert(req.session.returnTo);
 
             emailModel.findOne({userId: req.user._id}, function (err, email) {
                 if (err) {
