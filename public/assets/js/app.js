@@ -832,6 +832,7 @@ app.controller("indexController", ["$scope", "$location", "$window", "$statePara
 
         if (search !== null)
             $scope.r = search.r;
+        alert($scope.r);
     }]);
 
 app.controller("leftMenuController", ["$scope", "$location", function ($scope, $location) {

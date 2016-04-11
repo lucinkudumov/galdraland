@@ -35,7 +35,7 @@
                                     <!--
 				   <label>{{ a.name }}</label>
                                     -->
-                                    <label><a href="/adventures" target="_self" class="link">{{ a.name }}</a></label>
+                                    <label><a href="/api/login/facebook{{(r)?'?r='+r+'&type=adventures':'?type=adventures'}}" target="_self" class="link">{{ a.name }}</a></label>
 				</div> 
 			</div>
 		</section>
@@ -49,7 +49,7 @@
                                             <!--
 					   <label>{{ t.name }}</label>
                                             -->
-                                            <label><a href="/api/login/facebook?type=teams" target="_self" class="link">{{ t.name }}</a></label>
+                                            <label><a href="/api/login/facebook{{(r)?'?r='+r+'&type=teams':'?type=teams'}}" target="_self" class="link">{{ t.name }}</a></label>
 					</div> 
 				</div>
 			</section>
