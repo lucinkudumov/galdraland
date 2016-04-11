@@ -685,8 +685,8 @@ app.controller("headerController", ["$scope", "$http", "$location", "User", "$mo
             request.success(function (data) {
                 User.logout();
                 $location.path("/");
-            });
-        }
+            }); 
+       }
 
         $scope.search = function () {
             $location.path("/search/" + $scope.scategory + "/" + $scope.stext + "/ / / ");
