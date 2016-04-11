@@ -24,8 +24,8 @@ module.exports = function (opts) {
                         return res.json({success: false, error: "File Save error"});
                     }
 
-//                    var newPath = "/app/public/assets/images/upload/";
-                    var newPath = "/upload/";
+                    var newPath = "/app/public/assets/images/upload/";
+//                    var newPath = "/upload/";
                     var newName = new Date().toISOString().replace(':', '-').replace(':', '-') + file.name;
                     if (!fs.exists(newPath)) {
                         fs.mkdir(newPath, function (error) {
