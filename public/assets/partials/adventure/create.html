@@ -12,7 +12,7 @@
         </div>
         <div class="form-group">
 <!--            
-            <input ng-model="image" type="file" class="form-control" onchange="angular.element(this).scope().onFileSelect(this)" accept="image/png, image/jpeg, image/bmp, image/jpg, image/gif, image/tif">
+            <input ng-model="image" type="file" class="form-control" onchange="angular.element(this).scope().onFileSelect(this)" accept="image/png, image/jpeg">
 -->
             <input ng-model="image" type="file" class="form-control" onchange="angular.element(this).scope().onFileSelect(this)">
             <span ng-show="uploadInProgress">Upload progress: {{ uploadProgress }}</span>
