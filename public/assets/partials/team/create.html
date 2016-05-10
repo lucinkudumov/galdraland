@@ -11,10 +11,7 @@
             <textarea ng-model="description" class="form-control" placeholder="Provide team description (optional)"></textarea>
         </div>
         <div class="form-group">
-<!--            
             <input ng-model="image" type="file" class="form-control" onchange="angular.element(this).scope().onFileSelect(this)" accept="image/png, image/jpeg">
--->
-            <input ng-model="image" type="file" class="form-control" onchange="angular.element(this).scope().onFileSelect(this)">
             <span ng-show="uploadInProgress">Upload progress: {{ uploadProgress }}</span>
             <img src="{{uploadedImage}}" ng-show="uploadedImage">
         </div>        
