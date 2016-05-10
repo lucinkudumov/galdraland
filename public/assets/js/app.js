@@ -292,11 +292,11 @@ app.controller("createAdventureController", ["$scope", "$rootScope", "Upload", "
                 image = image[0];
             }
 
-            // This is how I handle file types in client side
-            if (image.type !== 'image/png' && image.type !== 'image/jpeg') {
-                alert('Only PNG and JPEG are accepted.');
-                return;
-            }
+//            // This is how I handle file types in client side
+//            if (image.type !== 'image/png' && image.type !== 'image/jpeg') {
+//                alert('Only PNG and JPEG are accepted.');
+//                return;
+//            }
 
             $scope.uploadInProgress = true;
             $scope.uploadProgress = 0;
