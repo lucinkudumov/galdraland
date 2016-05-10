@@ -21,7 +21,6 @@ module.exports = function (opts) {
                     }
 
                     var newPath = "/app/public/assets/images/upload/";
-//                    var newPath = "/upload/";
                     var newName = new Date().toISOString().replace(':', '-').replace(':', '-') + file.name;
                     if (!fs.exists(newPath)) {
                         fs.mkdir(newPath, function (error) {
