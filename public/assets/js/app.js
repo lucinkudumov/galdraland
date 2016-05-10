@@ -1457,10 +1457,10 @@ app.controller("createTeamController", ["$scope", "$rootScope", "Upload", "$http
             }
 
             // This is how I handle file types in client side
-            if (image.type !== 'image/png' && image.type !== 'image/jpeg') {
-                alert('Only PNG and JPEG are accepted.');
-                return;
-            }
+//            if (image.type !== 'image/png' && image.type !== 'image/jpeg') {
+//                alert('Only PNG and JPEG are accepted.');
+//                return;
+//            }
 
             $scope.uploadInProgress = true;
             $scope.uploadProgress = 0;
