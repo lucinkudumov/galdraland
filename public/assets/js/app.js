@@ -1006,7 +1006,7 @@ app.controller("sendInviteController", ["$scope", "$modalInstance", "values", "$
 
         $scope.addInvite = function (user) {
             if($scope.values.title === "0")
-                return;
+                return true;
             $scope.values.newMember = null;
             $scope.values.users = [];
             $scope.values.invites.push({user: user.username, memberId: user._id, fb_id: user.is_fb_friend, title: $scope.values.title});
@@ -1787,28 +1787,25 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$statePa
                         if (result.invites[i].fb_id != -1)
                             fb_ids.push(result.invites[i].fb_id);
                     }
-
-                    if (fb_ids.length) {
-                        FB.ui({method: 'apprequests',
-                            title: 'Invite to Galdraland Team',
-                            message: 'You have been invited to "' + $scope.team.name + '" team ',
-                            to: fb_ids,
-                            new_style_message: true,
-                        }, function (response) {
-                            if (response.error_code !== undefined && response.error_code == 4201) {
-                                for (i = 0; i < fb_ids.length; i++) {
-                                    for (var j = result.invites.length - 1; j >= 0; j--) {
-                                        if (result.invites[j].fb_id == fb_ids[i]) {
-                                            result.invites.splice(j, 1);
-                                        }
-                                    }
-                                }
-                            }
-                            send_invite();
-                        });
-                    } else
-                        send_invite();
-
+                    // if (fb_ids.length) {
+                    //     FB.ui({method: 'apprequests',
+                    //         title: 'Invite to Galdraland Team',
+                    //         message: 'You have been invited to "' + $scope.team.name + '" team ',
+                    //         to: fb_ids,
+                    //         new_style_message: true,
+                    //     }, function (response) {
+                    //         if (response.error_code !== undefined && response.error_code == 4201) {
+                    //             for (i = 0; i < fb_ids.length; i++) {
+                    //                 for (var j = result.invites.length - 1; j >= 0; j--) {
+                    //                     if (result.invites[j].fb_id == fb_ids[i]) {
+                    //                         result.invites.splice(j, 1);
+                    //                     }
+                    //                 }
+                    //             }
+                    //         }
+                    //         send_invite();
+                    //     });
+                    // } else
                     function send_invite() {
                         if (result.invites.length == 0)
                             return;
@@ -1817,8 +1814,9 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$statePa
 
                         });
                     }
+                    send_invite();
                 }
-            })
+            });
         }
 
         $scope.applyTeam = function () {
