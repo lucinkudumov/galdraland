@@ -907,7 +907,7 @@ app.controller("sendInviteController", ["$scope", "$modalInstance", "values", "$
         $scope.values.fb_friends = [];
         $scope.user = User.isLoggedIn();
         $scope.team = values.team;
-        $scope.values.emptyMembers = values.emptyMembers;
+        $scope.values._emptyMembers = values.emptyMembers;
 
         // FB.login(function () {
         //     FB.api(
@@ -1011,21 +1011,21 @@ app.controller("sendInviteController", ["$scope", "$modalInstance", "values", "$
             $scope.values.users = [];
             var title = {_id: $scope.values.title, title: ""};
             //Remove invited title
-            for(var i = 0; i < $scope.values.emptyMembers.length; i++)
-                if($scope.values.emptyMembers[i]._id === $scope.values.title)
+            for(var i = 0; i < $scope.values._emptyMembers.length; i++)
+                if($scope.values._emptyMembers[i]._id === $scope.values.title)
                 {
-                    title.title = $scope.values.emptyMembers[i].title;
+                    title.title = $scope.values._emptyMembers[i].title;
                     break;
                 }
             $scope.values.title = "0";
             $scope.values.invites.push({user: user.username, memberId: user._id, fb_id: user.is_fb_friend, title: title});
-            $scope.values.emptyMembers.splice(i, 1);
+            $scope.values._emptyMembers.splice(i, 1);
             return false;
         }
 
         $scope.removeInvite = function (index) {
             //Add uninvited title
-            $scope.values.emptyMembers.push($scope.values.invites[index].title);
+            $scope.values._emptyMembers.push($scope.values.invites[index].title);
             $scope.values.invites.splice(index, 1);
         }
 

@@ -5,7 +5,7 @@
     <div class="form-group">
         <select class="form-control" ng-model="values.title" ng-class="{unselected: values.title === '0'}">
             <option value="0">Title of a member</option>
-            <option ng-repeat="member in values.emptyMembers" value="{{ member._id}}">{{ member.title}}</option>
+            <option ng-repeat="member in values._emptyMembers" value="{{ member._id}}">{{ member.title}}</option>
         </select>
     </div>
     <div class="form-group">
@@ -40,7 +40,7 @@
     </div>
 </div>
 <div class="modal-footer">
-    <button class="btn btn-primary" ng-disabled="values.invites.length <= 0 || !values.title || values.title == 0" ng-click="send()">Send</button>
+    <button class="btn btn-primary" ng-disabled="values.invites.length <= 0" ng-click="send()">Send</button>
     <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
 </div>
 <style type="text/css">
