@@ -1005,18 +1005,27 @@ app.controller("sendInviteController", ["$scope", "$modalInstance", "values", "$
         }
 
         $scope.addInvite = function (user) {
+            if($scope.values.title === "0")
+                return;
             $scope.values.newMember = null;
             $scope.values.users = [];
-            $scope.values.invites.push({user: user.username, memberId: user._id, fb_id: user.is_fb_friend});
+            $scope.values.invites.push({user: user.username, memberId: user._id, fb_id: user.is_fb_friend, title: $scope.values.title});
+            //Remove invited title
+            for(var i = 0; i < $scope.values.emptyMembers.length; i++)
+                if($scope.values.emptyMembers[i]._id === $scope.values.title)
+                    break;
+            $scope.values.emptyMembers.splice(i, 1);
             return false;
         }
 
         $scope.removeInvite = function (index) {
+            //Add uninvited title
+            $scope.values.emptyMembers.push({_id: $scope.values.invites[index].title});
             $scope.values.invites.splice(index, 1);
         }
 
         $scope.send = function () {
-            $modalInstance.close({type: "SEND", to: $scope.values.to, msg: $scope.values.msg, title: $scope.values.title, roles: $scope.values.roles, invites: $scope.values.invites});
+            $modalInstance.close({type: "SEND", to: $scope.values.to, msg: $scope.values.msg, roles: $scope.values.roles, invites: $scope.values.invites});
         }
 
         function validateEmail(email) {
@@ -1782,7 +1791,7 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$statePa
                     if (fb_ids.length) {
                         FB.ui({method: 'apprequests',
                             title: 'Invite to Galdraland Team',
-                            message: 'You have been invited to "' + $scope.team.name + '" team as ' + result.title,
+                            message: 'You have been invited to "' + $scope.team.name + '" team ',
                             to: fb_ids,
                             new_style_message: true,
                         }, function (response) {
@@ -1795,7 +1804,6 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$statePa
                                     }
                                 }
                             }
-
                             send_invite();
                         });
                     } else
@@ -1804,7 +1812,7 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$statePa
                     function send_invite() {
                         if (result.invites.length == 0)
                             return;
-                        var request = $http({method: "POST", url: "sendInvite", api: true, data: {team: $scope.team._id, invites: result.invites, msg: result.msg, title: result.title, roles: result.roles}});
+                        var request = $http({method: "POST", url: "sendInvite", api: true, data: {team: $scope.team._id, invites: result.invites, msg: result.msg, roles: result.roles}});
                         request.success(function (data) {
 
                         });

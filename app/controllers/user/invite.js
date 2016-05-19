@@ -62,7 +62,6 @@ module.exports = function (opts) {
         "post#sendInvite": function (req, res) {
             var invites = req.body.invites,
                     msg = req.body.msg,
-                    title = req.body.title,
                     roles = req.body.roles,
                     team = req.body.team;
 
@@ -83,7 +82,8 @@ module.exports = function (opts) {
                                 invite.toId = item.memberId;
                                 toEmail = user.email;
                                 username = item.user;
-
+                                title = item.title;
+                                
                                 invite.from = req.user._id;
                                 invite.title = title;
                                 invite.roles = roles;

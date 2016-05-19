@@ -29,8 +29,13 @@
             </li>
             <li ng-repeat="i in values.invites">
                 <form role="form" class="form-inline">
-                    <div class="form-group">
-                        <input type="text" class="form-control" ng-model="i.user" readonly>
+                    <div class="form-group row">
+                        <div class="col-md-7">
+                            <input type="text" class="form-control" ng-model="i.user" readonly>
+                        </div>
+                        <div class="col-md-5">
+                            <input type="text" class="form-control" ng-model="i.title" readonly>
+                        </div>
                     </div>
                     <button type="submit" class="btn btn-danger" ng-click="removeInvite($index)">-</button>
                 </form>
