@@ -1009,11 +1009,15 @@ app.controller("sendInviteController", ["$scope", "$modalInstance", "values", "$
                 return true;
             $scope.values.newMember = null;
             $scope.values.users = [];
-            $scope.values.invites.push({user: user.username, memberId: user._id, fb_id: user.is_fb_friend, title: $scope.values.title});
+            var title = {_id: $scope.values.title, title: ""};
             //Remove invited title
             for(var i = 0; i < $scope.values.emptyMembers.length; i++)
-                if($scope.values.emptyMembers[i]._id === $scope.values.title._id)
+                if($scope.values.emptyMembers[i]._id === $scope.values.title)
+                {
+                    title.title = $scope.values.emptyMembers[i].title;
                     break;
+                }
+            $scope.values.invites.push({user: user.username, memberId: user._id, fb_id: user.is_fb_friend, title: title});
             $scope.values.emptyMembers.splice(i, 1);
             return false;
         }

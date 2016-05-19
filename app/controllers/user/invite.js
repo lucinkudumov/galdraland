@@ -82,8 +82,8 @@ module.exports = function (opts) {
                                 invite.toId = item.memberId;
                                 toEmail = user.email;
                                 username = item.user;
-                                title = item.title;
-                                
+                                title = item.title.title;
+
                                 invite.from = req.user._id;
                                 invite.title = title;
                                 invite.roles = roles;
