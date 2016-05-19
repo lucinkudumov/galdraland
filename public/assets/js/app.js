@@ -927,82 +927,87 @@ app.controller("sendInviteController", ["$scope", "$modalInstance", "values", "$
         }
 
         $scope.findUser = function (usernameOrEmail) {
-            var request = $http({method: "POST", url: "getUsers", api: true, data: {usernameOrEmail: usernameOrEmail}});
-            request.success(function (r) {
-                var users = [];
-                for (var i = 0; i < r.users.length; i++) {
-                    var user = r.users[i];
-                    var exist_in_team = false;
-                    user.is_fb_friend = -1;
+            if(usernameOrEmail != "")
+            {
+                var request = $http({method: "POST", url: "getUsers", api: true, data: {usernameOrEmail: usernameOrEmail}});
+                request.success(function (r) {
+                    var users = [];
+                    for (var i = 0; i < r.users.length; i++) {
+                        var user = r.users[i];
+                        var exist_in_team = false;
+                        user.is_fb_friend = -1;
 
-                    //Check If Current User
-                    if ($scope.user._id == user._id)
-                        continue;
+                        //Check If Current User
+                        if ($scope.user._id == user._id)
+                            continue;
 
-                    //Check If Exists in Team
-                    for (var j = 0; j < $scope.team.teamMembers.length; j++) {
-                        if ($scope.team.teamMembers[j].user._id == user._id)
-                            exist_in_team = true;
-                    }
-
-                    if (exist_in_team)
-                        continue;
-
-                    //Check If Exists in Facebook Friends List
-                    for (j = 0; j < $scope.values.fb_friends.length; j++) {
-                        if ($scope.values.fb_friends[j].id == user.profileId) {
-                            user.is_fb_friend = user.profileId;
-                            user.username = user.username + "(facebook friend - " + $scope.values.fb_friends[j].name + ")";
+                        //Check If Exists in Team
+                        for (var j = 0; j < $scope.team.teamMembers.length; j++) {
+                            if ($scope.team.teamMembers[j].user._id == user._id)
+                                exist_in_team = true;
                         }
-                    }
 
-                    //Check If Exists in Invite List
-                    if ($scope.values.invites.length > 0) {
-                        for (j = 0; j < $scope.values.invites.length; j++) {
-                            if (user.username == $scope.values.invites[j].user || (user.is_fb_friend != -1 && user.is_fb_friend == $scope.values.invites[j].profileId)) {
-                                break;
-                            } else if (j == $scope.values.invites.length - 1) {
-                                users.push(user);
+                        if (exist_in_team)
+                            continue;
+
+                        //Check If Exists in Facebook Friends List
+                        for (j = 0; j < $scope.values.fb_friends.length; j++) {
+                            if ($scope.values.fb_friends[j].id == user.profileId) {
+                                user.is_fb_friend = user.profileId;
+                                user.username = user.username + "(facebook friend - " + $scope.values.fb_friends[j].name + ")";
                             }
                         }
-                    } else {
-                        users.push(user);
+
+                        //Check If Exists in Invite List
+                        if ($scope.values.invites.length > 0) {
+                            for (j = 0; j < $scope.values.invites.length; j++) {
+                                if (user.username == $scope.values.invites[j].user || (user.is_fb_friend != -1 && user.is_fb_friend == $scope.values.invites[j].profileId)) {
+                                    break;
+                                } else if (j == $scope.values.invites.length - 1) {
+                                    users.push(user);
+                                }
+                            }
+                        } else {
+                            users.push(user);
+                        }
                     }
-                }
 
-                for (i = 0; i < $scope.values.fb_friends.length; i++) {
-                    var user = {username: $scope.values.fb_friends[i].name + "(facebook friend)", is_fb_friend: $scope.values.fb_friends[i].id, id: -1};
-                    var add = true;
+                    for (i = 0; i < $scope.values.fb_friends.length; i++) {
+                        var user = {username: $scope.values.fb_friends[i].name + "(facebook friend)", is_fb_friend: $scope.values.fb_friends[i].id, id: -1};
+                        var add = true;
 
-                    for (var j = 0; j < users.length; j++) {
-                        if (users[j].profileId == user.is_fb_friend)
-                            add = false;
-                    }
-
-                    if ($scope.values.invites.length > 0)
-                        for (j = 0; j < $scope.values.invites.length; j++) {
-                            if ($scope.values.invites[j].fb_id == user.is_fb_friend)
+                        for (var j = 0; j < users.length; j++) {
+                            if (users[j].profileId == user.is_fb_friend)
                                 add = false;
                         }
 
-                    if (!add)
-                        continue;
-
-                    if ($scope.values.invites.length > 0) {
-                        for (j = 0; j < $scope.values.invites.length; j++) {
-                            if (user.username == $scope.values.invites[j].user) {
-                                break;
-                            } else if (j == $scope.values.invites.length - 1) {
-                                users.push(user);
+                        if ($scope.values.invites.length > 0)
+                            for (j = 0; j < $scope.values.invites.length; j++) {
+                                if ($scope.values.invites[j].fb_id == user.is_fb_friend)
+                                    add = false;
                             }
-                        }
-                    } else {
-                        users.push(user);
-                    }
-                }
 
-                $scope.values.users = users;
-            });
+                        if (!add)
+                            continue;
+
+                        if ($scope.values.invites.length > 0) {
+                            for (j = 0; j < $scope.values.invites.length; j++) {
+                                if (user.username == $scope.values.invites[j].user) {
+                                    break;
+                                } else if (j == $scope.values.invites.length - 1) {
+                                    users.push(user);
+                                }
+                            }
+                        } else {
+                            users.push(user);
+                        }
+                    }
+
+                    $scope.values.users = users;
+                });
+            }
+            else
+                $scope.values.users = [];
         }
 
         $scope.addInvite = function (user) {

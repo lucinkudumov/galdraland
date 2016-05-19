@@ -193,7 +193,6 @@ module.exports = function (opts) {
                                                     console.log(err);
                                                     return res.json({success: false});
                                                 } else if (member) {
-                                                    team.teamMembers.push(member);
                                                     team.save(function (err, uTeam) {
                                                         if (err) {
                                                             console.log(err);
