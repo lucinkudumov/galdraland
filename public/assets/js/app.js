@@ -904,7 +904,7 @@ app.controller("sendInviteController", ["$scope", "$modalInstance", "values", "$
         $scope.values.invites = [];
         $scope.values.newMember = null;
         $scope.values.memberId = null;
-        $scope.values.fb_friends = null;
+        $scope.values.fb_friends = [];
         $scope.user = User.isLoggedIn();
         $scope.team = values.team;
         $scope.values.emptyMembers = values.emptyMembers;
