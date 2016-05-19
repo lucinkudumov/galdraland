@@ -3,7 +3,7 @@
 </div>
 <div class="modal-body">
     <div class="form-group">
-        <select class="form-control" ng-model="values.title">
+        <select class="form-control" ng-model="values.title" ng-class="{unselected: values.title === '0'}">
             <option value="0">Title of a member</option>
             <option ng-repeat="member in values.emptyMembers" value="{{ member._id}}">{{ member.title}}</option>
         </select>
@@ -43,3 +43,8 @@
     <button class="btn btn-primary" ng-disabled="values.invites.length <= 0 || !values.title || values.title == 0" ng-click="send()">Send</button>
     <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
 </div>
+<style type="text/css">
+    select.unselected{
+        border-color: rgb(255, 0 ,0);
+    }
+</style>

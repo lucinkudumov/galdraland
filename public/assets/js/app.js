@@ -1017,6 +1017,7 @@ app.controller("sendInviteController", ["$scope", "$modalInstance", "values", "$
                     title.title = $scope.values.emptyMembers[i].title;
                     break;
                 }
+            $scope.values.title = "0";
             $scope.values.invites.push({user: user.username, memberId: user._id, fb_id: user.is_fb_friend, title: title});
             $scope.values.emptyMembers.splice(i, 1);
             return false;
