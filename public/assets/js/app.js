@@ -909,17 +909,17 @@ app.controller("sendInviteController", ["$scope", "$modalInstance", "values", "$
         $scope.team = values.team;
         $scope.values.emptyMembers = values.emptyMembers;
 
-        FB.login(function () {
-            FB.api(
-                    "/me/friends",
-                    //"/me/taggable_friends",
-                            function (response) {
-                                if (response && !response.error) {
-                                    $scope.values.fb_friends = response.data;
-                                }
-                            }
-                    );
-                }, {scope: 'user_friends'});
+        // FB.login(function () {
+        //     FB.api(
+        //             "/me/friends",
+        //             //"/me/taggable_friends",
+        //                     function (response) {
+        //                         if (response && !response.error) {
+        //                             $scope.values.fb_friends = response.data;
+        //                         }
+        //                     }
+        //             );
+        //         }, {scope: 'user_friends'});
 
         $scope.cancel = function () {
             $modalInstance.close({type: "CLOSE"});
