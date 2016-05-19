@@ -911,7 +911,7 @@ app.controller("sendInviteController", ["$scope", "$modalInstance", "values", "$
         $scope.values._emptyMembers = [];
         
         $scope.init = function(values){
-            for(var i = 0; i < values.emptyMembers.length(); i++)
+            for(var i = 0; i < values.emptyMembers.length; i++)
                 $scope.values._emptyMembers.push(values.emptyMembers[i]);
         }
         $scope.init(values);
