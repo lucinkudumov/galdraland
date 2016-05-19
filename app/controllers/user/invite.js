@@ -86,6 +86,7 @@ module.exports = function (opts) {
 
                                 invite.from = req.user._id;
                                 invite.title = title;
+                                invite.title_id = item.title._id;
                                 invite.roles = roles;
                                 invite.message = msg;
                                 invite.team = team;
@@ -146,35 +147,74 @@ module.exports = function (opts) {
                                     console.log(err);
                                     return res.json({success: false});
                                 } else {
-                                    var teamMember = new teamMemberModel;
-                                    teamMember.title = invite.title;
-                                    teamMember.user = invite.toId;
-                                    teamMember.roles = invite.roles;
-                                    teamMember.save(function (err, member) {
+                                    // var teamMember = new teamMemberModel;
+                                    // teamMember.title = invite.title;
+                                    // teamMember.user = invite.toId;
+                                    // teamMember.roles = invite.roles;
+                                    // teamMember.save(function (err, member) {
+                                    //     if (err) {
+                                    //         console.log(err);
+                                    //         return res.json({success: false});
+                                    //     } else if (member) {
+                                    //         team.teamMembers.push(member);
+                                    //         team.save(function (err, uTeam) {
+                                    //             if (err) {
+                                    //                 console.log(err);
+                                    //                 return res.json({success: false});
+                                    //             } else {
+                                    //                 smtpTransport.sendMail({
+                                    //                     from: "noreply@holomathics.com",
+                                    //                     to: user.email,
+                                    //                     subject: req.user.username + " has accepted your invite to your team \"" + team.name + "\"",
+                                    //                     text: req.user.username + " has accepted your invite to your team \"" + team.name + "\"" + "\n" +
+                                    //                             "Thanks, Galdraland team",
+                                    //                     html: req.user.username + " has accepted your invite to your team \"" + team.name + "\"" + "<br>" +
+                                    //                             "Thanks, Galdraland team",
+                                    //                 }, function (err) {
+                                    //                     if (err) {
+                                    //                         console.log(err);
+                                    //                     }
+                                    //                 });
+                                    //                 return res.json({success: true});
+                                    //             }
+                                    //         });
+                                    //     }
+                                    // });
+                                    teamMemberModel.findOne({_id: invite.title_id}, function (err, teamMember) {
                                         if (err) {
                                             console.log(err);
                                             return res.json({success: false});
-                                        } else if (member) {
-                                            team.teamMembers.push(member);
-                                            team.save(function (err, uTeam) {
+                                        } else {
+                                            teamMember.title = invite.title;
+                                            teamMember.user = invite.toId;
+                                            teamMember.roles = invite.roles;
+                                            teamMember.save(function (err, member) {
                                                 if (err) {
                                                     console.log(err);
                                                     return res.json({success: false});
-                                                } else {
-                                                    smtpTransport.sendMail({
-                                                        from: "noreply@holomathics.com",
-                                                        to: user.email,
-                                                        subject: req.user.username + " has accepted your invite to your team \"" + team.name + "\"",
-                                                        text: req.user.username + " has accepted your invite to your team \"" + team.name + "\"" + "\n" +
-                                                                "Thanks, Galdraland team",
-                                                        html: req.user.username + " has accepted your invite to your team \"" + team.name + "\"" + "<br>" +
-                                                                "Thanks, Galdraland team",
-                                                    }, function (err) {
+                                                } else if (member) {
+                                                    team.teamMembers.push(member);
+                                                    team.save(function (err, uTeam) {
                                                         if (err) {
                                                             console.log(err);
+                                                            return res.json({success: false});
+                                                        } else {
+                                                            smtpTransport.sendMail({
+                                                                from: "noreply@holomathics.com",
+                                                                to: user.email,
+                                                                subject: req.user.username + " has accepted your invite to your team \"" + team.name + "\"",
+                                                                text: req.user.username + " has accepted your invite to your team \"" + team.name + "\"" + "\n" +
+                                                                        "Thanks, Galdraland team",
+                                                                html: req.user.username + " has accepted your invite to your team \"" + team.name + "\"" + "<br>" +
+                                                                        "Thanks, Galdraland team",
+                                                            }, function (err) {
+                                                                if (err) {
+                                                                    console.log(err);
+                                                                }
+                                                            });
+                                                            return res.json({success: true});
                                                         }
                                                     });
-                                                    return res.json({success: true});
                                                 }
                                             });
                                         }
