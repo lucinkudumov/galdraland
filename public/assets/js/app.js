@@ -929,8 +929,8 @@ app.controller("sendInviteController", ["$scope", "$modalInstance", "values", "$
             var request = $http({method: "POST", url: "getUsers", api: true, data: {usernameOrEmail: usernameOrEmail}});
             request.then(function (r) {
                 var users = [];
-                for (var i = 0; i < r.data.users.length; i++) {
-                    var user = r.data.users[i];
+                for (var i = 0; i < r.users.length; i++) {
+                    var user = r.users[i];
                     var exist_in_team = false;
                     user.is_fb_friend = -1;
 
