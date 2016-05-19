@@ -927,7 +927,7 @@ app.controller("sendInviteController", ["$scope", "$modalInstance", "values", "$
 
         $scope.findUser = function (usernameOrEmail) {
             var request = $http({method: "POST", url: "getUsers", api: true, data: {usernameOrEmail: usernameOrEmail}});
-            request.then(function (r) {
+            request.success(function (r) {
                 var users = [];
                 for (var i = 0; i < r.users.length; i++) {
                     var user = r.users[i];
