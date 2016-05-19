@@ -907,8 +907,8 @@ app.controller("sendInviteController", ["$scope", "$modalInstance", "values", "$
         $scope.values.fb_friends = [];
         $scope.user = User.isLoggedIn();
         $scope.team = values.team;
+        console.log(values.emptyMembers);
         $scope.values._emptyMembers = values.emptyMembers;
-        $scope.values.emptyMembers = values.emptyMembers;
 
         // FB.login(function () {
         //     FB.api(
