@@ -1012,7 +1012,7 @@ app.controller("sendInviteController", ["$scope", "$modalInstance", "values", "$
             $scope.values.invites.push({user: user.username, memberId: user._id, fb_id: user.is_fb_friend, title: $scope.values.title});
             //Remove invited title
             for(var i = 0; i < $scope.values.emptyMembers.length; i++)
-                if($scope.values.emptyMembers[i]._id === $scope.values.title)
+                if($scope.values.emptyMembers[i]._id === $scope.values.title._id)
                     break;
             $scope.values.emptyMembers.splice(i, 1);
             return false;
@@ -1020,7 +1020,7 @@ app.controller("sendInviteController", ["$scope", "$modalInstance", "values", "$
 
         $scope.removeInvite = function (index) {
             //Add uninvited title
-            $scope.values.emptyMembers.push({_id: $scope.values.invites[index].title});
+            $scope.values.emptyMembers.push($scope.values.invites[index].title);
             $scope.values.invites.splice(index, 1);
         }
 

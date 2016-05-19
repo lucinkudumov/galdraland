@@ -5,7 +5,7 @@
     <div class="form-group">
         <select class="form-control" ng-model="values.title">
             <option value="0">Title of a member</option>
-            <option ng-repeat="member in values.emptyMembers" value="{{ member._id}}">{{ member.title}}</option>
+            <option ng-repeat="member in values.emptyMembers" value="{{ member}}">{{ member.title}}</option>
         </select>
     </div>
     <div class="form-group">
@@ -27,15 +27,11 @@
                     </div>
                 </form>
             </li>
+            <h5>Invited: </h5>
             <li ng-repeat="i in values.invites">
                 <form role="form" class="form-inline">
-                    <div class="form-group row">
-                        <div class="col-md-7">
-                            <input type="text" class="form-control" ng-model="i.user" readonly>
-                        </div>
-                        <div class="col-md-5">
-                            <input type="text" class="form-control" ng-model="i.title" readonly>
-                        </div>
+                    <div class="form-group">
+                        <div>{{i.user}} as {{i.title.name}}</div>
                     </div>
                     <button type="submit" class="btn btn-danger" ng-click="removeInvite($index)">-</button>
                 </form>
