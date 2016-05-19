@@ -27,7 +27,7 @@ module.exports = function (opts) {
         title_id: {
             type: String,
             required: true,
-        }
+        },
         team: {
             type: mongoose.Schema.ObjectId,
             ref: "Team",
