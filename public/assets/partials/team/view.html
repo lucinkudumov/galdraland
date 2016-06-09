@@ -25,8 +25,8 @@
                     <p ng-hide="member.user.profileId == 000000000000000000000000" class="avatar" style="background-image: url('{{ member.user.photo}}')"></p>
                 </li>
             </ul>
-            <button ng-show="isManager" class="btn btn-success pull-right" ng-click="addMemberTitle()" style="margin-right: 5px;">Add member title</button>
-            <button ng-show="isManager" class="btn btn-primary pull-right" ng-click="sendInvite()" style="margin-right: 5px;">Send Invite</button>
+            <button ng-show="isManager" class="btn btn-success pull-right" ng-click="addMemberTitle()" style="margin-right: 5px;">Add new role</button>
+            <button ng-show="isManager" class="btn btn-primary pull-right" ng-click="sendInvite()" style="margin-right: 5px;">Invite</button>
             <button ng-show="!isMember && !isManager && emptyMembers.length > 0" class="btn btn-success pull-right" ng-click="applyTeam()">Apply for this team</button>
         </div>
     </div>

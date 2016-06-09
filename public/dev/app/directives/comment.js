@@ -5,7 +5,7 @@ app.directive('commentWidget', function ($http, User) {
 		scope: {
 			ref: '=ref',
 		},
-		template: '<div class="row"><div class="user-container"><h4>Comments</h4><hr></div><div id="dv1"><ul><li ng-repeat="comnt in comments"> <img src="{{ comnt.from.photo }}" style="width:50px;height:50px;">{{comnt.from.fullname}}: {{ comnt.comment }} </li></ul></div></div>' + 		          '<div class="row"><div class="user-container"><h4>Post your Comment</h4><hr></div><textarea ng-model="txtcomment" placeholder="Your Comment" style="width:550px"></textarea><button ng-click="save();" style="margin-top:10px;">Post Comment</button></div>',
+		template: '<div class="row"><div class="user-container"><h4>Comments</h4><hr></div><div id="dv1"><ul><li ng-repeat="comnt in comments"> <img src="{{ comnt.from.photo }}" style="width:50px;height:50px;">{{comnt.from.fullname}}: {{ comnt.comment }} </li></ul></div><div class="user-container"><h4>Post your comment</h4><hr></div><div class="row" style="width:80%"><textarea ng-model="txtcomment" placeholder="Your Comment" style="width:100%;display:block;"></textarea><button ng-click="save();" style="margin-top:10px;float:right;">Post Comment</button></div></div>',
 		link: function (scope, elem, attrs) {
 			scope.comment = [];
 			scope.user = User.isLoggedIn();
