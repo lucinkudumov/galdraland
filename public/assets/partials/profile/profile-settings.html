@@ -1,33 +1,44 @@
+<style type="text/css">
+    .label-for-setting{
+        color: rgb(230,230,230);
+        padding-top: 10px;
+        padding-bottom: 6px;
+        margin-bottom: 1px;
+    }
+    .form-group-for-setting{
+        display: flex;
+    }
+</style>
 <div class="settings" ng-controller="profileSettingsController">
     <p><a href="#" ng-click="goBack()"><span class="glyphicon glyphicon-chevron-left"></span> Back</a></p>
     <blockquote>
         <p>Main information</p>
-        <div class="form-group">
-            <label class="">Your UserName</label>
+        <div class="form-group form-group-for-setting">
+            <label class="label label-for-setting">Your UserName:</label>
             <input class="form-control" type="text" ng-model="username" ng-change="checkUsername()" placeholder="Your username">
         </div>
-        <div class="form-group">
-            <label>Your Full Name</label>
+        <div class="form-group form-group-for-setting">
+            <label class="label label-for-setting">Your Full Name:</label>
             <input class="form-control" type="text" ng-model="fullname" placeholder="Your full name">
         </div>
-        <div class="form-group">
-        <label>Your Email</label>
+        <div class="form-group form-group-for-setting">
+            <label class="label label-for-setting">Your Email:</label>
             <input class="form-control" type="email" ng-model="email" ng-change="checkEmail()" placeholder="Your email">
         </div>
-        <div class="form-group">
-            <label>Your Location</label>
+        <div class="form-group form-group-for-setting">
+            <label class="label label-for-setting">Your Location:</label>
             <input class="form-control" type="text" ng-model="location" placeholder="Your location">
         </div>
-        <div class="form-group">
-            <label>Provide Your Goals</label>
+        <div class="form-group form-group-for-setting">
+            <label class="label label-for-setting">Provide Your Goals:</label>
             <input class="form-control" type="text" ng-model="goals" placeholder="Provide your goals">
         </div>
-        <div class="form-group">
-            <label>Your Skype</label>
+        <div class="form-group form-group-for-setting">
+            <label class="label label-for-setting">Your Skype:</label>
             <input class="form-control" type="text" ng-model="skype" placeholder="Your skype">
         </div>
-        <div class="form-group">
-            <label>Provide Your Categories</label>
+        <div class="form-group form-group-for-setting">
+            <label class="label label-for-setting">Provide Your Categories:</label>
             <input class="form-control" type="text" ng-model="categories" placeholder="Provide your categories">
         </div>
         <button class="btn btn-default pull-right" ng-disabled="username.length == 0 || invalidUsername || fullname.length == 0 || email.length == 0 || invalidEmail || location.length == 0" ng-click="saveMainInformation()">Save</button>
