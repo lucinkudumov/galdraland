@@ -60,6 +60,7 @@ module.exports = function (opts) {
                 } else if (team) {
                     var adventure = new adventureModel();
                     adventure.name = name;
+                    adventure.type = req.body.type;
                     adventure.owner = req.user._id;
                     adventure.team = team;
                     adventure.image = req.body.image;

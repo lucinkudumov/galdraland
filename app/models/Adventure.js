@@ -6,6 +6,10 @@ module.exports = function (opts) {
             type: String,
             required: true
         },
+        type: {
+            type: String,
+            required: true
+        },
         owner: {
             type: mongoose.Schema.ObjectId,
             ref: "User"

@@ -327,7 +327,7 @@ app.controller("createAdventureController", ["$scope", "$rootScope", "Upload", "
                 method: "POST",
                 url: "adventure/create",
                 api: true,
-                data: {name: $scope.name, description: $scope.description, link: $scope.link, image: $scope.uploadedImage, team: $scope.team, start: $scope.formatDate($scope.start), end: $scope.formatDate($scope.end), tags: ($scope.tags) ? $scope.tags.split(' ') : []}
+                data: {name: $scope.name, type: $scope.type, description: $scope.description, link: $scope.link, image: $scope.uploadedImage, team: $scope.team, start: $scope.formatDate($scope.start), end: $scope.formatDate($scope.end), tags: ($scope.tags) ? $scope.tags.split(' ') : []}
             });
             request.success(function (data) {
                 $location.path("/adventures/view/" + data.id);
@@ -417,6 +417,7 @@ app.controller("editAdventureController", ["$scope", "$http", "$location", "$sta
                 $scope.end = new Date(Date.parse(data.adventure.end));
                 $scope.status = data.adventure.status;
                 $scope.team = data.adventure.team;
+                $scope.type = data.adventure.type;
             });
         }
 
