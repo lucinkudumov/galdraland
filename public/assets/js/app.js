@@ -805,6 +805,7 @@ app.controller("indexController", ["$scope", "$location", "$window", "$statePara
                 var result = {};
                 result._id = data.adventures[i]._id;
                 result.name = data.adventures[i].name;
+                result.image = data.adventures[i].image;
                 result.text1 = data.adventures[i].tags.join(" ");
                 result.text2 = data.adventures[i].start + " - " + data.adventures[i].end;
                 $scope.adventures.push(result);
