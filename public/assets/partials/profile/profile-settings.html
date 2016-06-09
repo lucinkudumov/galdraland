@@ -3,24 +3,31 @@
     <blockquote>
         <p>Main information</p>
         <div class="form-group">
+            <label class="">Your UserName</label>
             <input class="form-control" type="text" ng-model="username" ng-change="checkUsername()" placeholder="Your username">
         </div>
         <div class="form-group">
+            <label>Your Full Name</label>
             <input class="form-control" type="text" ng-model="fullname" placeholder="Your full name">
         </div>
         <div class="form-group">
+        <label>Your Email</label>
             <input class="form-control" type="email" ng-model="email" ng-change="checkEmail()" placeholder="Your email">
         </div>
         <div class="form-group">
+            <label>Your Location</label>
             <input class="form-control" type="text" ng-model="location" placeholder="Your location">
         </div>
         <div class="form-group">
-            <input class="form-control" type="text" ng-model="skype" placeholder="Your skype">
-        </div>
-        <div class="form-group">
+            <label>Provide Your Goals</label>
             <input class="form-control" type="text" ng-model="goals" placeholder="Provide your goals">
         </div>
         <div class="form-group">
+            <label>Your Skype</label>
+            <input class="form-control" type="text" ng-model="skype" placeholder="Your skype">
+        </div>
+        <div class="form-group">
+            <label>Provide Your Categories</label>
             <input class="form-control" type="text" ng-model="categories" placeholder="Provide your categories">
         </div>
         <button class="btn btn-default pull-right" ng-disabled="username.length == 0 || invalidUsername || fullname.length == 0 || email.length == 0 || invalidEmail || location.length == 0" ng-click="saveMainInformation()">Save</button>

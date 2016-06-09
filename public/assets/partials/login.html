@@ -34,21 +34,21 @@
 				<div class="col-md-3" ng-repeat="a in adventures" ng-class-odd="'featured-adventure-1'"  ng-class-even="'featured-adventure-2'">
             <label>
             	<a href="/api/login/facebook{{(r)?'?r='+r+'&type=adventures&id='+a._id:'?type=adventures&id='+a._id}}" target="_self" class="link">
-            		<img src="{{a.image}}">
+            		<img src="{{a.image}}" alt="{{a.name}}">
             	</a>
             </label>
-				</div> 
+				</div>
 			</div>
 		</section>
 	</div> <!-- .wrapper -->
 	<div class="fullwidth lightgray padbot5">
-		<div id="wrapper" >	
+		<div id="wrapper" >
 			<section id="teams" class="homepage">
-				<div class="row"> 
+				<div class="row">
 					<h1> Featured Teams </h1>
 					<div class="col-md-3" ng-repeat="t in teams" ng-class-odd="'featured-adventure-1'"  ng-class-even="'featured-adventure-2'">
-                                            <label><a href="/api/login/facebook{{(r)?'?r='+r+'&type=teams&id='+t._id:'?type=teams&id='+t._id}}" target="_self" class="link">{{ t.name }}</a></label>
-					</div> 
+                                            <label><a href="/api/login/facebook{{(r)?'?r='+r+'&type=teams&id='+t._id:'?type=teams&id='+t._id}}"target="_self" class="link">{{ t.name }}</a></label>
+					</div>
 				</div>
 			</section>
 		</div> <!-- .wrapper -->
