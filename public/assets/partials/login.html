@@ -32,7 +32,11 @@
 			<div class="row"> 
 				<h1> Featured Adventures </h1>
 				<div class="col-md-3" ng-repeat="a in adventures" ng-class-odd="'featured-adventure-1'"  ng-class-even="'featured-adventure-2'">
-                                    <label><a href="/api/login/facebook{{(r)?'?r='+r+'&type=adventures&id='+a._id:'?type=adventures&id='+a._id}}" target="_self" class="link">{{ a.name }}</a></label>
+            <label>
+            	<a href="/api/login/facebook{{(r)?'?r='+r+'&type=adventures&id='+a._id:'?type=adventures&id='+a._id}}" target="_self" class="link">
+            		<img src="{{a.image}}">
+            	</a>
+            </label>
 				</div> 
 			</div>
 		</section>
@@ -41,7 +45,7 @@
 		<div id="wrapper" >	
 			<section id="teams" class="homepage">
 				<div class="row"> 
-					<h1> Teams </h1>
+					<h1> Featured Teams </h1>
 					<div class="col-md-3" ng-repeat="t in teams" ng-class-odd="'featured-adventure-1'"  ng-class-even="'featured-adventure-2'">
                                             <label><a href="/api/login/facebook{{(r)?'?r='+r+'&type=teams&id='+t._id:'?type=teams&id='+t._id}}" target="_self" class="link">{{ t.name }}</a></label>
 					</div> 
