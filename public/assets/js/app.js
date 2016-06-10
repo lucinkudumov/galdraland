@@ -921,7 +921,7 @@ app.controller("sendInviteController", ["$scope", "$modalInstance", "values", "$
         console.log("Facebook friends response");
         FB.getLoginStatus(function(response) {
           if (response.status == 'connected') {
-            FB.api('/me', function(response) {
+            FB.api('/me/friends', function(response) {
                 if (response && !response.error) {
                     $scope.values.fb_friends = response.data;
                     console.log(response.data);
@@ -930,7 +930,7 @@ app.controller("sendInviteController", ["$scope", "$modalInstance", "values", "$
           } else if (response.status == 'not_authorized') {
             FB.login(function(response) {
               if (response.authResponse) {
-                FB.api('/me', function(response) {
+                FB.api('/me/friends', function(response) {
                   if (response && !response.error) {
                         $scope.values.fb_friends = response.data;
                         console.log(response.data);
