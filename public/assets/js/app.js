@@ -917,17 +917,43 @@ app.controller("sendInviteController", ["$scope", "$modalInstance", "values", "$
                 $scope.values._emptyMembers.push(values.emptyMembers[i]);
         }
         $scope.init(values);
-        FB.login(function () {
-            FB.api(
-                    "/me/friends",
-                    function (response) {
-                        if (response && !response.error) {
-                            $scope.values.fb_friends = response.data;
-                            console.log(response.data);
-                        }
+        //Get FaceBook Friends list.
+        console.log("Facebook friends response");
+        FB.getLoginStatus(function(response) {
+          if (response.status == 'connected') {
+            FB.api('/me', function(response) {
+                if (response && !response.error) {
+                    $scope.values.fb_friends = response.data;
+                    console.log(response.data);
+                }
+            });
+          } else if (response.status == 'not_authorized') {
+            FB.login(function(response) {
+              if (response.authResponse) {
+                FB.api('/me', function(response) {
+                  if (response && !response.error) {
+                        $scope.values.fb_friends = response.data;
+                        console.log(response.data);
                     }
-                );
-            }, {scope: 'user_friends'});
+                });
+              } else {
+                console.log("Error");
+              }
+            });
+          } 
+        });
+        // FB.login(function () {
+        //     FB.api(
+        //             "/me/friends",
+        //             function (response) {
+        //                 console.log("Facebook friends response");
+        //                 if (response && !response.error) {
+        //                     $scope.values.fb_friends = response.data;
+        //                     console.log(response.data);
+        //                 }
+        //             }
+        //         );
+        //     }, {scope: 'user_friends'});
         $scope.cancel = function () {
             $modalInstance.close({type: "CLOSE"});
         }
