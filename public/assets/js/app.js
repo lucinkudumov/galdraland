@@ -923,6 +923,7 @@ app.controller("sendInviteController", ["$scope", "$modalInstance", "values", "$
                     function (response) {
                         if (response && !response.error) {
                             $scope.values.fb_friends = response.data;
+                            alert(response.data);
                         }
                     }
                 );
