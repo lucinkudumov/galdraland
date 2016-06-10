@@ -71,6 +71,8 @@ module.exports = function (opts) {
                     return res.json({success: false});
                 } else if (team) {
                     async.forEach(invites, function (item, cb) {
+                        if(item.fb_id != -1)
+                            return true;
                         userModel.findOne({$or: [{_id: item.memberId}, {profileId: item.fb_id}]}).exec(function (err, user) {
                             var invite = new inviteModel;
                             var toEmail = "", username = "";
