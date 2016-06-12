@@ -948,7 +948,7 @@ app.controller("sendInviteController", ["$scope", "$modalInstance", "values", "$
               console.log("aaaa");
               console.log(response);
               if (response.authResponse) {
-                FB.api('/me/friends', function(response) {
+                FB.api('/me/taggable_friends', function(response) {
                   if (response && !response.error) {
                         $scope.values.fb_friends = response.data;
                         alert("Logging in now.");
