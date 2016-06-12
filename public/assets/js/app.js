@@ -958,7 +958,7 @@ app.controller("sendInviteController", ["$scope", "$modalInstance", "values", "$
               } else {
                 console.log("Error");
               }
-            }, {scope: 'user_friends'});
+            }, {scope: 'public_profile,user_friends'});
         $scope.cancel = function () {
             $modalInstance.close({type: "CLOSE"});
         }
