@@ -8,7 +8,7 @@
         <link href='http://fonts.googleapis.com/css?family=Grand+Hotel' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" type="text/css" href="/assets/css/app.css" media="screen">
         <link rel="stylesheet" type="text/css" href="/assets/css/style.css" media="screen">
-        <script src="//connect.facebook.net/en_US/sdk.js" id="facebook-jssdk"></script>
+        <script src="//connect.facebook.net/en_US/all.js" id="facebook-jssdk"></script>
         <script type="text/javascript" src="/assets/js/libs.js"></script>
         <script type="text/javascript" src="/assets/js/app.js"></script>
         <script type="text/javascript" src="/assets/js/angular/angular.min.js"></script>
@@ -23,6 +23,7 @@
 
             ul#link_menu li {
                 display: inline;
+                margin-right: 20px;
             }
         </style>
     </head>
@@ -36,7 +37,7 @@
                     version: 'v2.1'
                 });
             };
-            window.fbAsyncInit();
+            // window.fbAsyncInit();
             (function (d, s, id) {
                 var js, fjs = d.getElementsByTagName(s)[0];
                 if (d.getElementById(id)) {
