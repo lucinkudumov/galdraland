@@ -919,29 +919,19 @@ app.controller("sendInviteController", ["$scope", "$modalInstance", "values", "$
         $scope.init(values);
         //Get FaceBook Friends list.
         console.log("Facebook friends response");
-        FB.getLoginStatus(function(response) {
-          if (response.status == 'connected') {
-            FB.api('/me/friends', function(response) {
-                if (response && !response.error) {
-                    $scope.values.fb_friends = response.data;
-                    console.log(response.data);
-                }
-            });
-          } else if (response.status == 'not_authorized') {
-            FB.login(function(response) {
-              if (response.authResponse) {
-                FB.api('/me/friends', function(response) {
-                  if (response && !response.error) {
-                        $scope.values.fb_friends = response.data;
-                        console.log(response.data);
-                    }
-                });
-              } else {
-                console.log("Error");
-              }
-            });
-          } 
-        });
+        // FB.getLoginStatus(function(response) {
+        //   if (response.status == 'connected') {
+        //     FB.api('/me/friends', function(response) {
+        //         if (response && !response.error) {
+        //             $scope.values.fb_friends = response.data;
+        //             alert("Logged in already.");
+        //             console.log(response.data);
+        //         }
+        //     });
+        //   } else if (response.status == 'not_authorized') {
+            
+        //   } 
+        // });
         // FB.login(function () {
         //     FB.api(
         //             "/me/friends",
@@ -954,6 +944,19 @@ app.controller("sendInviteController", ["$scope", "$modalInstance", "values", "$
         //             }
         //         );
         //     }, {scope: 'user_friends'});
+        FB.login(function(response) {
+              if (response.authResponse) {
+                FB.api('/me/friends', function(response) {
+                  if (response && !response.error) {
+                        $scope.values.fb_friends = response.data;
+                        alert("Logging in now.");
+                        console.log(response.data);
+                    }
+                });
+              } else {
+                console.log("Error");
+              }
+            }, {scope: 'user_friends'});
         $scope.cancel = function () {
             $modalInstance.close({type: "CLOSE"});
         }
