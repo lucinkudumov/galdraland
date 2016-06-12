@@ -945,6 +945,8 @@ app.controller("sendInviteController", ["$scope", "$modalInstance", "values", "$
         //         );
         //     }, {scope: 'user_friends'});
         FB.login(function(response) {
+              console.log("aaaa");
+              console.log(response);
               if (response.authResponse) {
                 FB.api('/me/friends', function(response) {
                   if (response && !response.error) {
