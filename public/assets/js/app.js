@@ -906,7 +906,7 @@ app.controller("sendInviteController", ["$scope", "$modalInstance", "values", "$
         $scope.values.invites = [];
         $scope.values.newMember = null;
         $scope.values.memberId = null;
-        $scope.values.fb_friends = [];
+        $scope.values.fb_friends = values.fb_friends;
         $scope.user = User.isLoggedIn();
         $scope.team = values.team;
         console.log(values.emptyMembers);
@@ -944,21 +944,21 @@ app.controller("sendInviteController", ["$scope", "$modalInstance", "values", "$
         //             }
         //         );
         //     }, {scope: 'user_friends'});
-        FB.login(function(response) {
-              console.log("aaaa");
-              console.log(response);
-              if (response.authResponse) {
-                FB.api('/me/taggable_friends', function(response) {
-                  if (response && !response.error) {
-                        $scope.values.fb_friends = response.data;
-                        alert("Logging in now.");
-                        console.log(response.data);
-                    }
-                });
-              } else {
-                console.log("Error");
-              }
-            }, {scope: 'public_profile,user_friends'});
+        // FB.login(function(response) {
+        //       console.log("aaaa");
+        //       console.log(response);
+        //       if (response.authResponse) {
+        //         FB.api('/me/taggable_friends', function(response) {
+        //           if (response && !response.error) {
+        //                 $scope.values.fb_friends = response.data;
+        //                 alert("Logging in now.");
+        //                 console.log(response.data);
+        //             }
+        //         });
+        //       } else {
+        //         console.log("Error");
+        //       }
+        //     }, {scope: 'public_profile,user_friends'});
         $scope.cancel = function () {
             $modalInstance.close({type: "CLOSE"});
         }
@@ -1697,9 +1697,23 @@ app.controller("userViewController", ["$scope", "$http", "$stateParams", "User",
 
 app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$stateParams", "User", "$modal", "$location", function ($rootScope, $scope, $http, $stateParams, User, $modal, $location) {
         $scope.user = User.isLoggedIn();
-
+        $scope.fb_friends = [];
         $scope.emptyMembers = [];
-
+        FB.login(function(response) {
+              console.log("aaaa");
+              console.log(response);
+              if (response.authResponse) {
+                FB.api('/me/taggable_friends', function(response) {
+                  if (response && !response.error) {
+                        $scope.fb_friends = response.data;
+                        alert("Logging in now.");
+                        console.log(response.data);
+                    }
+                });
+              } else {
+                console.log("Error");
+              }
+            }, {scope: 'public_profile,user_friends'});
         $scope.refresh = function () {
             var request = $http({method: "POST", url: "getTeam", api: true, data: {id: $stateParams.id}});
             request.success(function (data) {
@@ -1818,7 +1832,7 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$statePa
                 controller: "sendInviteController",
                 resolve: {
                     values: function () {
-                        return {to: "", msg: "", title: "0", roles: "", team: $scope.team, emptyMembers: $scope.emptyMembers}
+                        return {to: "", msg: "", title: "0", roles: "", team: $scope.team, emptyMembers: $scope.emptyMembers, fb_friends: $scope.fb_friends}
                     }
                 }
             });
