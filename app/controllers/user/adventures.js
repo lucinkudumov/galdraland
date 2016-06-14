@@ -9,7 +9,7 @@ module.exports = function (opts) {
             emailModel = opts.models.Email,
             teamModel = opts.models.Team,
             adventureModel = opts.models.Adventure,
-            imageModel = opts.models.Image;
+            imageModel = opts.models.Imagestore;
 
     return {
         "post#upload/image": function (req, res) {
