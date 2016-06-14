@@ -1,5 +1,5 @@
 module.exports = function (opts) {
-		var imageModel = opts.models.Image;
+		var imageModel = opts.models.image;
     return function (req, res, next) {
         //Image loading from DB.
            app.get('/images/', function(req, res) {
