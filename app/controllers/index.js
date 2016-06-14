@@ -1,5 +1,5 @@
 var passport = require("passport");
-
+var fs = require('fs');
 module.exports = function (opts) {
 		var imageModel = opts.models.Imagestore;
     if (process.env.HEROKU) {
@@ -15,19 +15,26 @@ module.exports = function (opts) {
         "get#callback/facebook" : passport.authenticate('facebook', { failureRedirect: fail, successRedirect : "/api/cookie" }),
         'get#assets/images/upload/:id':function(req,res,next){
                 console.log("Uploaded Image Request...");
-                // console.log(req);
                 var id = req.param('id');
-                console.log(id);
-                console.log(req.id);
-                console.log(req.body.id);
-                imageModel.findOne({name: id},function (err, image) {
-                    if (err) return next(err);
-                // var base64 = (doc[0].img.data.toString('base64'));
-                //  res.send(base64);
-                		// console.log(image.name);
-                		// console.log(image.data);
-                    res.writeHead('200', {'Content-Type': 'image/png'});
-                    res.end(image.data.data, 'binary');
+                var newPath = "/app/public/assets/images/upload/" + id;
+                fs.readFile(file.path, function (err, data) {
+                	if(err)
+                	{
+                		imageModel.findOne({name: id},function (err, image) {
+		                    if (err) return next(err);
+		                // var base64 = (doc[0].img.data.toString('base64'));
+		                //  res.send(base64);
+		                		// console.log(image.name);
+		                		// console.log(image.data);
+		                    res.writeHead('200', {'Content-Type': 'image/png'});
+		                    res.end(image.data.data, 'binary');
+		                });
+                	}
+                	else
+                	{
+                		res.writeHead('200', {'Content-Type': 'image/png'});
+		                res.end(data, 'binary');
+                	}
                 });
             }
     }
