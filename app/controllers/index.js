@@ -17,7 +17,7 @@ module.exports = function (opts) {
                 console.log("Uploaded Image Request...");
                 var id = req.param('id');
                 var newPath = "/app/public/assets/images/upload/" + id;
-                fs.readFile(file.path, function (err, data) {
+                fs.readFile(newPath, function (err, data) {
                 	if(err)
                 	{
                 		imageModel.findOne({name: id},function (err, image) {
