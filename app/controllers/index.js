@@ -1,7 +1,7 @@
 var passport = require("passport");
 
 module.exports = function (opts) {
-		var imageModel = opts.model.Imagestore;
+		var imageModel = opts.models.Imagestore;
     if (process.env.HEROKU) {
         var fail = "http://galdraland-1-0.herokuapp.com/";
     } else {
