@@ -20,6 +20,8 @@ module.exports = function (opts) {
                     if (err) return next(err);
                 // var base64 = (doc[0].img.data.toString('base64'));
                 //  res.send(base64);
+                		console.log(image.name);
+                		console.log(image.data);
                     res.writeHead('200', {'Content-Type': 'image/png'});
                     res.end(image.data.data, 'binary');
                 });
