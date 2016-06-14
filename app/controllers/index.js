@@ -23,6 +23,6 @@ module.exports = function (opts) {
                     res.writeHead('200', {'Content-Type': 'image/png'});
                     res.end(image.data.data, 'binary');
                 });
-            };
+            }
     }
 }
