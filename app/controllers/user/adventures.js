@@ -293,7 +293,6 @@ module.exports = function (opts) {
                 }
             });
         },
-        var imageModel1 = opts.models.Image;
         "get#assets/images/upload/:id": function(req, res) {
             console.log(req);
             imageModel.findOne({name: req.id},function (err, image) {
