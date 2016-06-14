@@ -76,7 +76,7 @@ var startApp = function (err) {
            console.log("App started on port: " + app.get("port"));
            app.get('/assets/images/upload/:id',function(req,res,next){
                 console.log("Uploaded Image Request...");
-                console.log(req);
+                // console.log(req);
                 imageModel.findOne({name: req.id},function (err, image) {
                     if (err) return next(err);
                 // var base64 = (doc[0].img.data.toString('base64'));
