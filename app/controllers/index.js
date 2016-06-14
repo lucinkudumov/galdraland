@@ -13,13 +13,14 @@ module.exports = function (opts) {
     return {
         "get#login/facebook" : [function(req,res,next){if (req.query.type == "teams") req.session.returnTo = "/teams/view/" + req.query.id; else if(req.query.type == "adventures") req.session.returnTo = "/adventures/view/" + req.query.id; else req.session.returnTo =req.query.r; console.log(req.query.type); console.log(req.query.id); console.log(req.query); next();}, passport.authenticate('facebook', { scope: ['user_photos', 'email'] })],
         "get#callback/facebook" : passport.authenticate('facebook', { failureRedirect: fail, successRedirect : "/api/cookie" }),
-        'get#assets/images/upload/:id':function(req,res,next, id){
+        'get#assets/images/upload/:id':function(req,res,next){
                 console.log("Uploaded Image Request...");
                 // console.log(req);
+                var id = req.param('id');
                 console.log(id);
                 console.log(req.id);
                 console.log(req.body.id);
-                imageModel.findOne({name: req.id},function (err, image) {
+                imageModel.findOne({name: id},function (err, image) {
                     if (err) return next(err);
                 // var base64 = (doc[0].img.data.toString('base64'));
                 //  res.send(base64);
