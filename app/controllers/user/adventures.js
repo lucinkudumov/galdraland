@@ -8,7 +8,8 @@ module.exports = function (opts) {
     var userModel = opts.models.User,
             emailModel = opts.models.Email,
             teamModel = opts.models.Team,
-            adventureModel = opts.models.Adventure;
+            adventureModel = opts.models.Adventure,
+            imageModel = opts.models.Image;
 
     return {
         "post#upload/image": function (req, res) {
@@ -31,7 +32,9 @@ module.exports = function (opts) {
                             console.log(error);
                         })
                     }
-                    
+                    var image = new imageModel();
+                    image.data = data;
+                    image.name = newName;
                     fs.writeFile(newPath + newName, data, function (err) {
                         if (!err) {
                             console.log(newPath + newName);
@@ -64,8 +67,6 @@ module.exports = function (opts) {
                     adventure.owner = req.user._id;
                     adventure.team = team;
                     adventure.image = req.body.image;
-                    adventure.img.data = fs.readFileSync('/app/public' + adventure.image);
-                    adventure.img.contentType = 'jpg';
                     adventure.tags = req.body.tags;
                     adventure.start = req.body.start;
                     adventure.end = req.body.end;

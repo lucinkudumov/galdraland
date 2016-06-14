@@ -24,10 +24,6 @@ module.exports = function (opts) {
         image: {
             type: String
         },
-        img: { 
-            data: Buffer, 
-            contentType: String 
-        },
         tags: {
             type: [String]
         },
