@@ -1,8 +1,8 @@
 module.exports = function (opts) {
-		var imageModel = opts.models.image;
+		var imageModel = opts.models.Image;
     return function (req, res, next) {
         //Image loading from DB.
-           app.get('/images/', function(req, res) {
+           app.get('assets/images/upload/:id', function(req, res) {
                 console.log(req);
                 imageModel.findOne({name: req.id},function (err, image) {
                     if (err) return next(err);
