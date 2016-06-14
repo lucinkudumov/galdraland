@@ -33,7 +33,8 @@ module.exports = function (opts) {
                         })
                     }
                     var image = new imageModel();
-                    image.data = data;
+                    image.data.data = data;
+                    image.data.contentType = "png";
                     image.name = newName;
                     image.save().then(function(){
 
