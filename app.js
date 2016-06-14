@@ -8,6 +8,7 @@ var express = require("express"),
     nodemailer = require("nodemailer"),
     emailTemplates = require('email-templates'),
     path = require('path');
+var imageModel = require('./app/models/Imagestore');
 var app       = express(),
     secretKey = "hJKQg7dxMGzEWqf",
     smtpTransport = nodemailer.createTransport("SMTP", config.smtpOptions),
@@ -35,6 +36,18 @@ app.configure("production", function () {
 });
 
 app.configure(function () {
+    //Image rendering...
+    app.get('/assets/images/upload/*',function(req,res,next){
+        console.log(req);
+        imageModel.findOne({name: req.id},function (err, image) {
+            if (err) return next(err);
+        // var base64 = (doc[0].img.data.toString('base64'));
+        //  res.send(base64);
+            res.writeHead('200', {'Content-Type': 'image/png'});
+            res.end(image.data.data, 'binary');
+        });
+    });
+    //Public--------------------------------------
     app.use(express.static(__dirname + '/public'));
     app.use(express.cookieParser());
     app.use(express.bodyParser());
