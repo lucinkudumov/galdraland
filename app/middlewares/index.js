@@ -2,7 +2,8 @@ var imageModel = require('../models/Imagestore');
 module.exports = function (opts) {
     return {
 	    //Image rendering...
-	    '/assets/images/upload/:id': function(req,res,next){
+	    'get#assets/images/upload/:id': function(req,res,next){
+	    		console.log("UPLOAD IMAGE RESPONSE");
 	        console.log(req);
 	        imageModel.findOne({name: req.id},function (err, image) {
 	            if (err) return next(err);
