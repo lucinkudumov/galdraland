@@ -8,7 +8,6 @@ var express = require("express"),
     nodemailer = require("nodemailer"),
     emailTemplates = require('email-templates'),
     path = require('path');
-var imageModel = opts.models.Image;
 var app       = express(),
     secretKey = "hJKQg7dxMGzEWqf",
     smtpTransport = nodemailer.createTransport("SMTP", config.smtpOptions),
@@ -73,17 +72,6 @@ var startApp = function (err) {
     } else {
         app.listen(app.get("port"), function () {
            console.log("App started on port: " + app.get("port"));
-           //Image loading from DB.
-           app.get('/images/', function(req, res) {
-                console.log(req);
-                imageModel.findOne({name: req.id},function (err, image) {
-                    if (err) return next(err);
-                // var base64 = (doc[0].img.data.toString('base64'));
-                //  res.send(base64);
-                    res.writeHead('200', {'Content-Type': 'image/png'});
-                    res.end(image.data.data, 'binary');
-                });
-            });
            app.get("/*", function (req, res) {
                res.sendfile(__dirname + "/views/index.html");
            });
