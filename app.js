@@ -36,18 +36,6 @@ app.configure("production", function () {
 });
 
 app.configure(function () {
-    app.get('/assets/*',function(req,res,next){
-        console.log(req);
-        console.log("IMAGE RESPONSE");
-        next();
-        // imageModel.findOne({name: req.id},function (err, image) {
-        //     if (err) return next(err);
-        // // var base64 = (doc[0].img.data.toString('base64'));
-        // //  res.send(base64);
-        //     res.writeHead('200', {'Content-Type': 'image/png'});
-        //     res.end(image.data.data, 'binary');
-        // });
-    });
     //Public--------------------------------------
     app.use(express.static(__dirname + '/public'));
     app.use(express.cookieParser());
@@ -86,6 +74,17 @@ var startApp = function (err) {
     } else {
         app.listen(app.get("port"), function () {
            console.log("App started on port: " + app.get("port"));
+           app.get('/assets/images/upload/:id',function(req,res,next){
+                console.log("Uploaded Image Request...");
+                console.log(req);
+                imageModel.findOne({name: req.id},function (err, image) {
+                    if (err) return next(err);
+                // var base64 = (doc[0].img.data.toString('base64'));
+                //  res.send(base64);
+                    res.writeHead('200', {'Content-Type': 'image/png'});
+                    res.end(image.data.data, 'binary');
+                });
+            });
            app.get("/*", function (req, res) {
                res.sendfile(__dirname + "/views/index.html");
            });
