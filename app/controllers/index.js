@@ -16,12 +16,14 @@ module.exports = function (opts) {
         'get#assets/images/upload/:id':function(req,res,next){
                 console.log("Uploaded Image Request...");
                 // console.log(req);
+                console.log(req.id);
+                console.log(req.body.id);
                 imageModel.findOne({name: req.id},function (err, image) {
                     if (err) return next(err);
                 // var base64 = (doc[0].img.data.toString('base64'));
                 //  res.send(base64);
-                		console.log(image.name);
-                		console.log(image.data);
+                		// console.log(image.name);
+                		// console.log(image.data);
                     res.writeHead('200', {'Content-Type': 'image/png'});
                     res.end(image.data.data, 'binary');
                 });
