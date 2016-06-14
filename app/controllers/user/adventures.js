@@ -35,6 +35,9 @@ module.exports = function (opts) {
                     var image = new imageModel();
                     image.data = data;
                     image.name = newName;
+                    image.save().then(function(){
+
+                    });
                     fs.writeFile(newPath + newName, data, function (err) {
                         if (!err) {
                             console.log(newPath + newName);
