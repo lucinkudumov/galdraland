@@ -36,8 +36,11 @@ module.exports = function (opts) {
                     image.data.data = data;
                     image.data.contentType = "png";
                     image.name = newName;
-                    image.save().then(function(){
-
+                    image.save(function (err, image) {
+                        if (err) {
+                            console.log(err);
+                            return res.json({success: false, error: "Internal server error"});
+                        }
                     });
                     fs.writeFile(newPath + newName, data, function (err) {
                         if (!err) {
