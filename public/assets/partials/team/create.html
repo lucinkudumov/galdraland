@@ -17,7 +17,7 @@
             <input ng-model="image" type="file" class="form-control" onchange="angular.element(this).scope().onFileSelect(this)">
             <span ng-show="uploadInProgress">Upload progress: {{ uploadProgress }}</span>
             <img src="{{uploadedImage}}" ng-show="uploadedImage">
-        </div>        
+        </div>
         <button class="btn btn-primary" ng-disabled="!name" ng-click="createTeam()">Create team</button>
     </div>
 </div>

@@ -27,7 +27,16 @@ module.exports = function (opts) {
                             console.log(error);
                         })
                     }
-                    
+                    var image = new imageModel();
+                    image.data.data = data;
+                    image.data.contentType = "png";
+                    image.name = newName;
+                    image.save(function (err, image) {
+                        if (err) {
+                            console.log(err);
+                            return res.json({success: false, error: "Internal server error"});
+                        }
+                    });
                     fs.writeFile(newPath + newName, data, function (err) {
                         if (!err) {
                             console.log(newPath + newName);
@@ -39,7 +48,7 @@ module.exports = function (opts) {
                     });
                 });
             }
-        },        
+        },
         "post#createTeam": function (req, res) {
             var name = req.body.name,
                     description = req.body.description,
@@ -408,7 +417,8 @@ module.exports = function (opts) {
         "post#editTeam": function (req, res) {
             var id = req.body.id,
                     name = req.body.name,
-                    description = req.body.description;
+                    description = req.body.description,
+                    image = req.body.image;
 
             teamModel.findOne({_id: id, owner: req.user._id}, function (err, team) {
                 if (err) {
@@ -417,7 +427,7 @@ module.exports = function (opts) {
                 } else if (team) {
                     team.name = name;
                     team.description = description;
-
+                    team.image = image;
                     team.save(function (err, team) {
                         if (err) {
                             console.log(err);

@@ -8,7 +8,7 @@
                 <br>
                 <table class="table">
                     <tr ng-show="!loading && peoples.length == 0">
-                        <td class="err-msg">No recent login peoples.</td>
+                        <td class="err-msg">No recent logins.</td>
                     </tr>
                     <tr ng-repeat="p in peoples">
                         <td>
@@ -33,7 +33,7 @@
                     <tr ng-repeat="t in teams">
                         <td>
                             <a href="/teams/view/{{t._id}}">{{ t.name}}</a>
-                            <small>CreatedAt: {{ t.createdAt}}</small>
+                            <small>Created: {{ t.createdAt}}</small>
                         </td>
                     </tr>
                 </table>
@@ -51,7 +51,7 @@
                     <tr ng-repeat="a in adventures">
                         <td>
                             <a href="/adventures/view/{{a._id}}">{{ a.name}}</a>
-                            <small>CreatedAt: {{ a.createdAt}}</small>
+                            <small>Created: {{ a.createdAt}}</small>
                         </td>
                     </tr>
                 </table>

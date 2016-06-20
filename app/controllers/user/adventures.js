@@ -212,7 +212,8 @@ module.exports = function (opts) {
                     tags = req.body.tags,
                     start = req.body.start,
                     end = req.body.end,
-                    status = req.body.status;
+                    status = req.body.status,
+                    image = req.body.image;
 
             var updateInfo = {};
 
@@ -248,6 +249,9 @@ module.exports = function (opts) {
                 updateInfo.status = status;
             }
 
+            if (image) {
+                updateInfo.image = image;
+            }
             adventureModel.findOneAndUpdate({_id: id, owner: req.user._id}, updateInfo, function (err, invite) {
                 if (err) {
                     console.log(err);

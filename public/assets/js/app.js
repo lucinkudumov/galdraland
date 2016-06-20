@@ -12,6 +12,27 @@ app.config(["$urlRouterProvider", "$locationProvider", "$stateProvider", "$httpP
                     templateUrl: "/assets/partials/login.html"
                 }
             },
+        }).state("about", {
+            url: "/about",
+            views: {
+                "main": {
+                    templateUrl: "/assets/partials/about.html"
+                }
+            },
+        }).state("how_it_works", {
+            url: "/how_it_works",
+            views: {
+                "main": {
+                    templateUrl: "/assets/partials/how_it_works.html"
+                }
+            },
+        }).state("contact_us", {
+            url: "/contact_us",
+            views: {
+                "main": {
+                    templateUrl: "/assets/partials/contact_us.html"
+                }
+            },
         }).state("redirect", {
             url: "/redirect/:returnTo",
             views: {
@@ -405,7 +426,8 @@ app.controller("editAdventureController", ["$scope", "$http", "$location", "$sta
         $scope.values.newTeam = null;
         $scope.values.teamCount = 1;
         $scope.arr_status = ["Active", "Stopped", "Completed"];
-
+        $scope.uploadInProgress = false;
+        $scope.uploadProgress = 0;
         $scope.getAdventure = function () {
             var request = $http({method: "POST", url: "adventure/get", api: true, data: {id: $stateParams.id}});
             request.success(function (data) {
@@ -418,6 +440,7 @@ app.controller("editAdventureController", ["$scope", "$http", "$location", "$sta
                 $scope.status = data.adventure.status;
                 $scope.team = data.adventure.team;
                 $scope.type = data.adventure.type;
+                $scope.uploadedImage = data.adventure.image;
             });
         }
 
@@ -432,9 +455,42 @@ app.controller("editAdventureController", ["$scope", "$http", "$location", "$sta
             $scope.getAdventure();
             $scope.getTeamCount();
         }
+        $scope.onFileSelect = function (image) {
+            console.log(image);
+            image = image.files[0];
+            if (angular.isArray(image)) {
+                image = image[0];
+            }
 
+//            // This is how I handle file types in client side
+//            if (image.type !== 'image/png' && image.type !== 'image/jpeg') {
+//                alert('Only PNG and JPEG are accepted.');
+//                return;
+//            }
+
+            $scope.uploadInProgress = true;
+            $scope.uploadProgress = 0;
+
+            var fd = new FormData();
+            fd.append('file', image);
+            
+            $scope.upload = Upload.upload({
+                url: 'upload/image',
+                method: 'POST',
+                api: true,
+                file: image
+            }).success(function (data, status, headers, config) {
+                $scope.uploadInProgress = false;
+                // If you need uploaded file immediately 
+                console.log(data);
+                $scope.uploadedImage = "/api/assets/images/upload/" + data.data;
+            }).error(function (err) {
+                $scope.uploadInProgress = false;
+                console.log('Error uploading file: ' + err.message || err);
+            });
+        };
         $scope.editAdventure = function () {
-            var request = $http({method: "POST", url: "adventure/update", api: true, data: {id: $stateParams.id, name: $scope.name, description: $scope.description, link: $scope.link, tags: $scope.tags.split(" "), start: $scope.formatDate($scope.start), end: $scope.formatDate($scope.end), status: $scope.status}});
+            var request = $http({method: "POST", url: "adventure/update", api: true, data: {id: $stateParams.id, name: $scope.name, description: $scope.description, link: $scope.link, image: $scope.uploadedImage, tags: $scope.tags.split(" "), start: $scope.formatDate($scope.start), end: $scope.formatDate($scope.end), status: $scope.status}});
             request.success(function (data) {
                 $location.path("/adventures/view/" + $stateParams.id);
             });
@@ -1534,7 +1590,7 @@ app.controller("createTeamController", ["$scope", "$rootScope", "Upload", "$http
                 $scope.uploadInProgress = false;
                 // If you need uploaded file immediately 
                 console.log(data);
-                $scope.uploadedImage = "/assets/images/upload/" + data.data;
+                $scope.uploadedImage = "/api/assets/images/upload/" + data.data;
             }).error(function (err) {
                 $scope.uploadInProgress = false;
                 console.log('Error uploading file: ' + err.message || err);
@@ -1544,15 +1600,51 @@ app.controller("createTeamController", ["$scope", "$rootScope", "Upload", "$http
 
 app.controller("editTeamController", ["$scope", "$http", "$location", "$stateParams", function ($scope, $http, $location, $stateParams) {
         var id = $stateParams.id;
-
         var request = $http({method: "POST", url: "getTeam", api: true, data: {id: id}});
+        $scope.uploadInProgress = false;
+        $scope.uploadProgress = 0;
+
         request.success(function (data) {
             $scope.name = data.team.name;
             $scope.description = data.team.description;
+            $scope.uploadedImage = data.team.image;
         });
+        $scope.onFileSelect = function (image) {
+            console.log(image);
+            image = image.files[0];
+            if (angular.isArray(image)) {
+                image = image[0];
+            }
 
+            // This is how I handle file types in client side
+//            if (image.type !== 'image/png' && image.type !== 'image/jpeg') {
+//                alert('Only PNG and JPEG are accepted.');
+//                return;
+//            }
+
+            $scope.uploadInProgress = true;
+            $scope.uploadProgress = 0;
+
+            var fd = new FormData();
+            fd.append('file', image);
+            
+            $scope.upload = Upload.upload({
+                url: 'upload/image',
+                method: 'POST',
+                api: true,
+                file: image
+            }).success(function (data, status, headers, config) {
+                $scope.uploadInProgress = false;
+                // If you need uploaded file immediately 
+                console.log(data);
+                $scope.uploadedImage = "/api/assets/images/upload/" + data.data;
+            }).error(function (err) {
+                $scope.uploadInProgress = false;
+                console.log('Error uploading file: ' + err.message || err);
+            });
+        }
         $scope.editTeam = function () {
-            var request = $http({method: "POST", url: "editTeam", api: true, data: {id: id, name: $scope.name, description: $scope.description}});
+            var request = $http({method: "POST", url: "editTeam", api: true, data: {id: id, name: $scope.name, description: $scope.description, image:$scope.uploadedImage}});
             request.success(function (data) {
                 $location.path("/teams/view/" + id);
             });
