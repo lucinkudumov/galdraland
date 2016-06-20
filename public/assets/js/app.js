@@ -226,7 +226,9 @@ app.config(["$urlRouterProvider", "$locationProvider", "$stateProvider", "$httpP
 app.run(["$rootScope", "$http", "$location", "User", function ($rootScope, $http, $location, User) {
         $rootScope.return2Adventure = "normal";
         $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
-            if (toState.requireLogin && !User.isLoggedIn()) {
+            if(toState.url === "/about" || toState.url === "/how_it_works" || toState.url === "/contact_us")
+                $location.url(toState.url);
+            else if (toState.requireLogin && !User.isLoggedIn()) {
                 var url = "/redirect/?r=" + $location.path();
                 $location.url(url);
             } else if (!toState.requireLogin && User.isLoggedIn()) {
