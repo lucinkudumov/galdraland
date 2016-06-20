@@ -81,7 +81,9 @@ footer ul li a {
 	height:180px;
 }
 .btn-same-size{
-	width: 60%;
+	width: 65px;
+	padding-left: 5px;
+	padding-right: 5px;
 }
 .bold{
 	font-weight: bold;
