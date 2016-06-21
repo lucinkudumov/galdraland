@@ -422,7 +422,7 @@ app.controller("createAdventureController", ["$scope", "$rootScope", "Upload", "
         $scope.format = $scope.formats[1];
     }]);
 
-app.controller("editAdventureController", ["$scope", "$http", "Upload", "$location", "$stateParams", function ($scope, $http, $location, $stateParams) {
+app.controller("editAdventureController", ["$scope", "$http", "$location", "$stateParams", "Upload", function ($scope, $http, $location, $stateParams, Upload) {
         $scope.values = {};
         $scope.values.team = null;
         $scope.values.newTeam = null;
@@ -1600,7 +1600,7 @@ app.controller("createTeamController", ["$scope", "$rootScope", "Upload", "$http
         }
     }]);
 
-app.controller("editTeamController", ["$scope", "$http", "Upload", "$location", "$stateParams", function ($scope, $http, $location, $stateParams) {
+app.controller("editTeamController", ["$scope", "$http", "$location", "$stateParams", "Upload", function ($scope, $http, $location, $stateParams, Upload) {
         var id = $stateParams.id;
         var request = $http({method: "POST", url: "getTeam", api: true, data: {id: id}});
         $scope.uploadInProgress = false;
