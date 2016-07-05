@@ -5,7 +5,6 @@
         <small><cite title="Email">{{ user.email.email}} <i class="glyphicon glyphicon-pencil"></i></cite></small> 
         <small ng-show="user.location"><cite title="Location">{{ user.location}}  <i class="glyphicon glyphicon-map-marker"></i></cite></small>
         <small ng-show="user.skype">Skype: <cite title="Skype">{{ user.skype}}</cite></small>
-        <small ng-show="user.goals">Goals: <cite title="Goals">{{ user.goals}}</cite></small>
         <small ng-show="user.categories">Categories: <cite title="Categories">{{ user.categories}}</cite></small>
         <br>
         <p ng-show="user.educations.length > 0">Education</p>
@@ -27,6 +26,10 @@
         <p>Interests</p>
         <small ng-show="!user.interests || user.interests.length == 0">No interests, join to team and create new adventure to add your interests.</small>
         <small ng-repeat="item in user.interests| orderBy:'topic.topic' | groupBy:['topic.topic']">{{item.topic.topic}}: {{item.information}}</small>
-        <br>  
+        <br>
+        <p>Goals</p>
+        <small ng-show="!user.goals || user.goals.length == 0"> No Goals,  <a href="/settings">add</a> now.</small>
+        <pre ng-show="user.goals">{{ user.goals}}</pre>
+        <br>
     </blockquote>
 </div>
