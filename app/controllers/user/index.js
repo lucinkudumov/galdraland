@@ -405,6 +405,28 @@ module.exports = function (opts) {
                 }
             });
         },
+        "post#saveGoal": function (req, res) {
+            var goals = req.body.goals;
+            userModel.findById(req.user._id, function (err, user) {
+                if (err) {
+                    console.log(err);
+                    return res.json({success: false});
+                } else if (user) {
+                    user.goals = goals;
+                    user.save(function (err, user) {
+                        if (err) {
+                            console.log(err);
+                            return res.json({success: false});
+                        } else {
+                            return res.json({success: true});
+                        }
+                    });
+                } else {
+                    return res.json({success: false});
+                }
+            });
+        },
+
         "post#saveEducations": function (req, res) {
             var educations = req.body.educations;
 
@@ -435,7 +457,7 @@ module.exports = function (opts) {
                     email = req.body.email,
                     location = req.body.location,
                     skype = req.body.skype,
-                    goals = req.body.goals;
+//                    goals = req.body.goals;
             categories = req.body.categories;
 
             userModel.findById(req.user._id, function (err, user) {
@@ -447,7 +469,7 @@ module.exports = function (opts) {
                     user.fullname = fullname;
                     user.location = location;
                     user.skype = skype;
-                    user.goals = goals;
+//                    user.goals = goals;
                     user.categories = categories;
 
                     user.save(function (err, user) {

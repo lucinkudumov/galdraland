@@ -30,10 +30,12 @@
             <label class="label label-for-setting">Your Location:</label>
             <input class="form-control" type="text" ng-model="location" placeholder="Your location">
         </div>
+        <!--
         <div class="form-group form-group-for-setting">
             <label class="label label-for-setting">Provide Your Goals:</label>
             <input class="form-control" type="text" ng-model="goals" placeholder="Provide your goals">
         </div>
+        -->
         <div class="form-group form-group-for-setting">
             <label class="label label-for-setting">Your Skype:</label>
             <input class="form-control" type="text" ng-model="skype" placeholder="Your skype">
@@ -127,5 +129,11 @@
     <blockquote ng-show="false">
         <p>Interests</p>
         <button class="btn btn-default pull-right" ng-disabled="validateLinks()" ng-click="saveLinks()">Save</button>
+    </blockquote>
+    <blockquote>
+        <p>Goals</p>
+        <textarea class="form-control" ng-model="goals" placeholder="Provide your goals"></textarea>
+        <br>
+        <button class="btn btn-default pull-right" ng-click="saveGoal()">Save</button>
     </blockquote>
 </div>

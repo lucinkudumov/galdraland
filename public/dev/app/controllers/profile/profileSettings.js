@@ -48,7 +48,7 @@ app.controller("profileSettingsController", ["$scope", "$rootScope", "$location"
     }
     
     $scope.saveMainInformation = function () {
-        var request = $http({ method : "POST", url : "saveMainInformation", api : true,  data : { username : $scope.username, fullname : $scope.fullname, email : $scope.email, location : $scope.location, skype : $scope.skype, goals : $scope.goals, categories : $scope.categories }});
+        var request = $http({ method : "POST", url : "saveMainInformation", api : true,  data : { username : $scope.username, fullname : $scope.fullname, email : $scope.email, location : $scope.location, skype : $scope.skype, /*goals : $scope.goals,*/ categories : $scope.categories }});
         
         request.success(function (data) {
             if (data.success) {
@@ -133,7 +133,16 @@ app.controller("profileSettingsController", ["$scope", "$rootScope", "$location"
             }
         });
     }
-	
+
+    $scope.saveGoal = function () {
+        var request = $http({ method : "POST", url : "saveGoal", api : true, data : { goals : $scope.goals }});
+        request.success(function (data) {
+            if (data.success) {
+                User.update();
+            }
+        });
+    }
+
 	$scope.saveInterests = function () {
 		for(var i = $scope.interests.length - 1; i >= 0; i--)
 			if($scope.interests[i].topic.topic == "" && $scope.interests[i].information == "" ) $scope.interests.splice(i, 1);
