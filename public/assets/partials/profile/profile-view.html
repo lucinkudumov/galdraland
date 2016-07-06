@@ -7,18 +7,18 @@
         <small ng-show="user.skype">Skype: <cite title="Skype">{{ user.skype}}</cite></small>
         <small ng-show="user.categories">Categories: <cite title="Categories">{{ user.categories}}</cite></small>
         <br>
-        <uib-accordion close-others="true">
-        <uib-accordion-group is-open="true">
-        <uib-accordion-heading>
+        <accordion close-others="true">
+        <accordion-group is-open="true">
+        <accordion-heading>
         <p ng-show="user.educations.length > 0">Education<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': isopen, 'glyphicon-chevron-right': !isopen}"></i></p>
-        </uib-accordion-heading>
+        </accordion-heading>
         <small ng-show="!user.educations || user.educations.length == 0">No educations, <a href="/settings">add</a> now.</small>
         <small ng-repeat="e in user.educations" title="Education-{{ e.school.id}}">{{ e.type}}, {{ e.school.name}}, {{ e.year.name}}</small>
         <br>
-        </uib-accordion-group>
+        </accordion-group>
         <!--<uib-accordion-group is-open="0" template-url="group-template.html">-->
         <!--<uib-accordion-heading>-->
-        </uib-accordion>
+        </accordion>
         <p>Links</p>
         <!--<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': 0, 'glyphicon-chevron-right': 1}"></i>        -->
         <!--</uib-accordion-heading>-->
