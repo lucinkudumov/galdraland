@@ -37,6 +37,14 @@ module.exports = function (opts) {
                 }
             }]
         },
+        skills: {
+            type: [{
+                skill : {
+                    type: String,
+                    reqired: true
+                }
+            }]
+        },
         location: {
             type: String
         },

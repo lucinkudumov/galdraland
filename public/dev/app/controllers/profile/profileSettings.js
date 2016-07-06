@@ -14,6 +14,7 @@ app.controller("profileSettingsController", ["$scope", "$rootScope", "$location"
 	$scope.interests = [];
     $scope.likes = [];
     $scope.dislikes = [];
+    $scope.skills= [];
 		
 	$http.get("/api/getUserDetail").success(function (data) {
 		$scope.username = data.user.username;
@@ -30,6 +31,7 @@ app.controller("profileSettingsController", ["$scope", "$rootScope", "$location"
 		$scope.interests = (data.user.interests.length)?data.user.interests:[{topic: {topic : ""}, information: ""}];
         $scope.likes = data.user.likes;
         $scope.dislikes = data.user.dislikes;
+        $scope.skills= data.user.skills;
 
 		$scope.invalidUsername = false;
 		$scope.invalidEmail = false;
@@ -116,6 +118,10 @@ app.controller("profileSettingsController", ["$scope", "$rootScope", "$location"
         $scope.dislikes.push({ dislike : "" });
     }
 
+    $scope.addSkills = function () {
+        $scope.skills.push({ skill : "" });
+    }
+
     $scope.validateLinks = function () {
         for (var i = 0; i < $scope.links.length; i++) {
             var l = $scope.links[i];
@@ -152,6 +158,18 @@ app.controller("profileSettingsController", ["$scope", "$rootScope", "$location"
         return false;
     }
 
+    $scope.validateSkills = function () {
+        for (var i = 0; i < $scope.skills.length; i++) {
+            var l = $scope.skills[i];
+
+            if (!l.skill) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     $scope.saveLinks = function () {
         var request = $http({ method : "POST", url : "saveLinks", api : true, data :  { links : $scope.links }});
         request.success(function (data) {
@@ -179,6 +197,14 @@ app.controller("profileSettingsController", ["$scope", "$rootScope", "$location"
         });
     }
 
+    $scope.saveSkills = function () {
+        var request = $http({ method : "POST", url : "saveSkills", api : true, data :  { skills : $scope.skills }});
+        request.success(function (data) {
+            if (data.success) {
+                User.update();
+            }
+        });
+    }
 
     $scope.saveExperience = function () {
         var request = $http({ method : "POST", url : "saveExperience", api : true, data : { experience : $scope.experience }});
@@ -250,6 +276,13 @@ app.controller("profileSettingsController", ["$scope", "$rootScope", "$location"
         var index = $scope.dislikes.indexOf(l);
         if (index >= 0) {
             $scope.dislikes.splice(index, 1);
+        }
+    }
+
+    $scope.removeSkills = function (l) {
+        var index = $scope.skills.indexOf(l);
+        if (index >= 0) {
+            $scope.skills.splice(index, 1);
         }
     }
 
