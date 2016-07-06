@@ -37,7 +37,6 @@ module.exports = function (grunt) {
 					   "public/dev/libs/angular-ui-router.js",
 					   "public/dev/libs/angular-cookies.js",
 					   "public/dev/libs/ui-bootstrap.min.js",
-                       "public/dev/libs/ui-bootstrap-tpls-1.3.3.js",
 					   "bower_components/**/**.js"
 					],
 					
