@@ -2010,6 +2010,8 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$statePa
                         $scope.activeMember.description = model.description;
                         $scope.activeMember.roles = model.roles;
                         $scope.activeMember.status = model.status;
+                        $scope.activeMember.skills = model.skills;
+                        $scope.activeMember.whatisthere = model.whatisthere;
 
                         var request = $http({method: "POST", url: "updateTeamMember", api: true, data: model});
                     }

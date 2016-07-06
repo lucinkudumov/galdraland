@@ -500,6 +500,8 @@ module.exports = function (opts) {
                     title = req.body.title,
                     status = req.body.status,
                     description = req.body.description,
+                    skills = req.body.skills,
+                    whatisthere = req.body.whatisthere,
                     roles = req.body.roles;
 
             teamModel.findOne({teamMembers: id, owner: req.user._id}, function (err, team) {
@@ -515,6 +517,8 @@ module.exports = function (opts) {
                             member.title = title;
                             member.status = status;
                             member.description = description;
+                            member.skills = skills;
+                            member.whatisthere = whatisthere;
                             member.roles = roles;
 
                             member.save(function (err, member) {
