@@ -21,6 +21,14 @@ module.exports = function (opts) {
             }],
             required: true
         },
+        likes: {
+            type: [{
+                like : {
+                    type: String,
+                    reqired: true
+                }
+            }]
+        },
         location: {
             type: String
         },
