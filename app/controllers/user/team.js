@@ -381,6 +381,7 @@ module.exports = function (opts) {
                         member.title = title_list[i];
                         member.user = defuser._id;
                         member.description = description;
+                        member.skills = skills;
                         member.whatisthere = whatisthere;
                         member.save(function (err, member) {
                             if (err) {
