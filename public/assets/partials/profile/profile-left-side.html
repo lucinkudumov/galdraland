@@ -3,7 +3,7 @@
     <p>Teams</p>
     <small ng-show="teams.length == 0">No teams, <a href="/teams">search</a> or <a href="/teams/create">add</a> new team now.</small> 
     <ul ng-show="teams.length > 0"> 
-        <li ng-repeat="t in teams"><a href="/teams/view/{{ t._id }}">{{ t.name }}<p ng-repeat="member in t.teamMembers"> {{ member.title }}</p></a></li>
+        <li ng-repeat="t in teams"><a href="/teams/view/{{ t._id }}">{{ t.name }}<span ng-repeat="member in t.teamMembers"> <span ng-show="member.user._id==user._id">{{ member.title }}</span></span></a></li>
     </ul>
     <hr ng-show="recomendation.length > 0">
     <p>Adventures</p>
