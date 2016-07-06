@@ -213,7 +213,9 @@ module.exports = function (opts) {
                     start = req.body.start,
                     end = req.body.end,
                     status = req.body.status,
+                    type = req.body.type,
                     image = req.body.image;
+
 
             var updateInfo = {};
 
@@ -249,6 +251,9 @@ module.exports = function (opts) {
                 updateInfo.status = status;
             }
 
+            if (type) {
+                updateInfo.type = type;
+            }
             if (image) {
                 updateInfo.image = image;
             }
