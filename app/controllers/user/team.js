@@ -356,7 +356,10 @@ module.exports = function (opts) {
             console.log('ha');
             var team_id = req.body.team_id,
                     defuser = req.body.defuser,
-                    titles = req.body.titles;
+                    titles = req.body.titles,
+                    skills = req.body.skills,
+                    description = req.body.description,
+                    whatisthere = req.body.whatisthere;
 
             console.log('haha');
             teamModel.findById(team_id).populate("owner teamMembers").exec(function (err, team) {
@@ -377,6 +380,8 @@ module.exports = function (opts) {
                         var member = new teamMemberModel();
                         member.title = title_list[i];
                         member.user = defuser._id;
+                        member.description = description;
+                        member.whatisthere = whatisthere;
                         member.save(function (err, member) {
                             if (err) {
                                 console.log(err);

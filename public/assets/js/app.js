@@ -955,7 +955,8 @@ app.controller("addMemberTitleController", ["$scope", "$modalInstance", "values"
 
         $scope.create = function () {
             console.log('create member title action');
-            $modalInstance.close({type: "CREATE", titles: $scope.values.titles, team: $scope.values.team});
+            console.log('skills = ' + values.skills);
+            $modalInstance.close({type: "CREATE", titles: $scope.values.titles, skills: $scope.values.skills, description: $scope.values.description, whatisthere: $scope.values.whatisthere, team: $scope.values.team});
         }
     }]);
 
@@ -2036,7 +2037,7 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$statePa
                 controller: "addMemberTitleController",
                 resolve: {
                     values: function () {
-                        return {titles: "", team: $scope.team}
+                        return {titles: "", skills: "", description: "", whatisthere: "", team: $scope.team}
                     }
                 }
             });
@@ -2044,7 +2045,7 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$statePa
             modalInstance.result.then(function (result) {
                 if (result.type == "CREATE") {
                     console.log('send request : create member title');
-                    var request = $http({method: "POST", url: "addMemberTitle", api: true, data: {team_id: result.team._id, titles: result.titles, defuser: $rootScope.defUser}});
+                    var request = $http({method: "POST", url: "addMemberTitle", api: true, data: {team_id: result.team._id, titles: result.titles, skills: result.skills, description: result.description, whatisthere: result.whatisthere,defuser: $rootScope.defUser}});
                     request.success(function (data) {
                         location.reload();
                     });

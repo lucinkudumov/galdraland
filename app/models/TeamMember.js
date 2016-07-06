@@ -16,6 +16,12 @@ module.exports = function (opts) {
         description : {
             type: String
         },
+        skills : {
+            type: String
+        },
+        whatisthere : {
+            type: String
+        },
         status : {
             type: String
         },
