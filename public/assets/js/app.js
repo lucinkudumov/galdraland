@@ -955,8 +955,8 @@ app.controller("addMemberTitleController", ["$scope", "$modalInstance", "values"
 
         $scope.create = function () {
             console.log('create member title action');
-            console.log('skills = ', values.skills);
-            console.log('whatisthere = ', values.whatisthere);
+            console.log('skills = ', $scope.values.skills);
+            console.log('whatisthere = ', $scope.values.whatisthere);
             $modalInstance.close({type: "CREATE", titles: $scope.values.titles, skills: $scope.values.skills, description: $scope.values.description, whatisthere: $scope.values.whatisthere, team: $scope.values.team});
         }
     }]);
