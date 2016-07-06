@@ -7,14 +7,24 @@
         <small ng-show="user.skype">Skype: <cite title="Skype">{{ user.skype}}</cite></small>
         <small ng-show="user.categories">Categories: <cite title="Categories">{{ user.categories}}</cite></small>
         <br>
-        <p ng-show="user.educations.length > 0">Education</p>
+        <uib-accordion close-others="oneAtATime">
+        <uib-accordion-group is-open="status.open">
+        <uib-accordion-heading>
+        <p ng-show="user.educations.length > 0">Education</p><i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+        </uib-accordion-heading>
         <small ng-show="!user.educations || user.educations.length == 0">No educations, <a href="/settings">add</a> now.</small>
         <small ng-repeat="e in user.educations" title="Education-{{ e.school.id}}">{{ e.type}}, {{ e.school.name}}, {{ e.year.name}}</small>
         <br>
-        <p>Links</p>
+        </uib-accordion-group>
+        <uib-accordion-group is-open="status.open">
+        <uib-accordion-heading>
+        <p>Links</p><i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+        </uib-accordion-heading>
         <small ng-show="!user.links || user.link.length == 0">No links, <a href="/settings">add</a> now.</small>
         <small ng-repeat="l in user.links"><a href="{{ l.link}}" target="_blank">{{ l.name || l.link }}</a></small>
         <br>
+        </uib-accordion-group>
+        </uib-accordion>
         <p>Experience</p>
         <small ng-show="!user.experience || user.experience.length == 0">No experience, <a href="/settings">add</a> now.</small>
         <pre ng-show="user.experience">{{ user.experience}}</pre>
