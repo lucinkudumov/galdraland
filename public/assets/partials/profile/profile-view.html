@@ -24,7 +24,7 @@
         <small ng-show="user.categories">Categories: <cite title="Categories">{{ user.categories}}</cite></small>
         <br>
         <uib-accordion close-others="0">
-        <uib-accordion-group is-open="0">
+        <uib-accordion-group is-open="0" template-url="group-template.html">
         <uib-accordion-heading>
         <p ng-show="user.educations.length > 0">Education<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': 0, 'glyphicon-chevron-right': 1}"></i></p>
         </uib-accordion-heading>
@@ -32,7 +32,7 @@
         <small ng-repeat="e in user.educations" title="Education-{{ e.school.id}}">{{ e.type}}, {{ e.school.name}}, {{ e.year.name}}</small>
         <br>
         </uib-accordion-group>
-        <uib-accordion-group is-open="0">
+        <uib-accordion-group is-open="0" template-url="group-template.html">
         <uib-accordion-heading>
         <p>Links<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': 0, 'glyphicon-chevron-right': 1}"></i></p>
         </uib-accordion-heading>
