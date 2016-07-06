@@ -1,20 +1,20 @@
 <div ng-controller="profileViewController">
-    <script type="text/ng-template" id="group-template.html">
-        <div class="panel {{panelClass || 'panel-default'}}">
-            <div class="panel-heading">
-                <h4 class="panel-title" style="color:#fa39c3">
-                    <a href tabindex="0" class="accordion-toggle" ng-click="toggleOpen()" uib-accordion-transclude="heading">
-            <span uib-accordion-header ng-class="{'text-muted': isDisabled}">
-              {{heading}}
-            </span>
-                    </a>
-                </h4>
-            </div>
-            <div class="panel-collapse collapse" uib-collapse="!isOpen">
-                <div class="panel-body" style="text-align: right" ng-transclude></div>
-            </div>
-        </div>
-    </script>
+    <!--<script type="text/ng-template" id="group-template.html">-->
+        <!--<div class="panel {{panelClass || 'panel-default'}}">-->
+            <!--<div class="panel-heading">-->
+                <!--<h4 class="panel-title" style="color:#fa39c3">-->
+                    <!--<a href tabindex="0" class="accordion-toggle" ng-click="toggleOpen()" uib-accordion-transclude="heading">-->
+            <!--<span uib-accordion-header ng-class="{'text-muted': isDisabled}">-->
+              <!--{{heading}}-->
+            <!--</span>-->
+                    <!--</a>-->
+                <!--</h4>-->
+            <!--</div>-->
+            <!--<div class="panel-collapse collapse" uib-collapse="!isOpen">-->
+                <!--<div class="panel-body" style="text-align: right" ng-transclude></div>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</script>-->
     <blockquote>
         <p>{{ user.fullname}} <a href="/settings"><span class="badge badge-primary">Settings</span></a></p>
         <small><cite title="Username">{{ user.username}}  <i class="glyphicon glyphicon-user"></i></cite></small>
@@ -23,24 +23,26 @@
         <small ng-show="user.skype">Skype: <cite title="Skype">{{ user.skype}}</cite></small>
         <small ng-show="user.categories">Categories: <cite title="Categories">{{ user.categories}}</cite></small>
         <br>
-        <uib-accordion close-others="0">
-        <uib-accordion-group is-open="0" template-url="group-template.html">
-        <uib-accordion-heading>
-        <p ng-show="user.educations.length > 0">Education<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': 0, 'glyphicon-chevron-right': 1}"></i></p>
-        </uib-accordion-heading>
+        <!--<uib-accordion close-others="0">-->
+        <!--<uib-accordion-group is-open="0" template-url="group-template.html">-->
+        <!--<uib-accordion-heading>-->
+        <p ng-show="user.educations.length > 0">Education</p>
+        <!--<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': 0, 'glyphicon-chevron-right': 1}"></i>-->
+        <!--</uib-accordion-heading>-->
         <small ng-show="!user.educations || user.educations.length == 0">No educations, <a href="/settings">add</a> now.</small>
         <small ng-repeat="e in user.educations" title="Education-{{ e.school.id}}">{{ e.type}}, {{ e.school.name}}, {{ e.year.name}}</small>
         <br>
-        </uib-accordion-group>
-        <uib-accordion-group is-open="0" template-url="group-template.html">
-        <uib-accordion-heading>
-        <p>Links<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': 0, 'glyphicon-chevron-right': 1}"></i></p>
-        </uib-accordion-heading>
+        <!--</uib-accordion-group>-->
+        <!--<uib-accordion-group is-open="0" template-url="group-template.html">-->
+        <!--<uib-accordion-heading>-->
+        <p>Links</p>
+        <!--<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': 0, 'glyphicon-chevron-right': 1}"></i>        -->
+        <!--</uib-accordion-heading>-->
         <small ng-show="!user.links || user.link.length == 0">No links, <a href="/settings">add</a> now.</small>
         <small ng-repeat="l in user.links"><a href="{{ l.link}}" target="_blank">{{ l.name || l.link }}</a></small>
         <br>
-        </uib-accordion-group>
-        </uib-accordion>
+        <!--</uib-accordion-group>-->
+        <!--</uib-accordion>-->
         <p>Experience</p>
         <small ng-show="!user.experience || user.experience.length == 0">No experience, <a href="/settings">add</a> now.</small>
         <pre ng-show="user.experience">{{ user.experience}}</pre>
