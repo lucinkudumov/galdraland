@@ -38,7 +38,7 @@ module.exports = function (grunt) {
 					   "public/dev/libs/angular-cookies.js",
 					   "public/dev/libs/ui-bootstrap.min.js",
 //                       "public/dev/libs/ui-bootstrap-tpls-1.3.3.js",
-					   "bower_components/**/**.js",
+					   "bower_components/**/**.js"
 					],
 					
 					"public/assets/js/app.js" : [
