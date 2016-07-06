@@ -1248,6 +1248,7 @@ app.controller("profileSettingsController", ["$scope", "$rootScope", "$location"
         $scope.likes = [];
         $scope.dislikes = [];
         $scope.skills = [];
+        $scope.looks = [];
 
         $http.get("/api/getUserDetail").success(function (data) {
             $scope.username = data.user.username;
@@ -1265,6 +1266,7 @@ app.controller("profileSettingsController", ["$scope", "$rootScope", "$location"
             $scope.likes = data.user.likes;
             $scope.dislikes = data.user.dislikes;
             $scope.skills = data.user.skills;
+            $scope.looks = data.user.looks;
 
             $scope.invalidUsername = false;
             $scope.invalidEmail = false;
@@ -1350,6 +1352,10 @@ app.controller("profileSettingsController", ["$scope", "$rootScope", "$location"
             $scope.skills.push({skill: ""});
         }
 
+        $scope.addLooks = function () {
+            $scope.looks.push({look: ""});
+        }
+
         $scope.addInterest = function () {
             $scope.interests.push({topic: "", information: ""});
             $scope.interest_placeholder = "";
@@ -1412,6 +1418,17 @@ app.controller("profileSettingsController", ["$scope", "$rootScope", "$location"
             return false;
         }
 
+        $scope.validateLooks = function () {
+            for (var i = 0; i < $scope.looks.length; i++) {
+                var l = $scope.looks[i];
+
+                if (!l.look) {
+                    return true;
+                }
+            }
+
+            return false;
+        }
 
         $scope.saveLikes = function () {
             var request = $http({method: "POST", url: "saveLikes", api: true, data: {likes: $scope.likes}});
@@ -1433,6 +1450,15 @@ app.controller("profileSettingsController", ["$scope", "$rootScope", "$location"
 
         $scope.saveSkills = function () {
             var request = $http({method: "POST", url: "saveSkills", api: true, data: {skills: $scope.skills}});
+            request.success(function (data) {
+                if (data.success) {
+                    User.update();
+                }
+            });
+        }
+
+        $scope.saveLooks = function () {
+            var request = $http({method: "POST", url: "saveLooks", api: true, data: {looks: $scope.looks}});
             request.success(function (data) {
                 if (data.success) {
                     User.update();
@@ -1509,6 +1535,13 @@ app.controller("profileSettingsController", ["$scope", "$rootScope", "$location"
             var index = $scope.skills.indexOf(l);
             if (index >= 0) {
                 $scope.skills.splice(index, 1);
+            }
+        }
+
+        $scope.removeLooks = function (l) {
+            var index = $scope.looks.indexOf(l);
+            if (index >= 0) {
+                $scope.looks.splice(index, 1);
             }
         }
 

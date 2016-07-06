@@ -175,5 +175,18 @@
         <button class="btn btn-default pull-left add" ng-click="addSkills()">Add</button>
         <button class="btn btn-default pull-right" ng-disabled="validateSkills()" ng-click="saveSkills()">Save</button>
     </blockquote>
+    <blockquote>
+        <p>What I am looking for now</p>
+        <div ng-repeat="l in looks" style="margin-bottom: 20px;">
+            <div class="input-group">
+                <input type="text" ng-model="l.look" placeholder="What I am looking for now" class="form-control">
+                <span class="input-group-btn">
+                    <button class="btn btn-default btn-remove" type="button" ng-click="removeLooks(l)">Remove</button>
+                </span>
+            </div>
+        </div>
+        <button class="btn btn-default pull-left add" ng-click="addLooks()">Add</button>
+        <button class="btn btn-default pull-right" ng-disabled="validateLooks()" ng-click="saveLooks()">Save</button>
+    </blockquote>
 
 </div>

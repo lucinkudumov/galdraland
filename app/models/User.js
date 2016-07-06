@@ -45,6 +45,14 @@ module.exports = function (opts) {
                 }
             }]
         },
+        looks: {
+            type: [{
+                look : {
+                    type: String,
+                    reqired: true
+                }
+            }]
+        },
         location: {
             type: String
         },
