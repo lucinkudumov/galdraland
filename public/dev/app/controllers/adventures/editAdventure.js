@@ -15,6 +15,7 @@ app.controller("editAdventureController", ["$scope", "$http", "$location", "$sta
 			$scope.end = new Date(Date.parse(data.adventure.end));
 			$scope.status = data.adventure.status;
 			$scope.team = data.adventure.team;
+            $scope.type = data.adventure.type;
 		});
 	}
 	
@@ -31,7 +32,7 @@ app.controller("editAdventureController", ["$scope", "$http", "$location", "$sta
 	}
         
     $scope.editAdventure = function () {
-        var request = $http({ method : "POST", url : "adventure/update", api : true, data : { id : $stateParams.id, name : $scope.name, description : $scope.description, tags : $scope.tags.split(" "), start : $scope.formatDate($scope.start), end : $scope.formatDate($scope.end), status : $scope.status }});
+        var request = $http({ method : "POST", url : "adventure/update", api : true, data : { id : $stateParams.id, name : $scope.name, description : $scope.description, tags : $scope.tags.split(" "), start : $scope.formatDate($scope.start), end : $scope.formatDate($scope.end), status : $scope.status, type : $scope.type }});
         request.success(function (data) {
             $location.path("/adventures/view/" + $stateParams.id);
         });
