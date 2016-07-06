@@ -1,4 +1,4 @@
-var app = angular.module("galdra", ["ngRoute", "ui.router", "ngCookies", "ui.bootstrap", "ngFileUpload"]);
+var app = angular.module("galdra", ["ngRoute", "ui.router", "ngCookies", "ui.bootstrap", "ngFileUpload", "ui.bootstrap.accordion"]);
 var config = {
     //siteurl : 'http://galdraland.com:9010/'
     siteurl: 'http://galdraland-1-0.herokuapp.com/'

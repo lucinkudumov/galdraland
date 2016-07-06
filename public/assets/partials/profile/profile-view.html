@@ -34,6 +34,7 @@
         </uib-accordion-group>
         <!--<uib-accordion-group is-open="0" template-url="group-template.html">-->
         <!--<uib-accordion-heading>-->
+        </uib-accordion>
         <p>Links</p>
         <!--<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': 0, 'glyphicon-chevron-right': 1}"></i>        -->
         <!--</uib-accordion-heading>-->
@@ -41,7 +42,6 @@
         <small ng-repeat="l in user.links"><a href="{{ l.link}}" target="_blank">{{ l.name || l.link }}</a></small>
         <br>
         <!--</uib-accordion-group>-->
-        </uib-accordion>
         <p>Experience</p>
         <small ng-show="!user.experience || user.experience.length == 0">No experience, <a href="/settings">add</a> now.</small>
         <pre ng-show="user.experience">{{ user.experience}}</pre>
