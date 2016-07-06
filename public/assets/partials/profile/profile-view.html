@@ -54,6 +54,13 @@
         <small ng-show="!user.goals || user.goals.length == 0"> No Goals,  <a href="/settings">add</a> now.</small>
         <pre ng-show="user.goals">{{ user.goals}}</pre>
         </accordion-group>
+        <accordion-group is-open="true">
+        <accordion-heading>
+        <p>Likes</p>
+        </accordion-heading>
+        <small ng-show="!user.likes || user.likes.length == 0">No Likes, <a href="/settings">add</a> now.</small>
+        <small ng-repeat="l in user.likes">{{ l.like }}</small>
+        </accordion-group>
         </accordion>
     </blockquote>
 </div>

@@ -12,6 +12,7 @@ app.controller("profileSettingsController", ["$scope", "$rootScope", "$location"
 	$scope.bio = "";
 	$scope.bio_placeholder = "Provide your biography or import from facebook...";
 	$scope.interests = [];
+    $scope.likes = [];
 		
 	$http.get("/api/getUserDetail").success(function (data) {
 		$scope.username = data.user.username;
@@ -103,7 +104,11 @@ app.controller("profileSettingsController", ["$scope", "$rootScope", "$location"
         $scope.interests.push({ topic : "", information : "" });
 		$scope.interest_placeholder = "";
     }
-    
+
+    $scope.addLikes = function () {
+        $scope.likes.push({ like : "" });
+    }
+
     $scope.validateLinks = function () {
         for (var i = 0; i < $scope.links.length; i++) {
             var l = $scope.links[i];
@@ -115,6 +120,18 @@ app.controller("profileSettingsController", ["$scope", "$rootScope", "$location"
         
         return false;
     }
+
+    $scope.validateLikes = function () {
+        for (var i = 0; i < $scope.likes.length; i++) {
+            var l = $scope.likes[i];
+
+            if (!l.like) {
+                return true;
+            }
+        }
+
+        return false;
+    }
     
     $scope.saveLinks = function () {
         var request = $http({ method : "POST", url : "saveLinks", api : true, data :  { links : $scope.links }});
@@ -124,7 +141,28 @@ app.controller("profileSettingsController", ["$scope", "$rootScope", "$location"
             }
         });
     }
-    
+
+    $scope.saveLikes = function () {
+        var request = $http({ method : "POST", url : "saveLikes", api : true, data :  { likes : $scope.likes }});
+        request.success(function (data) {
+            if (data.success) {
+                User.update();
+            }
+        });
+    }
+
+    $scope.validateLikes = function () {
+        for (var i = 0; i < $scope.likes.length; i++) {
+            var l = $scope.likes[i];
+
+            if (!l.likes) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     $scope.saveExperience = function () {
         var request = $http({ method : "POST", url : "saveExperience", api : true, data : { experience : $scope.experience }});
         request.success(function (data) {
@@ -183,7 +221,14 @@ app.controller("profileSettingsController", ["$scope", "$rootScope", "$location"
             $scope.educations.splice(index, 1);
         }
     }
-	
+
+    $scope.removeLikes = function (l) {
+        var index = $scope.likes.indexOf(l);
+        if (index >= 0) {
+            $scope.likes.splice(index, 1);
+        }
+    }
+
 	$scope.importBio = function(){
 		FB.login(function(){
 			FB.api("/me", function (response) {
