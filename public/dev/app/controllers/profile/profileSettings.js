@@ -13,6 +13,7 @@ app.controller("profileSettingsController", ["$scope", "$rootScope", "$location"
 	$scope.bio_placeholder = "Provide your biography or import from facebook...";
 	$scope.interests = [];
     $scope.likes = [];
+    $scope.dislikes = [];
 		
 	$http.get("/api/getUserDetail").success(function (data) {
 		$scope.username = data.user.username;
@@ -27,7 +28,9 @@ app.controller("profileSettingsController", ["$scope", "$rootScope", "$location"
 		$scope.experience = data.user.experience;
 		$scope.bio = data.user.bio;
 		$scope.interests = (data.user.interests.length)?data.user.interests:[{topic: {topic : ""}, information: ""}];
-		
+        $scope.likes = data.user.likes;
+        $scope.dislikes = data.user.dislikes;
+
 		$scope.invalidUsername = false;
 		$scope.invalidEmail = false;
 	});
@@ -109,6 +112,10 @@ app.controller("profileSettingsController", ["$scope", "$rootScope", "$location"
         $scope.likes.push({ like : "" });
     }
 
+    $scope.addDislikes = function () {
+        $scope.dislikes.push({ dislike : "" });
+    }
+
     $scope.validateLinks = function () {
         for (var i = 0; i < $scope.links.length; i++) {
             var l = $scope.links[i];
@@ -132,7 +139,19 @@ app.controller("profileSettingsController", ["$scope", "$rootScope", "$location"
 
         return false;
     }
-    
+
+    $scope.validateDislikes = function () {
+        for (var i = 0; i < $scope.dislikes.length; i++) {
+            var l = $scope.dislikes[i];
+
+            if (!l.dislike) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     $scope.saveLinks = function () {
         var request = $http({ method : "POST", url : "saveLinks", api : true, data :  { links : $scope.links }});
         request.success(function (data) {
@@ -151,17 +170,15 @@ app.controller("profileSettingsController", ["$scope", "$rootScope", "$location"
         });
     }
 
-    $scope.validateLikes = function () {
-        for (var i = 0; i < $scope.likes.length; i++) {
-            var l = $scope.likes[i];
-
-            if (!l.likes) {
-                return true;
+    $scope.saveDislikes = function () {
+        var request = $http({ method : "POST", url : "saveDislikes", api : true, data :  { dislikes : $scope.dislikes }});
+        request.success(function (data) {
+            if (data.success) {
+                User.update();
             }
-        }
-
-        return false;
+        });
     }
+
 
     $scope.saveExperience = function () {
         var request = $http({ method : "POST", url : "saveExperience", api : true, data : { experience : $scope.experience }});
@@ -226,6 +243,13 @@ app.controller("profileSettingsController", ["$scope", "$rootScope", "$location"
         var index = $scope.likes.indexOf(l);
         if (index >= 0) {
             $scope.likes.splice(index, 1);
+        }
+    }
+
+    $scope.removeDislikes = function (l) {
+        var index = $scope.dislikes.indexOf(l);
+        if (index >= 0) {
+            $scope.dislikes.splice(index, 1);
         }
     }
 

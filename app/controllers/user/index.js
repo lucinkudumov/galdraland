@@ -326,6 +326,28 @@ module.exports = function (opts) {
                 }
             });
         },
+        "post#saveDislikes": function (req, res) {
+            var dislikes = req.body.dislikes;
+
+            userModel.findById(req.user._id, function (err, user) {
+                if (err) {
+                    console.log(err);
+                    return res.json({success: false});
+                } else if (user) {
+                    user.dislikes = dislikes;
+                    user.save(function (err, user) {
+                        if (err) {
+                            console.log(err);
+                            return res.json({success: false});
+                        } else {
+                            return res.json({success: true});
+                        }
+                    });
+                } else {
+                    return res.json({success: false});
+                }
+            });
+        },
         "post#saveBiography": function (req, res) {
             var bio = req.body.biography;
 

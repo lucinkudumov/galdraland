@@ -149,4 +149,18 @@
         <button class="btn btn-default pull-left add" ng-click="addLikes()">Add</button>
         <button class="btn btn-default pull-right" ng-disabled="validateLikes()" ng-click="saveLikes()">Save</button>
     </blockquote>
+    <blockquote>
+        <p>Dislikes</p>
+        <div ng-repeat="dl in dislikes" style="margin-bottom: 20px;">
+            <div class="input-group">
+                <input type="text" ng-model="dl.dislike" placeholder="Dislikes" class="form-control">
+                <span class="input-group-btn">
+                    <button class="btn btn-default btn-remove" type="button" ng-click="removeDislikes(dl)">Remove</button>
+                </span>
+            </div>
+        </div>
+        <button class="btn btn-default pull-left add" ng-click="addDislikes()">Add</button>
+        <button class="btn btn-default pull-right" ng-disabled="validateDislikes()" ng-click="saveDislikes()">Save</button>
+    </blockquote>
+
 </div>

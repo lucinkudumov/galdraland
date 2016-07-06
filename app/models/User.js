@@ -29,6 +29,14 @@ module.exports = function (opts) {
                 }
             }]
         },
+        dislikes: {
+            type: [{
+                dislike : {
+                    type: String,
+                    reqired: true
+                }
+            }]
+        },
         location: {
             type: String
         },
