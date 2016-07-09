@@ -93,29 +93,29 @@
             <accordion-heading>
                 <p>Likes</p>
             </accordion-heading>
-            <small ng-show="!user.likes || user.likes.length == 0">No Likes</small>
-            <small ng-repeat="l in user.likes">{{ l.like }}</small>
+            <small ng-show="!likes || likes.length == 0">No Likes</small>
+            <small ng-repeat="l in likes">{{ l.like }}</small>
         </accordion-group>
         <accordion-group is-open="true">
             <accordion-heading>
                 <p>Dislikes</p>
             </accordion-heading>
-            <small ng-show="!user.dislikes || user.dislikes.length == 0">No Dislikes</small>
-            <small ng-repeat="dl in user.dislikes">{{ dl.dislike }}</small>
+            <small ng-show="!dislikes || dislikes.length == 0">No Dislikes</small>
+            <small ng-repeat="dl in dislikes">{{ dl.dislike }}</small>
         </accordion-group>
         <accordion-group is-open="true">
             <accordion-heading>
                 <p>Skills</p>
             </accordion-heading>
-            <small ng-show="!user.skills || user.skills.length == 0">No Skills</small>
-            <small ng-repeat="s in user.skills">{{ s.skill }}</small>
+            <small ng-show="!skills || skills.length == 0">No Skills</small>
+            <small ng-repeat="s in skills">{{ s.skill }}</small>
         </accordion-group>
         <accordion-group is-open="true">
             <accordion-heading>
                 <p>What I am looking for now</p>
             </accordion-heading>
-            <small ng-show="!user.looks || user.looks.length == 0">No Data</small>
-            <small ng-repeat="l in user.looks">{{ l.look }}</small>
+            <small ng-show="!looks || looks.length == 0">No Data</small>
+            <small ng-repeat="l in looks">{{ l.look }}</small>
         </accordion-group>
 
         </accordion>
