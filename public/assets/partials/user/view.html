@@ -1,8 +1,12 @@
 <div class="view-user" ng-controller="userViewController">
     <div class="avatar" style="background-image: url('{{ photo}}')"></div>
     <h1>{{ fullname}}</h1>
+    <accordion close-others="false">
     <blockquote>
+        <accordion-group is-open="true">
+        <accordion-heading>
         <p>Main information</p>
+        </accordion-heading>
         <div class="form-group">
             <small>User Name : {{ username}}</small>
         </div>
@@ -16,18 +20,20 @@
             <small>Skype : {{ skype}}</small>
         </div>
         <div class="form-group">
-            <small>Goals : {{ goals}}</small>
-        </div>
-        <div class="form-group">
             <small>Categories : {{ categories}}</small>
         </div>
+        </accordion-group>
     </blockquote>
     <blockquote>
+        <accordion-group is-open="true">
+        <accordion-heading>
         <p>Teams</p>
+        </accordion-heading>
         <small ng-show="teams.length == 0">No teams</small> 
         <ul ng-show="teams.length > 0"> 
             <li ng-repeat="t in teams"><a href="/teams/view/{{ t._id}}">{{ t.name}}<span ng-repeat="member in t.teamMembers"> <span ng-show="member.user == searchUserId"> ( {{ member.title }} )</span></span></a></li>
         </ul>
+        </accordion-group>
     </blockquote>
     <blockquote>
         <p>Adventures</p>
@@ -71,5 +77,9 @@
                 <small><a href="{{ l.link}}">Link : {{ l.name}}</a></small>
             </div>
         </div>
+    </blockquote>
+    <blockquote>
+        <p>Goals</p>
+        <small ng-show="goals">{{ goals}}</small>
     </blockquote>
 </div>
