@@ -67,7 +67,13 @@ app.controller("teamViewController", ["$scope", "$http", "$stateParams", "User",
                  }
             });
         } else {
-            
+            var modalInstance = $modal.open({
+                templateUrl: '/assets/partials/modal/memberView.html',
+                controller: "MemberViewController",
+                resolve: {
+                    user : function () { return member; }
+                }
+            });
         }
     }
 	

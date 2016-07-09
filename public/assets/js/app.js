@@ -920,6 +920,15 @@ app.controller("MemberEditController", ["$scope", "user", "$modalInstance", func
         }
     }]);
 
+app.controller("MemberViewController", ["$scope", "user", "$modalInstance", function ($scope, user, $modalInstance) {
+    $scope.user = angular.copy(user);
+
+    $scope.cancel = function () {
+        $modalInstance.close();
+    }
+
+}]);
+
 app.controller("YesAndNoController", ["$scope", "msg", "title", "$modalInstance", function ($scope, msg, title, $modalInstance) {
         $scope.msg = msg;
         $scope.title = title;
@@ -2031,7 +2040,15 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$statePa
                     }
                 });
             } else {
-
+                var modalInstance = $modal.open({
+                    templateUrl: '/assets/partials/modal/memberView.html',
+                    controller: "MemberViewController",
+                    resolve: {
+                        user: function () {
+                            return member;
+                        }
+                    }
+                });
             }
         }
 
