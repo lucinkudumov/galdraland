@@ -2,7 +2,6 @@
     <div class="avatar" style="background-image: url('{{ photo}}')"></div>
     <h1>{{ fullname}}</h1>
     <accordion close-others="false">
-    <blockquote>
         <accordion-group is-open="true">
         <accordion-heading>
         <p>Main information</p>
@@ -23,8 +22,6 @@
             <small>Categories : {{ categories}}</small>
         </div>
         </accordion-group>
-    </blockquote>
-    <blockquote>
         <accordion-group is-open="true">
         <accordion-heading>
         <p>Teams</p>
@@ -34,19 +31,20 @@
             <li ng-repeat="t in teams"><a href="/teams/view/{{ t._id}}">{{ t.name}}<span ng-repeat="member in t.teamMembers"> <span ng-show="member.user == searchUserId"> ( {{ member.title }} )</span></span></a></li>
         </ul>
         </accordion-group>
-    </blockquote>
-    <blockquote>
+        <accordion-group is-open="true">
+        <accordion-heading>
         <p>Adventures</p>
+        </accordion-heading>
         <small ng-show="adventures.length == 0">No adventures</small> 
         <ul ng-show="adventures.length > 0"> 
             <li ng-repeat="a in adventures"><a href="/adventures/view/{{ a._id}}">{{ a.name}}</a></li>
         </ul>
-    </blockquote>
-    <blockquote>
+        </accordion-group>
+        <accordion-group is-open="true">
+        <accordion-heading>
         <p>Biography</p>
+        </accordion-heading>
         <small ng-show="bio">{{ bio}}</small>
-    </blockquote>
-    <blockquote>
         <p>Interests</p>
         <div ng-repeat="i in interests" style="margin-bottom: 20px;">
             <div class="input-group">
@@ -55,31 +53,40 @@
             <div class="input-group">
                 <small>Information : {{ i.information}}</small>
             </div>
-        </div>		
-    </blockquote>
-    <blockquote>
+        </div>
+        </accordion-group>
+        <accordion-group is-open="true">
+        <accordion-heading>
         <p>Experience</p>
+        </accordion-heading>
         <small ng-show="experience">{{ experience}}</small>
-    </blockquote>
-    <blockquote>
+        </accordion-group>
+        <accordion-group is-open="true">
+        <accordion-heading>
         <p>Education</p>
+        </accordion-heading>
         <div ng-repeat="e in educations" style="margin-bottom: 20px;">
             <div class="input-group">
                 <small>School : {{ e.school.name}}</small>
             </div>
             <small>Year : {{ e.year.name}}</small>
         </div>
-    </blockquote>
-    <blockquote>
+        </accordion-group>
+        <accordion-group is-open="true">
+        <accordion-heading>
         <p>Links</p>
+        </accordion-heading>
         <div ng-repeat="l in links" style="margin-bottom: 20px;">
             <div class="input-group">
                 <small><a href="{{ l.link}}">Link : {{ l.name}}</a></small>
             </div>
         </div>
-    </blockquote>
-    <blockquote>
+        </accordion-group>
+        <accordion-group is-open="true">
+        <accordion-heading>
         <p>Goals</p>
+        </accordion-heading>
         <small ng-show="goals">{{ goals}}</small>
-    </blockquote>
+        </accordion-group>
+        </accordion>
 </div>
