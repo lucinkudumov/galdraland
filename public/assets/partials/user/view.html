@@ -1,6 +1,7 @@
 <div class="view-user" ng-controller="userViewController">
     <div class="avatar" style="background-image: url('{{ photo}}')"></div>
     <h1>{{ fullname}}</h1>
+    <blockquote>
     <accordion close-others="false">
         <accordion-group is-open="true">
         <accordion-heading>
@@ -89,4 +90,5 @@
         <small ng-show="goals">{{ goals}}</small>
         </accordion-group>
         </accordion>
+    </blockquote>
 </div>
