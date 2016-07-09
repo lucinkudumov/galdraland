@@ -89,6 +89,35 @@
         </accordion-heading>
         <small ng-show="goals">{{ goals}}</small>
         </accordion-group>
+        <accordion-group is-open="true">
+            <accordion-heading>
+                <p>Likes</p>
+            </accordion-heading>
+            <small ng-show="!user.likes || user.likes.length == 0">No Likes, <a href="/settings">add</a> now.</small>
+            <small ng-repeat="l in user.likes">{{ l.like }}</small>
+        </accordion-group>
+        <accordion-group is-open="true">
+            <accordion-heading>
+                <p>Dislikes</p>
+            </accordion-heading>
+            <small ng-show="!user.dislikes || user.dislikes.length == 0">No Dislikes, <a href="/settings">add</a> now.</small>
+            <small ng-repeat="dl in user.dislikes">{{ dl.dislike }}</small>
+        </accordion-group>
+        <accordion-group is-open="true">
+            <accordion-heading>
+                <p>Skills</p>
+            </accordion-heading>
+            <small ng-show="!user.skills || user.skills.length == 0">No Skills, <a href="/settings">add</a> now.</small>
+            <small ng-repeat="s in user.skills">{{ s.skill }}</small>
+        </accordion-group>
+        <accordion-group is-open="true">
+            <accordion-heading>
+                <p>What I am looking for now</p>
+            </accordion-heading>
+            <small ng-show="!user.looks || user.looks.length == 0">No Data, <a href="/settings">add</a> now.</small>
+            <small ng-repeat="l in user.looks">{{ l.look }}</small>
+        </accordion-group>
+
         </accordion>
     </blockquote>
 </div>

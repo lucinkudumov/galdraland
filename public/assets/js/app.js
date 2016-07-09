@@ -1921,6 +1921,10 @@ app.controller("userViewController", ["$scope", "$http", "$stateParams", "User",
                 $scope.interests = data.user.interests;
                 $scope.photo = data.user.photo;
                 $scope.searchUserId = $stateParams.id;
+                $scope.likes = data.user.likes;
+                $scope.dislikes = data.user.dislikes;
+                $scope.skills= data.user.skills;
+                $scope.looks= data.user.looks;
             });
 
             $scope.teams = [];
