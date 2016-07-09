@@ -1909,7 +1909,7 @@ app.controller("userViewController", ["$scope", "$http", "$stateParams", "User",
             request.success(function (data) {
                 $scope.username = data.user.username;
                 $scope.fullname = data.user.fullname;
-                $scope.email = data.user.email.email;
+                $scope.email = data.user.email;
                 $scope.location = data.user.location;
                 $scope.skype = data.user.skype;
                 $scope.goals = data.user.goals;
@@ -1920,6 +1920,7 @@ app.controller("userViewController", ["$scope", "$http", "$stateParams", "User",
                 $scope.bio = data.user.bio;
                 $scope.interests = data.user.interests;
                 $scope.photo = data.user.photo;
+                $scope.searchUserId = $stateParams.id;
             });
 
             $scope.teams = [];
