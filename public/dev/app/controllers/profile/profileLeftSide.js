@@ -35,6 +35,10 @@ app.controller("profileLeftSideController", ["$scope", "$http", "User", function
     $scope.$watch("teams", function () {
         $scope.calculateRecomendation();
     });
-    
+
+    $scope.selectedProfileView = function() {
+        alert('Template Url is : '+$scope.viewType);
+    }
+
     $scope.getTeams();
 }]);
