@@ -30,7 +30,10 @@
             <button ng-show="!isMember && !isManager && emptyMembers.length > 0" class="btn btn-success pull-right" ng-click="applyTeam()">Apply for this team</button>
         </div>
     </div>
-    <div class="row">
+    <div class="col-md-3 user-container">
+        &nbsp;
+    </div>
+    <div class="col-md-8">
         <img src="{{team.image}}" alt="image" ng-show="team.image">
     </div>
     <div class="row">
