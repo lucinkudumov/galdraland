@@ -41,4 +41,5 @@ app.controller("profileLeftSideController", ["$scope", "$http", "User", function
     }
 
     $scope.getTeams();
+    $scope.selectedProfileView();
 }]);

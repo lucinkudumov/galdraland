@@ -1245,6 +1245,7 @@ app.controller("profileLeftSideController", ["$scope", "$http", "User", function
         }
 
         $scope.getTeams();
+        $scope.selectedProfileView();
     }]);
 app.controller("profileSettingsController", ["$scope", "$rootScope", "$location", "$http", "User", function ($scope, $rootScope, $location, $http, User) {
         $scope.username = "";
