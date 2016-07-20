@@ -39,6 +39,13 @@ app.controller("profileLeftSideController", ["$scope", "$http", "User", function
 
     $scope.selectedProfileView = function() {
         alert('Template Url is : '+$scope.viewType);
+        if ($scope.viewType == "aaa") {
+            $scope.profileTeamView.show = false;
+            $scope.profileAdventureView.show = true;
+        } else {
+            $scope.profileTeamView.show = true;
+            $scope.profileAdventureView.show = false;
+        }
     }
 
     $scope.getTeams();
