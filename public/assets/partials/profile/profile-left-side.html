@@ -10,10 +10,12 @@
     </ul>
     <div class="tab-content">
         <div class="tab-pane fade active in" id="tab_1">
-            <select ng-model="viewtype" class="ng-pristine ng-valid">
+            <div style="text-align: center;">
+            <select ng-model="viewtype">
                 <option value="t" selected>Teams</option>
                 <option value="a">Adventures</option>
              </select>
+            </div>
             <!--<p>Teams</p>            -->
             <div id="profileTeamView">
     <small ng-show="teams.length == 0">No teams, <a href="/teams">search</a> or <a href="/teams/create">add</a> new team now.</small>
