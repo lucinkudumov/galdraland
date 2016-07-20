@@ -1,6 +1,7 @@
 app.controller("profileLeftSideController", ["$scope", "$http", "User", function ($scope, $http, User) {
     $scope.user = User.isLoggedIn();
-    
+    $scope.viewType = "ttt";
+
     $scope.calculateRecomendation = function () {
         if (!$scope.user) {
             return;
@@ -41,5 +42,5 @@ app.controller("profileLeftSideController", ["$scope", "$http", "User", function
     }
 
     $scope.getTeams();
-    $scope.selectedProfileView();
+
 }]);
