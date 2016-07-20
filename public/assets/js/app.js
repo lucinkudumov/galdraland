@@ -1252,7 +1252,6 @@ app.controller("profileLeftSideController", ["$scope", "$http", "User", function
                 $scope.teamView = true;
             }
         }
-    
         $scope.getTeams();
     }]);
 app.controller("profileSettingsController", ["$scope", "$rootScope", "$location", "$http", "User", function ($scope, $rootScope, $location, $http, User) {
