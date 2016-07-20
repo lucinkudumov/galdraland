@@ -10,17 +10,25 @@
     </ul>
     <div class="tab-content">
         <div class="tab-pane fade active in" id="tab_1">
-    <p>Teams</p>
+            <select ng-model="viewtype" class="ng-pristine ng-valid">
+                <option value="t">Teams</option>
+                <option value="a">Adventures</option>
+             </select>
+            <!--<p>Teams</p>            -->
+            <div id="profileTeamView">
     <small ng-show="teams.length == 0">No teams, <a href="/teams">search</a> or <a href="/teams/create">add</a> new team now.</small>
     <ul ng-show="teams.length > 0"> 
         <li ng-repeat="t in teams"><a href="/teams/view/{{ t._id }}">{{ t.name }}<span ng-repeat="member in t.teamMembers"> <span ng-show="member.user == user._id"> ( {{ member.title }} )</span></span></a></li>
     </ul>
-    <hr ng-show="recomendation.length > 0">
-    <p>Adventures</p>
+            </div>
+    <!--<hr ng-show="recomendation.length > 0">-->
+    <!--<p>Adventures</p>-->
+            <div id="profileAdventureView" style="display: none;">
     <small ng-show="adventures.length == 0">No adventures, <a href="/adventures">search</a> or <a href="/adventures/create">add</a> new adventure now.</small> 
     <ul ng-show="adventures.length > 0"> 
         <li ng-repeat="a in adventures"><a href="/adventures/view/{{ a._id }}">{{ a.name }}</a></li>
     </ul>
+            </div>
             </div>
         <div class="tab-pane fade" id="tab_2">
     <hr ng-show="recomendation.length > 0">
