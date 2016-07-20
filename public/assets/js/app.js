@@ -1195,7 +1195,7 @@ app.controller("profileLeftSideController", ["$scope", "$http", "User", function
         $scope.viewType = "ttt";
         $scope.adventrueView = false;
         $scope.teamView = true;
-    
+
         $http.get("/api/getUserDetail").success(function (data) {
             $scope.user = data.user;
         });
