@@ -1240,6 +1240,10 @@ app.controller("profileLeftSideController", ["$scope", "$http", "User", function
             $scope.getAdventures();
         });
 
+        $scope.selectedProfileView = function() {
+            alert('Template Url is : '+$scope.viewType);
+        }
+
         $scope.getTeams();
     }]);
 app.controller("profileSettingsController", ["$scope", "$rootScope", "$location", "$http", "User", function ($scope, $rootScope, $location, $http, User) {
