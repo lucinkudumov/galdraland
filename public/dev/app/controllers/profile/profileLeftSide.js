@@ -1,6 +1,8 @@
 app.controller("profileLeftSideController", ["$scope", "$http", "User", function ($scope, $http, User) {
     $scope.user = User.isLoggedIn();
     $scope.viewType = "ttt";
+    $scope.adventrueView = false;
+    $scope.teamView = true;
 
     $scope.calculateRecomendation = function () {
         if (!$scope.user) {
@@ -38,13 +40,12 @@ app.controller("profileLeftSideController", ["$scope", "$http", "User", function
     });
 
     $scope.selectedProfileView = function() {
-        alert('Template Url is : '+$scope.viewType);
         if ($scope.viewType == "aaa") {
-            $scope.profileTeamView.show = false;
-            $scope.profileAdventureView.show = true;
+            $scope.adventrueView = true;
+            $scope.teamView = false;
         } else {
-            $scope.profileTeamView.show = true;
-            $scope.profileAdventureView.show = false;
+            $scope.adventrueView = false;
+            $scope.teamView = true;
         }
     }
 
