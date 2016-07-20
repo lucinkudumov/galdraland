@@ -121,6 +121,7 @@ app.config(["$urlRouterProvider", "$locationProvider", "$stateProvider", "$httpP
                 "main": {templateUrl: "/assets/partials/main.html"},
                 "left-side@teamView": {templateUrl: "/assets/partials/team/left-side.html"},
                 "right-side@teamView": {templateUrl: "/assets/partials/team/view.html"},
+                "right-side-sub@teamView" : { templateUrl : "/assets/partials/team/right-side.html" },
             },
             requireLogin: true
         }).state("teamEdit", {
@@ -899,6 +900,11 @@ app.controller("leftMenuController", ["$scope", "$location", function ($scope, $
             $location.path(url);
         }
     }]);
+app.controller("rightMenuController", ["$scope", "$location", function ($scope, $location) {
+    $scope.go = function (url) {
+        $location.path(url);
+    }
+}]);
 app.controller("MemberEditController", ["$scope", "user", "$modalInstance", function ($scope, user, $modalInstance) {
         $scope.user = angular.copy(user);
 
