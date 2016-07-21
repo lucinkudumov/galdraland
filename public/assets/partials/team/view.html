@@ -3,7 +3,7 @@
         <div class="col-md-3 user-container">
             <h4 ng-bind="team.name"></h4>
             <!--<p class="description" style="font-size: 13px;" ng-bind="team.description"></p>-->
-            <textarea style="font-size: 13px;" ng-bind="team.description" disabled></textarea>
+            <textarea style="font-size: 13px; margin-bottom: 15px;" ng-bind="team.description" disabled></textarea>
             <rating-widget ref="team._id" ></rating-widget>
             <!--<img src="{{team.image}}" alt="image" style="width:100px; height:100px;" ng-show="team.image">-->
             <hr>
@@ -15,7 +15,7 @@
                 <a href="#" class="btn btn-danger" ng-click="leave();">Leave</a>
             </div>
         </div>
-        <div class="col-md-6" ng-show="!loading && team">
+        <div class="col-md-5" ng-show="!loading && team">
             <!--<p ng-show="team.teamMembers.length == 0">No members, invite new members now.</p>-->
             <!--<ul ng-show="team.teamMembers.length > 0" class="members-list">-->
                 <!--<li ng-repeat="member in team.teamMembers" ng-click="showMember(member)">-->
@@ -41,7 +41,7 @@
             </ul>
             <comment-widget ref="team._id" ></comment-widget>
         </div>
-        <div class="col-md-2" ng-show="!loading && team">
+        <div class="col-md-3" ng-show="!loading && team">
             <p ng-show="team.teamMembers.length == 0">No members, invite new members now.</p>
             <ul ng-show="team.teamMembers.length > 0" class="members-list">
                 <li ng-repeat="member in team.teamMembers" ng-click="showMember(member)">
