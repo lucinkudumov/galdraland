@@ -14,7 +14,33 @@
                 <a href="#" class="btn btn-danger" ng-click="leave();">Leave</a>
             </div>
         </div>
-        <div class="col-md-8" ng-show="!loading && team">
+        <div class="col-md-6" ng-show="!loading && team">
+            <!--<p ng-show="team.teamMembers.length == 0">No members, invite new members now.</p>-->
+            <!--<ul ng-show="team.teamMembers.length > 0" class="members-list">-->
+                <!--<li ng-repeat="member in team.teamMembers" ng-click="showMember(member)">-->
+                    <!--<p ng-bind="member.title"></p>-->
+                    <!--<p ng-show="member.user.profileId == 000000000000000000000000" class="name">Empty</p>-->
+                    <!--<p ng-show="member.user.profileId == 000000000000000000000000" class="avatar" style="background-image: url(/assets/images/unknown.png); background-size: contain;"></p>-->
+                    <!--<a ng-hide="member.user.profileId == 000000000000000000000000" class="name" href="/users/view/{{member.user._id}}">{{member.user.fullname}}</a>-->
+                    <!--<p ng-hide="member.user.profileId == 000000000000000000000000" class="avatar" style="background-image: url('{{ member.user.photo}}')"></p>-->
+                <!--</li>-->
+            <!--</ul>-->
+            <!--<button ng-show="isManager" class="btn btn-success pull-right" ng-click="addMemberTitle()" style="margin-right: 5px;">Add new role</button>-->
+            <!--<button ng-show="isManager" class="btn btn-primary pull-right" ng-click="sendInvite()" style="margin-right: 5px;">Invite</button>-->
+            <!--<button ng-show="!isMember && !isManager && emptyMembers.length > 0" class="btn btn-success pull-right" ng-click="applyTeam()">Apply for this team</button>-->
+            <img src="{{team.image}}" alt="image" ng-show="team.image" style="margin-bottom: 10px; margin-top: 10px;">
+            <div class="user-container">
+                <h4>Adventures of the team</h4>
+                <hr>
+            </div>
+            <ul ng-show="adventures.length > 0" class="members-list">
+                <li ng-repeat="adv in adventures" ng-click="viewAdventure(adv)">
+                    <p class="name bold" ng-bind="adv.name"></p>
+                </li>
+            </ul>
+            <comment-widget ref="team._id" ></comment-widget>
+        </div>
+        <div class="col-md-2" ng-show="!loading && team">
             <p ng-show="team.teamMembers.length == 0">No members, invite new members now.</p>
             <ul ng-show="team.teamMembers.length > 0" class="members-list">
                 <li ng-repeat="member in team.teamMembers" ng-click="showMember(member)">
@@ -28,17 +54,6 @@
             <button ng-show="isManager" class="btn btn-success pull-right" ng-click="addMemberTitle()" style="margin-right: 5px;">Add new role</button>
             <button ng-show="isManager" class="btn btn-primary pull-right" ng-click="sendInvite()" style="margin-right: 5px;">Invite</button>
             <button ng-show="!isMember && !isManager && emptyMembers.length > 0" class="btn btn-success pull-right" ng-click="applyTeam()">Apply for this team</button>
-            <img src="{{team.image}}" alt="image" ng-show="team.image" style="margin-bottom: 10px; margin-top: 10px;">
-            <div class="user-container">
-                <h4>Adventures of the team</h4>
-                <hr>
-            </div>
-            <ul ng-show="adventures.length > 0" class="members-list">
-                <li ng-repeat="adv in adventures" ng-click="viewAdventure(adv)">
-                    <p class="name bold" ng-bind="adv.name"></p>
-                </li>
-            </ul>
-            <comment-widget ref="team._id" ></comment-widget>
         </div>
     </div>
 
