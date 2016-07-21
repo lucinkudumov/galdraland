@@ -41,7 +41,7 @@
             </ul>
             <comment-widget ref="team._id" ></comment-widget>
         </div>
-        <div class="col-md-3" ng-show="!loading && team">
+        <div class="col-md-4" ng-show="!loading && team">
             <p ng-show="team.teamMembers.length == 0">No members, invite new members now.</p>
             <ul ng-show="team.teamMembers.length > 0" class="members-list">
                 <li ng-repeat="member in team.teamMembers" ng-click="showMember(member)">
@@ -52,8 +52,8 @@
                     <p ng-hide="member.user.profileId == 000000000000000000000000" class="avatar" style="background-image: url('{{ member.user.photo}}')"></p>
                 </li>
             </ul>
-            <button ng-show="isManager" class="btn btn-success pull-right" ng-click="addMemberTitle()" style="margin-right: 5px;">Add new role</button>
-            <button ng-show="isManager" class="btn btn-primary pull-right" ng-click="sendInvite()" style="margin-right: 5px;">Invite</button>
+            <button ng-show="isManager" class="btn btn-primary pull-left" ng-click="sendInvite()" style="margin-left: 5px; font-size: 18px; padding-bottom: 1%;">Invite</button>
+            <button ng-show="isManager" class="btn btn-success pull-left" ng-click="addMemberTitle()" style="margin-left: 5px; font-size: 18px; padding-bottom: 1%;">Add new role</button>
             <button ng-show="!isMember && !isManager && emptyMembers.length > 0" class="btn btn-success pull-right" ng-click="applyTeam()">Apply for this team</button>
         </div>
     </div>
