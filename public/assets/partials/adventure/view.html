@@ -3,7 +3,7 @@
         <div class="col-md-3 user-container">
             <h4 ng-bind="adventure.name"></h4>
             <!--<p class="description" style="font-size: 13px;" ng-bind="adventure.description"></p>-->
-            <textarea style="font-size: 13px;" ng-bind="adventure.description"></textarea>
+            <textarea style="font-size: 13px;" ng-bind="adventure.description" disabled></textarea>
             <td><rating-widget ref="adventure._id" ></rating-widget></td>
             <hr>
             <div ng-show="isManager" class="btn-group btn-group-justified">
