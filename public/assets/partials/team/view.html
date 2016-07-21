@@ -29,17 +29,17 @@
             <button ng-show="isManager" class="btn btn-primary pull-right" ng-click="sendInvite()" style="margin-right: 5px;">Invite</button>
             <button ng-show="!isMember && !isManager && emptyMembers.length > 0" class="btn btn-success pull-right" ng-click="applyTeam()">Apply for this team</button>
             <img src="{{team.image}}" alt="image" ng-show="team.image" style="margin-bottom: 10px; margin-top: 10px;">
+            <div class="user-container">
+                <h4>Adventures of the team</h4>
+                <hr>
+            </div>
+            <ul ng-show="adventures.length > 0" class="members-list">
+                <li ng-repeat="adv in adventures" ng-click="viewAdventure(adv)">
+                    <p class="name bold" ng-bind="adv.name"></p>
+                </li>
+            </ul>
+            <comment-widget ref="team._id" ></comment-widget>
         </div>
-        <div class="user-container">
-            <h4>Adventures of the team</h4>
-            <hr>
-        </div>
-        <ul ng-show="adventures.length > 0" class="members-list">
-            <li ng-repeat="adv in adventures" ng-click="viewAdventure(adv)">
-                <p class="name bold" ng-bind="adv.name"></p>
-            </li>
-        </ul>
-        <comment-widget ref="team._id" ></comment-widget>
     </div>
 
     <!--<div class="row">-->
