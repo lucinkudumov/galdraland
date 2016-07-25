@@ -256,6 +256,7 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "U
         $scope.refresh = function () {
             var request = $http({method: "POST", url: "adventure/get", api: true, data: {id: $stateParams.id}});
             request.success(function (data) {
+                if (data.adventure.description && data.adventure.description != "") data.adventure.description = data.adventure.description.replace("\n","<br>");
                 $scope.adventure = data.adventure;
                 $scope.isManager = data.adventure.owner == $scope.user._id;
             });
@@ -1971,6 +1972,7 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$statePa
         $scope.refresh = function () {
             var request = $http({method: "POST", url: "getTeam", api: true, data: {id: $stateParams.id}});
             request.success(function (data) {
+                if (data.team.description && data.team.description != "") data.team.description = data.team.description.replace("\n","<br>");
                 $scope.team = data.team;
                 $scope.adventures = data.advs;
                 $scope.isManager = data.team.owner._id == $scope.user._id;
