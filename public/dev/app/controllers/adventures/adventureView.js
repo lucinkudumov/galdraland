@@ -1,9 +1,14 @@
-app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "User", "$modal", "$location", function ($scope, $http, $stateParams, User, $modal, $location) {
+app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$sce", "User", "$modal", "$location", function ($scope, $http, $stateParams, $sce, User, $modal, $location) {
     $scope.user = User.isLoggedIn();
     
     $scope.refresh = function () {
         var request = $http({ method : "POST", url : "adventure/get", api : true, data : { id : $stateParams.id }});
         request.success(function (data) {
+            if (data.adventure.description && data.adventure.description != "") {
+                var find = "\n";
+                var re = new RegExp(find, 'g');
+                data.adventure.description = $sce.trustAsHtml(data.adventure.description.replace(re,"<br>"));
+            }
             $scope.adventure = data.adventure;
             $scope.isManager = data.adventure.owner == $scope.user._id;
         });

@@ -1,9 +1,14 @@
-app.controller("teamViewController", ["$scope", "$http", "$stateParams", "User", "$modal", "$location", function ($scope, $http, $stateParams, User, $modal, $location) {
+app.controller("teamViewController", ["$scope", "$http", "$sce","$stateParams", "User", "$modal", "$location", function ($scope, $http, $sce, $stateParams, User, $modal, $location) {
     $scope.user = User.isLoggedIn();
     
     $scope.refresh = function () {
         var request = $http({ method : "POST", url : "getTeam", api : true, data : { id : $stateParams.id }});
         request.success(function (data) {
+            if (data.team.description && data.team.description != "") {
+                var find = "\n";
+                var re = new RegExp(find, 'g');
+                data.team.description = $sce.trustAsHtml(data.team.description.replace(re,"<br>"));
+            }
             $scope.team = data.team;
 			$scope.adventures = data.advs;
             $scope.isManager = data.team.owner._id == $scope.user._id;
