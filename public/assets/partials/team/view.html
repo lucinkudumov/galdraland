@@ -4,7 +4,7 @@
             <h4 ng-bind="team.name"></h4>
             <!--<p class="description" style="font-size: 13px;" ng-bind="team.description"></p>-->
             <!--<textarea style="font-size: 13px; margin-bottom: 15px; overflow: visible;" ng-bind="team.description" disabled></textarea>-->
-            <div class="description" style="font-size: 13px;" ngBindHtmlDirective="team.description"></div>
+            <div class="description" style="font-size: 13px;" ng-bind-html="team.description"></div>
             <rating-widget ref="team._id" ></rating-widget>
             <!--<img src="{{team.image}}" alt="image" style="width:100px; height:100px;" ng-show="team.image">-->
             <hr>
