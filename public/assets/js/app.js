@@ -1971,6 +1971,11 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
         $scope.refresh = function () {
             var request = $http({method: "POST", url: "getTeam", api: true, data: {id: $stateParams.id}});
             request.success(function (data) {
+                if (data.team.description && data.team.description != "") {
+                    var find = "\n";
+                    var re = new RegExp(find, 'g');
+                    data.team.description = $sce.trustAsHtml(data.team.description.replace(re,"<br>"));
+                }
                 $scope.team = data.team;
                 $scope.adventures = data.advs;
                 $scope.isManager = data.team.owner._id == $scope.user._id;
