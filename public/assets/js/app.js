@@ -1963,7 +1963,7 @@ app.controller("userViewController", ["$scope", "$http", "$stateParams", "User",
         $scope.refresh();
     }]);
 
-app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "$stateParams", "User", "$modal", "$location", function ($rootScope, $scope, $http, $stateParams, User, $modal, $location) {
+app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "$stateParams", "User", "$modal", "$location", function ($rootScope, $scope, $http, $sce, $stateParams, User, $modal, $location) {
         $scope.user = User.isLoggedIn();
 
         $scope.emptyMembers = [];
