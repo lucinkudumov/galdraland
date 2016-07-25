@@ -1,4 +1,4 @@
-var app = angular.module("galdra", ["ngRoute", "ui.router", "ngCookies", "ui.bootstrap", "ngFileUpload", "ngSanitize"]);
+var app = angular.module("galdra", ["ngRoute", "ui.router", "ngCookies", "ui.bootstrap", "ngFileUpload"]);
 var config = {
     //siteurl : 'http://galdraland.com:9010/'
     siteurl: 'http://galdraland-1-0.herokuapp.com/'
@@ -1963,7 +1963,7 @@ app.controller("userViewController", ["$scope", "$http", "$stateParams", "User",
         $scope.refresh();
     }]);
 
-app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$stateParams", "User", "$modal", "$location", function ($rootScope, $scope, $http, $stateParams, User, $modal, $location) {
+app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "$stateParams", "User", "$modal", "$location", function ($rootScope, $scope, $http, $stateParams, User, $modal, $location) {
         $scope.user = User.isLoggedIn();
 
         $scope.emptyMembers = [];
