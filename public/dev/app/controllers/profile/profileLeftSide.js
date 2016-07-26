@@ -1,8 +1,7 @@
 app.controller("profileLeftSideController", ["$scope", "$http", "User", function ($scope, $http, User) {
     $scope.user = User.isLoggedIn();
-    $scope.viewType = "ttt";
-    $scope.adventrueView = false;
-    $scope.teamView = true;
+    $scope.selTeam = "";
+    $scope.selAdv = "";
 
     $scope.calculateRecomendation = function () {
         if (!$scope.user) {
@@ -48,13 +47,14 @@ app.controller("profileLeftSideController", ["$scope", "$http", "User", function
         $scope.calculateRecomendation();
     });
 
-    $scope.selectedProfileView = function() {
-        if ($scope.viewType == "aaa") {
-            $scope.adventrueView = true;
-            $scope.teamView = false;
-        } else {
-            $scope.adventrueView = false;
-            $scope.teamView = true;
+    $scope.selectTeamView = function() {
+        if ($scope.selTeam != "") {
+            $location.path("/teams/view/" + $scope.selTeam);
+        }
+    }
+    $scope.selecteAdvView = function() {
+        if ($scope.selAdv != "") {
+            $location.path("/adventures/view/" + $scope.selAdv);
         }
     }
 

@@ -1197,9 +1197,8 @@ app.controller("viewInviteController", ["$scope", "invite", "$modalInstance", "U
     }]);
 app.controller("profileLeftSideController", ["$scope", "$http", "User", function ($scope, $http, User) {
         $scope.user = User.isLoggedIn();
-        $scope.viewType = "ttt";
-        $scope.adventrueView = false;
-        $scope.teamView = true;
+        $scope.selTeam = "";
+        $scope.selAdv = "";
 
         $http.get("/api/getUserDetail").success(function (data) {
             $scope.user = data.user;
@@ -1257,13 +1256,14 @@ app.controller("profileLeftSideController", ["$scope", "$http", "User", function
             $scope.getAdventures();
         });
 
-        $scope.selectedProfileView = function() {
-            if ($scope.viewType == "aaa") {
-                $scope.adventrueView = true;
-                $scope.teamView = false;
-            } else {
-                $scope.adventrueView = false;
-                $scope.teamView = true;
+        $scope.selectTeamView = function() {
+            if ($scope.selTeam != "") {
+                $location.path("/teams/view/" + $scope.selTeam);
+            }
+        }
+        $scope.selecteAdvView = function() {
+            if ($scope.selAdv != "") {
+                $location.path("/adventures/view/" + $scope.selAdv);
             }
         }
         $scope.getTeams();
