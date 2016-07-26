@@ -31,6 +31,15 @@ app.controller("profileLeftSideController", ["$scope", "$http", "User", function
     $scope.getTeams = function () {
         var request = $http({ method : "GET", url : "myTeams", api : true });
         request.success(function (data) {
+            for (var i = 0; i < data.teams.length; i++) {
+                for (var j = 0; j < data.teams[i].teamMembers.length; j ++) {
+                    var o = data.teams[i].teamMembers[j];
+                    if (o.user == $scope.user._id) {
+                        data.teams[i].tName =  data.teams[i].name + " (" + data.teams[i].teamMembers[j].title + ")";
+                        break;
+                    }
+                }
+            }
             $scope.teams = data.teams;
         });
     }
