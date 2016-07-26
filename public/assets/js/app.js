@@ -1236,7 +1236,7 @@ app.controller("profileLeftSideController", ["$scope", "$http", "User", function
                     for (var j = 0; j < data.teams[i].teamMembers.length; j ++) {
                         var o = data.teams[i].teamMembers[j];
                         if (o.user == $scope.user._id) {
-                            date.teams[i].tName =  data.teams[i].name + " (" + data.teams[i].teamMembers[j].title + ")";
+                            data.teams[i].tName =  data.teams[i].name + " (" + data.teams[i].teamMembers[j].title + ")";
                             break;
                         }
                     }
