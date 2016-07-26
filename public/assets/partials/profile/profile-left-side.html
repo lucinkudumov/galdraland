@@ -12,7 +12,7 @@
         <div class="tab-pane fade active in" id="tab_1">
             <p>Teams</p>
             <select>
-                <option ng-repeat="t in teams">{{ t.name }} <span ng-repeat="member in t.teamMembers"> ({{ member.user }})</span></option>
+                <option ng-repeat="t in teams">{{ t.tName }}</option>
             </select>
             <div style="text-align: center; margin-top: 10px; margin-bottom: 10px;">
             <select ng-model="viewType" ng-change="selectedProfileView()">

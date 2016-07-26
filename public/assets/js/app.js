@@ -1235,7 +1235,10 @@ app.controller("profileLeftSideController", ["$scope", "$http", "User", function
                 for (var i = 0; i < data.teams.length; i++) {
                     for (var j = 0; j < data.teams[i].teamMembers.length; j ++) {
                         var o = data.teams[i].teamMembers[j];
-                        console.log("member.user = " + o.user + ", userId = " + $scope.user._id);
+                        if (o.user == $scope.user._id) {
+                            date.teams[i].tName =  data.teams[i] + " (" + data.teams[i].teamMembers[j].title + ")";
+                            break;
+                        }
                     }
                 }
                 $scope.teams = data.teams;
