@@ -1195,7 +1195,7 @@ app.controller("viewInviteController", ["$scope", "invite", "$modalInstance", "U
             $modalInstance.close({action: "PUBLISH", model: invite});
         }
     }]);
-app.controller("profileLeftSideController", ["$scope", "$http", "User", function ($scope, $http, User) {
+app.controller("profileLeftSideController", ["$scope", "$http", "$location", "User", function ($scope, $http, $location, User) {
         $scope.user = User.isLoggedIn();
         $scope.selTeam = "";
         $scope.selAdv = "";
