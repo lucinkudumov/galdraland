@@ -2221,7 +2221,7 @@ app.directive('commentWidget', function ($http, User) {
             scope.request_in_process = false;
 
             scope.refresh = function () {
-                var request = $http({method: "POST", url: "getCommentByRefId", api: true, data: {id: scope.ref, fromMe: false}});
+                var request = $http({method: "POST", url: "getCommentByRefId", api: true, data: {id: scope.ref, fromMe: false, isManager : scope.ismanager, owner: scope.user._id}});
                 request.success(function (data) {
                     if (!data.success || data.comments.length == 0) {
                         scope.comments = [];

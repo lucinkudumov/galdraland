@@ -21,18 +21,43 @@ module.exports = function (opts) {
         "post#getCommentByRefId": function (req, res) {
             var id = req.body.id;
             var user_id = req.user._id;
+            var isManager = req.isManager;
+            var owner = req.owner;
             var query;
-
-            query = commentModel.find({refId: id}).populate('from').exec(function (err, comments) {
-                if (err) {
-                    console.log(err);
-                    return res.json({success: false});
-                } else if (comments) {
-                    return res.json({success: true, comments: comments});
-                } else {
-                    return res.json({success: false});
-                }
-            });
+            if (isManager == 1) {
+                query = commentModel.find({refId: id}).populate('from').exec(function (err, comments) {
+                    if (err) {
+                        console.log(err);
+                        return res.json({success: false});
+                    } else if (comments) {
+                        return res.json({success: true, comments: comments});
+                    } else {
+                        return res.json({success: false});
+                    }
+                });
+            } else {
+                query = commentModel.find({$and :
+                    [
+                        {refId: id},
+                        {
+                            $or :
+                            [
+                                {status: "APPROVE"},
+                                {from: owner}
+                            ]
+                        }
+                    ]
+                    }).populate('from').exec(function (err, comments) {
+                    if (err) {
+                        console.log(err);
+                        return res.json({success: false});
+                    } else if (comments) {
+                        return res.json({success: true, comments: comments});
+                    } else {
+                        return res.json({success: false});
+                    }
+                });
+            }
         },
         "post#insertComment": function (req, res) {
             var ref_id = req.body.ref_id;
