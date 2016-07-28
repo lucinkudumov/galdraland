@@ -2202,15 +2202,16 @@ app.directive('commentWidget', function ($http, User) {
         template: '<div class="row">' +
             '<div class="user-container"><h4>Comments</h4><hr></div>' +
             '<div id="dv1">' +
-            '<ul>' +
-            '<li ng-repeat="comnt in comments"> ' +
-            '<img src="{{ comnt.from.photo }}" style="width:50px;height:50px;"><span>{{comnt.from.fullname}}: {{ comnt.comment }}' +
-            '<span ng-show="ismanager">' +
-            '<a class="btn btn-danger" style="float: right;" ng-click="cmt_reject(comnt._id)">Reject</a>' +
-            '<a class="btn btn-primary" style="float: right;" ng-click="cmt_approve(comnt._id)">Approve</a>' +
-            '</span></span>' +
-            '</li>' +
-            '</ul>' +
+            '<div ng-repeat="comnt in comments">' +
+                '<table><tr>' +
+                    '<td><img src="{{ comnt.from.photo }}" style="width:50px;height:50px;"></td>' +
+                        '<td>{{comnt.from.fullname}}: {{ comnt.comment }}</td>' +
+                        '<td ng-show="ismanager"><a class="btn btn-danger" style="float: right;">Reject</a>' +
+                            '<a class="btn btn-primary" style="float: right;">Approve</a>' +
+                        '</td>' +
+                    '</tr>' +
+                '</table>' +
+                '</div>' +
             '</div>' +
             '<div class="user-container"><h4>Post your comment</h4><hr></div><div class="row" style="width:100%"><textarea ng-model="txtcomment" placeholder="Your Comment" style="width:100%;display:block;"></textarea><button ng-click="save();" style="margin-top:10px;float:right;">Post Comment</button></div></div>',
         link: function (scope, elem, attrs) {
