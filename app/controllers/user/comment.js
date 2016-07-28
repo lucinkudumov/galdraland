@@ -24,7 +24,7 @@ module.exports = function (opts) {
             var isManager = req.isManager;
             var owner = req.owner;
             var query;
-            if (isManager == 1) {
+            if (isManager == true) {
                 query = commentModel.find({refId: id}).populate('from').exec(function (err, comments) {
                     if (err) {
                         console.log(err);
