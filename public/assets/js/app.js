@@ -2224,6 +2224,7 @@ app.directive('commentWidget', function ($http, User) {
                         scope.comments = [];
                     } else {
                         scope.comments = data.comments;
+                        scope.isManager = 1;
                         console.log(scope.comments);
                     }
                 });
