@@ -21,8 +21,8 @@ module.exports = function (opts) {
         "post#getCommentByRefId": function (req, res) {
             var id = req.body.id;
             var user_id = req.user._id;
-            var isManager = req.isManager;
-            var owner = req.owner;
+            var isManager = req.body.isManager;
+            var owner = req.body.owner;
             var query;
             if (isManager == true) {
                 query = commentModel.find({refId: id}).populate('from').exec(function (err, comments) {
