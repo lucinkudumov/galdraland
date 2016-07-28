@@ -2205,7 +2205,7 @@ app.directive('commentWidget', function ($http, User) {
             '<div ng-repeat="comnt in comments">' +
                 '<table width="100%"><tr>' +
                     '<td><img src="{{ comnt.from.photo }}" style="width:50px;height:50px;"></td>' +
-                        '<td>{{comnt.from.fullname}}: {{ comnt.comment }}</td>' +
+                        '<td><p>{{comnt.from.fullname}}:</p> <p>{{ comnt.comment }}</p> <p>({{ comnt.status }})</p></td>' +
                         '<td ng-show="ismanager"><a class="btn btn-danger" style="float: right;">Reject</a>' +
                             '<a class="btn btn-primary" style="float: right;">Approve</a>' +
                         '</td>' +
