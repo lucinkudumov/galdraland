@@ -2202,7 +2202,7 @@ app.directive('commentWidget', function ($http, User) {
         template: '<div class="row">' +
             '<div class="user-container"><h4>Comments</h4><hr></div>' +
             '<div id="dv1">' +
-            '<ul>' +
+            '<ul style="margin-left: 0px;">' +
             '<li ng-repeat="comnt in comments"> ' +
             '<img src="{{ comnt.from.photo }}" style="width:50px;height:50px;"><span>{{comnt.from.fullname}}: {{ comnt.comment }}' +
             '<span ng-show="ismanager">' +
