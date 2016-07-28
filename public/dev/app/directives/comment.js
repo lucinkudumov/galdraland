@@ -12,7 +12,7 @@ app.directive('commentWidget', function ($http, User) {
             '<div ng-repeat="comnt in comments">' +
             '<table width="100%"><tr>' +
             '<td width="50px;"><img src="{{ comnt.from.photo }}" style="width:50px;height:50px;"></td>' +
-            '<td style="text-align: left;"><p style="margin-left:10px;">{{comnt.from.fullname}}:</p> <p style="margin-left:10px;">{{ comnt.comment }}</p> <p style="margin-left:10px;">({{ comnt.status }})</p></td>' +
+            '<td style="text-align: left;"><p style="margin-left:10px;">{{comnt.from.fullname}}:</p> <p style="margin-left:10px;">{{ comnt.comment }}</p> <p ng-show="ismanager" style="margin-left:10px;">({{ comnt.status }})</p></td>' +
             '<td ng-show="ismanager">' +
             '<a class="btn btn-danger" style="float: right;" ng-click="cmt_reject(comnt._id)">Reject</a>' +
             '<a class="btn btn-primary" style="float: right;" ng-click="cmt_approve(comnt._id)">Approve</a>' +
@@ -25,20 +25,22 @@ app.directive('commentWidget', function ($http, User) {
 		link: function (scope, elem, attrs) {
 			scope.comment = [];
 			scope.user = User.isLoggedIn();
-			scope.request_in_process = false;			
+			scope.request_in_process = false;
 
-			scope.refresh = function(){
-				var request = $http({ method : "POST", url : "getCommentByRefId", api : true, data : { id : scope.ref, fromMe : false }});
-				request.success(function (data) {
-					console.log(data);
-					if( !data.success || data.comments.length == 0 ){
-						scope.comments = [];
-					} else {
-						scope.comments = data.comments;
-						console.log(scope.comments);						
-					}
-				});
-			}
+            scope.refresh = function () {
+                console.log("id = " + scope.ref);
+                console.log("isManager = " + scope.ismanager);
+                console.log("owner = " + scope.user._id);
+                var request = $http({method: "POST", url: "getCommentByRefId", api: true, data: {id: scope.ref, fromMe: false, isManager : scope.ismanager, owner: scope.user._id}});
+                request.success(function (data) {
+                    if (!data.success || data.comments.length == 0) {
+                        scope.comments = [];
+                    } else {
+                        scope.comments = data.comments;
+                        console.log(scope.comments);
+                    }
+                });
+            }
 			
 			scope.save = function(){
 				if(scope.request_in_process) return;
