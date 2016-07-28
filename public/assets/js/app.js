@@ -2197,7 +2197,7 @@ app.directive('commentWidget', function ($http, User) {
         replace: true,
         scope: {
             ref: '=ref',
-            isManager: '=isManager',
+            ismanager: '=ismanager',
         },
         template: '<div class="row">' +
             '<div class="user-container"><h4>Comments</h4><hr></div>' +
@@ -2205,7 +2205,7 @@ app.directive('commentWidget', function ($http, User) {
             '<ul>' +
             '<li ng-repeat="comnt in comments"> ' +
             '<img src="{{ comnt.from.photo }}" style="width:50px;height:50px;">{{comnt.from.fullname}}: {{ comnt.comment }} ' +
-            '<span ng-show="isManager">' +
+            '<span ng-show="ismanager">' +
             '<a class="btn btn-primary">Approve</a>' +
             '<a class="btn btn-danger">Reject</a>' +
             '</span>' +
@@ -2249,7 +2249,13 @@ app.directive('commentWidget', function ($http, User) {
                 }
             });
 
-            if (scope.ref !== undefined && scope.ref !== null)
+            scope.$watch('ismanager', function (newValue, oldValue) {
+                if (newValue !== undefined && newValue !== null) {
+                    scope.ismanager = newValue;
+                }
+            });
+
+            if (scope.ref !== undefined && scope.ref !== null && scope.ismanager !== undefined && scope.ismanager !== null)
                 scope.refresh();
         }
     };
