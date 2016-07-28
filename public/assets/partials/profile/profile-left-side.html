@@ -10,23 +10,39 @@
     </ul>
     <div class="tab-content">
         <div class="tab-pane fade active in" id="tab_1">
+            <accordion close-others="false">
+            <accordion-group is-open="true">
+            <accordion-heading>
             <p>Teams</p>
+            </accordion-heading>
             <small ng-show="teams.length == 0">No teams, <a href="/teams">search</a> or <a href="/teams/create">add</a> new team now.</small>
-            <select ng-model="selTeam" ng-show="teams.length > 0" ng-change="selectTeamView()" >
-                <option ng-repeat="t in teams" value="{{ t._id }}">{{ t.tName }}</option>
-            </select>
+            <ul ng-show = "teams.length > 0">
+                <li ng-repeat = "t in teams"><a href="/teams/view/{{ t._id }}">{{ t.tName }}</a></li>
+            </ul>
+            <!--<select ng-model="selTeam" ng-show="teams.length > 0" ng-change="selectTeamView()" >-->
+                <!--<option ng-repeat="t in teams" value="{{ t._id }}">{{ t.tName }}</option>-->
+            <!--</select>-->
+            </accordion-group>
+            <accordion-group is-open="true">
+            <accordion-heading>
             <p>Adventures</p>
+            </accordion-heading>
             <small ng-show="adventures.length == 0">No adventures, <a href="/adventures">search</a> or <a href="/adventures/create">add</a> new adventure now.</small>
-            <select ng-model="selAdv" ng-show="adventures.length > 0" ng-change="selecteAdvView()">
-                <option ng-repeat="a in adventures" value="{{ a._id }}">{{ a.name }}</option>
-            </select>
+            <ul ng-show = "adventures.length > 0">
+                <li ng-repeat = "a in adventures"><a href="/adventures/view/{{ a._id }}">{{ t.name }}</a></li>
+            </ul>
+
+            <!--<select ng-model="selAdv" ng-show="adventures.length > 0" ng-change="selecteAdvView()">-->
+                <!--<option ng-repeat="a in adventures" value="{{ a._id }}">{{ a.name }}</option>-->
+            <!--</select>-->
+            </accordion-group>
+            </accordion>
             </div>
         <div class="tab-pane fade" id="tab_2">
-    <hr ng-show="recomendation.length > 0">
-    <p ng-show="recomendation.length > 0">Complete your profile</p>
-    <ul ng-show="recomendation.length > 0">
-        <li ng-repeat="r in recomendation">{{ r }}</li>
+            <hr ng-show="recomendation.length > 0">
+            <p ng-show="recomendation.length > 0">Complete your profile</p>
+            <ul ng-show="recomendation.length > 0">
+            <li ng-repeat="r in recomendation">{{ r }}</li>
         </div>
-    </ul>
     </div>
 </div>
