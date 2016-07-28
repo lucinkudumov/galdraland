@@ -10,6 +10,9 @@ module.exports = function (opts) {
         refId: {
             type: mongoose.Schema.ObjectId,
         },
+        status : {
+            type: String,
+        },
 		comment : {
             type: String,
         }

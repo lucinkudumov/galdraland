@@ -42,6 +42,7 @@ module.exports = function (opts) {
             comment.refId = ref_id;
             comment.from = from;
             comment.comment = commentVal;
+            comment.status = "PENDING";
 
             comment.save(function (err, r) {
                 if (err) {
