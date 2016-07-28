@@ -29,7 +29,7 @@
             </accordion-heading>
             <small ng-show="adventures.length == 0">No adventures, <a href="/adventures">search</a> or <a href="/adventures/create">add</a> new adventure now.</small>
             <ul ng-show = "adventures.length > 0">
-                <li ng-repeat = "a in adventures"><a href="/adventures/view/{{ a._id }}">{{ t.name }}</a></li>
+                <li ng-repeat = "a in adventures"><a href="/adventures/view/{{ a._id }}">{{ a.name }}</a></li>
             </ul>
 
             <!--<select ng-model="selAdv" ng-show="adventures.length > 0" ng-change="selecteAdvView()">-->
@@ -37,7 +37,7 @@
             <!--</select>-->
             </accordion-group>
             </accordion>
-            </div>
+        </div>
         <div class="tab-pane fade" id="tab_2">
             <hr ng-show="recomendation.length > 0">
             <p ng-show="recomendation.length > 0">Complete your profile</p>
