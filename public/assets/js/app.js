@@ -2252,6 +2252,7 @@ app.directive('commentWidget', function ($http, User) {
             scope.$watch('ismanager', function (newValue, oldValue) {
                 if (newValue !== undefined && newValue !== null) {
                     scope.ismanager = newValue;
+                    scope.refresh();
                 }
             });
 
