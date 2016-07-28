@@ -65,6 +65,30 @@ app.directive('commentWidget', function ($http, User) {
 
             if (scope.ref !== undefined && scope.ref !== null && scope.ismanager !== undefined && scope.ismanager !== null)
                 scope.refresh();
+
+            scope.cmt_reject = function (cmtId) {
+                if (scope.request_in_process)
+                    return;
+                scope.request_in_process = true;
+
+                var request = $http({method: "POST", url: "updateStatus", api: true, data: {id: cmtId, status: "REJECT"}});
+                request.then(function (result) {
+                    scope.request_in_process = false;
+                    scope.refresh();
+                });
+            }
+
+            scope.cmt_approve = function (cmtId) {
+                if (scope.request_in_process)
+                    return;
+                scope.request_in_process = true;
+
+                var request = $http({method: "POST", url: "updateStatus", api: true, data: {id: cmtId, status: "APPROVE"}});
+                request.then(function (result) {
+                    scope.request_in_process = false;
+                    scope.refresh();
+                });
+            }
 		}
 	};
 	

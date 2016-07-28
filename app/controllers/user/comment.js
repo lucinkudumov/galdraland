@@ -69,5 +69,20 @@ module.exports = function (opts) {
                 }
             });
         },
+        "post#updateStatus": function (req, res) {
+            var id = req.body.id;
+            var statVal = req.body.status;
+            var comment = new commentModel;
+
+            commentModel.findOneAndUpdate({_id: id}, {status: statVal}, function (err, status) {
+                if (err) {
+                    return res.json({success: false});
+                } else if (status) {
+                    return res.json({success: true, status: status});
+                } else {
+                    return res.json({success: false});
+                }
+            });
+        },
     }
 }

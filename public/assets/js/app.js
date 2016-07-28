@@ -2206,8 +2206,8 @@ app.directive('commentWidget', function ($http, User) {
             '<li ng-repeat="comnt in comments"> ' +
             '<img src="{{ comnt.from.photo }}" style="width:50px;height:50px;"><span>{{comnt.from.fullname}}: {{ comnt.comment }}' +
             '<span ng-show="ismanager">' +
-            '<a class="btn btn-danger" style="float: right;">Reject</a>' +
-            '<a class="btn btn-primary" style="float: right;">Approve</a>' +
+            '<a class="btn btn-danger" style="float: right;" ng-click="cmt_reject(comnt._id)">Reject</a>' +
+            '<a class="btn btn-primary" style="float: right;" ng-click="cmt_approve(comnt._id)">Approve</a>' +
             '</span></span>' +
             '</li>' +
             '</ul>' +
@@ -2258,6 +2258,31 @@ app.directive('commentWidget', function ($http, User) {
 
             if (scope.ref !== undefined && scope.ref !== null && scope.ismanager !== undefined && scope.ismanager !== null)
                 scope.refresh();
+
+            scope.cmt_reject = function (cmtId) {
+                if (scope.request_in_process)
+                    return;
+                scope.request_in_process = true;
+
+                var request = $http({method: "POST", url: "updateStatus", api: true, data: {id: cmtId, status: "REJECT"}});
+                request.then(function (result) {
+                    scope.request_in_process = false;
+                    scope.refresh();
+                });
+            }
+
+            scope.cmt_approve = function (cmtId) {
+                if (scope.request_in_process)
+                    return;
+                scope.request_in_process = true;
+
+                var request = $http({method: "POST", url: "updateStatus", api: true, data: {id: cmtId, status: "APPROVE"}});
+                request.then(function (result) {
+                    scope.request_in_process = false;
+                    scope.refresh();
+                });
+            }
+
         }
     };
 
