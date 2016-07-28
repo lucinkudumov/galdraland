@@ -2197,6 +2197,7 @@ app.directive('commentWidget', function ($http, User) {
         replace: true,
         scope: {
             ref: '=ref',
+            isManager: '=isManager',
         },
         template: '<div class="row">' +
             '<div class="user-container"><h4>Comments</h4><hr></div>' +
@@ -2224,7 +2225,6 @@ app.directive('commentWidget', function ($http, User) {
                         scope.comments = [];
                     } else {
                         scope.comments = data.comments;
-                        scope.isManager = 1;
                         console.log(scope.comments);
                     }
                 });

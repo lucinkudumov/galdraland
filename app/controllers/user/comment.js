@@ -32,7 +32,8 @@ module.exports = function (opts) {
                 } else {
                     return res.json({success: false});
                 }
-            });       },
+            });
+        },
         "post#insertComment": function (req, res) {
             var ref_id = req.body.ref_id;
             var from = req.user._id;
