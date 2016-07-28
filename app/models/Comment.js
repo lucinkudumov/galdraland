@@ -15,6 +15,10 @@ module.exports = function (opts) {
         },
 		comment : {
             type: String,
+        },
+        createdAt: {
+            type: Date,
+            "default": Date.now
         }
     });
     
