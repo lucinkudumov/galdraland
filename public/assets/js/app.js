@@ -2207,8 +2207,8 @@ app.directive('commentWidget', function ($http, User) {
                     '<td><img src="{{ comnt.from.photo }}" style="width:50px;height:50px;"></td>' +
                         '<td><p>{{comnt.from.fullname}}:</p> <p>{{ comnt.comment }}</p> <p>({{ comnt.status }})</p></td>' +
                         '<td ng-show="ismanager">' +
-                            '<a class="btn btn-danger" style="float: right;" ng-click="cmt_reject()">Reject</a>' +
-                            '<a class="btn btn-primary" style="float: right;" ng-click="cmt_approve()">Approve</a>' +
+                            '<a class="btn btn-danger" style="float: right;" ng-click="cmt_reject(comnt._id)">Reject</a>' +
+                            '<a class="btn btn-primary" style="float: right;" ng-click="cmt_approve(comnt._id)">Approve</a>' +
                         '</td>' +
                     '</tr>' +
                 '</table>' +
