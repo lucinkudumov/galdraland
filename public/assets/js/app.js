@@ -2249,6 +2249,8 @@ app.directive('commentWidget', function ($http, User) {
 
             scope.$watch('ref', function (newValue, oldValue) {
                 if (newValue !== undefined && newValue !== null) {
+                    console.log("getting newRef = " + newValue);
+                    console.log("getting oldRef = " + oldValue);
                     scope.ref = newValue;
                     scope.refresh();
                 }
@@ -2256,6 +2258,8 @@ app.directive('commentWidget', function ($http, User) {
 
             scope.$watch('ismanager', function (newValue, oldValue) {
                 if (newValue !== undefined && newValue !== null) {
+                    console.log("getting newismanager = " + newValue);
+                    console.log("getting oldismanager = " + oldValue);
                     scope.ismanager = newValue;
                     scope.refresh();
                 }
