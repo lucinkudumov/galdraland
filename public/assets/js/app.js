@@ -2200,7 +2200,7 @@ app.directive('commentWidget', function ($http, User) {
             ismanager: '=ismanager',
         },
         template: '<div class="row">' +
-            '<div class="user-container"><h4>Comments</h4><hr></div>' +
+//            '<div class="user-container"><h4>Comments</h4><hr></div>' +
             '<div id="dv1">' +
             '<div ng-repeat="comnt in comments">' +
                 '<table width="100%"><tr>' +
