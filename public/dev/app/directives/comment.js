@@ -12,7 +12,7 @@ app.directive('commentWidget', function ($http, User) {
             '<div ng-repeat="comnt in comments">' +
             '<table width="100%"><tr>' +
             '<td width="50px;"><img src="{{ comnt.from.photo }}" style="width:50px;height:50px;"></td>' +
-            '<td style="text-align: left;"><p style="margin-left:10px;">{{comnt.from.fullname}} - {{comnt.createdAt}}</p> <p style="margin-left:10px;">{{ comnt.comment }}</p> <p ng-show="ismanager" style="margin-left:10px;">({{ comnt.status }})</p></td>' +
+            '<td style="text-align: left;"><p style="margin-left:10px; word-wrap: break-word; word-break: break-word;">{{comnt.from.fullname}}</p><p style="margin-left:10px; word-wrap: break-word; word-break: break-word;"> {{ comnt.createdAt | date : ' + '"yyyy-MM-dd HH:mm:ss"' + ' }}</p><p style="margin-left:10px; word-wrap: break-word; word-break: break-word;">{{ comnt.comment }}</p> <p ng-show="ismanager" style="margin-left:10px; word-wrap: break-word; word-break: break-word;">({{ comnt.status }})</p></td>' +
             '<td ng-show="ismanager" width="50px;">' +
             '<a class="btn btn-primary" style="float: left;" ng-click="cmt_approve(comnt._id)">Approve</a>' +
             '<a class="btn btn-danger" style="float: left;" ng-click="cmt_reject(comnt._id)">Reject</a>' +
