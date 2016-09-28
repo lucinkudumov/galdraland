@@ -91,6 +91,14 @@ app.config(["$urlRouterProvider", "$locationProvider", "$stateProvider", "$httpP
                 "right-side@teamList": {templateUrl: "/assets/partials/team/list.html"}
             },
             requireLogin: true
+        }).state("users", {
+                url: "/users",
+                views: {
+                    "main": {templateUrl: "/assets/partials/users.html"},
+                    "users-result@users": {templateUrl: "/assets/partials/users/users-result.html"},
+                },
+                requireLogin: true
+
         }).state("news", {
             url: "/news",
             views: {
