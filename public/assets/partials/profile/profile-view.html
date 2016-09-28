@@ -82,7 +82,13 @@
         <small ng-show="!user.looks || user.looks.length == 0">No Data, <a href="/settings">add</a> now.</small>
         <small ng-repeat="l in user.looks">{{ l.look }}</small>
         </accordion-group>
-
+        <accordion-group is-open="true">
+        <accordion-heading>
+        <p>Desired Roles</p>
+        </accordion-heading>
+        <small ng-show="!user.roles || user.roles.length == 0">No Data, <a href="/settings">add</a> now.</small>
+        <small ng-repeat="r in user.roles">{{ r.role }}</small>
+        </accordion-group>
         </accordion>
     </blockquote>
 </div>
