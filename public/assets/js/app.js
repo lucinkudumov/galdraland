@@ -1286,6 +1286,7 @@ app.controller("profileSettingsController", ["$scope", "$rootScope", "$location"
         $scope.dislikes = [];
         $scope.skills = [];
         $scope.looks = [];
+        $scope.roles = [];
 
         $http.get("/api/getUserDetail").success(function (data) {
             $scope.username = data.user.username;
@@ -1304,6 +1305,7 @@ app.controller("profileSettingsController", ["$scope", "$rootScope", "$location"
             $scope.dislikes = data.user.dislikes;
             $scope.skills = data.user.skills;
             $scope.looks = data.user.looks;
+            $scope.roles = data.user.roles;
 
             $scope.invalidUsername = false;
             $scope.invalidEmail = false;
@@ -1393,6 +1395,10 @@ app.controller("profileSettingsController", ["$scope", "$rootScope", "$location"
             $scope.looks.push({look: ""});
         }
 
+        $scope.addRoles = function () {
+            $scope.roles.push({role: ""});
+        }
+
         $scope.addInterest = function () {
             $scope.interests.push({topic: "", information: ""});
             $scope.interest_placeholder = "";
@@ -1467,6 +1473,18 @@ app.controller("profileSettingsController", ["$scope", "$rootScope", "$location"
             return false;
         }
 
+        $scope.validateRoles = function () {
+            for (var i = 0; i < $scope.roles.length; i++) {
+                var l = $scope.roles[i];
+
+                if (!l.role) {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
         $scope.saveLikes = function () {
             var request = $http({method: "POST", url: "saveLikes", api: true, data: {likes: $scope.likes}});
             request.success(function (data) {
@@ -1496,6 +1514,15 @@ app.controller("profileSettingsController", ["$scope", "$rootScope", "$location"
 
         $scope.saveLooks = function () {
             var request = $http({method: "POST", url: "saveLooks", api: true, data: {looks: $scope.looks}});
+            request.success(function (data) {
+                if (data.success) {
+                    User.update();
+                }
+            });
+        }
+
+        $scope.saveRoles = function () {
+            var request = $http({method: "POST", url: "saveRoles", api: true, data: {looks: $scope.roles}});
             request.success(function (data) {
                 if (data.success) {
                     User.update();
@@ -1579,6 +1606,13 @@ app.controller("profileSettingsController", ["$scope", "$rootScope", "$location"
             var index = $scope.looks.indexOf(l);
             if (index >= 0) {
                 $scope.looks.splice(index, 1);
+            }
+        }
+
+        $scope.removeRoles = function (l) {
+            var index = $scope.roles.indexOf(l);
+            if (index >= 0) {
+                $scope.roles.splice(index, 1);
             }
         }
 
@@ -1960,6 +1994,7 @@ app.controller("userViewController", ["$scope", "$http", "$stateParams", "User",
                 $scope.dislikes = data.user.dislikes;
                 $scope.skills= data.user.skills;
                 $scope.looks= data.user.looks;
+                $scope.roles= data.user.roles;
             });
 
             $scope.teams = [];

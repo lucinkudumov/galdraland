@@ -117,7 +117,13 @@
             <small ng-show="!looks || looks.length == 0">No Data</small>
             <small ng-repeat="l in looks">{{ l.look }}</small>
         </accordion-group>
-
+        <accordion-group is-open="true">
+            <accordion-heading>
+                <p>Desired Roles</p>
+            </accordion-heading>
+            <small ng-show="!roles || roles.length == 0">No Data</small>
+            <small ng-repeat="r in roles">{{ r.role }}</small>
+        </accordion-group>
         </accordion>
     </blockquote>
 </div>

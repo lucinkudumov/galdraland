@@ -53,6 +53,14 @@ module.exports = function (opts) {
                 }
             }]
         },
+        roles: {
+            type: [{
+                role : {
+                    type: String,
+                    reqired: true
+                }
+            }]
+        },
         location: {
             type: String
         },

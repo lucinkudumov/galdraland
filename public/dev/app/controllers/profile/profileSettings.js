@@ -16,6 +16,7 @@ app.controller("profileSettingsController", ["$scope", "$rootScope", "$location"
     $scope.dislikes = [];
     $scope.skills = [];
     $scope.looks = [];
+    $scope.roles = [];
 		
 	$http.get("/api/getUserDetail").success(function (data) {
 		$scope.username = data.user.username;
@@ -34,6 +35,7 @@ app.controller("profileSettingsController", ["$scope", "$rootScope", "$location"
         $scope.dislikes = data.user.dislikes;
         $scope.skills= data.user.skills;
         $scope.looks= data.user.looks;
+        $scope.roles= data.user.roles;
 
 		$scope.invalidUsername = false;
 		$scope.invalidEmail = false;
@@ -128,6 +130,10 @@ app.controller("profileSettingsController", ["$scope", "$rootScope", "$location"
         $scope.looks.push({ look : "" });
     }
 
+    $scope.addRoles = function () {
+        $scope.roles.push({ role : "" });
+    }
+
     $scope.validateLinks = function () {
         for (var i = 0; i < $scope.links.length; i++) {
             var l = $scope.links[i];
@@ -188,6 +194,18 @@ app.controller("profileSettingsController", ["$scope", "$rootScope", "$location"
         return false;
     }
 
+    $scope.validateRoles = function () {
+        for (var i = 0; i < $scope.roles.length; i++) {
+            var l = $scope.roles[i];
+
+            if (!l.role) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     $scope.saveLinks = function () {
         var request = $http({ method : "POST", url : "saveLinks", api : true, data :  { links : $scope.links }});
         request.success(function (data) {
@@ -233,6 +251,14 @@ app.controller("profileSettingsController", ["$scope", "$rootScope", "$location"
         });
     }
 
+    $scope.saveRoles = function () {
+        var request = $http({ method : "POST", url : "saveRoles", api : true, data :  { roles : $scope.roles }});
+        request.success(function (data) {
+            if (data.success) {
+                User.update();
+            }
+        });
+    }
 
     $scope.saveExperience = function () {
         var request = $http({ method : "POST", url : "saveExperience", api : true, data : { experience : $scope.experience }});
@@ -318,6 +344,13 @@ app.controller("profileSettingsController", ["$scope", "$rootScope", "$location"
         var index = $scope.looks.indexOf(l);
         if (index >= 0) {
             $scope.looks.splice(index, 1);
+        }
+    }
+
+    $scope.removeRoles = function (l) {
+        var index = $scope.roles.indexOf(l);
+        if (index >= 0) {
+            $scope.roles.splice(index, 1);
         }
     }
 

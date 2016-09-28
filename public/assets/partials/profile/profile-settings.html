@@ -182,5 +182,17 @@
         <button class="btn btn-default pull-left add" ng-click="addLooks()">Add</button>
         <button class="btn btn-default pull-right" ng-disabled="validateLooks()" ng-click="saveLooks()">Save</button>
     </blockquote>
-
+    <blockquote>
+        <p>Desired Roles</p>
+        <div ng-repeat="r in roles" style="margin-bottom: 20px;">
+            <div class="input-group">
+                <input type="text" ng-model="r.role" placeholder="Desired Roles" class="form-control">
+                <span class="input-group-btn">
+                    <button class="btn btn-default btn-remove" type="button" ng-click="removeRoles(r)">Remove</button>
+                </span>
+            </div>
+        </div>
+        <button class="btn btn-default pull-left add" ng-click="addRoles()">Add</button>
+        <button class="btn btn-default pull-right" ng-disabled="validateRoles()" ng-click="saveRoles()">Save</button>
+    </blockquote>
 </div>
