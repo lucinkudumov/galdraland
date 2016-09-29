@@ -56,7 +56,7 @@ module.exports = function (opts) {
             });
         },
         "post#getUserById": function (req, res) {
-            userModel.findOne({_id: req.id}).select("_id profileId fullname username email signin photo skype experience goals categories").exec(function (err, user) {
+            userModel.findOne({_id: req.body.id}).select("_id profileId fullname username email signin photo skype experience goals categories").exec(function (err, user) {
                 if (err) {
                     console.log(err);
                     return res.json({success: false});
