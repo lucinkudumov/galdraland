@@ -55,6 +55,27 @@ module.exports = function (opts) {
                 }
             });
         },
+        "post#getUserById": function (req, res) {
+            userModel.findOne({_id: req.id}).select("_id profileId fullname username email signin photo skype experience goals categories").exec(function (err, user) {
+                if (err) {
+                    console.log(err);
+                    return res.json({success: false});
+                } else if (user) {
+                    emailModel.findOne({userId: user._id}, function (err, email) {
+                        if (err) {
+                            console.log(err);
+                            return res.json({success: false});
+                        } else {
+                            user = user.toObject();
+                            user.email = email.toObject();
+                            return res.json({success: true, user: user});
+                        }
+                    });
+                } else {
+                    return res.json({success: false});
+                }
+            });
+        },
         "get#getUserDetail": function (req, res) {
             userModel.findById(req.user._id).populate("interests.topic").exec(function (err, user) {
                 if (err) {

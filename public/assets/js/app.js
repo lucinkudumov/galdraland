@@ -316,8 +316,12 @@ app.controller("usersResultController", ["$scope", "$http", "User", "$location",
                         console.log("team's name = " + $scope.teams[i].name);
                         for (var j = 0; j < $scope.teams[i].teamMembers.length; j ++) {
                             var o = $scope.teams[i].teamMembers[j];
-                            console.log("member = ", o);
-                        }
+
+                            console.log("userId = " + o.user);
+                            var request = $http({method: "POST", url: "getUserById", api: true, data: {id: o.user}});
+                            request.success(function (data) {
+                                console.log("user = ", data);
+                            });
                     }
                     $scope.loading = false;
 
