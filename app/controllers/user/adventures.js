@@ -74,7 +74,6 @@ module.exports = function (opts) {
                     adventure.owner = req.user._id;
                     adventure.team = team;
                     adventure.image = req.body.image;
-                    console.log("tags = ", req.body.tags);
                     adventure.tags = req.body.tags;
                     adventure.start = req.body.start;
                     adventure.end = req.body.end;
