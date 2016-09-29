@@ -320,7 +320,7 @@ app.controller("usersResultController", ["$scope", "$http", "User", "$location",
                             console.log("userId = " + o.user);
                             var request = $http({method: "POST", url: "getUserById", api: true, data: {id: o.user}});
                             request.success(function (data) {
-                                console.log("user = ", data);
+                                console.log("user = ", data.user);
                             });
                         }
                     }
