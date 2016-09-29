@@ -296,6 +296,11 @@ module.exports = function (opts) {
                 }
             });
         },
+        "post#adventureTag/list": function (req, res) {
+            var tag = req.body.tag;
+            console.log("Tag = " + tag);
+            return res.json({success: false, adventures: []});
+        },
         "post#adventure/get": function (req, res) {
             adventureModel.findOne({_id: req.body.id}).populate("team team").exec(function (err, adventure) {
                 if (err) {
