@@ -332,6 +332,7 @@ app.controller("usersResultController", ["$scope", "$http", "User", "$location",
                         }).then(function (r) {
                            if ($scope.users.length) {
                                 for (var i = 0; i < $scope.users.length; i++) {
+                                    if ($scope.users[i].profileId == "000000000000000000000000") continue;
                                     var result = {};
                                     result.name = $scope.users[i].fullname;
                                     $scope.results.push(result);
