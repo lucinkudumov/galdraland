@@ -357,7 +357,6 @@ app.controller("createAdventureController", ["$scope", "$rootScope", "Upload", "
         $scope.values.team = null;
         $scope.values.newTeam = null;
         $scope.values.teamCount = 1;
-        $scope.tags = [];
 
         $scope.refresh = function () {
             var request = $http({method: "GET", url: "myOwnTeams", api: true});
@@ -368,17 +367,6 @@ app.controller("createAdventureController", ["$scope", "$rootScope", "Upload", "
                 else
                     $rootScope.return2Adventure = "normal";
             });
-        }
-
-        $scope.addTags = function () {
-            $scope.tags.push({tag: ""});
-        }
-
-        $scope.removeTags = function (l) {
-            var index = $scope.tags.indexOf(l);
-            if (index >= 0) {
-                $scope.tags.splice(index, 1);
-            }
         }
 
         $scope.onFileSelect = function (image) {
