@@ -4,5 +4,17 @@
             Users
         </div>
     </div>
-    <hr>
+    <div class="row">
+        <div class="col-md-8">
+            <br>
+            <table class="table teams">
+                <tr ng-show="!loading && results.length == 0">
+                    <td class="err-msg">No Users</td>
+                </tr>
+                <tr ng-repeat="r in results">
+                    <td>{{ r.name}}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
 </div>

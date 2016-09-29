@@ -304,14 +304,7 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
     }]);
 app.controller("usersResultController", ["$scope", "$http", "User", "$location", function ($scope, $http, User, $location) {
     $scope.user = User.isLoggedIn();
-
-//    $scope.getUserById = function (userId) {
-//        var request = $http({method: "POST", url: "getUserById", api: true, data: {id: userId}});
-//        request.success(function (data) {
-//            console.log("user = ", data.user);
-//        });
-//    }
-
+    $scope.results = [];
     $scope.refresh = function () {
         $scope.loading = true;
         var request = $http({method: "GET", url: "myTeams", api: true});
@@ -321,7 +314,6 @@ app.controller("usersResultController", ["$scope", "$http", "User", "$location",
                 if ($scope.teams.length) {
                     var userIds = [];
                     for (var i = 0; i < $scope.teams.length; i++) {
-                        console.log("team's name = " + $scope.teams[i].name);
                         for (var j = 0; j < $scope.teams[i].teamMembers.length; j ++) {
                             var o = $scope.teams[i].teamMembers[j];
                             console.log("userId = " + o.user);
@@ -330,29 +322,29 @@ app.controller("usersResultController", ["$scope", "$http", "User", "$location",
                             } else {
                                 userIds.push(o.user);
                             }
-//                            $scope.getUserById(o.user);
                         }
                     }
-                    console.log("userIds = ", userIds);
                     if (userIds.length) {
                         var request = $http({method: "POST", url: "getUsersByIds", api: true, data: {ids: userIds}});
                         request.success(function (data) {
                             console.log("users = ", data.users);
+                            $scope.users = data.users
+                        }).then(function (r) {
+                           if ($scope.users.length) {
+                                for (var i = 0; i < $scope.users.length; i++) {
+                                    var result = {};
+                                    result.name = $scope.users[i].fullname;
+                                    $scope.results.push(result);
+                                }
+                                $scope.loading = false;
+                            } else {
+                                $scope.loading = false;
+                            }
                         });
                     }
-
-                    $scope.loading = false;
-
-//                    var request = $http({method: "POST", url: "teams/getMembers", api: true, data: {teams: $scope.teams}});
-//                    request.success(function(data) {
-//
-//                    });
                 } else {
                     $scope.loading = false;
                 }
-//            }).then(function (r) {
-//                $scope.adventures = r.data.adventures;
-//                $scope.loading = false;
             });
     }
 
