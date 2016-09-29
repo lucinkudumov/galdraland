@@ -302,22 +302,39 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
 
         $scope.refresh();
     }]);
-app.controller("usersResultController", ["$scope", "$http", "$stateParams", "$sce", "User", "$modal", "$location", function ($scope, $http, $stateParams, $sce, User, $modal, $location) {
+app.controller("usersResultController", ["$scope", "$http", "User", "$location", function ($scope, $http, User, $location) {
     $scope.user = User.isLoggedIn();
 
-//    $scope.refresh = function () {
-//        var request = $http({method: "POST", url: "adventure/get", api: true, data: {id: $stateParams.id}});
-//        request.success(function (data) {
-//            if (data.adventure.description && data.adventure.description != "") {
-//                var find = "\n";
-//                var re = new RegExp(find, 'g');
-//                data.adventure.description = $sce.trustAsHtml(data.adventure.description.replace(re,"<br>"));
-//            }
-//            $scope.adventure = data.adventure;
-//            $scope.isManager = data.adventure.owner == $scope.user._id;
-//        });
-//    }
-//    $scope.refresh();
+    $scope.refresh = function () {
+        $scope.loading = true;
+        var request = $http({method: "GET", url: "myTeams", api: true});
+        request.success(function (data) {
+            $scope.teams = data.teams;
+        }).then(function (r) {
+                if ($scope.teams.length) {
+                    for (var i = 0; i < $scope.teams.length; i++) {
+                        console.log("team's name = " + $scope.teams[i].name);
+                        for (var j = 0; j < $scope.teams[i].teamMembers.length; j ++) {
+                            var o = $scope.teams[i].teamMembers[j];
+                            console.log("member = ", o);
+                        }
+                    }
+                    $scope.loading = false;
+
+//                    var request = $http({method: "POST", url: "teams/getMembers", api: true, data: {teams: $scope.teams}});
+//                    request.success(function(data) {
+//
+//                    });
+                } else {
+                    $scope.loading = false;
+                }
+//            }).then(function (r) {
+//                $scope.adventures = r.data.adventures;
+//                $scope.loading = false;
+            });
+    }
+
+    $scope.refresh();
 }]);
 app.controller("createAdventureController", ["$scope", "$rootScope", "Upload", "$http", "$location", "User", function ($scope, $rootScope, Upload, $http, $location, User) {
         $scope.user = User.isLoggedIn();
