@@ -148,7 +148,7 @@ app.config(["$urlRouterProvider", "$locationProvider", "$stateProvider", "$httpP
             },
             requireLogin: true
         }).state("adventureTagList", {
-            url: "/adventuresTag/:tag",
+            url: "/adventuresTag/:id",
             views: {
                 "main": {templateUrl: "/assets/partials/main.html"},
                 "left-side@adventureTagList": {templateUrl: "/assets/partials/adventureTag/left-side.html"},
