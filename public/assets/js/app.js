@@ -151,8 +151,8 @@ app.config(["$urlRouterProvider", "$locationProvider", "$stateProvider", "$httpP
             url: "/adventuresTag/:id",
             views: {
                 "main": {templateUrl: "/assets/partials/main.html"},
-                "left-side@adventureTagList": {templateUrl: "/assets/partials/adventureTag/left-side.html"},
-                "right-side@adventureTagList": {templateUrl: "/assets/partials/adventureTag/list.html"}
+                "left-side@adventureList": {templateUrl: "/assets/partials/adventureTag/left-side.html"},
+                "right-side@adventureList": {templateUrl: "/assets/partials/adventureTag/list.html"}
             },
             requireLogin: true
         }).state("adventureCreate", {
