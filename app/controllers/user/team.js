@@ -239,6 +239,23 @@ module.exports = function (opts) {
                 }
             });
         },
+//        "POST#teams/getMembers": function (req, res) {
+//            var teams = req.body.teams;
+//            var queries = [];
+//
+//            for (var i = 0; i < teams.length; i++)
+//                queries.push({team: teams[i]._id});
+//
+//            adventureModel.find({$or: queries}, function (err, advs) {
+//                if (err) {
+//                    console.log(err);
+//                    return res.json({success: false, adventures: []});
+//                } else {
+//                    return res.json({success: true, adventures: advs});
+//                }
+//            });
+//        },
+
         "post#userTeams": function (req, res) {
             teamMemberModel.find({user: req.body.userid}, function (err, members) {
                 if (err) {
@@ -295,7 +312,7 @@ module.exports = function (opts) {
                             cb();
                         }
                     });
-                },
+                }
             ], function (err, vals) {
                 if (err) {
                     console.log(err);
