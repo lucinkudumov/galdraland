@@ -322,6 +322,7 @@ app.controller("usersResultController", ["$scope", "$http", "User", "$location",
                             request.success(function (data) {
                                 console.log("user = ", data);
                             });
+                        }
                     }
                     $scope.loading = false;
 
