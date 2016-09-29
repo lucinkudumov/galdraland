@@ -663,7 +663,7 @@ app.controller("myAdventuresController", ["$scope", "$http", "$location", "User"
     }]);
 app.controller("myAdventuresTagController", ["$scope", "$http", "$location", "$stateParams", "User", function ($scope, $http, $location, $stateParams, User) {
     $scope.user = User.isLoggedIn();
-    console.log("tags ID = " + $stateParams.id);
+    console.log("tags TAG = " + $stateParams.tag);
     $scope.refresh = function () {
         $scope.loading = true;
         var request = $http({method: "GET", url: "myTeams", api: true});
