@@ -55,27 +55,25 @@ module.exports = function (opts) {
                 }
             });
         },
-//        "post#getUserById": function (req, res) {
-//            userModel.findOne({_id: req.body.id}).select("_id profileId fullname username email signin photo skype experience goals categories").exec(function (err, user) {
-//                if (err) {
-//                    console.log(err);
-//                    return res.json({success: false});
-//                } else if (user) {
-//                    emailModel.findOne({userId: user._id}, function (err, email) {
-//                        if (err) {
-//                            console.log(err);
-//                            return res.json({success: false});
-//                        } else {
-//                            user = user.toObject();
-//                            user.email = email.toObject();
-//                            return res.json({success: true, user: user});
-//                        }
-//                    });
-//                } else {
-//                    return res.json({success: false});
-//                }
-//            });
-//        },
+        "post#getUsersByIds": function (req, res) {
+            var ids = req.body.ids;
+            var queries = [];
+            for (var i = 0; i < ids.length; i++)
+                queries.push({_id: ids[i]});
+
+            userModel.find({$or: queries}).select("_id profileId fullname username email signin photo skype experience goals categories").exec(function (err, users) {
+                if (err) {
+                    console.log("getUsersByIds Error = " + err);
+                    return res.json({success: false});
+                } else if (users) {
+                    console.log("getUsersByIds Success = ", users);
+                    return res.json({success: true, users: users});
+                } else {
+                    console.log("getUsersByIds Error! No Data");
+                    return res.json({success: false});
+                }
+            });
+        },
         "get#getUserDetail": function (req, res) {
             userModel.findById(req.user._id).populate("interests.topic").exec(function (err, user) {
                 if (err) {

@@ -334,6 +334,13 @@ app.controller("usersResultController", ["$scope", "$http", "User", "$location",
                         }
                     }
                     console.log("userIds = ", userIds);
+                    if (userIds.length) {
+                        var request = $http({method: "POST", url: "getUsersByIds", api: true, data: {ids: userIds}});
+                        request.success(function (data) {
+                            console.log("users = ", data.users);
+                        });
+                    }
+
                     $scope.loading = false;
 
 //                    var request = $http({method: "POST", url: "teams/getMembers", api: true, data: {teams: $scope.teams}});
