@@ -24,15 +24,8 @@ module.exports = function (opts) {
         image: {
             type: String
         },
-//        tags: {
-//            type: [String]
-//        },
         tags: {
-            type: [{
-                tag : {
-                    type: String
-                }
-            }]
+            type: [String]
         },
         createdAt: {
             type: Date,
