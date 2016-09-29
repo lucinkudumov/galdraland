@@ -299,14 +299,7 @@ module.exports = function (opts) {
         "post#adventureTag/list": function (req, res) {
             var tag = req.body.tag;
             console.log("Tag = " + tag);
-            adventureModel.find({tags: {$all : {tag : tag} }}, function (err, advs) {
-                if (err) {
-                    console.log(err);
-                    return res.json({success: false, adventures: []});
-                } else {
-                    return res.json({success: true, adventures: advs});
-                }
-            });
+            return res.json({success: false, adventures: []});
         },
         "post#adventure/get": function (req, res) {
             adventureModel.findOne({_id: req.body.id}).populate("team team").exec(function (err, adventure) {
