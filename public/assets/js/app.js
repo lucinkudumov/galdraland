@@ -511,13 +511,26 @@ app.controller("editAdventureController", ["$scope", "$http", "$location", "$sta
         $scope.arr_status = ["Active", "Stopped", "Completed"];
         $scope.uploadInProgress = false;
         $scope.uploadProgress = 0;
+        $scope.tags = [];
+
+        $scope.addTags = function () {
+            $scope.tags.push({tag: ""});
+        }
+
+        $scope.removeTags = function (l) {
+            var index = $scope.tags.indexOf(l);
+            if (index >= 0) {
+                $scope.tags.splice(index, 1);
+            }
+        }
+
         $scope.getAdventure = function () {
             var request = $http({method: "POST", url: "adventure/get", api: true, data: {id: $stateParams.id}});
             request.success(function (data) {
                 $scope.name = data.adventure.name;
                 $scope.description = data.adventure.description;
                 $scope.link = data.adventure.link;
-                $scope.tags = data.adventure.tags.join(" ");
+                $scope.tags = data.adventure.tags;
                 $scope.start = new Date(Date.parse(data.adventure.start));
                 $scope.end = new Date(Date.parse(data.adventure.end));
                 $scope.status = data.adventure.status;
@@ -573,7 +586,7 @@ app.controller("editAdventureController", ["$scope", "$http", "$location", "$sta
             });
         };
         $scope.editAdventure = function () {
-            var request = $http({method: "POST", url: "adventure/update", api: true, data: {id: $stateParams.id, name: $scope.name, description: $scope.description, link: $scope.link, image: $scope.uploadedImage, tags: $scope.tags.split(" "), start: $scope.formatDate($scope.start), end: $scope.formatDate($scope.end), status: $scope.status, type: $scope.type}});
+            var request = $http({method: "POST", url: "adventure/update", api: true, data: {id: $stateParams.id, name: $scope.name, description: $scope.description, link: $scope.link, image: $scope.uploadedImage, tags: $scope.tags, start: $scope.formatDate($scope.start), end: $scope.formatDate($scope.end), status: $scope.status, type: $scope.type}});
             request.success(function (data) {
                 $location.path("/adventures/view/" + $stateParams.id);
             });
