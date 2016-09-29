@@ -305,12 +305,12 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
 app.controller("usersResultController", ["$scope", "$http", "User", "$location", function ($scope, $http, User, $location) {
     $scope.user = User.isLoggedIn();
 
-    $scope.getUserById = function (userId) {
-        var request = $http({method: "POST", url: "getUserById", api: true, data: {id: userId}});
-        request.success(function (data) {
-            console.log("user = ", data.user);
-        });
-    }
+//    $scope.getUserById = function (userId) {
+//        var request = $http({method: "POST", url: "getUserById", api: true, data: {id: userId}});
+//        request.success(function (data) {
+//            console.log("user = ", data.user);
+//        });
+//    }
 
     $scope.refresh = function () {
         $scope.loading = true;
@@ -325,7 +325,7 @@ app.controller("usersResultController", ["$scope", "$http", "User", "$location",
                             var o = $scope.teams[i].teamMembers[j];
 
                             console.log("userId = " + o.user);
-                            $scope.getUserById(o.user);
+//                            $scope.getUserById(o.user);
                         }
                     }
                     $scope.loading = false;
