@@ -110,7 +110,7 @@ module.exports = function (opts) {
             var term = req.body.term;
             var tags = term.split(" ");
 
-            adventureModel.find({$or: [{name: new RegExp(term, 'i')}, {description: new RegExp(term, 'i')}, {"tags.tag" : tags}]}, function (err, adventures) {
+            adventureModel.find({$or: [{name: new RegExp(term, 'i')}, {description: new RegExp(term, 'i')}, {tags: {$in: tags}}]}, function (err, adventures) {
                 if (err) {
                     console.log(err);
                     return res.json({adventures: []});
