@@ -27,21 +27,9 @@
             <span ng-show="uploadInProgress">Upload progress: {{ uploadProgress }}</span>
             <img src="{{uploadedImage}}" ng-show="uploadedImage">
         </div>
-        <!--<div class="form-group">-->
-            <!--<input class="form-control" type="text" ng-model="tags" placeholder="Tags(optional)">-->
-        <!--</div>-->
         <div class="form-group">
-            <div ng-repeat="t in tags" style="margin-bottom: 20px;">
-                <div class="input-group">
-                    <input type="text" ng-model="t.tag" placeholder="Tags(optional)" class="form-control">
-                    <span class="input-group-btn">
-                        <button class="btn btn-default btn-remove" type="button" ng-click="removeTags(t)">Remove</button>
-                    </span>
-                </div>
-            </div>
-            <button class="btn btn-default" ng-click="addTags()">Add Tags</button>
+            <input class="form-control" type="text" ng-model="tags" placeholder="Tags(optional)">
         </div>
-
         <div class="form-group">
             <ul class="unstyled invites">
                 <li ng-hide = "team">
