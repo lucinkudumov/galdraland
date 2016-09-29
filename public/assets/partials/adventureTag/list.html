@@ -4,7 +4,7 @@
             <br>
             <table class="table adventures">
                 <tr ng-show="!loading && adventures.length == 0">
-                    <td class="err-msg">No adventures, <a href="/adventures/create">add</a> new adventure now.</td>
+                    <td class="err-msg">No adventures</td>
                 </tr>
                 <tr ng-repeat="a in adventures">
                     <td>{{ a.name}}</td>
