@@ -319,15 +319,21 @@ app.controller("usersResultController", ["$scope", "$http", "User", "$location",
             $scope.teams = data.teams;
         }).then(function (r) {
                 if ($scope.teams.length) {
+                    var userIds = [];
                     for (var i = 0; i < $scope.teams.length; i++) {
                         console.log("team's name = " + $scope.teams[i].name);
                         for (var j = 0; j < $scope.teams[i].teamMembers.length; j ++) {
                             var o = $scope.teams[i].teamMembers[j];
-
                             console.log("userId = " + o.user);
+                            if(userIds.indexOf(o.user) != -1) {
+                                continue;
+                            } else {
+                                userIds.push(o.user);
+                            }
 //                            $scope.getUserById(o.user);
                         }
                     }
+                    console.log("userIds = ", userIds);
                     $scope.loading = false;
 
 //                    var request = $http({method: "POST", url: "teams/getMembers", api: true, data: {teams: $scope.teams}});
