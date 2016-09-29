@@ -417,7 +417,6 @@ app.controller("createAdventureController", ["$scope", "$rootScope", "Upload", "
         };
 
         $scope.createAdventure = function () {
-            console.log("tags = ", $scope.tags);
             var post = $scope.fb_post;
             console.log($scope.image);
             var request = $http({

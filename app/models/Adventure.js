@@ -30,8 +30,7 @@ module.exports = function (opts) {
         tags: {
             type: [{
                 tag : {
-                    type: String,
-                    reqired: true
+                    type: String
                 }
             }]
         },
