@@ -660,7 +660,6 @@ app.controller("myAdventuresController", ["$scope", "$http", "$location", "User"
 
 app.controller("myAdventuresTagController", ["$scope", "$http", "$location", "$stateParams", "User", function ($scope, $http, $location, $stateParams, User) {
     $scope.user = User.isLoggedIn();
-    console.log("tags TAG = " + $stateParams.tag);
     $scope.refresh = function () {
         $scope.loading = true;
         var request = $http({method: "POST", url: "adventureTag/list", api: true, data: {tag: $stateParams.tag}});
@@ -1982,7 +1981,6 @@ app.controller("myTeamsController", ["$scope", "$http", "$location", "User", fun
 
 app.controller("myTeamsTagController", ["$scope", "$http", "$location", "$stateParams", "User", function ($scope, $http, $location, $stateParams, User) {
     $scope.user = User.isLoggedIn();
-    console.log("tags TAG = " + $stateParams.tag);
     $scope.refresh = function () {
         $scope.loading = true;
         var request = $http({method: "POST", url: "teamTag/list", api: true, data: {tag: $stateParams.tag}});
