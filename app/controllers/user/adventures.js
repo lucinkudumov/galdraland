@@ -299,7 +299,7 @@ module.exports = function (opts) {
         "post#adventureTag/list": function (req, res) {
             var tag = req.body.tag;
             console.log("Tag = " + tag);
-            adventureModel.find({"tags" : {$in : tag}}, function (err, advs) {
+            adventureModel.find({"tags" : {$in : [tag]}}, function (err, advs) {
                 if (err) {
                     console.log(err);
                     return res.json({success: false, adventures: []});
