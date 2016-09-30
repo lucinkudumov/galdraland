@@ -242,7 +242,7 @@ module.exports = function (opts) {
                 }
             });
         },
-        "POST#teamTag/list": function (req, res) {
+        "post#teamTag/list": function (req, res) {
             var tag = req.body.tag;
             console.log("Tag = " + tag);
             teamModel.find({"tags" : {$in : [tag]}}, function (err, teams) {
