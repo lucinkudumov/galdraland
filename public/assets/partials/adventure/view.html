@@ -37,8 +37,12 @@
                     <p class="name">{{adventure.start + " - " + adventure.end}}</p>
                 </li>
                 <li>
+                    <!--<p>Tags</p>-->
+                    <!--<p class="name">{{adventure.tags.join(" ")}}</p>-->
                     <p>Tags</p>
-                    <p class="name">{{adventure.tags.join(" ")}}</p>
+                    <p ng-repeat="t in adventure.tags" >
+                        <a href="/adventuresTag/{{t}}" class="name">{{t}}</a>
+                    </p>
                 </li>
                 <li>
                     <p>Status</p>
