@@ -91,6 +91,14 @@ app.config(["$urlRouterProvider", "$locationProvider", "$stateProvider", "$httpP
                 "right-side@teamList": {templateUrl: "/assets/partials/team/list.html"}
             },
             requireLogin: true
+        }).state("teamTagList", {
+            url: "/teamsTag/:tag",
+            views: {
+                "main": {templateUrl: "/assets/partials/main.html"},
+                "left-side@teamTagList": {templateUrl: "/assets/partials/teamTag/left-side.html"},
+                "right-side@teamTagList": {templateUrl: "/assets/partials/teamTag/list.html"}
+            },
+            requireLogin: true
         }).state("users", {
                 url: "/users",
                 views: {
@@ -1851,7 +1859,7 @@ app.controller("searchController", ["$scope", "$http", "$location", "$stateParam
     }]);
 app.controller("createTeamController", ["$scope", "$rootScope", "Upload", "$http", "$location", function ($scope, $rootScope, Upload, $http, $location) {
         $scope.createTeam = function () {
-            request = $http({method: "POST", url: "createTeam", api: true, data: {name: $scope.name, description: $scope.description, roles: $scope.roles, defuser: $rootScope.defUser, image: $scope.uploadedImage}});
+            request = $http({method: "POST", url: "createTeam", api: true, data: {name: $scope.name, description: $scope.description, roles: $scope.roles, defuser: $rootScope.defUser, image: $scope.uploadedImage, tags: ($scope.tags) ? $scope.tags.split(' ') : []}});
             request.success(function (data) {
                 if ($rootScope.return2Adventure == "return")
                 {
@@ -1909,6 +1917,7 @@ app.controller("editTeamController", ["$scope", "$http", "$location", "$statePar
             $scope.name = data.team.name;
             $scope.description = data.team.description;
             $scope.uploadedImage = data.team.image;
+            $scope.tags = data.team.tags.join(" ");
         });
         $scope.onFileSelect = function (image) {
             console.log(image);
@@ -1945,7 +1954,7 @@ app.controller("editTeamController", ["$scope", "$http", "$location", "$statePar
             });
         }
         $scope.editTeam = function () {
-            var request = $http({method: "POST", url: "editTeam", api: true, data: {id: id, name: $scope.name, description: $scope.description, image:$scope.uploadedImage}});
+            var request = $http({method: "POST", url: "editTeam", api: true, data: {id: id, name: $scope.name, description: $scope.description, image:$scope.uploadedImage, tags:$scope.tags.split(" ")}});
             request.success(function (data) {
                 $location.path("/teams/view/" + id);
             });
@@ -1970,6 +1979,21 @@ app.controller("myTeamsController", ["$scope", "$http", "$location", "User", fun
 
         $scope.refresh();
     }]);
+
+app.controller("myTeamsTagController", ["$scope", "$http", "$location", "$stateParams", "User", function ($scope, $http, $location, $stateParams, User) {
+    $scope.user = User.isLoggedIn();
+    console.log("tags TAG = " + $stateParams.tag);
+    $scope.refresh = function () {
+        $scope.loading = true;
+        var request = $http({method: "POST", url: "teamTag/list", api: true, data: {tag: $stateParams.tag}});
+        request.success(function (data) {
+            $scope.teams = data.teams;
+            $scope.loading = false;
+        });
+    }
+
+    $scope.refresh();
+}]);
 
 app.controller("newsController", ["$scope", "$http", "$location", "User", function ($scope, $http, $location, User) {
         $scope.user = User.isLoggedIn();

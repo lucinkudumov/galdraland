@@ -17,6 +17,9 @@ module.exports = function (opts) {
         image: {
             type: String
         },
+        tags: {
+            type: [String]
+        },
         teamMembers: [{
             type: mongoose.Schema.ObjectId,
             ref: "TeamMember"

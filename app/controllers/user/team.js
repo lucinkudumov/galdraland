@@ -53,6 +53,7 @@ module.exports = function (opts) {
             var name = req.body.name,
                     description = req.body.description,
                     image = req.body.image,
+                    tags = req.body.tags,
                     team = new teamModel();
 
             var roles;
@@ -64,6 +65,7 @@ module.exports = function (opts) {
             team.name = name;
             team.description = description;
             team.image = image;
+            team.tags = tags;
             team.teamMembers = [];
 
             var i = 0;
@@ -149,9 +151,10 @@ module.exports = function (opts) {
         },
         "post#searchTeam": function (req, res) {
             var term = req.body.term;
+            var tags = term.split(" ");
 
             //teamModel.find({ $or : [ {name : new RegExp(term, 'i')}, {description : new RegExp(term, 'i')}, {tags : { $in : tags } } ] }, function (err, teams) {
-            teamModel.find({$or: [{name: new RegExp(term, 'i')}, {description: new RegExp(term, 'i')}]}).populate("owner teamMembers").exec(function (err, teams) {
+            teamModel.find({$or: [{name: new RegExp(term, 'i')}, {description: new RegExp(term, 'i')}, {tags: {$in: tags}}]}).populate("owner teamMembers").exec(function (err, teams) {
                 if (err) {
                     console.log(err);
                     return res.json({teams: []});
@@ -236,6 +239,18 @@ module.exports = function (opts) {
                             return res.json({success: true, teams: teams});
                         }
                     });
+                }
+            });
+        },
+        "POST#teamTag/list": function (req, res) {
+            var tag = req.body.tag;
+            console.log("Tag = " + tag);
+            teamModel.find({"tags" : {$in : [tag]}}, function (err, teams) {
+                if (err) {
+                    console.log(err);
+                    return res.json({success: false, teams: []});
+                } else {
+                    return res.json({success: true, teams: teams});
                 }
             });
         },
@@ -441,6 +456,7 @@ module.exports = function (opts) {
             var id = req.body.id,
                     name = req.body.name,
                     description = req.body.description,
+                    tags = req.body.tags,
                     image = req.body.image;
 
             teamModel.findOne({_id: id, owner: req.user._id}, function (err, team) {
@@ -451,6 +467,7 @@ module.exports = function (opts) {
                     team.name = name;
                     team.description = description;
                     team.image = image;
+                    team.tags = tags;
                     team.save(function (err, team) {
                         if (err) {
                             console.log(err);
