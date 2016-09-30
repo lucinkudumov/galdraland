@@ -147,6 +147,14 @@ app.config(["$urlRouterProvider", "$locationProvider", "$stateProvider", "$httpP
                 "right-side@adventureList": {templateUrl: "/assets/partials/adventure/list.html"}
             },
             requireLogin: true
+        }).state("adventureTagList", {
+            url: "/adventuresTag/:tag",
+            views: {
+                "main": {templateUrl: "/assets/partials/main.html"},
+                "left-side@adventureTagList": {templateUrl: "/assets/partials/adventureTag/left-side.html"},
+                "right-side@adventureTagList": {templateUrl: "/assets/partials/adventureTag/list.html"}
+            },
+            requireLogin: true
         }).state("adventureCreate", {
             url: "/adventures/create",
             views: {
@@ -641,6 +649,24 @@ app.controller("myAdventuresController", ["$scope", "$http", "$location", "User"
 
         $scope.refresh();
     }]);
+
+app.controller("myAdventuresTagController", ["$scope", "$http", "$location", "$stateParams", "User", function ($scope, $http, $location, $stateParams, User) {
+    $scope.user = User.isLoggedIn();
+    console.log("tags TAG = " + $stateParams.tag);
+    $scope.refresh = function () {
+        $scope.loading = true;
+        var request = $http({method: "POST", url: "adventureTag/list", api: true, data: {tag: $stateParams.tag}});
+        request.success(function (data) {
+            $scope.teams = data.teams;
+        }).then(function (r) {
+                $scope.adventures = r.data.adventures;
+                $scope.loading = false;
+            });
+    }
+
+    $scope.refresh();
+}]);
+
 app.controller("emailController", ["$scope", "$location", "$http", "User", function ($scope, $location, $http, User) {
         $scope.validate = false;
         $scope.email = User.isLoggedIn().email.email || "";
