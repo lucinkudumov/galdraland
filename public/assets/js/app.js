@@ -326,14 +326,12 @@ app.controller("usersResultController", ["$scope", "$http", "User", "$location",
         var request = $http({method: "GET", url: "myTeams", api: true});
         request.success(function (data) {
             $scope.teams = data.teams;
-            console.log("teams = ", $scope.teams);
         }).then(function (r) {
                 if ($scope.teams.length) {
                     var userIds = [];
                     for (var i = 0; i < $scope.teams.length; i++) {
                         for (var j = 0; j < $scope.teams[i].teamMembers.length; j ++) {
                             var o = $scope.teams[i].teamMembers[j];
-                            console.log("userId = " + o.user);
                             if(userIds.indexOf(o.user) != -1) {
                                 continue;
                             } else {
@@ -344,7 +342,6 @@ app.controller("usersResultController", ["$scope", "$http", "User", "$location",
                     if (userIds.length) {
                         var request = $http({method: "POST", url: "getUsersByIds", api: true, data: {ids: userIds}});
                         request.success(function (data) {
-                            console.log("users = ", data.users);
                             $scope.users = data.users
                         }).then(function (r) {
                            if ($scope.users.length) {
@@ -353,15 +350,12 @@ app.controller("usersResultController", ["$scope", "$http", "User", "$location",
                                     var result = {};
                                     result.name = $scope.users[i].fullname;
                                     result.href = "/users/view/" + $scope.users[i]._id;
-                                    console.log("user name = " + result.name);
                                     result.team_role = "";
                                     for (var j = 0; j < $scope.teams.length; j++) {
                                         for (var k = 0; k < $scope.teams[j].teamMembers.length; k++) {
                                             var o = $scope.teams[j].teamMembers[k];
                                             if (o.user == $scope.users[i]._id) {
                                                 result.team_role += $scope.teams[j].name + '(' + $scope.teams[j].teamMembers[k].title + ') ';
-                                                console.log("team name = " + $scope.teams[j].name);
-                                                console.log("role name = " + $scope.teams[j].teamMembers[k].title);
                                             }
                                         }
                                     }
