@@ -5,8 +5,8 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-4"></div>
-        <div class="col-md-4">
+        <div class="col-md-8"></div>
+        <div class="col-md-8">
             <br>
             <table class="table">
                 <tr ng-show="!loading && results.length == 0">
@@ -14,6 +14,7 @@
                 </tr>
                 <tr ng-repeat="r in results">
                     <td>{{ r.name}}</td>
+                    <td>{{ r.team_role}}</td>
                     <td ng-show="r.href">
                         <a href="{{r.href}}" class="btn btn-primary">View</a>
                     </td>
