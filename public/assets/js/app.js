@@ -359,7 +359,7 @@ app.controller("usersResultController", ["$scope", "$http", "User", "$location",
                                         for (var k = 0; k < $scope.teams[j].teamMembers.length; k++) {
                                             var o = $scope.teams[j].teamMembers[k];
                                             if (o.user == $scope.users[i]._id) {
-                                                result.team_role += $scope.teams[j].name + '(' + $scope.teams[j].teamMembers[k].title) + ') ';
+                                                result.team_role += $scope.teams[j].name + '(' + $scope.teams[j].teamMembers[k].title + ') ';
                                                 console.log("team name = " + $scope.teams[j].name);
                                                 console.log("role name = " + $scope.teams[j].teamMembers[k].title);
                                             }
