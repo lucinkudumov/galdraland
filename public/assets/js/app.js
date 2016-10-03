@@ -353,6 +353,18 @@ app.controller("usersResultController", ["$scope", "$http", "User", "$location",
                                     var result = {};
                                     result.name = $scope.users[i].fullname;
                                     result.href = "/users/view/" + $scope.users[i]._id;
+                                    for (var j = 0; j < $scope.teams.length; j++) {
+                                        for (var k = 0; k < $scope.teams[j].teamMembers.length; k++) {
+                                            var o = $scope.teams[j].teamMembers[k];
+                                            if (o.user == $scope.users[i]._id) {
+                                                console.log("team name = " + $scope.teams[j].name);
+                                                console.log("role name = " + $scope.teams[j].teamMembers[k].title);
+                                            }
+
+                                        }
+                                    }
+
+
                                     $scope.results.push(result);
                                 }
                                 $scope.loading = false;

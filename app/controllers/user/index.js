@@ -61,13 +61,15 @@ module.exports = function (opts) {
             for (var i = 0; i < ids.length; i++)
                 queries.push({_id: ids[i]});
 
-            userModel.find({$or: queries}).select("_id profileId fullname username email signin photo skype experience goals categories").exec(function (err, users) {
+            userModel.find({$or: queries}).select("_id fullname username").exec(function (err, users) {
                 if (err) {
                     console.log("getUsersByIds Error = " + err);
                     return res.json({success: false});
                 } else if (users) {
                     console.log("getUsersByIds Success = ", users);
-                    return res.json({success: true, users: users});
+
+
+//                    return res.json({success: true, users: users});
                 } else {
                     console.log("getUsersByIds Error! No Data");
                     return res.json({success: false});
