@@ -353,6 +353,7 @@ app.controller("usersResultController", ["$scope", "$http", "User", "$location",
                                     var result = {};
                                     result.name = $scope.users[i].fullname;
                                     result.href = "/users/view/" + $scope.users[i]._id;
+                                    console.log("user name = " + result.name);
                                     for (var j = 0; j < $scope.teams.length; j++) {
                                         for (var k = 0; k < $scope.teams[j].teamMembers.length; k++) {
                                             var o = $scope.teams[j].teamMembers[k];
