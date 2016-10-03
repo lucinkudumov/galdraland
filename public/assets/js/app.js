@@ -351,6 +351,7 @@ app.controller("usersResultController", ["$scope", "$http", "User", "$location",
                                     if ($scope.users[i].profileId == "000000000000000000000000") continue;
                                     var result = {};
                                     result.name = $scope.users[i].fullname;
+                                    result.href = "/users/view/" + $scope.users[i]._id;
                                     $scope.results.push(result);
                                 }
                                 $scope.loading = false;

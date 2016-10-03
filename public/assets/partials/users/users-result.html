@@ -14,6 +14,9 @@
                 </tr>
                 <tr ng-repeat="r in results">
                     <td>{{ r.name}}</td>
+                    <td ng-show="r.href">
+                        <a href="{{r.href}}" class="btn btn-primary">View</a>
+                    </td>
                 </tr>
             </table>
         </div>
