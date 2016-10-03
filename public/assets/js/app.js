@@ -326,6 +326,7 @@ app.controller("usersResultController", ["$scope", "$http", "User", "$location",
         var request = $http({method: "GET", url: "myTeams", api: true});
         request.success(function (data) {
             $scope.teams = data.teams;
+            console.log("teams = ", $scope.teams);
         }).then(function (r) {
                 if ($scope.teams.length) {
                     var userIds = [];
