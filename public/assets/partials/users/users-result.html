@@ -13,6 +13,7 @@
                     <td class="err-msg">No Users</td>
                 </tr>
                 <tr ng-repeat="r in results">
+                    <td ng-show="r.photo"><div class="avatar" style="background-image: url('{{ r.photo}}')"></div></td>
                     <td>{{ r.name}}</td>
                     <td>{{ r.team_role}}</td>
                     <td ng-show="r.href">
