@@ -2386,6 +2386,7 @@ app.directive('commentWidget', function ($http, User) {
                 '</table>' +
             '</div>' +
             '</div>' +
+            '<div id="fb-root"></div>' +
             '<div class="fb-comment-embed" data-href="http://webascender.com/blog" data-width="500"></div>' +
             '<div class="user-container"><h4>Post your comment</h4><hr></div><div class="row" style="width:100%"><textarea ng-model="txtcomment" placeholder="Your Comment" style="width:100%;display:block;"></textarea><button ng-click="save();" style="margin-top:10px;float:right;">Post Comment</button></div></div>',
         link: function (scope, elem, attrs) {
