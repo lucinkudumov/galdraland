@@ -1987,6 +1987,9 @@ app.controller("myTeamsController", ["$scope", "$http", "$location", "User", fun
                 $scope.loading = false;
             });
         }
+        $scope.shareButton = function () {
+            console.log("call share button");
+        }
 
         $scope.refresh();
     }]);
