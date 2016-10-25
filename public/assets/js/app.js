@@ -2386,8 +2386,7 @@ app.directive('commentWidget', function ($http, User) {
                 '</table>' +
             '</div>' +
             '</div>' +
-            '<div class="user-container"><h4>Post your comment</h4><hr></div><div class="row" style="width:100%"><textarea ng-model="txtcomment" placeholder="Your Comment" style="width:100%;display:block;"></textarea><button ng-click="save();" style="margin-top:10px;float:right;">Post Comment</button></div></div>' +
-            '<div class="fb-comment-comment" data-href="http://galdraland-1-0.herokuapp.com/adventures/view/570d367b7d12d00300abe179" data-width="500"></div>',
+            '<div class="user-container"><h4>Post your comment</h4><hr></div><div class="row" style="width:100%"><textarea ng-model="txtcomment" placeholder="Your Comment" style="width:100%;display:block;"></textarea><button ng-click="save();" style="margin-top:10px;float:right;">Post Comment</button></div></div>',
         link: function (scope, elem, attrs) {
             scope.comment = [];
             scope.user = User.isLoggedIn();
