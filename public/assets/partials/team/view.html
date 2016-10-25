@@ -47,7 +47,11 @@
             <span ng-repeat="t in team.tags" >
                 <a href="/teamsTag/{{t}}" class="name">{{t}}</a>
             </span>
-            <comment-widget ref="team._id" ismanager="isManager" ></comment-widget>
+            <div id="fb-root"></div>
+            <div class="fb-comment-embed"
+                 data-href="https://www.facebook.com/zuck/posts/10102735452532991?comment_id=1070233703036185"
+                 data-width="500"></div>
+            <!--<comment-widget ref="team._id" ismanager="isManager" ></comment-widget>-->
         </div>
         <div class="col-md-4" ng-show="!loading && team">
             <p ng-show="team.teamMembers.length == 0">No members, invite new members now.</p>
