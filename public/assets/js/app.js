@@ -1987,16 +1987,15 @@ app.controller("myTeamsController", ["$scope", "$http", "$location", "User", fun
                 $scope.loading = false;
             });
         }
-        $scope.shareButton = function () {
-            console.log("call share button");
+        $scope.shareTeam = function () {
             FB.ui({
                 method: 'feed',
-                name: 'This is the content of the aaa field.',
-                link: ' http://www.hyperarts.com/',
+                name: 'This is the content of the "name" field.',
+                link: '',
                 picture: 'http://www.hyperarts.com/external-xfbml/share-image.gif',
                 caption: 'This is the content of the "caption" field.',
                 description: 'This is the content of the "description" field, below the caption.',
-                message: 'message'
+                message: ''
             });
         }
 
