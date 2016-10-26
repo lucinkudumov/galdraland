@@ -19,6 +19,13 @@ app.config(["$urlRouterProvider", "$locationProvider", "$stateProvider", "$httpP
                     templateUrl: "/assets/partials/about.html"
                 }
             },
+        }).state("blog", {
+            url: "/blog",
+            views: {
+                "main": {
+                    templateUrl: "/assets/partials/blog.html"
+                }
+            },
         }).state("how_it_works", {
             url: "/how_it_works",
             views: {
@@ -250,7 +257,7 @@ app.config(["$urlRouterProvider", "$locationProvider", "$stateProvider", "$httpP
 app.run(["$rootScope", "$http", "$location", "User", function ($rootScope, $http, $location, User) {
         $rootScope.return2Adventure = "normal";
         $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
-            if(toState.url === "/about" || toState.url === "/how_it_works" || toState.url === "/contact_us")
+            if(toState.url === "/about" || toState.url === "/how_it_works" || toState.url === "/contact_us" || toState.url === "/blog")
                 $location.url(toState.url);
             else if (toState.requireLogin && !User.isLoggedIn()) {
                 var url = "/redirect/?r=" + $location.path();
