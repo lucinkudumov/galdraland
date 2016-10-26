@@ -47,10 +47,20 @@
             <span ng-repeat="t in team.tags" >
                 <a href="/teamsTag/{{t}}" class="name">{{t}}</a>
             </span>
-            <!--<div id="fb-root"></div>-->
-            <div class="fb-comment-embed"
-                 data-href="https://www.facebook.com/zuck/posts/10102735452532991?comment_id=1070233703036185"
-                 data-width="500">sdfgsdfgsdfg</div>
+            <div id="fb-root"></div>
+            <script>
+            (function (d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) {
+                return;
+                }
+                js = d.createElement(s);
+                js.id = id;
+                js.src = "//connect.facebook.net/en_US/sdk.js";
+                fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));
+            </script>
+            <div class="fb-comments" data-href="http://webascender.com/blog" data-numposts="5" data-colorscheme="light"></div>
             <!--<comment-widget ref="team._id" ismanager="isManager" ></comment-widget>-->
         </div>
         <div class="col-md-4" ng-show="!loading && team">
