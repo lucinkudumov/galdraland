@@ -1,28 +1,54 @@
 <div ng-controller="usersResultController">
-    <div class="row">
-        <div class="col-md-8">
-            Users
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-2"></div>
-        <div class="col-md-8">
-            <br>
-            <table class="table">
-                <tr ng-show="!loading && results.length == 0">
-                    <td class="err-msg">No Users</td>
-                </tr>
-                <tr ng-repeat="r in results">
-                    <td ng-show="r.photo"><div class="avatar" style="background-image: url('{{ r.photo}}')"></div></td>
-                    <td>{{ r.name}}</td>
-                    <!--<td>{{ r.team_role}}</td>-->
-                    <td><p ng-repeat="tr in r.team_role">{{tr}}</p></td>
-                    <td ng-show="r.href">
-                        <a href="{{r.href}}" class="btn btn-primary">View</a>
-                    </td>
-                </tr>
-            </table>
-        </div>
-        <div class="col-md-2"></div>
-    </div>
+    <div id="fb-root"></div>
+    <script>
+        window.fbAsyncInit = function () {
+            FB.init({
+//					appId      : '1406306389669359',
+                appId: '110469289012320',
+                status: true,
+                cookie: true,
+                xfbml: true,
+                version: 'v2.6'
+            });
+        };
+        window.fbAsyncInit();
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) {
+                return;
+            }
+            js = d.createElement(s);
+            js.id = id;
+            js.src = "//connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
+    <!--<div class="fb-comments" data-href="http://webascender.com/blog" data-numposts="5" data-colorscheme="light"></div>-->
+    <div class="fb-comments" data-href="http://galdraland-1-0.herokuapp.com" data-numposts="5" data-colorscheme="light"></div>
+    <!--<div class="row">-->
+        <!--<div class="col-md-8">-->
+            <!--Users-->
+        <!--</div>-->
+    <!--</div>-->
+    <!--<div class="row">-->
+        <!--<div class="col-md-2"></div>-->
+        <!--<div class="col-md-8">-->
+            <!--<br>-->
+            <!--<table class="table">-->
+                <!--<tr ng-show="!loading && results.length == 0">-->
+                    <!--<td class="err-msg">No Users</td>-->
+                <!--</tr>-->
+                <!--<tr ng-repeat="r in results">-->
+                    <!--<td ng-show="r.photo"><div class="avatar" style="background-image: url('{{ r.photo}}')"></div></td>-->
+                    <!--<td>{{ r.name}}</td>-->
+                    <!--&lt;!&ndash;<td>{{ r.team_role}}</td>&ndash;&gt;-->
+                    <!--<td><p ng-repeat="tr in r.team_role">{{tr}}</p></td>-->
+                    <!--<td ng-show="r.href">-->
+                        <!--<a href="{{r.href}}" class="btn btn-primary">View</a>-->
+                    <!--</td>-->
+                <!--</tr>-->
+            <!--</table>-->
+        <!--</div>-->
+        <!--<div class="col-md-2"></div>-->
+    <!--</div>-->
 </div>
