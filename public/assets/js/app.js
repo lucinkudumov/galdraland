@@ -2013,7 +2013,7 @@ app.controller("myTeamsController", ["$scope", "$http", "$location", "User", fun
                     object : {
                         'og:url': 'http://galdraland-1-0.herokuapp.com/', // your url to share
                         'og:title': 'Here my custom title',
-                        'og:type': 'website',
+//                        'og:type': 'website',
                         'og:description': 'here custom description',
                         'og:image': 'http://www.hyperarts.com/external-xfbml/share-image.gif'
                     }
