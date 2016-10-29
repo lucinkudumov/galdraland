@@ -2007,8 +2007,16 @@ app.controller("myTeamsController", ["$scope", "$http", "$location", "User", fun
         $scope.shareTeam = function () {
             console.log("starting share.... ");
             FB.ui({
-                method: 'share',
-                href: 'http://galdraland-1-0.herokuapp.com/',
+                method: 'share_open_graph',
+                action_type: 'og.shares',
+                action_properties: JSON.stringify({
+                    object : {
+                        'og:url': 'http://galdraland-1-0.herokuapp.com/', // your url to share
+                        'og:title': 'Here my custom title',
+                        'og:description': 'here custom description',
+                        'og:image': 'http://www.hyperarts.com/external-xfbml/share-image.gif'
+                    }
+                })
             }, function(response){
                 console.log("response = ", response);
             });
