@@ -2005,6 +2005,7 @@ app.controller("myTeamsController", ["$scope", "$http", "$location", "User", fun
             });
         }
         $scope.shareTeam = function () {
+            console.log("starting share.... ");
             FB.ui({
                 method: 'share',
                 href: 'http://galdraland-1-0.herokuapp.com/',
@@ -2019,7 +2020,7 @@ app.controller("myTeamsController", ["$scope", "$http", "$location", "User", fun
 //                caption: 'This is the content of the "caption" field.',
 //                description: 'This is the content of the "description" field, below the caption.',
 //                message: ''
-            });
+//            });
         }
 
         $scope.refresh();
