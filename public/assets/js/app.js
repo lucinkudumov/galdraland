@@ -2011,7 +2011,7 @@ app.controller("myTeamsController", ["$scope", "$http", "$location", "User", fun
                 action_type: 'og.comments',
                 action_properties: JSON.stringify({
                     object : {
-                        'og:url': 'http://galdraland-1-0.herokuapp.com/', // your url to share
+                        'og:url': 'http://galdraland-1-0.herokuapp.com/users', // your url to share
                         'og:title': 'Here my custom title',
 //                        'og:type': 'website',
                         'og:description': 'here custom description',
