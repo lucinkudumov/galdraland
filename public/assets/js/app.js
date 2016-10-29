@@ -2009,7 +2009,7 @@ app.controller("myTeamsController", ["$scope", "$http", "$location", "User", fun
             FB.ui({
                 method: 'share_open_graph',
                 action_type: 'og.shares',
-                data-href: 'http://galdraland-1-0.herokuapp.com/',
+                href: 'http://galdraland-1-0.herokuapp.com/',
                 action_properties: JSON.stringify({
                     object : {
                         'og:url': 'http://galdraland-1-0.herokuapp.com/', // your url to share
