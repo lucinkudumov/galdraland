@@ -2008,7 +2008,7 @@ app.controller("myTeamsController", ["$scope", "$http", "$location", "User", fun
             console.log("starting share.... ");
             FB.ui({
                 method: 'share_open_graph',
-                action_type: 'og.shares',
+                action_type: 'og.comments',
                 href: 'http://galdraland-1-0.herokuapp.com/',
                 action_properties: JSON.stringify({
                     object : {
