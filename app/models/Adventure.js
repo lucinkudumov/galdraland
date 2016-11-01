@@ -43,6 +43,9 @@ module.exports = function (opts) {
         },
         link: {
             type: String
+        },
+        fb_page: {
+            type: String
         }
     });
 

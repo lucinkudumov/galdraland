@@ -75,6 +75,7 @@ module.exports = function (opts) {
                     adventure.team = team;
                     adventure.image = req.body.image;
                     adventure.tags = req.body.tags;
+                    adventure.fb_page = req.body.fb_page;
                     adventure.start = req.body.start;
                     adventure.end = req.body.end;
                     adventure.description = req.body.description;
@@ -210,6 +211,7 @@ module.exports = function (opts) {
                     link = req.body.link,
                     team = req.body.team,
                     tags = req.body.tags,
+                    fb_page = req.body.fb_page,
                     start = req.body.start,
                     end = req.body.end,
                     status = req.body.status,
@@ -233,6 +235,10 @@ module.exports = function (opts) {
 
             if (team) {
                 updateInfo.team = team;
+            }
+
+            if (fb_page) {
+                updateInfo.fb_page = fb_page;
             }
 
             if (tags) {

@@ -446,7 +446,7 @@ app.controller("createAdventureController", ["$scope", "$rootScope", "Upload", "
                 method: "POST",
                 url: "adventure/create",
                 api: true,
-                data: {name: $scope.name, type: $scope.type, description: $scope.description, link: $scope.link, image: $scope.uploadedImage, team: $scope.team, start: $scope.formatDate($scope.start), end: $scope.formatDate($scope.end), tags: ($scope.tags) ? $scope.tags.split(' ') : []}
+                data: {name: $scope.name, type: $scope.type, fb_page: $scope.fb_page, description: $scope.description, link: $scope.link, image: $scope.uploadedImage, team: $scope.team, start: $scope.formatDate($scope.start), end: $scope.formatDate($scope.end), tags: ($scope.tags) ? $scope.tags.split(' ') : []}
             });
             request.success(function (data) {
                 $location.path("/adventures/view/" + data.id);
@@ -539,6 +539,7 @@ app.controller("editAdventureController", ["$scope", "$http", "$location", "$sta
                 $scope.team = data.adventure.team;
                 $scope.type = data.adventure.type;
                 $scope.uploadedImage = data.adventure.image;
+                $scope.fb_page = data.adventure.fb_page;
             });
         }
 
@@ -588,7 +589,7 @@ app.controller("editAdventureController", ["$scope", "$http", "$location", "$sta
             });
         };
         $scope.editAdventure = function () {
-            var request = $http({method: "POST", url: "adventure/update", api: true, data: {id: $stateParams.id, name: $scope.name, description: $scope.description, link: $scope.link, image: $scope.uploadedImage, tags: $scope.tags.split(" "), start: $scope.formatDate($scope.start), end: $scope.formatDate($scope.end), status: $scope.status, type: $scope.type}});
+            var request = $http({method: "POST", url: "adventure/update", api: true, data: {id: $stateParams.id, name: $scope.name, fb_page: $scope.fb_page, description: $scope.description, link: $scope.link, image: $scope.uploadedImage, tags: $scope.tags.split(" "), start: $scope.formatDate($scope.start), end: $scope.formatDate($scope.end), status: $scope.status, type: $scope.type}});
             request.success(function (data) {
                 $location.path("/adventures/view/" + $stateParams.id);
             });
@@ -1887,7 +1888,7 @@ app.controller("searchController", ["$scope", "$http", "$location", "$stateParam
     }]);
 app.controller("createTeamController", ["$scope", "$rootScope", "Upload", "$http", "$location", function ($scope, $rootScope, Upload, $http, $location) {
         $scope.createTeam = function () {
-            request = $http({method: "POST", url: "createTeam", api: true, data: {name: $scope.name, description: $scope.description, roles: $scope.roles, defuser: $rootScope.defUser, image: $scope.uploadedImage, tags: ($scope.tags) ? $scope.tags.split(' ') : []}});
+            request = $http({method: "POST", url: "createTeam", api: true, data: {name: $scope.name, description: $scope.description, roles: $scope.roles, defuser: $rootScope.defUser, fb_page: $scope.fb_page, image: $scope.uploadedImage, tags: ($scope.tags) ? $scope.tags.split(' ') : []}});
             request.success(function (data) {
                 if ($rootScope.return2Adventure == "return")
                 {
@@ -1946,6 +1947,7 @@ app.controller("editTeamController", ["$scope", "$http", "$location", "$statePar
             $scope.description = data.team.description;
             $scope.uploadedImage = data.team.image;
             $scope.tags = data.team.tags.join(" ");
+            $scope.fb_page = data.team.fb_page;
         });
         $scope.onFileSelect = function (image) {
             console.log(image);
@@ -1982,7 +1984,7 @@ app.controller("editTeamController", ["$scope", "$http", "$location", "$statePar
             });
         }
         $scope.editTeam = function () {
-            var request = $http({method: "POST", url: "editTeam", api: true, data: {id: id, name: $scope.name, description: $scope.description, image:$scope.uploadedImage, tags:$scope.tags.split(" ")}});
+            var request = $http({method: "POST", url: "editTeam", api: true, data: {id: id, name: $scope.name, description: $scope.description, image:$scope.uploadedImage, fb_page: $scope.fb_page, tags:$scope.tags.split(" ")}});
             request.success(function (data) {
                 $location.path("/teams/view/" + id);
             });

@@ -20,6 +20,9 @@ module.exports = function (opts) {
         tags: {
             type: [String]
         },
+        fb_page: {
+            type: [String]
+        },
         teamMembers: [{
             type: mongoose.Schema.ObjectId,
             ref: "TeamMember"
