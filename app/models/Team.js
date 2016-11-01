@@ -21,7 +21,7 @@ module.exports = function (opts) {
             type: [String]
         },
         fb_page: {
-            type: [String]
+            type: String
         },
         teamMembers: [{
             type: mongoose.Schema.ObjectId,
