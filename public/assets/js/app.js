@@ -674,15 +674,15 @@ app.controller("myAdventuresController", ["$scope", "$http", "$location", "User"
             });
         }
         $scope.shareAdventrue = function () {
-            FB.ui({
-                method: 'feed',
-                name: 'This is the content of the "name" field.',
-                link: 'http://www.hyperarts.com/',
-                picture: 'http://www.hyperarts.com/external-xfbml/share-image.gif',
-                caption: 'This is the content of the "caption" field.',
-                description: 'This is the content of the "description" field, below the caption.',
-                message: ''
-            });
+//            FB.ui({
+//                method: 'feed',
+//                name: 'This is the content of the "name" field.',
+//                link: 'http://www.hyperarts.com/',
+//                picture: 'http://www.hyperarts.com/external-xfbml/share-image.gif',
+//                caption: 'This is the content of the "caption" field.',
+//                description: 'This is the content of the "description" field, below the caption.',
+//                message: ''
+//            });
         }
         $scope.refresh();
     }]);
@@ -2005,30 +2005,21 @@ app.controller("myTeamsController", ["$scope", "$http", "$location", "User", fun
             });
         }
         $scope.shareTeam = function () {
-            console.log("starting share.... ");
-            FB.ui({
-                method: 'share_open_graph',
-                action_type: 'og.comments',
-                action_properties: JSON.stringify({
-                    object : {
-                        'og:url': 'http://galdraland-1-0.herokuapp.com/users', // your url to share
-                        'og:title': 'Here my custom title',
-//                        'og:type': 'website',
-                        'og:description': 'here custom description',
-                        'og:image': 'http://www.hyperarts.com/external-xfbml/share-image.gif'
-                    }
-                })
-            }, function(response){
-                console.log("response = ", response);
-            });
+//            console.log("starting share.... ");
 //            FB.ui({
-//                method: 'share',
-//                name: 'This is the content of the "name" field.',
-//                link: 'http://galdraland-1-0.herokuapp.com/',
-//                picture: 'http://www.hyperarts.com/external-xfbml/share-image.gif',
-//                caption: 'This is the content of the "caption" field.',
-//                description: 'This is the content of the "description" field, below the caption.',
-//                message: ''
+//                method: 'share_open_graph',
+//                action_type: 'og.comments',
+//                action_properties: JSON.stringify({
+//                    object : {
+//                        'og:url': 'http://galdraland-1-0.herokuapp.com/users', // your url to share
+//                        'og:title': 'Here my custom title',
+////                        'og:type': 'website',
+//                        'og:description': 'here custom description',
+//                        'og:image': 'http://www.hyperarts.com/external-xfbml/share-image.gif'
+//                    }
+//                })
+//            }, function(response){
+//                console.log("response = ", response);
 //            });
         }
 
