@@ -74,7 +74,9 @@
                 fjs.parentNode.insertBefore(js, fjs);
             }(document, 'script', 'facebook-jssdk'));
             </script>
-            <div class="fb-comments" data-href="http://webascender.com/blog" data-numposts="5" data-colorscheme="light"></div>
+                data-href='" + window.location.href + "'
+            <script>document.write("<div class='fb-comments' data-href='" + window.location.href + "' data-num-posts='2' data-width='470'></div>");</script>
+            <!--<div class="fb-comments" data-href="http://webascender.com/blog" data-numposts="5" data-colorscheme="light"></div>-->
             </div>
             <!--<comment-widget ref="team._id" ismanager="isManager" ></comment-widget>-->
         </div>
