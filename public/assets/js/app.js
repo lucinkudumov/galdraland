@@ -2404,8 +2404,8 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
             }
         }, true);
 
-        $scope.shareTeam = function (teamId) {
-                console.log("teamId = " + teamId);
+        $scope.shareTeam = function () {
+                console.log("teamId = " + $stateParams.id);
 //                FB.ui({
 //                    method: 'share_open_graph',
 //                    action_type: 'og.comments',
