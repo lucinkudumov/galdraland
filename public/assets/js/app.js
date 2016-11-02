@@ -2171,6 +2171,7 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
         $scope.emptyMembers = [];
 
         $scope.refresh = function () {
+            console.log("refreshing.....");
             var request = $http({method: "POST", url: "getTeam", api: true, data: {id: $stateParams.id}});
             request.success(function (data) {
                 if (data.team.description && data.team.description != "") {
