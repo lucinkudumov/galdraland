@@ -1157,7 +1157,6 @@ app.controller("sendInviteController", ["$scope", "$modalInstance", "values", "$
         //         );
         //     }, {scope: 'user_friends'});
         FB.login(function(response) {
-              console.log("aaaa");
               console.log(response);
               if (response.authResponse) {
                 FB.api('/me/taggable_friends', function(response) {
@@ -2404,6 +2403,26 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
                 $compile($('#fbPage'))($scope);
             }
         }, true);
+
+        $scope.shareTeam = function (teamId) {
+                console.log("teamId = " + teamId);
+//                FB.ui({
+//                    method: 'share_open_graph',
+//                    action_type: 'og.comments',
+//                    action_properties: JSON.stringify({
+//                        object : {
+//                            'og:url': 'http://galdraland-1-0.herokuapp.com/users', // your url to share
+//                            'og:title': 'Here my custom title',
+//    //                        'og:type': 'website',
+//                            'og:description': 'here custom description',
+//                            'og:image': 'http://www.hyperarts.com/external-xfbml/share-image.gif'
+//                        }
+//                    })
+//                }, function(response){
+//                    console.log("response = ", response);
+//                });
+        }
+
         $scope.refresh();
     }]);
 
