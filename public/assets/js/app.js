@@ -2425,7 +2425,6 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
 //                            'og:image': 'http://www.hyperarts.com/external-xfbml/share-image.gif'
 //                        }
                     href : 'http://galdraland-1-0.herokuapp.com/teams/view/' + $stateParams.id
-                    })
                 }, function(response){
                     console.log("response = ", response);
                 });
