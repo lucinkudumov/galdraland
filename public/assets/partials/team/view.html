@@ -47,7 +47,7 @@
             <span ng-repeat="t in team.tags" >
                 <a href="/teamsTag/{{t}}" class="name">{{t}}</a>
             </span>
-            <div ng-show="team.fb_page">
+            <div ng-show="team.fb_page" id = "fbPage">
                 <div id="fb-root"></div>
                 <script>
                     window.fbAsyncInit = function () {
@@ -75,7 +75,7 @@
                 <div class="fb-page"
                      data-tabs="timeline,events,messages"
                      data-href="{{ team.fb_page }}"
-                     data-width="380"
+                     data-width="400"
                      data-hide-cover="false"></div>
                 <!--data-href="https://www.facebook.com/YoloBookStore"-->
             <!--<div id="fb-root"></div>-->

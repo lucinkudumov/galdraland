@@ -2380,12 +2380,15 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
             console.log("newValue = " + newValue);
             console.log("oldValue = " + oldValue);
             if (newValue != oldValue) {
-                $scope.refresh();
+                var htmlcontent = $('#fbPage');
+                htmlcontent.load('/teams/view/5818c2472ca1190300bb0971');
+                $compile(htmlcontent.contents())($scope);
+//                $scope.refresh();
 //                location.reload();
-                $rootScope.$digest();
+//                $rootScope.$digest();
             }
         }, true);
-//        $scope.refresh();
+        $scope.refresh();
     }]);
 
 app.directive('commentWidget', function ($http, User) {
