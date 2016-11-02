@@ -9,11 +9,9 @@
             <!--<img src="{{team.image}}" alt="image" style="width:100px; height:100px;" ng-show="team.image">-->
             <hr>
             <div ng-show="isManager" class="btn-group btn-group-justified">
-                <a href="/teams/edit/{{ team._id}}" class="btn btn-primary">Edit</a>
+                <a href="/teams/edit/'{{ team._id}}" class="btn btn-primary">Edit</a>
                 <a href="#" ng-click="modal()" class="btn btn-danger">Remove</a>
-                <p>
-                    <a href="#" ng-click="shareTeam({{ team._id }})" class="btn btn-danger">Share</a>
-                </p>
+                <a href="#" ng-click="shareTeam('{{ team._id }}')" class="btn btn-danger">Share</a>
             </div>
             <div ng-show="isMember && !isManager" class="btn-group btn-group-justified">
                 <a href="#" class="btn btn-danger" ng-click="leave();">Leave</a>
