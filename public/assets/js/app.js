@@ -2171,6 +2171,7 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
         $scope.emptyMembers = [];
 
         $scope.refresh = function () {
+            console.log("refresh......");
             var request = $http({method: "POST", url: "getTeam", api: true, data: {id: $stateParams.id}});
             request.success(function (data) {
                 if (data.team.description && data.team.description != "") {
@@ -2378,8 +2379,10 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
         $scope.$watch("team.fb_page", function(newValue, oldValue){
             console.log("newValue = " + newValue);
             console.log("oldValue = " + oldValue);
-            if (newValue != oldValue)
+            if (newValue != oldValue) {
+                console.log("calling refresh");
                 $scope.refresh();
+            }
         }, true);
         $scope.refresh();
     }]);
