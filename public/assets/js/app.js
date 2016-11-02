@@ -2406,21 +2406,28 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
 
         $scope.shareTeam = function () {
                 console.log("teamId = " + $stateParams.id);
-//                FB.ui({
-//                    method: 'share_open_graph',
-//                    action_type: 'og.comments',
-//                    action_properties: JSON.stringify({
-//                        object : {
-//                            'og:url': 'http://galdraland-1-0.herokuapp.com/users', // your url to share
-//                            'og:title': 'Here my custom title',
-//    //                        'og:type': 'website',
-//                            'og:description': 'here custom description',
-//                            'og:image': 'http://www.hyperarts.com/external-xfbml/share-image.gif'
-//                        }
-//                    })
-//                }, function(response){
-//                    console.log("response = ", response);
-//                });
+//            FB.login(function(response) {
+//                if (response.authResponse) {
+//
+//                } else {
+//                    console.log("share team Error!");
+//                }
+//            });
+                FB.ui({
+                    method: 'share_open_graph',
+                    action_type: 'og.comments',
+                    action_properties: JSON.stringify({
+                        object : {
+                            'og:url': 'http://galdraland-1-0.herokuapp.com/teams/view/' + $stateParams.id, // your url to share
+                            'og:title': 'Share Team Page',
+    //                        'og:type': 'website',
+                            'og:description': "You can share your team page",
+                            'og:image': 'http://www.hyperarts.com/external-xfbml/share-image.gif'
+                        }
+                    })
+                }, function(response){
+                    console.log("response = ", response);
+                });
         }
 
         $scope.refresh();
