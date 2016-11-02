@@ -333,7 +333,34 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
             }
         }, true);
 
-        $scope.refresh();
+
+        $scope.shareAdventure = function () {
+            console.log("advId = " + $stateParams.id);
+    //            FB.login(function(response) {
+    //                if (response.authResponse) {
+    //
+    //                } else {
+    //                    console.log("share team Error!");
+    //                }
+    //            });
+            FB.ui({
+                method: 'share',
+    //                    action_type: 'og.comments',
+    //                    action_properties: JSON.stringify({
+    //                        object : {
+    //                            'og:url': 'http://galdraland-1-0.herokuapp.com/teams/view/' + $stateParams.id, // your url to share
+    //                            'og:title': 'Share Team Page',
+    //    //                        'og:type': 'website',
+    //                            'og:description': "You can share your team page",
+    //                            'og:image': 'http://www.hyperarts.com/external-xfbml/share-image.gif'
+    //                        }
+                href : 'http://galdraland-1-0.herokuapp.com/adventures/view/' + $stateParams.id
+            }, function(response){
+                console.log("response = ", response);
+            });
+        }
+
+    $scope.refresh();
     }]);
 app.controller("usersResultController", ["$scope", "$http", "User", "$location", function ($scope, $http, User, $location) {
     $scope.user = User.isLoggedIn();
