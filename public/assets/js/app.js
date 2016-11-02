@@ -451,7 +451,7 @@ app.controller("createAdventureController", ["$scope", "$rootScope", "Upload", "
 
         $scope.createAdventure = function () {
             var post = $scope.fb_post;
-            console.log($scope.image);
+
             var request = $http({
                 method: "POST",
                 url: "adventure/create",
@@ -466,14 +466,17 @@ app.controller("createAdventureController", ["$scope", "$rootScope", "Upload", "
         }
 
         $scope.post_to_fb = function (id) {
-            FB.login(function () {
-                FB.api('/me/feed', 'post', {message: $scope.user.fullname + " has created a new adventure on Galdraland.\n" + config.siteurl + "/adventures/view/" + id}, function(response) {
-                    if (!response || response.error) {
-                        console.log('Error occured');
-                    } else {
-                        console.log('Post ID: ' + response.id);
-                    }
-                });
+            FB.login(function (response) {
+                console.log(response);
+                if (response.authResponse) {
+                    FB.api('/me/feed', 'post', {message: $scope.user.fullname + " has created a new adventure on Galdraland.\n" + config.siteurl + "/adventures/view/" + id}, function(response) {
+                        if (!response || response.error) {
+                            console.log('Error occured');
+                        } else {
+                            console.log('Post ID: ' + response.id);
+                        }
+                    });
+                }
             }, {scope: 'publish_actions'});
         }
 
