@@ -2379,7 +2379,8 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
             console.log("newValue = " + newValue);
             console.log("oldValue = " + oldValue);
             if (newValue != oldValue) {
-                location.reload();
+//                location.reload();
+                $rootScope.$digest();
             }
         }, true);
         $scope.refresh();
