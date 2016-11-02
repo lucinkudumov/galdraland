@@ -2379,11 +2379,12 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
             console.log("newValue = " + newValue);
             console.log("oldValue = " + oldValue);
             if (newValue != oldValue) {
+                $scope.refresh();
 //                location.reload();
                 $rootScope.$digest();
             }
         }, true);
-        $scope.refresh();
+//        $scope.refresh();
     }]);
 
 app.directive('commentWidget', function ($http, User) {
