@@ -2378,8 +2378,9 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
         $scope.$watch("team.fb_page", function(newValue, oldValue){
             console.log("newValue = " + newValue);
             console.log("oldValue = " + oldValue);
+            $scope.refresh();
         }, true);
-        $scope.refresh();
+//        $scope.refresh();
     }]);
 
 app.directive('commentWidget', function ($http, User) {
