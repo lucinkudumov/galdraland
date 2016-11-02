@@ -281,7 +281,7 @@ app.run(["$rootScope", "$http", "$location", "User", function ($rootScope, $http
             }
         });
     }]);
-app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$sce", "User", "$modal", "$location", function ($scope, $http, $stateParams, $sce, User, $modal, $location) {
+app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$sce", "User", "$modal", "$location", "$compile", function ($scope, $http, $stateParams, $sce, User, $modal, $location, $compile) {
         $scope.user = User.isLoggedIn();
 
         $scope.refresh = function () {
@@ -322,6 +322,16 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
 
             return false;
         }
+
+        $scope.$watch("adventure.fb_page", function(newValue, oldValue){
+            console.log("newValue = " + newValue);
+            console.log("oldValue = " + oldValue);
+            if (newValue != oldValue) {
+                var htmlcontent = "<div id='fb-root'></div><script>window.fbAsyncInit = function () {FB.init({appId: '110469289012320',status: true,cookie: true,xfbml: true,version: 'v2.6'});};window.fbAsyncInit();(function (d, s, id) {var js, fjs = d.getElementsByTagName(s)[0];if (d.getElementById(id)) {return;}js = d.createElement(s);js.id = id;js.src = '//connect.facebook.net/en_US/sdk.js';fjs.parentNode.insertBefore(js, fjs);}(document, 'script', 'facebook-jssdk'));</script><div class='fb-page' data-tabs='timeline,events,messages' data-href='"+newValue+"' data-width='400' data-hide-cover='false'></div>";
+                var $scope = $('#fbPage').html(htmlcontent).scope();
+                $compile($('#fbPage'))($scope);
+            }
+        }, true);
 
         $scope.refresh();
     }]);
