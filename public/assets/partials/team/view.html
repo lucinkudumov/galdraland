@@ -49,20 +49,20 @@
                 <a href="/teamsTag/{{t}}" class="name">{{t}}</a>
             </span>
             <div ng-show="team.fb_page" id = "fbPage">
-            <!--<div id="fb-root"></div>-->
-            <!--<script>-->
-            <!--(function (d, s, id) {-->
-                <!--var js, fjs = d.getElementsByTagName(s)[0];-->
-                <!--if (d.getElementById(id)) {-->
-                <!--return;-->
-                <!--}-->
-                <!--js = d.createElement(s);-->
-                <!--js.id = id;-->
-                <!--js.src = "//connect.facebook.net/en_US/sdk.js";-->
-                <!--fjs.parentNode.insertBefore(js, fjs);-->
-            <!--}(document, 'script', 'facebook-jssdk'));-->
-            <!--</script>-->
-            <!--<div class="fb-comments" data-href="http://webascender.com/blog" data-numposts="5" data-colorscheme="light"></div>-->
+            <div id="fb-root"></div>
+            <script>
+            (function (d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) {
+                return;
+                }
+                js = d.createElement(s);
+                js.id = id;
+                js.src = "//connect.facebook.net/en_US/sdk.js";
+                fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));
+            </script>
+            <div class="fb-comments" data-href="http://webascender.com/blog" data-numposts="5" data-colorscheme="light"></div>
             <!--<comment-widget ref="team._id" ismanager="isManager" ></comment-widget>-->
             </div>
         </div>
