@@ -51,30 +51,6 @@
             <div ng-show="team.fb_page" id = "fbPage">
             </div>
             <div id="fbComment">
-            <div id="fb-root"></div>
-            <script>
-            window.fbAsyncInit = function () {
-                FB.init({
-                    appId: '110469289012320',
-                    status: true,
-                    cookie: true,
-                    xfbml: true,
-                    version: 'v2.6'
-                });
-            };
-            window.fbAsyncInit();
-            (function (d, s, id) {
-                var js, fjs = d.getElementsByTagName(s)[0];
-                if (d.getElementById(id)) {
-                return;
-                }
-                js = d.createElement(s);
-                js.id = id;
-                js.src = "//connect.facebook.net/en_US/sdk.js";
-                fjs.parentNode.insertBefore(js, fjs);
-            }(document, 'script', 'facebook-jssdk'));
-            </script>
-            <script>document.write("<div class='fb-comments' data-href='" + window.location.href + "' data-num-posts='2' data-width='400'></div>");</script>
             <!--<div class="fb-comments" data-href="http://webascender.com/blog" data-numposts="5" data-colorscheme="light"></div>-->
             </div>
             <!--<comment-widget ref="team._id" ismanager="isManager" ></comment-widget>-->
