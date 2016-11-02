@@ -467,7 +467,13 @@ app.controller("createAdventureController", ["$scope", "$rootScope", "Upload", "
 
         $scope.post_to_fb = function (id) {
             FB.login(function () {
-                FB.api('/me/feed', 'post', {message: $scope.user.fullname + " has created a new adventure on Galdraland.\n" + config.siteurl + "/adventures/view/" + id});
+                FB.api('/me/feed', 'post', {message: $scope.user.fullname + " has created a new adventure on Galdraland.\n" + config.siteurl + "/adventures/view/" + id}, function(response) {
+                    if (!response || response.error) {
+                        console.log('Error occured');
+                    } else {
+                        console.log('Post ID: ' + response.id);
+                    }
+                });
             }, {scope: 'publish_actions'});
         }
 
