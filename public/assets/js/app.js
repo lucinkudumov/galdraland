@@ -2430,8 +2430,8 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
                 $compile($('#fbPage'))($scope);
             }
 
-            var htmlcontent = "<div id='fb-root'></div><script>window.fbAsyncInit = function () {FB.init({appId: '110469289012320',status: true,cookie: true,xfbml: true,version: 'v2.6'});};window.fbAsyncInit();(function (d, s, id) {var js, fjs = d.getElementsByTagName(s)[0];if (d.getElementById(id)) {return;}js = d.createElement(s);js.id = id;js.src = '//connect.facebook.net/en_US/sdk.js';fjs.parentNode.insertBefore(js, fjs);}(document, 'script', 'facebook-jssdk'));</script>";
-            htmlcontent += "<div class='fb-comment-box' dyn-fb-comment-box page-href='http://galdraland-1-0.herokuapp.com/teams/view/" + $stateParams.id + "' numposts='5' colorscheme='light'></div>";
+//            var htmlcontent = "<div id='fb-root'></div><script>window.fbAsyncInit = function () {FB.init({appId: '110469289012320',status: true,cookie: true,xfbml: true,version: 'v2.6'});};window.fbAsyncInit();(function (d, s, id) {var js, fjs = d.getElementsByTagName(s)[0];if (d.getElementById(id)) {return;}js = d.createElement(s);js.id = id;js.src = '//connect.facebook.net/en_US/sdk.js';fjs.parentNode.insertBefore(js, fjs);}(document, 'script', 'facebook-jssdk'));</script>";
+//            htmlcontent += "<div class='fb-comment-box' dyn-fb-comment-box page-href='http://galdraland-1-0.herokuapp.com/teams/view/" + $stateParams.id + "' numposts='5' colorscheme='light'></div>";
 
 //            <div id="fb-comment-box" dyn-fb-comment-box
 //            page-href="https://example.com/page/{{page.id}}"
@@ -2443,8 +2443,8 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
 //            data-href="https://www.facebook.com/aileenpass/posts/10157806290045055?comment_id=10157811394570055"
 //            data-width="500">
 //            </div>
-            var $scope = $('#fbComment').html(htmlcontent).scope();
-            $compile($('#fbComment'))($scope);
+//            var $scope = $('#fbComment').html(htmlcontent).scope();
+//            $compile($('#fbComment'))($scope);
 
 
         }, true);
@@ -2477,6 +2477,31 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
 
         $scope.refresh();
     }]);
+
+app.directive('dynFbCommentBox', function () {
+    function createHTML(href, numposts, colorscheme) {
+        return '<div class="fb-comments" ' +
+            'data-href="' + href + '" ' +
+            'data-numposts="' + numposts + '" ' +
+            'data-colorsheme="' + colorscheme + '">' +
+            '</div>';
+    }
+
+    return {
+        restrict: 'A',
+        scope: {},
+        link: function postLink(scope, elem, attrs) {
+            attrs.$observe('pageHref', function (newValue) {
+                var href        = newValue;
+                var numposts    = attrs.numposts    || 5;
+                var colorscheme = attrs.colorscheme || 'light';
+
+                elem.html(createHTML(href, numposts, colorscheme));
+                FB.XFBML.parse(elem[0]);
+            });
+        }
+    };
+});
 
 app.directive('commentWidget', function ($http, User) {
     var comment_dir = {
