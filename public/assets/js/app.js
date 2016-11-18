@@ -2487,7 +2487,7 @@ app.directive('dynFbCommentBox', function () {
     }
 
     return {
-        restrict: 'A',
+        restrict: 'C',
         scope: {},
         link: function postLink(scope, elem, attrs) {
             attrs.$observe('pageHref', function (newValue) {
