@@ -2430,11 +2430,10 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
                 $compile($('#fbPage'))($scope);
             }
 
-//            var htmlcontent = "<div id='fb-root'></div><script>window.fbAsyncInit = function () {FB.init({appId: '110469289012320',status: true,cookie: true,xfbml: true,version: 'v2.6'});};window.fbAsyncInit();(function (d, s, id) {var js, fjs = d.getElementsByTagName(s)[0];if (d.getElementById(id)) {return;}js = d.createElement(s);js.id = id;js.src = '//connect.facebook.net/en_US/sdk.js';fjs.parentNode.insertBefore(js, fjs);}(document, 'script', 'facebook-jssdk'));</script><div class='fb-comments' data-href='http://galdraland-1-0.herokuapp.com/teams/view/" + $stateParams.id + "' data-numposts='5' data-colorscheme='light'></div>";
-//            var $scope = $('#fbComment').html(htmlcontent).scope();
-//            $compile($('#fbComment'))($scope);
-
-
+            var htmlcontent = "<div id='fb-root'></div><script>window.fbAsyncInit = function () {FB.init({appId: '110469289012320',status: true,cookie: true,xfbml: true,version: 'v2.6'});};window.fbAsyncInit();(function (d, s, id) {var js, fjs = d.getElementsByTagName(s)[0];if (d.getElementById(id)) {return;}js = d.createElement(s);js.id = id;js.src = '//connect.facebook.net/en_US/sdk.js';fjs.parentNode.insertBefore(js, fjs);}(document, 'script', 'facebook-jssdk'));</script>";
+            htmlcontent += "<div class='fb-comment-embed' data-href='https://www.facebook.com/aileenpass/posts/10157806290045055?comment_id=10157811394570055' data-width='500'></div>";
+            var $scope = $('#fbComment').html(htmlcontent).scope();
+            $compile($('#fbComment'))($scope);
         }, true);
 
         $scope.shareTeam = function () {
