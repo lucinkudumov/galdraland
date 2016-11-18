@@ -2482,12 +2482,13 @@ app.directive('dynFbCommentBox', function () {
     function createHTML(href, numposts, colorscheme) {
         return '<div class="fb-comment-embed" ' +
             'data-href="' + href + '" ' +
-            'data-width="' + colorscheme + '">' +
+            'data-numposts="' + numposts + '" ' +
+            'data-colorsheme="' + colorscheme + '">' +
             '</div>';
     }
 
     return {
-        restrict: 'C',
+        restrict: 'A',
         scope: {},
         link: function postLink(scope, elem, attrs) {
             attrs.$observe('pageHref', function (newValue) {
