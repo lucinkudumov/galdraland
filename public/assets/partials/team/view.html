@@ -114,10 +114,18 @@
     <!--</div>-->
     <!--<comment-widget ref="team._id" ></comment-widget>-->
 
-    <div id="fb-comment-box" dyn-fb-comment-box
-         page-href="https://www.facebook.com/tommi.andersson.94/posts/1688252521486616?comment_id=1688252528153282"
-         numposts="5"
-         colorscheme="light">
-    </div>
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.6";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+
+    <!-- Your embedded comments code -->
+    <div class="fb-comment-embed"
+         data-href="https://www.facebook.com/tommi.andersson.94/posts/1688252521486616?comment_id=1688252528153282"
+         data-width="500"></div>
 
 </div>
