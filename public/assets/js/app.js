@@ -2480,10 +2480,9 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
 
 app.directive('dynFbCommentBox', function () {
     function createHTML(href, numposts, colorscheme) {
-        return '<div class="fb-comment-embed" ' +
+        return '<div class="fb-comment-comment" ' +
             'data-href="' + href + '" ' +
-            'data-numposts="' + numposts + '" ' +
-            'data-colorsheme="' + colorscheme + '">' +
+            'data-width="' + colorscheme + '">' +
             '</div>';
     }
 
