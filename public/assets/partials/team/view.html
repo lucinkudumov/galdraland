@@ -42,12 +42,15 @@
             </div>
             <div class="col-md-4" style="padding-right: 0px;">
                 <h2 style="color:#394b59; margin-top:0px;font-size:18px; font-weight:700; position: absolute">Adventures of the team</h2>
-                <div style="margin-top:0px;">
-                    <ul ng-show="adventures.length > 0" class="members-list">
-                        <li ng-repeat="adv in adventures" ng-click="viewAdventure(adv)">
-                            <p class="name bold" ng-bind="adv.name"></p>
-                        </li>
-                    </ul>
+                <div style="margin-top:0px;" ng-show="adventures.length == 0" class="members-list">
+                    <li>
+                        <p class="name bold"> No Adventures</p>
+                    </li>
+                </div>
+                <div style="margin-top:0px;" ng-show="adventures.length > 0" class="members-list">
+                    <li ng-repeat="adv in adventures" ng-click="viewAdventure(adv)">
+                        <p class="name bold" ng-bind="adv.name"></p>
+                    </li>
                 </div>
             </div>
         </div>
