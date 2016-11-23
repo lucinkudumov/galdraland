@@ -1988,7 +1988,7 @@ app.controller("editTeamController", ["$scope", "$http", "$location", "$statePar
         $scope.uploadProgress = 0;
 
         request.success(function (data) {
-            $scope.name = data.team.name;
+            $scope.name = data.team.description;
             $scope.description = data.team.description;
             $scope.uploadedImage = data.team.image;
             $scope.tags = data.team.tags.join(" ");
