@@ -5,30 +5,34 @@
             <h2 ng-bind="team.name" style="color:#394b59; margin-top:0px;font-size:25px; font-weight:700;"></h2>
         </div>
         <div style="margin-top:0px;">
-            <div class="col-md-3 user-container">
+            <div class="col-md-4" ng-show="!loading && team">
                 <h2 style="color:#394b59; margin-top:0px;font-size:25px; font-weight:700;">ROLES</h2>
-                <div>
-                    <p ng-show="team.teamMembers.length == 0">No members, invite new members now.</p>
-                    <ul ng-show="team.teamMembers.length > 0" class="members-list">
-                        <li ng-repeat="member in team.teamMembers" ng-click="showMember(member)">
-                            <p ng-bind="member.title" style="font-style : italic;"></p>
-                            <p ng-show="member.user.profileId == 000000000000000000000000" class="name">Empty</p>
-                            <p ng-show="member.user.profileId == 000000000000000000000000" class="avatar" style="background-image: url(/assets/images/unknown.png); background-size: contain;"></p>
-                            <a ng-hide="member.user.profileId == 000000000000000000000000" class="name" href="/users/view/{{member.user._id}}">{{member.user.fullname}}</a>
-                            <p ng-hide="member.user.profileId == 000000000000000000000000" class="avatar" style="background-image: url('{{ member.user.photo}}')"></p>
-                        </li>
-                    </ul>
-                    <button ng-show="isManager" class="btn btn-primary pull-left" ng-click="sendInvite()" style="margin-left: 15px; font-size: 18px; padding-bottom: 1%;">Invite</button>
-                    <button ng-show="isManager" class="btn btn-success pull-left" ng-click="addMemberTitle()" style="margin-left: 15px; font-size: 18px; padding-bottom: 1%;">Add a new role</button>
-                    <button ng-show="!isMember && !isManager && emptyMembers.length > 0" class="btn btn-success pull-left" ng-click="applyTeam()" style="margin-left: 15px; font-size: 18px; padding-bottom: 1%;">Apply for this team</button>
-                </div>
+                <p ng-show="team.teamMembers.length == 0">No members, invite new members now.</p>
+                <ul ng-show="team.teamMembers.length > 0" class="members-list">
+                    <li ng-repeat="member in team.teamMembers" ng-click="showMember(member)">
+                        <p ng-bind="member.title"></p>
+                        <p ng-show="member.user.profileId == 000000000000000000000000" class="name">Empty</p>
+                        <p ng-show="member.user.profileId == 000000000000000000000000" class="avatar" style="background-image: url(/assets/images/unknown.png); background-size: contain;"></p>
+                        <a ng-hide="member.user.profileId == 000000000000000000000000" class="name" href="/users/view/{{member.user._id}}">{{member.user.fullname}}</a>
+                        <p ng-hide="member.user.profileId == 000000000000000000000000" class="avatar" style="background-image: url('{{ member.user.photo}}')"></p>
+                    </li>
+                </ul>
+                <button ng-show="isManager" class="btn btn-primary pull-left" ng-click="sendInvite()" style="margin-left: 15px; font-size: 18px; padding-bottom: 1%;">Invite</button>
+                <button ng-show="isManager" class="btn btn-success pull-left" ng-click="addMemberTitle()" style="margin-left: 15px; font-size: 18px; padding-bottom: 1%;">Add a new role</button>
+                <button ng-show="!isMember && !isManager && emptyMembers.length > 0" class="btn btn-success pull-left" ng-click="applyTeam()" style="margin-left: 15px; font-size: 18px; padding-bottom: 1%;">Apply for this team</button>
+            </div>
+            <div class="col-md-5">
+                AAAAAAAAAAAAAA
+            </div>
+            <div class="col-md-5">
+                BBBBBBBBBBBBBB
             </div>
         </div>
     </div>
 
     <div ng-controller="teamViewController" class="teamMembers">
         <div class="row">
-            <div class="col-md-3 user-container">
+            <div class="col-md-4" ng-show="!loading && team">
                 <h4 ng-bind="team.name"></h4>
                 <p ng-show="team.description" class="description" style="text-align:left; padding: 10px 5px 10px 5px; word-wrap: break-word; word-break: break-word; font-size: 15px; border: 1px solid #ddd;" ng-bind-html="team.description"></p>
                 <rating-widget ref="team._id" ></rating-widget>
