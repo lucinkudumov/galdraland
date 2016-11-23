@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-md-8">
             <!--<a class="btn btn-success pull-left" style= "font-size: 18px;padding-bottom:1%;" ng-click="shareTeam();">Share</a>-->
-            <div>
+            <div class="col-md-4" id="fbShare">
                 <!-- Load Facebook SDK for JavaScript -->
                 <div id="fb-root"></div>
                 <script>
@@ -35,7 +35,7 @@
                      data-layout="button_count">
                 </div>
             </div>
-            <div>
+            <div class="col-md-4" style="float:right;">
                 <a class="btn btn-success pull-right" href="/teams/create">Create a new team</a>
             </div>
         </div>
