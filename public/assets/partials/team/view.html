@@ -60,12 +60,10 @@
                     <img src="{{team.image}}" alt="image" ng-show="team.image" style="margin-bottom: 10px; margin-top: 10px; width:396px; height:297px;">
                 </div>
                 <h2 style="color:#394b59; margin-top:5px;font-size:18px; font-weight:700; position: absolute">Team's Tags {{team.tags.length}}</h2>
-                <div style="margin-top:28px;" ng-show="team.tags.length == 0" class="members-list">
-                    <p class="name bold" style="margin:0px; margin-left:5px; font-size:14px; color:#cfcfcf;"> No Tags </p>
-                </div>
                 <div style="margin-top:28px;" ng-show="team.tags" class="members-list">
                     <div style="margin-top:0px; margin-left:5px;" ng-repeat="t in team.tags">
-                        <a style="font-size:14px; color:#1ab8f3; font-weight: bold;" href="/teamsTag/{{t}}" class="name">{{t}}</a>
+                        <p class="name bold" ng-show="!t" style="margin:0px; margin-left:5px; font-size:14px; color:#cfcfcf;"> No Tags</p>
+                        <a style="font-size:14px; color:#1ab8f3; font-weight: bold;" ng-show="t" href="/teamsTag/{{t}}" class="name">{{t}}</a>
                     </div>
                 </div>
             </div>
