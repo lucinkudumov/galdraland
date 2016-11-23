@@ -61,7 +61,7 @@
                 </div>
                 <h2 style="color:#394b59; margin-top:5px;font-size:18px; font-weight:700; position: absolute">Team's Tags</h2>
                 <div style="margin-top:28px;" ng-show="team.tags.length == 0" class="members-list">
-                    <p class="name bold" style="margin:0px; margin-left:5px; font-size:14px; color:#cfcfcf;"> No Tags</p>
+                    <p class="name bold" style="margin:0px; margin-left:5px; font-size:14px; color:#cfcfcf;"> No Tags {{team.tags.length}}</p>
                 </div>
                 <div style="margin-top:28px;" ng-show="team.tags" class="members-list">
                     <div style="margin-top:0px; margin-left:5px;" ng-repeat="t in team.tags">
