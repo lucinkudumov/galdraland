@@ -5,8 +5,8 @@
             <h2 ng-bind="team.name" style="color:#394b59; margin-top:0px;font-size:25px; font-weight:700;"></h2>
         </div>
         <div style="margin-top:0px;">
-            <div class="col-md-4" ng-show="!loading && team">
-                <h2 style="color:#394b59; margin-top:0px;font-size:10px; font-weight:600;">ROLES</h2>
+            <div class="col-md-4" ng-show="!loading && team" style="padding-left: 0px; padding-right: 0px;">
+                <h2 style="color:#394b59; margin-top:0px;font-size:18px; font-weight:700; position: absolute">ROLES</h2>
                 <p ng-show="team.teamMembers.length == 0">No members, invite new members now.</p>
                 <ul ng-show="team.teamMembers.length > 0" class="members-list">
                     <li ng-repeat="member in team.teamMembers" ng-click="showMember(member)">
