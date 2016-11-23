@@ -41,16 +41,23 @@
                 </div>
             </div>
             <div class="col-md-4" style="padding-right: 0px;">
-                <h2 style="color:#394b59; margin-top:0px;font-size:18px; font-weight:700; position: absolute">Adventures of the team</h2>
+                <h2 style="color:#394b59; margin-top:0px;font-size:18px; font-weight:700; position: absolute">Team's Adventures</h2>
                 <div style="margin-top:28px;" ng-show="adventures.length == 0" class="members-list">
                     <div>
-                        <p class="name bold" style="margin:0px; margin-left:5px; font-size:12px; color:#cfcfcf;"> No Adventures</p>
+                        <p class="name bold" style="margin:0px; margin-left:5px; font-size:14px; color:#cfcfcf;"> No Adventures</p>
                     </div>
                 </div>
                 <div style="margin-top:28px;" ng-show="adventures.length > 0" class="members-list">
                     <div style="margin-top:0px;" ng-repeat="adv in adventures">
-                        <p class="name bold" style="margin:0px; margin-left:5px; cursor: pointer; color: #1ab8f3; font-size:12px;" ng-bind="adv.name" ng-click="viewAdventure(adv)"></p>
+                        <p class="name bold" style="margin:0px; margin-left:5px; cursor: pointer; color: #1ab8f3; font-size:14px;" ng-bind="adv.name" ng-click="viewAdventure(adv)"></p>
                     </div>
+                </div>
+                <h2 style="color:#394b59; margin-top:0px;font-size:18px; font-weight:700; position: absolute">Team's Photo</h2>
+                <div style="margin-top:0px;" ng-show="!team.image">
+                        <p class="name bold" style="margin:0px; margin-left:5px; font-size:14px; color:#cfcfcf;"> No Photo</p>
+                </div>
+                <div style="margin-top:0px;" ng-show="team.image">
+                    <img src="{{team.image}}" alt="image" ng-show="team.image" style="margin-bottom: 10px; margin-top: 10px; width:396px; height:297px;">
                 </div>
             </div>
         </div>
