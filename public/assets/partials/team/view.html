@@ -5,7 +5,24 @@
             <h2 ng-bind="team.name" style="color:#394b59; margin-top:0px;font-size:25px; font-weight:700;"></h2>
         </div>
         <div style="margin-top:0px;">
-
+            <div class="col-md-3 user-container">
+                <h2 style="color:#394b59; margin-top:0px;font-size:25px; font-weight:700;">ROLES</h2>
+                <div>
+                    <p ng-show="team.teamMembers.length == 0">No members, invite new members now.</p>
+                    <ul ng-show="team.teamMembers.length > 0" class="members-list">
+                        <li ng-repeat="member in team.teamMembers" ng-click="showMember(member)">
+                            <p ng-bind="member.title" style="font-style : italic;"></p>
+                            <p ng-show="member.user.profileId == 000000000000000000000000" class="name">Empty</p>
+                            <p ng-show="member.user.profileId == 000000000000000000000000" class="avatar" style="background-image: url(/assets/images/unknown.png); background-size: contain;"></p>
+                            <a ng-hide="member.user.profileId == 000000000000000000000000" class="name" href="/users/view/{{member.user._id}}">{{member.user.fullname}}</a>
+                            <p ng-hide="member.user.profileId == 000000000000000000000000" class="avatar" style="background-image: url('{{ member.user.photo}}')"></p>
+                        </li>
+                    </ul>
+                    <button ng-show="isManager" class="btn btn-primary pull-left" ng-click="sendInvite()" style="margin-left: 15px; font-size: 18px; padding-bottom: 1%;">Invite</button>
+                    <button ng-show="isManager" class="btn btn-success pull-left" ng-click="addMemberTitle()" style="margin-left: 15px; font-size: 18px; padding-bottom: 1%;">Add a new role</button>
+                    <button ng-show="!isMember && !isManager && emptyMembers.length > 0" class="btn btn-success pull-left" ng-click="applyTeam()" style="margin-left: 15px; font-size: 18px; padding-bottom: 1%;">Apply for this team</button>
+                </div>
+            </div>
         </div>
     </div>
 
