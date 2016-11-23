@@ -21,10 +21,26 @@
                 <button ng-show="isManager" class="btn btn-success pull-left" ng-click="addMemberTitle()" style="margin-left: 15px; font-size: 18px; padding-bottom: 1%;">Add a new role</button>
                 <button ng-show="!isMember && !isManager && emptyMembers.length > 0" class="btn btn-success pull-left" ng-click="applyTeam()" style="margin-left: 15px; font-size: 18px; padding-bottom: 1%;">Apply for this team</button>
             </div>
-            <div class="col-md-5">
-                AAAAAAAAAAAAAA
+            <div class="col-md-4">
+                <h2 style="color:#cfcfcf; margin-top:0px;font-size:18px; font-weight:700; position: absolute">Comments</h2>
+                <div id="fbComment">
+                    <div id="fb-root"></div>
+                    <script>
+                        (function (d, s, id) {
+                            var js, fjs = d.getElementsByTagName(s)[0];
+                            if (d.getElementById(id)) {
+                                return;
+                            }
+                            js = d.createElement(s);
+                            js.id = id;
+                            js.src = "//connect.facebook.net/en_US/sdk.js";
+                            fjs.parentNode.insertBefore(js, fjs);
+                        }(document, 'script', 'facebook-jssdk'));
+                    </script>
+                    <div class="fb-comments" data-href="http://webascender.com/blog" data-numposts="5" data-colorscheme="light" data-width="400"></div>
+                </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-4">
                 BBBBBBBBBBBBBB
             </div>
         </div>
