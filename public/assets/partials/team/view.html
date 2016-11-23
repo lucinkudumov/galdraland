@@ -48,8 +48,8 @@
                     </div>
                 </div>
                 <div style="margin-top:28px;" ng-show="adventures.length > 0" class="members-list">
-                    <div style="margin-top:0px;" ng-repeat="adv in adventures" ng-click="viewAdventure(adv)">
-                        <p class="name" style="margin:0px;" ng-bind="adv.name"></p>
+                    <div style="margin-top:0px;" ng-repeat="adv in adventures">
+                        <p class="name" style="margin:0px; margin-left:5px; cursor: pointer; color: #1ab8f3;" ng-bind="adv.name" ng-click="viewAdventure(adv)"></p>
                     </div>
                 </div>
             </div>
