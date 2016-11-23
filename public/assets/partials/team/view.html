@@ -1,56 +1,71 @@
-<!--<div ng-controller="teamViewController" class="teamMembers">-->
-    <!--<div class="row">-->
-        <!--<div class="col-md-3 user-container">-->
-            <!--<h4 ng-bind="team.name"></h4>-->
-            <!--&lt;!&ndash;<p class="description" style="font-size: 13px;" ng-bind="team.description"></p>&ndash;&gt;-->
-            <!--&lt;!&ndash;<textarea style="font-size: 13px; margin-bottom: 15px; overflow: visible;" ng-bind="team.description" disabled></textarea>&ndash;&gt;-->
-            <!--<p ng-show="team.description" class="description" style="text-align:left; padding: 10px 5px 10px 5px; word-wrap: break-word; word-break: break-word; font-size: 15px; border: 1px solid #ddd;" ng-bind-html="team.description"></p>-->
-            <!--<rating-widget ref="team._id" ></rating-widget>-->
-            <!--&lt;!&ndash;<img src="{{team.image}}" alt="image" style="width:100px; height:100px;" ng-show="team.image">&ndash;&gt;-->
-            <!--<hr>-->
-            <!--<div ng-show="isManager" class="btn-group btn-group-justified">-->
-                <!--<a href="/teams/edit/'{{ team._id}}" class="btn btn-primary">Edit</a>-->
-                <!--<a href="#" ng-click="modal()" class="btn btn-danger">Remove</a>-->
-                <!--<a href="#" ng-click="shareTeam('{{ team._id }}')" class="btn btn-success">Share</a>-->
-            <!--</div>-->
-            <!--<div ng-show="isMember && !isManager" class="btn-group btn-group-justified">-->
-                <!--<a href="#" class="btn btn-danger" ng-click="leave();">Leave</a>-->
-            <!--</div>-->
-        <!--</div>-->
-        <!--<div class="col-md-5" ng-show="!loading && team">-->
-            <!--&lt;!&ndash;<p ng-show="team.teamMembers.length == 0">No members, invite new members now.</p>&ndash;&gt;-->
-            <!--&lt;!&ndash;<ul ng-show="team.teamMembers.length > 0" class="members-list">&ndash;&gt;-->
-                <!--&lt;!&ndash;<li ng-repeat="member in team.teamMembers" ng-click="showMember(member)">&ndash;&gt;-->
-                    <!--&lt;!&ndash;<p ng-bind="member.title"></p>&ndash;&gt;-->
-                    <!--&lt;!&ndash;<p ng-show="member.user.profileId == 000000000000000000000000" class="name">Empty</p>&ndash;&gt;-->
-                    <!--&lt;!&ndash;<p ng-show="member.user.profileId == 000000000000000000000000" class="avatar" style="background-image: url(/assets/images/unknown.png); background-size: contain;"></p>&ndash;&gt;-->
-                    <!--&lt;!&ndash;<a ng-hide="member.user.profileId == 000000000000000000000000" class="name" href="/users/view/{{member.user._id}}">{{member.user.fullname}}</a>&ndash;&gt;-->
-                    <!--&lt;!&ndash;<p ng-hide="member.user.profileId == 000000000000000000000000" class="avatar" style="background-image: url('{{ member.user.photo}}')"></p>&ndash;&gt;-->
-                <!--&lt;!&ndash;</li>&ndash;&gt;-->
-            <!--&lt;!&ndash;</ul>&ndash;&gt;-->
-            <!--&lt;!&ndash;<button ng-show="isManager" class="btn btn-success pull-right" ng-click="addMemberTitle()" style="margin-right: 5px;">Add new role</button>&ndash;&gt;-->
-            <!--&lt;!&ndash;<button ng-show="isManager" class="btn btn-primary pull-right" ng-click="sendInvite()" style="margin-right: 5px;">Invite</button>&ndash;&gt;-->
-            <!--&lt;!&ndash;<button ng-show="!isMember && !isManager && emptyMembers.length > 0" class="btn btn-success pull-right" ng-click="applyTeam()">Apply for this team</button>&ndash;&gt;-->
-            <!--<img src="{{team.image}}" alt="image" ng-show="team.image" style="margin-bottom: 10px; margin-top: 10px; width:396px; height:297px;">-->
-            <!--<div class="user-container">-->
-                <!--<h4>Adventures of the team</h4>-->
-                <!--<hr>-->
-            <!--</div>-->
-            <!--<ul ng-show="adventures.length > 0" class="members-list">-->
-                <!--<li ng-repeat="adv in adventures" ng-click="viewAdventure(adv)">-->
-                    <!--<p class="name bold" ng-bind="adv.name"></p>-->
+<div ng-controller="teamViewController" class="teamMembers">
+    <div class="row">
+        <div class="col-md-3 user-container">
+            <h4 ng-bind="team.name"></h4>
+            <!--<p class="description" style="font-size: 13px;" ng-bind="team.description"></p>-->
+            <!--<textarea style="font-size: 13px; margin-bottom: 15px; overflow: visible;" ng-bind="team.description" disabled></textarea>-->
+            <p ng-show="team.description" class="description" style="text-align:left; padding: 10px 5px 10px 5px; word-wrap: break-word; word-break: break-word; font-size: 15px; border: 1px solid #ddd;" ng-bind-html="team.description"></p>
+            <rating-widget ref="team._id" ></rating-widget>
+            <!--<img src="{{team.image}}" alt="image" style="width:100px; height:100px;" ng-show="team.image">-->
+            <hr>
+            <div ng-show="isManager" class="btn-group btn-group-justified">
+                <a href="/teams/edit/'{{ team._id}}" class="btn btn-primary">Edit</a>
+                <a href="#" ng-click="modal()" class="btn btn-danger">Remove</a>
+                <a href="#" ng-click="shareTeam('{{ team._id }}')" class="btn btn-success">Share</a>
+            </div>
+            <div ng-show="isMember && !isManager" class="btn-group btn-group-justified">
+                <a href="#" class="btn btn-danger" ng-click="leave();">Leave</a>
+            </div>
+        </div>
+        <div class="col-md-5" ng-show="!loading && team">
+            <!--<p ng-show="team.teamMembers.length == 0">No members, invite new members now.</p>-->
+            <!--<ul ng-show="team.teamMembers.length > 0" class="members-list">-->
+                <!--<li ng-repeat="member in team.teamMembers" ng-click="showMember(member)">-->
+                    <!--<p ng-bind="member.title"></p>-->
+                    <!--<p ng-show="member.user.profileId == 000000000000000000000000" class="name">Empty</p>-->
+                    <!--<p ng-show="member.user.profileId == 000000000000000000000000" class="avatar" style="background-image: url(/assets/images/unknown.png); background-size: contain;"></p>-->
+                    <!--<a ng-hide="member.user.profileId == 000000000000000000000000" class="name" href="/users/view/{{member.user._id}}">{{member.user.fullname}}</a>-->
+                    <!--<p ng-hide="member.user.profileId == 000000000000000000000000" class="avatar" style="background-image: url('{{ member.user.photo}}')"></p>-->
                 <!--</li>-->
             <!--</ul>-->
-            <!--<div class="user-container">-->
-                <!--<h4>Tags</h4>-->
-                <!--<hr>-->
-            <!--</div>-->
-            <!--<span ng-repeat="t in team.tags" >-->
-                <!--<a href="/teamsTag/{{t}}" class="name">{{t}}</a>-->
-            <!--</span>-->
-            <!--<div ng-show="team.fb_page" id = "fbPage">-->
-            <!--</div>-->
-            <!--<div id="fbComment">-->
+            <!--<button ng-show="isManager" class="btn btn-success pull-right" ng-click="addMemberTitle()" style="margin-right: 5px;">Add new role</button>-->
+            <!--<button ng-show="isManager" class="btn btn-primary pull-right" ng-click="sendInvite()" style="margin-right: 5px;">Invite</button>-->
+            <!--<button ng-show="!isMember && !isManager && emptyMembers.length > 0" class="btn btn-success pull-right" ng-click="applyTeam()">Apply for this team</button>-->
+            <img src="{{team.image}}" alt="image" ng-show="team.image" style="margin-bottom: 10px; margin-top: 10px; width:396px; height:297px;">
+            <div class="user-container">
+                <h4>Adventures of the team</h4>
+                <hr>
+            </div>
+            <ul ng-show="adventures.length > 0" class="members-list">
+                <li ng-repeat="adv in adventures" ng-click="viewAdventure(adv)">
+                    <p class="name bold" ng-bind="adv.name"></p>
+                </li>
+            </ul>
+            <div class="user-container">
+                <h4>Tags</h4>
+                <hr>
+            </div>
+            <span ng-repeat="t in team.tags" >
+                <a href="/teamsTag/{{t}}" class="name">{{t}}</a>
+            </span>
+            <div ng-show="team.fb_page" id = "fbPage">
+            </div>
+            <div id="fbComment">
+                <!-- Load Facebook SDK for JavaScript -->
+                <div id="fb-root"></div>
+                <script>(function(d, s, id) {
+                    var js, fjs = d.getElementsByTagName(s)[0];
+                    if (d.getElementById(id)) return;
+                    js = d.createElement(s); js.id = id;
+                    js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1";
+                    fjs.parentNode.insertBefore(js, fjs);
+                }(document, 'script', 'facebook-jssdk'));</script>
+
+                <!-- Your share button code -->
+                <div class="fb-share-button"
+                     data-href="http://www.your-domain.com/your-page.html"
+                     data-layout="button_count">
+                </div>
                 <!--<div id="fb-root"></div>-->
                 <!--<script>-->
                     <!--(function (d, s, id) {-->
@@ -65,68 +80,37 @@
                     <!--}(document, 'script', 'facebook-jssdk'));-->
                 <!--</script>-->
                 <!--<div class="fb-comments" data-href="http://webascender.com/blog" data-numposts="5" data-colorscheme="light" data-width="400"></div>-->
-            <!--</div>-->
-            <!--&lt;!&ndash;<comment-widget ref="team._id" ismanager="isManager" ></comment-widget>&ndash;&gt;-->
+            </div>
+            <!--<comment-widget ref="team._id" ismanager="isManager" ></comment-widget>-->
+        </div>
+        <div class="col-md-4" ng-show="!loading && team">
+            <p ng-show="team.teamMembers.length == 0">No members, invite new members now.</p>
+            <ul ng-show="team.teamMembers.length > 0" class="members-list">
+                <li ng-repeat="member in team.teamMembers" ng-click="showMember(member)">
+                    <p ng-bind="member.title"></p>
+                    <p ng-show="member.user.profileId == 000000000000000000000000" class="name">Empty</p>
+                    <p ng-show="member.user.profileId == 000000000000000000000000" class="avatar" style="background-image: url(/assets/images/unknown.png); background-size: contain;"></p>
+                    <a ng-hide="member.user.profileId == 000000000000000000000000" class="name" href="/users/view/{{member.user._id}}">{{member.user.fullname}}</a>
+                    <p ng-hide="member.user.profileId == 000000000000000000000000" class="avatar" style="background-image: url('{{ member.user.photo}}')"></p>
+                </li>
+            </ul>
+            <button ng-show="isManager" class="btn btn-primary pull-left" ng-click="sendInvite()" style="margin-left: 15px; font-size: 18px; padding-bottom: 1%;">Invite</button>
+            <button ng-show="isManager" class="btn btn-success pull-left" ng-click="addMemberTitle()" style="margin-left: 15px; font-size: 18px; padding-bottom: 1%;">Add a new role</button>
+            <button ng-show="!isMember && !isManager && emptyMembers.length > 0" class="btn btn-success pull-left" ng-click="applyTeam()" style="margin-left: 15px; font-size: 18px; padding-bottom: 1%;">Apply for this team</button>
+        </div>
+    </div>
+
+    <!--<div class="row">-->
+        <!--<div class="user-container">-->
+            <!--<h4>Adventures of the team</h4>-->
+            <!--<hr>-->
         <!--</div>-->
-        <!--<div class="col-md-4" ng-show="!loading && team">-->
-            <!--<p ng-show="team.teamMembers.length == 0">No members, invite new members now.</p>-->
-            <!--<ul ng-show="team.teamMembers.length > 0" class="members-list">-->
-                <!--<li ng-repeat="member in team.teamMembers" ng-click="showMember(member)">-->
-                    <!--<p ng-bind="member.title"></p>-->
-                    <!--<p ng-show="member.user.profileId == 000000000000000000000000" class="name">Empty</p>-->
-                    <!--<p ng-show="member.user.profileId == 000000000000000000000000" class="avatar" style="background-image: url(/assets/images/unknown.png); background-size: contain;"></p>-->
-                    <!--<a ng-hide="member.user.profileId == 000000000000000000000000" class="name" href="/users/view/{{member.user._id}}">{{member.user.fullname}}</a>-->
-                    <!--<p ng-hide="member.user.profileId == 000000000000000000000000" class="avatar" style="background-image: url('{{ member.user.photo}}')"></p>-->
-                <!--</li>-->
-            <!--</ul>-->
-            <!--<button ng-show="isManager" class="btn btn-primary pull-left" ng-click="sendInvite()" style="margin-left: 15px; font-size: 18px; padding-bottom: 1%;">Invite</button>-->
-            <!--<button ng-show="isManager" class="btn btn-success pull-left" ng-click="addMemberTitle()" style="margin-left: 15px; font-size: 18px; padding-bottom: 1%;">Add a new role</button>-->
-            <!--<button ng-show="!isMember && !isManager && emptyMembers.length > 0" class="btn btn-success pull-left" ng-click="applyTeam()" style="margin-left: 15px; font-size: 18px; padding-bottom: 1%;">Apply for this team</button>-->
-        <!--</div>-->
+        <!--<ul ng-show="adventures.length > 0" class="members-list">-->
+            <!--<li ng-repeat="adv in adventures" ng-click="viewAdventure(adv)">-->
+                <!--<p class="name bold" ng-bind="adv.name"></p>-->
+            <!--</li>-->
+        <!--</ul>-->
     <!--</div>-->
+    <!--<comment-widget ref="team._id" ></comment-widget>-->
 
-    <!--&lt;!&ndash;<div class="row">&ndash;&gt;-->
-        <!--&lt;!&ndash;<div class="user-container">&ndash;&gt;-->
-            <!--&lt;!&ndash;<h4>Adventures of the team</h4>&ndash;&gt;-->
-            <!--&lt;!&ndash;<hr>&ndash;&gt;-->
-        <!--&lt;!&ndash;</div>&ndash;&gt;-->
-        <!--&lt;!&ndash;<ul ng-show="adventures.length > 0" class="members-list">&ndash;&gt;-->
-            <!--&lt;!&ndash;<li ng-repeat="adv in adventures" ng-click="viewAdventure(adv)">&ndash;&gt;-->
-                <!--&lt;!&ndash;<p class="name bold" ng-bind="adv.name"></p>&ndash;&gt;-->
-            <!--&lt;!&ndash;</li>&ndash;&gt;-->
-        <!--&lt;!&ndash;</ul>&ndash;&gt;-->
-    <!--&lt;!&ndash;</div>&ndash;&gt;-->
-    <!--&lt;!&ndash;<comment-widget ref="team._id" ></comment-widget>&ndash;&gt;-->
-
-<!--</div>-->
-<html>
-<head>
-    <title>Your Website Title</title>
-    <!-- You can use Open Graph tags to customize link previews.
-    Learn more: https://developers.facebook.com/docs/sharing/webmasters -->
-    <meta property="og:url"           content="http://www.your-domain.com/your-page.html" />
-    <meta property="og:type"          content="website" />
-    <meta property="og:title"         content="Your Website Title" />
-    <meta property="og:description"   content="Your description" />
-    <meta property="og:image"         content="http://www.your-domain.com/path/image.jpg" />
-</head>
-<body>
-
-<!-- Load Facebook SDK for JavaScript -->
-<div id="fb-root"></div>
-<script>(function(d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s); js.id = id;
-    js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1";
-    fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
-
-<!-- Your share button code -->
-<div class="fb-share-button"
-     data-href="http://www.your-domain.com/your-page.html"
-     data-layout="button_count">
 </div>
-
-</body>
-</html>
