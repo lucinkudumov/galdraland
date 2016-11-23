@@ -21,7 +21,7 @@
                 <button ng-show="isManager" class="btn btn-success pull-left" ng-click="addMemberTitle()" style="margin-left: 15px; font-size: 18px; padding-bottom: 1%;">Add a new role</button>
                 <button ng-show="!isMember && !isManager && emptyMembers.length > 0" class="btn btn-success pull-left" ng-click="applyTeam()" style="margin-left: 15px; font-size: 18px; padding-bottom: 1%;">Apply for this team</button>
             </div>
-            <div class="col-md-4" style="padding-left: 0px; padding-right: 0px;">
+            <div class="col-md-4" style="padding-left: 0px; padding-right: 10px;">
                 <h2 style="color:#cfcfcf; margin-top:0px;font-size:18px; font-weight:700; position: absolute">Comments</h2>
                 <div id="fbComment" style="margin-top:28px;">
                     <div id="fb-root"></div>
@@ -52,12 +52,21 @@
                         <p class="name bold" style="margin:0px; margin-left:5px; cursor: pointer; color: #1ab8f3; font-size:14px;" ng-bind="adv.name" ng-click="viewAdventure(adv)"></p>
                     </div>
                 </div>
-                <h2 style="color:#394b59; margin-top:0px;font-size:18px; font-weight:700; position: absolute">Team's Photo</h2>
+                <h2 style="color:#394b59; margin-top:5px;font-size:18px; font-weight:700; position: absolute">Team's Photo</h2>
                 <div style="margin-top:28px;" ng-show="!team.image">
                         <p class="name bold" style="margin:0px; margin-left:5px; font-size:14px; color:#cfcfcf;"> No Photo</p>
                 </div>
                 <div style="margin-top:28px;" ng-show="team.image">
                     <img src="{{team.image}}" alt="image" ng-show="team.image" style="margin-bottom: 10px; margin-top: 10px; width:396px; height:297px;">
+                </div>
+                <h2 style="color:#394b59; margin-top:5px;font-size:18px; font-weight:700; position: absolute">Team's Tags</h2>
+                <div style="margin-top:28px;" ng-show="team.tags.length == 0" class="members-list">
+                    <p class="name bold" style="margin:0px; margin-left:5px; font-size:14px; color:#cfcfcf;"> No Tags</p>
+                </div>
+                <div style="margin-top:28px;" ng-show="team.tags.length > 0" class="members-list">
+                    <div style="margin-top:0px;" ng-repeat="t in team.tags">
+                        <a href="/teamsTag/{{t}}" class="name">{{t}}</a>
+                    </div>
                 </div>
             </div>
         </div>
