@@ -1,5 +1,43 @@
 <div ng-controller="adventureViewController" class="adventureMembers">
     <div class="row">
+        <div style="margin-top:5px;">
+            <span style="color:#cfcfcf;">Galdra Adventure</span>
+            <h2 ng-bind="adventure.name" style="color:#394b59; margin-top:0px;font-size:25px; font-weight:700;"></h2>
+        </div>
+        <div style="margin-top:0px;">
+            <div class="col-md-3 user-container">
+                <h2 style="color:#394b59; margin-top:5px;font-size:18px; font-weight:700;">Adventure's Photo</h2>
+                <div style="margin-top:5px;" ng-show="!adventure.image">
+                    <p class="name bold" style="margin:0px; margin-left:5px; font-size:14px; color:#cfcfcf;"> No Photo</p>
+                </div>
+                <div style="margin-top:5px;" ng-show="adventure.image">
+                    <img src="{{adventure.image}}" alt="image" ng-show="adventure.image" style="margin-bottom: 10px; margin-top: 10px; width:396px; height:297px;">
+                </div>
+                <h2 style="color:#394b59; margin-top:5px;font-size:18px; font-weight:700;">Adventure's Description</h2>
+                <div style="margin-top:5px;" ng-show="!adventure.description" class="members-list">
+                    <p class="name bold" style="margin:0px; margin-left:5px; font-size:14px; color:#cfcfcf;"> No Description</p>
+                </div>
+                <div style="margin-top:5px;" ng-show="adventure.description" class="members-list">
+                    <p class="description" style="margin-left:5px; text-align:left; padding: 10px 5px 10px 5px; word-wrap: break-word; word-break: break-word; font-size: 15px; border: 1px solid #ddd;" ng-bind-html="adventure.description"></p>
+                </div>
+                <h2 style="color:#394b59; margin-top:5px;font-size:18px; font-weight:700;">Adventure's Link</h2>
+                <div style="margin-top:5px;" ng-show="!adventure.link" class="members-list">
+                    <p class="name bold" style="margin:0px; margin-left:5px; font-size:14px; color:#cfcfcf;"> No Link</p>
+                </div>
+                <div style="margin-top:5px;" ng-show="adventure.link" class="members-list">
+                    <a style="font-size:14px; color:#1ab8f3; font-weight: bold;" href="{{adventure.link}}" class="name">{{adventure.link}}</a>
+                </div>
+            </div>
+            <div class="col-md-4" style="padding-left: 0px; padding-right: 10px;">
+                aaaaaaaa
+            </div>
+            <div class="col-md-4" style="padding-right: 0px;">
+                bbbbbbbb
+            </div>
+
+        </div>
+    </div>
+    <div class="row">
         <div class="col-md-3 user-container">
             <h4 ng-bind="adventure.name"></h4>
             <!--<p class="description" style="font-size: 13px;" ng-bind="adventure.description"></p>-->
