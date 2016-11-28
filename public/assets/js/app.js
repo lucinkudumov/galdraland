@@ -53,7 +53,14 @@ app.config(["$urlRouterProvider", "$locationProvider", "$stateProvider", "$httpP
                 "main": {
                     templateUrl: "/assets/partials/login.html"
                 }
-            }
+            },
+        }).state("shareFBAdv", {
+            url: "/shareadventure/:id",
+            views: {
+                "main": {
+                    templateUrl: "/assets/partials/shareadventure.html"
+                }
+            },
         }).state("profileView", {
             url: "/profile",
             views: {
