@@ -3,6 +3,38 @@
         <div style="margin-top:5px;">
             <span style="color:#cfcfcf;">Galdra Adventure</span>
             <h2 ng-bind="adventure.name" style="color:#394b59; margin-top:0px;font-size:25px; font-weight:700;"></h2>
+            <!-- Load Facebook SDK for JavaScript -->
+            <div id="fb-root"></div>
+            <script>
+                window.fbAsyncInit = function () {
+                    FB.init({
+//					appId      : '1406306389669359',
+                        appId: '110469289012320',
+                        status: true,
+                        cookie: true,
+                        xfbml: true,
+                        version: 'v2.6'
+                    });
+                };
+                window.fbAsyncInit();
+                (function (d, s, id) {
+                    var js, fjs = d.getElementsByTagName(s)[0];
+                    if (d.getElementById(id)) {
+                        return;
+                    }
+                    js = d.createElement(s);
+                    js.id = id;
+                    js.src = "//connect.facebook.net/en_US/sdk.js";
+                    fjs.parentNode.insertBefore(js, fjs);
+                }(document, 'script', 'facebook-jssdk'));
+            </script>
+
+            <!-- Your share button code -->
+            <div class="fb-share-button"
+                 data-href="http://galdraland-1-0.herokuapp.com/adventures/view/{{adventure._id}}"
+                 data-layout="button_count">
+            </div>
+
         </div>
         <div style="margin-top:0px;">
             <div class="col-md-4" style="padding-left: 0px; padding-right: 10px;">
