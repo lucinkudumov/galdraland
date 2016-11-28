@@ -355,7 +355,7 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
             if (newValue != oldValue) {
                 var htmlcontent = "<div id='fb-root'>" +
                     "</div><script>window.fbAsyncInit = function () {FB.init({appId: '110469289012320',status: true,cookie: true,xfbml: true,version: 'v2.6'});};window.fbAsyncInit();(function (d, s, id) {var js, fjs = d.getElementsByTagName(s)[0];if (d.getElementById(id)) {return;}js = d.createElement(s);js.id = id;js.src = '//connect.facebook.net/en_US/sdk.js';fjs.parentNode.insertBefore(js, fjs);}(document, 'script', 'facebook-jssdk'));</script>" +
-                    "<div class='fb-share-button' data-href='http://galdraland-1-0.herokuapp.com/shareadventure/"+newValue+"' data-layout='button_count'></div>";
+                    "<div class='fb-share-button' data-href='http://galdraland-1-0.herokuapp.com/adventures/view/"+newValue+"' data-layout='button_count'></div>";
                 var $scope = $('#fbshare').html(htmlcontent).scope();
                 $compile($('#fbshare'))($scope);
 
@@ -2472,7 +2472,7 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
             if (newValue != oldValue) {
                 var htmlcontent = "<div id='fb-root'>" +
                     "</div><script>window.fbAsyncInit = function () {FB.init({appId: '110469289012320',status: true,cookie: true,xfbml: true,version: 'v2.6'});};window.fbAsyncInit();(function (d, s, id) {var js, fjs = d.getElementsByTagName(s)[0];if (d.getElementById(id)) {return;}js = d.createElement(s);js.id = id;js.src = '//connect.facebook.net/en_US/sdk.js';fjs.parentNode.insertBefore(js, fjs);}(document, 'script', 'facebook-jssdk'));</script>" +
-                    "<div class='fb-share-button' data-href='http://galdraland-1-0.herokuapp.com/shareteam/"+newValue+"' data-layout='button_count'></div>";
+                    "<div class='fb-share-button' data-href='http://galdraland-1-0.herokuapp.com/teams/view/"+newValue+"' data-layout='button_count'></div>";
                 var $scope = $('#fbshare').html(htmlcontent).scope();
                 $compile($('#fbshare'))($scope);
                 htmlcontent = "<div id='fb-root'>" +
