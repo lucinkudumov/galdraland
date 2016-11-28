@@ -1,39 +1,7 @@
 <div ng-controller="myTeamsController">
     <div class="row">
         <div class="col-md-8">
-            <!--<a class="btn btn-success pull-left" style= "font-size: 18px;padding-bottom:1%;" ng-click="shareTeam();">Share</a>-->
-            <div class="col-md-4" id="fbShare">
-                <!-- Load Facebook SDK for JavaScript -->
-                <div id="fb-root"></div>
-                <script>
-                    window.fbAsyncInit = function () {
-                        FB.init({
-//					appId      : '1406306389669359',
-                            appId: '110469289012320',
-                            status: true,
-                            cookie: true,
-                            xfbml: true,
-                            version: 'v2.6'
-                        });
-                    };
-                    window.fbAsyncInit();
-                    (function (d, s, id) {
-                        var js, fjs = d.getElementsByTagName(s)[0];
-                        if (d.getElementById(id)) {
-                            return;
-                        }
-                        js = d.createElement(s);
-                        js.id = id;
-                        js.src = "//connect.facebook.net/en_US/sdk.js";
-                        fjs.parentNode.insertBefore(js, fjs);
-                    }(document, 'script', 'facebook-jssdk'));
-                </script>
-
-                <!-- Your share button code -->
-                <div class="fb-share-button"
-                     data-href="http://galdraland-1-0.herokuapp.com/teams"
-                     data-layout="button_count">
-                </div>
+            <div class="col-md-4">
             </div>
             <div class="col-md-4" style="float:right;">
                 <a class="btn btn-success pull-right" href="/teams/create">Create a new team</a>

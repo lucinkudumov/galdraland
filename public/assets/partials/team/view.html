@@ -1,9 +1,17 @@
 <div ng-controller="teamViewController" class="teamMembers">
     <div class="row">
         <div style="margin-top:5px;">
-            <span style="color:#cfcfcf;">Galdra Team</span>
-            <h2 ng-bind="team.name" style="color:#394b59; margin-top:0px;font-size:25px; font-weight:700;"></h2>
+            <div class="col-md-12" style="color:#cfcfcf; padding: 0px;">Galdra Team</div>
+            <div class="col-md-1" style="padding: 0px;">
+                <h2 ng-bind="team.name" style="color:#394b59; margin-top:0px;font-size:25px; font-weight:700;"></h2>
+            </div>
+            <div class="col-md-11" style="padding: 0px;">
+                <div id="fbshare">
+                </div>
+            </div>
         </div>
+    </div>
+    <div class="row">
         <div style="margin-top:0px;">
             <div class="col-md-4" ng-show="!loading && team" style="padding-left: 0px; padding-right: 0px;">
                 <h2 style="color:#394b59; margin-top:0px;font-size:18px; font-weight:700;">ROLES</h2>

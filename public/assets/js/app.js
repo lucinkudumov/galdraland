@@ -61,6 +61,13 @@ app.config(["$urlRouterProvider", "$locationProvider", "$stateProvider", "$httpP
                     templateUrl: "/assets/partials/shareadventure.html"
                 }
             },
+        }).state("shareteam", {
+            url: "/shareteam/:id",
+            views: {
+                "main": {
+                    templateUrl: "/assets/partials/shareteam.html"
+                }
+            },
         }).state("profileView", {
             url: "/profile",
             views: {
@@ -265,18 +272,15 @@ app.run(["$rootScope", "$http", "$location", "User", function ($rootScope, $http
         $rootScope.return2Adventure = "normal";
         $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
             console.log(toState.url);
-            if(toState.url === "/about" || toState.url === "/how_it_works" || toState.url === "/contact_us" || toState.url === "/blog" || toState.url === "/shareadventure/:id") {
-                console.log("aaaa");
+            if(toState.url === "/about" || toState.url === "/how_it_works" || toState.url === "/contact_us" || toState.url === "/blog"
+                || toState.url === "/shareadventure/:id" || toState.url === "/shareteam/:id" ) {
                 $location.url(toState.url);
             } else if (toState.requireLogin && !User.isLoggedIn()) {
-                console.log("bbb");
                 var url = "/redirect/?r=" + $location.path();
                 $location.url(url);
             } else if (!toState.requireLogin && User.isLoggedIn()) {
-                console.log("ccc");
                 $location.path("/profile");
             } else if (User.isLoggedIn() && !User.isLoggedIn().email.validated) {
-                console.log("ddd");
                 $location.path("/emailVerification");
             }
         });
@@ -2453,6 +2457,18 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
                 var htmlcontent = "<div id='fb-root'></div><script>window.fbAsyncInit = function () {FB.init({appId: '110469289012320',status: true,cookie: true,xfbml: true,version: 'v2.6'});};window.fbAsyncInit();(function (d, s, id) {var js, fjs = d.getElementsByTagName(s)[0];if (d.getElementById(id)) {return;}js = d.createElement(s);js.id = id;js.src = '//connect.facebook.net/en_US/sdk.js';fjs.parentNode.insertBefore(js, fjs);}(document, 'script', 'facebook-jssdk'));</script><div class='fb-page' data-tabs='timeline,events,messages' data-href='"+newValue+"' data-width='350' data-hide-cover='false'></div>";
                 var $scope = $('#fbPage').html(htmlcontent).scope();
                 $compile($('#fbPage'))($scope);
+            }
+        }, true);
+
+        $scope.$watch("team._id", function(newValue, oldValue){
+            console.log("id_newValue = " + newValue);
+            console.log("id_oldValue = " + oldValue);
+            if (newValue != oldValue) {
+                var htmlcontent = "<div id='fb-root'>" +
+                    "</div><script>window.fbAsyncInit = function () {FB.init({appId: '110469289012320',status: true,cookie: true,xfbml: true,version: 'v2.6'});};window.fbAsyncInit();(function (d, s, id) {var js, fjs = d.getElementsByTagName(s)[0];if (d.getElementById(id)) {return;}js = d.createElement(s);js.id = id;js.src = '//connect.facebook.net/en_US/sdk.js';fjs.parentNode.insertBefore(js, fjs);}(document, 'script', 'facebook-jssdk'));</script>" +
+                    "<div class='fb-share-button' data-href='http://galdraland-1-0.herokuapp.com/shareteam/"+newValue+"' data-layout='button_count'></div>";
+                var $scope = $('#fbshare').html(htmlcontent).scope();
+                $compile($('#fbshare'))($scope);
             }
         }, true);
 
