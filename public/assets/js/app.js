@@ -265,7 +265,7 @@ app.run(["$rootScope", "$http", "$location", "User", function ($rootScope, $http
         $rootScope.return2Adventure = "normal";
         $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
             console.log(toState.url);
-            if(toState.url === "/about" || toState.url === "/how_it_works" || toState.url === "/contact_us" || toState.url === "/blog" || toState.url === "/shareadventure") {
+            if(toState.url === "/about" || toState.url === "/how_it_works" || toState.url === "/contact_us" || toState.url === "/blog" || toState.url === "/shareadventure/:id") {
                 console.log("aaaa");
                 $location.url(toState.url);
             } else if (toState.requireLogin && !User.isLoggedIn()) {
