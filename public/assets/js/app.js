@@ -192,7 +192,7 @@ app.config(["$urlRouterProvider", "$locationProvider", "$stateProvider", "$httpP
                 "left-side@adventureView": {templateUrl: "/assets/partials/adventure/left-side.html"},
                 "right-side@adventureView": {templateUrl: "/assets/partials/adventure/view.html"},
             },
-//            requireLogin: true
+            requireLogin: true
         }).state("adventureEdit", {
             url: "/adventures/edit/:id",
             views: {
