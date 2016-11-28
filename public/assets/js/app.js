@@ -345,6 +345,11 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
             }
         }, true);
 
+        $scope.$watch("adventure._id", function(newValue, oldValue){
+            console.log("newValue = " + newValue);
+            console.log("oldValue = " + oldValue);
+        }, true);
+
 
         $scope.shareAdventure = function () {
             console.log("advId = " + $stateParams.id);
