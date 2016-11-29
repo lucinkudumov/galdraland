@@ -364,6 +364,22 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
                     "<div class='fb-comments' data-href='http://galdraland-1-0.herokuapp.com/adventures/view/" + newValue +"' data-numposts='5' data-colorscheme='light' data-width='350'></div>";
                 $scope = $('#fbComment').html(htmlcontent).scope();
                 $compile($('#fbComment'))($scope);
+
+                htmlcontent = "<div id='fb-root'>" +
+                    "</div><script>window.fbAsyncInit = function () {FB.init({appId: '110469289012320',status: true,cookie: true,xfbml: true,version: 'v2.6'});};window.fbAsyncInit();(function (d, s, id) {var js, fjs = d.getElementsByTagName(s)[0];if (d.getElementById(id)) {return;}js = d.createElement(s);js.id = id;js.src = '//connect.facebook.net/en_US/sdk.js';fjs.parentNode.insertBefore(js, fjs);}(document, 'script', 'facebook-jssdk'));</script>" +
+                    "<div class='fb-comments' data-href='http://webascender.com/blog/#" + newValue +"' data-numposts='5' data-colorscheme='light' data-width='350'></div>";
+                $scope = $('#fbComment2').html(htmlcontent).scope();
+                $compile($('#fbComment2'))($scope);
+
+                htmlcontent = "<div id='fb-root'>" +
+                    "</div><script>window.fbAsyncInit = function () {FB.init({appId: '110469289012320',status: true,cookie: true,xfbml: true,version: 'v2.6'});};window.fbAsyncInit();(function (d, s, id) {var js, fjs = d.getElementsByTagName(s)[0];if (d.getElementById(id)) {return;}js = d.createElement(s);js.id = id;js.src = '//connect.facebook.net/en_US/sdk.js';fjs.parentNode.insertBefore(js, fjs);}(document, 'script', 'facebook-jssdk'));</script>" +
+                    "<fb:comments reverse='false' publish_feed='false' showform='true' " +
+                    "simple='false' migrated='1' canpost='true' url='http://webascender.com/blog' " +
+                    "width='350px' numposts='10' xid='"+newValue+"'>" +
+                    "</fb:comments>"
+                $scope = $('#fbComment3').html(htmlcontent).scope();
+                $compile($('#fbComment3'))($scope);
+
             }
         }, true);
 
