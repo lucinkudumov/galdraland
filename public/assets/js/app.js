@@ -2479,7 +2479,8 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
 
                 htmlcontent = "<div id='fb-root'>" +
                     "</div><script>window.fbAsyncInit = function () {FB.init({appId: '110469289012320',status: true,cookie: true,xfbml: true,version: 'v2.6'});};window.fbAsyncInit();(function (d, s, id) {var js, fjs = d.getElementsByTagName(s)[0];if (d.getElementById(id)) {return;}js = d.createElement(s);js.id = id;js.src = '//connect.facebook.net/en_US/sdk.js';fjs.parentNode.insertBefore(js, fjs);}(document, 'script', 'facebook-jssdk'));</script>" +
-                    "<div class='fb-comments' data-href='http://webascender.com/blog/#team" + newValue +"' data-numposts='5' data-colorscheme='light' data-width='350'></div>";
+                    "<div class='fb-comments' data-href='http://galdraland-1-0.herokuapp.com/blog/#team" + newValue +"' data-numposts='5' data-colorscheme='light' data-width='350'></div>";
+//                    "<div class='fb-comments' data-href='http://webascender.com/blog/#team" + newValue +"' data-numposts='5' data-colorscheme='light' data-width='350'></div>";
                 $scope = $('#fbComment').html(htmlcontent).scope();
                 $compile($('#fbComment'))($scope);
             }
