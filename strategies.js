@@ -81,6 +81,8 @@ module.exports.facebook = function (opts, cb) {
                               return done(err);
                           } else {
                               var email = new emailModel();
+                              console.log("userid = " + user._id);
+                              console.log("email = " + profileJSON.email);
                               email.userId = user._id;
                               email.email = profileJSON.email;
 
@@ -99,7 +101,7 @@ module.exports.facebook = function (opts, cb) {
 				  console.log("came here");
 
                   if (process.env.HEROKU) {
-                      console.log("6");
+                      console.log("6 = " + u.profileId);
                       cloudinary.uploader.upload("http://graph.facebook.com/" + u.profileId + "/picture?type=large", function (r) {
                           console.log("7");
                           saveToUser(r.url);
