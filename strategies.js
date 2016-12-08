@@ -99,8 +99,11 @@ module.exports.facebook = function (opts, cb) {
 				  console.log("came here");
 
                   if (process.env.HEROKU) {
+                      console.log("6");
                       cloudinary.uploader.upload("http://graph.facebook.com/" + u.profileId + "/picture?type=large", function (r) {
+                          console.log("7");
                           saveToUser(r.url);
+                          console.log("8");
                       });
                   } else {
                       var fileName = hat() + ".jpg";
