@@ -78,7 +78,7 @@ module.exports.facebook = function (opts, cb) {
 
                       u.save(function (err, user) {
                           if (err) {
-                              console.log(err);
+                              console.log("Error = " + err);
                               return done(err);
                           } else {
                               var email = new emailModel();
