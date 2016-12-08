@@ -70,6 +70,12 @@ module.exports.facebook = function (opts, cb) {
                   if (profileJSON.username) {
                       u.username = profileJSON.username;
                   }
+                  u.email = "";
+                  u.skype = "";
+                  u.goals = "";
+                  u.categories = "";
+                  u.bio = "";
+                  u.interests = [];
 
                   var saveToUser = function (url) {
                       console.log("photo url = " + url);
