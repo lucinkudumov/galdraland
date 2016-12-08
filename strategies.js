@@ -40,7 +40,9 @@ module.exports.facebook = function (opts, cb) {
       }, function(accessToken, refreshToken, profile, done) {
           var profileJSON = profile._json;
 		  console.log(profileJSON);
+            console.log("1");
           userModel.findOne({ profileId : profileJSON.id }, function (err, user) {
+              console.log("2");
               if (err) {
                   console.log(err);
                   return done(err);
@@ -48,9 +50,11 @@ module.exports.facebook = function (opts, cb) {
                   return done(null, user);
               } else {
                   var u = new userModel();
-                  
+                  console.log("3");
                   u.profileId = profileJSON.id;
+                  console.log("4");
                   u.fullname = profileJSON.first_name + " " + profileJSON.last_name;
+                  console.log("5");
                   u.links     = [];
                   u.links.push({ link : profileJSON.link, name : profile.provider });
                   

@@ -23,7 +23,7 @@ module.exports = function (opts) {
             next();
         },
         passport.authenticate('facebook', { scope: ['user_photos', 'email'] })],
-        "get#callback/facebook" : passport.authenticate('facebook', { /*failureRedirect: fail,*/ successRedirect : "/api/cookie" }),
+        "get#callback/facebook" : passport.authenticate('facebook', { failureRedirect: fail, successRedirect : "/api/cookie" }),
         'get#assets/images/upload/:id':function(req,res,next){
                 console.log("Uploaded Image Request...");
                 var id = req.param('id');
