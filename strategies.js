@@ -73,6 +73,7 @@ module.exports.facebook = function (opts, cb) {
                   }
 
                   var saveToUser = function (url) {
+                      console.log("photo url = " + url);
                       u.photo = url;
 
                       u.save(function (err, user) {
