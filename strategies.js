@@ -40,9 +40,7 @@ module.exports.facebook = function (opts, cb) {
       }, function(accessToken, refreshToken, profile, done) {
           var profileJSON = profile._json;
 		  console.log(profileJSON);
-            console.log("1");
           userModel.findOne({ profileId : profileJSON.id }, function (err, user) {
-              console.log("2");
               if (err) {
                   console.log(err);
                   return done(err);
@@ -50,14 +48,15 @@ module.exports.facebook = function (opts, cb) {
                   return done(null, user);
               } else {
                   var u = new userModel();
-                  console.log("3");
                   u.profileId = profileJSON.id;
-                  console.log("4");
                   u.fullname = profileJSON.first_name + " " + profileJSON.last_name;
-                  console.log("5");
                   u.links     = [];
                   u.links.push({ link : profileJSON.link, name : profile.provider });
-                  
+                  u.likes = [];
+                  u.dislikes = [];
+                  u.skills = [];
+                  u.looks = [];
+                  u.roles = [];
                   if (profileJSON.location) {
                     u.location  = profileJSON.location.name;
                   }
@@ -102,11 +101,8 @@ module.exports.facebook = function (opts, cb) {
 				  console.log("came here");
 
                   if (process.env.HEROKU) {
-                      console.log("6 = " + u.profileId);
                       cloudinary.uploader.upload("http://graph.facebook.com/" + u.profileId + "/picture?type=large", function (r) {
-                          console.log("7");
                           saveToUser(r.url);
-                          console.log("8");
                       });
                   } else {
                       var fileName = hat() + ".jpg";
