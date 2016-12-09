@@ -48,6 +48,7 @@ module.exports.facebook = function (opts, cb) {
                   return done(null, user);
               } else {
                   var u = new userModel();
+                  
                   u.profileId = profileJSON.id;
                   u.fullname = profileJSON.first_name + " " + profileJSON.last_name;
                   u.links     = [];
@@ -78,17 +79,14 @@ module.exports.facebook = function (opts, cb) {
                   u.interests = [];
 
                   var saveToUser = function (url) {
-                      console.log("photo url = " + url);
                       u.photo = url;
 
                       u.save(function (err, user) {
                           if (err) {
-                              console.log("Error = " + err);
+                              console.log(err);
                               return done(err);
                           } else {
                               var email = new emailModel();
-                              console.log("userid = " + user._id);
-                              console.log("email = " + profileJSON.email);
                               email.userId = user._id;
                               email.email = profileJSON.email;
 
