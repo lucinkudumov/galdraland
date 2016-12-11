@@ -124,7 +124,8 @@ app.config(["$urlRouterProvider", "$locationProvider", "$stateProvider", "$httpP
                 url: "/users",
                 views: {
                     "main": {templateUrl: "/assets/partials/users.html"},
-                    "users-result@users": {templateUrl: "/assets/partials/users/users-result.html"},
+                    "left-side@users": {templateUrl: "/assets/partials/users/left-side.html"},
+                    "right-side@users": {templateUrl: "/assets/partials/users/users-result.html"},
                 },
                 requireLogin: true
 
