@@ -304,7 +304,7 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
         $scope.refresh = function () {
             var request = $http({method: "POST", url: "adventure/get", api: true, data: {id: $stateParams.id}});
             request.success(function (data) {
-                if (data.adventure.description && data.adventure.description != "") {
+                if (data.adventure.description && data.adventure.description != null) {
                     var find = "\n";
                     var re = new RegExp(find, 'g');
                     data.adventure.description = $sce.trustAsHtml(data.adventure.description.replace(re,"<br>"));
