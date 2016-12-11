@@ -1399,6 +1399,7 @@ app.controller("profileLeftSideController", ["$scope", "$http", "$location", "Us
         $scope.user = User.isLoggedIn();
         $scope.selTeam = "";
         $scope.selAdv = "";
+        $scope.users = [];
 
         $http.get("/api/getUserDetail").success(function (data) {
             $scope.user = data.user;
