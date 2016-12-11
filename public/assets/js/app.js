@@ -1497,13 +1497,15 @@ app.controller("profileLeftSideController", ["$scope", "$http", "$location", "Us
         }
 
         $scope.$watch("teams", function () {
+            $scope.calculateRecomendation();
+            $scope.getAdventures();
             $scope.getUsers();
         });
 
-        $scope.$watch("users", function () {
-            $scope.calculateRecomendation();
-            $scope.getAdventures();
-        });
+//        $scope.$watch("users", function () {
+//            $scope.calculateRecomendation();
+//            $scope.getAdventures();
+//        });
 
         $scope.selectTeamView = function() {
             if ($scope.selTeam != "") {
