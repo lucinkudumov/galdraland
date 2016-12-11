@@ -1444,6 +1444,49 @@ app.controller("profileLeftSideController", ["$scope", "$http", "$location", "Us
             });
         }
 
+        var userTeams = [];
+        var users = [];
+        $scope.getUsers = function () {
+            var request = $http({method: "GET", url: "myTeams", api: true});
+            request.success(function (data) {
+                userTeams = data.teams;
+            }).then(function (r) {
+                if (userTeams.length) {
+                    var userIds = [];
+                    for (var i = 0; i < userTeams.length; i++) {
+                        for (var j = 0; j < userTeams[i].teamMembers.length; j ++) {
+                            var o = userTeams[i].teamMembers[j];
+                            if(userIds.indexOf(o.user) != -1) {
+                                continue;
+                            } else {
+                                userIds.push(o.user);
+                            }
+                        }
+                    }
+
+                    if (userIds.length) {
+                        var request = $http({method: "POST", url: "getUsersByIds", api: true, data: {ids: userIds}});
+                        request.success(function (data) {
+                            users = data.users;
+                        }).then(function (r) {
+                            if (users.length) {
+                                for (var i = 0; i < users.length; i++) {
+                                    if (users[i].profileId == "000000000000000000000000") continue;
+                                    if ($scope.user._id == users[i]._id) continue;
+                                    var result = {};
+                                    result.name = users[i].fullname;
+                                    result._id = users[i]._id;
+                                    result.photo = users[i].photo;
+                                    $scope.users.push(result);
+                                }
+                            }
+                        });
+                    }
+                }
+            });
+        }
+
+
         $scope.getAdventures = function () {
             var request = $http({method: "POST", url: "adventure/list", api: true, data: {teams: $scope.teams}});
             request.success(function (r) {
@@ -1452,6 +1495,10 @@ app.controller("profileLeftSideController", ["$scope", "$http", "$location", "Us
         }
 
         $scope.$watch("teams", function () {
+            $scope.getUsers();
+        });
+
+        $scope.$watch("users", function () {
             $scope.calculateRecomendation();
             $scope.getAdventures();
         });

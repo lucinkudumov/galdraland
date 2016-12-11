@@ -24,6 +24,15 @@
             <!--</select>-->
             </accordion-group>
             <accordion-group is-open="true">
+                <accordion-heading>
+                    <p style="margin-top : 7px;">Peoples</p>
+                </accordion-heading>
+                <small ng-show="users.length == 0">No peoples <a href="/users">search</a></small>
+                <ul ng-show = "users.length > 0">
+                    <li ng-repeat = "u in users"><a href="/users/view/{{ u._id }}">{{ u.name }}</a></li>
+                </ul>
+            </accordion-group>
+            <accordion-group is-open="true">
             <accordion-heading>
             <p style="margin-top : 7px;">Adventures</p>
             </accordion-heading>
@@ -31,7 +40,6 @@
             <ul ng-show = "adventures.length > 0">
                 <li ng-repeat = "a in adventures"><a href="/adventures/view/{{ a._id }}">{{ a.name }}</a></li>
             </ul>
-
             <!--<select ng-model="selAdv" ng-show="adventures.length > 0" ng-change="selecteAdvView()">-->
                 <!--<option ng-repeat="a in adventures" value="{{ a._id }}">{{ a.name }}</option>-->
             <!--</select>-->
