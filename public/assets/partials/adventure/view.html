@@ -14,49 +14,33 @@
     <div class="row">
         <div style="margin-top:0px;">
             <div class="col-md-4" style="padding-left: 0px; padding-right: 10px;">
-                <h2 style="color:#394b59; margin-top:5px;font-size:18px; font-weight:700;">PHOTO</h2>
-                <div style="margin-top:5px;" ng-show="!adventure.image">
-                    <p class="name bold" style="margin:0px; margin-left:5px; font-size:14px; color:#cfcfcf;"> No Photo</p>
-                </div>
+                <h2 style="color:#394b59; margin-top:5px;font-size:18px; font-weight:700;" ng-show="adventure.image">PHOTO</h2>
                 <div style="margin-top:5px;" ng-show="adventure.image">
                     <img src="{{adventure.image}}" alt="image" ng-show="adventure.image" style="margin-bottom: 10px; margin-top: 10px; width:396px; height:297px;">
                 </div>
-                <h2 style="color:#394b59; margin-top:5px;font-size:18px; font-weight:700;">DESCRIPTION</h2>
-                <div style="margin-top:5px;" ng-show="!adventure.description" class="members-list">
-                    <p class="name bold" style="margin:0px; margin-left:5px; font-size:14px; color:#cfcfcf;"> No Description</p>
-                </div>
+                <h2 style="color:#394b59; margin-top:5px;font-size:18px; font-weight:700;" ng-show="adventure.description">DESCRIPTION</h2>
                 <div style="margin-top:5px;" ng-show="adventure.description" class="members-list">
                     <p class="description" style="margin-left:5px; text-align:left; padding: 10px 5px 10px 5px; word-wrap: break-word; word-break: break-word; font-size: 15px; border: 1px solid #ddd;" ng-bind-html="adventure.description"></p>
                 </div>
-                <h2 style="color:#394b59; margin-top:5px;font-size:18px; font-weight:700;">LINK</h2>
-                <div style="margin-top:5px;" ng-show="!adventure.link" class="members-list">
-                    <p class="name bold" style="margin:0px; margin-left:5px; font-size:14px; color:#cfcfcf;"> No Link</p>
-                </div>
+                <h2 style="color:#394b59; margin-top:5px;font-size:18px; font-weight:700;" ng-show="adventure.link">LINK</h2>
                 <div style="margin-top:5px;" ng-show="adventure.link" class="members-list">
                     <a style="font-size:14px; margin-left:5px; color:#1ab8f3; font-weight: bold;" href="{{adventure.link}}" class="name">{{adventure.link}}</a>
                 </div>
-                <h2 style="color:#394b59; margin-top:5px;font-size:18px; font-weight:700;">TEAM</h2>
-                <div style="margin-top:5px;" ng-show="!adventure.team" class="members-list">
-                    <p class="name bold" style="margin:0px; margin-left:5px; font-size:14px; color:#cfcfcf;"> No Team</p>
-                </div>
+                <h2 style="color:#394b59; margin-top:5px;font-size:18px; font-weight:700;" ng-show="adventure.team">TEAM</h2>
                 <div style="margin-top:5px;" ng-show="adventure.team" class="members-list">
                     <a style="font-size:14px; margin-left:5px; color:#1ab8f3; font-weight: bold;" href="/teams/view/{{adventure.team._id}}" class="name">{{adventure.team.name}}</a>
                 </div>
-                <h2 style="color:#394b59; margin-top:5px;font-size:18px; font-weight:700;">TIMELINE</h2>
+                <h2 style="color:#394b59; margin-top:5px;font-size:18px; font-weight:700;" ng-show="adventure.team">TIMELINE</h2>
                 <div style="margin-top:5px;" ng-show="adventure.team" class="members-list">
                     <p class="name bold" style="margin:0px; margin-left:5px; font-size:14px; color:#cfcfcf;">{{adventure.start + " - " + adventure.end}}</p>
                 </div>
-                <h2 style="color:#394b59; margin-top:5px;font-size:18px; font-weight:700;">MORE TAGS</h2>
-                <div style="margin-top:5px;" ng-show="adventure.tags" class="members-list">
+                <h2 style="color:#394b59; margin-top:5px;font-size:18px; font-weight:700;" ng-show="adventure.tags.length > 0">MORE TAGS</h2>
+                <div style="margin-top:5px;" ng-show="adventure.tags.length > 0" class="members-list">
                     <div style="margin-top:0px; margin-left:5px;" ng-repeat="t in adventure.tags">
-                        <p class="name bold" ng-show="!t" style="margin:0px; margin-left:5px; font-size:14px; color:#cfcfcf;"> No Tags</p>
                         <a style="font-size:14px; color:#1ab8f3; font-weight: bold;" ng-show="t" href="/adventuresTag/{{t}}" class="name">{{t}}</a>
                     </div>
                 </div>
-                <h2 style="color:#394b59; margin-top:5px;font-size:18px; font-weight:700;">STATUS</h2>
-                <div style="margin-top:5px;" ng-show="!adventure.status" class="members-list">
-                    <p class="name bold" style="margin:0px; margin-left:5px; font-size:14px; color:#cfcfcf;"> No Status</p>
-                </div>
+                <h2 style="color:#394b59; margin-top:5px;font-size:18px; font-weight:700;" ng-show="adventure.status">STATUS</h2>
                 <div style="margin-top:5px;" ng-show="adventure.status" class="members-list">
                     <p class="name bold" style="margin:0px; margin-left:5px; font-size:14px; color:#cfcfcf;">{{adventure.status}}</p>
                 </div>
