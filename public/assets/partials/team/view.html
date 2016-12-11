@@ -33,22 +33,6 @@
                 <h2 style="color:#cfcfcf; margin-top:0px;font-size:18px; font-weight:700;">Comments</h2>
                 <div id="fbComment" style="margin-top:5px; text-align: center;">
                 </div>
-                <!--<div id="fbComment1" style="margin-top:5px; text-align: center;">-->
-                    <!--<div id="fb-root"></div>-->
-                    <!--<script>-->
-                        <!--(function (d, s, id) {-->
-                            <!--var js, fjs = d.getElementsByTagName(s)[0];-->
-                            <!--if (d.getElementById(id)) {-->
-                                <!--return;-->
-                            <!--}-->
-                            <!--js = d.createElement(s);-->
-                            <!--js.id = id;-->
-                            <!--js.src = "//connect.facebook.net/en_US/sdk.js";-->
-                            <!--fjs.parentNode.insertBefore(js, fjs);-->
-                        <!--}(document, 'script', 'facebook-jssdk'));-->
-                    <!--</script>-->
-                    <!--<div class="fb-comments" data-href="http://webascender.com/blog" data-numposts="5" data-colorscheme="light" data-width="350"></div>-->
-                <!--</div>-->
                 <h2 style="color:#cfcfcf; margin-top:5px;font-size:18px; font-weight:700;">FB Page</h2>
                 <div ng-show="!team.fb_page">
                     <div>
@@ -59,35 +43,23 @@
                 </div>
             </div>
             <div class="col-md-4" style="padding-right: 0px;">
-                <h2 style="color:#394b59; margin-top:0px;font-size:18px; font-weight:700;">ADVENTURES</h2>
-                <div style="margin-top:5px;" ng-show="adventures.length == 0" class="members-list">
-                    <div>
-                        <p class="name bold" style="margin:0px; margin-left:5px; font-size:14px; color:#cfcfcf;"> No Adventures</p>
-                    </div>
-                </div>
+                <h2 style="color:#394b59; margin-top:0px;font-size:18px; font-weight:700;" ng-show="adventures.length > 0">ADVENTURES</h2>
                 <div style="margin-top:5px;" ng-show="adventures.length > 0" class="members-list">
                     <div style="margin-top:0px;" ng-repeat="adv in adventures">
                         <p class="name bold" style="margin:0px; margin-left:5px; cursor: pointer; color: #1ab8f3; font-size:14px;" ng-bind="adv.name" ng-click="viewAdventure(adv)"></p>
                     </div>
                 </div>
-                <h2 style="color:#394b59; margin-top:5px;font-size:18px; font-weight:700;">PHOTO</h2>
-                <div style="margin-top:5px;" ng-show="!team.image">
-                        <p class="name bold" style="margin:0px; margin-left:5px; font-size:14px; color:#cfcfcf;"> No Photo</p>
-                </div>
+                <h2 style="color:#394b59; margin-top:5px;font-size:18px; font-weight:700;" ng-show="team.image">PHOTO</h2>
                 <div style="margin-top:5px;" ng-show="team.image">
                     <img src="{{team.image}}" alt="image" ng-show="team.image" style="margin-bottom: 10px; margin-top: 10px; width:396px; height:297px;">
                 </div>
-                <h2 style="color:#394b59; margin-top:5px;font-size:18px; font-weight:700;">TAGS</h2>
-                <div style="margin-top:5px;" ng-show="team.tags" class="members-list">
+                <h2 style="color:#394b59; margin-top:5px;font-size:18px; font-weight:700;" ng-show="team.tags.length > 0">TAGS</h2>
+                <div style="margin-top:5px;" ng-show="team.tags.length > 0" class="members-list">
                     <div style="margin-top:0px; margin-left:5px;" ng-repeat="t in team.tags">
-                        <p class="name bold" ng-show="!t" style="margin:0px; margin-left:5px; font-size:14px; color:#cfcfcf;"> No Tags</p>
                         <a style="font-size:14px; color:#1ab8f3; font-weight: bold;" ng-show="t" href="/teamsTag/{{t}}" class="name">{{t}}</a>
                     </div>
                 </div>
-                <h2 style="color:#394b59; margin-top:5px;font-size:18px; font-weight:700;">DESCRIPTION</h2>
-                <div style="margin-top:5px;" ng-show="!team.description" class="members-list">
-                    <p class="name bold" style="margin:0px; margin-left:5px; font-size:14px; color:#cfcfcf;"> No Description</p>
-                </div>
+                <h2 style="color:#394b59; margin-top:5px;font-size:18px; font-weight:700;" ng-show="team.description">DESCRIPTION</h2>
                 <div style="margin-top:5px;" ng-show="team.description" class="description">
                    <p class="description" style="margin-left:5px; text-align:left; padding: 10px 5px 10px 5px; word-wrap: break-word; word-break: break-word; font-size: 15px; border: 1px solid #ddd;" ng-bind-html="team.description"></p>
                 </div>
