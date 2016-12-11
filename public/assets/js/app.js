@@ -412,7 +412,7 @@ app.controller("usersResultController", ["$scope", "$http", "User", "$location",
                     for (var i = 0; i < $scope.teams.length; i++) {
                         for (var j = 0; j < $scope.teams[i].teamMembers.length; j ++) {
                             var o = $scope.teams[i].teamMembers[j];
-                            if(userIds.indexOf(o.user) != -1) {
+                            if(userIds.indexOf(o.user) != -1 || $scope.user._id == o.user) {
                                 continue;
                             } else {
                                 userIds.push(o.user);
@@ -1457,7 +1457,7 @@ app.controller("profileLeftSideController", ["$scope", "$http", "$location", "Us
                     for (var i = 0; i < userTeams.length; i++) {
                         for (var j = 0; j < userTeams[i].teamMembers.length; j ++) {
                             var o = userTeams[i].teamMembers[j];
-                            if(userIds.indexOf(o.user) != -1) {
+                            if(userIds.indexOf(o.user) != -1 || o.user == $scope.user._id) {
                                 continue;
                             } else {
                                 userIds.push(o.user);
@@ -1468,10 +1468,11 @@ app.controller("profileLeftSideController", ["$scope", "$http", "$location", "Us
                     if (userIds.length) {
                         var request = $http({method: "POST", url: "getUsersByIds", api: true, data: {ids: userIds}});
                         request.success(function (data) {
-                            users = data.users;
+                            $scope.users = data.users;
                         }).then(function (r) {
                             if (users.length) {
                                 console.log("usrs = ", users);
+                                var results = [];
                                 for (var i = 0; i < users.length; i++) {
                                     if (users[i].profileId == "000000000000000000000000") continue;
                                     if ($scope.user._id == users[i]._id) continue;
@@ -1479,8 +1480,9 @@ app.controller("profileLeftSideController", ["$scope", "$http", "$location", "Us
                                     result.name = users[i].fullname;
                                     result._id = users[i]._id;
                                     result.photo = users[i].photo;
-                                    $scope.users.push(result);
+                                    results.push(result);
                                 }
+                                $scope.users = results;
                             }
                         });
                     }
@@ -1497,15 +1499,13 @@ app.controller("profileLeftSideController", ["$scope", "$http", "$location", "Us
         }
 
         $scope.$watch("teams", function () {
-            $scope.calculateRecomendation();
-            $scope.getAdventures();
             $scope.getUsers();
         });
 
-//        $scope.$watch("users", function () {
-//            $scope.calculateRecomendation();
-//            $scope.getAdventures();
-//        });
+        $scope.$watch("users", function () {
+            $scope.calculateRecomendation();
+            $scope.getAdventures();
+        });
 
         $scope.selectTeamView = function() {
             if ($scope.selTeam != "") {
