@@ -1464,13 +1464,14 @@ app.controller("profileLeftSideController", ["$scope", "$http", "$location", "Us
                             }
                         }
                     }
-
+                    console.log("usersId = " + userIds);
                     if (userIds.length) {
                         var request = $http({method: "POST", url: "getUsersByIds", api: true, data: {ids: userIds}});
                         request.success(function (data) {
                             users = data.users;
                         }).then(function (r) {
                             if (users.length) {
+                                console.log("usrs = ", users);
                                 for (var i = 0; i < users.length; i++) {
                                     if (users[i].profileId == "000000000000000000000000") continue;
                                     if ($scope.user._id == users[i]._id) continue;
