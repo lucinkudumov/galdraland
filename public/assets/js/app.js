@@ -1468,7 +1468,7 @@ app.controller("profileLeftSideController", ["$scope", "$http", "$location", "Us
                     if (userIds.length) {
                         var request = $http({method: "POST", url: "getUsersByIds", api: true, data: {ids: userIds}});
                         request.success(function (data) {
-                            $scope.users = data.users;
+                            users = data.users;
                         }).then(function (r) {
                             if (users.length) {
                                 console.log("usrs = ", users);
