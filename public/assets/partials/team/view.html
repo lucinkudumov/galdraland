@@ -33,12 +33,7 @@
                 <h2 style="color:#cfcfcf; margin-top:0px;font-size:18px; font-weight:700;">Comments</h2>
                 <div id="fbComment" style="margin-top:5px; text-align: center;">
                 </div>
-                <h2 style="color:#cfcfcf; margin-top:5px;font-size:18px; font-weight:700;">FB Page</h2>
-                <div ng-show="!team.fb_page">
-                    <div>
-                        <p class="name bold" style="margin:0px; margin-left:5px; font-size:14px; color:#cfcfcf;"> No FB Page</p>
-                    </div>
-                </div>
+                <h2 style="color:#cfcfcf; margin-top:5px;font-size:18px; font-weight:700;" ng-show="team.fb_page">FB Page</h2>
                 <div ng-show="team.fb_page" id = "fbPage" style="text-align: center; margin-bottom: 10px;">
                 </div>
             </div>
