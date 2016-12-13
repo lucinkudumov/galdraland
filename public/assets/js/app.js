@@ -1113,6 +1113,7 @@ app.controller("indexController", ["$scope", "$location", "$window", "$statePara
                 result._id = data.users[i]._id;
                 result.name = data.users[i].fullname;
                 result.image = data.users[i].photo;
+                console.log("photo = " + data.users[i].photo);
                 $scope.users.push(result);
             }
         }
