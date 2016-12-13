@@ -16,6 +16,8 @@ module.exports = function (opts) {
                 req.session.returnTo = "/teams/view/" + req.query.id;
             else if(req.query.type == "adventures")
                 req.session.returnTo = "/adventures/view/" + req.query.id;
+            else if(req.query.type == "users")
+                req.session.returnTo = "/users/view/" + req.query.id;
             else req.session.returnTo =req.query.r;
             console.log(req.query.type);
             console.log(req.query.id);
