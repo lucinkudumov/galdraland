@@ -62,7 +62,7 @@
                 <div class="col-sm-6 col-md-3" ng-repeat="u in users" ng-class-odd="'featured-adventure-1'"  ng-class-even="'featured-adventure-2'" style="padding:0px;">
                     <a href="/api/login/facebook{{(r)?'?r='+r+'&type=users&id='+u._id:'?type=users&id='+u._id}}" target="_self" class="link" style="width:100%;height:100%;">
                         {{u.name}}
-                        <img src="{{a.image}}" alt="Image" class="img-responsive">
+                        <img src="{{u.image}}" alt="Image" class="img-responsive">
                     </a>
                 </div>
             </div>
