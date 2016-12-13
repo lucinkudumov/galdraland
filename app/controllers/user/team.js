@@ -188,7 +188,6 @@ module.exports = function (opts) {
             });
         },
         "post#lastUser": function (req, res) {
-            userModel.findOne({profileId: "000000000000000000000000"},
             userModel.find({profileId: {'$ne' : "000000000000000000000000"}, function (err, users) {
                 if (err) {
                     console.log(err);
