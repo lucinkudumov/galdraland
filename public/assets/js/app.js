@@ -1058,6 +1058,7 @@ app.controller("indexController", ["$scope", "$location", "$window", "$statePara
         }
 
         $scope.parse_adventures = function (data) {
+            console.log("lastAdventure = " + data);
             $scope.adventures = [];
 
             data.adventures.sort($scope.compare);
@@ -1078,6 +1079,7 @@ app.controller("indexController", ["$scope", "$location", "$window", "$statePara
         }
 
         $scope.parse_teams = function (data) {
+            console.log("lastTeam = " + data);
             $scope.teams = [];
 
             data.teams.sort($scope.compare);
