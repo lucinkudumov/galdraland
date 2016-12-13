@@ -23,15 +23,15 @@
                 <!--<option ng-repeat="t in teams" value="{{ t._id }}">{{ t.tName }}</option>-->
             <!--</select>-->
             </accordion-group>
-            <accordion-group is-open="true">
-                <accordion-heading>
-                    <p style="margin-top : 7px;">Peoples</p>
-                </accordion-heading>
-                <small ng-show="users.length == 0">No peoples <a href="/users">search</a></small>
-                <ul ng-show = "users.length > 0">
-                    <li ng-repeat = "u in users"><a href="/users/view/{{ u._id }}">{{ u.name }}</a></li>
-                </ul>
-            </accordion-group>
+            <!--<accordion-group is-open="true">-->
+                <!--<accordion-heading>-->
+                    <!--<p style="margin-top : 7px;">Peoples</p>-->
+                <!--</accordion-heading>-->
+                <!--<small ng-show="users.length == 0">No peoples <a href="/users">search</a></small>-->
+                <!--<ul ng-show = "users.length > 0">-->
+                    <!--<li ng-repeat = "u in users"><a href="/users/view/{{ u._id }}">{{ u.name }}</a></li>-->
+                <!--</ul>-->
+            <!--</accordion-group>-->
             <accordion-group is-open="true">
             <accordion-heading>
             <p style="margin-top : 7px;">Adventures</p>
