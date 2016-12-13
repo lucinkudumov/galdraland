@@ -1092,6 +1092,7 @@ app.controller("indexController", ["$scope", "$location", "$window", "$statePara
                 var result = {};
                 result._id = data.teams[i]._id;
                 result.name = data.teams[i].name;
+                result.image = data.teams[i].image;
                 $scope.teams.push(result);
             }
         }
