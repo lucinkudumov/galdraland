@@ -187,6 +187,16 @@ module.exports = function (opts) {
                 }
             });
         },
+        "post#lastUser": function (req, res) {
+            userModel.find({}, function (err, users) {
+                if (err) {
+                    console.log(err);
+                    return res.json({users: []});
+                } else {
+                    return res.json({users: users});
+                }
+            });
+        },
         "post#adsearchTeam": function (req, res) {
             var name = req.body.name;
             var description = req.body.description;

@@ -1032,6 +1032,7 @@ app.controller("indexController", ["$scope", "$location", "$window", "$statePara
         $scope.r = "";
         $scope.adventures = [];
         $scope.teams = [];
+        $scope.users = [];
         $scope.loading = true;
         var search = $location.search();
 
@@ -1043,6 +1044,9 @@ app.controller("indexController", ["$scope", "$location", "$window", "$statePara
 
             request = $http({method: "POST", url: "lastTeam", api: true, data: {term: ""}});
             request.success($scope.parse_teams);
+
+            request = $http({method: "POST", url: "lastUser", api: true, data: {term: ""}});
+            request.success($scope.parse_users);
 
             request.then(function () {
                 $scope.loading = false;
@@ -1058,7 +1062,6 @@ app.controller("indexController", ["$scope", "$location", "$window", "$statePara
         }
 
         $scope.parse_adventures = function (data) {
-            console.log("lastAdventure = " + data);
             $scope.adventures = [];
 
             data.adventures.sort($scope.compare);
@@ -1079,7 +1082,6 @@ app.controller("indexController", ["$scope", "$location", "$window", "$statePara
         }
 
         $scope.parse_teams = function (data) {
-            console.log("lastTeam = " + data);
             $scope.teams = [];
 
             data.teams.sort($scope.compare);
@@ -1094,6 +1096,24 @@ app.controller("indexController", ["$scope", "$location", "$window", "$statePara
                 result.name = data.teams[i].name;
                 result.image = data.teams[i].image;
                 $scope.teams.push(result);
+            }
+        }
+
+        $scope.parse_users = function (data) {
+            $scope.users = [];
+
+            data.users.sort($scope.compare);
+            data.users.reverse();
+            if (data.users.length > 4) {
+                data.users.length = 4;
+            }
+
+            for (var i = 0; i < data.users.length; i++) {
+                var result = {};
+                result._id = data.users[i]._id;
+                result.name = data.users[i].fullname;
+                result.image = data.users[i].photo;
+                $scope.users.push(result);
             }
         }
 
