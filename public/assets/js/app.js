@@ -2338,6 +2338,9 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
                     var re = new RegExp(find, 'g');
                     data.team.description = $sce.trustAsHtml(data.team.description.replace(re,"<br>"));
                 }
+                if (data.team.tags && data.team.tags.length > 0) {
+                    if (data.team.tags[0] == "") data.team.tags = [];
+                }
                 $scope.team = data.team;
                 $scope.adventures = data.advs;
                 $scope.isManager = data.team.owner._id == $scope.user._id;
