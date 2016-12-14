@@ -58,6 +58,7 @@
                 <button ng-show="isManager" class="btn btn-primary pull-left" ng-click="sendInvite()" style="margin-left: 15px; font-size: 18px; padding-bottom: 1%;">Invite</button>
                 <button ng-show="isManager" class="btn btn-success pull-left" ng-click="addMemberTitle()" style="margin-left: 15px; font-size: 18px; padding-bottom: 1%;">Add a new role</button>
                 <button ng-show="!isMember && !isManager && emptyMembers.length > 0" class="btn btn-success pull-left" ng-click="applyTeam()" style="margin-left: 15px; font-size: 18px; padding-bottom: 1%;">Apply for this team</button>
+                <br/>
                 <h2 style="color:#394b59; margin-top:5px;font-size:18px; font-weight:700;">RATINGS</h2>
                 <div style="text-align: center; margin-top : 20px; padding-right: 10px; padding-left: 10px;">
                     <rating-widget ref="team._id" ></rating-widget>
