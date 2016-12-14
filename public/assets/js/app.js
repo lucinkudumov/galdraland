@@ -309,6 +309,9 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
                     var re = new RegExp(find, 'g');
                     data.adventure.description = $sce.trustAsHtml(data.adventure.description.replace(re,"<br>"));
                 }
+                if (data.adventure.tags && data.adventure.tags.length > 0) {
+                    if (data.adventure.tags[0] == "") data.adventure.tags = [];
+                }
                 $scope.adventure = data.adventure;
                 $scope.isManager = data.adventure.owner == $scope.user._id;
             });
