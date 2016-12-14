@@ -13,7 +13,7 @@
     </div>
     <div class="row">
         <div style="margin-top:0px;">
-            <div class="col-md-4" style="padding-left: 0px; padding-right: 10px;">
+            <div class="col-md-4" style="padding-right: 10px;">
                 <h2 style="color:#394b59; margin-top:0px;font-size:18px; font-weight:700;" ng-show="adventures.length > 0">ADVENTURES</h2>
                 <div style="margin-top:5px;" ng-show="adventures.length > 0" class="members-list">
                     <div style="margin-top:0px;" ng-repeat="adv in adventures">
@@ -43,7 +43,7 @@
                 <div ng-show="team.fb_page" id = "fbPage" style="text-align: center; margin-bottom: 10px;">
                 </div>
             </div>
-            <div class="col-md-4" ng-show="!loading && team" style="padding-right: 0px;">
+            <div class="col-md-4" ng-show="!loading && team" style="padding-left: 0px; padding-right: 0px;">
                 <h2 style="color:#394b59; margin-top:0px;font-size:18px; font-weight:700;">ROLES</h2>
                 <p ng-show="team.teamMembers.length == 0">No members, invite new members now.</p>
                 <ul ng-show="team.teamMembers.length > 0" class="members-list">
