@@ -389,7 +389,7 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
 
         $scope.goProfile = function (userid) {
             console.log("userID = " + userid);
-        });
+        }
 
     $scope.refresh();
     }]);
