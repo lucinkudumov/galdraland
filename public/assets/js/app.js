@@ -387,8 +387,9 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
             });
         }
 
-        $scope.goProfile = function (userid) {
-            console.log("userID = " + userid);
+        $scope.goProfile = function (url) {
+            console.log("userID = " + url);
+            $location.path(url);
         }
 
     $scope.refresh();
