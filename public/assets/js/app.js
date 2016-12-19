@@ -298,7 +298,7 @@ app.run(["$rootScope", "$http", "$location", "User", function ($rootScope, $http
             }
         });
     }]);
-app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$sce", "User", "$modal", "$location", "$compile", "simpleCalendarConfig", function ($scope, $http, $stateParams, $sce, User, $modal, $location, $compile, simpleCalendarConfig) {
+app.controller("adventureViewController", ["$scope", "$rootScope", "$http", "$stateParams", "$sce", "User", "$modal", "$location", "$compile", "simpleCalendarConfig", function ($scope, $rootScope, $http, $stateParams, $sce, User, $modal, $location, $compile, simpleCalendarConfig) {
         $scope.user = User.isLoggedIn();
         $scope.photo = "";
 
