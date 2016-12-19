@@ -40,6 +40,7 @@
                     <a style="font-size:14px; margin-left:5px; color:#1ab8f3; font-weight: bold;" href="/teams/view/{{adventure.team._id}}" class="name">{{adventure.team.name}}</a>
                 </div>
                 <h2 style="color:#394b59; margin-top:5px;font-size:18px; font-weight:700;" ng-show="adventure.team">TIMELINE</h2>
+                <simple-calendar date="date" events="events"></simple-calendar>
                 <div style="margin-top:5px;" ng-show="adventure.team" class="members-list">
                     <p class="name bold" style="margin:0px; margin-left:5px; font-size:14px; color:#cfcfcf;">{{adventure.start + " - " + adventure.end}}</p>
                 </div>
