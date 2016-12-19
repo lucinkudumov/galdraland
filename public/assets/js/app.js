@@ -302,16 +302,47 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
         $scope.user = User.isLoggedIn();
         $scope.photo = "";
 
+        simpleCalendarConfig.weekStart = 1;
+        simpleCalendarConfig.onDayClick = onDayClick;
+        simpleCalendarConfig.onEventClick = onEventClick;
+
         $scope.date = new Date();
-        $scope.events = [
-            {
-                date: '2016-12-12'
-            },
-            {
-                date: new Date()
-            }
-        ];
+        $scope.events = [{
+            name: 'foo',
+            date: '5-2-15',
+            link: 'http://www.google.com'
+        }, {
+            name: 'bar',
+            date: new Date()
+        },{
+            name: 'bar 2',
+            date: new Date()
+        },{
+            name: 'baz',
+            date: '6-12-15'
+        }];
+
         $scope.changeMonth = changeMonth;
+        $scope.monthName = monthName;
+
+        function monthName(date){
+            var months = [
+                'January','February','March',
+                'April','May','June',
+                'July','August','September',
+                'October','November','December',
+            ];
+            return months[date.getMonth()];
+        }
+
+        function onDayClick(day){
+            alert(JSON.stringify(day, null, 2))
+        }
+
+        function onEventClick(event, day){
+            alert(JSON.stringify(event, null, 2) +'\n' + JSON.stringify(day, null, 2))
+        }
+
         function changeMonth(offset){
             $scope.date = moment($scope.date).add(offset, 'month').toDate();
         }
