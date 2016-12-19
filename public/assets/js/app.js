@@ -308,6 +308,7 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
 
 //        $scope.date = new Date();
         $scope.date = moment().toDate();
+        console.log("Date = " + $scope.date);
         $scope.events = [
         {
             name: 'bar',
@@ -332,10 +333,12 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
         }
 
         function onDayClick(day){
+            console.log("onDayClick");
             alert(JSON.stringify(day, null, 2))
         }
 
         function onEventClick(event, day){
+            console.log("onEventClick");
             alert(JSON.stringify(event, null, 2) +'\n' + JSON.stringify(day, null, 2))
         }
 
