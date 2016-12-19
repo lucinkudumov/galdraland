@@ -35,8 +35,8 @@
                     <p class="description" style="margin-left:5px; text-align:left; padding: 10px 5px 10px 5px; word-wrap: break-word; word-break: break-word; font-size: 15px; border: 1px solid #ddd;" ng-bind-html="team.description"></p>
                 </div>
                 <h2 style="color:#394b59; margin-top:5px;font-size:18px; font-weight:700;" ng-show="team.mission">MISSION</h2>
-                <div style="margin-top:5px;" ng-show="team.mission">
-                    <p style="margin-left:5px; text-align:left; padding: 10px 5px 10px 5px;">{{team.mission}}</p>
+                <div ng-show="team.mission">
+                    <p style="margin-left:5px; text-align:left;">{{team.mission}}</p>
                 </div>
             </div>
             <div class="col-md-4" style="padding-left: 0px; padding-right: 10px;">
