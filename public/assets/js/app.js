@@ -298,7 +298,7 @@ app.run(["$rootScope", "$http", "$location", "User", function ($rootScope, $http
             }
         });
     }]);
-app.controller("adventureViewController", ["$scope", "$rootScope", "$http", "$stateParams", "$sce", "User", "$modal", "$location", "$compile", "simpleCalendarConfig", function ($scope, $rootScope, $http, $stateParams, $sce, User, $modal, $location, $compile, simpleCalendarConfig) {
+app.controller("adventureViewController", ["$scope", "$rootScope", "$http", "$stateParams", "$sce", "User", "$modal", "$location", "$compile", "simpleCalendarConfig", function ($scope, $http, $stateParams, $sce, User, $modal, $location, $compile, simpleCalendarConfig) {
         $scope.user = User.isLoggedIn();
         $scope.photo = "";
 
@@ -306,16 +306,16 @@ app.controller("adventureViewController", ["$scope", "$rootScope", "$http", "$st
         simpleCalendarConfig.onDayClick = onDayClick;
         simpleCalendarConfig.onEventClick = onEventClick;
 
-//        $scope.date = new Date("2015-11-01");
-        $rootScope.date = new Date();
-//        $scope.events = [{
-//            name: 'bar',
-//            date: new Date()
-//        }];
-        $rootScope.events = [{
+        $scope.date = new Date("2015-11-01");
+//        $rootScope.date = new Date();
+        $scope.events = [{
             name: 'bar',
             date: new Date()
         }];
+//        $rootScope.events = [{
+//            name: 'bar',
+//            date: new Date()
+//        }];
         $scope.changeMonth = changeMonth;
         $scope.monthName = monthName;
 
