@@ -1,4 +1,4 @@
-var app = angular.module("galdra", ["ngRoute", "ui.router", "ngCookies", "ui.bootstrap", "ngFileUpload"]);
+var app = angular.module("galdra", ["ngRoute", "ui.router", "ngCookies", "ui.bootstrap", "ngFileUpload", "envoc.simpleCalendar"]);
 var config = {
     //siteurl : 'http://galdraland.com:9010/'
     siteurl: 'http://galdraland-1-0.herokuapp.com/'
@@ -2486,7 +2486,7 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
                             title: 'Invite to Galdraland Team',
                             message: 'You have been invited to "' + $scope.team.name + '" team ',
                             to: fb_ids,
-                            new_style_message: true,
+                            new_style_message: true
                         }, function (response) {
                             if (response.error_code !== undefined && response.error_code == 4201) {
                                 for (i = 0; i < fb_ids.length; i++) {
@@ -2625,7 +2625,7 @@ app.directive('commentWidget', function ($http, User) {
         replace: true,
         scope: {
             ref: '=ref',
-            ismanager: '=ismanager',
+            ismanager: '=ismanager'
         },
         template: '<div class="row">' +
 //            '<div class="user-container"><h4>Comments</h4><hr></div>' +
