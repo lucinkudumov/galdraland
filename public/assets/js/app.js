@@ -302,7 +302,7 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
         $scope.user = User.isLoggedIn();
         $scope.photo = "";
 
-        simpleCalendarConfig.weekStart = 1;
+        simpleCalendarConfig.weekStart = 0;
         simpleCalendarConfig.onDayClick = onDayClick;
         simpleCalendarConfig.onEventClick = onEventClick;
 
