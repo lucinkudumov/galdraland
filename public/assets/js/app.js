@@ -2043,7 +2043,7 @@ app.controller("searchController", ["$scope", "$http", "$location", "$stateParam
     }]);
 app.controller("createTeamController", ["$scope", "$rootScope", "Upload", "$http", "$location", function ($scope, $rootScope, Upload, $http, $location) {
         $scope.createTeam = function () {
-            request = $http({method: "POST", url: "createTeam", api: true, data: {name: $scope.name, description: $scope.description, rols: $scope.roles, defuser: $rootScope.defUser, fb_page: $scope.fb_page, misson: $scope.misson, image: $scope.uploadedImage, tags: ($scope.tags) ? $scope.tags.split(' ') : []}});
+            request = $http({method: "POST", url: "createTeam", api: true, data: {name: $scope.name, description: $scope.description, rols: $scope.roles, defuser: $rootScope.defUser, fb_page: $scope.fb_page, mission: $scope.mission, image: $scope.uploadedImage, tags: ($scope.tags) ? $scope.tags.split(' ') : []}});
             request.success(function (data) {
                 if ($rootScope.return2Adventure == "return")
                 {
@@ -2104,7 +2104,7 @@ app.controller("editTeamController", ["$scope", "$http", "$location", "$statePar
             $scope.uploadedImage = data.team.image;
             $scope.tags = data.team.tags.join(" ");
             $scope.fb_page = data.team.fb_page;
-            $scope.misson = data.team.misson;
+            $scope.mission = data.team.mission;
         });
         $scope.onFileSelect = function (image) {
             console.log(image);
@@ -2141,7 +2141,7 @@ app.controller("editTeamController", ["$scope", "$http", "$location", "$statePar
             });
         }
         $scope.editTeam = function () {
-            var request = $http({method: "POST", url: "editTeam", api: true, data: {id: id, name: $scope.name, description: $scope.description, image:$scope.uploadedImage, fb_page: $scope.fb_page, mission: $scope.misson, tags:$scope.tags.split(" ")}});
+            var request = $http({method: "POST", url: "editTeam", api: true, data: {id: id, name: $scope.name, description: $scope.description, image:$scope.uploadedImage, fb_page: $scope.fb_page, mission: $scope.mission, tags:$scope.tags.split(" ")}});
             request.success(function (data) {
                 $location.path("/teams/view/" + id);
             });
