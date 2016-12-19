@@ -332,10 +332,13 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
         }
 
         function onDayClick(day){
+            console.log("day = ", day);
             alert(JSON.stringify(day, null, 2))
         }
 
         function onEventClick(event, day){
+            console.log("event = ", event);
+            console.log("day = ", day);
             alert(JSON.stringify(event, null, 2) +'\n' + JSON.stringify(day, null, 2))
         }
 
