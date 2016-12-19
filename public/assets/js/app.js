@@ -312,6 +312,12 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
             name: 'bar',
             date: new Date()
         }];
+        $scope.calendar.date = new Date();
+        $scope.calendar.events = [{
+            name: 'bar',
+            date: new Date()
+        }];
+
 //        $rootScope.events = [{
 //            name: 'bar',
 //            date: new Date()
