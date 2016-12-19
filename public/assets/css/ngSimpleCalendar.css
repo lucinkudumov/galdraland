@@ -53,3 +53,13 @@ simple-calendar {
 .simple-calendar .has-events {
     background-color: yellow;
 }
+
+.simple-calendar-event {
+    background: rgba(255,0,0,0.3);
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+
+.simple-calendar td {
+    width: 14.2857143%;
+}
