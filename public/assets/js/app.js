@@ -310,13 +310,20 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
         $scope.date = moment().toDate();
         console.log("Date = " + $scope.date);
         $scope.events = [
-        {
-            name: 'bar',
-            date: new Date("2016-12-12")
-        },{
-            name: 'bar 2',
-            date: new Date("2016-12-19")
-        }
+            {
+                name: 'foo',
+                date: '5-2-15',
+                link: 'http://www.google.com'
+            }, {
+                name: 'bar',
+                date: new Date()
+            },{
+                name: 'bar 2',
+                date: new Date()
+            },{
+                name: 'baz',
+                date: '6-12-15'
+            }
         ];
 
         $scope.changeMonth = changeMonth;
@@ -431,13 +438,7 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
                 console.log("response = ", response);
             });
         }
-
-        $scope.goProfile = function (url) {
-            console.log("userID = " + url);
-            $location.path(url);
-        }
-
-    $scope.refresh();
+        $scope.refresh();
     }]);
 app.controller("usersResultController", ["$scope", "$http", "User", "$location", function ($scope, $http, User, $location) {
     $scope.user = User.isLoggedIn();
