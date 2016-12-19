@@ -302,7 +302,7 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
         $scope.user = User.isLoggedIn();
         $scope.photo = "";
 
-        $scope.date = moment().toDate();
+        $scope.date = new Date();
         $scope.events = [
             {
                 date: '2016-12-12'
