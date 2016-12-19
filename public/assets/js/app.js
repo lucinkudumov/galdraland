@@ -309,10 +309,10 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
         $scope.date = moment().toDate();
         $scope.events = [ {
             name: 'bar',
-            date: "2016-12-12"
+            date: "2016-12-12T13:45:59"
         },{
             name: 'bar 2',
-            date: "2016-12-19"
+            date: "2016-12-19T13:45:59"
         },{
             name: 'baz',
             date: '6-12-15'
