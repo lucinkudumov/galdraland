@@ -309,6 +309,11 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
                 date: new Date(['2016-12-19'])
             }
         ];
+        $scope.changeMonth = changeMonth;
+        function changeMonth(offset){
+            $scope.date = moment($scope.date).add(offset, 'month').toDate();
+        }
+
         $scope.refresh = function () {
             var request = $http({method: "POST", url: "adventure/get", api: true, data: {id: $stateParams.id}});
             request.success(function (data) {
