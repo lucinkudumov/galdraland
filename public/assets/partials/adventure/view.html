@@ -43,6 +43,19 @@
                 <div>{{date}}</div>
                 <div>{{events}}</div>
                 <simple-calendar date="date" events="events"></simple-calendar>
+                <simple-calendar date="date" events="events">
+                    <simple-calendar-day>
+                        <strong>11{{$day.day}}11</strong>
+                        <em class="pull-right" ng-show="$day.events.length">({{$day.events.length}})</em>
+                    </simple-calendar-day>
+                    <simple-calendar-event>
+                        <strong>22{{$event.name}}22</strong>
+                        <a ng-show="{{!!$event.link}}" ng-href="{{$event.link}}" target="_blank">
+                            <i class="fa fa-link"></i>
+                        </a>
+                    </simple-calendar-event>
+                </simple-calendar>
+
                 <div style="margin-top:5px;" ng-show="adventure.team" class="members-list">
                     <p class="name bold" style="margin:0px; margin-left:5px; font-size:14px; color:#cfcfcf;">{{adventure.start + " - " + adventure.end}}</p>
                 </div>
