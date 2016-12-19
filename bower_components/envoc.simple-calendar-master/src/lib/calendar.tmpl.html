@@ -1,0 +1,17 @@
+<table class="simple-calendar">
+    <thead>
+        <tr>
+            <td ng-repeat="weekday in calendar.weekdays">{{weekday}}</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="week in calendar.weeks"
+            class="simple-calendar-week">
+            <td ng-repeat="$day in week"
+                ng-click="calendar.onDayClick($day)"
+                class="simple-calendar-day"
+                ng-class="{'sibling-month': $day.siblingMonth, 'has-events': $day.events.length}">
+            </td>
+        </tr>
+    </tbody>
+</table>

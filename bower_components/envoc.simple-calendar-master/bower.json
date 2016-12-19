@@ -1,0 +1,21 @@
+{
+  "name": "envoc.simpleCalendar",
+  "version": "0.0.1",
+  "homepage": "https://github.com/Envoc/envoc.simple-calendar",
+  "authors": [
+    "Justin Obney <justinobney@gmail.com>"
+  ],
+  "main": "./dist/ngSimpleCalendar.js",
+  "moduleType": [
+    "globals"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "app/libs/",
+    "test",
+    "tests"
+  ]
+}
