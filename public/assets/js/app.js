@@ -303,12 +303,10 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
         $scope.photo = "";
         $scope.events = [
             {
-                name: 'foo',
-                date: '5-2-15'
+                date: new Date(['2016-12-12'])
             },
             {
-                name: 'bar',
-                date: new Date()
+                date: new Date(['2016-12-19'])
             }
         ];
         $scope.refresh = function () {
