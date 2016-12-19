@@ -302,52 +302,6 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
         $scope.user = User.isLoggedIn();
         $scope.photo = "";
 
-        simpleCalendarConfig.weekStart = 0;
-        simpleCalendarConfig.onDayClick = onDayClick;
-        simpleCalendarConfig.onEventClick = onEventClick;
-
-        $scope.date = new Date();
-        $scope.events = [{
-            name: 'foo',
-            date: '5-2-15'
-        }, {
-            name: 'bar',
-            date: new Date()
-        }, {
-            name: 'bar foo',
-            date: new Date()
-        }, {
-            name: 'baz',
-            date: '6-12-15'
-        }];
-
-        $scope.changeMonth = changeMonth;
-        $scope.monthName = monthName;
-
-        function onDayClick(day){
-            console.log(day);
-        }
-
-        function onEventClick(event, day){
-            console.log(event, day);
-        }
-
-        function monthName(date) {
-            var d = new Date(date);
-            var months = [
-                'January', 'February', 'March',
-                'April', 'May', 'June',
-                'July', 'August', 'September',
-                'October', 'November', 'December'
-            ];
-            return months[d.getMonth()];
-        }
-
-        function changeMonth(offset) {
-            var d = new Date($scope.date);
-            $scope.date = d.setMonth(d.getMonth() + offset);
-        }
-
         $scope.refresh = function () {
             var request = $http({method: "POST", url: "adventure/get", api: true, data: {id: $stateParams.id}});
             request.success(function (data) {
@@ -364,6 +318,52 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
                 request = $http({method: "POST", url: "getViewUser", api: true, data: {userid: data.adventure.owner}});
                 request.success(function (data) {
                     $scope.photo = data.user.photo;
+                    
+                    simpleCalendarConfig.weekStart = 0;
+                    simpleCalendarConfig.onDayClick = onDayClick;
+                    simpleCalendarConfig.onEventClick = onEventClick;
+
+                    $scope.date = new Date();
+                    $scope.events = [{
+                        name: 'foo',
+                        date: '5-2-15'
+                    }, {
+                        name: 'bar',
+                        date: new Date()
+                    }, {
+                        name: 'bar foo',
+                        date: new Date()
+                    }, {
+                        name: 'baz',
+                        date: '6-12-15'
+                    }];
+
+                    $scope.changeMonth = changeMonth;
+                    $scope.monthName = monthName;
+
+                    function onDayClick(day){
+                        console.log(day);
+                    }
+
+                    function onEventClick(event, day){
+                        console.log(event, day);
+                    }
+
+                    function monthName(date) {
+                        var d = new Date(date);
+                        var months = [
+                            'January', 'February', 'March',
+                            'April', 'May', 'June',
+                            'July', 'August', 'September',
+                            'October', 'November', 'December'
+                        ];
+                        return months[d.getMonth()];
+                    }
+
+                    function changeMonth(offset) {
+                        var d = new Date($scope.date);
+                        $scope.date = d.setMonth(d.getMonth() + offset);
+                    }
                 });
             });
         }
