@@ -301,12 +301,14 @@ app.run(["$rootScope", "$http", "$location", "User", function ($rootScope, $http
 app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$sce", "User", "$modal", "$location", "$compile", "simpleCalendarConfig", function ($scope, $http, $stateParams, $sce, User, $modal, $location, $compile, simpleCalendarConfig) {
         $scope.user = User.isLoggedIn();
         $scope.photo = "";
+
+        $scope.date = moment().toDate();
         $scope.events = [
             {
-                date: new Date(['2016-12-12'])
+                date: '2016-12-12'
             },
             {
-                date: new Date(['2016-12-19'])
+                date: new Date()
             }
         ];
         $scope.changeMonth = changeMonth;
