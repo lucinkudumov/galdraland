@@ -350,26 +350,26 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
                 $scope.monthName = monthName;
                 console.log("start" + data.adventure.start);
                 console.log("end" + data.adventure.end);
-                $scope.date = new Date(data.adventure.start);
+                $scope.date = new Date("2016-12-11");
                 $scope.events = [
                     {
                         name: 'start',
-                        date: new Date(data.adventure.start)
+                        date: new Date("2016-12-11")
                     },
                     {
                         name: 'end',
-                        date: new Date(data.adventure.end)
+                        date: new Date("2016-12-21")
                     }
                 ];
-                simpleCalendarConfig.date = new Date(data.adventure.start);
+                simpleCalendarConfig.date = new Date("2016-12-11");
                 simpleCalendarConfig.events = [
                     {
                         name: 'start',
-                        date: new Date(data.adventure.start)
+                        date: new Date("2016-12-11")
                     },
                     {
                         name: 'end',
-                        date: new Date(data.adventure.end)
+                        date: new Date("2016-12-21")
                     }
                 ];
 
