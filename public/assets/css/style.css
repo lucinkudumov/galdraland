@@ -90,6 +90,10 @@ footer ul li a {
 	color: black;
 }
 
+.MD_fb_invite {
+    margin-top: 3px;
+    margin-bottom: 3px;
+}
 .MD_fb_invite a{
     font-family: 'lucida grande', tahoma, verdana, arial, sans-serif !important;
     font-weight:bold !important;
