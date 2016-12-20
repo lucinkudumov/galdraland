@@ -306,19 +306,8 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
         simpleCalendarConfig.onDayClick = onDayClick;
         simpleCalendarConfig.onEventClick = onEventClick;
 
-        $scope.date = new Date();
-        $scope.events = [{
-            name: 'bar',
-            date: new Date()
-        }];
-        simpleCalendarConfig.date = new Date("2016-11-01");
-        simpleCalendarConfig.events = [{
-            name: 'bar',
-            date: new Date("2016-11-01")
-        }];
-
-//        $scope.changeMonth = changeMonth;
-//        $scope.monthName = monthName;
+        $scope.changeMonth = changeMonth;
+        $scope.monthName = monthName;
 
         function onDayClick(day){
             console.log(day);
@@ -328,21 +317,22 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
             console.log(event, day);
         }
 
-//        function monthName(date) {
-//            var d = new Date(date);
-//            var months = [
-//                'January', 'February', 'March',
-//                'April', 'May', 'June',
-//                'July', 'August', 'September',
-//                'October', 'November', 'December'
-//            ];
-//            return months[d.getMonth()];
-//        }
+        function monthName(date) {
+            var d = new Date(date);
+            var months = [
+                'January', 'February', 'March',
+                'April', 'May', 'June',
+                'July', 'August', 'September',
+                'October', 'November', 'December'
+            ];
+            return months[d.getMonth()];
+        }
 
-//        function changeMonth(offset) {
-//            var d = new Date($scope.date);
-//            $scope.date = d.setMonth(d.getMonth() + offset);
-//        }
+        function changeMonth(offset) {
+            var d = new Date($scope.date);
+            $scope.date = d.setMonth(d.getMonth() + offset);
+            simpleCalendarConfig.date = d.setMonth(d.getMonth() + offset);
+        }
 
         $scope.refresh = function () {
             var request = $http({method: "POST", url: "adventure/get", api: true, data: {id: $stateParams.id}});
@@ -355,6 +345,29 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
                 if (data.adventure.tags && data.adventure.tags.length > 0) {
                     if (data.adventure.tags[0] == "") data.adventure.tags = [];
                 }
+                $scope.date = new Date(data.adventure.start);
+                $scope.events = [
+                    {
+                        name: 'bar',
+                        date: new Date(data.adventure.start)
+                    },
+                    {
+                        name: 'end',
+                        date: new Date(data.adventure.end)
+                    }
+                ];
+                simpleCalendarConfig.date = new Date(data.adventure.start);
+                simpleCalendarConfig.events = [
+                    {
+                        name: 'start',
+                        date: new Date(data.adventure.start)
+                    },
+                    {
+                        name: 'end',
+                        date: new Date(data.adventure.end)
+                    }
+                ];
+
                 $scope.adventure = data.adventure;
                 $scope.isManager = data.adventure.owner == $scope.user._id;
                 request = $http({method: "POST", url: "getViewUser", api: true, data: {userid: data.adventure.owner}});
