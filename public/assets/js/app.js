@@ -301,6 +301,8 @@ app.run(["$rootScope", "$http", "$location", "User", function ($rootScope, $http
 app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$sce", "User", "$modal", "$location", "$compile", "simpleCalendarConfig", function ($scope, $http, $stateParams, $sce, User, $modal, $location, $compile, simpleCalendarConfig) {
         $scope.user = User.isLoggedIn();
         $scope.photo = "";
+        $scope.timeStart = "";
+        $scope.timeEnd = "";
 
         function onDayClick(day){
             console.log(day);
@@ -351,6 +353,8 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
                         date: new Date(data.adventure.end)
                     }
                 ];
+                $scope.timeStart = data.adventure.start;
+                $scope.timeEnd = data.adventure.end;
                 $scope.adventure = data.adventure;
                 $scope.isManager = data.adventure.owner == $scope.user._id;
                 request = $http({method: "POST", url: "getViewUser", api: true, data: {userid: data.adventure.owner}});
@@ -367,17 +371,15 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
             simpleCalendarConfig.onDayClick = onDayClick;
             simpleCalendarConfig.onEventClick = onEventClick;
 
-            console.log("start" + $scope.adventure.start);
-            console.log("end" + $scope.adventure.end);
-            simpleCalendarConfig.date = new Date($scope.adventure.start);
+            simpleCalendarConfig.date = new Date($scope.timeStart);
             simpleCalendarConfig.events = [
                 {
                     name: 'start',
-                    date: new Date($scope.adventure.start)
+                    date: new Date($scope.timeStart)
                 },
                 {
                     name: 'end',
-                    date: new Date($scope.adventure.end)
+                    date: new Date($scope.timeEnd)
                 }
             ];
             var htmlcontent = "<simple-calendar date='date' events='events'></simple-calendar>";
