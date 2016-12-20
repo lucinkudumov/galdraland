@@ -302,13 +302,6 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
         $scope.user = User.isLoggedIn();
         $scope.photo = "";
 
-        simpleCalendarConfig.weekStart = 0;
-        simpleCalendarConfig.onDayClick = onDayClick;
-        simpleCalendarConfig.onEventClick = onEventClick;
-
-        $scope.changeMonth = changeMonth;
-        $scope.monthName = monthName;
-
         function onDayClick(day){
             console.log(day);
         }
@@ -347,6 +340,14 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
                 if (data.adventure.tags && data.adventure.tags.length > 0) {
                     if (data.adventure.tags[0] == "") data.adventure.tags = [];
                 }
+
+                simpleCalendarConfig.weekStart = 0;
+                simpleCalendarConfig.onDayClick = onDayClick;
+                simpleCalendarConfig.onEventClick = onEventClick;
+
+                $scope.changeMonth = changeMonth;
+                $scope.monthName = monthName;
+                
                 $scope.date = new Date(data.adventure.start);
                 $scope.events = [
                     {
