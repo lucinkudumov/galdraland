@@ -55,7 +55,6 @@ module.exports = function (opts) {
                     image = req.body.image,
                     tags = req.body.tags,
                     fb_page = req.body.fb_page,
-                    mission = req.body.mission,
                     team = new teamModel();
 
             var roles;
@@ -69,7 +68,6 @@ module.exports = function (opts) {
             team.image = image;
             team.tags = tags;
             team.fb_page = fb_page;
-            team.mission = mission;
             team.teamMembers = [];
 
             var i = 0;
@@ -471,7 +469,6 @@ module.exports = function (opts) {
                     description = req.body.description,
                     tags = req.body.tags,
                     fb_page = req.body.fb_page,
-                    mission = req.body.mission,
                     image = req.body.image;
 
             teamModel.findOne({_id: id, owner: req.user._id}, function (err, team) {
@@ -484,7 +481,6 @@ module.exports = function (opts) {
                     team.image = image;
                     team.tags = tags;
                     team.fb_page = fb_page;
-                    team.mission = mission;
                     team.save(function (err, team) {
                         if (err) {
                             console.log(err);

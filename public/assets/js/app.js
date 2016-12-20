@@ -1,4 +1,4 @@
-var app = angular.module("galdra", ["ngRoute", "ui.router", "ngCookies", "ui.bootstrap", "ngFileUpload", "envoc.simpleCalendar", "ngTagsInput"]);
+var app = angular.module("galdra", ["ngRoute", "ui.router", "ngCookies", "ui.bootstrap", "ngFileUpload"]);
 var config = {
     //siteurl : 'http://galdraland.com:9010/'
     siteurl: 'http://galdraland-1-0.herokuapp.com/'
@@ -298,50 +298,8 @@ app.run(["$rootScope", "$http", "$location", "User", function ($rootScope, $http
             }
         });
     }]);
-app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$sce", "User", "$modal", "$location", "$compile", "simpleCalendarConfig", function ($scope, $http, $stateParams, $sce, User, $modal, $location, $compile, simpleCalendarConfig) {
+app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$sce", "User", "$modal", "$location", "$compile", function ($scope, $http, $stateParams, $sce, User, $modal, $location, $compile) {
         $scope.user = User.isLoggedIn();
-        $scope.photo = "";
-
-        simpleCalendarConfig.weekStart = 0;
-        simpleCalendarConfig.onDayClick = onDayClick;
-        simpleCalendarConfig.onEventClick = onEventClick;
-
-        $scope.date = new Date();
-        $scope.events = [{
-            name: 'bar',
-            date: new Date()
-        }];
-        $scope.events = [{
-            name: 'bar',
-            date: new Date()
-        }];
-
-        $scope.changeMonth = changeMonth;
-        $scope.monthName = monthName;
-
-        function onDayClick(day){
-            console.log(day);
-        }
-
-        function onEventClick(event, day){
-            console.log(event, day);
-        }
-
-        function monthName(date) {
-            var d = new Date(date);
-            var months = [
-                'January', 'February', 'March',
-                'April', 'May', 'June',
-                'July', 'August', 'September',
-                'October', 'November', 'December'
-            ];
-            return months[d.getMonth()];
-        }
-
-        function changeMonth(offset) {
-            var d = new Date($scope.date);
-            $scope.date = d.setMonth(d.getMonth() + offset);
-        }
 
         $scope.refresh = function () {
             var request = $http({method: "POST", url: "adventure/get", api: true, data: {id: $stateParams.id}});
@@ -353,14 +311,9 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
                 }
                 if (data.adventure.tags && data.adventure.tags.length > 0) {
                     if (data.adventure.tags[0] == "") data.adventure.tags = [];
-
                 }
                 $scope.adventure = data.adventure;
                 $scope.isManager = data.adventure.owner == $scope.user._id;
-                request = $http({method: "POST", url: "getViewUser", api: true, data: {userid: data.adventure.owner}});
-                request.success(function (data) {
-                    $scope.photo = data.user.photo;
-                });
             });
         }
 
@@ -422,14 +375,31 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
 
         $scope.shareAdventure = function () {
             console.log("advId = " + $stateParams.id);
+    //            FB.login(function(response) {
+    //                if (response.authResponse) {
+    //
+    //                } else {
+    //                    console.log("share team Error!");
+    //                }
+    //            });
             FB.ui({
                 method: 'share',
+    //                    action_type: 'og.comments',
+    //                    action_properties: JSON.stringify({
+    //                        object : {
+    //                            'og:url': 'http://galdraland-1-0.herokuapp.com/teams/view/' + $stateParams.id, // your url to share
+    //                            'og:title': 'Share Team Page',
+    //    //                        'og:type': 'website',
+    //                            'og:description': "You can share your team page",
+    //                            'og:image': 'http://www.hyperarts.com/external-xfbml/share-image.gif'
+    //                        }
                 href : 'http://galdraland-1-0.herokuapp.com/adventures/view/' + $stateParams.id
             }, function(response){
                 console.log("response = ", response);
             });
         }
-        $scope.refresh();
+
+    $scope.refresh();
     }]);
 app.controller("usersResultController", ["$scope", "$http", "User", "$location", function ($scope, $http, User, $location) {
     $scope.user = User.isLoggedIn();
@@ -2079,7 +2049,7 @@ app.controller("searchController", ["$scope", "$http", "$location", "$stateParam
     }]);
 app.controller("createTeamController", ["$scope", "$rootScope", "Upload", "$http", "$location", function ($scope, $rootScope, Upload, $http, $location) {
         $scope.createTeam = function () {
-            request = $http({method: "POST", url: "createTeam", api: true, data: {name: $scope.name, description: $scope.description, rols: $scope.roles, defuser: $rootScope.defUser, fb_page: $scope.fb_page, mission: $scope.mission, image: $scope.uploadedImage, tags: ($scope.tags) ? $scope.tags.split(' ') : []}});
+            request = $http({method: "POST", url: "createTeam", api: true, data: {name: $scope.name, description: $scope.description, roles: $scope.roles, defuser: $rootScope.defUser, fb_page: $scope.fb_page, image: $scope.uploadedImage, tags: ($scope.tags) ? $scope.tags.split(' ') : []}});
             request.success(function (data) {
                 if ($rootScope.return2Adventure == "return")
                 {
@@ -2140,7 +2110,6 @@ app.controller("editTeamController", ["$scope", "$http", "$location", "$statePar
             $scope.uploadedImage = data.team.image;
             $scope.tags = data.team.tags.join(" ");
             $scope.fb_page = data.team.fb_page;
-            $scope.mission = data.team.mission;
         });
         $scope.onFileSelect = function (image) {
             console.log(image);
@@ -2177,7 +2146,7 @@ app.controller("editTeamController", ["$scope", "$http", "$location", "$statePar
             });
         }
         $scope.editTeam = function () {
-            var request = $http({method: "POST", url: "editTeam", api: true, data: {id: id, name: $scope.name, description: $scope.description, image:$scope.uploadedImage, fb_page: $scope.fb_page, mission: $scope.mission, tags:$scope.tags.split(" ")}});
+            var request = $http({method: "POST", url: "editTeam", api: true, data: {id: id, name: $scope.name, description: $scope.description, image:$scope.uploadedImage, fb_page: $scope.fb_page, tags:$scope.tags.split(" ")}});
             request.success(function (data) {
                 $location.path("/teams/view/" + id);
             });
@@ -2522,7 +2491,7 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
                             title: 'Invite to Galdraland Team',
                             message: 'You have been invited to "' + $scope.team.name + '" team ',
                             to: fb_ids,
-                            new_style_message: true
+                            new_style_message: true,
                         }, function (response) {
                             if (response.error_code !== undefined && response.error_code == 4201) {
                                 for (i = 0; i < fb_ids.length; i++) {
@@ -2661,7 +2630,7 @@ app.directive('commentWidget', function ($http, User) {
         replace: true,
         scope: {
             ref: '=ref',
-            ismanager: '=ismanager'
+            ismanager: '=ismanager',
         },
         template: '<div class="row">' +
 //            '<div class="user-container"><h4>Comments</h4><hr></div>' +
