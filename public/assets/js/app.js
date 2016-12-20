@@ -311,9 +311,10 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
             name: 'bar',
             date: new Date()
         }];
+        simpleCalendarConfig.date = new Date("2016-11-01");
         simpleCalendarConfig.events = [{
             name: 'bar',
-            date: new Date()
+            date: new Date("2016-11-01")
         }];
 
 //        $scope.changeMonth = changeMonth;
