@@ -347,11 +347,12 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
 
                 $scope.changeMonth = changeMonth;
                 $scope.monthName = monthName;
-                
+                console.log("start" + data.adventure.start);
+                console.log("end" + data.adventure.end);
                 $scope.date = new Date(data.adventure.start);
                 $scope.events = [
                     {
-                        name: 'bar',
+                        name: 'start',
                         date: new Date(data.adventure.start)
                     },
                     {
