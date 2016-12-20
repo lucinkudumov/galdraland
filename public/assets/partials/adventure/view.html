@@ -40,19 +40,21 @@
                     <a style="font-size:14px; margin-left:5px; color:#1ab8f3; font-weight: bold;" href="/teams/view/{{adventure.team._id}}" class="name">{{adventure.team.name}}</a>
                 </div>
                 <h2 style="color:#394b59; margin-top:5px;font-size:18px; font-weight:700;" ng-show="adventure.team">TIMELINE</h2>
+                <div style="text-align: center;">
                 <strong>{{monthName(date)}} {{date|date:'yyyy'}}</strong>
                 <br />
                 <div>
                     <button class="btn btn-default" ng-click="changeMonth(-1)">Prev</button>
                     <button class="btn btn-default" ng-click="changeMonth(1)">Next</button>
                 </div>
+                </div>
                 <br />
                 <div id="simpeCalendar">
 				<simple-calendar date="date" events="events"></simple-calendar>
                 </div>
-                <div style="margin-top:5px;" ng-show="adventure.team" class="members-list">
-                    <p class="name bold" style="margin:0px; margin-left:5px; font-size:14px; color:#cfcfcf;">{{adventure.start + " - " + adventure.end}}</p>
-                </div>
+                <!--<div style="margin-top:5px;" ng-show="adventure.team" class="members-list">-->
+                    <!--<p class="name bold" style="margin:0px; margin-left:5px; font-size:14px; color:#cfcfcf;">{{adventure.start + " - " + adventure.end}}</p>-->
+                <!--</div>-->
                 <h2 style="color:#394b59; margin-top:5px;font-size:18px; font-weight:700;" ng-show="adventure.tags.length > 0">MORE TAGS</h2>
                 <div style="margin-top:5px;" ng-show="adventure.tags.length > 0" class="members-list">
                     <div style="margin-top:0px; margin-left:5px;" ng-repeat="t in adventure.tags">
