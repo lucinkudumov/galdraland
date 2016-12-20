@@ -307,21 +307,15 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
         simpleCalendarConfig.onEventClick = onEventClick;
 
         $scope.date = new Date();
-//        $rootScope.date = new Date();
         $scope.events = [{
             name: 'bar',
             date: new Date()
         }];
-        $scope.calendar.date = new Date();
-        $scope.calendar.events = [{
+        $scope.events = [{
             name: 'bar',
             date: new Date()
         }];
 
-//        $rootScope.events = [{
-//            name: 'bar',
-//            date: new Date()
-//        }];
         $scope.changeMonth = changeMonth;
         $scope.monthName = monthName;
 
