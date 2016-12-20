@@ -364,7 +364,7 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
             });
         }
 
-        $scope.$watch("date", function(newValue, oldValue){
+        $scope.$watch("date", function(newValue, oldValue, scope){
             simpleCalendarConfig.weekStart = 0;
             simpleCalendarConfig.onDayClick = onDayClick;
             simpleCalendarConfig.onEventClick = onEventClick;
@@ -373,11 +373,11 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
             simpleCalendarConfig.events = [
                 {
                     name: 'start',
-                    date: new Date("timeStart")
+                    date: new Date(scope.timeStart)
                 },
                 {
                     name: 'end',
-                    date: new Date("timeEnd")
+                    date: new Date(scope.timeEnd)
                 }
             ];
             var htmlcontent = "<simple-calendar date='date' events='events'></simple-calendar>";
