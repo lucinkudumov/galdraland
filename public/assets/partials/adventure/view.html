@@ -42,13 +42,14 @@
                 <h2 style="color:#394b59; margin-top:5px;font-size:18px; font-weight:700;" ng-show="adventure.team">TIMELINE</h2>
                 <strong>{{monthName(date)}} {{date|date:'yyyy'}}</strong>
                 <br />
-
                 <div>
                     <button class="btn btn-default" ng-click="changeMonth(-1)">Prev</button>
                     <button class="btn btn-default" ng-click="changeMonth(1)">Next</button>
                 </div>
                 <br />
+                <div id="simpeCalendar">
 				<simple-calendar date="date" events="events"></simple-calendar>
+                </div>
                 <div style="margin-top:5px;" ng-show="adventure.team" class="members-list">
                     <p class="name bold" style="margin:0px; margin-left:5px; font-size:14px; color:#cfcfcf;">{{adventure.start + " - " + adventure.end}}</p>
                 </div>

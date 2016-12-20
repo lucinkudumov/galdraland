@@ -363,37 +363,28 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
         $scope.$watch("date", function(newValue, oldValue){
             console.log("newValue = " + newValue);
             console.log("oldValue = " + oldValue);
-//            simpleCalendarConfig.weekStart = 0;
-//            simpleCalendarConfig.onDayClick = onDayClick;
-//            simpleCalendarConfig.onEventClick = onEventClick;
-//
-//            $scope.changeMonth = changeMonth;
-//            $scope.monthName = monthName;
-//            console.log("start" + $scope.adventure.start);
-//            console.log("end" + $scope.adventure.end);
-//            $scope.date = new Date($scope.adventure.start);
-//            $scope.events = [
-//                {
-//                    name: 'start',
-//                    date: new Date($scope.adventure.start)
-//                },
-//                {
-//                    name: 'end',
-//                    date: new Date($scope.adventure.end)
-//                }
-//            ];
-//            simpleCalendarConfig.date = new Date($scope.adventure.start);
-//            simpleCalendarConfig.events = [
-//                {
-//                    name: 'start',
-//                    date: new Date($scope.adventure.start)
-//                },
-//                {
-//                    name: 'end',
-//                    date: new Date($scope.adventure.end)
-//                }
-//            ];
+            simpleCalendarConfig.weekStart = 0;
+            simpleCalendarConfig.onDayClick = onDayClick;
+            simpleCalendarConfig.onEventClick = onEventClick;
 
+            $scope.changeMonth = changeMonth;
+            $scope.monthName = monthName;
+            console.log("start" + $scope.adventure.start);
+            console.log("end" + $scope.adventure.end);
+            simpleCalendarConfig.date = new Date($scope.adventure.start);
+            simpleCalendarConfig.events = [
+                {
+                    name: 'start',
+                    date: new Date($scope.adventure.start)
+                },
+                {
+                    name: 'end',
+                    date: new Date($scope.adventure.end)
+                }
+            ];
+            var htmlcontent = "<simple-calendar date='date' events='events'></simple-calendar>";
+            var $scope = $('#simpeCalendar').html(htmlcontent).scope();
+            $compile($('#simpeCalendar'))($scope);
         }, true);
 
         $scope.modal = function () {
