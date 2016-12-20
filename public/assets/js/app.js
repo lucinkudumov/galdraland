@@ -371,15 +371,15 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
             simpleCalendarConfig.onDayClick = onDayClick;
             simpleCalendarConfig.onEventClick = onEventClick;
 
-            simpleCalendarConfig.date = new Date($scope.timeStart);
+            simpleCalendarConfig.date = new Date("2016-12-11");
             simpleCalendarConfig.events = [
                 {
                     name: 'start',
-                    date: new Date($scope.timeStart)
+                    date: new Date("2016-12-11")
                 },
                 {
                     name: 'end',
-                    date: new Date($scope.timeEnd)
+                    date: new Date("2016-12-21")
                 }
             ];
             var htmlcontent = "<simple-calendar date='date' events='events'></simple-calendar>";
