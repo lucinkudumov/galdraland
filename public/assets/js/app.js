@@ -310,7 +310,7 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
             console.log(event, day);
         }
 
-        function monthName(date) {
+        $scope.monthName = function(date) {
             var d = new Date(date);
             var months = [
                 'January', 'February', 'March',
@@ -321,7 +321,7 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
             return months[d.getMonth()];
         }
 
-        function changeMonth(offset) {
+        $scope.changeMonth = function (offset) {
 
             var d = new Date($scope.date);
             console.log("changeMonth...", d);
@@ -367,8 +367,6 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
             simpleCalendarConfig.onDayClick = onDayClick;
             simpleCalendarConfig.onEventClick = onEventClick;
 
-            $scope.changeMonth = changeMonth;
-            $scope.monthName = monthName;
             console.log("start" + $scope.adventure.start);
             console.log("end" + $scope.adventure.end);
             simpleCalendarConfig.date = new Date($scope.adventure.start);
