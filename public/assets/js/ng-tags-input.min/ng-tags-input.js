@@ -343,7 +343,7 @@ tagsInput.directive('tagsInput', ["$timeout", "$document", "$window", "$q", "tag
 
                 // ngModelController won't trigger validators when the model changes (because it's an array),
                 // so we need to do it ourselves. Unfortunately this won't trigger any registered formatter.
-                ngModelCtrl.$validate();
+//                ngModelCtrl.$validate();
             });
 
             attrs.$observe('disabled', function(value) {
