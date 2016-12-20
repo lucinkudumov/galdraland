@@ -31,6 +31,9 @@ module.exports = function (opts) {
             type : Date,
             "default" : Date.now
         },
+        mission: {
+            type: String
+        }
     });
     
     return Schema;

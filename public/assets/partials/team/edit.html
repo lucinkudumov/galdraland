@@ -25,6 +25,9 @@
             <input class="form-control" type="text" ng-model="fb_page" placeholder="FB Page(optional)">
         </div>
         <div class="form-group">
+            <input class="form-control" type="text" ng-model="mission" placeholder="MISSION">
+        </div>
+        <div class="form-group">
 <!--            
             <input ng-model="image" type="file" class="form-control" onchange="angular.element(this).scope().onFileSelect(this)" accept="image/png, image/jpeg">
 -->
@@ -32,6 +35,6 @@
             <span ng-show="uploadInProgress">Upload progress: {{ uploadProgress }}</span>
             <img src="{{uploadedImage}}" ng-show="uploadedImage">
         </div>
-        <button class="btn btn-primary" ng-disabled="!name" ng-click="editTeam()">Save team</button>
+        <button class="btn btn-primary" ng-disabled="!name || !mission" ng-click="editTeam()">Save team</button>
     </div>
 </div>
