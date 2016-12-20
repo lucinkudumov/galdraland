@@ -331,7 +331,7 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
         function changeMonth(offset) {
 
             var d = new Date($scope.date);
-            console.log("changeMonth..." + d);
+            console.log("changeMonth...", d);
             $scope.date = d.setMonth(d.getMonth() + offset);
             simpleCalendarConfig.date = d.setMonth(d.getMonth() + offset);
         }
