@@ -497,7 +497,11 @@ app.controller("createAdventureController", ["$scope", "$rootScope", "Upload", "
         $scope.values.team = null;
         $scope.values.newTeam = null;
         $scope.values.teamCount = 1;
-
+        $scope.tags = [
+            { text: 'Tag1' },
+            { text: 'Tag2' },
+            { text: 'Tag3' }
+        ];
         $scope.refresh = function () {
             var request = $http({method: "GET", url: "myOwnTeams", api: true});
             request.success(function (data) {
