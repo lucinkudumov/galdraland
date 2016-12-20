@@ -340,15 +340,15 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
                     if (data.adventure.tags[0] == "") data.adventure.tags = [];
                 }
 
-                $scope.date = new Date($scope.adventure.start);
+                $scope.date = new Date(data.adventure.start);
                 $scope.events = [
                     {
                         name: 'start',
-                        date: new Date($scope.adventure.start)
+                        date: new Date(data.adventure.start)
                     },
                     {
                         name: 'end',
-                        date: new Date($scope.adventure.end)
+                        date: new Date(data.adventure.end)
                     }
                 ];
                 $scope.adventure = data.adventure;
