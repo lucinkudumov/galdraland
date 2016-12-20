@@ -355,7 +355,6 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
                     if (data.adventure.tags[0] == "") data.adventure.tags = [];
 
                 }
-                data.adventure.tags = [{text: 'Tag1'}, {text: 'Tag2'}];
                 $scope.adventure = data.adventure;
                 $scope.isManager = data.adventure.owner == $scope.user._id;
                 request = $http({method: "POST", url: "getViewUser", api: true, data: {userid: data.adventure.owner}});
