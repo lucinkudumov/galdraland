@@ -298,17 +298,14 @@ app.run(["$rootScope", "$http", "$location", "User", function ($rootScope, $http
             }
         });
     }]);
-app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$sce", "User", "$modal", "$location", "$compile", "simpleCalendarConfig", "simpleCalendar" , function ($scope, $http, $stateParams, $sce, User, $modal, $location, $compile, simpleCalendarConfig, simpleCalendar) {
+app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$sce", "User", "$modal", "$location", "$compile", "simpleCalendarConfig", function ($scope, $http, $stateParams, $sce, User, $modal, $location, $compile, simpleCalendarConfig) {
         $scope.user = User.isLoggedIn();
         $scope.photo = "";
 
         simpleCalendarConfig.weekStart = 0;
         simpleCalendarConfig.onDayClick = onDayClick;
         simpleCalendarConfig.onEventClick = onEventClick;
-        simpleCalendar.Calendar.events = [{
-            name: 'bar',
-            date: new Date()
-        }];
+
         $scope.date = new Date();
         $scope.events = [{
             name: 'bar',
