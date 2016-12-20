@@ -61,6 +61,7 @@
                 </div>
                 <h2 style="color:#394b59; margin-top:5px;font-size:18px; font-weight:700;" ng-show="adventure.tags.length > 0">MORE TAGS</h2>
                 <div style="margin-top:5px;" ng-show="adventure.tags.length > 0" class="members-list">
+                    <tags-input ng-model="tags"></tags-input>
                     <div style="margin-top:0px; margin-left:5px;" ng-repeat="t in adventure.tags">
                         <a style="font-size:14px; color:#1ab8f3; font-weight: bold;" ng-show="t" href="/adventuresTag/{{t}}" class="name">{{t}}</a>
                     </div>
