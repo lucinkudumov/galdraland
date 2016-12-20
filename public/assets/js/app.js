@@ -312,8 +312,8 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
             date: new Date()
         }];
 
-        $scope.changeMonth = changeMonth;
-        $scope.monthName = monthName;
+//        $scope.changeMonth = changeMonth;
+//        $scope.monthName = monthName;
 
         function onDayClick(day){
             console.log(day);
@@ -323,21 +323,21 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
             console.log(event, day);
         }
 
-        function monthName(date) {
-            var d = new Date(date);
-            var months = [
-                'January', 'February', 'March',
-                'April', 'May', 'June',
-                'July', 'August', 'September',
-                'October', 'November', 'December'
-            ];
-            return months[d.getMonth()];
-        }
+//        function monthName(date) {
+//            var d = new Date(date);
+//            var months = [
+//                'January', 'February', 'March',
+//                'April', 'May', 'June',
+//                'July', 'August', 'September',
+//                'October', 'November', 'December'
+//            ];
+//            return months[d.getMonth()];
+//        }
 
-        function changeMonth(offset) {
-            var d = new Date($scope.date);
-            $scope.date = d.setMonth(d.getMonth() + offset);
-        }
+//        function changeMonth(offset) {
+//            var d = new Date($scope.date);
+//            $scope.date = d.setMonth(d.getMonth() + offset);
+//        }
 
         $scope.refresh = function () {
             var request = $http({method: "POST", url: "adventure/get", api: true, data: {id: $stateParams.id}});
