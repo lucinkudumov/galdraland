@@ -30,14 +30,14 @@ module.exports = function (grunt) {
 			develop: {
 				files: {
 					"public/assets/js/libs.js": [
-					   "public/dev/libs/jquery.js",
-					   "public/dev/libs/bootstrap.js",
-					   "public/dev/libs/angular.js",
-					   "public/dev/libs/angular-route.js",
-					   "public/dev/libs/angular-ui-router.js",
-					   "public/dev/libs/angular-cookies.js",
-                        "public/dev/libs/angular-resource.js",
-					   "public/dev/libs/ui-bootstrap.min.js",
+//					   "public/dev/libs/jquery.js",
+//					   "public/dev/libs/bootstrap.js",
+//					   "public/dev/libs/angular.js",
+//					   "public/dev/libs/angular-route.js",
+//					   "public/dev/libs/angular-ui-router.js",
+//					   "public/dev/libs/angular-cookies.js",
+//                       "public/dev/libs/angular-resource.js",
+//					   "public/dev/libs/ui-bootstrap.min.js",
 					   "bower_components/**/**.js"
 					],
 					
