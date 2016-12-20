@@ -311,10 +311,6 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
             name: 'bar',
             date: new Date()
         }];
-        $scope.events = [{
-            name: 'bar',
-            date: new Date()
-        }];
 
         $scope.changeMonth = changeMonth;
         $scope.monthName = monthName;
