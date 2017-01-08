@@ -1,4 +1,4 @@
-var app = angular.module("galdra", ["ngRoute", "ui.router", "ngCookies", "ui.bootstrap", "ngFileUpload", /*'ngTagsInput',*/ "envoc.simpleCalendar"]);
+var app = angular.module("galdra", ["ngRoute", "ui.router", "ngCookies", "ui.bootstrap", "ngFileUpload", /*'ngTagsInput',*/ "envoc.simpleCalendar", "infinite-scroll"]);
 var config = {
     //siteurl : 'http://galdraland.com:9010/'
     siteurl: 'http://galdraland-1-0.herokuapp.com/'
@@ -2001,6 +2001,10 @@ app.controller("profileSettingsController", ["$scope", "$rootScope", "$location"
         }
 
     }]);
+app.controller("aboutViewController", ["$scope", "$http", "User", function ($scope, $http, User) {
+    $scope.items = [{"title":"About us"}, {"title":"How it works"}, {"title":"Contact us"}];
+}]);
+
 app.controller("profileViewController", ["$scope", "$http", "User", function ($scope, $http, User) {
         $http.get("/api/getUserDetail").success(function (data) {
             $scope.user = data.user;
