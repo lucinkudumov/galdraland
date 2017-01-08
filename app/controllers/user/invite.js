@@ -67,7 +67,15 @@ module.exports = function (opts) {
 
             console.log("calling sendMail...");
             console.log("subject = " + subject);
-            return res.json({success: false});
+            smtpTransport.sendMail({
+                from: fromEmail, // sender address
+                to: toEmail, // list of receivers
+                subject: subject, // Subject line
+                text: text,
+            }, function (err) {
+                return res.json({success: false});
+            });
+            return res.json({success: true});
         },
         "post#sendInvite": function (req, res) {
             var invites = req.body.invites,

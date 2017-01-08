@@ -2020,18 +2020,18 @@ app.controller("contactController", ['$scope', '$http', '$rootScope', function($
     $scope.sentSuccess = false;
     $scope.sentFailed = false;
     $scope.sendEmail = function () {
-        $scope.$apply(function(){
-            $scope.sentSuccess = false;
-            $scope.sentFailed = false;
-        });
-
         var request = $http({method: "POST", url: "sendContact", api: true,
-            data: {toEmail: 'dav.makow1992@yandex.com', fromEmail: $scope.yourEmail, text: $scope.description, subject: 'Contact Galdraland Support Center'}});
+            data: {toEmail: 'dav.makow1992@yandex.com',
+                fromEmail: $scope.yourEmail,
+                text: $scope.description,
+                subject: 'Contact Galdraland Support Center'}});
         request.success(function (data) {
             console.log('Mail Sent Success');
+            console.log(data);
             $scope.sentSuccess = true;
         }).error(function (err) {
             console.log('Mail Sent Error');
+            console.log(err);
             $scope.sentFailed = true;
         });
     }
