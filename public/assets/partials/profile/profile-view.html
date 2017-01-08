@@ -3,33 +3,6 @@
         <div class="col-md-4">
             <a href="/settings"><span class="badge badge-primary">Settings</span></a>
         </div>
-        <script>
-            window.fbAsyncInit = function () {
-                FB.init({appId: '110469289012320',status: true,cookie: true,xfbml: true,version: 'v2.6'});
-            };
-            window.fbAsyncInit();
-            (function (d, s, id) {
-                var js, fjs = d.getElementsByTagName(s)[0];
-                if (d.getElementById(id)) {return;}
-                js = d.createElement(s);
-                js.id = id;
-                js.src = '//connect.facebook.net/en_US/sdk.js';
-                fjs.parentNode.insertBefore(js, fjs);
-            }(document, 'script', 'facebook-jssdk'));
-            function FacebookInviteFriends()
-            {
-                FB.ui({
-                    method: 'apprequests',
-                    message: 'Invite your friends to Galdraland'
-                });
-            }
-        </script>
-        <div class="col-md-8">
-            <div id='fb-root'></div>
-            <span class='MD_fb_invite'>
-                <a href='#' onclick='FacebookInviteFriends();'>Invite your friends</a>
-            </span>
-        </div>
         <accordion close-others="false">
         <accordion-group is-open="true">
         <accordion-heading>
