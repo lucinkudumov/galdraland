@@ -3,7 +3,7 @@
 <div style="height: 700px;" infinite-scroll="nextPage()" infinite-scroll-distance="3">
     <div ng-repeat="item in items">
         <p>{{item.title}}</p>
-        <p ng-repeat="content in contents">{{content}}</p>
+        <p ng-repeat="content in item.contents">{{content}}</p>
     </div>
     <!--<p>About us</p>-->
     <!--<p>How it works</p>-->
