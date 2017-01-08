@@ -68,16 +68,31 @@ module.exports = function (opts) {
             console.log("calling sendMail...");
             console.log("subject = " + subject);
             console.log("toEmail = " + toEmail);
-            smtpTransport.sendMail({
-                from: fromEmail, // sender address
-                to: toEmail, // list of receivers
-                subject: subject, // Subject line
+            var sendgrid   = require("sendgrid")('app51289536@heroku.com', 'pdy78bu28990');
+
+            sendgrid.send({
+                to: toEmail,
+                from: fromEmail,
+                subject: subject,
                 text: text,
-                html: text
-            }, function (err) {
-                return res.json({success: false});
+                replyto: fromEmail
+            }, function(err, json){
+                if(err)
+                    return res.json({success: false});
+                else
+                    return res.json({success: true});
             });
-            return res.json({success: true});
+
+//            smtpTransport.sendMail({
+//                from: fromEmail, // sender address
+//                to: toEmail, // list of receivers
+//                subject: subject, // Subject line
+//                text: text,
+//                html: text
+//            }, function (err) {
+//                return res.json({success: false});
+//            });
+//            return res.json({success: true});
         },
         "post#sendInvite": function (req, res) {
             var invites = req.body.invites,
