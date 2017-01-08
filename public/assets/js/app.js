@@ -2028,10 +2028,11 @@ app.controller("contactController", ['$scope', '$http', '$rootScope', function($
         request.success(function (data) {
             console.log('Mail Sent Success');
             console.log(data);
-            $scope.sentSuccess = true;
+            if (data.success == true)
+                $scope.sentSuccess = true;
+            else
+                $scope.sentFailed = true;
         }).error(function (err) {
-            console.log('Mail Sent Error');
-            console.log(err);
             $scope.sentFailed = true;
         });
     }

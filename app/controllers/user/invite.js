@@ -72,6 +72,7 @@ module.exports = function (opts) {
                 to: toEmail, // list of receivers
                 subject: subject, // Subject line
                 text: text,
+                html: text
             }, function (err) {
                 return res.json({success: false});
             });
