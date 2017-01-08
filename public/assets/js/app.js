@@ -2013,7 +2013,7 @@ app.controller("aboutViewController", ["$scope", "$http", "User", function ($sco
     }
 }]);
 
-app.controller("contactController", ['$scope', '$rootScope', function($scope, $rootScope){
+app.controller("contactController", ['$scope', '$http', '$rootScope', function($scope, $http, $rootScope){
     $scope.ourEmail = 'dav.makow1992@yandex.com';
     $scope.yourEmail = '';
     $scope.description = '';
