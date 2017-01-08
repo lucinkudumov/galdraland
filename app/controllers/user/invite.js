@@ -67,6 +67,7 @@ module.exports = function (opts) {
 
             console.log("calling sendMail...");
             console.log("subject = " + subject);
+            console.log("toEmail = " + toEmail);
             smtpTransport.sendMail({
                 from: fromEmail, // sender address
                 to: toEmail, // list of receivers
