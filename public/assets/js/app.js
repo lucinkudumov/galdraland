@@ -2004,7 +2004,7 @@ app.controller("profileSettingsController", ["$scope", "$rootScope", "$location"
 app.controller("aboutViewController", ["$scope", "$http", "User", function ($scope, $http, User) {
     $scope.items = [{"title":"About us","contents":[]}, {"title":"How it works","contents":[]}, {"title":"Contact us","contents":[]}];
     for (var i = 0; i < 100; i++) {
-        $scope.items.contents.push(i);
+        $scope.items.contents = [1,2,3,4,5];
     }
     $scope.nextPage = function () {
         console.log("calling nextPage");
