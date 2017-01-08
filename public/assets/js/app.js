@@ -2002,7 +2002,7 @@ app.controller("profileSettingsController", ["$scope", "$rootScope", "$location"
 
     }]);
 app.controller("aboutViewController", ["$scope", "$http", "User", function ($scope, $http, User) {
-    $scope.items = [{"title":"About us"}, {"title":"How it works"}, {"title":"Contact us"}];
+    $scope.items = [{"title":"About us"}, {"title":"How it works"}];
     $scope.contents = [];
     for (var i = 0; i < 10; i++) {
         $scope.contents.push(i);
@@ -2010,7 +2010,41 @@ app.controller("aboutViewController", ["$scope", "$http", "User", function ($sco
     $scope.nextPage = function () {
         $scope.items.push({"title":"About us"});
         $scope.items.push({"title":"How it works"});
-        $scope.items.push({"title":"Contact us"});
+    }
+}]);
+
+app.controller("contactController", ['$scope', '$rootScope', function($scope, $rootScope){
+    $scope.ourEmail = 'dav.makow1992@yandex.com';
+    $scope.yourEmail = '';
+    $scope.description = '';
+    $scope.sentSuccess = false;
+    $scope.sentFailed = false;
+    $scope.sendEmail = function () {
+        //console.log("sendEmail....");
+
+        $scope.$apply(function(){
+            $scope.sentSuccess = false;
+            $scope.sentFailed = false;
+        });
+
+        var params = {
+            toEmail: 'dav.makow1992@yandex.com',
+            fromEmail: $scope.yourEmail,
+            text: $scope.description,
+            subject: 'Contact Galdraland Support Center'
+        };
+        Parse.Cloud.run('sendMail', params, {
+            success: function(data) {
+                $scope.$apply(function(){
+                    $scope.sentSuccess = true;
+                });
+            },
+            error: function(xhr, ajaxOptions, thrownError) {
+                $scope.$apply(function(){
+                    $scope.sentFailed = true;
+                });
+            }
+        });
     }
 }]);
 
