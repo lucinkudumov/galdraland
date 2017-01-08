@@ -40,6 +40,28 @@
             <li><a href="#" ng-click="logout()">logout</a></li>
         </ul>
     </div>
+    <script>
+        window.fbAsyncInit = function () {
+            FB.init({appId: '110469289012320',status: true,cookie: true,xfbml: true,version: 'v2.6'});
+        };
+        window.fbAsyncInit();
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) {return;}
+            js = d.createElement(s);
+            js.id = id;
+            js.src = '//connect.facebook.net/en_US/sdk.js';
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+        function FacebookInviteFriends1()
+        {
+            FB.ui({
+                method: 'apprequests',
+                message: 'Invite your friends to Galdraland'
+            });
+        }
+    </script>
+    <div id='fb-root'></div>
 	<div class="col-md-12 search-menu darkblue">
 		<ul class="pull-right">
             <li><select ng-model="scategory">
@@ -51,6 +73,7 @@
             <li><a class="btn btn-search" href="#" ng-click="search()">Search</a></li>
             <li><a class="btn btn-success" href="/adventures/create">Create a new Adventure</a></li>
             <li><a class="btn btn-success" href="/teams/create">Create a new team</a></li>
+            <li><a class="btn btn-success" href="#" onclick='FacebookInviteFriends1();'>Invite your friends</a></li>
         </ul>
 	</div>
 </div>
