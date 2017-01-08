@@ -2008,7 +2008,9 @@ app.controller("aboutViewController", ["$scope", "$http", "User", function ($sco
         $scope.contents.push(i);
     }
     $scope.nextPage = function () {
-        $scope.items.push([{"title":"About us"}, {"title":"How it works"}, {"title":"Contact us"}]);
+        $scope.items.push({"title":"About us"});
+        $scope.items.push({"title":"How it works"});
+        $scope.items.push({"title":"Contact us"});
     }
 }]);
 
