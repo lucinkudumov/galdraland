@@ -2003,6 +2003,13 @@ app.controller("profileSettingsController", ["$scope", "$rootScope", "$location"
     }]);
 app.controller("aboutViewController", ["$scope", "$http", "User", function ($scope, $http, User) {
     $scope.items = [{"title":"About us"}, {"title":"How it works"}, {"title":"Contact us"}];
+    $scope.contents = [];
+    for (var i = 0; i < 100; i++) {
+        $scope.contents.push(i);
+    }
+    $scope.nextPage = function () {
+        console.log("calling nextPage");
+    }
 }]);
 
 app.controller("profileViewController", ["$scope", "$http", "User", function ($scope, $http, User) {
