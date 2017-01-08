@@ -59,6 +59,16 @@ module.exports = function (opts) {
                 }
             });
         },
+        "post#sendContact": function (req, res) {
+            var toEmail = req.body.toEmail,
+                fromEmail = req.body.fromEmail,
+                text = req.body.text,
+                subject = req.body.subject;
+
+            console.log("calling sendMail...");
+            console.log("subject = " + subject);
+            return res.json({success: false});
+        },
         "post#sendInvite": function (req, res) {
             var invites = req.body.invites,
                     msg = req.body.msg,

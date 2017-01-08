@@ -2020,30 +2020,19 @@ app.controller("contactController", ['$scope', '$rootScope', function($scope, $r
     $scope.sentSuccess = false;
     $scope.sentFailed = false;
     $scope.sendEmail = function () {
-        //console.log("sendEmail....");
-
         $scope.$apply(function(){
             $scope.sentSuccess = false;
             $scope.sentFailed = false;
         });
 
-        var params = {
-            toEmail: 'dav.makow1992@yandex.com',
-            fromEmail: $scope.yourEmail,
-            text: $scope.description,
-            subject: 'Contact Galdraland Support Center'
-        };
-        Parse.Cloud.run('sendMail', params, {
-            success: function(data) {
-                $scope.$apply(function(){
-                    $scope.sentSuccess = true;
-                });
-            },
-            error: function(xhr, ajaxOptions, thrownError) {
-                $scope.$apply(function(){
-                    $scope.sentFailed = true;
-                });
-            }
+        var request = $http({method: "POST", url: "sendContact", api: true,
+            data: {toEmail: 'dav.makow1992@yandex.com', fromEmail: $scope.yourEmail, text: $scope.description, subject: 'Contact Galdraland Support Center'}});
+        request.success(function (data) {
+            console.log('Mail Sent Success');
+            $scope.sentSuccess = true;
+        }).error(function (err) {
+            console.log('Mail Sent Error');
+            $scope.sentFailed = true;
         });
     }
 }]);
