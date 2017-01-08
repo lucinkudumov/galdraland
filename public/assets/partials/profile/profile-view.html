@@ -1,11 +1,6 @@
 <div ng-controller="profileViewController">
-        <div class="col-md-4">
-            <a href="/settings"><span class="badge badge-primary">Settings</span></a>
-        </div>
-        <div class="col-md-8">
-        </div>
-        <div class="col-md-12">
         <blockquote>
+        <a href="/settings"><span class="badge badge-primary">Settings</span></a>
         <accordion close-others="false">
         <accordion-group is-open="true">
         <accordion-heading>
@@ -95,6 +90,5 @@
         <small ng-repeat="r in user.roles">{{ r.role }}</small>
         </accordion-group>
         </accordion>
-    </blockquote>
-        </div>
+        </blockquote>
 </div>
