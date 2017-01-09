@@ -70,6 +70,70 @@
     </div> <!-- .wrapper -->
     <div id="wrapper" >
     <div style="" infinite-scroll="nextPage()" infinite-scroll-distance="3">
+        <div class="row" ng-show="about">
+            <div class="col-md-12">
+                <p>About us</p>
+                <p>About us</p>
+                <p>About us</p>
+                <p>About us</p>
+                <p>About us</p>
+                <p>About us</p>
+                <p>About us</p>
+                <p>About us</p>
+                <p>About us</p>
+                <p>About us</p>
+            </div>
+        </div>
+        <div class="row" ng-show="works">
+            <div class="col-md-12">
+                <p>About us</p>
+                <p>About us</p>
+                <p>About us</p>
+                <p>About us</p>
+                <p>About us</p>
+                <p>About us</p>
+                <p>About us</p>
+                <p>About us</p>
+                <p>About us</p>
+                <p>About us</p>
+            </div>
+        </div>
+        <div class="row" ng-show="contactUs">
+            <div class="col-md-10 col-md-offset-1">
+                <div class="row col-md-7"> <div class="lead">&nbsp;</div>
+                    <img src="/assets/images/world-galdraland-contact.gif"  title="contact">
+                </div>
+                <div class="col-md-4">
+                    <div>
+                        <h3>Contact us</h3>
+                        <p style="padding-top:20px;">If you are interested in trying Galdraland or to know more, please do contact us</p>
+                        <p>Our team will contact you as soon as possible.</p>
+                    </div>
+                    <form role="form">
+                        <div class="form-group">
+                            <label for="ourEmail" style="color:#000;">Our address:</label>
+                            <input type="text" class="form-control" ng-model="ourEmail" id="ourEmail" text="info@holomathics.com" ng-disabled="true">
+                        </div>
+                        <div class="form-group">
+                            <label for="yourEmail" style="color:#000;">Your Email:</label>
+                            <input type="text" class="form-control" style="text-transform:none;font-size: 14px;" ng-model="yourEmail" id="yourEmail" placeholder="Enter your email">
+                        </div>
+                        <div class="form-group">
+                            <label for="description" style="color:#000;">Description:</label>
+                            <textarea class="form-control" ng-model="description" id="description" placeholder="Description" rows="3"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary" ng-click="sendEmail()" ng-disabled="!yourEmail || !description">Send</button>
+
+                        <div ng-show="sentSuccess" style="margin-top: 5px;">
+                            <span class="label label-success">Email sent Successfully!</span>
+                        </div>
+                        <div ng-show="sentFailed" style="margin-top: 5px;">
+                            <span class="label label-danger">Email sent failed!</span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
     </div>
 </div>
