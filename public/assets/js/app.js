@@ -2014,14 +2014,14 @@ app.controller("aboutViewController", ["$scope", "$http", "User", function ($sco
 }]);
 
 app.controller("contactController", ['$scope', '$http', '$rootScope', function($scope, $http, $rootScope){
-    $scope.ourEmail = 'dav.makow1992@yandex.com';
+    $scope.ourEmail = 'info@holomathics.com';
     $scope.yourEmail = '';
     $scope.description = '';
     $scope.sentSuccess = false;
     $scope.sentFailed = false;
     $scope.sendEmail = function () {
         var request = $http({method: "POST", url: "sendContact", api: true,
-            data: {toEmail: 'dav.makow1992@yandex.com',
+            data: {toEmail: 'info@holomathics.com',
                 fromEmail: $scope.yourEmail,
                 text: $scope.description,
                 subject: 'Contact Galdraland Support Center'}});
