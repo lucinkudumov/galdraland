@@ -1102,6 +1102,10 @@ app.controller("indexController", ["$scope", "$location", "$window", "$statePara
             });
         }
 
+        $scope.nextPage = function () {
+            console.log("calling nextPage");
+        }
+
         $scope.compare = function (a, b) {
             if (a._id < b._id)
                 return -1;
