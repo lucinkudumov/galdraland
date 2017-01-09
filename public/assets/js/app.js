@@ -1084,6 +1084,9 @@ app.controller("indexController", ["$scope", "$location", "$window", "$statePara
         $scope.users = [];
         $scope.loading = true;
         var search = $location.search();
+        $scope.works = false;
+        $scope.contactUs = false;
+        $scope.about = true;
 
         $scope.refresh = function () {
             $scope.loading = true;
