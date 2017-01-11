@@ -934,7 +934,7 @@ app.controller("emailController", ["$scope", "$location", "$http", "User", funct
         $scope.validateEmail();
         $scope.validateUsername();
     }]);
-app.controller("headerController", ["$scope", "$http", "$location", "User", "$modal", "$stateParams", function ($scope, $http, $location, User, $modal, $stateParams) {
+app.controller("headerController", ["$scope", "$rootScope", "$http", "$location", "User", "$modal", "$stateParams", function ($scope, $rootScope, $http, $location, User, $modal, $stateParams) {
         $scope.user = User.isLoggedIn();
         $temp = $stateParams.scategory;
         if ($temp == "aa")
@@ -1010,6 +1010,7 @@ app.controller("headerController", ["$scope", "$http", "$location", "User", "$mo
             var request = $http.get({url: "logout", api: true});
             request.success(function (data) {
                 User.logout();
+                $rootScope.flag = 1;
                 $location.path("/");
             }); 
        }
