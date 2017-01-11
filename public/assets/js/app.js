@@ -12,27 +12,27 @@ app.config(["$urlRouterProvider", "$locationProvider", "$stateProvider", "$httpP
                     templateUrl: "/assets/partials/login.html"
                 }
             }
-        }).state("who", {
-            url: "/#who",
-            views: {
-                "main": {
-                    templateUrl: "/assets/partials/login.html"
-                }
-            }
-        }).state("how", {
-            url: "/#how",
-            views: {
-                "main": {
-                    templateUrl: "/assets/partials/login.html"
-                }
-            }
-        }).state("contact", {
-            url: "/#contact",
-            views: {
-                "main": {
-                    templateUrl: "/assets/partials/login.html"
-                }
-            }
+//        }).state("who", {
+//            url: "/#who",
+//            views: {
+//                "main": {
+//                    templateUrl: "/assets/partials/login.html"
+//                }
+//            }
+//        }).state("how", {
+//            url: "/#how",
+//            views: {
+//                "main": {
+//                    templateUrl: "/assets/partials/login.html"
+//                }
+//            }
+//        }).state("contact", {
+//            url: "/#contact",
+//            views: {
+//                "main": {
+//                    templateUrl: "/assets/partials/login.html"
+//                }
+//            }
         }).state("about", {
             url: "/about",
             views: {
@@ -233,7 +233,7 @@ app.config(["$urlRouterProvider", "$locationProvider", "$stateProvider", "$httpP
         })
 
         $locationProvider.html5Mode(true);
-//        $urlRouterProvider.otherwise("/");
+        $urlRouterProvider.otherwise("/");
 
         $httpProvider.interceptors.push('middleware');
     }]).filter('groupBy', ['$parse', function ($parse) {
