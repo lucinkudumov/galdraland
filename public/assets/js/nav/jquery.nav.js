@@ -119,7 +119,7 @@
 				$target = $('#' + linkHref);
 
 				if($target.length) {
-					topPos = $target.offset().top - 0;//62;//$('.header').outerHeight()
+					topPos = $target.offset().top - 200;//$('.header').outerHeight()
 					self.sections[linkHref] = Math.round(topPos);
 				}
 			});
