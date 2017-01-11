@@ -273,6 +273,10 @@ app.run(["$rootScope", "$http", "$location", "User", function ($rootScope, $http
         $rootScope.return2Adventure = "normal";
         $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
             console.log(toState.url);
+            if (toState.url == "/")
+                $rootScope.flag = 1;
+            else
+                $rootScope.flag = 0;
             if(toState.url === "/about" || toState.url === "/how_it_works" || toState.url === "/contact_us" || toState.url === "/blog"
                 || toState.url === "/shareadventure/:id" || toState.url === "/shareteam/:id" ) {
                 $location.url(toState.url);
@@ -299,14 +303,14 @@ app.run(["$rootScope", "$http", "$location", "User", function ($rootScope, $http
         });
     }]);
 app.controller("firstController", ["$scope", "$http", "$location", function ($scope, $http, $location) {
-    console.log("location = " + $location.path());
-    if ($location.path() == "/") {
-        $scope.flag = 1;
-        console.log($scope.flag);
-    } else {
-        $scope.flag = 0;
-        console.log($scope.flag);
-    }
+//    console.log("location = " + $location.path());
+//    if ($location.path() == "/") {
+//        $scope.flag = 1;
+//        console.log($scope.flag);
+//    } else {
+//        $scope.flag = 0;
+//        console.log($scope.flag);
+//    }
 
 }]);
 
@@ -1010,7 +1014,6 @@ app.controller("headerController", ["$scope", "$rootScope", "$http", "$location"
             var request = $http.get({url: "logout", api: true});
             request.success(function (data) {
                 User.logout();
-                $rootScope.flag = 1;
                 $location.path("/");
             }); 
        }
