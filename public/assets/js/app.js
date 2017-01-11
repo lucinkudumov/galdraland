@@ -2867,7 +2867,7 @@ app.directive('ratingWidget', function ($http, User) {
         replace: true,
         scope: {
             ref: '=ref',
-            isstatic: '=isstatic',
+            isstatic: '=isstatic'
         },
         template: '<input id="rating-elem" type="number" class="rating" min=0 max=5 step=0.5 data-size="xs">',
         link: function (scope, elem, attrs) {
