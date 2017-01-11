@@ -300,7 +300,10 @@ app.run(["$rootScope", "$http", "$location", "User", function ($rootScope, $http
     }]);
 app.controller("firstController", ["$scope", "$http", "$location", function ($scope, $http, $location) {
     console.log($location.path());
-    $scope.flag = 0;
+    if ($location.path() == "/")
+        $scope.flag = 1;
+    else
+        $scope.flag = 0;
 }]);
 
 app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$sce", "User", "$modal", "$location", "$compile", "simpleCalendarConfig", function ($scope, $http, $stateParams, $sce, User, $modal, $location, $compile, simpleCalendarConfig) {
