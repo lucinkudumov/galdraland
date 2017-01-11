@@ -1084,10 +1084,6 @@ app.controller("indexController", ["$scope", "$location", "$window", "$statePara
         $scope.users = [];
         $scope.loading = true;
         var search = $location.search();
-        $scope.works = false;
-        $scope.contactUs = false;
-        $scope.about = true;
-
         $scope.refresh = function () {
             $scope.loading = true;
 
@@ -1104,11 +1100,6 @@ app.controller("indexController", ["$scope", "$location", "$window", "$statePara
                 $scope.loading = false;
             });
         }
-
-        $scope.nextPage = function () {
-            console.log("calling nextPage");
-        }
-
         $scope.compare = function (a, b) {
             if (a._id < b._id)
                 return -1;
