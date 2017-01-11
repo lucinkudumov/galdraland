@@ -128,7 +128,7 @@
 		getSection: function(windowPos) {
 			var returnValue = null;
 			var windowHeight = Math.round(this.$win.height() * this.config.scrollThreshold);
-
+            console.log("windowHeight = " + windowHeight);
 			for(var section in this.sections) {
 				if((this.sections[section] - windowHeight) < windowPos) {
 					returnValue = section;
@@ -178,9 +178,10 @@
 
 		scrollChange: function() {
 			var windowTop = this.$win.scrollTop();
+            console.log("windowTop = " + windowTop);
 			var position = this.getSection(windowTop);
 			var $parent;
-
+            console.log("position = " + position);
 			//If the position is set
 			if(position !== null) {
 				$parent = this.$elem.find('a[href$="#' + position + '"]').parent();
