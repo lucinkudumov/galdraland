@@ -233,7 +233,7 @@ app.config(["$urlRouterProvider", "$locationProvider", "$stateProvider", "$httpP
         })
 
         $locationProvider.html5Mode(true);
-        $urlRouterProvider.otherwise("/");
+//        $urlRouterProvider.otherwise("/");
 
         $httpProvider.interceptors.push('middleware');
     }]).filter('groupBy', ['$parse', function ($parse) {
