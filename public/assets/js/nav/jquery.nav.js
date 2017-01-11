@@ -178,10 +178,8 @@
 
 		scrollChange: function() {
 			var windowTop = this.$win.scrollTop();
-            console.log("windowTop = " + windowTop);
 			var position = this.getSection(windowTop);
 			var $parent;
-            console.log("position = " + position);
 			//If the position is set
 			if(position !== null) {
 				$parent = this.$elem.find('a[href$="#' + position + '"]').parent();
