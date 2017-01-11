@@ -75,7 +75,7 @@
         <footer>
             <div id="wrapper" class="row">
                 <div class="">
-                    <ul id="link_menu">
+                    <ul id="link_menu" class="header-navigation">
                         <!--<li><a href="#who" target="_self"> Who we are </a> </li>-->
                         <!--<li><a href="#how" target="_self"> How it works </a> </li>-->
                         <!--<li><a href="#contact" target="_self"> Contact us </a></li>-->
@@ -118,6 +118,13 @@
                 </div>
             </div>
         </div>
+        <script>
+            $(document).ready(function() {
+                $(".header-navigation").onePageNav({
+                    currentClass: "current",
+                    scrollThreshold: 0
+                });
+            });
+        </script>
     </body>
-
 </html>
