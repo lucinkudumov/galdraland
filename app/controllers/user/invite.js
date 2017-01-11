@@ -74,6 +74,7 @@ module.exports = function (opts) {
                 text: text,
                 replyto: fromEmail
             }, function(err, json){
+                console.log(err);
                 if(err)
                     return res.json({success: false});
                 else
