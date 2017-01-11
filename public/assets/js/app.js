@@ -274,7 +274,7 @@ app.run(["$rootScope", "$http", "$location", "User", function ($rootScope, $http
         $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
             console.log(toState.url);
             if(toState.url === "/about" || toState.url === "/how_it_works" || toState.url === "/contact_us" || toState.url === "/blog"
-                || toState.url === "/shareadventure/:id" || toState.url === "/shareteam/:id" ) {
+                || toState.url === "/shareadventure/:id" || toState.url === "/shareteam/:id" || toState.url === "/api/sendContact" ) {
                 $location.url(toState.url);
             } else if (toState.requireLogin && !User.isLoggedIn()) {
                 var url = "/redirect/?r=" + $location.path();
