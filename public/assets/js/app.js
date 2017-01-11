@@ -299,6 +299,7 @@ app.run(["$rootScope", "$http", "$location", "User", function ($rootScope, $http
         });
     }]);
 app.controller("firstController", ["$scope", "$http", "$location", function ($scope, $http, $location) {
+    console.log($location.path());
     $scope.flag = 0;
 }]);
 
