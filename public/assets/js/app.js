@@ -11,84 +11,84 @@ app.config(["$urlRouterProvider", "$locationProvider", "$stateProvider", "$httpP
                 "main": {
                     templateUrl: "/assets/partials/login.html"
                 }
-            },
+            }
         }).state("who", {
             url: "/#who",
             views: {
                 "main": {
-                    templateUrl: "/assets/partials/about.html"
+                    templateUrl: "/assets/partials/login.html"
                 }
-            },
+            }
         }).state("how", {
             url: "/#how",
             views: {
                 "main": {
-                    templateUrl: "/assets/partials/about.html"
+                    templateUrl: "/assets/partials/login.html"
                 }
-            },
+            }
         }).state("contact", {
             url: "/#contact",
             views: {
                 "main": {
-                    templateUrl: "/assets/partials/about.html"
+                    templateUrl: "/assets/partials/login.html"
                 }
-            },
+            }
         }).state("about", {
             url: "/about",
             views: {
                 "main": {
                     templateUrl: "/assets/partials/about.html"
                 }
-            },
+            }
         }).state("blog", {
             url: "/blog",
             views: {
                 "main": {
                     templateUrl: "/assets/partials/blog.html"
                 }
-            },
+            }
         }).state("how_it_works", {
             url: "/how_it_works",
             views: {
                 "main": {
                     templateUrl: "/assets/partials/how_it_works.html"
                 }
-            },
+            }
         }).state("contact_us", {
             url: "/contact_us",
             views: {
                 "main": {
                     templateUrl: "/assets/partials/contact_us.html"
                 }
-            },
+            }
         }).state("redirect", {
             url: "/redirect/:returnTo",
             views: {
                 "main": {
                     templateUrl: "/assets/partials/login.html"
                 }
-            },
+            }
         }).state("indexFacebook", {
             url: "/_=_",
             views: {
                 "main": {
                     templateUrl: "/assets/partials/login.html"
                 }
-            },
+            }
         }).state("shareadventure", {
             url: "/shareadventure/:id",
             views: {
                 "main": {
                     templateUrl: "/assets/partials/shareadventure.html"
                 }
-            },
+            }
         }).state("shareteam", {
             url: "/shareteam/:id",
             views: {
                 "main": {
                     templateUrl: "/assets/partials/shareteam.html"
                 }
-            },
+            }
         }).state("profileView", {
             url: "/profile",
             views: {
@@ -146,7 +146,7 @@ app.config(["$urlRouterProvider", "$locationProvider", "$stateProvider", "$httpP
                 views: {
                     "main": {templateUrl: "/assets/partials/users.html"},
                     "left-side@users": {templateUrl: "/assets/partials/users/left-side.html"},
-                    "right-side@users": {templateUrl: "/assets/partials/users/users-result.html"},
+                    "right-side@users": {templateUrl: "/assets/partials/users/users-result.html"}
                 },
                 requireLogin: true
 
@@ -179,7 +179,7 @@ app.config(["$urlRouterProvider", "$locationProvider", "$stateProvider", "$httpP
             views: {
                 "main": {templateUrl: "/assets/partials/main.html"},
                 "left-side@teamView": {templateUrl: "/assets/partials/team/left-side.html"},
-                "right-side@teamView": {templateUrl: "/assets/partials/team/view.html"},
+                "right-side@teamView": {templateUrl: "/assets/partials/team/view.html"}
             },
             requireLogin: true
         }).state("teamEdit", {
@@ -219,7 +219,7 @@ app.config(["$urlRouterProvider", "$locationProvider", "$stateProvider", "$httpP
             views: {
                 "main": {templateUrl: "/assets/partials/main.html"},
                 "left-side@adventureView": {templateUrl: "/assets/partials/adventure/left-side.html"},
-                "right-side@adventureView": {templateUrl: "/assets/partials/adventure/view.html"},
+                "right-side@adventureView": {templateUrl: "/assets/partials/adventure/view.html"}
             },
             requireLogin: true
         }).state("adventureEdit", {
@@ -294,7 +294,7 @@ app.run(["$rootScope", "$http", "$location", "User", function ($rootScope, $http
         $rootScope.return2Adventure = "normal";
         $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
             console.log(toState.url);
-            if (toState.url == "/")
+            if (toState.url == "/" || toState.url == "/#how" || toState.url == "/#who" || toState.url == "/#contact")
                 $rootScope.flag = 1;
             else
                 $rootScope.flag = 0;
