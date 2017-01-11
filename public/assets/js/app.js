@@ -302,17 +302,6 @@ app.run(["$rootScope", "$http", "$location", "User", function ($rootScope, $http
             }
         });
     }]);
-app.controller("firstController", ["$scope", "$http", "$location", function ($scope, $http, $location) {
-//    console.log("location = " + $location.path());
-//    if ($location.path() == "/") {
-//        $scope.flag = 1;
-//        console.log($scope.flag);
-//    } else {
-//        $scope.flag = 0;
-//        console.log($scope.flag);
-//    }
-
-}]);
 
 app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$sce", "User", "$modal", "$location", "$compile", "simpleCalendarConfig", function ($scope, $http, $stateParams, $sce, User, $modal, $location, $compile, simpleCalendarConfig) {
         $scope.user = User.isLoggedIn();
