@@ -1083,6 +1083,13 @@ app.controller("indexController", ["$scope", "$location", "$window", "$statePara
         $scope.teams = [];
         $scope.users = [];
         $scope.loading = true;
+
+        $scope.ourEmail = 'dav.makow1992@yandex.com';
+        $scope.yourEmail = '';
+        $scope.description = '';
+        $scope.sentSuccess = false;
+        $scope.sentFailed = false;
+
         var search = $location.search();
         $scope.refresh = function () {
             $scope.loading = true;
@@ -1163,6 +1170,24 @@ app.controller("indexController", ["$scope", "$location", "$window", "$statePara
                 console.log("photo = " + data.users[i].photo);
                 $scope.users.push(result);
             }
+        }
+
+        $scope.sendEmail = function () {
+            var request = $http({method: "POST", url: "sendContact", api: true,
+                data: {toEmail: 'dav.makow1992@yandex.com',
+                    fromEmail: $scope.yourEmail,
+                    text: $scope.description,
+                    subject: 'Contact Galdraland Support Center'}});
+            request.success(function (data) {
+                console.log('Mail Sent Success');
+                console.log(data);
+                if (data.success == true)
+                    $scope.sentSuccess = true;
+                else
+                    $scope.sentFailed = true;
+            }).error(function (err) {
+                    $scope.sentFailed = true;
+                });
         }
 
         $scope.refresh();
