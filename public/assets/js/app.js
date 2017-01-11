@@ -299,7 +299,7 @@ app.run(["$rootScope", "$http", "$location", "User", function ($rootScope, $http
         });
     }]);
 app.controller("firstController", ["$scope", "$http", "$location", function ($scope, $http, $location) {
-    $scope.flag = 1;
+    $scope.flag = 0;
 }]);
 
 app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$sce", "User", "$modal", "$location", "$compile", "simpleCalendarConfig", function ($scope, $http, $stateParams, $sce, User, $modal, $location, $compile, simpleCalendarConfig) {
