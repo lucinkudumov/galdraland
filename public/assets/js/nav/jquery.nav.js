@@ -41,7 +41,7 @@
 			easing: 'swing',
 			filter: '',
 			scrollSpeed: 750,
-			scrollThreshold: 0.9,
+			scrollThreshold: 0.5,
 			begin: false,
 			end: false,
 			scrollChange: false
@@ -186,7 +186,7 @@
 				$parent = this.$elem.find('a[href$="#' + position + '"]').parent();
 
 				//If it's not already the current section
-				if(!$parent.hasClass(this.config.currentClass)) {
+//				if(!$parent.hasClass(this.config.currentClass)) {
 					//Change the highlighted nav item
 					this.adjustNav(this, $parent);
 
@@ -194,7 +194,7 @@
 					if(this.config.scrollChange) {
 						this.config.scrollChange($parent);
 					}
-				}
+//				}
 			}
 		},
 
