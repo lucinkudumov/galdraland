@@ -119,7 +119,7 @@
 				$target = $('#' + linkHref);
 
 				if($target.length) {
-					topPos = $target.offset().top - 200;//$('.header').outerHeight()
+					topPos = $target.offset().top-62;//$('.header').outerHeight()
 					self.sections[linkHref] = Math.round(topPos);
 				}
 			});
@@ -144,7 +144,7 @@
 			var $parent = $link.parent();
 			var newLoc = '#' + self.getHash($link);
 
-			if(!$parent.hasClass(self.config.currentClass)) {
+//			if(!$parent.hasClass(self.config.currentClass)) {
 				//Start callback
 				if(self.config.begin) {
 					self.config.begin();
@@ -171,7 +171,7 @@
 						self.config.end();
 					}
 				});
-			}
+//			}
 
 			e.preventDefault();
 		},
