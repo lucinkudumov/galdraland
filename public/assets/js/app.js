@@ -298,7 +298,7 @@ app.run(["$rootScope", "$http", "$location", "User", function ($rootScope, $http
             }
         });
     }]);
-app.controller("indexController", ["$scope", "$http", "$location", function ($scope, $http, $location) {
+app.controller("firstController", ["$scope", "$http", "$location", function ($scope, $http, $location) {
     $scope.flag = 1;
 }]);
 
