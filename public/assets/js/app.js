@@ -323,6 +323,12 @@ app.run(["$rootScope", "$http", "$location", "User", function ($rootScope, $http
             }
         });
     }]);
+app.controller("loginController", ["$scope", "$location", "$anchorScroll", function ($scope, $location, $anchorScroll) {
+    $scope.gotoHash = function(hash) {
+        $location.hash(hash);
+        $anchorScroll();
+    };
+}]);
 
 app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$sce", "User", "$modal", "$location", "$compile", "simpleCalendarConfig", function ($scope, $http, $stateParams, $sce, User, $modal, $location, $compile, simpleCalendarConfig) {
         $scope.user = User.isLoggedIn();
