@@ -12,6 +12,27 @@ app.config(["$urlRouterProvider", "$locationProvider", "$stateProvider", "$httpP
                     templateUrl: "/assets/partials/login.html"
                 }
             },
+        }).state("who", {
+            url: "/#who",
+            views: {
+                "main": {
+                    templateUrl: "/assets/partials/about.html"
+                }
+            },
+        }).state("how", {
+            url: "/#how",
+            views: {
+                "main": {
+                    templateUrl: "/assets/partials/about.html"
+                }
+            },
+        }).state("contact", {
+            url: "/#contact",
+            views: {
+                "main": {
+                    templateUrl: "/assets/partials/about.html"
+                }
+            },
         }).state("about", {
             url: "/about",
             views: {
