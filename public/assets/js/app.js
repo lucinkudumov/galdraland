@@ -378,7 +378,7 @@ app.service('anchorSmoothScroll', function(){
 
 });
 
-app.controller("loginController", ["$scope", "$location", "$anchorScroll", anchorSmoothScroll, function ($scope, $location, $anchorScroll, anchorSmoothScroll) {
+app.controller("loginController", ["$scope", "$location", "$anchorScroll", function ($scope, $location, $anchorScroll, anchorSmoothScroll) {
     $scope.gotoHash = function(hash) {
         $location.hash(hash);
 //        $anchorScroll();
