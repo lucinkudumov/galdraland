@@ -299,7 +299,7 @@ app.run(["$rootScope", "$http", "$location", "User", function ($rootScope, $http
         });
     }]);
 app.controller("firstController", ["$scope", "$http", "$location", function ($scope, $http, $location) {
-    console.log($location.path());
+    console.log("location = " + $location.path());
     if ($location.path() == "/") {
         $scope.flag = 1;
         console.log($scope.flag);
