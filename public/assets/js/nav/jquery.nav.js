@@ -41,7 +41,7 @@
 			easing: 'swing',
 			filter: '',
 			scrollSpeed: 750,
-			scrollThreshold: 0.1,
+			scrollThreshold: 0.9,
 			begin: false,
 			end: false,
 			scrollChange: false
