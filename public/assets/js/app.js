@@ -11,7 +11,28 @@ app.config(["$urlRouterProvider", "$locationProvider", "$stateProvider", "$httpP
                 "main": {
                     templateUrl: "/assets/partials/login.html"
                 }
-            },
+            }
+//        }).state("who", {
+//            url: "/#who",
+//            views: {
+//                "main": {
+//                    templateUrl: "/assets/partials/login.html"
+//                }
+//            }
+//        }).state("how", {
+//            url: "/#how",
+//            views: {
+//                "main": {
+//                    templateUrl: "/assets/partials/login.html"
+//                }
+//            }
+//        }).state("contact", {
+//            url: "/#contact",
+//            views: {
+//                "main": {
+//                    templateUrl: "/assets/partials/login.html"
+//                }
+//            }
         }).state("about", {
             url: "/about",
             views: {
@@ -302,6 +323,13 @@ app.run(["$rootScope", "$http", "$location", "User", function ($rootScope, $http
             }
         });
     }]);
+app.controller("loginController", ["$scope", "$location", "$anchorScroll", function ($scope, $location, $anchorScroll) {
+//    $scope.gotoHash = function(hash) {
+//        $location.hash(hash);
+//        $anchorScroll();
+//    };
+}]);
+
 app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$sce", "User", "$modal", "$location", "$compile", "simpleCalendarConfig", function ($scope, $http, $stateParams, $sce, User, $modal, $location, $compile, simpleCalendarConfig) {
         $scope.user = User.isLoggedIn();
         $scope.photo = "";
@@ -926,7 +954,7 @@ app.controller("emailController", ["$scope", "$location", "$http", "User", funct
         $scope.validateEmail();
         $scope.validateUsername();
     }]);
-app.controller("headerController", ["$scope", "$http", "$location", "User", "$modal", "$stateParams", function ($scope, $http, $location, User, $modal, $stateParams) {
+app.controller("headerController", ["$scope", "$rootScope", "$http", "$location", "User", "$modal", "$stateParams", function ($scope, $rootScope, $http, $location, User, $modal, $stateParams) {
         $scope.user = User.isLoggedIn();
         $temp = $stateParams.scategory;
         if ($temp == "aa")
