@@ -868,6 +868,7 @@ app.controller("myAdventuresTypeController", ["$scope", "$http", "$location", "$
     $scope.user = User.isLoggedIn();
     $scope.refresh = function () {
         $scope.loading = true;
+        console.log("abc = " + $stateParams.type);
         var request = $http({method: "POST", url: "adventureType/list", api: true, data: {type: $stateParams.type}});
         request.success(function (data) {
             $scope.teams = data.teams;
