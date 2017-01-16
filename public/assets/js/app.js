@@ -560,6 +560,7 @@ app.controller("createAdventureController", ["$scope", "$rootScope", "Upload", "
         $scope.values.team = null;
         $scope.values.newTeam = null;
         $scope.values.teamCount = 1;
+        $scope.tags = [];
         $scope.refresh = function () {
             var request = $http({method: "GET", url: "myOwnTeams", api: true});
             request.success(function (data) {
@@ -608,12 +609,17 @@ app.controller("createAdventureController", ["$scope", "$rootScope", "Upload", "
 
         $scope.createAdventure = function () {
             var post = $scope.fb_post;
-
+            var tmpTags = [];
+            if ($scope.tags) {
+                for (i=0; i<$scope.tags.length; i++) {
+                    tmpTags.push($scope.tags[i].name);
+                }
+            }
             var request = $http({
                 method: "POST",
                 url: "adventure/create",
                 api: true,
-                data: {name: $scope.name, type: $scope.type, fb_page: $scope.fb_page, description: $scope.description, link: $scope.link, image: $scope.uploadedImage, team: $scope.team, start: $scope.formatDate($scope.start), end: $scope.formatDate($scope.end), tags: ($scope.tags) ? $scope.tags.split(' ') : []}
+                data: {name: $scope.name, type: $scope.type, fb_page: $scope.fb_page, description: $scope.description, link: $scope.link, image: $scope.uploadedImage, team: $scope.team, start: $scope.formatDate($scope.start), end: $scope.formatDate($scope.end), tags: tmpTags}
             });
             request.success(function (data) {
                 $location.path("/adventures/view/" + data.id);
@@ -708,7 +714,7 @@ app.controller("editAdventureController", ["$scope", "$http", "$location", "$sta
                 $scope.name = data.adventure.name;
                 $scope.description = data.adventure.description;
                 $scope.link = data.adventure.link;
-                $scope.tags = data.adventure.tags.join(" ");
+                $scope.tags = data.adventure.tags;//.join(" ");
                 $scope.start = new Date(Date.parse(data.adventure.start));
                 $scope.end = new Date(Date.parse(data.adventure.end));
                 $scope.status = data.adventure.status;
@@ -765,7 +771,13 @@ app.controller("editAdventureController", ["$scope", "$http", "$location", "$sta
             });
         };
         $scope.editAdventure = function () {
-            var request = $http({method: "POST", url: "adventure/update", api: true, data: {id: $stateParams.id, name: $scope.name, fb_page: $scope.fb_page, description: $scope.description, link: $scope.link, image: $scope.uploadedImage, tags: $scope.tags.split(" "), start: $scope.formatDate($scope.start), end: $scope.formatDate($scope.end), status: $scope.status, type: $scope.type}});
+            var tmpTags = [];
+            if ($scope.tags) {
+                for (i=0; i<$scope.tags.length; i++) {
+                    tmpTags.push($scope.tags[i].name);
+                }
+            }
+            var request = $http({method: "POST", url: "adventure/update", api: true, data: {id: $stateParams.id, name: $scope.name, fb_page: $scope.fb_page, description: $scope.description, link: $scope.link, image: $scope.uploadedImage, tags: tmpTags, start: $scope.formatDate($scope.start), end: $scope.formatDate($scope.end), status: $scope.status, type: $scope.type}});
             request.success(function (data) {
                 $location.path("/adventures/view/" + $stateParams.id);
             });
