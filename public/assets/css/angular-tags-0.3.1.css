@@ -34,7 +34,6 @@
   cursor: pointer;
 }
 .decipher-tags .decipher-tags-input {
-  border: none;
   outline: 0;
 }
 .decipher-tags .decipher-tags-invalid {
