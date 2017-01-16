@@ -2217,6 +2217,12 @@ app.controller("searchController", ["$scope", "$http", "$location", "$stateParam
     }]);
 app.controller("createTeamController", ["$scope", "$rootScope", "Upload", "$http", "$location", function ($scope, $rootScope, Upload, $http, $location) {
         $scope.createTeam = function () {
+            var tmpTags = [];
+            if ($scope.tags) {
+                for (i=0; i<$scope.tags.length; i++) {
+                    tmpTags.push($scope.tags[i].name);
+                }
+            }
             request = $http({method: "POST", url: "createTeam", api: true, data: {name: $scope.name, description: $scope.description, rols: $scope.roles, defuser: $rootScope.defUser, fb_page: $scope.fb_page, mission: $scope.mission, image: $scope.uploadedImage, tags: ($scope.tags) ? $scope.tags: []}});
             request.success(function (data) {
                 if ($rootScope.return2Adventure == "return")
