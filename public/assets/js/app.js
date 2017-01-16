@@ -2223,7 +2223,7 @@ app.controller("createTeamController", ["$scope", "$rootScope", "Upload", "$http
                     tmpTags.push($scope.tags[i].name);
                 }
             }
-            request = $http({method: "POST", url: "createTeam", api: true, data: {name: $scope.name, description: $scope.description, rols: $scope.roles, defuser: $rootScope.defUser, fb_page: $scope.fb_page, mission: $scope.mission, image: $scope.uploadedImage, tags: ($scope.tags) ? $scope.tags: []}});
+            request = $http({method: "POST", url: "createTeam", api: true, data: {name: $scope.name, description: $scope.description, rols: $scope.roles, defuser: $rootScope.defUser, fb_page: $scope.fb_page, mission: $scope.mission, image: $scope.uploadedImage, tags: tmpTags}});
             request.success(function (data) {
                 if ($rootScope.return2Adventure == "return")
                 {
