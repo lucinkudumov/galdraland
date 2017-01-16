@@ -2229,7 +2229,7 @@ app.controller("createTeamController", ["$scope", "$rootScope", "Upload", "$http
             });
         }
 
-        $scope.foo = [{name: 'foo'}, {name: 'bar'}];
+        $scope.foo = ['foo','bar'];
 
         $scope.onFileSelect = function (image) {
             console.log(image);
