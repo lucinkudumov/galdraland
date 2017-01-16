@@ -12,7 +12,7 @@
         </div>
         <div class="form-group">
             <!--<input class="form-control" type="text" ng-model="tags" placeholder="Tags(optional)">-->
-            <tags options="{addable: true}"  model="foo" src="b.value as b.name for b in baz"></tags>
+            <tags options="{addable: true, classes: {white: 'black', red: 'red'}}"  data-src="b.value as b.name for b in baz" data-model="foo"></tags>
         </div>
         <div class="form-group">
             <input class="form-control" type="text" ng-model="fb_page" placeholder="FB Page(optional)">
