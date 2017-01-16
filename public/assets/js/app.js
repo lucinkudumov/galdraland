@@ -1,4 +1,4 @@
-var app = angular.module("galdra", ["ngRoute", "ui.router", "ngCookies", "ui.bootstrap", "ngFileUpload", 'decipher.tags', 'ui.bootstrap.typeahead', /*'ngTagsInput',*/ "envoc.simpleCalendar", "infinite-scroll"]);
+var app = angular.module("galdra", ["ngRoute", "ui.router", "ngCookies", "ui.bootstrap", "ngFileUpload", 'decipher.tags', /*'ngTagsInput',*/ "envoc.simpleCalendar", "infinite-scroll"]);
 var config = {
     //siteurl : 'http://galdraland.com:9010/'
     siteurl: 'http://galdraland-1-0.herokuapp.com/'
