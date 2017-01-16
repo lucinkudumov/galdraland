@@ -2229,7 +2229,7 @@ app.controller("createTeamController", ["$scope", "$rootScope", "Upload", "$http
             });
         }
 
-        $scope.baz = ['bar','spam', 'baz','herp'];
+        $scope.tags = [];
 
         $scope.onFileSelect = function (image) {
             console.log(image);
