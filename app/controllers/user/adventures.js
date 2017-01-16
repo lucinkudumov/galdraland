@@ -287,11 +287,13 @@ module.exports = function (opts) {
             });
         },
         "post#adventure/list": function (req, res) {
-            var teams = req.body.teams;
+//            var teams = req.body.teams;
             var queries = [];
 
-            for (var i = 0; i < teams.length; i++)
-                queries.push({team: teams[i]._id});
+            if (req.body.teams != null) {
+                for (var i = 0; i < req.body.teams.length; i++)
+                    queries.push({team: req.body.teams[i]._id});
+            }
 
             adventureModel.find({$or: queries}, function (err, advs) {
                 if (err) {
@@ -314,8 +316,9 @@ module.exports = function (opts) {
             });
         },
         "post#adventureType/list": function (req, res) {
-            var tag = req.body.type;
-            adventureModel.find({"type" : tag}, function (err, advs) {
+            var type = req.body.type;
+            console.log("type="+type);
+            adventureModel.find({"type" : type}, function (err, advs) {
                 if (err) {
                     console.log(err);
                     return res.json({success: false, adventures: []});
