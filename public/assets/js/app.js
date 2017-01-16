@@ -1,4 +1,4 @@
-var app = angular.module("galdra", ["ngRoute", "ui.router", "ngCookies", "ui.bootstrap", "ngFileUpload", /*'ngTagsInput',*/ "envoc.simpleCalendar", "infinite-scroll"]);
+var app = angular.module("galdra", ["ngRoute", "ui.router", "ngCookies", "ui.bootstrap", "ngFileUpload", 'decipher.tags', 'ui.bootstrap.typeahead', /*'ngTagsInput',*/ "envoc.simpleCalendar", "infinite-scroll"]);
 var config = {
     //siteurl : 'http://galdraland.com:9010/'
     siteurl: 'http://galdraland-1-0.herokuapp.com/'
@@ -2228,7 +2228,9 @@ app.controller("createTeamController", ["$scope", "$rootScope", "Upload", "$http
                     $location.path("/teams/view/" + data.id);
             });
         }
-        
+
+        $scope.foo = [{name: 'foo'}, {name: 'bar'}];
+
         $scope.onFileSelect = function (image) {
             console.log(image);
             image = image.files[0];
