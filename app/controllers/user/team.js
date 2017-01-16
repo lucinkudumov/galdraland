@@ -57,7 +57,7 @@ module.exports = function (opts) {
                     fb_page = req.body.fb_page,
                     mission = req.body.mission,
                     team = new teamModel();
-
+            console.log("tags" = tags);
             var roles;
             if (req.body.roles) {
                 roles = req.body.roles.split(",");
