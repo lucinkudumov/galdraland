@@ -2284,7 +2284,7 @@ app.controller("editTeamController", ["$scope", "$http", "$location", "$statePar
             $scope.name = data.team.name;
             $scope.description = data.team.description;
             $scope.uploadedImage = data.team.image;
-            $scope.tags = data.team.tags.join(" ");
+            $scope.tags = data.team.tags;
             $scope.fb_page = data.team.fb_page;
             $scope.mission = data.team.mission;
         });
@@ -2323,7 +2323,13 @@ app.controller("editTeamController", ["$scope", "$http", "$location", "$statePar
             });
         }
         $scope.editTeam = function () {
-            var request = $http({method: "POST", url: "editTeam", api: true, data: {id: id, name: $scope.name, description: $scope.description, image:$scope.uploadedImage, fb_page: $scope.fb_page, mission: $scope.mission, tags:$scope.tags.split(" ")}});
+            var tmpTags = [];
+            if ($scope.tags) {
+                for (i=0; i<$scope.tags.length; i++) {
+                    tmpTags.push($scope.tags[i].name);
+                }
+            }
+            var request = $http({method: "POST", url: "editTeam", api: true, data: {id: id, name: $scope.name, description: $scope.description, image:$scope.uploadedImage, fb_page: $scope.fb_page, mission: $scope.mission, tags:tmpTags}});
             request.success(function (data) {
                 $location.path("/teams/view/" + id);
             });
