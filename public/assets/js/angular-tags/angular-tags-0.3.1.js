@@ -2,7 +2,11 @@
 (function () {
   'use strict';
 
-  angular.module('decipher.tags.templates', []);
+  try {
+    angular.module('decipher.tags.templates');
+  } catch (e) {
+    angular.module('decipher.tags.templates', []);
+  }
 
   var tags = angular.module('decipher.tags',
     ['ui.bootstrap.typeahead', 'decipher.tags.templates']);
