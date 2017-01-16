@@ -2229,7 +2229,7 @@ app.controller("createTeamController", ["$scope", "$rootScope", "Upload", "$http
             });
         }
 
-        baz = [
+        $scope.baz = [
             {foo: 'bar', value: 'baz', name: 'derp'},
             {foo: 'spam', value: 'baz', name: 'herp'},
         ]
