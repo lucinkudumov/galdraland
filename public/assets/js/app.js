@@ -206,6 +206,14 @@ app.config(["$urlRouterProvider", "$locationProvider", "$stateProvider", "$httpP
                 "right-side@adventureTagList": {templateUrl: "/assets/partials/adventureTag/list.html"}
             },
             requireLogin: true
+        }).state("adventureTypeList", {
+            url: "/adventuresType/:type",
+            views: {
+                "main": {templateUrl: "/assets/partials/main.html"},
+                "left-side@adventureTypeList": {templateUrl: "/assets/partials/adventureType/left-side.html"},
+                "right-side@adventureTypeList": {templateUrl: "/assets/partials/adventureType/list.html"}
+            },
+            requireLogin: true
         }).state("adventureCreate", {
             url: "/adventures/create",
             views: {
@@ -855,6 +863,22 @@ app.controller("myAdventuresController", ["$scope", "$http", "$location", "User"
         }
         $scope.refresh();
     }]);
+
+app.controller("myAdventuresTypeController", ["$scope", "$http", "$location", "$stateParams", "User", function ($scope, $http, $location, $stateParams, User) {
+    $scope.user = User.isLoggedIn();
+    $scope.refresh = function () {
+        $scope.loading = true;
+        var request = $http({method: "POST", url: "adventureType/list", api: true, data: {type: $stateParams.type}});
+        request.success(function (data) {
+            $scope.teams = data.teams;
+        }).then(function (r) {
+                $scope.adventures = r.data.adventures;
+                $scope.loading = false;
+            });
+    }
+
+    $scope.refresh();
+}]);
 
 app.controller("myAdventuresTagController", ["$scope", "$http", "$location", "$stateParams", "User", function ($scope, $http, $location, $stateParams, User) {
     $scope.user = User.isLoggedIn();
