@@ -35,6 +35,7 @@
 }
 .decipher-tags .decipher-tags-input {
   outline: 0;
+  font-size: 11px;
 }
 .decipher-tags .decipher-tags-invalid {
   color: #FFF;
