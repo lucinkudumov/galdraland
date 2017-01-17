@@ -903,6 +903,7 @@ app.controller("myAdventuresTagController", ["$scope", "$http", "$location", "$s
         request.success(function (data) {
             $scope.teams = data.teams;
         }).then(function (r) {
+                $scope.adventures = [];
                 if (r != null) $scope.adventures = r.adventures;
                 $scope.loading = false;
             });
