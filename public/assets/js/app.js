@@ -860,7 +860,7 @@ app.controller("myAdventuresController", ["$scope", "$http", "$location", "User"
                     $scope.loading = false;
                 }
             }).then(function (r) {
-                if (r.data != null) $scope.adventures = r.data.adventures;
+                $scope.adventures = r.adventures;
                 $scope.loading = false;
             });
         }
@@ -887,7 +887,7 @@ app.controller("myAdventuresTypeController", ["$scope", "$http", "$location", "$
         request.success(function (data) {
             $scope.teams = data.teams;
         }).then(function (r) {
-                if (r.data != null) $scope.adventures = r.data.adventures;
+                $scope.adventures = r.adventures;
                 $scope.loading = false;
             });
     }
@@ -903,7 +903,7 @@ app.controller("myAdventuresTagController", ["$scope", "$http", "$location", "$s
         request.success(function (data) {
             $scope.teams = data.teams;
         }).then(function (r) {
-                if (r.data != null) $scope.adventures = r.data.adventures;
+                $scope.adventures = r.adventures;
                 $scope.loading = false;
             });
     }
