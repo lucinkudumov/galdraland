@@ -474,7 +474,7 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
                     "}" +
                     "</script>" +
 //                    "<div class='fb-share-button' onclick='a();' data-layout='button_count'></div>" +
-                    "<a onclick='a();' target='_blank'>Share</a>"
+                    "<a class='fb-share-button' onclick='a();' target='_blank'></a>"
                     "</body></html>";
                 var $scope = $('#fbshare').html(htmlcontent).scope();
                 $compile($('#fbshare'))($scope);
