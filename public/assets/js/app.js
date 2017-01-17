@@ -847,7 +847,8 @@ app.controller("editAdventureController", ["$scope", "$http", "$location", "$sta
 
 app.controller("myAdventuresController", ["$scope", "$http", "$location", "User", function ($scope, $http, $location, User) {
         $scope.user = User.isLoggedIn();
-
+        $scope.adventures = [];
+        $scope.teams = [];
         $scope.refresh = function () {
             $scope.loading = true;
             var request = $http({method: "GET", url: "myTeams", api: true});
@@ -860,7 +861,6 @@ app.controller("myAdventuresController", ["$scope", "$http", "$location", "User"
                     $scope.loading = false;
                 }
             }).then(function (r) {
-                $scope.adventures = [];
                 if (r != null) $scope.adventures = r.adventures;
                 $scope.loading = false;
             });
