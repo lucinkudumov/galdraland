@@ -51,7 +51,7 @@
                 <h2 style="color:#394b59; margin-top:5px;font-size:18px; font-weight:700;" ng-show="adventure.tags.length > 0">TAGS</h2>
                 <div style="margin-top:5px;" ng-show="adventure.tags.length > 0" class="members-list">
                     <div style="margin-top:0px; margin-left:5px;" ng-repeat="t in adventure.tags">
-                        <a style="font-size:14px; color:#1ab8f3; font-weight: bold;" ng-show="t" href="/adventuresTag/{{t}}" class="name">{{t}}</a>
+                        <a class="decipher-tags-tag ng-binding" ng-show="t" href="/adventuresTag/{{t}}" class="name">{{t}}</a>
                     </div>
                 </div>
                 <h2 style="color:#394b59; margin-top:5px;font-size:18px; font-weight:700;" ng-show="adventure.status">STATUS</h2>
