@@ -782,6 +782,7 @@ app.controller("editAdventureController", ["$scope", "$http", "$location", "$sta
         };
         $scope.editAdventure = function () {
             var tmpTags = [];
+            console.log("adventure Tags = ", $scope.tags);
             if ($scope.tags) {
                 for (i=0; i<$scope.tags.length; i++) {
                     tmpTags.push($scope.tags[i].name);
