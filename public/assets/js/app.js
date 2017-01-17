@@ -463,6 +463,7 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
         $scope.$watch("photo", function(newValue, oldValue){
             if (newValue != oldValue) {
                 console.log("photo old = " + oldValue + " new = " + newValue);
+                $scope.photo = newValue;
             }
         }, true);
 
