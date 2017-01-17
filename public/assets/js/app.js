@@ -472,12 +472,12 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
                 var htmlcontent = "<div id='fb-root'>" +
                     "</div>" +
                     "<script>window.fbAsyncInit = function () {FB.init({appId: '110469289012320',status: true,cookie: true,xfbml: true,version: 'v2.6'});};window.fbAsyncInit();(function (d, s, id) {var js, fjs = d.getElementsByTagName(s)[0];if (d.getElementById(id)) {return;}js = d.createElement(s);js.id = id;js.src = '//connect.facebook.net/en_US/sdk.js';fjs.parentNode.insertBefore(js, fjs);}(document, 'script', 'facebook-jssdk'));" +
-                    "function a() {" +
+                    "function fbshare() {" +
                     "window.open('https://www.facebook.com/sharer/sharer.php?app_id=110469289012320&sdk=joey&u=http://galdraland-1-0.herokuapp.com/adventures/view/"+newValue+"&display=popup&ref=plugin&src=share_button&description="+$scope.description+"&picture=http://galdraland-1-0.herokuapp.com"+$scope.adventure.image+"', '','width=200,height=100');" +
                     "}" +
                     "</script>" +
 //                    "<div class='fb-share-button' onclick='a();' data-layout='button_count'></div>" +
-                    "<a onclick='a();' style='cursor:pointer;' target='_blank'>Share</a>"
+                    "<a onclick='fbshare();' style='cursor:pointer;background-image:url(/assets/images/fbshare.png);' target='_blank'></a>"
                     "</body></html>";
                 var $scope1 = $('#fbshare').html(htmlcontent).scope();
                 $compile($('#fbshare'))($scope1);
