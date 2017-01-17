@@ -612,6 +612,7 @@ app.controller("createAdventureController", ["$scope", "$rootScope", "Upload", "
         $scope.createAdventure = function () {
             var post = $scope.fb_post;
             var tmpTags = [];
+            console.log("Create adventure Tags = ", $scope.tags);
             if ($scope.tags) {
                 for (i=0; i<$scope.tags.length; i++) {
                     tmpTags.push($scope.tags[i].name);
@@ -774,7 +775,7 @@ app.controller("editAdventureController", ["$scope", "$http", "$location", "$sta
         };
         $scope.editAdventure = function () {
             var tmpTags = [];
-            console.log("adventure Tags = ", $scope.tags);
+            console.log("Edit adventure Tags = ", $scope.tags);
             if ($scope.tags) {
                 for (i=0; i<$scope.tags.length; i++) {
                     tmpTags.push($scope.tags[i].name);
@@ -2234,6 +2235,7 @@ app.controller("searchController", ["$scope", "$http", "$location", "$stateParam
     }]);
 app.controller("createTeamController", ["$scope", "$rootScope", "Upload", "$http", "$location", function ($scope, $rootScope, Upload, $http, $location) {
         $scope.createTeam = function () {
+            console.log("Create Team Tags = ", $scope.tags);
             var tmpTags = [];
             if ($scope.tags) {
                 for (i=0; i<$scope.tags.length; i++) {
@@ -2341,9 +2343,8 @@ app.controller("editTeamController", ["$scope", "$http", "$location", "$statePar
         }
         $scope.editTeam = function () {
             var tmpTags = [];
-            console.log("Tags = ", $scope.tags);
+            console.log("Edit Team Tags = ", $scope.tags);
             if ($scope.tags) {
-
                 for (i=0; i<$scope.tags.length; i++) {
                     tmpTags.push($scope.tags[i].name);
                 }
@@ -2775,33 +2776,6 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
                 $compile($('#fbComment'))($scope1);
             }
         }, true);
-
-//        $scope.shareTeam = function () {
-//                console.log("teamId = " + $stateParams.id);
-////            FB.login(function(response) {
-////                if (response.authResponse) {
-////
-////                } else {
-////                    console.log("share team Error!");
-////                }
-////            });
-//                FB.ui({
-//                    method: 'share',
-////                    action_type: 'og.comments',
-////                    action_properties: JSON.stringify({
-////                        object : {
-////                            'og:url': 'http://galdraland-1-0.herokuapp.com/teams/view/' + $stateParams.id, // your url to share
-////                            'og:title': 'Share Team Page',
-////    //                        'og:type': 'website',
-////                            'og:description': "You can share your team page",
-////                            'og:image': 'http://www.hyperarts.com/external-xfbml/share-image.gif'
-////                        }
-//                    href : 'http://galdraland-1-0.herokuapp.com/teams/view/' + $stateParams.id
-//                }, function(response){
-//                    console.log("response = ", response);
-//                });
-//        }
-
         $scope.refresh();
     }]);
 
