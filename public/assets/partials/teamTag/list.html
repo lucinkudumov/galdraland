@@ -10,7 +10,9 @@
                     <td>{{ t.name}}</td>
                     <td><rating-widget isstatic="1" ref="t._id" ></rating-widget></td>
                 <td>{{ t.teamMembers.length}} members</td>
+                <td>
                     <a href="/teams/view/{{ t._id}}" class="btn btn-same-size btn-primary">View</a>
+                </td>
                 <!--<td>-->
                     <!--<a href="/teams/view/{{ t._id}}" class="btn btn-same-size btn-primary" ng-show="user._id != t.owner._id">View</a>-->
                     <!--<a href="#" class="btn btn-same-size btn-danger" ng-show="user._id != t.owner._id">Leave</a>-->
