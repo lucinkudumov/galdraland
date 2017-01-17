@@ -615,7 +615,10 @@ app.controller("createAdventureController", ["$scope", "$rootScope", "Upload", "
             console.log("Create adventure Tags = ", $scope.tags);
             if ($scope.tags) {
                 for (i=0; i<$scope.tags.length; i++) {
-                    tmpTags.push($scope.tags[i].name);
+                    if ($scope.tags[i].name == null || $scope.tags[i].name == "undefined")
+                        tmpTags.push($scope.tags[i]);
+                    else
+                        tmpTags.push($scope.tags[i].name);
                 }
             }
             var request = $http({
@@ -778,7 +781,10 @@ app.controller("editAdventureController", ["$scope", "$http", "$location", "$sta
             console.log("Edit adventure Tags = ", $scope.tags);
             if ($scope.tags) {
                 for (i=0; i<$scope.tags.length; i++) {
-                    tmpTags.push($scope.tags[i].name);
+                    if ($scope.tags[i].name == null || $scope.tags[i].name == "undefined")
+                        tmpTags.push($scope.tags[i]);
+                    else
+                        tmpTags.push($scope.tags[i].name);
                 }
             }
             var request = $http({method: "POST", url: "adventure/update", api: true, data: {id: $stateParams.id, name: $scope.name, fb_page: $scope.fb_page, description: $scope.description, link: $scope.link, image: $scope.uploadedImage, tags: tmpTags, start: $scope.formatDate($scope.start), end: $scope.formatDate($scope.end), status: $scope.status, type: $scope.type}});
@@ -2237,10 +2243,11 @@ app.controller("createTeamController", ["$scope", "$rootScope", "Upload", "$http
         $scope.createTeam = function () {
             console.log("Create Team Tags = ", $scope.tags);
             var tmpTags = [];
-            if ($scope.tags) {
-                for (i=0; i<$scope.tags.length; i++) {
+            for (i=0; i<$scope.tags.length; i++) {
+                if ($scope.tags[i].name == null || $scope.tags[i].name == "undefined")
+                    tmpTags.push($scope.tags[i]);
+                else
                     tmpTags.push($scope.tags[i].name);
-                }
             }
             request = $http({method: "POST", url: "createTeam", api: true, data: {name: $scope.name, description: $scope.description, rols: $scope.roles, defuser: $rootScope.defUser, fb_page: $scope.fb_page, mission: $scope.mission, image: $scope.uploadedImage, tags: tmpTags}});
             request.success(function (data) {
@@ -2344,10 +2351,11 @@ app.controller("editTeamController", ["$scope", "$http", "$location", "$statePar
         $scope.editTeam = function () {
             var tmpTags = [];
             console.log("Edit Team Tags = ", $scope.tags);
-            if ($scope.tags) {
-                for (i=0; i<$scope.tags.length; i++) {
+            for (i=0; i<$scope.tags.length; i++) {
+                if ($scope.tags[i].name == null || $scope.tags[i].name == "undefined")
+                    tmpTags.push($scope.tags[i]);
+                else
                     tmpTags.push($scope.tags[i].name);
-                }
             }
             var request = $http({method: "POST", url: "editTeam", api: true, data: {id: id, name: $scope.name, description: $scope.description, image:$scope.uploadedImage, fb_page: $scope.fb_page, mission: $scope.mission, tags:tmpTags}});
             request.success(function (data) {
