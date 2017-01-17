@@ -469,6 +469,7 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
                     "</div>" +
                     "<script>window.fbAsyncInit = function () {FB.init({appId: '110469289012320',status: true,cookie: true,xfbml: true,version: 'v2.6'});};window.fbAsyncInit();(function (d, s, id) {var js, fjs = d.getElementsByTagName(s)[0];if (d.getElementById(id)) {return;}js = d.createElement(s);js.id = id;js.src = '//connect.facebook.net/en_US/sdk.js';fjs.parentNode.insertBefore(js, fjs);}(document, 'script', 'facebook-jssdk'));" +
                     "function a() {" +
+                    "alert('aaaa');" +
                     "window.open('https://www.facebook.com/sharer/sharer.php?app_id=110469289012320&sdk=joey&u=http%3A%2F%2Fgaldraland-1-0.herokuapp.com%2Fadventures%2Fview%2F584eac48cc85a40400e84944&display=popup&ref=plugin&src=share_button&description=abcdefg', '','width=200,height=100');" +
                     "}" +
                     "</script>" +
