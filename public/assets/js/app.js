@@ -860,6 +860,7 @@ app.controller("myAdventuresController", ["$scope", "$http", "$location", "User"
                     $scope.loading = false;
                 }
             }).then(function (r) {
+                    console.log(r);
                 $scope.adventures = r.adventures;
                 $scope.loading = false;
             });
