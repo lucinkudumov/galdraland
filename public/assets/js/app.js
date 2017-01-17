@@ -2341,6 +2341,7 @@ app.controller("editTeamController", ["$scope", "$http", "$location", "$statePar
         }
         $scope.editTeam = function () {
             var tmpTags = [];
+            console.log("Tags = ", $scope.tags);
             if ($scope.tags) {
 
                 for (i=0; i<$scope.tags.length; i++) {
