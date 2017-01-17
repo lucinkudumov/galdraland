@@ -473,8 +473,8 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
                     "window.open('https://www.facebook.com/sharer/sharer.php?app_id=110469289012320&sdk=joey&u=http%3A%2F%2Fgaldraland-1-0.herokuapp.com%2Fadventures%2Fview%2F584eac48cc85a40400e84944&display=popup&ref=plugin&src=share_button&description=abcdefg', '','width=200,height=100');" +
                     "}" +
                     "</script>" +
-                    "<div class='fb-share-button' onclick='a();' data-layout='button_count'></div>" +
-//                    "<a class='fb-xfbml-parse-ignore' target='_blank' href='https://www.facebook.com/sharer/sharer.php?app_id=110469289012320&sdk=joey&u=http%3A%2F%2Fgaldraland-1-0.herokuapp.com%2Fadventures%2Fview%2F584eac48cc85a40400e84944&display=popup&ref=plugin&src=share_button'>Share</a>"
+//                    "<div class='fb-share-button' onclick='a();' data-layout='button_count'></div>" +
+                    "<a onclick='a();' target='_blank'>Share</a>"
                     "</body></html>";
                 var $scope = $('#fbshare').html(htmlcontent).scope();
                 $compile($('#fbshare'))($scope);
