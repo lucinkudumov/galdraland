@@ -460,6 +460,11 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
                 $compile($('#fbPage'))($scope);
             }
         }, true);
+        $scope.$watch("photo", function(newValue, oldValue){
+            if (newValue != oldValue) {
+                console.log("photo old = " + oldValue + " new = " + newValue);
+            }
+        }, true);
 
         $scope.$watch("adventure._id", function(newValue, oldValue){
             if (newValue != oldValue) {
