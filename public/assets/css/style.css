@@ -111,3 +111,13 @@ footer ul li a {
 .MD_fb_invite a:active{
     background-color:#609946 !important;
 }
+
+.tag {
+    display: inline-block;
+    border-radius: 5px;
+    background-color: #EFEFEF;
+    border: 1px solid #DDD;
+    padding: 2px;
+    margin-right: 5px;
+    margin-top: 5px;
+}
