@@ -460,12 +460,6 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
                 $compile($('#fbPage'))($scope);
             }
         }, true);
-        $scope.$watch("photo", function(newValue, oldValue){
-            if (newValue != oldValue) {
-                console.log("photo old = " + oldValue + " new = " + newValue);
-                $scope.photo = newValue;
-            }
-        }, true);
 
         $scope.$watch("adventure._id", function(newValue, oldValue){
             if (newValue != oldValue) {
@@ -477,8 +471,7 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
                     "}" +
                     "</script>" +
 //                    "<div class='fb-share-button' onclick='a();' data-layout='button_count'></div>" +
-                    "<a onclick='fbshare();' style='cursor:pointer;background-image:url(/assets/images/fbshare.png);' target='_blank'></a>"
-                    "</body></html>";
+                    "<img onclick='fbshare();' style='cursor:pointer;' src='/assets/images/fbshare.png'/>";
                 var $scope1 = $('#fbshare').html(htmlcontent).scope();
                 $compile($('#fbshare'))($scope1);
 
@@ -487,7 +480,6 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
                     "<div class='fb-comments' data-href='http://webascender.com/blog/#adv" + newValue +"' data-numposts='5' data-colorscheme='light' data-width='350'></div>";
                 $scope1 = $('#fbComment').html(htmlcontent).scope();
                 $compile($('#fbComment'))($scope1);
-
             }
         }, true);
 
@@ -2539,8 +2531,9 @@ app.controller("userViewController", ["$scope", "$http", "$stateParams", "User",
 
 app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "$stateParams", "User", "$modal", "$location", "$compile", function ($rootScope, $scope, $http, $sce, $stateParams, User, $modal, $location, $compile) {
         $scope.user = User.isLoggedIn();
+        $scope.description = "";
 
-        $scope.emptyMembers = [];
+    $scope.emptyMembers = [];
 
         $scope.refresh = function () {
             console.log("refreshing.....");
@@ -2550,6 +2543,7 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
                     var find = "\n";
                     var re = new RegExp(find, 'g');
                     data.team.description = $sce.trustAsHtml(data.team.description.replace(re,"<br>"));
+                    $scope.description = data.team.description;
                 }
                 if (data.team.tags && data.team.tags.length > 0) {
                     if (data.team.tags[0] == "") data.team.tags = [];
@@ -2763,16 +2757,22 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
             if (newValue != oldValue) {
                 var htmlcontent = "<div id='fb-root'>" +
                     "</div><script>window.fbAsyncInit = function () {FB.init({appId: '110469289012320',status: true,cookie: true,xfbml: true,version: 'v2.6'});};window.fbAsyncInit();(function (d, s, id) {var js, fjs = d.getElementsByTagName(s)[0];if (d.getElementById(id)) {return;}js = d.createElement(s);js.id = id;js.src = '//connect.facebook.net/en_US/sdk.js';fjs.parentNode.insertBefore(js, fjs);}(document, 'script', 'facebook-jssdk'));</script>" +
-                    "<div class='fb-share-button' data-href='http://galdraland-1-0.herokuapp.com/teams/view/"+newValue+"' data-layout='button_count'></div>";
-                var $scope = $('#fbshare').html(htmlcontent).scope();
-                $compile($('#fbshare'))($scope);
+//                    "<div class='fb-share-button' data-href='http://galdraland-1-0.herokuapp.com/teams/view/"+newValue+"' data-layout='button_count'></div>";
+                    "function fbshare() {" +
+                    "window.open('https://www.facebook.com/sharer/sharer.php?app_id=110469289012320&sdk=joey&u=http://galdraland-1-0.herokuapp.com/teams/view/"+newValue+"&display=popup&ref=plugin&src=share_button&description="+$scope.description+"&picture=http://galdraland-1-0.herokuapp.com"+$scope.team.image+"', '','width=200,height=100');" +
+                    "}" +
+                    "</script>" +
+                    "<img onclick='fbshare();' style='cursor:pointer;' src='/assets/images/fbshare.png'/>";
+
+                var $scope1 = $('#fbshare').html(htmlcontent).scope();
+                $compile($('#fbshare'))($scope1);
 
                 htmlcontent = "<div id='fb-root'>" +
                     "</div><script>window.fbAsyncInit = function () {FB.init({appId: '110469289012320',status: true,cookie: true,xfbml: true,version: 'v2.6'});};window.fbAsyncInit();(function (d, s, id) {var js, fjs = d.getElementsByTagName(s)[0];if (d.getElementById(id)) {return;}js = d.createElement(s);js.id = id;js.src = '//connect.facebook.net/en_US/sdk.js';fjs.parentNode.insertBefore(js, fjs);}(document, 'script', 'facebook-jssdk'));</script>" +
 //                    "<div class='fb-comments' data-href='http://galdraland-1-0.herokuapp.com/blog/#team" + newValue +"' data-numposts='5' data-colorscheme='light' data-width='350'></div>";
                     "<div class='fb-comments' data-href='http://webascender.com/blog/#team" + newValue +"' data-numposts='5' data-colorscheme='light' data-width='350'></div>";
-                $scope = $('#fbComment').html(htmlcontent).scope();
-                $compile($('#fbComment'))($scope);
+                $scope1 = $('#fbComment').html(htmlcontent).scope();
+                $compile($('#fbComment'))($scope1);
             }
         }, true);
 
