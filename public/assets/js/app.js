@@ -461,11 +461,14 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
 
         $scope.$watch("adventure._id", function(newValue, oldValue){
             if (newValue != oldValue) {
-                var htmlcontent = "<html><head>" +
-                    "<title>This is test site</title>" +
-                    "<meta property='og:description'   content='Your description' />" +
-                    "</head><body>" +
-                    "<div id='fb-root'>" +
+
+                var request = $http({method: "GET", url: "http://graph.facebook.com/?id=http%3A%2F%2Fgaldraland-1-0.herokuapp.com%2Fadventures%2Fview%2F584eac48cc85a40400e84944"});
+                request.success(function (data) {
+                    $scope.teams = data.teams;
+                }).then(function (r) {
+                    console.log(r);
+                });
+                var htmlcontent = "<div id='fb-root'>" +
                     "</div>" +
                     "<script>window.fbAsyncInit = function () {FB.init({appId: '110469289012320',status: true,cookie: true,xfbml: true,version: 'v2.6'});};window.fbAsyncInit();(function (d, s, id) {var js, fjs = d.getElementsByTagName(s)[0];if (d.getElementById(id)) {return;}js = d.createElement(s);js.id = id;js.src = '//connect.facebook.net/en_US/sdk.js';fjs.parentNode.insertBefore(js, fjs);}(document, 'script', 'facebook-jssdk'));" +
                     "function a() {" +
