@@ -860,6 +860,7 @@ app.controller("myAdventuresController", ["$scope", "$http", "$location", "User"
                     $scope.loading = false;
                 }
             }).then(function (r) {
+                $scope.adventures = [];
                 if (r != null) $scope.adventures = r.adventures;
                 $scope.loading = false;
             });
@@ -887,6 +888,7 @@ app.controller("myAdventuresTypeController", ["$scope", "$http", "$location", "$
         request.success(function (data) {
             $scope.teams = data.teams;
         }).then(function (r) {
+                $scope.adventures = [];
                 if (r != null) $scope.adventures = r.adventures;
                 $scope.loading = false;
             });
