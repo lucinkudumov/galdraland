@@ -856,13 +856,12 @@ app.controller("myAdventuresController", ["$scope", "$http", "$location", "User"
                 $scope.teams = data.teams;
             }).then(function (r) {
                 if ($scope.teams.length) {
-                    $scope.loading = false;
                     return $http({method: "POST", url: "adventure/list", api: true, data: {teams: $scope.teams}});
                 } else {
                     $scope.loading = false;
                 }
             }).then(function (r) {
-                if (r != null) $scope.adventures = r.adventures;
+                if (r != null) $scope.adventures = r.data.adventures;
                 $scope.loading = false;
             });
         }
@@ -889,7 +888,7 @@ app.controller("myAdventuresTypeController", ["$scope", "$http", "$location", "$
             $scope.teams = data.teams;
         }).then(function (r) {
                 $scope.adventures = [];
-                if (r != null) $scope.adventures = r.adventures;
+                if (r != null) $scope.adventures = r.data.adventures;
                 $scope.loading = false;
             });
     }
@@ -906,7 +905,7 @@ app.controller("myAdventuresTagController", ["$scope", "$http", "$location", "$s
             $scope.teams = data.teams;
         }).then(function (r) {
                 $scope.adventures = [];
-                if (r != null) $scope.adventures = r.adventures;
+                if (r != null) $scope.adventures = r.data.adventures;
                 $scope.loading = false;
             });
     }
