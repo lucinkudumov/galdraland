@@ -10,10 +10,10 @@
                     <td>{{ a.name}}</td>
                     <td><rating-widget isstatic="1" ref="a._id" ></rating-widget></td>
                 <td>{{ a.start + " - " + a.end}}</td>
-                <!--<td>-->
-                    <!--<a href="/adventures/view/{{ a._id}}" class="btn btn-same-size btn-primary" ng-show="user._id != a.owner">View</a>-->
-                    <!--<a href="/adventures/view/{{ a._id}}" class="btn btn-same-size btn-primary" ng-show="user._id == a.owner">Manage</a>-->
-                <!--</td>-->
+                <td>
+                    <a href="/adventures/view/{{ a._id}}" class="btn btn-same-size btn-primary" ng-show="user._id != a.owner">View</a>
+                    <a href="/adventures/view/{{ a._id}}" class="btn btn-same-size btn-primary" ng-show="user._id == a.owner">Manage</a>
+                </td>
                 </tr>
             </table>
         </div>
