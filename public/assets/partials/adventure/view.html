@@ -50,9 +50,9 @@
                 </div>
                 <h2 style="color:#394b59; margin-top:5px;font-size:18px; font-weight:700;" ng-show="adventure.tags.length > 0">TAGS</h2>
                 <div style="margin-top:5px;" ng-show="adventure.tags.length > 0" class="members-list">
-                    <div style="margin-top:0px; margin-left:5px;" ng-repeat="t in adventure.tags">
+                    <span style="margin-top:0px; margin-left:5px;" ng-repeat="t in adventure.tags">
                         <a ng-show="t" href="/adventuresTag/{{t}}" class="tag">{{t}}</a>
-                    </div>
+                    </span>
                 </div>
                 <h2 style="color:#394b59; margin-top:5px;font-size:18px; font-weight:700;" ng-show="adventure.status">STATUS</h2>
                 <div style="margin-top:5px;" ng-show="adventure.status" class="members-list">

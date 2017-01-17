@@ -25,9 +25,9 @@
                 </div>
                 <h2 style="color:#394b59; margin-top:5px;font-size:18px; font-weight:700;" ng-show="team.tags.length > 0">TAGS</h2>
                 <div style="margin-top:5px;" ng-show="team.tags.length > 0" class="members-list">
-                    <div style="margin-top:0px; margin-left:5px;" ng-repeat="t in team.tags">
+                    <span style="margin-top:0px; margin-left:5px;" ng-repeat="t in team.tags">
                         <a ng-show="t" href="/teamsTag/{{t}}" class="tag">{{t}}</a>
-                    </div>
+                    </span>
                 </div>
                 <h2 style="color:#394b59; margin-top:5px;font-size:18px; font-weight:700;" ng-show="team.description">DESCRIPTION</h2>
                 <div style="margin-top:5px;" ng-show="team.description" class="description">
