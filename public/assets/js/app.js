@@ -1389,32 +1389,32 @@ app.controller("sendInviteController", ["$scope", "$modalInstance", "values", "$
             
         //   } 
         // });
-        // FB.login(function () {
-        //     FB.api(
-        //             "/me/friends",
-        //             function (response) {
-        //                 console.log("Facebook friends response");
-        //                 if (response && !response.error) {
-        //                     $scope.values.fb_friends = response.data;
-        //                     console.log(response.data);
-        //                 }
-        //             }
-        //         );
-        //     }, {scope: 'user_friends'});
-        FB.login(function(response) {
-              console.log(response);
-              if (response.authResponse) {
-                FB.api('/me/taggable_friends', function(response) {
-                  if (response && !response.error) {
-                        $scope.values.fb_friends = response.data;
-                        alert("Logging in now.");
-                        console.log(response.data);
-                    }
-                });
-              } else {
-                console.log("Error");
-              }
-            }, {scope: 'public_profile,user_friends'});
+        FB.login(function () {
+             FB.api(
+                     "/me/friends",
+                     function (response) {
+                         console.log("Facebook friends response");
+                         if (response && !response.error) {
+                             $scope.values.fb_friends = response.data;
+                             console.log(response.data);
+                         }
+                     }
+                 );
+             }, {scope: 'user_friends'});
+//        FB.login(function(response) {
+//              console.log(response);
+//              if (response.authResponse) {
+//                FB.api('/me/taggable_friends', function(response) {
+//                  if (response && !response.error) {
+//                        $scope.values.fb_friends = response.data;
+//                        alert("Logging in now.");
+//                        console.log(response.data);
+//                    }
+//                });
+//              } else {
+//                console.log("Error");
+//              }
+//            }, {scope: 'public_profile,user_friends'});
         $scope.cancel = function () {
             $modalInstance.close({type: "CLOSE"});
         }
