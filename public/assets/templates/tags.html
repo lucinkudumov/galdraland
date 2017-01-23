@@ -11,7 +11,7 @@
 
   <span class="container-fluid" data-ng-show="toggles.inputActive">
     <input ng-if="!srcTags.length" type="text" data-ng-model="inputTag"
-           class="form-control decipher-tags-input" />
+           class="form-control decipher-tags-input" placeholder="Add Tags here"/>
     <!-- may want to fiddle with limitTo here, but it was inhibiting my results
     so perhaps there is another way -->
     <input ng-if="srcTags.length" type="text" data-ng-model="inputTag"
@@ -24,7 +24,7 @@
            data-typeahead-wait-ms="{{typeaheadOptions.waitMs}}"
 
            data-typeahead-editable="{{typeaheadOptions.allowsEditable}}"
-           data-typeahead-on-select="add($item) && selectArea() && typeaheadOptions.onSelect()"/>
+           data-typeahead-on-select="add($item) && selectArea() && typeaheadOptions.onSelect()" placeholder="Add Tags here"/>
 
   </span>
 </div>
