@@ -41,13 +41,13 @@
     height: 100%;
 }
 
-.decipher-tags .decipher-tags-input .ng-scope {
+.decipher-tags .decipher-tags-input .ng-valid {
     outline: 0;
     font-size: 20px;
     width:100%;
     height: 100%;
 }
-.decipher-tags .decipher-tags-input .ng-scope .ng-dirty{
+.decipher-tags .decipher-tags-input .ng-valid .ng-dirty{
     outline: 0;
     font-size: 20px;
     width:100%;
