@@ -123,8 +123,8 @@ module.exports = function (opts) {
             if (req.session.returnTo)
                 var returnTo = req.session.returnTo;
             if (process.env.HEROKU) {
-                var redirect = "https://galdraland-1-0.herokuapp.com",
-                        failRedirect = "https://galdraland-1-0.herokuapp.com/";
+                var redirect = "http://galdraland-1-0.herokuapp.com",
+                        failRedirect = "http://galdraland-1-0.herokuapp.com/";
             } else {
                 var redirect = "http://galdraland.com:9010",
                         failRedirect = "http://galdraland.com:9010/";
