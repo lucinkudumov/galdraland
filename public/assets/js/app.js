@@ -1376,19 +1376,21 @@ app.controller("sendInviteController", ["$scope", "$modalInstance", "values", "$
         $scope.init(values);
         //Get FaceBook Friends list.
         console.log("Facebook friends response");
-        // FB.getLoginStatus(function(response) {
-        //   if (response.status == 'connected') {
-        //     FB.api('/me/friends', function(response) {
-        //         if (response && !response.error) {
-        //             $scope.values.fb_friends = response.data;
-        //             alert("Logged in already.");
-        //             console.log(response.data);
-        //         }
-        //     });
-        //   } else if (response.status == 'not_authorized') {
-            
-        //   } 
-        // });
+        FB.getLoginStatus(function(response) {
+           if (response.status == 'connected') {
+               console.log("Logged in already");
+             FB.api('/me/friends', function(response) {
+                 if (response && !response.error) {
+                     $scope.values.fb_friends = response.data;
+                     alert("Logged in already.");
+                     console.log(response.data);
+                 }
+             });
+           } else if (response.status == 'not_authorized') {
+               console.log("Not authorized");
+           }
+        });
+
 //        FB.login(function () {
 //             FB.api(
 //                     "/me/friends",
@@ -1418,6 +1420,7 @@ app.controller("sendInviteController", ["$scope", "$modalInstance", "values", "$
                 console.log("Error");
               }
             }, {scope: 'public_profile,user_friends'});
+
         $scope.cancel = function () {
             $modalInstance.close({type: "CLOSE"});
         }
