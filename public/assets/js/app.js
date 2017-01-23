@@ -1379,7 +1379,7 @@ app.controller("sendInviteController", ["$scope", "$modalInstance", "values", "$
         FB.getLoginStatus(function(response) {
            if (response.status == 'connected') {
                console.log("Logged in already");
-             FB.api('/me/taggable_friends', function(response) {
+             FB.api('/me', function(response) {
                  console.log(response);
                  if (response && !response.error) {
                      $scope.values.fb_friends = response.data;
@@ -1408,7 +1408,7 @@ app.controller("sendInviteController", ["$scope", "$modalInstance", "values", "$
               console.log(response);
               if (response.authResponse) {
 //                FB.api('/me/taggable_friends', function(response) {
-                FB.api('/me/friends', function(response) {
+                FB.api('/me', function(response) {
                     console.log("Facebook friends response");
                     console.log(response);
                   if (response && !response.error) {
