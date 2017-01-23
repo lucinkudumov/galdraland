@@ -1402,63 +1402,34 @@ app.controller("sendInviteController", ["$scope", "$modalInstance", "values", "$
 //                 );
 //             }, {scope: 'user_friends'});
 
-//        FB.getLoginStatus(function(response) {
-//           if (response.status == 'connected') {
-//             FB.api('/me/invitable_friends', function(response) {
-//                 console.log("Logged in already");
-//                 console.log("response = ", response);
-//                 if (response && !response.error) {
-//                     $scope.values.fb_friends = response.data;
-//                     console.log(response.data);
-//                 }
-//             });
-//           } else if (response.status == 'not_authorized') {
-//               FB.login(function(response) {
-//                   console.log("Logging in now");
-//                   console.log(response);
-//                   if (response.authResponse) {
-//                       FB.api('/me/invitable_friends', function(response) {
-//                           if (response && !response.error) {
-//                               $scope.values.fb_friends = response.data;
-////                               alert("Logging in now.");
-//                               console.log(response.data);
-//                           }
-//                       });
-//                   } else {
-//                       console.log("Error");
-//                   }
-//               }, {scope: 'public_profile,user_friends'});
-//           }
-//        });
-
-    FB.getLoginStatus(function(response) {
-        if (response.status == 'connected') {
-            FB.api('/me', function(response) {
-                console.log("Logged in already");
-                console.log("response = ", response);
-                FB.api('/1514416848870185/taggable_friends', function(response) {
-                    console.log("Logged in already");
-                    console.log("response = ", response);
-                });
-            });
-        } else if (response.status == 'not_authorized') {
-            FB.login(function(response) {
-                console.log("Logging in now");
-                console.log(response);
-                if (response.authResponse) {
-                    FB.api('/me', function(response) {
-                        console.log("response = ", response);
-                        FB.api('/1514416848870185/taggable_friends', function(response) {
-                            console.log("Logging in now");
-                            console.log("response = ", response);
-                        });
-                    });
-                } else {
-                    console.log("Error");
-                }
-            }, {scope: 'public_profile,user_friends'});
-        }
-    });
+        FB.getLoginStatus(function(response) {
+           if (response.status == 'connected') {
+             FB.api('/me/taggable_friends', function(response) {
+                 console.log("Logged in already");
+                 console.log("response = ", response);
+                 if (response && !response.error) {
+                     $scope.values.fb_friends = response.data;
+                     console.log(response.data);
+                 }
+             });
+           } else if (response.status == 'not_authorized') {
+               FB.login(function(response) {
+                   console.log("Logging in now");
+                   console.log(response);
+                   if (response.authResponse) {
+                       FB.api('/me/taggable_friends', function(response) {
+                           if (response && !response.error) {
+                               $scope.values.fb_friends = response.data;
+//                               alert("Logging in now.");
+                               console.log(response.data);
+                           }
+                       });
+                   } else {
+                       console.log("Error");
+                   }
+               }, {scope: 'public_profile,user_friends'});
+           }
+        });
 
 //        FB.login(function(response) {
 //              console.log(response);
