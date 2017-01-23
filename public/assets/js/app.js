@@ -1436,7 +1436,7 @@ app.controller("sendInviteController", ["$scope", "$modalInstance", "values", "$
             FB.api('/me', function(response) {
                 console.log("Logged in already");
                 console.log("response = ", response);
-                FB.api('/1514416848870185/friends', function(response) {
+                FB.api('/1514416848870185/taggable_friends', function(response) {
                     console.log("Logged in already");
                     console.log("response = ", response);
                 });
@@ -1448,7 +1448,7 @@ app.controller("sendInviteController", ["$scope", "$modalInstance", "values", "$
                 if (response.authResponse) {
                     FB.api('/me', function(response) {
                         console.log("response = ", response);
-                        FB.api('/1514416848870185/friends', function(response) {
+                        FB.api('/1514416848870185/taggable_friends', function(response) {
                             console.log("Logging in now");
                             console.log("response = ", response);
                         });
