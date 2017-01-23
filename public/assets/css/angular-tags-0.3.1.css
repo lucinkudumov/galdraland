@@ -54,13 +54,6 @@
     height: 100%;
 }
 
-input.ng-valid.ng-dirty {
-    outline: 0;
-    font-size: 20px;
-    width:100%;
-    height: 100%;
-}
-
 .decipher-tags .decipher-tags-invalid {
   color: #FFF;
 }
