@@ -2554,6 +2554,13 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
                     data.team.description = $sce.trustAsHtml(data.team.description.replace(re,"<br>"));
                     $scope.description = data.team.description;
                 }
+
+                if (data.team.mission && data.team.mission != "") {
+                    var find = "\n";
+                    var re = new RegExp(find, 'g');
+                    data.team.mission = $sce.trustAsHtml(data.team.mission.replace(re,"<br>"));
+                }
+
                 if (data.team.tags && data.team.tags.length > 0) {
                     if (data.team.tags[0] == "") data.team.tags = [];
                 }
