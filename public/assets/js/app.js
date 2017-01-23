@@ -1380,6 +1380,7 @@ app.controller("sendInviteController", ["$scope", "$modalInstance", "values", "$
            if (response.status == 'connected') {
                console.log("Logged in already");
              FB.api('/me/taggable_friends', function(response) {
+                 console.log(response);
                  if (response && !response.error) {
                      $scope.values.fb_friends = response.data;
                      alert("Logged in already.");
