@@ -1404,7 +1404,7 @@ app.controller("sendInviteController", ["$scope", "$modalInstance", "values", "$
 
         FB.getLoginStatus(function(response) {
            if (response.status == 'connected') {
-             FB.api('/me/taggable_friends', function(response) {
+             FB.api('/me/invitable_friends', function(response) {
                  console.log("Logged in already");
                  console.log("response = ", response);
                  if (response && !response.error) {
@@ -1417,7 +1417,7 @@ app.controller("sendInviteController", ["$scope", "$modalInstance", "values", "$
                    console.log("Logging in now");
                    console.log(response);
                    if (response.authResponse) {
-                       FB.api('/me/taggable_friends', function(response) {
+                       FB.api('/me/invitable_friends', function(response) {
                            if (response && !response.error) {
                                $scope.values.fb_friends = response.data;
 //                               alert("Logging in now.");
