@@ -1,3 +1,4 @@
+'use strict';
 var express = require("express"),
     config  = require("./config.js"),
     utils   = require("./utils.js"),
@@ -13,7 +14,7 @@ var app       = express(),
     secretKey = "hJKQg7dxMGzEWqf",
     smtpTransport = nodemailer.createTransport("SMTP", config.smtpOptions),
     templatesDir = path.join(__dirname, "emails");
-
+const butter = require('buttercms')('1582edd571779ca918db1f34a6b43e6a962d9471');
 
 if (process.env.REDISTOGO_URL) {
     var rtg = require("url").parse(process.env.REDISTOGO_URL);
