@@ -14,7 +14,7 @@ var app       = express(),
     smtpTransport = nodemailer.createTransport("SMTP", config.smtpOptions),
     templatesDir = path.join(__dirname, "emails");
 //var butter = require('buttercms')('1582edd571779ca918db1f34a6b43e6a962d9471');
-var Prismic = require('prismic.ic');
+var Prismic = require('prismic.io');
 
 if (process.env.REDISTOGO_URL) {
     var rtg = require("url").parse(process.env.REDISTOGO_URL);
