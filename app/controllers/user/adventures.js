@@ -3,7 +3,6 @@ var validator = require('validator'),
         multiparty = require('multiparty'),
         fs = require('fs'),
         async = require('async');
-var meowblog = require("meow-blog");
 module.exports = function (opts) {
     var userModel = opts.models.User,
             emailModel = opts.models.Email,
