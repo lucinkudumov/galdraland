@@ -8,7 +8,7 @@ var express = require("express"),
     nodemailer = require("nodemailer"),
     emailTemplates = require('email-templates'),
     path = require('path');
-var meowblog = require("meow-blog");
+
 var imageModel = require('./app/models/Imagestore');
 var app       = express(),
     secretKey = "hJKQg7dxMGzEWqf",
