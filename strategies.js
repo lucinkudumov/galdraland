@@ -43,7 +43,7 @@ module.exports.facebook = function (opts, cb) {
           userModel.findOne({ profileId : profileJSON.id }, function (err, user) {
               if (err) {
                   console.log(err);
-                  return done(err, false);
+                  return done(err);
               } else if (user) {
                   return done(null, user);
               } else {
@@ -84,7 +84,7 @@ module.exports.facebook = function (opts, cb) {
                       u.save(function (err, user) {
                           if (err) {
                               console.log(err);
-                              return done(err, false);
+                              return done(err);
                           } else {
                               var email = new emailModel();
                               email.userId = user._id;
@@ -93,7 +93,7 @@ module.exports.facebook = function (opts, cb) {
                               email.save(function (err, email) {
                                   if (err) {
                                       console.log(err);
-                                      return done(err, false);
+                                      return done(err);
                                   } else {
                                       return done(null, user);
                                   }
@@ -114,7 +114,7 @@ module.exports.facebook = function (opts, cb) {
                       utils.downloadFileFromUrl("http://graph.facebook.com/" + u.profileId + "/picture?type=large", path.join(__dirname, "public", "users", fileName), function (err) {
                           if (err) {
                               console.log(err);
-                              return done(err, false);
+                              return done(err);
                           } else {
                               saveToUser("/users/" + fileName);
                           }
