@@ -306,7 +306,7 @@ app.run(["$rootScope", "$http", "$location", "User", function ($rootScope, $http
                 $rootScope.flag = 1;
             else
                 $rootScope.flag = 0;
-            if(toState.url === "/about" || toState.url === "/how_it_works" || toState.url === "/contact_us" || toState.url === "/blog"
+            if(toState.url === "/about" || toState.url === "/how_it_works" || toState.url === "/contact_us" /*|| toState.url === "/blog"*/
                 || toState.url === "/shareadventure/:id" || toState.url === "/shareteam/:id" ) {
                 $location.url(toState.url);
             } else if (toState.requireLogin && !User.isLoggedIn()) {
@@ -2824,6 +2824,20 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
         }, true);
         $scope.refresh();
     }]);
+
+app.controller("blogController", ["$scope", "$http", "User", "$location", function ($scope, $http, User, $location) {
+    $scope.user = User.isLoggedIn();
+    $scope.results = [];
+    console.log("calling blog");
+    $scope.refresh = function () {
+        $scope.loading = true;
+        var request = $http({method: "POST", url: "/api/blogs", api: true});
+        request.success(function (data) {
+            console.log(data);
+        });
+    }
+    $scope.refresh();
+}]);
 
 app.directive('dynFbCommentBox', function () {
     function createHTML(href, numposts, colorscheme) {
