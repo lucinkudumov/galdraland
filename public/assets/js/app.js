@@ -306,7 +306,7 @@ app.run(["$rootScope", "$http", "$location", "User", function ($rootScope, $http
                 $rootScope.flag = 1;
             else
                 $rootScope.flag = 0;
-            if(toState.url === "/about" || toState.url === "/how_it_works" || toState.url === "/contact_us" /*|| toState.url === "/blog"*/
+            if(toState.url === "/about" || toState.url === "/how_it_works" || toState.url === "/contact_us" || toState.url === "/blog"
                 || toState.url === "/shareadventure/:id" || toState.url === "/shareteam/:id" ) {
                 $location.url(toState.url);
             } else if (toState.requireLogin && !User.isLoggedIn()) {
