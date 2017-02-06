@@ -4,6 +4,7 @@
   "description": "Galdra project",
   "main": "app.js",
   "engines": {
+    "node": ">=4.3",
 	"npm": "2.1.x"
   },
   "scripts": {
