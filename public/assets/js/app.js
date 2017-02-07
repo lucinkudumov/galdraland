@@ -1206,12 +1206,14 @@ app.controller("indexController", ["$scope", "$location", "$window", "$statePara
 
     $scope.refresh = function () {
             $scope.loading = true;
+            console.log("index refreshing...");
             $http({
                 method: "POST",
                 url: "lastAdventure",
                 api: true,
                 data: {term: ""},
                 success: function(data) {
+                    console.log("data = ", data);
                     $scope.adventures = [];
 
                     data.adventures.sort($scope.compare);
