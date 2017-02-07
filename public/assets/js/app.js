@@ -319,17 +319,35 @@ app.run(["$rootScope", "$http", "$location", "User", function ($rootScope, $http
             }
         });
 
-        var request = $http({method: "GET", url: "getDefaultUser", api: true});
-        request.success(function (data) {
-            if (data.user) {
-                $rootScope.defUser = data.user;
-            } else {
-                request = $http({method: "POST", url: "createDefaultUser", api: true});
-                request.success(function (data) {
-                    console.log(data);
-                });
+        var request = $http({
+            method: "GET",
+            url: "getDefaultUser",
+            api: true,
+            success: function(data) {
+                if (data.user) {
+                    $rootScope.defUser = data.user;
+                } else {
+                    request = $http({
+                        method: "POST",
+                        url: "createDefaultUser",
+                        api: true,
+                        success: function (data) {
+                            console.log(data);
+                        }
+                    });
+                }
             }
         });
+//        request.success(function (data) {
+//            if (data.user) {
+//                $rootScope.defUser = data.user;
+//            } else {
+//                request = $http({method: "POST", url: "createDefaultUser", api: true});
+//                request.success(function (data) {
+//                    console.log(data);
+//                });
+//            }
+//        });
     }]);
 app.controller("loginController", ["$scope", "$location", "$anchorScroll", function ($scope, $location, $anchorScroll) {
 //    $scope.gotoHash = function(hash) {
