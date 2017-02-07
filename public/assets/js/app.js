@@ -1208,12 +1208,15 @@ app.controller("indexController", ["$scope", "$location", "$window", "$statePara
             url: "lastAdventure",
             api: true,
             data: {term: ""}}).then (function success(data) {
+                console.log("lastAdventure = ", data);
                 $scope.adventures = [];
-                if (data != null && data.data.adventures != null && data.data.adventures.length != null) {
-                    var index = 0;
-                    for (var i = data.data.adventures.length - 1; i >= 0; i--) {
-                        if (index == 4) break;
-                        index++;
+                if (data != null && data.data.adventures != null && data.data.adventures.length) {
+                    data.data.adventures.sort($scope.compare);
+                    data.data.adventures.reverse();
+                    if (data.data.adventures.length > 4) {
+                        data.data.adventures.length = 4;
+                    }
+                    for (var i = 0; i < data.data.teams.length; i++) {
                         var result = {};
                         result._id = data.data.adventures[i]._id;
                         result.name = data.data.adventures[i].name;
@@ -1230,11 +1233,14 @@ app.controller("indexController", ["$scope", "$location", "$window", "$statePara
                     api: true,
                     data: {term: ""}}).then (function success(data) {
                         $scope.teams = [];
-                        if (data.data != null && data.data.teams != null && data.data.teams.length != null) {
-                            var index = 0;
-                            for (var i = data.data.teams.length - 1; i >= 0; i--) {
-                                if (index == 4) break;
-                                index++;
+                        if (data != null && data.data.teams != null && data.data.teams.length) {
+                            data.data.teams.sort($scope.compare);
+                            data.data.teams.reverse();
+                            if (data.data.teams.length > 4) {
+                                data.data.teams.length = 4;
+                            }
+
+                            for (var i = 0; i < data.data.teams.length; i++) {
                                 var result = {};
                                 result._id = data.data.teams[i]._id;
                                 result.name = data.data.teams[i].name;
@@ -1249,15 +1255,19 @@ app.controller("indexController", ["$scope", "$location", "$window", "$statePara
                             api: true,
                             data: {term: ""}}).then (function success (data){
                                 $scope.users = [];
-                                if (data.data != null && data.data.users != null && data.data.users.length != null) {
-                                    var index = 0;
-                                    for (var i = data.data.users.length - 1; i >= 0; i--) {
-                                        if (index == 4) break;
-                                        index++;
+                                if (data != null && data.data.users != null && data.data.users.length) {
+                                    data.data.users.sort($scope.compare);
+                                    data.data.users.reverse();
+                                    if (data.data.users.length > 4) {
+                                        data.data.users.length = 4;
+                                    }
+
+                                    for (var i = 0; i < data.data.users.length; i++) {
                                         var result = {};
                                         result._id = data.data.users[i]._id;
                                         result.name = data.data.users[i].fullname;
                                         result.image = data.data.users[i].photo;
+                                        console.log("photo = " + data.data.users[i].photo);
                                         $scope.users.push(result);
                                     }
                                 }
