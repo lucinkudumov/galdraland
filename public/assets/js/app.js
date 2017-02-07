@@ -1210,8 +1210,14 @@ app.controller("indexController", ["$scope", "$location", "$window", "$statePara
             data: {term: ""}}).then (function success(data) {
                 console.log("lastAdventure = ", data);
                 $scope.adventures = [];
+                data.adventures.sort(function (a, b) {
+                    if (a._id < b._id)
+                        return -1;
+                    if (a._id > b._id)
+                        return 1;
+                    return 0;
+                });
 
-                data.adventures.sort($scope.compare);
                 data.adventures.reverse();
                 if (data.adventures.length > 4) {
                     data.adventures.length = 4;
