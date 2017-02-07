@@ -324,8 +324,8 @@ app.run(["$rootScope", "$http", "$location", "User", function ($rootScope, $http
             url: "getDefaultUser",
             api: true}).then(function success(data) {
                 console.log("getDefaultUser = ", data);
-                if (data.user) {
-                    $rootScope.defUser = data.user;
+                if (data.data.user) {
+                    $rootScope.defUser = data.data.user;
                 } else {
                     $http({
                         method: "POST",
@@ -1261,7 +1261,6 @@ app.controller("indexController", ["$scope", "$location", "$window", "$statePara
                                     if (data.data.users.length > 4) {
                                         data.data.users.length = 4;
                                     }
-
                                     for (var i = 0; i < data.data.users.length; i++) {
                                         var result = {};
                                         result._id = data.data.users[i]._id;
@@ -1278,21 +1277,26 @@ app.controller("indexController", ["$scope", "$location", "$window", "$statePara
     }
 
         $scope.sendEmail = function () {
-            var request = $http({method: "POST", url: "sendContact", api: true,
-                data: {toEmail: 'info@holomathics.com',
+            $http({
+                method: "POST",
+                url: "sendContact",
+                api: true,
+                data: {
+                    toEmail: 'dav.makow1992@yandex.com',// 'info@holomathics.com',
                     fromEmail: $scope.yourEmail,
                     text: $scope.description,
-                    subject: 'Contact Galdraland Support Center'}});
-            request.success(function (data) {
-                console.log('Mail Sent Success');
-                console.log(data);
-                if (data.success == true)
-                    $scope.sentSuccess = true;
-                else
+                    subject: 'Contact Galdraland Support Center'}
+            }).then( function success(data) {
+                    console.log('Mail Sent Success');
+                    console.log(data);
+                    if (data.data.success == true)
+                        $scope.sentSuccess = true;
+                    else
+                        $scope.sentFailed = true;
+                }, function error (data) {
                     $scope.sentFailed = true;
-            }).error(function (err) {
-                    $scope.sentFailed = true;
-                });
+                }
+            );
         }
 
         $scope.refresh();
