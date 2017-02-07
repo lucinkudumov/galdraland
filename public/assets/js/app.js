@@ -323,6 +323,7 @@ app.run(["$rootScope", "$http", "$location", "User", function ($rootScope, $http
             method: "GET",
             url: "getDefaultUser",
             api: true}).then(function success(data) {
+                console.log("getDefaultUser = ", data);
                 if (data.user) {
                     $rootScope.defUser = data.user;
                 } else {
@@ -1208,7 +1209,6 @@ app.controller("indexController", ["$scope", "$location", "$window", "$statePara
             url: "lastAdventure",
             api: true,
             data: {term: ""}}).then (function success(data) {
-                console.log("lastAdventure = ", data);
                 $scope.adventures = [];
                 if (data != null && data.data.adventures != null && data.data.adventures.length) {
                     data.data.adventures.sort($scope.compare);
