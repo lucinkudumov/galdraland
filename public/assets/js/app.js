@@ -319,11 +319,12 @@ app.run(["$rootScope", "$http", "$location", "User", function ($rootScope, $http
             }
         });
 
+        console.log("starting DefaultUser...");
+
         $http({
             method: "GET",
             url: "getDefaultUser",
-            api: true,
-            success: function(data) {
+            api: true}).then(function success(data) {
                 console.log("getDefaultUser = ", data);
                 if (data.user) {
                     $rootScope.defUser = data.user;
@@ -331,13 +332,10 @@ app.run(["$rootScope", "$http", "$location", "User", function ($rootScope, $http
                     $http({
                         method: "POST",
                         url: "createDefaultUser",
-                        api: true,
-                        success: function (data) {
-                            console.log(data);
-                        }
+                        api: true}).then (function sucess(data) {
+                        console.log(data);
                     });
                 }
-            }
         });
     }]);
 app.controller("loginController", ["$scope", "$location", "$anchorScroll", function ($scope, $location, $anchorScroll) {
