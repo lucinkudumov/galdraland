@@ -38,7 +38,7 @@
       "fs" : "~0.0.2",
       "sendgrid": "~2.0.0",
       "meow-blog": "~0.1.9",
-      "email-templates": "~0.1.8"
+      "email-templates": "~2.4.0"
   },
     "devDependencies": {
         "grunt": "~0.4.2",
