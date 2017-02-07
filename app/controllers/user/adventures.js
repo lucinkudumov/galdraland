@@ -132,14 +132,14 @@ module.exports = function (opts) {
             });
         },
         "post#lastAdventure": function (req, res) {
-            adventureModel.find({}, function (err, adventures) {
+            adventureModel.find({$orderby: {$natural : -1}}, function (err, adventures) {
                 if (err) {
                     console.log(err);
                     return res.json({adventures: []});
                 } else {
                     return res.json({adventures: adventures});
                 }
-            }).sort({$natural : -1}).limit(4);
+            }).limit(4);
         },
         "post#adventure/adsearch": function (req, res) {
             var name = req.body.name;
