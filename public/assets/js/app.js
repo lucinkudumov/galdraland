@@ -1210,26 +1210,19 @@ app.controller("indexController", ["$scope", "$location", "$window", "$statePara
             data: {term: ""}}).then (function success(data) {
                 console.log("lastAdventure = ", data);
                 $scope.adventures = [];
-                data.adventures.sort(function (a, b) {
-                    if (a._id < b._id)
-                        return -1;
-                    if (a._id > b._id)
-                        return 1;
-                    return 0;
-                });
-                data.adventures.reverse();
-                if (data.adventures.length > 4) {
-                    data.adventures.length = 4;
-                }
-
-                for (var i = 0; i < data.adventures.length; i++) {
-                    var result = {};
-                    result._id = data.adventures[i]._id;
-                    result.name = data.adventures[i].name;
-                    result.image = data.adventures[i].image;
-                    result.text1 = data.adventures[i].tags.join(" ");
-                    result.text2 = data.adventures[i].start + " - " + data.adventures[i].end;
-                    $scope.adventures.push(result);
+                if (data != null && data.adventures != null && data.adventures.length != null) {
+                    var index = 0;
+                    for (var i = data.adventures.length - 1; i >= 0; i--) {
+                        if (index == 4) break;
+                        index++;
+                        var result = {};
+                        result._id = data.adventures[i]._id;
+                        result.name = data.adventures[i].name;
+                        result.image = data.adventures[i].image;
+                        result.text1 = data.adventures[i].tags.join(" ");
+                        result.text2 = data.adventures[i].start + " - " + data.adventures[i].end;
+                        $scope.adventures.push(result);
+                    }
                 }
 
                 $http({
@@ -1239,20 +1232,20 @@ app.controller("indexController", ["$scope", "$location", "$window", "$statePara
                     data: {term: ""}}).then (function success(data) {
                         console.log("lastTeam = ", data);
                         $scope.teams = [];
-
-//                        data.teams.sort($scope.compare);
-                        data.teams.reverse();
-                        if (data.teams.length > 4) {
-                            data.teams.length = 4;
+                        if (data != null && data.teams != null && data.teams.length != null) {
+                            var index = 0;
+                            for (var i = data.teams.length - 1; i >= 0; i--) {
+                                if (index == 4) break;
+                                index++;
+                                var result = {};
+                                result._id = data.teams[i]._id;
+                                result.name = data.teams[i].name;
+                                result.image = data.teams[i].image;
+                                $scope.teams.push(result);
+                            }
                         }
 
-                        for (var i = 0; i < data.teams.length; i++) {
-                            var result = {};
-                            result._id = data.teams[i]._id;
-                            result.name = data.teams[i].name;
-                            result.image = data.teams[i].image;
-                            $scope.teams.push(result);
-                        }
+
                         $http({
                             method: "POST",
                             url: "lastUser",
@@ -1260,19 +1253,18 @@ app.controller("indexController", ["$scope", "$location", "$window", "$statePara
                             data: {term: ""}}).then (function success (data){
                                 console.log("lastUser = ", data);
                                 $scope.users = [];
-//                                data.users.sort($scope.compare);
-                                data.users.reverse();
-                                if (data.users.length > 4) {
-                                    data.users.length = 4;
-                                }
-
-                                for (var i = 0; i < data.users.length; i++) {
-                                    var result = {};
-                                    result._id = data.users[i]._id;
-                                    result.name = data.users[i].fullname;
-                                    result.image = data.users[i].photo;
-                                    console.log("photo = " + data.users[i].photo);
-                                    $scope.users.push(result);
+                                if (data != null && data.users != null && data.users.length != null) {
+                                    var index = 0;
+                                    for (var i = data.users.length - 1; i >= 0; i--) {
+                                        if (index == 4) break;
+                                        index++;
+                                        var result = {};
+                                        result._id = data.users[i]._id;
+                                        result.name = data.users[i].fullname;
+                                        result.image = data.users[i].photo;
+                                        console.log("photo = " + data.users[i].photo);
+                                        $scope.users.push(result);
+                                    }
                                 }
                                 $scope.loading = false;
                         });
