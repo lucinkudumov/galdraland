@@ -1221,6 +1221,7 @@ app.controller("indexController", ["$scope", "$location", "$window", "$statePara
                         result.image = data.adventures[i].image;
                         result.text1 = data.adventures[i].tags.join(" ");
                         result.text2 = data.adventures[i].start + " - " + data.adventures[i].end;
+                        console.log("test = ", result);
                         $scope.adventures.push(result);
                     }
                 }
