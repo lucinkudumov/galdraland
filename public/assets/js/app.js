@@ -1210,19 +1210,19 @@ app.controller("indexController", ["$scope", "$location", "$window", "$statePara
             data: {term: ""}}).then (function success(data) {
                 console.log("lastAdventure = ", data);
                 $scope.adventures = [];
-                if (data != null && data.adventures != null && data.adventures.length != null) {
+                if (data != null && data.data.adventures != null && data.data.adventures.length != null) {
                     console.log("aaaaaaaaaaaaaa");
                     var index = 0;
-                    for (var i = data.adventures.length - 1; i >= 0; i--) {
+                    for (var i = data.data.adventures.length - 1; i >= 0; i--) {
                         console.log("bbbbbbbbbbbb");
                         if (index == 4) break;
                         index++;
                         var result = {};
-                        result._id = data.adventures[i]._id;
-                        result.name = data.adventures[i].name;
-                        result.image = data.adventures[i].image;
-                        result.text1 = data.adventures[i].tags.join(" ");
-                        result.text2 = data.adventures[i].start + " - " + data.adventures[i].end;
+                        result._id = data.data.adventures[i]._id;
+                        result.name = data.data.adventures[i].name;
+                        result.image = data.data.adventures[i].image;
+                        result.text1 = data.data.adventures[i].tags.join(" ");
+                        result.text2 = data.data.adventures[i].start + " - " + data.data.adventures[i].end;
                         console.log("test = ", result);
                         $scope.adventures.push(result);
                     }
