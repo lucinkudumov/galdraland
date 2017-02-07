@@ -4,7 +4,8 @@
   "description": "Galdra project",
   "main": "app.js",
   "engines": {
-    "node": "6.9.1"
+    "node": "6.9.1",
+    "npm": "2.1.x"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
