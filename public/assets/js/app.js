@@ -1177,7 +1177,7 @@ app.controller("headerController", ["$scope", "$rootScope", "$http", "$location"
         }
     }]);
 
-app.controller("indexController", ["$scope", "$location", "$window", "$stateParams", "$http", function ($scope, $location, $window, $stateParams, $http) {
+app.controller("indexController", ["$scope", "$location", "$window", "$stateParams", "$http", "$filter", function ($scope, $location, $window, $stateParams, $http, $filter) {
         $scope.r = "";
         $scope.adventures = [];
         $scope.teams = [];
@@ -1208,7 +1208,7 @@ app.controller("indexController", ["$scope", "$location", "$window", "$statePara
             url: "lastAdventure",
             api: true,
             data: {term: ""}}).then (function success(data) {
-                console.log("lastAdventure = ", data);
+                console.log("lastAdventure = ", data.adventures);
                 $scope.adventures = [];
 //                data.adventures.sort(function (a, b) {
 //                    if (a._id < b._id)
@@ -1217,8 +1217,9 @@ app.controller("indexController", ["$scope", "$location", "$window", "$statePara
 //                        return 1;
 //                    return 0;
 //                });
-
-                data.adventures.reverse();
+                data.adventures =  $filter('orderBy')(data.adventures, '_id')
+                console.log("lastAdventure = ", data.adventures);
+//                data.adventures.reverse();
                 if (data.adventures.length > 4) {
                     data.adventures.length = 4;
                 }
