@@ -1216,7 +1216,7 @@ app.controller("indexController", ["$scope", "$location", "$window", "$statePara
                     if (data.data.adventures.length > 4) {
                         data.data.adventures.length = 4;
                     }
-                    for (var i = 0; i < data.data.teams.length; i++) {
+                    for (var i = 0; i < data.data.adventures.length; i++) {
                         var result = {};
                         result._id = data.data.adventures[i]._id;
                         result.name = data.data.adventures[i].name;
