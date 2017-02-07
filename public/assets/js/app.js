@@ -1208,7 +1208,7 @@ app.controller("indexController", ["$scope", "$location", "$window", "$statePara
             url: "lastAdventure",
             api: true,
             data: {term: ""}}).then (function success(data) {
-                console.log("lastAdventure = ", data.adventures);
+                console.log("lastAdventure = ", data);
                 $scope.adventures = [];
 //                data.adventures.sort(function (a, b) {
 //                    if (a._id < b._id)
@@ -1217,8 +1217,8 @@ app.controller("indexController", ["$scope", "$location", "$window", "$statePara
 //                        return 1;
 //                    return 0;
 //                });
-                data.adventures =  $filter('orderBy')(data.adventures, '_id')
-                console.log("lastAdventure = ", data.adventures);
+                $scope.adventures =  $filter('orderBy')(data.adventures, '_id', false);
+                console.log("lastAdventure = ", $scope.adventures);
 //                data.adventures.reverse();
                 if (data.adventures.length > 4) {
                     data.adventures.length = 4;
