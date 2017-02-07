@@ -319,7 +319,7 @@ app.run(["$rootScope", "$http", "$location", "User", function ($rootScope, $http
             }
         });
 
-        var request = $http({
+        $http({
             method: "GET",
             url: "getDefaultUser",
             api: true,
@@ -327,7 +327,7 @@ app.run(["$rootScope", "$http", "$location", "User", function ($rootScope, $http
                 if (data.user) {
                     $rootScope.defUser = data.user;
                 } else {
-                    request = $http({
+                    $http({
                         method: "POST",
                         url: "createDefaultUser",
                         api: true,
@@ -338,16 +338,6 @@ app.run(["$rootScope", "$http", "$location", "User", function ($rootScope, $http
                 }
             }
         });
-//        request.success(function (data) {
-//            if (data.user) {
-//                $rootScope.defUser = data.user;
-//            } else {
-//                request = $http({method: "POST", url: "createDefaultUser", api: true});
-//                request.success(function (data) {
-//                    console.log(data);
-//                });
-//            }
-//        });
     }]);
 app.controller("loginController", ["$scope", "$location", "$anchorScroll", function ($scope, $location, $anchorScroll) {
 //    $scope.gotoHash = function(hash) {
@@ -390,37 +380,47 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
         }
 
         $scope.refresh = function () {
-            var request = $http({method: "POST", url: "adventure/get", api: true, data: {id: $stateParams.id}});
-            request.success(function (data) {
-                if (data.adventure.description && data.adventure.description != "") {
-                    var find = "\n";
-                    var re = new RegExp(find, 'g');
-                    data.adventure.description = $sce.trustAsHtml(data.adventure.description.replace(re,"<br>"));
-                    $scope.description = data.adventure.description;
-                }
-                if (data.adventure.tags && data.adventure.tags.length > 0) {
-                    if (data.adventure.tags[0] == "") data.adventure.tags = [];
-                }
-
-                $scope.date = new Date(data.adventure.start);
-                $scope.events = [
-                    {
-                        name: 'start',
-                        date: new Date(data.adventure.start)
-                    },
-                    {
-                        name: 'end',
-                        date: new Date(data.adventure.end)
+            $http({
+                method: "POST",
+                url: "adventure/get",
+                api: true,
+                data: {id: $stateParams.id},
+                success: function (data) {
+                    if (data.adventure.description && data.adventure.description != "") {
+                        var find = "\n";
+                        var re = new RegExp(find, 'g');
+                        data.adventure.description = $sce.trustAsHtml(data.adventure.description.replace(re,"<br>"));
+                        $scope.description = data.adventure.description;
                     }
-                ];
-                $scope.timeStart = data.adventure.start;
-                $scope.timeEnd = data.adventure.end;
-                $scope.adventure = data.adventure;
-                $scope.isManager = data.adventure.owner == $scope.user._id;
-                request = $http({method: "POST", url: "getViewUser", api: true, data: {userid: data.adventure.owner}});
-                request.success(function (data) {
-                    $scope.photo = data.user.photo;
-                });
+                    if (data.adventure.tags && data.adventure.tags.length > 0) {
+                        if (data.adventure.tags[0] == "") data.adventure.tags = [];
+                    }
+
+                    $scope.date = new Date(data.adventure.start);
+                    $scope.events = [
+                        {
+                            name: 'start',
+                            date: new Date(data.adventure.start)
+                        },
+                        {
+                            name: 'end',
+                            date: new Date(data.adventure.end)
+                        }
+                    ];
+                    $scope.timeStart = data.adventure.start;
+                    $scope.timeEnd = data.adventure.end;
+                    $scope.adventure = data.adventure;
+                    $scope.isManager = data.adventure.owner == $scope.user._id;
+                    $http({
+                        method: "POST",
+                        url: "getViewUser",
+                        api: true,
+                        data: {userid: data.adventure.owner},
+                        success : function (data) {
+                            $scope.photo = data.user.photo;
+                        }
+                    });
+                }
             });
         }
 
@@ -1195,85 +1195,90 @@ app.controller("indexController", ["$scope", "$location", "$window", "$statePara
         $scope.sentFailed = false;
 
         var search = $location.search();
-        $scope.refresh = function () {
+
+    $scope.compare = function (a, b) {
+        if (a._id < b._id)
+            return -1;
+        if (a._id > b._id)
+            return 1;
+        return 0;
+    }
+
+    $scope.refresh = function () {
             $scope.loading = true;
+            $http({
+                method: "POST",
+                url: "lastAdventure",
+                api: true,
+                data: {term: ""},
+                success: function(data) {
+                    $scope.adventures = [];
 
-            var request = $http({method: "POST", url: "lastAdventure", api: true, data: {term: ""}});
-            request.success($scope.parse_adventures);
+                    data.adventures.sort($scope.compare);
+                    data.adventures.reverse();
+                    if (data.adventures.length > 4) {
+                        data.adventures.length = 4;
+                    }
 
-            request = $http({method: "POST", url: "lastTeam", api: true, data: {term: ""}});
-            request.success($scope.parse_teams);
+                    for (var i = 0; i < data.adventures.length; i++) {
+                        var result = {};
+                        result._id = data.adventures[i]._id;
+                        result.name = data.adventures[i].name;
+                        result.image = data.adventures[i].image;
+                        result.text1 = data.adventures[i].tags.join(" ");
+                        result.text2 = data.adventures[i].start + " - " + data.adventures[i].end;
+                        $scope.adventures.push(result);
+                    }
+                    $http({
+                        method: "POST",
+                        url: "lastTeam",
+                        api: true,
+                        data: {term: ""},
+                        success: function (data) {
+                            $scope.teams = [];
 
-            request = $http({method: "POST", url: "lastUser", api: true, data: {term: ""}});
-            request.success($scope.parse_users);
+                            data.teams.sort($scope.compare);
+                            data.teams.reverse();
+                            if (data.teams.length > 4) {
+                                data.teams.length = 4;
+                            }
 
-            request.then(function () {
-                $scope.loading = false;
+                            for (var i = 0; i < data.teams.length; i++) {
+                                var result = {};
+                                result._id = data.teams[i]._id;
+                                result.name = data.teams[i].name;
+                                result.image = data.teams[i].image;
+                                $scope.teams.push(result);
+                            }
+                            $http({
+                                method: "POST",
+                                url: "lastUser",
+                                api: true,
+                                data: {term: ""},
+                                success: function (data) {
+                                    $scope.users = [];
+
+                                    data.users.sort($scope.compare);
+                                    data.users.reverse();
+                                    if (data.users.length > 4) {
+                                        data.users.length = 4;
+                                    }
+
+                                    for (var i = 0; i < data.users.length; i++) {
+                                        var result = {};
+                                        result._id = data.users[i]._id;
+                                        result.name = data.users[i].fullname;
+                                        result.image = data.users[i].photo;
+                                        console.log("photo = " + data.users[i].photo);
+                                        $scope.users.push(result);
+                                    }
+                                }
+                            });
+                            $scope.loading = false;
+                        }
+                    });
+                }
             });
-        }
-        $scope.compare = function (a, b) {
-            if (a._id < b._id)
-                return -1;
-            if (a._id > b._id)
-                return 1;
-            return 0;
-        }
-
-        $scope.parse_adventures = function (data) {
-            $scope.adventures = [];
-
-            data.adventures.sort($scope.compare);
-            data.adventures.reverse();
-            if (data.adventures.length > 4) {
-                data.adventures.length = 4;
-            }
-
-            for (var i = 0; i < data.adventures.length; i++) {
-                var result = {};
-                result._id = data.adventures[i]._id;
-                result.name = data.adventures[i].name;
-                result.image = data.adventures[i].image;
-                result.text1 = data.adventures[i].tags.join(" ");
-                result.text2 = data.adventures[i].start + " - " + data.adventures[i].end;
-                $scope.adventures.push(result);
-            }
-        }
-
-        $scope.parse_teams = function (data) {
-            $scope.teams = [];
-
-            data.teams.sort($scope.compare);
-            data.teams.reverse();
-            if (data.teams.length > 4) {
-                data.teams.length = 4;
-            }
-
-            for (var i = 0; i < data.teams.length; i++) {
-                var result = {};
-                result._id = data.teams[i]._id;
-                result.name = data.teams[i].name;
-                result.image = data.teams[i].image;
-                $scope.teams.push(result);
-            }
-        }
-
-        $scope.parse_users = function (data) {
-            $scope.users = [];
-
-            data.users.sort($scope.compare);
-            data.users.reverse();
-            if (data.users.length > 4) {
-                data.users.length = 4;
-            }
-
-            for (var i = 0; i < data.users.length; i++) {
-                var result = {};
-                result._id = data.users[i]._id;
-                result.name = data.users[i].fullname;
-                result.image = data.users[i].photo;
-                console.log("photo = " + data.users[i].photo);
-                $scope.users.push(result);
-            }
         }
 
         $scope.sendEmail = function () {
