@@ -1210,16 +1210,15 @@ app.controller("indexController", ["$scope", "$location", "$window", "$statePara
             data: {term: ""}}).then (function success(data) {
                 console.log("lastAdventure = ", data);
                 $scope.adventures = [];
-//                data.adventures.sort(function (a, b) {
-//                    if (a._id < b._id)
-//                        return -1;
-//                    if (a._id > b._id)
-//                        return 1;
-//                    return 0;
-//                });
-                $scope.adventures =  $filter('orderBy')(data.adventures, '_id', false);
+                data.adventures.sort(function (a, b) {
+                    if (a._id < b._id)
+                        return -1;
+                    if (a._id > b._id)
+                        return 1;
+                    return 0;
+                });
                 console.log("lastAdventure = ", $scope.adventures);
-//                data.adventures.reverse();
+                data.adventures.reverse();
                 if (data.adventures.length > 4) {
                     data.adventures.length = 4;
                 }
