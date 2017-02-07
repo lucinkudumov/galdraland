@@ -1211,8 +1211,10 @@ app.controller("indexController", ["$scope", "$location", "$window", "$statePara
                 console.log("lastAdventure = ", data);
                 $scope.adventures = [];
                 if (data != null && data.adventures != null && data.adventures.length != null) {
+                    console.log("aaaaaaaaaaaaaa");
                     var index = 0;
                     for (var i = data.adventures.length - 1; i >= 0; i--) {
+                        console.log("bbbbbbbbbbbb");
                         if (index == 4) break;
                         index++;
                         var result = {};
