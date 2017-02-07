@@ -139,7 +139,7 @@ module.exports = function (opts) {
                 } else {
                     return res.json({adventures: adventures});
                 }
-            });
+            }).limit(4);
         },
         "post#adventure/adsearch": function (req, res) {
             var name = req.body.name;

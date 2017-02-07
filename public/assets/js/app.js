@@ -1217,7 +1217,6 @@ app.controller("indexController", ["$scope", "$location", "$window", "$statePara
                         return 1;
                     return 0;
                 });
-                console.log("lastAdventure = ", $scope.adventures);
                 data.adventures.reverse();
                 if (data.adventures.length > 4) {
                     data.adventures.length = 4;
