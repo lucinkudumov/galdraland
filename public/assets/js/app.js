@@ -3069,6 +3069,7 @@ app.factory('middleware', function () {
 app.factory("User", ["$http", "$cookieStore", "$q", function ($http, $cookieStore, $q) {
     console.log("1");
         var user = $cookieStore.get("user");
+    console.log("user=", user);
         return {
             isLoggedIn: function () {
                 console.log("2");
