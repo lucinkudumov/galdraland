@@ -1208,13 +1208,10 @@ app.controller("indexController", ["$scope", "$location", "$window", "$statePara
             url: "lastAdventure",
             api: true,
             data: {term: ""}}).then (function success(data) {
-                console.log("lastAdventure = ", data);
                 $scope.adventures = [];
                 if (data != null && data.data.adventures != null && data.data.adventures.length != null) {
-                    console.log("aaaaaaaaaaaaaa");
                     var index = 0;
                     for (var i = data.data.adventures.length - 1; i >= 0; i--) {
-                        console.log("bbbbbbbbbbbb");
                         if (index == 4) break;
                         index++;
                         var result = {};
@@ -1223,7 +1220,6 @@ app.controller("indexController", ["$scope", "$location", "$window", "$statePara
                         result.image = data.data.adventures[i].image;
                         result.text1 = data.data.adventures[i].tags.join(" ");
                         result.text2 = data.data.adventures[i].start + " - " + data.data.adventures[i].end;
-                        console.log("test = ", result);
                         $scope.adventures.push(result);
                     }
                 }
@@ -1233,39 +1229,35 @@ app.controller("indexController", ["$scope", "$location", "$window", "$statePara
                     url: "lastTeam",
                     api: true,
                     data: {term: ""}}).then (function success(data) {
-                        console.log("lastTeam = ", data);
                         $scope.teams = [];
-                        if (data != null && data.teams != null && data.teams.length != null) {
+                        if (data.data != null && data.data.teams != null && data.data.teams.length != null) {
                             var index = 0;
-                            for (var i = data.teams.length - 1; i >= 0; i--) {
+                            for (var i = data.data.teams.length - 1; i >= 0; i--) {
                                 if (index == 4) break;
                                 index++;
                                 var result = {};
-                                result._id = data.teams[i]._id;
-                                result.name = data.teams[i].name;
-                                result.image = data.teams[i].image;
+                                result._id = data.data.teams[i]._id;
+                                result.name = data.data.teams[i].name;
+                                result.image = data.data.teams[i].image;
                                 $scope.teams.push(result);
                             }
                         }
-
 
                         $http({
                             method: "POST",
                             url: "lastUser",
                             api: true,
                             data: {term: ""}}).then (function success (data){
-                                console.log("lastUser = ", data);
                                 $scope.users = [];
-                                if (data != null && data.users != null && data.users.length != null) {
+                                if (data.data != null && data.data.users != null && data.data.users.length != null) {
                                     var index = 0;
-                                    for (var i = data.users.length - 1; i >= 0; i--) {
+                                    for (var i = data.data.users.length - 1; i >= 0; i--) {
                                         if (index == 4) break;
                                         index++;
                                         var result = {};
-                                        result._id = data.users[i]._id;
-                                        result.name = data.users[i].fullname;
-                                        result.image = data.users[i].photo;
-                                        console.log("photo = " + data.users[i].photo);
+                                        result._id = data.data.users[i]._id;
+                                        result.name = data.data.users[i].fullname;
+                                        result.image = data.data.users[i].photo;
                                         $scope.users.push(result);
                                     }
                                 }
