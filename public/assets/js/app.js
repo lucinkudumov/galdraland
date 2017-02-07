@@ -323,7 +323,6 @@ app.run(["$rootScope", "$http", "$location", "User", function ($rootScope, $http
             method: "GET",
             url: "getDefaultUser",
             api: true}).then(function success(data) {
-                console.log("getDefaultUser = ", data);
                 if (data.data.user) {
                     $rootScope.defUser = data.data.user;
                 } else {
@@ -381,43 +380,41 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
                 method: "POST",
                 url: "adventure/get",
                 api: true,
-                data: {id: $stateParams.id},
-                success: function (data) {
-                    if (data.adventure.description && data.adventure.description != "") {
-                        var find = "\n";
-                        var re = new RegExp(find, 'g');
-                        data.adventure.description = $sce.trustAsHtml(data.adventure.description.replace(re,"<br>"));
-                        $scope.description = data.adventure.description;
-                    }
-                    if (data.adventure.tags && data.adventure.tags.length > 0) {
-                        if (data.adventure.tags[0] == "") data.adventure.tags = [];
-                    }
-
-                    $scope.date = new Date(data.adventure.start);
-                    $scope.events = [
-                        {
-                            name: 'start',
-                            date: new Date(data.adventure.start)
-                        },
-                        {
-                            name: 'end',
-                            date: new Date(data.adventure.end)
-                        }
-                    ];
-                    $scope.timeStart = data.adventure.start;
-                    $scope.timeEnd = data.adventure.end;
-                    $scope.adventure = data.adventure;
-                    $scope.isManager = data.adventure.owner == $scope.user._id;
-                    $http({
-                        method: "POST",
-                        url: "getViewUser",
-                        api: true,
-                        data: {userid: data.adventure.owner},
-                        success : function (data) {
-                            $scope.photo = data.user.photo;
-                        }
-                    });
+                data: {id: $stateParams.id}
+            }).then (function success(data) {
+                if (data.data.adventure.description && data.data.adventure.description != "") {
+                    var find = "\n";
+                    var re = new RegExp(find, 'g');
+                    data.data.adventure.description = $sce.trustAsHtml(data.data.adventure.description.replace(re,"<br>"));
+                    $scope.description = data.data.adventure.description;
                 }
+                if (data.data.adventure.tags && data.data.adventure.tags.length > 0) {
+                    if (data.data.adventure.tags[0] == "") data.data.adventure.tags = [];
+                }
+
+                $scope.date = new Date(data.data.adventure.start);
+                $scope.events = [
+                    {
+                        name: 'start',
+                        date: new Date(data.data.adventure.start)
+                    },
+                    {
+                        name: 'end',
+                        date: new Date(data.data.adventure.end)
+                    }
+                ];
+                $scope.timeStart = data.data.adventure.start;
+                $scope.timeEnd = data.data.adventure.end;
+                $scope.adventure = data.data.adventure;
+                $scope.isManager = data.data.adventure.owner == $scope.user._id;
+                $http({
+                    method: "POST",
+                    url: "getViewUser",
+                    api: true,
+                    data: {userid: data.data.adventure.owner}
+                }).then ( function success (data) {
+                    $scope.photo = data.data.user.photo;
+                });
             });
         }
 
@@ -458,13 +455,16 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
 
             modalInstance.result.then(function (result) {
                 if (result == "YES") {
-                    var request = $http({method: "POST", url: "adventure/remove", api: true, data: {id: $scope.adventure._id}});
-                    request.success(function () {
+                    $http({
+                        method: "POST",
+                        url: "adventure/remove",
+                        api: true,
+                        data: {id: $scope.adventure._id}
+                    }). then ( function success(data) {
                         $location.path("/adventures");
                     });
                 }
             });
-
             return false;
         }
 
@@ -515,58 +515,62 @@ app.controller("usersResultController", ["$scope", "$http", "User", "$location",
     $scope.results = [];
     $scope.refresh = function () {
         $scope.loading = true;
-        var request = $http({method: "GET", url: "myTeams", api: true});
-        request.success(function (data) {
-            $scope.teams = data.teams;
-        }).then(function (r) {
-                if ($scope.teams.length) {
-                    var userIds = [];
-                    for (var i = 0; i < $scope.teams.length; i++) {
-                        for (var j = 0; j < $scope.teams[i].teamMembers.length; j ++) {
-                            var o = $scope.teams[i].teamMembers[j];
-                            if(userIds.indexOf(o.user) != -1 || $scope.user._id == o.user) {
-                                continue;
-                            } else {
-                                userIds.push(o.user);
-                            }
+        $http({
+            method: "GET",
+            url: "myTeams",
+            api: true
+        }).then (function success(data) {
+            $scope.teams = data.data.teams;
+            if ($scope.teams.length) {
+                var userIds = [];
+                for (var i = 0; i < $scope.teams.length; i++) {
+                    for (var j = 0; j < $scope.teams[i].teamMembers.length; j ++) {
+                        var o = $scope.teams[i].teamMembers[j];
+                        if(userIds.indexOf(o.user) != -1 || $scope.user._id == o.user) {
+                            continue;
+                        } else {
+                            userIds.push(o.user);
                         }
                     }
-                    if (userIds.length) {
-                        var request = $http({method: "POST", url: "getUsersByIds", api: true, data: {ids: userIds}});
-                        request.success(function (data) {
-                            $scope.users = data.users
-                        }).then(function (r) {
-                           if ($scope.users.length) {
-                                for (var i = 0; i < $scope.users.length; i++) {
-                                    if ($scope.users[i].profileId == "000000000000000000000000") continue;
-                                    if ($scope.user._id == $scope.users[i]._id) continue;
-                                    var result = {};
-                                    result.name = $scope.users[i].fullname;
-                                    result.href = "/users/view/" + $scope.users[i]._id;
-                                    result.photo = $scope.users[i].photo;
-                                    result.team_role = [];
-                                    for (var j = 0; j < $scope.teams.length; j++) {
-                                        for (var k = 0; k < $scope.teams[j].teamMembers.length; k++) {
-                                            var o = $scope.teams[j].teamMembers[k];
-                                            if (o.user == $scope.users[i]._id) {
-//                                                result.team_role += $scope.teams[j].name + '(' + $scope.teams[j].teamMembers[k].title + ') ';
-                                                result.team_role.push($scope.teams[j].name + '(' + $scope.teams[j].teamMembers[k].title + ') ');
-                                            }
+                }
+                if (userIds.length) {
+                    $http({
+                        method: "POST",
+                        url: "getUsersByIds",
+                        api: true,
+                        data: {ids: userIds}
+                    }).then(function success(data) {
+                        $scope.users = data.data.users
+                        if ($scope.users.length) {
+                            for (var i = 0; i < $scope.users.length; i++) {
+                                if ($scope.users[i].profileId == "000000000000000000000000") continue;
+                                if ($scope.user._id == $scope.users[i]._id) continue;
+                                var result = {};
+                                result.name = $scope.users[i].fullname;
+                                result.href = "/users/view/" + $scope.users[i]._id;
+                                result.photo = $scope.users[i].photo;
+                                result.team_role = [];
+                                for (var j = 0; j < $scope.teams.length; j++) {
+                                    for (var k = 0; k < $scope.teams[j].teamMembers.length; k++) {
+                                        var o = $scope.teams[j].teamMembers[k];
+                                        if (o.user == $scope.users[i]._id) {
+                                            result.team_role.push($scope.teams[j].name + '(' + $scope.teams[j].teamMembers[k].title + ') ');
                                         }
                                     }
-
-                                    $scope.results.push(result);
                                 }
-                                $scope.loading = false;
-                            } else {
-                                $scope.loading = false;
+
+                                $scope.results.push(result);
                             }
-                        });
-                    }
-                } else {
-                    $scope.loading = false;
+                            $scope.loading = false;
+                        } else {
+                            $scope.loading = false;
+                        }
+                    });
                 }
-            });
+            } else {
+                $scope.loading = false;
+            }
+        });
     }
 
     $scope.refresh();
@@ -579,9 +583,12 @@ app.controller("createAdventureController", ["$scope", "$rootScope", "Upload", "
         $scope.values.teamCount = 1;
         $scope.tags = [];
         $scope.refresh = function () {
-            var request = $http({method: "GET", url: "myOwnTeams", api: true});
-            request.success(function (data) {
-                $scope.values.teamCount = data.teams.length;
+            $http({
+                method: "GET",
+                url: "myOwnTeams",
+                api: true
+            }).then(function success(data) {
+                $scope.values.teamCount = data.data.teams.length;
                 if ($scope.values.teamCount == 0)
                     $rootScope.return2Adventure = "return";
                 else
@@ -636,16 +643,16 @@ app.controller("createAdventureController", ["$scope", "$rootScope", "Upload", "
                         tmpTags.push($scope.tags[i].name);
                 }
             }
-            var request = $http({
+
+            $http({
                 method: "POST",
                 url: "adventure/create",
                 api: true,
                 data: {name: $scope.name, type: $scope.type, fb_page: $scope.fb_page, description: $scope.description, link: $scope.link, image: $scope.uploadedImage, team: $scope.team, start: $scope.formatDate($scope.start), end: $scope.formatDate($scope.end), tags: tmpTags}
-            });
-            request.success(function (data) {
-                $location.path("/adventures/view/" + data.id);
+            }). then (function success(data) {
+                $location.path("/adventures/view/" + data.data.id);
                 if (post)
-                    $scope.post_to_fb(data.id);
+                    $scope.post_to_fb(data.data.id);
             });
         }
 
@@ -665,8 +672,12 @@ app.controller("createAdventureController", ["$scope", "$rootScope", "Upload", "
         }
 
         $scope.findTeam = function (name) {
-            var request = $http({method: "POST", url: "adventure/getTeams", api: true, data: {name: name}});
-            request.then(function (r) {
+            $http({
+                method: "POST",
+                url: "adventure/getTeams",
+                api: true,
+                data: {name: name}
+            }).then (function success(r) {
                 var teams = [];
                 for (var i = 0; i < r.data.teams.length; i++) {
                     if ($scope.values.team != null) {
@@ -677,7 +688,6 @@ app.controller("createAdventureController", ["$scope", "$rootScope", "Upload", "
                         teams.push(r.data.teams[i]);
                     }
                 }
-
                 $scope.values.teams = teams;
             });
         }
@@ -730,26 +740,33 @@ app.controller("editAdventureController", ["$scope", "$http", "$location", "$sta
         $scope.uploadInProgress = false;
         $scope.uploadProgress = 0;
         $scope.getAdventure = function () {
-            var request = $http({method: "POST", url: "adventure/get", api: true, data: {id: $stateParams.id}});
-            request.success(function (data) {
-                $scope.name = data.adventure.name;
-                $scope.description = data.adventure.description;
-                $scope.link = data.adventure.link;
-                $scope.tags = data.adventure.tags;//.join(" ");
-                $scope.start = new Date(Date.parse(data.adventure.start));
-                $scope.end = new Date(Date.parse(data.adventure.end));
-                $scope.status = data.adventure.status;
-                $scope.team = data.adventure.team;
-                $scope.type = data.adventure.type;
-                $scope.uploadedImage = data.adventure.image;
-                $scope.fb_page = data.adventure.fb_page;
+            $http({
+                method: "POST",
+                url: "adventure/get",
+                api: true,
+                data: {id: $stateParams.id}
+            }).then(function success(data) {
+                $scope.name = data.data.adventure.name;
+                $scope.description = data.data.adventure.description;
+                $scope.link = data.data.adventure.link;
+                $scope.tags = data.data.adventure.tags;//.join(" ");
+                $scope.start = new Date(Date.parse(data.data.adventure.start));
+                $scope.end = new Date(Date.parse(data.data.adventure.end));
+                $scope.status = data.data.adventure.status;
+                $scope.team = data.data.adventure.team;
+                $scope.type = data.data.adventure.type;
+                $scope.uploadedImage = data.data.adventure.image;
+                $scope.fb_page = data.data.adventure.fb_page;
             });
         }
 
         $scope.getTeamCount = function () {
-            var request = $http({method: "GET", url: "myOwnTeams", api: true});
-            request.success(function (data) {
-                $scope.values.teamCount = data.teams;
+            $http({
+                method: "GET",
+                url: "myOwnTeams",
+                api: true
+            }).then (function success(data) {
+                $scope.values.teamCount = data.data.teams;
             });
         }
 
@@ -802,15 +819,23 @@ app.controller("editAdventureController", ["$scope", "$http", "$location", "$sta
                         tmpTags.push($scope.tags[i].name);
                 }
             }
-            var request = $http({method: "POST", url: "adventure/update", api: true, data: {id: $stateParams.id, name: $scope.name, fb_page: $scope.fb_page, description: $scope.description, link: $scope.link, image: $scope.uploadedImage, tags: tmpTags, start: $scope.formatDate($scope.start), end: $scope.formatDate($scope.end), status: $scope.status, type: $scope.type}});
-            request.success(function (data) {
+            $http({
+                method: "POST",
+                url: "adventure/update",
+                api: true,
+                data: {id: $stateParams.id, name: $scope.name, fb_page: $scope.fb_page, description: $scope.description, link: $scope.link, image: $scope.uploadedImage, tags: tmpTags, start: $scope.formatDate($scope.start), end: $scope.formatDate($scope.end), status: $scope.status, type: $scope.type}
+            }).then  (function success(data) {
                 $location.path("/adventures/view/" + $stateParams.id);
             });
         }
 
         $scope.findTeam = function (name) {
-            var request = $http({method: "POST", url: "adventure/getTeams", api: true, data: {name: name}});
-            request.then(function (r) {
+            $http({
+                method: "POST",
+                url: "adventure/getTeams",
+                api: true,
+                data: {name: name}
+            }).then(function sucess(r) {
                 var teams = [];
                 for (var i = 0; i < r.data.teams.length; i++) {
                     if ($scope.values.team != null) {
@@ -821,7 +846,6 @@ app.controller("editAdventureController", ["$scope", "$http", "$location", "$sta
                         teams.push(r.data.teams[i]);
                     }
                 }
-
                 $scope.values.teams = teams;
             });
         }
@@ -874,10 +898,12 @@ app.controller("myAdventuresController", ["$scope", "$http", "$location", "User"
         $scope.teams = [];
         $scope.refresh = function () {
             $scope.loading = true;
-            var request = $http({method: "GET", url: "myTeams", api: true});
-            request.success(function (data) {
-                $scope.teams = data.teams;
-            }).then(function (r) {
+            $http({
+                method: "GET",
+                url: "myTeams",
+                api: true
+            }).then(function success(data) {
+                $scope.teams = data.data.teams;
                 if ($scope.teams.length) {
                     return $http({method: "POST", url: "adventure/list", api: true, data: {teams: $scope.teams}});
                 } else {
@@ -888,17 +914,6 @@ app.controller("myAdventuresController", ["$scope", "$http", "$location", "User"
                 $scope.loading = false;
             });
         }
-        $scope.shareAdventrue = function () {
-//            FB.ui({
-//                method: 'feed',
-//                name: 'This is the content of the "name" field.',
-//                link: 'http://www.hyperarts.com/',
-//                picture: 'http://www.hyperarts.com/external-xfbml/share-image.gif',
-//                caption: 'This is the content of the "caption" field.',
-//                description: 'This is the content of the "description" field, below the caption.',
-//                message: ''
-//            });
-        }
         $scope.refresh();
     }]);
 
@@ -906,16 +921,17 @@ app.controller("myAdventuresTypeController", ["$scope", "$http", "$location", "$
     $scope.user = User.isLoggedIn();
     $scope.refresh = function () {
         $scope.loading = true;
-        var request = $http({method: "POST", url: "adventureType/list", api: true, data: {type: $stateParams.type}});
-        request.success(function (data) {
-            $scope.teams = data.teams;
-        }).then(function (r) {
-                $scope.adventures = [];
-                if (r != null) $scope.adventures = r.data.adventures;
-                $scope.loading = false;
-            });
+        $http({
+            method: "POST",
+            url: "adventureType/list",
+            api: true,
+            data: {type: $stateParams.type}
+        }).then (function success(data) {
+            $scope.adventures = [];
+            if (data != null) $scope.adventures = data.data.adventures;
+            $scope.loading = false;
+        });
     }
-
     $scope.refresh();
 }]);
 
@@ -923,16 +939,17 @@ app.controller("myAdventuresTagController", ["$scope", "$http", "$location", "$s
     $scope.user = User.isLoggedIn();
     $scope.refresh = function () {
         $scope.loading = true;
-        var request = $http({method: "POST", url: "adventureTag/list", api: true, data: {tag: $stateParams.tag}});
-        request.success(function (data) {
-            $scope.teams = data.teams;
-        }).then(function (r) {
+        $http({
+            method: "POST",
+            url: "adventureTag/list",
+            api: true,
+            data: {tag: $stateParams.tag}
+        }).then (function success(data) {
                 $scope.adventures = [];
-                if (r != null) $scope.adventures = r.data.adventures;
+                if (data != null) $scope.adventures = data.data.adventures;
                 $scope.loading = false;
-            });
+        });
     }
-
     $scope.refresh();
 }]);
 
@@ -965,8 +982,8 @@ app.controller("emailController", ["$scope", "$location", "$http", "User", funct
             }
 
             var request = $http.post("/api/validateEmail", {email: $scope.email});
-            request.success(function (data) {
-                if (!data.find) {
+            request.then(function (data) {
+                if (!data.data.find) {
                     $scope.availableEmail = true;
                 } else {
                     $scope.availableEmail = false;
@@ -978,8 +995,12 @@ app.controller("emailController", ["$scope", "$location", "$http", "User", funct
             $scope.error = null;
             $scope.errors = {};
 
-            var request = $http({method: "POST", url: "saveMainInfo", api: true, data: {username: $scope.username, email: $scope.email}});
-            request.then(function (r) {
+            $http({
+                method: "POST",
+                url: "saveMainInfo",
+                api: true,
+                data: {username: $scope.username, email: $scope.email}
+            }).then(function success(r) {
                 if (r.data.success) {
                     User.update(function () {
                         $location.path("/profile");
@@ -1001,10 +1022,13 @@ app.controller("emailController", ["$scope", "$location", "$http", "User", funct
             } else {
                 $scope.validateUsername = true;
             }
-
-            var request = $http.post("/api/validateUsername", {username: $scope.username});
-            request.success(function (data) {
-                if (!data.find) {
+            $http({
+                method: "POST",
+                url: "/api/validateUsername",
+                api: true,
+                data: {username: $scope.username}
+            }).then(function success(data) {
+                if (!data.data.find) {
                     $scope.availableUsername = true;
                 } else {
                     $scope.availableUsername = false;
@@ -1014,7 +1038,7 @@ app.controller("emailController", ["$scope", "$location", "$http", "User", funct
 
         $scope.saveEmail = function () {
             var request = $http.post("/api/saveEmail", {email: $scope.email});
-            request.success(function (data) {
+            request.then(function (data) {
                 User.update();
                 $location.path("/profile");
             });
@@ -1035,15 +1059,7 @@ app.controller("headerController", ["$scope", "$rootScope", "$http", "$location"
         $scope.scategory = ($temp) ? $temp : "a";
         $scope.stext = ($stateParams.sterm) ? $stateParams.sterm : "";
 
-
-        /*
-         if(localStorage.getItem("galdraland.redirect") != null && localStorage.getItem("galdraland.redirect") != ""){
-         location.href = localStorage.getItem("galdraland.redirect");
-         localStorage.setItem("galdraland.redirect", "");
-         return;
-         }*/
         var invite_request = $http({method: "GET", url: "getInvites", api: true});
-
         invite_request.then(function (result) {
             if (result !== undefined && result.data !== undefined && result.data.invites !== undefined)
                 $scope.invites = result.data.invites;
@@ -1097,7 +1113,7 @@ app.controller("headerController", ["$scope", "$rootScope", "$http", "$location"
 
         $scope.logout = function () {
             var request = $http.get({url: "logout", api: true});
-            request.success(function (data) {
+            request.then(function (data) {
                 User.logout();
                 $location.path("/");
             }); 
@@ -1282,7 +1298,7 @@ app.controller("indexController", ["$scope", "$location", "$window", "$statePara
                 url: "sendContact",
                 api: true,
                 data: {
-                    toEmail: 'dav.makow1992@yandex.com',// 'info@holomathics.com',
+                    toEmail: 'info@holomathics.com',
                     fromEmail: $scope.yourEmail,
                     text: $scope.description,
                     subject: 'Contact Galdraland Support Center'}
@@ -1399,32 +1415,6 @@ app.controller("sendInviteController", ["$scope", "$modalInstance", "values", "$
         $scope.init(values);
         //Get FaceBook Friends list.
         console.log("Facebook friends response");
-        // FB.getLoginStatus(function(response) {
-        //   if (response.status == 'connected') {
-        //     FB.api('/me/friends', function(response) {
-        //         if (response && !response.error) {
-        //             $scope.values.fb_friends = response.data;
-        //             alert("Logged in already.");
-        //             console.log(response.data);
-        //         }
-        //     });
-        //   } else if (response.status == 'not_authorized') {
-
-        //   }
-        // });
-//        FB.login(function () {
-//             FB.api(
-//                     "/me/friends",
-//                     function (response) {
-//                         console.log("Facebook friends response");
-//                         if (response && !response.error) {
-//                             $scope.values.fb_friends = response.data;
-//                             console.log(response.data);
-//                         }
-//                     }
-//                 );
-//             }, {scope: 'user_friends'});
-
         FB.getLoginStatus(function(response) {
            if (response.status == 'connected') {
              FB.api('/me/taggable_friends', function(response) {
@@ -1454,21 +1444,6 @@ app.controller("sendInviteController", ["$scope", "$modalInstance", "values", "$
            }
         });
 
-//        FB.login(function(response) {
-//              console.log(response);
-//              if (response.authResponse) {
-//                FB.api('/me/taggable_friends', function(response) {
-//                  if (response && !response.error) {
-//                        $scope.values.fb_friends = response.data;
-//                        alert("Logging in now.");
-//                        console.log(response.data);
-//                    }
-//                });
-//              } else {
-//                console.log("Error");
-//              }
-//            }, {scope: 'public_profile,user_friends'});
-
         $scope.cancel = function () {
             $modalInstance.close({type: "CLOSE"});
         }
@@ -1477,10 +1452,10 @@ app.controller("sendInviteController", ["$scope", "$modalInstance", "values", "$
             if(usernameOrEmail != "")
             {
                 var request = $http({method: "POST", url: "getUsers", api: true, data: {usernameOrEmail: usernameOrEmail}});
-                request.success(function (r) {
+                request.then(function (r) {
                     var users = [];
-                    for (var i = 0; i < r.users.length; i++) {
-                        var user = r.users[i];
+                    for (var i = 0; i < r.data.users.length; i++) {
+                        var user = r.data.users[i];
                         var exist_in_team = false;
                         user.is_fb_friend = -1;
 
@@ -1637,8 +1612,8 @@ app.controller("profileLeftSideController", ["$scope", "$http", "$location", "Us
         $scope.selAdv = "";
         $scope.users = [];
 
-        $http.get("/api/getUserDetail").success(function (data) {
-            $scope.user = data.user;
+        $http.get("/api/getUserDetail").then(function (data) {
+            $scope.user = data.data.user;
         });
 
         $scope.calculateRecomendation = function () {
@@ -1667,17 +1642,17 @@ app.controller("profileLeftSideController", ["$scope", "$http", "$location", "Us
 
         $scope.getTeams = function () {
             var request = $http({method: "GET", url: "myTeams", api: true});
-            request.success(function (data) {
-                for (var i = 0; i < data.teams.length; i++) {
-                    for (var j = 0; j < data.teams[i].teamMembers.length; j ++) {
-                        var o = data.teams[i].teamMembers[j];
+            request.then(function (data) {
+                for (var i = 0; i < data.data.teams.length; i++) {
+                    for (var j = 0; j < data.data.teams[i].teamMembers.length; j ++) {
+                        var o = data.data.teams[i].teamMembers[j];
                         if (o.user == $scope.user._id) {
-                            data.teams[i].tName =  data.teams[i].name + " (" + data.teams[i].teamMembers[j].title + ")";
+                            data.data.teams[i].tName =  data.data.teams[i].name + " (" + data.data.teams[i].teamMembers[j].title + ")";
                             break;
                         }
                     }
                 }
-                $scope.teams = data.teams;
+                $scope.teams = data.data.teams;
             });
         }
 
@@ -1685,9 +1660,8 @@ app.controller("profileLeftSideController", ["$scope", "$http", "$location", "Us
         var users = [];
         $scope.getUsers = function () {
             var request = $http({method: "GET", url: "myTeams", api: true});
-            request.success(function (data) {
-                userTeams = data.teams;
-            }).then(function (r) {
+            request.then(function (data) {
+                userTeams = data.data.teams;
                 if (userTeams.length) {
                     var userIds = [];
                     for (var i = 0; i < userTeams.length; i++) {
@@ -1703,9 +1677,8 @@ app.controller("profileLeftSideController", ["$scope", "$http", "$location", "Us
                     console.log("usersId = " + userIds);
                     if (userIds.length) {
                         var request = $http({method: "POST", url: "getUsersByIds", api: true, data: {ids: userIds}});
-                        request.success(function (data) {
-                            users = data.users;
-                        }).then(function (r) {
+                        request.then (function (data) {
+                            users = data.data.users;
                             if (users.length) {
                                 console.log("usrs = ", users);
                                 var results = [];
@@ -1729,8 +1702,8 @@ app.controller("profileLeftSideController", ["$scope", "$http", "$location", "Us
 
         $scope.getAdventures = function () {
             var request = $http({method: "POST", url: "adventure/list", api: true, data: {teams: $scope.teams}});
-            request.success(function (r) {
-                $scope.adventures = r.adventures;
+            request.then(function (r) {
+                $scope.adventures = r.data.adventures;
             });
         }
 
@@ -1777,24 +1750,24 @@ app.controller("profileSettingsController", ["$scope", "$rootScope", "$location"
         $scope.looks = [];
         $scope.roles = [];
 
-        $http.get("/api/getUserDetail").success(function (data) {
-            $scope.username = data.user.username;
-            $scope.fullname = data.user.fullname;
-            $scope.email = data.user.email.email;
-            $scope.location = data.user.location;
-            $scope.skype = data.user.skype;
-            $scope.goals = data.user.goals;
-            $scope.categories = data.user.categories;
-            $scope.educations = data.user.educations;
-            $scope.links = data.user.links;
-            $scope.experience = data.user.experience;
-            $scope.bio = data.user.bio;
-            $scope.interests = (data.user.interests.length) ? data.user.interests : [{topic: {topic: ""}, information: ""}];
-            $scope.likes = data.user.likes;
-            $scope.dislikes = data.user.dislikes;
-            $scope.skills = data.user.skills;
-            $scope.looks = data.user.looks;
-            $scope.roles = data.user.roles;
+        $http.get("/api/getUserDetail").then(function (data) {
+            $scope.username = data.data.user.username;
+            $scope.fullname = data.data.user.fullname;
+            $scope.email = data.data.user.email.email;
+            $scope.location = data.data.user.location;
+            $scope.skype = data.data.user.skype;
+            $scope.goals = data.data.user.goals;
+            $scope.categories = data.data.user.categories;
+            $scope.educations = data.data.user.educations;
+            $scope.links = data.data.user.links;
+            $scope.experience = data.data.user.experience;
+            $scope.bio = data.data.user.bio;
+            $scope.interests = (data.data.user.interests.length) ? data.data.user.interests : [{topic: {topic: ""}, information: ""}];
+            $scope.likes = data.data.user.likes;
+            $scope.dislikes = data.data.user.dislikes;
+            $scope.skills = data.data.user.skills;
+            $scope.looks = data.data.user.looks;
+            $scope.roles = data.data.user.roles;
 
             $scope.invalidUsername = false;
             $scope.invalidEmail = false;
@@ -1803,24 +1776,23 @@ app.controller("profileSettingsController", ["$scope", "$rootScope", "$location"
         $scope.checkUsername = function () {
             $scope.invalidUsername = true;
             var request = $http({method: "POST", url: "validateUsername", api: true, data: {username: $scope.username}});
-            request.success(function (data) {
-                $scope.invalidUsername = data.find;
+            request.then(function (data) {
+                $scope.invalidUsername = data.data.find;
             });
         }
 
         $scope.checkEmail = function () {
             $scope.invalidEmail = true;
             var request = $http({method: "POST", url: "validateEmail", api: true, data: {email: $scope.email}});
-            request.success(function (data) {
-                $scope.invalidEmail = data.find;
+            request.then(function (data) {
+                $scope.invalidEmail = data.data.find;
             });
         }
 
         $scope.saveMainInformation = function () {
             var request = $http({method: "POST", url: "saveMainInformation", api: true, data: {username: $scope.username, fullname: $scope.fullname, email: $scope.email, location: $scope.location, skype: $scope.skype, /*goals: $scope.goals,*/ categories: $scope.categories}});
-
-            request.success(function (data) {
-                if (data.success) {
+            request.then(function (data) {
+                if (data.data.success) {
                     User.update();
                 }
             });
@@ -1857,8 +1829,8 @@ app.controller("profileSettingsController", ["$scope", "$rootScope", "$location"
 
         $scope.saveEducations = function () {
             var request = $http({method: "POST", url: "saveEducations", api: true, data: {educations: $scope.educations}});
-            request.success(function (data) {
-                if (data.success) {
+            request.then(function (data) {
+                if (data.data.success) {
                     User.update();
                 }
             });
@@ -1907,8 +1879,8 @@ app.controller("profileSettingsController", ["$scope", "$rootScope", "$location"
 
         $scope.saveLinks = function () {
             var request = $http({method: "POST", url: "saveLinks", api: true, data: {links: $scope.links}});
-            request.success(function (data) {
-                if (data.success) {
+            request.then(function (data) {
+                if (data.data.success) {
                     User.update();
                 }
             });
@@ -1976,8 +1948,8 @@ app.controller("profileSettingsController", ["$scope", "$rootScope", "$location"
 
         $scope.saveLikes = function () {
             var request = $http({method: "POST", url: "saveLikes", api: true, data: {likes: $scope.likes}});
-            request.success(function (data) {
-                if (data.success) {
+            request.then(function (data) {
+                if (data.data.success) {
                     User.update();
                 }
             });
@@ -1985,8 +1957,8 @@ app.controller("profileSettingsController", ["$scope", "$rootScope", "$location"
 
         $scope.saveDislikes = function () {
             var request = $http({method: "POST", url: "saveDislikes", api: true, data: {dislikes: $scope.dislikes}});
-            request.success(function (data) {
-                if (data.success) {
+            request.then(function (data) {
+                if (data.data.success) {
                     User.update();
                 }
             });
@@ -1994,8 +1966,8 @@ app.controller("profileSettingsController", ["$scope", "$rootScope", "$location"
 
         $scope.saveSkills = function () {
             var request = $http({method: "POST", url: "saveSkills", api: true, data: {skills: $scope.skills}});
-            request.success(function (data) {
-                if (data.success) {
+            request.then(function (data) {
+                if (data.data.success) {
                     User.update();
                 }
             });
@@ -2003,8 +1975,8 @@ app.controller("profileSettingsController", ["$scope", "$rootScope", "$location"
 
         $scope.saveLooks = function () {
             var request = $http({method: "POST", url: "saveLooks", api: true, data: {looks: $scope.looks}});
-            request.success(function (data) {
-                if (data.success) {
+            request.then(function (data) {
+                if (data.data.success) {
                     User.update();
                 }
             });
@@ -2012,8 +1984,8 @@ app.controller("profileSettingsController", ["$scope", "$rootScope", "$location"
 
         $scope.saveRoles = function () {
             var request = $http({method: "POST", url: "saveRoles", api: true, data: {roles: $scope.roles}});
-            request.success(function (data) {
-                if (data.success) {
+            request.then(function (data) {
+                if (data.data.success) {
                     User.update();
                 }
             });
@@ -2021,8 +1993,8 @@ app.controller("profileSettingsController", ["$scope", "$rootScope", "$location"
 
         $scope.saveExperience = function () {
             var request = $http({method: "POST", url: "saveExperience", api: true, data: {experience: $scope.experience}});
-            request.success(function (data) {
-                if (data.success) {
+            request.then(function (data) {
+                if (data.data.success) {
                     User.update();
                 }
             });
@@ -2033,8 +2005,8 @@ app.controller("profileSettingsController", ["$scope", "$rootScope", "$location"
                 if ($scope.interests[i].topic.topic == "" && $scope.interests[i].information == "")
                     $scope.interests.splice(i, 1);
             var request = $http({method: "POST", url: "saveInterests", api: true, data: {interests: $scope.interests}});
-            request.success(function (data) {
-                if (data.success) {
+            request.then(function (data) {
+                if (data.data.success) {
                     User.update();
                 }
             });
@@ -2042,8 +2014,8 @@ app.controller("profileSettingsController", ["$scope", "$rootScope", "$location"
 
         $scope.saveBiography = function () {
             var request = $http({method: "POST", url: "saveBiography", api: true, data: {biography: $scope.bio}});
-            request.success(function (data) {
-                if (data.success) {
+            request.then(function (data) {
+                if (data.data.success) {
                     User.update();
                 }
             });
@@ -2156,8 +2128,8 @@ app.controller("profileSettingsController", ["$scope", "$rootScope", "$location"
 
         $scope.saveGoal = function () {
             var request = $http({method: "POST", url: "saveGoal", api: true, data: {goals: $scope.goals}});
-            request.success(function (data) {
-                if (data.success) {
+            request.then(function (data) {
+                if (data.data.success) {
                     User.update();
                 }
             });
@@ -2188,10 +2160,10 @@ app.controller("contactController", ['$scope', '$http', '$rootScope', function($
                 fromEmail: $scope.yourEmail,
                 text: $scope.description,
                 subject: 'Contact Galdraland Support Center'}});
-        request.success(function (data) {
+        request.then(function (data) {
             console.log('Mail Sent Success');
             console.log(data);
-            if (data.success == true)
+            if (data.data.success == true)
                 $scope.sentSuccess = true;
             else
                 $scope.sentFailed = true;
@@ -2202,8 +2174,8 @@ app.controller("contactController", ['$scope', '$http', '$rootScope', function($
 }]);
 
 app.controller("profileViewController", ["$scope", "$http", "User", function ($scope, $http, User) {
-        $http.get("/api/getUserDetail").success(function (data) {
-            $scope.user = data.user;
+        $http.get("/api/getUserDetail").then(function (data) {
+            $scope.user = data.data.user;
         });
     }]);
 
@@ -2225,27 +2197,27 @@ app.controller("searchController", ["$scope", "$http", "$location", "$stateParam
             switch ($stateParams.scategory) {
                 case "aa":
                     request = $http({method: "POST", url: "adventure/adsearch", api: true, data: {name: $stateParams.sname, description: $stateParams.sdescription, tag: $stateParams.stag}});
-                    request.success($scope.parse_adventures);
+                    request.then($scope.parse_adventures);
                     break;
                 case "tt":
                     request = $http({method: "POST", url: "adsearchTeam", api: true, data: {name: $stateParams.sname, description: $stateParams.sdescription}});
-                    request.success($scope.parse_teams);
+                    request.then($scope.parse_teams);
                     break;
                 case "pp":
                     request = $http({method: "POST", url: "searchUser", api: true, data: {term: $stateParams.sname}});
-                    request.success($scope.parse_users);
+                    request.then($scope.parse_users);
                     break;
                 case "a":
                     request = $http({method: "POST", url: "adventure/search", api: true, data: {term: $stateParams.sterm}});
-                    request.success($scope.parse_adventures);
+                    request.then($scope.parse_adventures);
                     break;
                 case "t":
                     request = $http({method: "POST", url: "searchTeam", api: true, data: {term: $stateParams.sterm}});
-                    request.success($scope.parse_teams);
+                    request.then($scope.parse_teams);
                     break;
                 case "p":
                     request = $http({method: "POST", url: "searchUser", api: true, data: {term: $stateParams.sterm}});
-                    request.success($scope.parse_users);
+                    request.then($scope.parse_users);
                     break;
             }
 
@@ -2256,37 +2228,37 @@ app.controller("searchController", ["$scope", "$http", "$location", "$stateParam
 
         $scope.parse_adventures = function (data) {
             $scope.results = [];
-            for (var i = 0; i < data.adventures.length; i++) {
+            for (var i = 0; i < data.data.adventures.length; i++) {
                 var result = {};
-                result._id = data.adventures[i]._id;
-                result.name = data.adventures[i].name;
-                result.text1 = data.adventures[i].tags.join(" ");
-                result.text2 = data.adventures[i].start + " - " + data.adventures[i].end;
-                result.href = "/adventures/view/" + data.adventures[i]._id;
+                result._id = data.data.adventures[i]._id;
+                result.name = data.data.adventures[i].name;
+                result.text1 = data.data.adventures[i].tags.join(" ");
+                result.text2 = data.data.adventures[i].start + " - " + data.data.adventures[i].end;
+                result.href = "/adventures/view/" + data.data.adventures[i]._id;
                 $scope.results.push(result);
             }
         }
 
         $scope.parse_teams = function (data) {
             $scope.results = [];
-            for (var i = 0; i < data.teams.length; i++) {
+            for (var i = 0; i < data.data.teams.length; i++) {
                 var result = {};
-                result._id = data.teams[i]._id;
-                result.name = data.teams[i].name;
-                result.text1 = data.teams[i].teamMembers.length + " Members";
-                result.href = "/teams/view/" + data.teams[i]._id;
+                result._id = data.data.teams[i]._id;
+                result.name = data.data.teams[i].name;
+                result.text1 = data.data.teams[i].teamMembers.length + " Members";
+                result.href = "/teams/view/" + data.data.teams[i]._id;
                 $scope.results.push(result);
             }
         }
 
         $scope.parse_users = function (data) {
             $scope.results = [];
-            for (var i = 0; i < data.users.length; i++) {
+            for (var i = 0; i < data.data.users.length; i++) {
                 var result = {};
-                result.name = data.users[i].username;
-                result.text1 = data.users[i].fullname;
-                result.photo = data.users[i].photo;
-                result.href = "/users/view/" + data.users[i]._id;
+                result.name = data.data.users[i].username;
+                result.text1 = data.data.users[i].fullname;
+                result.photo = data.data.users[i].photo;
+                result.href = "/users/view/" + data.data.users[i]._id;
                 $scope.results.push(result);
             }
         }
@@ -2304,14 +2276,14 @@ app.controller("createTeamController", ["$scope", "$rootScope", "Upload", "$http
                     tmpTags.push($scope.tags[i].name);
             }
             request = $http({method: "POST", url: "createTeam", api: true, data: {name: $scope.name, description: $scope.description, rols: $scope.roles, defuser: $rootScope.defUser, fb_page: $scope.fb_page, mission: $scope.mission, image: $scope.uploadedImage, tags: tmpTags}});
-            request.success(function (data) {
+            request.then(function (data) {
                 if ($rootScope.return2Adventure == "return")
                 {
                     $rootScope.return2Adventure = "normal";
                     $location.path("/adventures/create");
                 }
                 else
-                    $location.path("/teams/view/" + data.id);
+                    $location.path("/teams/view/" + data.data.id);
             });
         }
 
@@ -2359,14 +2331,14 @@ app.controller("editTeamController", ["$scope", "$http", "$location", "$statePar
         $scope.uploadInProgress = false;
         $scope.uploadProgress = 0;
 
-        request.success(function (data) {
+        request.then(function (data) {
             console.log(data);
-            $scope.name = data.team.name;
-            $scope.description = data.team.description;
-            $scope.uploadedImage = data.team.image;
-            $scope.tags = data.team.tags;
-            $scope.fb_page = data.team.fb_page;
-            $scope.mission = data.team.mission;
+            $scope.name = data.data.team.name;
+            $scope.description = data.data.team.description;
+            $scope.uploadedImage = data.data.team.image;
+            $scope.tags = data.data.team.tags;
+            $scope.fb_page = data.data.team.fb_page;
+            $scope.mission = data.data.team.mission;
         });
         $scope.onFileSelect = function (image) {
             console.log(image);
@@ -2374,12 +2346,6 @@ app.controller("editTeamController", ["$scope", "$http", "$location", "$statePar
             if (angular.isArray(image)) {
                 image = image[0];
             }
-
-            // This is how I handle file types in client side
-//            if (image.type !== 'image/png' && image.type !== 'image/jpeg') {
-//                alert('Only PNG and JPEG are accepted.');
-//                return;
-//            }
 
             $scope.uploadInProgress = true;
             $scope.uploadProgress = 0;
@@ -2412,7 +2378,7 @@ app.controller("editTeamController", ["$scope", "$http", "$location", "$statePar
                     tmpTags.push($scope.tags[i].name);
             }
             var request = $http({method: "POST", url: "editTeam", api: true, data: {id: id, name: $scope.name, description: $scope.description, image:$scope.uploadedImage, fb_page: $scope.fb_page, mission: $scope.mission, tags:tmpTags}});
-            request.success(function (data) {
+            request.then(function (data) {
                 $location.path("/teams/view/" + id);
             });
         }
@@ -2428,28 +2394,10 @@ app.controller("myTeamsController", ["$scope", "$http", "$location", "User", fun
         $scope.refresh = function () {
             $scope.loading = true;
             var request = $http({method: "GET", url: "myTeams", api: true});
-            request.success(function (data) {
-                $scope.teams = data.teams;
+            request.then(function (data) {
+                $scope.teams = data.data.teams;
                 $scope.loading = false;
             });
-        }
-        $scope.shareTeam = function () {
-//            console.log("starting share.... ");
-//            FB.ui({
-//                method: 'share_open_graph',
-//                action_type: 'og.comments',
-//                action_properties: JSON.stringify({
-//                    object : {
-//                        'og:url': 'http://galdraland-1-0.herokuapp.com/users', // your url to share
-//                        'og:title': 'Here my custom title',
-////                        'og:type': 'website',
-//                        'og:description': 'here custom description',
-//                        'og:image': 'http://www.hyperarts.com/external-xfbml/share-image.gif'
-//                    }
-//                })
-//            }, function(response){
-//                console.log("response = ", response);
-//            });
         }
 
         $scope.refresh();
@@ -2460,8 +2408,8 @@ app.controller("myTeamsTagController", ["$scope", "$http", "$location", "$stateP
     $scope.refresh = function () {
         $scope.loading = true;
         var request = $http({method: "POST", url: "teamTag/list", api: true, data: {tag: $stateParams.tag}});
-        request.success(function (data) {
-            $scope.teams = data.teams;
+        request.then(function (data) {
+            $scope.teams = data.data.teams;
             $scope.loading = false;
         });
     }
@@ -2480,13 +2428,13 @@ app.controller("newsController", ["$scope", "$http", "$location", "User", functi
             $scope.loading = true;
 
             request = $http({method: "POST", url: "newAdventure", api: true, data: {term: ""}});
-            request.success($scope.parse_adventures);
+            request.then($scope.parse_adventures);
 
             request = $http({method: "POST", url: "newTeam", api: true, data: {term: ""}});
-            request.success($scope.parse_teams);
+            request.then($scope.parse_teams);
 
             request = $http({method: "POST", url: "newUser", api: true, data: {term: ""}});
-            request.success($scope.parse_users);
+            request.then($scope.parse_users);
 
             request.then(function () {
                 $scope.loading = false;
@@ -2509,40 +2457,40 @@ app.controller("newsController", ["$scope", "$http", "$location", "User", functi
 
         $scope.parse_adventures = function (data) {
             $scope.adventures = [];
-            for (var i = 0; i < data.adventures.length; i++) {
+            for (var i = 0; i < data.data.adventures.length; i++) {
                 var result = {};
-                result._id = data.adventures[i]._id;
-                result.name = data.adventures[i].name;
-                result.text1 = data.adventures[i].tags.join(" ");
-                result.text2 = data.adventures[i].start + " - " + data.adventures[i].end;
-                result.href = "/adventures/view/" + data.adventures[i]._id;
-                result.createdAt = prettyDate(data.adventures[i].createdAt);
+                result._id = data.data.adventures[i]._id;
+                result.name = data.data.adventures[i].name;
+                result.text1 = data.data.adventures[i].tags.join(" ");
+                result.text2 = data.data.adventures[i].start + " - " + data.data.adventures[i].end;
+                result.href = "/adventures/view/" + data.data.adventures[i]._id;
+                result.createdAt = prettyDate(data.data.adventures[i].createdAt);
                 $scope.adventures.push(result);
             }
         }
 
         $scope.parse_teams = function (data) {
             $scope.teams = [];
-            for (var i = 0; i < data.teams.length; i++) {
+            for (var i = 0; i < data.data.teams.length; i++) {
                 var result = {};
-                result._id = data.teams[i]._id;
-                result.name = data.teams[i].name;
-                result.text1 = data.teams[i].teamMembers.length + " Members";
-                result.href = "/teams/view/" + data.teams[i]._id;
-                result.createdAt = prettyDate(data.teams[i].createdAt);
+                result._id = data.data.teams[i]._id;
+                result.name = data.data.teams[i].name;
+                result.text1 = data.data.teams[i].teamMembers.length + " Members";
+                result.href = "/teams/view/" + data.data.teams[i]._id;
+                result.createdAt = prettyDate(data.data.teams[i].createdAt);
                 $scope.teams.push(result);
             }
         }
 
         $scope.parse_users = function (data) {
             $scope.peoples = [];
-            for (var i = 0; i < data.users.length; i++) {
+            for (var i = 0; i < data.data.users.length; i++) {
                 var result = {};
-                result._id = data.users[i]._id;
-                result.name = data.users[i].username;
-                result.text1 = data.users[i].fullname;
-                result.photo = data.users[i].photo;
-                result.signin = prettyDate(data.users[i].signin);
+                result._id = data.data.users[i]._id;
+                result.name = data.data.users[i].username;
+                result.text1 = data.data.users[i].fullname;
+                result.photo = data.data.users[i].photo;
+                result.signin = prettyDate(data.data.users[i].signin);
                 $scope.peoples.push(result);
             }
         }
@@ -2555,37 +2503,37 @@ app.controller("userViewController", ["$scope", "$http", "$stateParams", "User",
 
         $scope.refresh = function () {
             var request = $http({method: "POST", url: "getViewUser", api: true, data: {userid: $stateParams.id}});
-            request.success(function (data) {
-                $scope.username = data.user.username;
-                $scope.fullname = data.user.fullname;
-                $scope.email = data.user.email;
-                $scope.location = data.user.location;
-                $scope.skype = data.user.skype;
-                $scope.goals = data.user.goals;
-                $scope.categories = data.user.categories;
-                $scope.educations = data.user.educations;
-                $scope.links = data.user.links;
-                $scope.experience = data.user.experience;
-                $scope.bio = data.user.bio;
-                $scope.interests = data.user.interests;
-                $scope.photo = data.user.photo;
+            request.then(function (data) {
+                $scope.username = data.data.user.username;
+                $scope.fullname = data.data.user.fullname;
+                $scope.email = data.data.user.email;
+                $scope.location = data.data.user.location;
+                $scope.skype = data.data.user.skype;
+                $scope.goals = data.data.user.goals;
+                $scope.categories = data.data.user.categories;
+                $scope.educations = data.data.user.educations;
+                $scope.links = data.data.user.links;
+                $scope.experience = data.data.user.experience;
+                $scope.bio = data.data.user.bio;
+                $scope.interests = data.data.user.interests;
+                $scope.photo = data.data.user.photo;
                 $scope.searchUserId = $stateParams.id;
-                $scope.likes = data.user.likes;
-                $scope.dislikes = data.user.dislikes;
-                $scope.skills= data.user.skills;
-                $scope.looks= data.user.looks;
-                $scope.roles= data.user.roles;
+                $scope.likes = data.data.user.likes;
+                $scope.dislikes = data.data.user.dislikes;
+                $scope.skills= data.data.user.skills;
+                $scope.looks= data.data.user.looks;
+                $scope.roles= data.data.user.roles;
             });
 
             $scope.teams = [];
             request = $http({method: "POST", url: "userTeams", api: true, data: {userid: $stateParams.id}});
-            request.success(function (data) {
-                $scope.teams = data.teams;
+            request.then(function (data) {
+                $scope.teams = data.data.teams;
             });
 
             request = $http({method: "POST", url: "adventure/list", api: true, data: {teams: $scope.teams}});
-            request.success(function (r) {
-                $scope.adventures = r.adventures;
+            request.then(function (r) {
+                $scope.adventures = r.data.adventures;
             });
         }
 
@@ -2601,31 +2549,31 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
         $scope.refresh = function () {
             console.log("refreshing.....");
             var request = $http({method: "POST", url: "getTeam", api: true, data: {id: $stateParams.id}});
-            request.success(function (data) {
-                if (data.team.description && data.team.description != "") {
+            request.then(function (data) {
+                if (data.data.team.description && data.data.team.description != "") {
                     var find = "\n";
                     var re = new RegExp(find, 'g');
-                    data.team.description = $sce.trustAsHtml(data.team.description.replace(re,"<br>"));
-                    $scope.description = data.team.description;
+                    data.data.team.description = $sce.trustAsHtml(data.data.team.description.replace(re,"<br>"));
+                    $scope.description = data.data.team.description;
                 }
 
-                if (data.team.mission && data.team.mission != "") {
+                if (data.data.team.mission && data.data.team.mission != "") {
                     var find = "\n";
                     var re = new RegExp(find, 'g');
-                    data.team.mission = $sce.trustAsHtml(data.team.mission.replace(re,"<br>"));
+                    data.data.team.mission = $sce.trustAsHtml(data.data.team.mission.replace(re,"<br>"));
                 }
 
-                if (data.team.tags && data.team.tags.length > 0) {
-                    if (data.team.tags[0] == "") data.team.tags = [];
+                if (data.data.team.tags && data.data.team.tags.length > 0) {
+                    if (data.data.team.tags[0] == "") data.data.team.tags = [];
                 }
-                $scope.team = data.team;
-                $scope.adventures = data.advs;
-                $scope.isManager = data.team.owner._id == $scope.user._id;
+                $scope.team = data.data.team;
+                $scope.adventures = data.data.advs;
+                $scope.isManager = data.data.team.owner._id == $scope.user._id;
                 $scope.isMember = false;
-                for (var i = 0; i < data.team.teamMembers.length; i++) {
-                    if (data.team.teamMembers[i].user.profileId == '000000000000000000000000')
-                        $scope.emptyMembers.push(data.team.teamMembers[i]);
-                    if (data.team.teamMembers[i].user._id == $scope.user._id)
+                for (var i = 0; i < data.data.team.teamMembers.length; i++) {
+                    if (data.data.team.teamMembers[i].user.profileId == '000000000000000000000000')
+                        $scope.emptyMembers.push(data.data.team.teamMembers[i]);
+                    if (data.data.team.teamMembers[i].user._id == $scope.user._id)
                         $scope.isMember = true;
                 }
             });
@@ -2648,7 +2596,7 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
             modalInstance.result.then(function (result) {
                 if (result == "YES") {
                     var request = $http({method: "POST", url: "removeTeam", api: true, data: {id: $scope.team._id}});
-                    request.success(function () {
+                    request.then(function () {
                         $location.path("/teams");
                     });
                 }
@@ -2730,7 +2678,7 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
                 if (result.type == "CREATE") {
                     console.log('send request : create member title');
                     var request = $http({method: "POST", url: "addMemberTitle", api: true, data: {team_id: result.team._id, titles: result.titles, skills: result.skills, description: result.description, whatisthere: result.whatisthere,defuser: $rootScope.defUser}});
-                    request.success(function (data) {
+                    request.then(function (data) {
                         location.reload();
                     });
                 }
@@ -2782,7 +2730,7 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
                         if (result.invites.length == 0)
                             return;
                         var request = $http({method: "POST", url: "sendInvite", api: true, data: {team: $scope.team._id, invites: result.invites, msg: result.msg, roles: result.roles}});
-                        request.success(function (data) {
+                        request.then(function (data) {
 
                         });
                     }
@@ -2809,7 +2757,7 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
                     }
 
                     var request = $http({method: "POST", url: "sendApply", api: true, data: {team: $scope.team._id, msg: result.msg, title: result.title, memberList: $scope.emptyMembers}});
-                    request.success(function (data) {
+                    request.then(function (data) {
                         console.log(data);
                     });
                 }
@@ -2855,7 +2803,7 @@ app.controller("blogController", ["$scope", "$http", "User", "$location", functi
     $scope.refresh = function () {
         $scope.loading = true;
         var request = $http({method: "POST", url: "/api/blogs", api: true});
-        request.success(function (data) {
+        request.then(function (data) {
             console.log(data);
         });
     }
@@ -2923,11 +2871,11 @@ app.directive('commentWidget', function ($http, User) {
                 console.log("isManager = " + scope.ismanager);
                 console.log("owner = " + scope.user._id);
                 var request = $http({method: "POST", url: "getCommentByRefId", api: true, data: {id: scope.ref, fromMe: false, isManager : scope.ismanager, owner: scope.user._id}});
-                request.success(function (data) {
-                    if (!data.success || data.comments.length == 0) {
+                request.then(function (data) {
+                    if (!data.data.success || data.data.comments.length == 0) {
                         scope.comments = [];
                     } else {
-                        scope.comments = data.comments;
+                        scope.comments = data.data.comments;
                         console.log(scope.comments);
                     }
                 });
@@ -3012,20 +2960,20 @@ app.directive('ratingWidget', function ($http, User) {
             scope.refresh = function () {
                 $('#rating-elem').attr('id', 'rating-elem' + scope.ref);
                 var request = $http({method: "POST", url: "getRatingByRefId", api: true, data: {id: scope.ref, fromMe: false}});
-                request.success(function (data) {
+                request.then(function (data) {
                     scope.myrating = null;
-                    if (!data.success || data.ratings.length == 0) {
+                    if (!data.data.success || data.data.ratings.length == 0) {
                         scope.count = 0;
                         scope.average = 0;
                     } else {
                         var sum = 0;
-                        for (var i = 0; i < data.ratings.length; i++) {
-                            sum += data.ratings[i].rating;
-                            if (data.ratings[i].from == scope.user._id)
-                                scope.myrating = data.ratings[i];
+                        for (var i = 0; i < data.data.ratings.length; i++) {
+                            sum += data.data.ratings[i].rating;
+                            if (data.data.ratings[i].from == scope.user._id)
+                                scope.myrating = data.data.ratings[i];
                         }
 
-                        scope.count = data.ratings.length;
+                        scope.count = data.data.ratings.length;
                         scope.average = sum / scope.count;
                     }
 
@@ -3129,9 +3077,9 @@ app.factory("User", ["$http", "$cookieStore", "$q", function ($http, $cookieStor
                 $cookieStore.remove("user");
             },
             update: function (cb) {
-                $http.get("/api/getUser").success(function (data) {
+                $http.get("/api/getUser").then(function (data) {
                     $cookieStore.remove("user");
-                    $cookieStore.put("user", data.user);
+                    $cookieStore.put("user", data.data.user);
                 });
 
                 if (cb)
