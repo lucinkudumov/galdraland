@@ -132,7 +132,7 @@ module.exports = function (opts) {
             });
         },
         "post#lastAdventure": function (req, res) {
-            adventureModel.find({$orderby: {$natural : -1}}, function (err, adventures) {
+            adventureModel.find({}, function (err, adventures) {
                 if (err) {
                     console.log(err);
                     return res.json({adventures: []});
