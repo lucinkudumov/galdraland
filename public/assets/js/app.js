@@ -3067,17 +3067,22 @@ app.factory('middleware', function () {
     };
 });
 app.factory("User", ["$http", "$cookieStore", "$q", function ($http, $cookieStore, $q) {
+    console.log("1");
         var user = $cookieStore.get("user");
         return {
             isLoggedIn: function () {
+                console.log("2");
                 return $cookieStore.get("user");
             },
             logout: function () {
                 user = null;
+                console.log("3");
                 $cookieStore.remove("user");
             },
             update: function (cb) {
+                console.log("4");
                 $http.get("/api/getUser").then(function (data) {
+                    console.log("5");
                     $cookieStore.remove("user");
                     $cookieStore.put("user", data.data.user);
                 });
