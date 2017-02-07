@@ -13908,8 +13908,8 @@ function locationGetterSetter(property, preprocess) {
 function $LocationProvider() {
   var hashPrefix = '!',
       html5Mode = {
-        enabled: false,
-        requireBase: true,
+        enabled: true,
+        requireBase: false,
         rewriteLinks: true
       };
 
