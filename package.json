@@ -37,7 +37,8 @@
       "multiparty" : "~4.1.2",
       "fs" : "~0.0.2",
       "sendgrid": "~2.0.0",
-      "meow-blog": "~0.1.9"
+      "meow-blog": "~0.1.9",
+      "email-templates": "~0.1.8"
   },
     "devDependencies": {
         "grunt": "~0.4.2",
