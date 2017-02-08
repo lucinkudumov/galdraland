@@ -3120,26 +3120,26 @@ app.factory('middleware', function () {
         }
     };
 });
-app.factory("User", ["$http", "$cookieStore", "$q", function ($http, $cookieStore, $q) {
+app.factory("User", ["$http", "$cookies", "$q", function ($http, $cookies, $q) {
     console.log("1");
-    var user = $cookieStore.get("user");
+    var user = $cookies.get("user");
     console.log("2");
     return {
         isLoggedIn: function () {
             console.log("3");
-            return $cookieStore.get("user");
+            return $cookies.get("user");
         },
         logout: function () {
             console.log("4");
             user = null;
-            $cookieStore.remove("user");
+            $cookies.remove("user");
         },
         update: function (cb) {
             console.log("5");
             $http.get("/api/getUser").success(function (data) {
                 console.log("6");
-                $cookieStore.remove("user");
-                $cookieStore.put("user", data.user);
+                $cookies.remove("user");
+                $cookies.put("user", data.user);
             });
 
             if (cb)
