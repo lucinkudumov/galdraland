@@ -2,7 +2,7 @@
         <blockquote>
         <a href="/settings"><span class="badge badge-primary">Settings</span></a>
         <uib-accordion close-others="false">
-        <uib-accordion-group is-open="true">
+        <div uib-accordion-group is-open="true">
         <uib-accordion-heading>
         <p>{{ user.fullname}}</p>
         </uib-accordion-heading>
@@ -11,7 +11,7 @@
         <small ng-show="user.location"><cite title="Location">{{ user.location}}  <i class="glyphicon glyphicon-map-marker"></i></cite></small>
         <small ng-show="user.skype">Skype: <cite title="Skype">{{ user.skype}}</cite></small>
         <small ng-show="user.categories">Categories: <cite title="Categories">{{ user.categories}}</cite></small>
-        </uib-accordion-group>
+        </div>
         <uib-accordion-group is-open="true">
         <uib-accordion-heading>
         <p ng-show="user.educations.length > 0">Education</p>
