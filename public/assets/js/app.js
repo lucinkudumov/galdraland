@@ -3099,7 +3099,7 @@ app.factory("User", ["$http", "$cookies", "$q", function ($http, $cookies, $q) {
                 return false;
             }
 
-            if (typeof($cookies.get("user")) == "object")
+            if (typeof $cookies.get("user") == "object")
                 return $cookies.get("user");
             else
                 return JSON.parse(decodeURIComponent($cookies.get("user")));
