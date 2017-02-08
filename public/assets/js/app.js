@@ -3068,7 +3068,7 @@ app.factory('middleware', function () {
     };
 });
 app.factory("User", ["$http", "$cookies", "$q", function ($http, $cookies, $q) {
-        var user = $cookies.getObject("user");
+        var user = $cookies.get("user");
         return {
             isLoggedIn: function () {
                 console.log("user session = ", $cookies.getObject("user"));
@@ -3082,7 +3082,7 @@ app.factory("User", ["$http", "$cookies", "$q", function ($http, $cookies, $q) {
                 $http.get("/api/getUser").then(function (data) {
                     console.log(data);
                     $cookies.remove("user");
-                    $cookies.putObject("user", data.data.user);
+                    $cookies.put("user", data.data.user);
                 });
                 if (cb)
                     cb();
