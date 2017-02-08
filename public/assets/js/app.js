@@ -2205,7 +2205,7 @@ app.controller("profileViewController", ["$scope", "$http", "User", function ($s
     console.log("aaa");
     $http.get("/api/getUserDetail").success(function (data) {
         console.log(data);
-        $scope.user = data.user;
+//        $scope.user = data.user;
     });
 }]);
 
