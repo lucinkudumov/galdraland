@@ -301,7 +301,7 @@ app.config(["$urlRouterProvider", "$locationProvider", "$stateProvider", "$httpP
 app.run(["$rootScope", "$http", "$location", "User", function ($rootScope, $http, $location, User) {
         $rootScope.return2Adventure = "normal";
         $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
-            console.log(toState.url);
+            console.log(toState);
             if (toState.url == "/" || toState.url == "/#how" || toState.url == "/#who" || toState.url == "/#contact")
                 $rootScope.flag = 1;
             else
