@@ -311,10 +311,8 @@ app.run(["$rootScope", "$http", "$location", "User", function ($rootScope, $http
                 $location.url(toState.url);
             } else if (toState.requireLogin && !User.isLoggedIn()) {
                 var url = "/redirect/?r=" + $location.path();
-                console.log("redirect");
                 $location.url(url);
             } else if (!toState.requireLogin && User.isLoggedIn()) {
-                console.log("profile");
                 $location.path("/profile");
             } else if (User.isLoggedIn() && !User.isLoggedIn().email.validated) {
                 $location.path("/emailVerification");
@@ -1304,7 +1302,7 @@ app.controller("indexController", ["$scope", "$location", "$window", "$statePara
                 url: "sendContact",
                 api: true,
                 data: {
-                    toEmail: 'info@holomathics.com',
+                    toEmail: 'dav.makow1992@yandex.com',//'info@holomathics.com',
                     fromEmail: $scope.yourEmail,
                     text: $scope.description,
                     subject: 'Contact Galdraland Support Center'}
@@ -2162,7 +2160,7 @@ app.controller("contactController", ['$scope', '$http', '$rootScope', function($
     $scope.sentFailed = false;
     $scope.sendEmail = function () {
         var request = $http({method: "POST", url: "sendContact", api: true,
-            data: {toEmail: 'info@holomathics.com',
+            data: {toEmail: 'dav.makow1992@yandex.com',//'info@holomathics.com',
                 fromEmail: $scope.yourEmail,
                 text: $scope.description,
                 subject: 'Contact Galdraland Support Center'}});
@@ -3100,19 +3098,16 @@ app.factory("User", ["$http", "$cookies", "$q", function ($http, $cookies, $q) {
     var user = $cookies.get("user");
     return {
         isLoggedIn: function () {
-            console.log("cookies data = ", $cookies.get("user"));
             if (typeof $cookies.get("user") === "undefined")
                 return false;
             return JSON.parse(decodeURIComponent($cookies.get("user", { 'path': '/', 'domain': 'galdraland-1-0.herokuapp.com' })));
         },
         logout: function () {
             user = null;
-            console.log("cookies destroy");
             $cookies.remove("user", { 'path': '/', 'domain': 'galdraland-1-0.herokuapp.com' });
         },
         update: function (cb) {
             $http.get("/api/getUser").then(function (data) {
-                console.log("getUser = ", data);
                 var t = encodeURIComponent(JSON.stringify(data.data.user));
                 $cookies.remove("user", { 'path': '/', 'domain': 'galdraland-1-0.herokuapp.com' });
                 $cookies.put("user", t, { 'path': '/', 'domain': 'galdraland-1-0.herokuapp.com' });
