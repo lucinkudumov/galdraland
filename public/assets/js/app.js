@@ -3095,11 +3095,9 @@ app.factory("User", ["$http", "$cookies", "$q", function ($http, $cookies, $q) {
     var user = $cookies.get("user");
     return {
         isLoggedIn: function () {
-            console.log("user session1 = ", $cookies.get("user"));
-            console.log("user session2 = ", angular.toJson($cookies.get("user")));
-            console.log("user session3 = ", decodeURI($cookies.get("user")));
-            console.log("user session4 = ", decodeURIComponent($cookies.get("user")));
-            return decodeURIComponent($cookies.get("user"));
+            console.log("user session1 = ", decodeURIComponent($cookies.get("user")));
+            console.log("user session2 = ", JSON.parse(decodeURIComponent($cookies.get("user"))));
+            return JSON.parse(decodeURIComponent($cookies.get("user")));
         },
         logout: function () {
             user = null;
