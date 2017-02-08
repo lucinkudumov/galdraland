@@ -3101,8 +3101,8 @@ app.factory("User", ["$http", "$cookies", "$q", function ($http, $cookies, $q) {
     return {
         isLoggedIn: function () {
             console.log("cookies data = ", $cookies.get("user"));
-//            if (typeof $cookies.get("user") === "undefined")
-//                return false;
+            if (typeof $cookies.get("user") === "undefined")
+                return false;
             return JSON.parse(decodeURIComponent($cookies.get("user")));
         },
         logout: function () {
