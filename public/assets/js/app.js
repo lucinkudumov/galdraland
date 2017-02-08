@@ -3095,18 +3095,7 @@ app.factory("User", ["$http", "$cookies", "$q", function ($http, $cookies, $q) {
     var user = $cookies.get("user");
     return {
         isLoggedIn: function () {
-            if ($cookies.get("user") == "undefined" || $cookies.get("user") == null) {
-                console.log("undefined");
-                return false;
-            }
-            console.log("typeof = ", typeof $cookies.get("user"));
-            if (typeof $cookies.get("user") === "object") {
-                console.log("object = ", $cookies.get("user"));
-                return $cookies.get("user");
-            } else {
-                console.log("uricomponent = ", $cookies.get("user"));
-                return JSON.parse(decodeURIComponent($cookies.get("user")));
-            }
+            return JSON.parse(decodeURIComponent($cookies.get("user")));
         },
         logout: function () {
             user = null;
