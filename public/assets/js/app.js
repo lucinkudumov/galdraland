@@ -2205,7 +2205,7 @@ app.controller("profileViewController", ["$scope", "$http", "User", function ($s
     console.log("aaa");
     $http.get("/api/getUserDetail").success(function (data) {
         console.log(data);
-//        $scope.user = data.user;
+        $scope.user = data.user;
     });
 }]);
 
@@ -3121,17 +3121,23 @@ app.factory('middleware', function () {
     };
 });
 app.factory("User", ["$http", "$cookieStore", "$q", function ($http, $cookieStore, $q) {
+    console.log("1");
     var user = $cookieStore.get("user");
+    console.log("2");
     return {
         isLoggedIn: function () {
+            console.log("3");
             return $cookieStore.get("user");
         },
         logout: function () {
+            console.log("4");
             user = null;
             $cookieStore.remove("user");
         },
         update: function (cb) {
+            console.log("5");
             $http.get("/api/getUser").success(function (data) {
+                console.log("6");
                 $cookieStore.remove("user");
                 $cookieStore.put("user", data.user);
             });
