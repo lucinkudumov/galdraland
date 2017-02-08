@@ -1038,8 +1038,7 @@ app.controller("emailController", ["$scope", "$location", "$http", "User", funct
         }
 
         $scope.saveEmail = function () {
-            var request = $http.post("/api/saveEmail", {email: $scope.email});
-            request.then(function (data) {
+            $http.post("/api/saveEmail", {email: $scope.email}).then(function (data) {
                 User.update();
                 $location.path("/profile");
             });
@@ -1060,8 +1059,9 @@ app.controller("headerController", ["$scope", "$rootScope", "$http", "$location"
         $scope.scategory = ($temp) ? $temp : "a";
         $scope.stext = ($stateParams.sterm) ? $stateParams.sterm : "";
 
-        var invite_request = $http({method: "GET", url: "getInvites", api: true});
-        invite_request.then(function (result) {
+        $http({
+            method: "GET", url: "getInvites", api: true
+        }).then (function (result) {
             if (result !== undefined && result.data !== undefined && result.data.invites !== undefined)
                 $scope.invites = result.data.invites;
             else
@@ -1302,7 +1302,7 @@ app.controller("indexController", ["$scope", "$location", "$window", "$statePara
                 url: "sendContact",
                 api: true,
                 data: {
-                    toEmail: 'dav.makow1992@yandex.com',//'info@holomathics.com',
+                    toEmail: 'info@holomathics.com',
                     fromEmail: $scope.yourEmail,
                     text: $scope.description,
                     subject: 'Contact Galdraland Support Center'}
@@ -1455,8 +1455,12 @@ app.controller("sendInviteController", ["$scope", "$uibModalInstance", "values",
         $scope.findUser = function (usernameOrEmail) {
             if(usernameOrEmail != "")
             {
-                var request = $http({method: "POST", url: "getUsers", api: true, data: {usernameOrEmail: usernameOrEmail}});
-                request.then(function (r) {
+                $http({
+                    method: "POST",
+                    url: "getUsers",
+                    api: true,
+                    data: {usernameOrEmail: usernameOrEmail}
+                }).then(function (r) {
                     var users = [];
                     for (var i = 0; i < r.data.users.length; i++) {
                         var user = r.data.users[i];
@@ -1645,8 +1649,10 @@ app.controller("profileLeftSideController", ["$scope", "$http", "$location", "Us
         }
 
         $scope.getTeams = function () {
-            var request = $http({method: "GET", url: "myTeams", api: true});
-            request.then(function (data) {
+            $http({
+                method: "GET",
+                url: "myTeams", api: true
+            }).then(function (data) {
                 for (var i = 0; i < data.data.teams.length; i++) {
                     for (var j = 0; j < data.data.teams[i].teamMembers.length; j ++) {
                         var o = data.data.teams[i].teamMembers[j];
@@ -1663,8 +1669,11 @@ app.controller("profileLeftSideController", ["$scope", "$http", "$location", "Us
         var userTeams = [];
         var users = [];
         $scope.getUsers = function () {
-            var request = $http({method: "GET", url: "myTeams", api: true});
-            request.then(function (data) {
+            $http({
+                method: "GET",
+                url: "myTeams",
+                api: true
+            }).then(function (data) {
                 userTeams = data.data.teams;
                 if (userTeams.length) {
                     var userIds = [];
@@ -1680,8 +1689,12 @@ app.controller("profileLeftSideController", ["$scope", "$http", "$location", "Us
                     }
                     console.log("usersId = " + userIds);
                     if (userIds.length) {
-                        var request = $http({method: "POST", url: "getUsersByIds", api: true, data: {ids: userIds}});
-                        request.then (function (data) {
+                        $http({
+                            method: "POST",
+                            url: "getUsersByIds",
+                            api: true,
+                            data: {ids: userIds}
+                        }).then (function (data) {
                             users = data.data.users;
                             if (users.length) {
                                 console.log("usrs = ", users);
@@ -1705,8 +1718,12 @@ app.controller("profileLeftSideController", ["$scope", "$http", "$location", "Us
 
 
         $scope.getAdventures = function () {
-            var request = $http({method: "POST", url: "adventure/list", api: true, data: {teams: $scope.teams}});
-            request.then(function (r) {
+            $http({
+                method: "POST",
+                url: "adventure/list",
+                api: true,
+                data: {teams: $scope.teams}
+            }).then(function (r) {
                 $scope.adventures = r.data.adventures;
             });
         }
@@ -1787,15 +1804,23 @@ app.controller("profileSettingsController", ["$scope", "$rootScope", "$location"
 
         $scope.checkEmail = function () {
             $scope.invalidEmail = true;
-            var request = $http({method: "POST", url: "validateEmail", api: true, data: {email: $scope.email}});
-            request.then(function (data) {
+            $http({
+                method: "POST",
+                url: "validateEmail",
+                api: true,
+                data: {email: $scope.email}
+            }).then(function (data) {
                 $scope.invalidEmail = data.data.find;
             });
         }
 
         $scope.saveMainInformation = function () {
-            var request = $http({method: "POST", url: "saveMainInformation", api: true, data: {username: $scope.username, fullname: $scope.fullname, email: $scope.email, location: $scope.location, skype: $scope.skype, /*goals: $scope.goals,*/ categories: $scope.categories}});
-            request.then(function (data) {
+            $http({
+                method: "POST",
+                url: "saveMainInformation",
+                api: true,
+                data: {username: $scope.username, fullname: $scope.fullname, email: $scope.email, location: $scope.location, skype: $scope.skype, /*goals: $scope.goals,*/ categories: $scope.categories}
+            }).then(function (data) {
                 if (data.data.success) {
                     User.update();
                 }
@@ -1832,8 +1857,12 @@ app.controller("profileSettingsController", ["$scope", "$rootScope", "$location"
         }
 
         $scope.saveEducations = function () {
-            var request = $http({method: "POST", url: "saveEducations", api: true, data: {educations: $scope.educations}});
-            request.then(function (data) {
+            $http({
+                method: "POST",
+                url: "saveEducations",
+                api: true,
+                data: {educations: $scope.educations}
+            }).then(function (data) {
                 if (data.data.success) {
                     User.update();
                 }
@@ -1882,8 +1911,12 @@ app.controller("profileSettingsController", ["$scope", "$rootScope", "$location"
         }
 
         $scope.saveLinks = function () {
-            var request = $http({method: "POST", url: "saveLinks", api: true, data: {links: $scope.links}});
-            request.then(function (data) {
+            $http({
+                method: "POST",
+                url: "saveLinks",
+                api: true,
+                data: {links: $scope.links}
+            }).then(function (data) {
                 if (data.data.success) {
                     User.update();
                 }
@@ -1951,8 +1984,12 @@ app.controller("profileSettingsController", ["$scope", "$rootScope", "$location"
         }
 
         $scope.saveLikes = function () {
-            var request = $http({method: "POST", url: "saveLikes", api: true, data: {likes: $scope.likes}});
-            request.then(function (data) {
+            $http({
+                method: "POST",
+                url: "saveLikes",
+                api: true,
+                data: {likes: $scope.likes}
+            }).then(function (data) {
                 if (data.data.success) {
                     User.update();
                 }
@@ -1960,8 +1997,12 @@ app.controller("profileSettingsController", ["$scope", "$rootScope", "$location"
         }
 
         $scope.saveDislikes = function () {
-            var request = $http({method: "POST", url: "saveDislikes", api: true, data: {dislikes: $scope.dislikes}});
-            request.then(function (data) {
+            $http({
+                method: "POST",
+                url: "saveDislikes",
+                api: true,
+                data: {dislikes: $scope.dislikes}
+            }).then(function (data) {
                 if (data.data.success) {
                     User.update();
                 }
@@ -1969,8 +2010,12 @@ app.controller("profileSettingsController", ["$scope", "$rootScope", "$location"
         }
 
         $scope.saveSkills = function () {
-            var request = $http({method: "POST", url: "saveSkills", api: true, data: {skills: $scope.skills}});
-            request.then(function (data) {
+            $http({
+                method: "POST",
+                url: "saveSkills",
+                api: true,
+                data: {skills: $scope.skills}
+            }).then(function (data) {
                 if (data.data.success) {
                     User.update();
                 }
@@ -1978,8 +2023,12 @@ app.controller("profileSettingsController", ["$scope", "$rootScope", "$location"
         }
 
         $scope.saveLooks = function () {
-            var request = $http({method: "POST", url: "saveLooks", api: true, data: {looks: $scope.looks}});
-            request.then(function (data) {
+            $http({
+                method: "POST",
+                url: "saveLooks",
+                api: true,
+                data: {looks: $scope.looks}
+            }).then(function (data) {
                 if (data.data.success) {
                     User.update();
                 }
@@ -1987,8 +2036,12 @@ app.controller("profileSettingsController", ["$scope", "$rootScope", "$location"
         }
 
         $scope.saveRoles = function () {
-            var request = $http({method: "POST", url: "saveRoles", api: true, data: {roles: $scope.roles}});
-            request.then(function (data) {
+            $http({
+                method: "POST",
+                url: "saveRoles",
+                api: true,
+                data: {roles: $scope.roles}
+            }).then(function (data) {
                 if (data.data.success) {
                     User.update();
                 }
@@ -1996,8 +2049,12 @@ app.controller("profileSettingsController", ["$scope", "$rootScope", "$location"
         }
 
         $scope.saveExperience = function () {
-            var request = $http({method: "POST", url: "saveExperience", api: true, data: {experience: $scope.experience}});
-            request.then(function (data) {
+            $http({
+                method: "POST",
+                url: "saveExperience",
+                api: true,
+                data: {experience: $scope.experience}
+            }).then(function (data) {
                 if (data.data.success) {
                     User.update();
                 }
@@ -2008,8 +2065,12 @@ app.controller("profileSettingsController", ["$scope", "$rootScope", "$location"
             for (var i = $scope.interests.length - 1; i >= 0; i--)
                 if ($scope.interests[i].topic.topic == "" && $scope.interests[i].information == "")
                     $scope.interests.splice(i, 1);
-            var request = $http({method: "POST", url: "saveInterests", api: true, data: {interests: $scope.interests}});
-            request.then(function (data) {
+            $http({
+                method: "POST",
+                url: "saveInterests",
+                api: true,
+                data: {interests: $scope.interests}
+            }).then(function (data) {
                 if (data.data.success) {
                     User.update();
                 }
@@ -2017,8 +2078,12 @@ app.controller("profileSettingsController", ["$scope", "$rootScope", "$location"
         }
 
         $scope.saveBiography = function () {
-            var request = $http({method: "POST", url: "saveBiography", api: true, data: {biography: $scope.bio}});
-            request.then(function (data) {
+            $http({
+                method: "POST",
+                url: "saveBiography",
+                api: true,
+                data: {biography: $scope.bio}
+            }).then(function (data) {
                 if (data.data.success) {
                     User.update();
                 }
@@ -2131,8 +2196,12 @@ app.controller("profileSettingsController", ["$scope", "$rootScope", "$location"
         }
 
         $scope.saveGoal = function () {
-            var request = $http({method: "POST", url: "saveGoal", api: true, data: {goals: $scope.goals}});
-            request.then(function (data) {
+            $http({
+                method: "POST",
+                url: "saveGoal",
+                api: true,
+                data: {goals: $scope.goals}
+            }).then(function (data) {
                 if (data.data.success) {
                     User.update();
                 }
@@ -2161,7 +2230,7 @@ app.controller("contactController", ['$scope', '$http', '$rootScope', function($
     $scope.sendEmail = function () {
         $http({
             method: "POST", url: "sendContact", api: true,
-            data: {toEmail: 'dav.makow1992@yandex.com',//'info@holomathics.com',
+            data: {toEmail: 'info@holomathics.com',
                 fromEmail: $scope.yourEmail,
                 text: $scope.description,
                 subject: 'Contact Galdraland Support Center'}
@@ -2201,28 +2270,22 @@ app.controller("searchController", ["$scope", "$http", "$location", "$stateParam
             var request = null;
             switch ($stateParams.scategory) {
                 case "aa":
-                    request = $http({method: "POST", url: "adventure/adsearch", api: true, data: {name: $stateParams.sname, description: $stateParams.sdescription, tag: $stateParams.stag}});
-                    request.then($scope.parse_adventures);
+                    $http({method: "POST", url: "adventure/adsearch", api: true, data: {name: $stateParams.sname, description: $stateParams.sdescription, tag: $stateParams.stag}}).then($scope.parse_adventures);
                     break;
                 case "tt":
-                    request = $http({method: "POST", url: "adsearchTeam", api: true, data: {name: $stateParams.sname, description: $stateParams.sdescription}});
-                    request.then($scope.parse_teams);
+                    $http({method: "POST", url: "adsearchTeam", api: true, data: {name: $stateParams.sname, description: $stateParams.sdescription}}).then($scope.parse_teams);
                     break;
                 case "pp":
-                    request = $http({method: "POST", url: "searchUser", api: true, data: {term: $stateParams.sname}});
-                    request.then($scope.parse_users);
+                    $http({method: "POST", url: "searchUser", api: true, data: {term: $stateParams.sname}}).then($scope.parse_users);
                     break;
                 case "a":
-                    request = $http({method: "POST", url: "adventure/search", api: true, data: {term: $stateParams.sterm}});
-                    request.then($scope.parse_adventures);
+                    $http({method: "POST", url: "adventure/search", api: true, data: {term: $stateParams.sterm}}).then($scope.parse_adventures);
                     break;
                 case "t":
-                    request = $http({method: "POST", url: "searchTeam", api: true, data: {term: $stateParams.sterm}});
-                    request.then($scope.parse_teams);
+                    $http({method: "POST", url: "searchTeam", api: true, data: {term: $stateParams.sterm}}).then($scope.parse_teams);
                     break;
                 case "p":
-                    request = $http({method: "POST", url: "searchUser", api: true, data: {term: $stateParams.sterm}});
-                    request.then($scope.parse_users);
+                    $http({method: "POST", url: "searchUser", api: true, data: {term: $stateParams.sterm}}).then($scope.parse_users);
                     break;
             }
 
@@ -2280,8 +2343,12 @@ app.controller("createTeamController", ["$scope", "$rootScope", "Upload", "$http
                 else
                     tmpTags.push($scope.tags[i].name);
             }
-            request = $http({method: "POST", url: "createTeam", api: true, data: {name: $scope.name, description: $scope.description, rols: $scope.roles, defuser: $rootScope.defUser, fb_page: $scope.fb_page, mission: $scope.mission, image: $scope.uploadedImage, tags: tmpTags}});
-            request.then(function (data) {
+            $http({
+                method: "POST",
+                url: "createTeam",
+                api: true,
+                data: {name: $scope.name, description: $scope.description, rols: $scope.roles, defuser: $rootScope.defUser, fb_page: $scope.fb_page, mission: $scope.mission, image: $scope.uploadedImage, tags: tmpTags}
+            }).then(function (data) {
                 if ($rootScope.return2Adventure == "return")
                 {
                     $rootScope.return2Adventure = "normal";
@@ -2332,11 +2399,15 @@ app.controller("createTeamController", ["$scope", "$rootScope", "Upload", "$http
 
 app.controller("editTeamController", ["$scope", "$http", "$location", "$stateParams", "Upload", function ($scope, $http, $location, $stateParams, Upload) {
         var id = $stateParams.id;
-        var request = $http({method: "POST", url: "getTeam", api: true, data: {id: id}});
         $scope.uploadInProgress = false;
         $scope.uploadProgress = 0;
 
-        request.then(function (data) {
+        $http({
+            method: "POST",
+            url: "getTeam",
+            api: true,
+            data: {id: id}
+        }).then(function (data) {
             console.log(data);
             $scope.name = data.data.team.name;
             $scope.description = data.data.team.description;
@@ -2382,8 +2453,7 @@ app.controller("editTeamController", ["$scope", "$http", "$location", "$statePar
                 else
                     tmpTags.push($scope.tags[i].name);
             }
-            var request = $http({method: "POST", url: "editTeam", api: true, data: {id: id, name: $scope.name, description: $scope.description, image:$scope.uploadedImage, fb_page: $scope.fb_page, mission: $scope.mission, tags:tmpTags}});
-            request.then(function (data) {
+            $http({method: "POST", url: "editTeam", api: true, data: {id: id, name: $scope.name, description: $scope.description, image:$scope.uploadedImage, fb_page: $scope.fb_page, mission: $scope.mission, tags:tmpTags}}).then(function (data) {
                 $location.path("/teams/view/" + id);
             });
         }
@@ -2398,8 +2468,11 @@ app.controller("myTeamsController", ["$scope", "$http", "$location", "User", fun
 
         $scope.refresh = function () {
             $scope.loading = true;
-            var request = $http({method: "GET", url: "myTeams", api: true});
-            request.then(function (data) {
+            $http({
+                method: "GET",
+                url: "myTeams",
+                api: true
+            }).then(function (data) {
                 $scope.teams = data.data.teams;
                 $scope.loading = false;
             });
@@ -2412,8 +2485,12 @@ app.controller("myTeamsTagController", ["$scope", "$http", "$location", "$stateP
     $scope.user = User.isLoggedIn();
     $scope.refresh = function () {
         $scope.loading = true;
-        var request = $http({method: "POST", url: "teamTag/list", api: true, data: {tag: $stateParams.tag}});
-        request.then(function (data) {
+        $http({
+            method: "POST",
+            url: "teamTag/list",
+            api: true,
+            data: {tag: $stateParams.tag}
+        }).then(function (data) {
             $scope.teams = data.data.teams;
             $scope.loading = false;
         });
@@ -2432,16 +2509,11 @@ app.controller("newsController", ["$scope", "$http", "$location", "User", functi
         $scope.refresh = function () {
             $scope.loading = true;
 
-            request = $http({method: "POST", url: "newAdventure", api: true, data: {term: ""}});
-            request.then($scope.parse_adventures);
+            $http({method: "POST", url: "newAdventure", api: true, data: {term: ""}}).then($scope.parse_adventures);
 
-            request = $http({method: "POST", url: "newTeam", api: true, data: {term: ""}});
-            request.then($scope.parse_teams);
+            $http({method: "POST", url: "newTeam", api: true, data: {term: ""}}).then($scope.parse_teams);
 
-            request = $http({method: "POST", url: "newUser", api: true, data: {term: ""}});
-            request.then($scope.parse_users);
-
-            request.then(function () {
+            $http({method: "POST", url: "newUser", api: true, data: {term: ""}}).then($scope.parse_users).then(function () {
                 $scope.loading = false;
             });
         }
@@ -2507,8 +2579,12 @@ app.controller("userViewController", ["$scope", "$http", "$stateParams", "User",
         $scope.user = User.isLoggedIn();
 
         $scope.refresh = function () {
-            var request = $http({method: "POST", url: "getViewUser", api: true, data: {userid: $stateParams.id}});
-            request.then(function (data) {
+            $http({
+                method: "POST",
+                url: "getViewUser",
+                api: true,
+                data: {userid: $stateParams.id}
+            }).then(function (data) {
                 $scope.username = data.data.user.username;
                 $scope.fullname = data.data.user.fullname;
                 $scope.email = data.data.user.email;
@@ -2531,13 +2607,21 @@ app.controller("userViewController", ["$scope", "$http", "$stateParams", "User",
             });
 
             $scope.teams = [];
-            request = $http({method: "POST", url: "userTeams", api: true, data: {userid: $stateParams.id}});
-            request.then(function (data) {
+            $http({
+                method: "POST",
+                url: "userTeams",
+                api: true,
+                data: {userid: $stateParams.id}
+            }).then(function (data) {
                 $scope.teams = data.data.teams;
             });
 
-            request = $http({method: "POST", url: "adventure/list", api: true, data: {teams: $scope.teams}});
-            request.then(function (r) {
+            $http({
+                method: "POST",
+                url: "adventure/list",
+                api: true,
+                data: {teams: $scope.teams}
+            }).then(function (r) {
                 $scope.adventures = r.data.adventures;
             });
         }
@@ -2553,8 +2637,12 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
 
         $scope.refresh = function () {
             console.log("refreshing.....");
-            var request = $http({method: "POST", url: "getTeam", api: true, data: {id: $stateParams.id}});
-            request.then(function (data) {
+            $http({
+                method: "POST",
+                url: "getTeam",
+                api: true,
+                data: {id: $stateParams.id}
+            }).then(function (data) {
                 if (data.data.team.description && data.data.team.description != "") {
                     var find = "\n";
                     var re = new RegExp(find, 'g');
@@ -2600,8 +2688,7 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
 
             modalInstance.result.then(function (result) {
                 if (result == "YES") {
-                    var request = $http({method: "POST", url: "removeTeam", api: true, data: {id: $scope.team._id}});
-                    request.then(function () {
+                    $http({method: "POST", url: "removeTeam", api: true, data: {id: $scope.team._id}}).then(function () {
                         $location.path("/teams");
                     });
                 }
@@ -2682,8 +2769,7 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
             modalInstance.result.then(function (result) {
                 if (result.type == "CREATE") {
                     console.log('send request : create member title');
-                    var request = $http({method: "POST", url: "addMemberTitle", api: true, data: {team_id: result.team._id, titles: result.titles, skills: result.skills, description: result.description, whatisthere: result.whatisthere,defuser: $rootScope.defUser}});
-                    request.then(function (data) {
+                    $http({method: "POST", url: "addMemberTitle", api: true, data: {team_id: result.team._id, titles: result.titles, skills: result.skills, description: result.description, whatisthere: result.whatisthere,defuser: $rootScope.defUser}}).then(function (data) {
                         location.reload();
                     });
                 }
@@ -2734,8 +2820,7 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
                     function send_invite() {
                         if (result.invites.length == 0)
                             return;
-                        var request = $http({method: "POST", url: "sendInvite", api: true, data: {team: $scope.team._id, invites: result.invites, msg: result.msg, roles: result.roles}});
-                        request.then(function (data) {
+                        $http({method: "POST", url: "sendInvite", api: true, data: {team: $scope.team._id, invites: result.invites, msg: result.msg, roles: result.roles}}).then(function (data) {
 
                         });
                     }
@@ -2761,8 +2846,7 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
                         result.roles = result.roles.split(/\s*,\s*/);
                     }
 
-                    var request = $http({method: "POST", url: "sendApply", api: true, data: {team: $scope.team._id, msg: result.msg, title: result.title, memberList: $scope.emptyMembers}});
-                    request.then(function (data) {
+                    $http({method: "POST", url: "sendApply", api: true, data: {team: $scope.team._id, msg: result.msg, title: result.title, memberList: $scope.emptyMembers}}).then(function (data) {
                         console.log(data);
                     });
                 }
@@ -2807,8 +2891,7 @@ app.controller("blogController", ["$scope", "$http", "User", "$location", functi
     console.log("calling blog");
     $scope.refresh = function () {
         $scope.loading = true;
-        var request = $http({method: "POST", url: "/api/blogs", api: true});
-        request.then(function (data) {
+        $http({method: "POST", url: "/api/blogs", api: true}).then(function (data) {
             console.log(data);
         });
     }
@@ -2875,8 +2958,7 @@ app.directive('commentWidget', function ($http, User) {
                 console.log("id = " + scope.ref);
                 console.log("isManager = " + scope.ismanager);
                 console.log("owner = " + scope.user._id);
-                var request = $http({method: "POST", url: "getCommentByRefId", api: true, data: {id: scope.ref, fromMe: false, isManager : scope.ismanager, owner: scope.user._id}});
-                request.then(function (data) {
+                $http({method: "POST", url: "getCommentByRefId", api: true, data: {id: scope.ref, fromMe: false, isManager : scope.ismanager, owner: scope.user._id}}).then(function (data) {
                     if (!data.data.success || data.data.comments.length == 0) {
                         scope.comments = [];
                     } else {
@@ -2891,8 +2973,7 @@ app.directive('commentWidget', function ($http, User) {
                     return;
                 scope.request_in_process = true;
 
-                var request = $http({method: "POST", url: "insertComment", api: true, data: {ref_id: scope.ref, comment: scope.txtcomment}});
-                request.then(function (result) {
+                $http({method: "POST", url: "insertComment", api: true, data: {ref_id: scope.ref, comment: scope.txtcomment}}).then(function (result) {
                     scope.request_in_process = false;
                     scope.refresh();
                 });
@@ -2924,8 +3005,7 @@ app.directive('commentWidget', function ($http, User) {
                     return;
                 scope.request_in_process = true;
 
-                var request = $http({method: "POST", url: "updateStatus", api: true, data: {id: cmtId, status: "REJECT"}});
-                request.then(function (result) {
+                $http({method: "POST", url: "updateStatus", api: true, data: {id: cmtId, status: "REJECT"}}).then(function (result) {
                     scope.request_in_process = false;
                     scope.refresh();
                 });
@@ -2936,8 +3016,7 @@ app.directive('commentWidget', function ($http, User) {
                     return;
                 scope.request_in_process = true;
 
-                var request = $http({method: "POST", url: "updateStatus", api: true, data: {id: cmtId, status: "APPROVE"}});
-                request.then(function (result) {
+                $http({method: "POST", url: "updateStatus", api: true, data: {id: cmtId, status: "APPROVE"}}).then(function (result) {
                     scope.request_in_process = false;
                     scope.refresh();
                 });
@@ -2964,8 +3043,7 @@ app.directive('ratingWidget', function ($http, User) {
 
             scope.refresh = function () {
                 $('#rating-elem').attr('id', 'rating-elem' + scope.ref);
-                var request = $http({method: "POST", url: "getRatingByRefId", api: true, data: {id: scope.ref, fromMe: false}});
-                request.then(function (data) {
+                $http({method: "POST", url: "getRatingByRefId", api: true, data: {id: scope.ref, fromMe: false}}).then(function (data) {
                     scope.myrating = null;
                     if (!data.data.success || data.data.ratings.length == 0) {
                         scope.count = 0;
@@ -3024,14 +3102,16 @@ app.directive('ratingWidget', function ($http, User) {
                     return;
                 scope.request_in_process = true;
                 if (scope.myrating == null) {
-                    var request = $http({method: "POST", url: "insertRating", api: true, data: {ref_id: scope.ref, rating: value}});
+                    $http({method: "POST", url: "insertRating", api: true, data: {ref_id: scope.ref, rating: value}}).then(function (result) {
+                        scope.request_in_process = false;
+                        scope.refresh();
+                    });
                 } else {
-                    var request = $http({method: "POST", url: "updateRating", api: true, data: {id: scope.myrating._id, rating: value}});
+                    $http({method: "POST", url: "updateRating", api: true, data: {id: scope.myrating._id, rating: value}}).then(function (result) {
+                        scope.request_in_process = false;
+                        scope.refresh();
+                    });
                 }
-                request.then(function (result) {
-                    scope.request_in_process = false;
-                    scope.refresh();
-                });
             });
 
             scope.$watch('ref', function (newValue, oldValue) {
