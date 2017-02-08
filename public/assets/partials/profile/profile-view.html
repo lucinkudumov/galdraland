@@ -1,94 +1,94 @@
 <div ng-controller="profileViewController">
         <blockquote>
         <a href="/settings"><span class="badge badge-primary">Settings</span></a>
-        <accordion close-others="false">
-        <accordion-group is-open="true">
-        <accordion-heading>
+        <uib-accordion close-others="false">
+        <uib-accordion-group is-open="true">
+        <uib-accordion-heading>
         <p>{{ user.fullname}}</p>
-        </accordion-heading>
+        </uib-accordion-heading>
         <small><cite title="Username">{{ user.username}}  <i class="glyphicon glyphicon-user"></i></cite></small>
         <small><cite title="Email">{{ user.email.email}} <i class="glyphicon glyphicon-pencil"></i></cite></small> 
         <small ng-show="user.location"><cite title="Location">{{ user.location}}  <i class="glyphicon glyphicon-map-marker"></i></cite></small>
         <small ng-show="user.skype">Skype: <cite title="Skype">{{ user.skype}}</cite></small>
         <small ng-show="user.categories">Categories: <cite title="Categories">{{ user.categories}}</cite></small>
-        </accordion-group>
-        <accordion-group is-open="true">
-        <accordion-heading>
+        </uib-accordion-group>
+        <uib-accordion-group is-open="true">
+        <uib-accordion-heading>
         <p ng-show="user.educations.length > 0">Education</p>
-        </accordion-heading>
+        </uib-accordion-heading>
         <small ng-show="!user.educations || user.educations.length == 0">No educations, <a href="/settings">add</a> now.</small>
         <small ng-repeat="e in user.educations" title="Education-{{ e.school.id}}">{{ e.type}}, {{ e.school.name}}, {{ e.year.name}}</small>
-        </accordion-group>
-        <accordion-group is-open="true">
-        <accordion-heading>
+        </uib-accordion-group>
+        <uib-accordion-group is-open="true">
+        <uib-accordion-heading>
         <p>Links</p>
-        </accordion-heading>
+        </uib-accordion-heading>
         <small ng-show="!user.links || user.link.length == 0">No links, <a href="/settings">add</a> now.</small>
         <small ng-repeat="l in user.links"><a href="{{ l.link}}" target="_blank">{{ l.name || l.link }}</a></small>
-        </accordion-group>
-        <accordion-group is-open="true">
-        <accordion-heading>
+        </uib-accordion-group>
+        <uib-accordion-group is-open="true">
+        <uib-accordion-heading>
         <p>Experience</p>
-        </accordion-heading>
+        </uib-accordion-heading>
         <small ng-show="!user.experience || user.experience.length == 0">No experience, <a href="/settings">add</a> now.</small>
         <pre ng-show="user.experience">{{ user.experience}}</pre>
-        </accordion-group>
-        <accordion-group is-open="true">
-        <accordion-heading>
+        </uib-accordion-group>
+        <uib-accordion-group is-open="true">
+        <uib-accordion-heading>
         <p>Biography</p>
-        </accordion-heading>
+        </uib-accordion-heading>
         <small ng-show="!user.bio">No biography, <a href="/settings">add</a> now.</small>
         <pre ng-show="user.bio">{{ user.bio}}</pre>
-        </accordion-group>
-        <accordion-group is-open="true">
-        <accordion-heading>
+        </uib-accordion-group>
+        <uib-accordion-group is-open="true">
+        <uib-accordion-heading>
         <p>Interests</p>
-        </accordion-heading>
+        </uib-accordion-heading>
         <small ng-show="!user.interests || user.interests.length == 0">No interests, join to team and create new adventure to add your interests.</small>
         <small ng-repeat="item in user.interests| orderBy:'topic.topic' | groupBy:['topic.topic']">{{item.topic.topic}}: {{item.information}}</small>
-        </accordion-group>
-        <accordion-group is-open="true">
-        <accordion-heading>
+        </uib-accordion-group>
+        <uib-accordion-group is-open="true">
+        <uib-accordion-heading>
         <p>Goals</p>
-        </accordion-heading>
+        </uib-accordion-heading>
         <small ng-show="!user.goals || user.goals.length == 0"> No Goals,  <a href="/settings">add</a> now.</small>
         <pre ng-show="user.goals">{{ user.goals}}</pre>
-        </accordion-group>
-        <accordion-group is-open="true">
-        <accordion-heading>
+        </uib-accordion-group>
+        <uib-accordion-group is-open="true">
+        <uib-accordion-heading>
         <p>Likes</p>
-        </accordion-heading>
+        </uib-accordion-heading>
         <small ng-show="!user.likes || user.likes.length == 0">No Likes, <a href="/settings">add</a> now.</small>
         <small ng-repeat="l in user.likes">{{ l.like }}</small>
-        </accordion-group>
-        <accordion-group is-open="true">
-        <accordion-heading>
+        </uib-accordion-group>
+        <uib-accordion-group is-open="true">
+        <uib-accordion-heading>
         <p>Dislikes</p>
-        </accordion-heading>
+        </uib-accordion-heading>
         <small ng-show="!user.dislikes || user.dislikes.length == 0">No Dislikes, <a href="/settings">add</a> now.</small>
         <small ng-repeat="dl in user.dislikes">{{ dl.dislike }}</small>
-        </accordion-group>
-        <accordion-group is-open="true">
-        <accordion-heading>
+        </uib-accordion-group>
+        <uib-accordion-group is-open="true">
+        <uib-accordion-heading>
         <p>Skills</p>
-        </accordion-heading>
+        </uib-accordion-heading>
         <small ng-show="!user.skills || user.skills.length == 0">No Skills, <a href="/settings">add</a> now.</small>
         <small ng-repeat="s in user.skills">{{ s.skill }}</small>
-        </accordion-group>
-        <accordion-group is-open="true">
-        <accordion-heading>
+        </uib-accordion-group>
+        <uib-accordion-group is-open="true">
+        <uib-accordion-heading>
         <p>What I am looking for now</p>
-        </accordion-heading>
+        </uib-accordion-heading>
         <small ng-show="!user.looks || user.looks.length == 0">No Data, <a href="/settings">add</a> now.</small>
         <small ng-repeat="l in user.looks">{{ l.look }}</small>
-        </accordion-group>
-        <accordion-group is-open="true">
-        <accordion-heading>
+        </uib-accordion-group>
+        <uib-accordion-group is-open="true">
+        <uib-accordion-heading>
         <p>Desired Roles</p>
-        </accordion-heading>
+        </uib-accordion-heading>
         <small ng-show="!user.roles || user.roles.length == 0">No Data, <a href="/settings">add</a> now.</small>
         <small ng-repeat="r in user.roles">{{ r.role }}</small>
-        </accordion-group>
-        </accordion>
+        </uib-accordion-group>
+        </uib-accordion>
         </blockquote>
 </div>
