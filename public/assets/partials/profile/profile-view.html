@@ -2,7 +2,7 @@
         <blockquote>
         <a href="/settings"><span class="badge badge-primary">Settings</span></a>
         <uib-accordion close-others="false">
-        <div uib-accordion-group is-open="true">
+        <div uib-accordion-group class="panel-default" is-open="true">
         <uib-accordion-heading>
         <p>{{ user.fullname}}</p>
         </uib-accordion-heading>
@@ -12,77 +12,77 @@
         <small ng-show="user.skype">Skype: <cite title="Skype">{{ user.skype}}</cite></small>
         <small ng-show="user.categories">Categories: <cite title="Categories">{{ user.categories}}</cite></small>
         </div>
-        <div uib-accordion-group is-open="true">
+        <div uib-accordion-group class="panel-default" is-open="true">
         <uib-accordion-heading>
         <p ng-show="user.educations.length > 0">Education</p>
         </uib-accordion-heading>
         <small ng-show="!user.educations || user.educations.length == 0">No educations, <a href="/settings">add</a> now.</small>
         <small ng-repeat="e in user.educations" title="Education-{{ e.school.id}}">{{ e.type}}, {{ e.school.name}}, {{ e.year.name}}</small>
         </div>
-        <div uib-accordion-group is-open="true">
+        <div uib-accordion-group class="panel-default" is-open="true">
         <uib-accordion-heading>
         <p>Links</p>
         </uib-accordion-heading>
         <small ng-show="!user.links || user.link.length == 0">No links, <a href="/settings">add</a> now.</small>
         <small ng-repeat="l in user.links"><a href="{{ l.link}}" target="_blank">{{ l.name || l.link }}</a></small>
         </div>
-        <div uib-accordion-group is-open="true">
+        <div uib-accordion-group class="panel-default" is-open="true">
         <uib-accordion-heading>
         <p>Experience</p>
         </uib-accordion-heading>
         <small ng-show="!user.experience || user.experience.length == 0">No experience, <a href="/settings">add</a> now.</small>
         <pre ng-show="user.experience">{{ user.experience}}</pre>
         </div>
-        <div uib-accordion-group is-open="true">
+        <div uib-accordion-group class="panel-default" is-open="true">
         <uib-accordion-heading>
         <p>Biography</p>
         </uib-accordion-heading>
         <small ng-show="!user.bio">No biography, <a href="/settings">add</a> now.</small>
         <pre ng-show="user.bio">{{ user.bio}}</pre>
         </div>
-        <div uib-accordion-group is-open="true">
+        <div uib-accordion-group class="panel-default" is-open="true">
         <uib-accordion-heading>
         <p>Interests</p>
         </uib-accordion-heading>
         <small ng-show="!user.interests || user.interests.length == 0">No interests, join to team and create new adventure to add your interests.</small>
         <small ng-repeat="item in user.interests| orderBy:'topic.topic' | groupBy:['topic.topic']">{{item.topic.topic}}: {{item.information}}</small>
         </div>
-        <div uib-accordion-group is-open="true">
+        <div uib-accordion-group class="panel-default" is-open="true">
         <uib-accordion-heading>
         <p>Goals</p>
         </uib-accordion-heading>
         <small ng-show="!user.goals || user.goals.length == 0"> No Goals,  <a href="/settings">add</a> now.</small>
         <pre ng-show="user.goals">{{ user.goals}}</pre>
         </div>
-        <div uib-accordion-group is-open="true">
+        <div uib-accordion-group class="panel-default" is-open="true">
         <uib-accordion-heading>
         <p>Likes</p>
         </uib-accordion-heading>
         <small ng-show="!user.likes || user.likes.length == 0">No Likes, <a href="/settings">add</a> now.</small>
         <small ng-repeat="l in user.likes">{{ l.like }}</small>
         </div>
-        <div uib-accordion-group is-open="true">
+        <div uib-accordion-group class="panel-default" is-open="true">
         <uib-accordion-heading>
         <p>Dislikes</p>
         </uib-accordion-heading>
         <small ng-show="!user.dislikes || user.dislikes.length == 0">No Dislikes, <a href="/settings">add</a> now.</small>
         <small ng-repeat="dl in user.dislikes">{{ dl.dislike }}</small>
         </div>
-        <div uib-accordion-group is-open="true">
+        <div uib-accordion-group class="panel-default" is-open="true">
         <uib-accordion-heading>
         <p>Skills</p>
         </uib-accordion-heading>
         <small ng-show="!user.skills || user.skills.length == 0">No Skills, <a href="/settings">add</a> now.</small>
         <small ng-repeat="s in user.skills">{{ s.skill }}</small>
         </div>
-        <div uib-accordion-group is-open="true">
+        <div uib-accordion-group class="panel-default" is-open="true">
         <uib-accordion-heading>
         <p>What I am looking for now</p>
         </uib-accordion-heading>
         <small ng-show="!user.looks || user.looks.length == 0">No Data, <a href="/settings">add</a> now.</small>
         <small ng-repeat="l in user.looks">{{ l.look }}</small>
         </div>
-        <div uib-accordion-group is-open="true">
+        <div uib-accordion-group class="panel-default" is-open="true">
         <uib-accordion-heading>
         <p>Desired Roles</p>
         </uib-accordion-heading>
