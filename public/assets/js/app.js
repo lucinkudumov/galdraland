@@ -3083,11 +3083,10 @@ app.factory("User", ["$http", "$cookieStore", "$q", function ($http, $cookieStor
             update: function (cb) {
                 console.log("4");
                 $http.get("/api/getUser").then(function (data) {
-                    console.log("5");
+                    console.log(data);
                     $cookieStore.remove("user");
                     $cookieStore.put("user", data.data.user);
                 });
-
                 if (cb)
                     cb();
             }
