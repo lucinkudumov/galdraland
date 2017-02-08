@@ -311,8 +311,10 @@ app.run(["$rootScope", "$http", "$location", "User", function ($rootScope, $http
                 $location.url(toState.url);
             } else if (toState.requireLogin && !User.isLoggedIn()) {
                 var url = "/redirect/?r=" + $location.path();
+                console.log("redirect");
                 $location.url(url);
             } else if (!toState.requireLogin && User.isLoggedIn()) {
+                console.log("profile");
                 $location.path("/profile");
             } else if (User.isLoggedIn() && !User.isLoggedIn().email.validated) {
                 $location.path("/emailVerification");
@@ -1113,11 +1115,13 @@ app.controller("headerController", ["$scope", "$rootScope", "$http", "$location"
         }
 
         $scope.logout = function () {
+            console.log("1");
             $http({
                 method: "GET",
                 url: "logout",
                 api: true
             }).then(function success(data) {
+                console.log("a");
                 User.logout();
                 $location.path("/");
             });
