@@ -135,7 +135,7 @@ module.exports = function (opts) {
             else
                 redirect = redirect + "/profile";
 
-            console.log("cookie = ", user);
+            console.log("cookie = ", req);
 
             emailModel.findOne({userId: req.user._id}, function (err, email) {
                 if (err) {
