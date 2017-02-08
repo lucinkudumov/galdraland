@@ -3092,11 +3092,11 @@ app.factory("User", ["$http", "$cookieStore", "$q", function ($http, $cookieStor
     }]);
 */
 app.factory("User", ["$http", "$cookies", "$q", function ($http, $cookies, $q) {
-    var user = $cookies.get("user");
+    var user = $cookies.getObject("user");
     return {
         isLoggedIn: function () {
-            console.log("user session = ", angular.toJson($cookies.get("user")));
-            return $cookies.get("user");
+            console.log("user session = ", angular.toJson($cookies.getObject("user")));
+            return $cookies.getObject("user");
         },
         logout: function () {
             user = null;
@@ -3106,7 +3106,7 @@ app.factory("User", ["$http", "$cookies", "$q", function ($http, $cookies, $q) {
             $http.get("/api/getUser").then(function (data) {
                 console.log(data);
                 $cookies.remove("user");
-                $cookies.put("user", data.data.user);
+                $cookies.putObject("user", data.data.user);
             });
             if (cb)
                 cb();
