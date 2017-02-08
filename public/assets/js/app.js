@@ -3099,13 +3099,13 @@ app.factory("User", ["$http", "$cookies", "$q", function ($http, $cookies, $q) {
                 console.log("undefined");
                 return false;
             }
-
+            console.log("typeof = ", typeof $cookies.get("user"));
             if (typeof $cookies.get("user") === "object") {
                 console.log("object = ", $cookies.get("user"));
                 return $cookies.get("user");
-            }
-            else {
+            } else {
                 console.log("uricomponent = ", $cookies.get("user"));
+                return $cookies.get("user");
                 return JSON.parse(decodeURIComponent($cookies.get("user")));
             }
         },
