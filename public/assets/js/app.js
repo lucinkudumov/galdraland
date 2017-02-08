@@ -982,8 +982,7 @@ app.controller("emailController", ["$scope", "$location", "$http", "User", funct
                 $scope.validate = true;
             }
 
-            var request = $http.post("/api/validateEmail", {email: $scope.email});
-            request.then(function (data) {
+            $http.post("/api/validateEmail", {email: $scope.email}).then(function (data) {
                 if (!data.data.find) {
                     $scope.availableEmail = true;
                 } else {
@@ -1796,8 +1795,7 @@ app.controller("profileSettingsController", ["$scope", "$rootScope", "$location"
 
         $scope.checkUsername = function () {
             $scope.invalidUsername = true;
-            var request = $http({method: "POST", url: "validateUsername", api: true, data: {username: $scope.username}});
-            request.then(function (data) {
+            $http({method: "POST", url: "validateUsername", api: true, data: {username: $scope.username}}).then(function (data) {
                 $scope.invalidUsername = data.data.find;
             });
         }
@@ -2270,28 +2268,36 @@ app.controller("searchController", ["$scope", "$http", "$location", "$stateParam
             var request = null;
             switch ($stateParams.scategory) {
                 case "aa":
-                    $http({method: "POST", url: "adventure/adsearch", api: true, data: {name: $stateParams.sname, description: $stateParams.sdescription, tag: $stateParams.stag}}).then($scope.parse_adventures);
+                    $http({method: "POST", url: "adventure/adsearch", api: true, data: {name: $stateParams.sname, description: $stateParams.sdescription, tag: $stateParams.stag}}).then($scope.parse_adventures).then(function () {
+                        $scope.loading = false;
+                    });
                     break;
                 case "tt":
-                    $http({method: "POST", url: "adsearchTeam", api: true, data: {name: $stateParams.sname, description: $stateParams.sdescription}}).then($scope.parse_teams);
+                    $http({method: "POST", url: "adsearchTeam", api: true, data: {name: $stateParams.sname, description: $stateParams.sdescription}}).then($scope.parse_teams).then(function () {
+                        $scope.loading = false;
+                    });
                     break;
                 case "pp":
-                    $http({method: "POST", url: "searchUser", api: true, data: {term: $stateParams.sname}}).then($scope.parse_users);
+                    $http({method: "POST", url: "searchUser", api: true, data: {term: $stateParams.sname}}).then($scope.parse_users).then(function () {
+                        $scope.loading = false;
+                    });
                     break;
                 case "a":
-                    $http({method: "POST", url: "adventure/search", api: true, data: {term: $stateParams.sterm}}).then($scope.parse_adventures);
+                    $http({method: "POST", url: "adventure/search", api: true, data: {term: $stateParams.sterm}}).then($scope.parse_adventures).then(function () {
+                        $scope.loading = false;
+                    });
                     break;
                 case "t":
-                    $http({method: "POST", url: "searchTeam", api: true, data: {term: $stateParams.sterm}}).then($scope.parse_teams);
+                    $http({method: "POST", url: "searchTeam", api: true, data: {term: $stateParams.sterm}}).then($scope.parse_teams).then(function () {
+                        $scope.loading = false;
+                    });
                     break;
                 case "p":
-                    $http({method: "POST", url: "searchUser", api: true, data: {term: $stateParams.sterm}}).then($scope.parse_users);
+                    $http({method: "POST", url: "searchUser", api: true, data: {term: $stateParams.sterm}}).then($scope.parse_users).then(function () {
+                        $scope.loading = false;
+                    });
                     break;
             }
-
-            request.then(function () {
-                $scope.loading = false;
-            });
         }
 
         $scope.parse_adventures = function (data) {
