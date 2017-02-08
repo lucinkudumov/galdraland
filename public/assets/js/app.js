@@ -3104,9 +3104,9 @@ app.factory("User", ["$http", "$cookies", "$q", function ($http, $cookies, $q) {
         },
         update: function (cb) {
             $http.get("/api/getUser").then(function (data) {
-                console.log(data);
+                console.log("getUser = ", data);
                 $cookies.remove("user");
-                $cookies.putObject("user", data.data.user);
+                $cookies.putObject("user", data.user);
             });
             if (cb)
                 cb();
