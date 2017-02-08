@@ -40,13 +40,13 @@ app.config(["$urlRouterProvider", "$locationProvider", "$stateProvider", "$httpP
                     templateUrl: "/assets/partials/about.html"
                 }
             }
-        }).state("blog", {
+/*        }).state("blog", {
             url: "/blog",
             views: {
                 "main": {
                     templateUrl: "/assets/partials/blog.html"
                 }
-            }
+            }*/
         }).state("how_it_works", {
             url: "/how_it_works",
             views: {
