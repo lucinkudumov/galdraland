@@ -3067,25 +3067,50 @@ app.factory('middleware', function () {
         }
     };
 });
-app.factory("User", ["$http", "$cookies", "$q", function ($http, $cookies, $q) {
-        var user = $cookies.getObject("user");
+
+/*
+app.factory("User", ["$http", "$cookieStore", "$q", function ($http, $cookieStore, $q) {
+        var user = $cookieStore.get("user");
         return {
             isLoggedIn: function () {
-                console.log("user session = ", $cookies.getObject("user"));
-                return $cookies.getObject("user");
+                return $cookieStore.get("user");
             },
             logout: function () {
                 user = null;
-                $cookies.remove("user");
+                $cookieStore.remove("user");
             },
             update: function (cb) {
                 $http.get("/api/getUser").then(function (data) {
                     console.log(data);
-                    $cookies.remove("user");
-                    $cookies.put("user", data.data.user);
+                    $cookieStore.remove("user");
+                    $cookieStore.put("user", data.data.user);
                 });
                 if (cb)
                     cb();
             }
         }
     }]);
+*/
+app.factory("User", ["$http", "$cookies", "$q", function ($http, $cookies, $q) {
+    var user = $cookies.get("user");
+    return {
+        isLoggedIn: function () {
+            console.log("user session = ", angular.fromJson($cookies.get("user")));
+            return $cookies.get("user");
+        },
+        logout: function () {
+            user = null;
+            $cookies.remove("user");
+        },
+        update: function (cb) {
+            $http.get("/api/getUser").then(function (data) {
+                console.log(data);
+                $cookies.remove("user");
+                $cookies.put("user", data.data.user);
+            });
+            if (cb)
+                cb();
+        }
+    }
+}]);
+
