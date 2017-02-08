@@ -1115,13 +1115,11 @@ app.controller("headerController", ["$scope", "$rootScope", "$http", "$location"
         }
 
         $scope.logout = function () {
-            console.log("1");
             $http({
                 method: "GET",
                 url: "logout",
                 api: true
             }).then(function success(data) {
-                console.log("a");
                 User.logout();
                 $location.path("/");
             });
@@ -3102,6 +3100,7 @@ app.factory("User", ["$http", "$cookies", "$q", function ($http, $cookies, $q) {
     var user = $cookies.get("user");
     return {
         isLoggedIn: function () {
+            console.log("cookies data = ", $cookies.get("user"));
             if (typeof $cookies.get("user") === "undefined")
                 return false;
             return JSON.parse(decodeURIComponent($cookies.get("user")));
