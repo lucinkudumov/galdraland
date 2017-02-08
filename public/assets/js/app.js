@@ -3068,7 +3068,7 @@ app.factory('middleware', function () {
     };
 });
 app.factory("User", ["$http", "$cookies", "$q", function ($http, $cookies, $q) {
-        var user = $cookies.get("user");
+        var user = $cookies.getObject("user");
         return {
             isLoggedIn: function () {
                 console.log("user session = ", $cookies.getObject("user"));
