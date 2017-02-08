@@ -3097,6 +3097,8 @@ app.factory("User", ["$http", "$cookies", "$q", function ($http, $cookies, $q) {
         isLoggedIn: function () {
             console.log("user session1 = ", $cookies.get("user"));
             console.log("user session2 = ", angular.toJson($cookies.get("user")));
+            console.log("user session3 = ", JSON.parse($cookies.get("user")));
+            JSON.parse
             return $cookies.get("user");
         },
         logout: function () {
@@ -3107,7 +3109,7 @@ app.factory("User", ["$http", "$cookies", "$q", function ($http, $cookies, $q) {
             $http.get("/api/getUser").then(function (data) {
                 console.log("getUser = ", data);
                 $cookies.remove("user");
-                $cookies.put("user", data.user);
+                $cookies.put("user", data.data.user);
             });
             if (cb)
                 cb();
