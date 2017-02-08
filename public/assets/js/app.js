@@ -3105,7 +3105,6 @@ app.factory("User", ["$http", "$cookies", "$q", function ($http, $cookies, $q) {
                 return $cookies.get("user");
             } else {
                 console.log("uricomponent = ", $cookies.get("user"));
-                return $cookies.get("user");
                 return JSON.parse(decodeURIComponent($cookies.get("user")));
             }
         },
