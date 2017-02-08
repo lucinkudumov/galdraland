@@ -2159,19 +2159,20 @@ app.controller("contactController", ['$scope', '$http', '$rootScope', function($
     $scope.sentSuccess = false;
     $scope.sentFailed = false;
     $scope.sendEmail = function () {
-        var request = $http({method: "POST", url: "sendContact", api: true,
+        $http({
+            method: "POST", url: "sendContact", api: true,
             data: {toEmail: 'dav.makow1992@yandex.com',//'info@holomathics.com',
                 fromEmail: $scope.yourEmail,
                 text: $scope.description,
-                subject: 'Contact Galdraland Support Center'}});
-        request.then(function (data) {
+                subject: 'Contact Galdraland Support Center'}
+        }).then( function success (data) {
             console.log('Mail Sent Success');
             console.log(data);
             if (data.data.success == true)
                 $scope.sentSuccess = true;
             else
                 $scope.sentFailed = true;
-        }).error(function (err) {
+        }, function error (err) {
             $scope.sentFailed = true;
         });
     }
