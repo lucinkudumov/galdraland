@@ -3107,6 +3107,7 @@ app.factory("User", ["$http", "$cookies", "$q", function ($http, $cookies, $q) {
         },
         logout: function () {
             user = null;
+            console.log("cookies destroy");
             $cookies.remove("user");
         },
         update: function (cb) {
