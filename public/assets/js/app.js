@@ -1113,7 +1113,8 @@ app.controller("headerController", ["$scope", "$rootScope", "$http", "$location"
         }
 
         $scope.logout = function () {
-            $http.get({
+            $http({
+                method: "GET",
                 url: "logout",
                 api: true
             }).then(function success(data) {
