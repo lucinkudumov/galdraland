@@ -2391,12 +2391,12 @@ app.controller("createTeamController", ["$scope", "$rootScope", "Upload", "$http
                 method: 'POST',
                 api: true,
                 file: image
-            }).then(function (data, status, headers, config) {
+            }).success(function (data, status, headers, config) {
                 $scope.uploadInProgress = false;
                 // If you need uploaded file immediately 
                 console.log(data);
                 $scope.uploadedImage = "/api/assets/images/upload/" + data.data;
-            }, function error (err) {
+            }).error(function (err) {
                 $scope.uploadInProgress = false;
                 console.log('Error uploading file: ' + err.message || err);
             });

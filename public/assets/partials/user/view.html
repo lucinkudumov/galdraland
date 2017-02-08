@@ -3,7 +3,7 @@
     <h1>{{ fullname}}</h1>
     <blockquote>
     <uib-accordion close-others="false">
-        <uib-accordion-group class="panel-default" is-open="true">
+        <div uib-accordion-group class="panel-default" is-open="true">
         <uib-accordion-heading>
         <p>Main information</p>
         </uib-accordion-heading>
@@ -22,7 +22,7 @@
         <div class="form-group">
             <small>Categories : {{ categories}}</small>
         </div>
-        </uib-accordion-group>
+        </div>
         <div uib-accordion-group class="panel-default" is-open="true">
         <uib-accordion-heading>
         <p>Teams</p>
