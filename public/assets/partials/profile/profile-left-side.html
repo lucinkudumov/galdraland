@@ -10,11 +10,11 @@
     </ul>
     <div class="tab-content" style="margin-top: 5px;">
         <div class="tab-pane fade active in" id="tab_1">
-            <accordion close-others="false">
-            <accordion-group is-open="true">
-            <accordion-heading>
+            <uib-accordion close-others="false">
+            <div uib-accordion-group class="panel-default" is-open="true">
+            <uib-accordion-heading>
             <p style="margin-top : 7px;">Teams</p>
-            </accordion-heading>
+            </uib-accordion-heading>
             <small ng-show="teams.length == 0">No teams, <a href="/teams">search</a> or <a href="/teams/create">add</a> new team now.</small>
             <ul ng-show = "teams.length > 0">
                 <li ng-repeat = "t in teams"><a href="/teams/view/{{ t._id }}">{{ t.tName }}</a></li>
@@ -22,20 +22,20 @@
             <!--<select ng-model="selTeam" ng-show="teams.length > 0" ng-change="selectTeamView()" >-->
                 <!--<option ng-repeat="t in teams" value="{{ t._id }}">{{ t.tName }}</option>-->
             <!--</select>-->
-            </accordion-group>
-            <!--<accordion-group is-open="true">-->
-                <!--<accordion-heading>-->
+            </div>
+            <!--<div uib-accordion-group class="panel-default" is-open="true">-->
+                <!--<uib-accordion-heading>-->
                     <!--<p style="margin-top : 7px;">Peoples</p>-->
-                <!--</accordion-heading>-->
+                <!--</uib-accordion-heading>-->
                 <!--<small ng-show="users.length == 0">No peoples <a href="/users">search</a></small>-->
                 <!--<ul ng-show = "users.length > 0">-->
                     <!--<li ng-repeat = "u in users"><a href="/users/view/{{ u._id }}">{{ u.name }}</a></li>-->
                 <!--</ul>-->
-            <!--</accordion-group>-->
-            <accordion-group is-open="true">
-            <accordion-heading>
+            <!--</div>-->
+            <div uib-accordion-group class="panel-default" is-open="true">
+            <uib-accordion-heading>
             <p style="margin-top : 7px;">Adventures</p>
-            </accordion-heading>
+            </uib-accordion-heading>
             <small ng-show="adventures.length == 0">No adventures, <a href="/adventures">search</a> or <a href="/adventures/create">add</a> new adventure now.</small>
             <ul ng-show = "adventures.length > 0">
                 <li ng-repeat = "a in adventures"><a href="/adventures/view/{{ a._id }}">{{ a.name }}</a></li>
@@ -43,8 +43,8 @@
             <!--<select ng-model="selAdv" ng-show="adventures.length > 0" ng-change="selecteAdvView()">-->
                 <!--<option ng-repeat="a in adventures" value="{{ a._id }}">{{ a.name }}</option>-->
             <!--</select>-->
-            </accordion-group>
-            </accordion>
+            </div>
+            </uib-accordion>
         </div>
         <div class="tab-pane fade" id="tab_2">
             <hr ng-show="recomendation.length > 0">
