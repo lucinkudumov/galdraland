@@ -3095,6 +3095,10 @@ app.factory("User", ["$http", "$cookies", "$q", function ($http, $cookies, $q) {
     var user = $cookies.get("user");
     return {
         isLoggedIn: function () {
+            if ($cookies.get("user") == "undefined" || $cookies.get("user") == null) {
+                return false;
+            }
+
             if (typeof($cookies.get("user") == "object"))
                 return $cookies.get("user");
             else
