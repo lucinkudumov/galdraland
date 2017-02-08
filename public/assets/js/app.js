@@ -1113,11 +1113,13 @@ app.controller("headerController", ["$scope", "$rootScope", "$http", "$location"
         }
 
         $scope.logout = function () {
-            var request = $http.get({url: "logout", api: true});
-            request.then(function (data) {
+            $http.get({
+                url: "logout",
+                api: true
+            }).then(function success(data) {
                 User.logout();
                 $location.path("/");
-            }); 
+            });
        }
 
         $scope.search = function () {
