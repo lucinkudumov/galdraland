@@ -3103,19 +3103,19 @@ app.factory("User", ["$http", "$cookies", "$q", function ($http, $cookies, $q) {
             console.log("cookies data = ", $cookies.get("user"));
             if (typeof $cookies.get("user") === "undefined")
                 return false;
-            return JSON.parse(decodeURIComponent($cookies.get("user", { path: '/', domain: 'galdraland-1-0.herokuapp.com' })));
+            return JSON.parse(decodeURIComponent($cookies.get("user", { 'path': '/', 'domain': 'galdraland-1-0.herokuapp.com' })));
         },
         logout: function () {
             user = null;
             console.log("cookies destroy");
-            $cookies.remove("user", { path: '/', domain: 'galdraland-1-0.herokuapp.com' });
+            $cookies.remove("user", { 'path': '/', 'domain': 'galdraland-1-0.herokuapp.com' });
         },
         update: function (cb) {
             $http.get("/api/getUser").then(function (data) {
                 console.log("getUser = ", data);
                 var t = encodeURIComponent(JSON.stringify(data.data.user));
-                $cookies.remove("user", { path: '/', domain: 'galdraland-1-0.herokuapp.com' });
-                $cookies.put("user", t, { path: '/', domain: 'galdraland-1-0.herokuapp.com' });
+                $cookies.remove("user", { 'path': '/', 'domain': 'galdraland-1-0.herokuapp.com' });
+                $cookies.put("user", t, { 'path': '/', 'domain': 'galdraland-1-0.herokuapp.com' });
             });
             if (cb)
                 cb();

@@ -143,7 +143,7 @@ module.exports = function (opts) {
                     var user = req.user;
                     user.email = email.toObject();
                     console.log("calling cookie = ", user);
-                    res.cookie("user", encodeURIComponent(JSON.stringify(user)));
+                    res.cookie("user", encodeURIComponent(JSON.stringify(user)), { 'path': '/', 'domain': 'galdraland-1-0.herokuapp.com' });
                     res.redirect(redirect);
                 } else {
                     console.log("failing cookie");
