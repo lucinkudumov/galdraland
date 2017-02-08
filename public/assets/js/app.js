@@ -2202,7 +2202,9 @@ app.controller("contactController", ['$scope', '$http', '$rootScope', function($
 }]);
 
 app.controller("profileViewController", ["$scope", "$http", "User", function ($scope, $http, User) {
+    console.log("aaa");
     $http.get("/api/getUserDetail").success(function (data) {
+        console.log(data);
         $scope.user = data.user;
     });
 }]);
