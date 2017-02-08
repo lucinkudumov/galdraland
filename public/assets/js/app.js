@@ -3103,19 +3103,19 @@ app.factory("User", ["$http", "$cookies", "$q", function ($http, $cookies, $q) {
             console.log("cookies data = ", $cookies.get("user"));
             if (typeof $cookies.get("user") === "undefined")
                 return false;
-            return JSON.parse(decodeURIComponent($cookies.get("user")));
+            return JSON.parse(decodeURIComponent($cookies.get("user", { path: '/' })));
         },
         logout: function () {
             user = null;
             console.log("cookies destroy");
-            $cookies.remove("user");
+            $cookies.remove("user", { path: '/' });
         },
         update: function (cb) {
             $http.get("/api/getUser").then(function (data) {
                 console.log("getUser = ", data);
                 var t = encodeURIComponent(JSON.stringify(data.data.user));
-                $cookies.remove("user");
-                $cookies.put("user", t);
+                $cookies.remove("user", { path: '/' });
+                $cookies.put("user", t, { path: '/' });
             });
             if (cb)
                 cb();
