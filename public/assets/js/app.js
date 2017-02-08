@@ -343,7 +343,7 @@ app.controller("loginController", ["$scope", "$location", "$anchorScroll", funct
 //    };
 }]);
 
-app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$sce", "User", "$modal", "$location", "$compile", "simpleCalendarConfig", function ($scope, $http, $stateParams, $sce, User, $modal, $location, $compile, simpleCalendarConfig) {
+app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$sce", "User", "$uibModal", "$location", "$compile", "simpleCalendarConfig", function ($scope, $http, $stateParams, $sce, User, $uibModal, $location, $compile, simpleCalendarConfig) {
         $scope.user = User.isLoggedIn();
         $scope.photo = "";
         $scope.description = "";
@@ -441,7 +441,7 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
         }, true);
 
         $scope.modal = function () {
-            var modalInstance = $modal.open({
+            var modalInstance = $uibModal.open({
                 templateUrl: '/assets/partials/modal/yesandno.html',
                 controller: "YesAndNoController",
                 resolve: {
@@ -1048,7 +1048,7 @@ app.controller("emailController", ["$scope", "$location", "$http", "User", funct
         $scope.validateEmail();
         $scope.validateUsername();
     }]);
-app.controller("headerController", ["$scope", "$rootScope", "$http", "$location", "User", "$modal", "$stateParams", function ($scope, $rootScope, $http, $location, User, $modal, $stateParams) {
+app.controller("headerController", ["$scope", "$rootScope", "$http", "$location", "User", "$uibModal", "$stateParams", function ($scope, $rootScope, $http, $location, User, $uibModal, $stateParams) {
         $scope.user = User.isLoggedIn();
         $temp = $stateParams.scategory;
         if ($temp == "aa")
@@ -1125,7 +1125,7 @@ app.controller("headerController", ["$scope", "$rootScope", "$http", "$location"
         }
 
         $scope.showInvite = function (invite) {
-            var modalInstance = $modal.open({
+            var modalInstance = $uibModal.open({
                 templateUrl: "/assets/partials/modal/viewInvite.html",
                 controller: "viewInviteController",
                 resolve: {
@@ -1161,7 +1161,7 @@ app.controller("headerController", ["$scope", "$rootScope", "$http", "$location"
 
 
         $scope.showApply = function (apply) {
-            var modalInstance = $modal.open({
+            var modalInstance = $uibModal.open({
                 templateUrl: "/assets/partials/modal/viewApply.html",
                 controller: "viewApplyController",
                 resolve: {
@@ -1327,7 +1327,7 @@ app.controller("leftMenuController", ["$scope", "$location", function ($scope, $
             $location.path(url);
         }
     }]);
-app.controller("MemberEditController", ["$scope", "user", "$modalInstance", function ($scope, user, $modalInstance) {
+app.controller("MemberEditController", ["$scope", "user", "$uibModalInstance", function ($scope, user, $uibModalInstance) {
         $scope.user = angular.copy(user);
 
         if ($scope.user.roles && $scope.user.roles.join) {
@@ -1336,69 +1336,69 @@ app.controller("MemberEditController", ["$scope", "user", "$modalInstance", func
 
         $scope.cancel = function () {
             $scope.user = $scope.backup;
-            $modalInstance.close();
+            $uibModalInstance.close();
         }
 
         $scope.save = function () {
-            $modalInstance.close({type: "SAVE", user: $scope.user});
+            $uibModalInstance.close({type: "SAVE", user: $scope.user});
         }
 
         $scope.remove = function () {
-            $modalInstance.close({type: "REMOVE", user: $scope.user});
+            $uibModalInstance.close({type: "REMOVE", user: $scope.user});
         }
     }]);
 
-app.controller("MemberViewController", ["$scope", "user", "$modalInstance", function ($scope, user, $modalInstance) {
+app.controller("MemberViewController", ["$scope", "user", "$uibModalInstance", function ($scope, user, $uibModalInstance) {
     $scope.user = angular.copy(user);
 
     $scope.cancel = function () {
-        $modalInstance.close();
+        $uibModalInstance.close();
     }
 
 }]);
 
-app.controller("YesAndNoController", ["$scope", "msg", "title", "$modalInstance", function ($scope, msg, title, $modalInstance) {
+app.controller("YesAndNoController", ["$scope", "msg", "title", "$uibModalInstance", function ($scope, msg, title, $uibModalInstance) {
         $scope.msg = msg;
         $scope.title = title;
 
         $scope.yes = function () {
-            $modalInstance.close("YES");
+            $uibModalInstance.close("YES");
         }
 
         $scope.no = function () {
-            $modalInstance.close("NO");
+            $uibModalInstance.close("NO");
         }
     }]);
 
-app.controller("applyTeamController", ["$scope", "$modalInstance", "values", "$http", function ($scope, $modalInstance, values, $http) {
+app.controller("applyTeamController", ["$scope", "$uibModalInstance", "values", "$http", function ($scope, $uibModalInstance, values, $http) {
         $scope.values = angular.copy(values);
 
         $scope.cancel = function () {
-            $modalInstance.close({type: "CLOSE"});
+            $uibModalInstance.close({type: "CLOSE"});
         }
 
         $scope.send = function () {
-            $modalInstance.close({type: "SEND", msg: $scope.values.msg, title: $scope.values.title, roles: $scope.values.roles});
+            $uibModalInstance.close({type: "SEND", msg: $scope.values.msg, title: $scope.values.title, roles: $scope.values.roles});
         }
     }]);
 
-app.controller("addMemberTitleController", ["$scope", "$modalInstance", "values", "$http", function ($scope, $modalInstance, values, $http) {
+app.controller("addMemberTitleController", ["$scope", "$uibModalInstance", "values", "$http", function ($scope, $uibModalInstance, values, $http) {
         $scope.values = angular.copy(values);
 
         $scope.cancel = function () {
             console.log('close member title action');
-            $modalInstance.close({type: "CLOSE"});
+            $uibModalInstance.close({type: "CLOSE"});
         }
 
         $scope.create = function () {
             console.log('create member title action');
             console.log('skills = ', $scope.values.skills);
             console.log('whatisthere = ', $scope.values.whatisthere);
-            $modalInstance.close({type: "CREATE", titles: $scope.values.titles, skills: $scope.values.skills, description: $scope.values.description, whatisthere: $scope.values.whatisthere, team: $scope.values.team});
+            $uibModalInstance.close({type: "CREATE", titles: $scope.values.titles, skills: $scope.values.skills, description: $scope.values.description, whatisthere: $scope.values.whatisthere, team: $scope.values.team});
         }
     }]);
 
-app.controller("sendInviteController", ["$scope", "$modalInstance", "values", "$http", "User", function ($scope, $modalInstance, values, $http, User) {
+app.controller("sendInviteController", ["$scope", "$uibModalInstance", "values", "$http", "User", function ($scope, $uibModalInstance, values, $http, User) {
         $scope.values = angular.copy(values);
         $scope.values.invites = [];
         $scope.values.newMember = null;
@@ -1446,7 +1446,7 @@ app.controller("sendInviteController", ["$scope", "$modalInstance", "values", "$
         });
 
         $scope.cancel = function () {
-            $modalInstance.close({type: "CLOSE"});
+            $uibModalInstance.close({type: "CLOSE"});
         }
 
         $scope.findUser = function (usernameOrEmail) {
@@ -1559,7 +1559,7 @@ app.controller("sendInviteController", ["$scope", "$modalInstance", "values", "$
         }
 
         $scope.send = function () {
-            $modalInstance.close({type: "SEND", to: $scope.values.to, msg: $scope.values.msg, roles: $scope.values.roles, invites: $scope.values.invites});
+            $uibModalInstance.close({type: "SEND", to: $scope.values.to, msg: $scope.values.msg, roles: $scope.values.roles, invites: $scope.values.invites});
         }
 
         function validateEmail(email) {
@@ -1567,44 +1567,44 @@ app.controller("sendInviteController", ["$scope", "$modalInstance", "values", "$
             return re.test(email);
         }
     }]);
-app.controller("viewApplyController", ["$scope", "User", "apply", "$modalInstance", function ($scope, User, apply, $modalInstance) {
+app.controller("viewApplyController", ["$scope", "User", "apply", "$uibModalInstance", function ($scope, User, apply, $uibModalInstance) {
         $scope.apply = apply;
         $scope.user = User.isLoggedIn();
 
         $scope.approve = function () {
-            $modalInstance.close({action: "APPROVE", model: apply});
+            $uibModalInstance.close({action: "APPROVE", model: apply});
         }
 
         $scope.reject = function () {
-            $modalInstance.close({action: "REJECT", model: apply});
+            $uibModalInstance.close({action: "REJECT", model: apply});
         }
 
         $scope.close = function () {
-            $modalInstance.close({action: "CLOSE", model: apply});
+            $uibModalInstance.close({action: "CLOSE", model: apply});
         }
 
         $scope.publish = function () {
-            $modalInstance.close({action: "PUBLISH", model: apply});
+            $uibModalInstance.close({action: "PUBLISH", model: apply});
         }
     }]);
-app.controller("viewInviteController", ["$scope", "invite", "$modalInstance", "User", function ($scope, invite, $modalInstance, User) {
+app.controller("viewInviteController", ["$scope", "invite", "$uibModalInstance", "User", function ($scope, invite, $uibModalInstance, User) {
         $scope.invite = invite;
         $scope.user = User.isLoggedIn();
 
         $scope.accept = function () {
-            $modalInstance.close({action: "ACCEPT", model: invite});
+            $uibModalInstance.close({action: "ACCEPT", model: invite});
         }
 
         $scope.decline = function () {
-            $modalInstance.close({action: "DECLINE", model: invite});
+            $uibModalInstance.close({action: "DECLINE", model: invite});
         }
 
         $scope.close = function () {
-            $modalInstance.close({action: "CLOSE", model: invite});
+            $uibModalInstance.close({action: "CLOSE", model: invite});
         }
 
         $scope.publish = function () {
-            $modalInstance.close({action: "PUBLISH", model: invite});
+            $uibModalInstance.close({action: "PUBLISH", model: invite});
         }
     }]);
 app.controller("profileLeftSideController", ["$scope", "$http", "$location", "User", function ($scope, $http, $location, User) {
@@ -2499,7 +2499,7 @@ app.controller("newsController", ["$scope", "$http", "$location", "User", functi
         $scope.refresh();
     }]);
 
-app.controller("userViewController", ["$scope", "$http", "$stateParams", "User", "$modal", "$location", function ($scope, $http, $stateParams, User, $modal, $location) {
+app.controller("userViewController", ["$scope", "$http", "$stateParams", "User", "$uibModal", "$location", function ($scope, $http, $stateParams, User, $uibModal, $location) {
         $scope.user = User.isLoggedIn();
 
         $scope.refresh = function () {
@@ -2541,7 +2541,7 @@ app.controller("userViewController", ["$scope", "$http", "$stateParams", "User",
         $scope.refresh();
     }]);
 
-app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "$stateParams", "User", "$modal", "$location", "$compile", function ($rootScope, $scope, $http, $sce, $stateParams, User, $modal, $location, $compile) {
+app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "$stateParams", "User", "$uibModal", "$location", "$compile", function ($rootScope, $scope, $http, $sce, $stateParams, User, $uibModal, $location, $compile) {
         $scope.user = User.isLoggedIn();
         $scope.description = "";
 
@@ -2581,7 +2581,7 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
         }
 
         $scope.modal = function () {
-            var modalInstance = $modal.open({
+            var modalInstance = $uibModal.open({
                 templateUrl: '/assets/partials/modal/yesandno.html',
                 controller: "YesAndNoController",
                 resolve: {
@@ -2614,7 +2614,7 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
             $scope.activeMember = member;
 
             if ($scope.isManager) {
-                var modalInstance = $modal.open({
+                var modalInstance = $uibModal.open({
                     templateUrl: '/assets/partials/modal/memberEdit.html',
                     controller: "MemberEditController",
                     resolve: {
@@ -2648,7 +2648,7 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
                     }
                 });
             } else {
-                var modalInstance = $modal.open({
+                var modalInstance = $uibModal.open({
                     templateUrl: '/assets/partials/modal/memberView.html',
                     controller: "MemberViewController",
                     resolve: {
@@ -2665,7 +2665,7 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
         }
 
         $scope.addMemberTitle = function () {
-            var modalInstance = $modal.open({
+            var modalInstance = $uibModal.open({
                 templateUrl: "/assets/partials/modal/addMemberTitle.html",
                 controller: "addMemberTitleController",
                 resolve: {
@@ -2687,7 +2687,7 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
         }
 
         $scope.sendInvite = function () {
-            var modalInstance = $modal.open({
+            var modalInstance = $uibModal.open({
                 templateUrl: "/assets/partials/modal/sendInvite.html",
                 controller: "sendInviteController",
                 resolve: {
@@ -2741,7 +2741,7 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
         }
 
         $scope.applyTeam = function () {
-            var modalInstance = $modal.open({
+            var modalInstance = $uibModal.open({
                 templateUrl: "/assets/partials/modal/applyTeam.html",
                 controller: "applyTeamController",
                 resolve: {
