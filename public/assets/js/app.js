@@ -323,6 +323,7 @@ app.run(["$rootScope", "$http", "$location", "User", function ($rootScope, $http
             method: "GET",
             url: "getDefaultUser",
             api: true}).then(function success(data) {
+                console.log("getDefaultUser = ", data);
                 if (data.data.user) {
                     $rootScope.defUser = data.data.user;
                 } else {
