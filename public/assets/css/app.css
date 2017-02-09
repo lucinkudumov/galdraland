@@ -8854,7 +8854,7 @@ button.close {
 }
 
 .input-group-btn.show {
-    display: table-cell
+    display: table-cell!important
 }
 
 .invisible {
