@@ -8849,13 +8849,13 @@ button.close {
     display: block!important
 }
 
-/*.show .dropdown-menu {*/
-    /*display: block!important*/
-/*}*/
+.show .dropdown-menu {
+    display: block!important
+}
 
-/*.input-group-btn.show {*/
-    /*display: table-cell!important*/
-/*}*/
+.input-group-btn.show {
+    display: table-cell!important
+}
 
 .invisible {
     visibility: hidden
