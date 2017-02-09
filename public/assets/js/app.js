@@ -2247,6 +2247,7 @@ app.controller("contactController", ['$scope', '$http', '$rootScope', function($
 
 app.controller("profileViewController", ["$scope", "$http", "User", function ($scope, $http, User) {
         $http.get("/api/getUserDetail").then(function (data) {
+            console.log("getUserDeatail = ",data.data.user);
             $scope.user = data.data.user;
         });
     }]);
