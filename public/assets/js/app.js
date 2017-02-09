@@ -1,4 +1,4 @@
-var app = angular.module("galdra", ["ngRoute", "ui.router", "ngCookies", "ui.bootstrap", "ngFileUpload", 'decipher.tags', 'ui.bootstrap.typeahead', /*'ngTagsInput',*/ "envoc.simpleCalendar", "infinite-scroll", "meow.blog.view", "meow.blog.edit"]);
+var app = angular.module("galdra", ["ngRoute", "ui.router", "ngCookies", "ui.bootstrap", "ngFileUpload", 'decipher.tags', 'ui.bootstrap.typeahead', /*'ngTagsInput',*/ "envoc.simpleCalendar", "infinite-scroll"/*, "meow.blog.view", "meow.blog.edit"*/]);
 var config = {
     //siteurl : 'http://galdraland.com:9010/'
     siteurl: 'http://galdraland-1-0.herokuapp.com/'
@@ -306,7 +306,7 @@ app.run(["$rootScope", "$http", "$location", "User", function ($rootScope, $http
                 $rootScope.flag = 1;
             else
                 $rootScope.flag = 0;
-            if(toState.url === "/about" || toState.url === "/how_it_works" || toState.url === "/contact_us" || toState.url === "/blog"
+            if(toState.url === "/about" || toState.url === "/how_it_works" || toState.url === "/contact_us" /*|| toState.url === "/blog"*/
                 || toState.url === "/shareadventure/:id" || toState.url === "/shareteam/:id" ) {
                 $location.url(toState.url);
             } else if (toState.requireLogin && !User.isLoggedIn()) {
