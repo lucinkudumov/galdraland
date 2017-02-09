@@ -4,7 +4,7 @@ var config = {
     siteurl: 'http://galdraland-1-0.herokuapp.com/'
 }
 
-app.config(["$urlRouterProvider", "$locationProvider", "$stateProvider", "$httpProvider", function ($urlRouterProvider, $locationProvider, $stateProvider, $httpProvider) {
+app.config(["$urlRouterProvider", "$locationProvider", "$stateProvider", "$httpProvider", "$qProvider", function ($urlRouterProvider, $locationProvider, $stateProvider, $httpProvider, $qProvider) {
         $stateProvider.state("index", {
             url: "/",
             views: {
@@ -244,6 +244,7 @@ app.config(["$urlRouterProvider", "$locationProvider", "$stateProvider", "$httpP
         $urlRouterProvider.otherwise("/");
 
         $httpProvider.interceptors.push('middleware');
+        $qProvider.errorOnUnhandledRejections(false);
     }]).filter('groupBy', ['$parse', function ($parse) {
         return function (list, group_by) {
 
@@ -597,11 +598,10 @@ app.controller("createAdventureController", ["$scope", "$rootScope", "Upload", "
             });
         }
 
-        $scope.onFileSelect = function (image) {
-            console.log(image);
-            image = image.files[0];
-            if (angular.isArray(image)) {
-                image = image[0];
+        $scope.onFileSelect = function (image1) {
+            $scope.image = image1.files[0];
+            if (angular.isArray($scope.image)) {
+                $scope.image = $scope.image[0];
             }
 
 //            // This is how I handle file types in client side
@@ -614,13 +614,13 @@ app.controller("createAdventureController", ["$scope", "$rootScope", "Upload", "
             $scope.uploadProgress = 0;
 
             var fd = new FormData();
-            fd.append('file', image);
+            fd.append('file', $scope.image);
             
             $scope.upload = Upload.upload({
                 url: 'upload/image',
                 method: 'POST',
                 api: true,
-                file: image
+                file: $scope.image
             }).success(function (data, status, headers, config) {
                 $scope.uploadInProgress = false;
                 // If you need uploaded file immediately 
@@ -2369,13 +2369,10 @@ app.controller("createTeamController", ["$scope", "$rootScope", "Upload", "$http
         $scope.tags = [];
 
         $scope.onFileSelect = function (image1) {
-            console.log(image1);
             $scope.image = image1.files[0];
-            console.log("image1 = ", $scope.image);
             if (angular.isArray($scope.image)) {
                 $scope.image = $scope.image[0];
             }
-            console.log("image2 = ", $scope.image);
 
             // This is how I handle file types in client side
 //            if (image.type !== 'image/png' && image.type !== 'image/jpeg') {
