@@ -2387,7 +2387,7 @@ app.controller("createTeamController", ["$scope", "$rootScope", "Upload", "$http
             $scope.uploadProgress = 0;
 
             var fd = new FormData();
-            fd.append('file', image);
+            fd.append('file', $scope.image);
             
             $scope.upload = Upload.upload({
                 url: 'upload/image',
