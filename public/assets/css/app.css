@@ -18461,6 +18461,10 @@ html body .main-menu ul li a {
     font-weight: 300
 }
 
+html body .main-menu .pull-right .dropdown.show {
+    dispaly: inline-table!important
+}
+
 html body .teams tr td {
     text-align: center
 }
