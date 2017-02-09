@@ -8853,6 +8853,10 @@ button.close {
     display: block!important
 }
 
+.input-group-btn.show {
+    display: table-cell
+}
+
 .invisible {
     visibility: hidden
 }
