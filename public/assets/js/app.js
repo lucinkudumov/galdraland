@@ -1892,7 +1892,7 @@ app.controller("profileSettingsController", ["$scope", "$rootScope", "$location"
         }
 
         $scope.addInterest = function () {
-            $scope.interests.push({topic: "", information: ""});
+            $scope.interests.push({topic: {topic:""}, information: ""});
             $scope.interest_placeholder = "";
         }
 
