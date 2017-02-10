@@ -8,6 +8,7 @@
       "npm": "3.10.x"
   },
   "scripts": {
+    "postinstall": "./node_modules/bower/bin/bower install",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -38,7 +39,8 @@
       "fs" : "~0.0.2",
       "sendgrid": "~2.0.0",
       "meow-blog": "~0.1.9",
-      "email-templates": "~2.4.0"
+      "email-templates": "~2.4.0",
+      "bower": "0.6.x"
   },
     "devDependencies": {
         "grunt": "~0.4.2",
