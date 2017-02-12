@@ -37,7 +37,6 @@
       "multiparty" : "~4.1.2",
       "fs" : "~0.0.2",
       "sendgrid": "~2.0.0",
-      "meow-blog": "~0.1.9",
       "email-templates": "~2.4.0",
       "bower": "1.8.0"
   },
