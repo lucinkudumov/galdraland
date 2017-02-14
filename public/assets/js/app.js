@@ -190,6 +190,14 @@ app.config(["$urlRouterProvider", "$locationProvider", "$stateProvider", "$httpP
                 "right-side@teamEdit": {templateUrl: "/assets/partials/team/edit.html"}
             },
             requireLogin: true
+        }).state("teamBlog", {
+                url: "/teams/blog/:id",
+                views: {
+                    "main": {templateUrl: "/assets/partials/main.html"},
+                    "left-side@teamEdit": {templateUrl: "/assets/partials/team/left-side.html"},
+                    "right-side@teamEdit": {templateUrl: "/assets/partials/team/blog.html"}
+                },
+                requireLogin: true
         }).state("adventureList", {
             url: "/adventures",
             views: {
@@ -2468,6 +2476,62 @@ app.controller("editTeamController", ["$scope", "$http", "$location", "$statePar
             $location.path("/teams/view/" + id);
         }
     }]);
+
+app.controller("editTeamBlogController", ["$scope", "$http", "$location", "$stateParams", "Upload", function ($scope, $http, $location, $stateParams, Upload) {
+    var id = $stateParams.id;
+    $scope.uploadInProgress = false;
+    $scope.uploadProgress = 0;
+
+    $http({
+        method: "POST",
+        url: "getTeam",
+        api: true,
+        data: {id: id}
+    }).then(function (data) {
+            console.log(data);
+            $scope.blogTitle = data.data.team.blogTitle;
+            $scope.uploadedBlogImage = data.data.team.blogImage;
+            $scope.blogBody = data.data.team.blogBody;
+
+        });
+    $scope.onFileSelect = function (image) {
+        console.log(image);
+        $scope.blogImage = image.files[0];
+        if (angular.isArray($scope.blogImage)) {
+            $scope.blogImage = $scope.blogImage[0];
+        }
+
+        $scope.uploadInProgress = true;
+        $scope.uploadProgress = 0;
+
+        var fd = new FormData();
+        fd.append('file', $scope.blogImage);
+
+        $scope.upload = Upload.upload({
+            url: 'upload/image',
+            method: 'POST',
+            api: true,
+            file: $scope.blogImage
+        }).success(function (data, status, headers, config) {
+                $scope.uploadInProgress = false;
+                // If you need uploaded file immediately
+                console.log(data);
+                $scope.uploadedBlogImage = "/api/assets/images/upload/" + data.data;
+            }).error(function (err) {
+                $scope.uploadInProgress = false;
+                console.log('Error uploading file: ' + err.message || err);
+            });
+    }
+    $scope.updateBlog = function () {
+        $http({method: "POST", url: "editBlog", api: true, data: {id: id, blogTitle: $scope.blogTitle, blogImage:$scope.uploadedBlogImage, blogBody: $scope.blogBody}}).then(function (data) {
+            $location.path("/teams/view/" + id);
+        });
+    }
+
+    $scope.goBack = function () {
+        $location.path("/teams/view/" + id);
+    }
+}]);
 
 app.controller("myTeamsController", ["$scope", "$http", "$location", "User", function ($scope, $http, $location, User) {
         $scope.user = User.isLoggedIn();

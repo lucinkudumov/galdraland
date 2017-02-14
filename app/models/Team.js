@@ -33,6 +33,15 @@ module.exports = function (opts) {
         },
         mission: {
             type: String
+        },
+        blogTitle: {
+            type: String
+        },
+        blogImage: {
+            type: String
+        },
+        blogBody : {
+            type: String
         }
     });
     
