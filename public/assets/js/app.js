@@ -194,8 +194,8 @@ app.config(["$urlRouterProvider", "$locationProvider", "$stateProvider", "$httpP
                 url: "/teams/blog/:id",
                 views: {
                     "main": {templateUrl: "/assets/partials/main.html"},
-                    "left-side@teamEdit": {templateUrl: "/assets/partials/team/left-side.html"},
-                    "right-side@teamEdit": {templateUrl: "/assets/partials/team/blog.html"}
+                    "left-side@teamBlog": {templateUrl: "/assets/partials/team/left-side.html"},
+                    "right-side@teamBlog": {templateUrl: "/assets/partials/team/blog.html"}
                 },
                 requireLogin: true
         }).state("adventureList", {
