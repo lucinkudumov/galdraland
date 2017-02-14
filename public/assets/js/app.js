@@ -2735,6 +2735,16 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
                     if (data.data.team.teamMembers[i].user._id == $scope.user._id)
                         $scope.isMember = true;
                 }
+
+                $http({
+                    method: "POST",
+                    url: "team/bloglist",
+                    api: true,
+                    data: {team: $stateParams.id}
+                }).then(function (data) {
+                    $scope.teamblogs = data.data.teamblogs;
+                    console.log("teamblogs = ", teamblogs);
+                });
             });
         }
 

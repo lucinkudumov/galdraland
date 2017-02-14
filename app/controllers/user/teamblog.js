@@ -12,25 +12,20 @@ module.exports = function (opts) {
                 body = req.body.blogBody,
                 team = req.body.team,
                 teamblog = new teamBlogModel();
-            console.log("createblog..... teamid = ", team);
             teamModel.findOne({_id: team}, function (err, team) {
                 console.log("search OK");
                 if (err) {
-                    console.log("error...");
                     console.log(err);
                     return res.json({success: false, error: "Internal server error"});
                 } else if (team) {
-                    console.log("find OK!");
                     teamblog.title = title;
                     teamblog.image = image;
                     teamblog.body = body;
                     teamblog.team = team;
                     teamblog.save(function (err, teamblog) {
-                        console.log("saving blog....");
                         if (err) {
                             console.log(err);
                         } else {
-                            console.log("saving blog OK");
                             return res.json({success: true, id: teamblog._id});
                         }
                     });
@@ -44,7 +39,15 @@ module.exports = function (opts) {
 
         },
         "post#team/bloglist": function (req, res) {
-
+            var team = req.body.team;
+            teamBlogModel.find({"team" : team}, function (err, teamblogs) {
+                if (err) {
+                    console.log(err);
+                    return res.json({success: false, teamblogs: []});
+                } else {
+                    return res.json({success: true, teamblogs: teamblogs});
+                }
+            });
         },
         "post#team/blogget": function (req, res) {
 
