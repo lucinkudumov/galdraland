@@ -13,7 +13,7 @@ module.exports = function (opts) {
                 team = req.body.team,
                 teamblog = new teamBlogModel();
             console.log("createblog..... teamid = ", team);
-            teamModel.findById({_id: team}, function (err, team) {
+            teamModel.findOne({_id: team}, function (err, team) {
                 console.log("search OK");
                 if (err) {
                     console.log("error...");
