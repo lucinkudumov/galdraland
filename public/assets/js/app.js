@@ -190,14 +190,22 @@ app.config(["$urlRouterProvider", "$locationProvider", "$stateProvider", "$httpP
                 "right-side@teamEdit": {templateUrl: "/assets/partials/team/edit.html"}
             },
             requireLogin: true
-        }).state("teamBlog", {
-                url: "/teams/blog/:id",
+        }).state("teamBlogCreate", {
+                url: "/teams/blogcreate/:id",
                 views: {
                     "main": {templateUrl: "/assets/partials/main.html"},
-                    "left-side@teamBlog": {templateUrl: "/assets/partials/team/left-side.html"},
-                    "right-side@teamBlog": {templateUrl: "/assets/partials/team/blog.html"}
+                    "left-side@teamBlogCreate": {templateUrl: "/assets/partials/team/left-side.html"},
+                    "right-side@teamBlogCreate": {templateUrl: "/assets/partials/team/createblog.html"}
                 },
                 requireLogin: true
+        }).state("teamBlogEdit", {
+            url: "/teams/blogedit/:id",
+            views: {
+                "main": {templateUrl: "/assets/partials/main.html"},
+                "left-side@teamBlogEdit": {templateUrl: "/assets/partials/team/left-side.html"},
+                "right-side@teamBlogEdit": {templateUrl: "/assets/partials/team/editblog.html"}
+            },
+            requireLogin: true
         }).state("adventureList", {
             url: "/adventures",
             views: {
@@ -2477,7 +2485,7 @@ app.controller("editTeamController", ["$scope", "$http", "$location", "$statePar
         }
     }]);
 
-app.controller("editTeamBlogController", ["$scope", "$http", "$location", "$stateParams", "Upload", function ($scope, $http, $location, $stateParams, Upload) {
+app.controller("createTeamBlogController", ["$scope", "$http", "$location", "$stateParams", "Upload", function ($scope, $http, $location, $stateParams, Upload) {
     var id = $stateParams.id;
     $scope.uploadInProgress = false;
     $scope.uploadProgress = 0;
@@ -2491,9 +2499,9 @@ app.controller("editTeamBlogController", ["$scope", "$http", "$location", "$stat
     }).then(function (data) {
             console.log("calling... getTeam");
             console.log(data);
-            $scope.blogTitle = data.data.team.blogTitle;
-            $scope.uploadedBlogImage = data.data.team.blogImage;
-            $scope.blogBody = data.data.team.blogBody;
+//            $scope.blogTitle = data.data.team.blogTitle;
+//            $scope.uploadedBlogImage = data.data.team.blogImage;
+//            $scope.blogBody = data.data.team.blogBody;
 
         });
     $scope.onFileSelect = function (image) {
@@ -2524,10 +2532,10 @@ app.controller("editTeamBlogController", ["$scope", "$http", "$location", "$stat
                 console.log('Error uploading file: ' + err.message || err);
             });
     }
-    $scope.updateBlog = function () {
-        console.log("calling... updateBlog");
-        $http({method: "POST", url: "editBlog", api: true, data: {id: id, blogTitle: $scope.blogTitle, blogImage:$scope.uploadedBlogImage, blogBody: $scope.blogBody}}).then(function (data) {
-            console.log("ending... updateBlog");
+    $scope.createBlog = function () {
+        console.log("calling... createBlog");
+        $http({method: "POST", url: "createBlog", api: true, data: {id: id, blogTitle: $scope.blogTitle, blogImage:$scope.uploadedBlogImage, blogBody: $scope.blogBody}}).then(function (data) {
+            console.log("ending... createBlog");
             $location.path("/teams/view/" + id);
         });
     }

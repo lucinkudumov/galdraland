@@ -1,6 +1,6 @@
-<div class="row" ng-controller="editTeamBlogController">
+<div class="row" ng-controller="createTeamBlogController">
     <div class="col-md-8">
-        <p>Edit Blog</p>
+        <p>Create Blog</p>
         <div class="form-group">
             <input class="form-control" type="text" ng-model="blogTitle" placeholder="">
         </div>
@@ -12,6 +12,6 @@
         <div class="form-group">
             <textarea ng-model="blogBody" class="form-control" placeholder=""></textarea>
         </div>
-        <button class="btn btn-primary" ng-disabled="!blogTitle || !blogBody"  ng-click="updateBlog()">Save</button>
+        <button class="btn btn-primary" ng-disabled="!blogTitle || !blogBody"  ng-click="updateBlog()">Create</button>
     </div>
 </div>

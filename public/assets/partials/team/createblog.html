@@ -1,0 +1,17 @@
+<div class="row" ng-controller="createTeamBlogController">
+    <div class="col-md-8">
+        <p>Create Blog</p>
+        <div class="form-group">
+            <input class="form-control" type="text" ng-model="blogTitle" placeholder="">
+        </div>
+        <div class="form-group">
+            <input ng-model="blogImage" type="file" class="form-control" onchange="angular.element(this).scope().onFileSelect(this)">
+            <span ng-show="uploadInProgress">Upload progress: {{ uploadProgress }}</span>
+            <img src="{{uploadedBlogImage}}" ng-show="uploadedBlogImage">
+        </div>
+        <div class="form-group">
+            <textarea ng-model="blogBody" class="form-control" placeholder=""></textarea>
+        </div>
+        <button class="btn btn-primary" ng-disabled="!blogTitle || !blogBody"  ng-click="createBlog()">Create</button>
+    </div>
+</div>

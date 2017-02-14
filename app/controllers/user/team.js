@@ -498,33 +498,7 @@ module.exports = function (opts) {
                 }
             });
         },
-        "post#editBlog": function (req, res) {
-            var id = req.body.id,
-                blogTitle = req.body.blogTitle,
-                blogBody = req.body.blogBody,
-                blogImage = req.body.blogImage;
 
-            teamModel.findOne({_id: id, owner: req.user._id}, function (err, team) {
-                if (err) {
-                    console.log(err);
-                    return res.json({success: false});
-                } else if (team) {
-                    team.blogTitle = blogTitle;
-                    team.blogBody = blogBody;
-                    team.blogImage = blogImage;
-                    team.save(function (err, team) {
-                        if (err) {
-                            console.log(err);
-                            return res.json({success: false});
-                        } else {
-                            return res.json({success: true});
-                        }
-                    });
-                } else {
-                    return res.json({success: false});
-                }
-            });
-        },
         "post#removeTeam": function (req, res) {
             var id = req.body.id;
             teamModel.findOne({_id: id, owner: req.user._id}, function (err, team) {
