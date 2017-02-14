@@ -16,6 +16,7 @@ module.exports = function (opts) {
             teamModel.findOne({id: team}, function (err, team) {
                 console.log("search OK");
                 if (err) {
+                    console.log("error...");
                     console.log(err);
                     return res.json({success: false, error: "Internal server error"});
                 } else if (team) {
