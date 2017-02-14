@@ -2482,12 +2482,14 @@ app.controller("editTeamBlogController", ["$scope", "$http", "$location", "$stat
     $scope.uploadInProgress = false;
     $scope.uploadProgress = 0;
 
+    console.log("calling... editTeamBlogController");
     $http({
         method: "POST",
         url: "getTeam",
         api: true,
         data: {id: id}
     }).then(function (data) {
+            console.log("calling... getTeam");
             console.log(data);
             $scope.blogTitle = data.data.team.blogTitle;
             $scope.uploadedBlogImage = data.data.team.blogImage;
@@ -2523,7 +2525,9 @@ app.controller("editTeamBlogController", ["$scope", "$http", "$location", "$stat
             });
     }
     $scope.updateBlog = function () {
+        console.log("calling... updateBlog");
         $http({method: "POST", url: "editBlog", api: true, data: {id: id, blogTitle: $scope.blogTitle, blogImage:$scope.uploadedBlogImage, blogBody: $scope.blogBody}}).then(function (data) {
+            console.log("ending... updateBlog");
             $location.path("/teams/view/" + id);
         });
     }
