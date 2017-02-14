@@ -1,0 +1,47 @@
+var validator = require('validator'),
+        async = require('async');
+
+module.exports = function (opts) {
+    var teamBlogModel = opts.models.TeamBlog,
+        teamModel = opts.models.Team;
+
+    return {
+        "post#team/createblog": function (req, res) {
+            var title = req.body.blogTitle,
+                image = req.body.blogImage,
+                body = req.body.blogBody,
+                team = req.body.team,
+                teamblog = new teamBlogModel();
+            teamModel.findOne({id: team}, function (err, team) {
+                if (err) {
+                    console.log(err);
+                    return res.json({success: false, error: "Internal server error"});
+                } else if (team) {
+                    teamblog.title = title;
+                    teamblog.image = image;
+                    teamblog.body = body;
+                    teamblog.team = team;
+                    teamblog.save(function (err, teamblog) {
+                        if (err) {
+                            console.log(err);
+                        } else {
+                            return res.json({success: true, id: teamblog._id});
+                        }
+                    });
+                }
+            });
+        },
+        "post#team/editblog": function (req, res) {
+
+        },
+        "post#team/deleteblog": function (req, res) {
+
+        },
+        "post#team/bloglist": function (req, res) {
+
+        },
+        "post#team/blogget": function (req, res) {
+
+        }
+    }
+}

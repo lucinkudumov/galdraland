@@ -2490,20 +2490,8 @@ app.controller("createTeamBlogController", ["$scope", "$http", "$location", "$st
     $scope.uploadInProgress = false;
     $scope.uploadProgress = 0;
 
-    console.log("calling... editTeamBlogController");
-    $http({
-        method: "POST",
-        url: "getTeam",
-        api: true,
-        data: {id: id}
-    }).then(function (data) {
-            console.log("calling... getTeam");
-            console.log(data);
-//            $scope.blogTitle = data.data.team.blogTitle;
-//            $scope.uploadedBlogImage = data.data.team.blogImage;
-//            $scope.blogBody = data.data.team.blogBody;
+    console.log("calling... createTeamBlogController");
 
-        });
     $scope.onFileSelect = function (image) {
         console.log(image);
         $scope.blogImage = image.files[0];
@@ -2534,14 +2522,10 @@ app.controller("createTeamBlogController", ["$scope", "$http", "$location", "$st
     }
     $scope.createBlog = function () {
         console.log("calling... createBlog");
-        $http({method: "POST", url: "createBlog", api: true, data: {id: id, blogTitle: $scope.blogTitle, blogImage:$scope.uploadedBlogImage, blogBody: $scope.blogBody}}).then(function (data) {
+        $http({method: "POST", url: "team/createblog", api: true, data: {team: id, blogTitle: $scope.blogTitle, blogImage:$scope.uploadedBlogImage, blogBody: $scope.blogBody}}).then(function (data) {
             console.log("ending... createBlog");
             $location.path("/teams/view/" + id);
         });
-    }
-
-    $scope.goBack = function () {
-        $location.path("/teams/view/" + id);
     }
 }]);
 
