@@ -38,7 +38,7 @@ module.exports = function (opts) {
                 body = req.body.blogBody,
                 image = req.body.blogImage;
 
-            teamBlogModel.findOne({_id: id}, function (err, team) {
+            teamBlogModel.findOne({_id: id}, function (err, teamblog) {
                 if (err) {
                     console.log(err);
                     return res.json({success: false});
@@ -46,7 +46,7 @@ module.exports = function (opts) {
                     teamblog.name = title;
                     teamblog.body = body;
                     teamblog.image = image;
-                    teamblog.save(function (err, team) {
+                    teamblog.save(function (err, teamblog) {
                         if (err) {
                             console.log(err);
                             return res.json({success: false});
