@@ -3037,15 +3037,16 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
                 controller: "YesAndNoController",
                 resolve: {
                     msg: function () {
-                        return "Do you want to remove \"" + title + "\" blog?"
+                        return "Do you want to remove this blog?";
                     },
                     title: function () {
-                        return "Remove \"" + title + "\""
+                        return "Remove Blog";
                     }
                 }
             });
 
             modalInstance.result.then(function (result) {
+                console.log(blogid);
                 if (result == "YES") {
                     $http({method: "POST", url: "team/deleteblog", api: true, data: {id: blogid}}).then(function () {
                         $location.path("/teams/view/" + $scope.team._id);
