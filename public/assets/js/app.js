@@ -2555,9 +2555,9 @@ app.controller("editTeamBlogController", ["$scope", "$http", "$location", "$stat
         data: {id: blogid}
     }).then(function (data) {
             console.log(data);
-            $scope.blogTitle = data.data.title;
-            $scope.blogBody = data.data.description;
-            $scope.uploadedBlogImage = data.data.image;
+            $scope.blogTitle = data.data.teamblog.title;
+            $scope.blogBody = data.data.teamblog.body;
+            $scope.uploadedBlogImage = data.data.teamblog.image;
     });
 
     $scope.onFileSelect = function (image) {

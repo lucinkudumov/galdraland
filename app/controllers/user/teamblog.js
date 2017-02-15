@@ -74,7 +74,15 @@ module.exports = function (opts) {
             });
         },
         "post#team/blogget": function (req, res) {
-
+            var id = req.body.id;
+            teamBlogModel.find({"_id" : id}, function (err, teamblog) {
+                if (err) {
+                    console.log(err);
+                    return res.json({success: false, teamblog: []});
+                } else {
+                    return res.json({success: true, teamblog: teamblog});
+                }
+            });
         }
     }
 }
