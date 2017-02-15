@@ -2608,27 +2608,31 @@ app.controller("teamBlogViewController", ["$scope", "$http", "$sce", "$location"
     $scope.uploadProgress = 0;
 
     console.log("calling... viewTeamBlogController");
-    $http({
-        method: "POST",
-        url: "team/blogget",
-        api: true,
-        data: {id: blogid}
-    }).then(function (data) {
-        console.log(data);
-        $scope.blogTitle = data.data.teamblog.title;
-        $scope.blogBody = data.data.teamblog.body;
-        $scope.uploadedBlogImage = data.data.teamblog.image;
-        if ($scope.blogBody && $scope.blogBody != "") {
-            var find = "\n";
-            var re = new RegExp(find, 'g');
-            $scope.blogBody = $sce.trustAsHtml($scope.blogBody.replace(re,"<br>"));
-            $scope.blogBody = $scope.blogBody;
-        }
-    });
+    $scope.refresh = function () {
+        $http({
+            method: "POST",
+            url: "team/blogget",
+            api: true,
+            data: {id: blogid}
+        }).then(function (data) {
+            console.log(data);
+            $scope.blogTitle = data.data.teamblog.title;
+            $scope.blogBody = data.data.teamblog.body;
+            $scope.uploadedBlogImage = data.data.teamblog.image;
+            if ($scope.blogBody && $scope.blogBody != "") {
+                var find = "\n";
+                var re = new RegExp(find, 'g');
+                $scope.blogBody = $sce.trustAsHtml($scope.blogBody.replace(re,"<br>"));
+                $scope.blogBody = $scope.blogBody;
+            }
+       });
+    };
 
     $scope.goBack = function () {
         $location.path("/teams/view/" + teamid);
     }
+
+    $scope.refresh();
 }]);
 
 app.controller("myTeamsController", ["$scope", "$http", "$location", "User", function ($scope, $http, $location, User) {
