@@ -3052,8 +3052,8 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
                     console.log(result);
                     $http({method: "POST", url: "team/deleteblog", api: true, data: {id: blogid}}).then(function (data) {
                         console.log($scope.team._id);
-                        console.log(data);
-                        $location.path("/teams/view/" + $scope.team._id);
+                        $scope.refresh();
+//                        $location.path("/teams/view/" + $scope.team._id);
                     });
                 }
             });
