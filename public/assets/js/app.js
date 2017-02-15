@@ -3031,7 +3031,7 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
             }
         }, true);
 
-        $scope.removeblog = function (title, blogid) {
+        $scope.removeblog = function (blogid, title) {
             var modalInstance = $uibModal.open({
                 templateUrl: '/assets/partials/modal/yesandno.html',
                 controller: "YesAndNoController",
