@@ -3047,6 +3047,7 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
 
             modalInstance.result.then(function (result) {
                 console.log(blogid);
+                console.log(result);
                 if (result == "YES") {
                     $http({method: "POST", url: "team/deleteblog", api: true, data: {id: blogid}}).then(function () {
                         $location.path("/teams/view/" + $scope.team._id);
