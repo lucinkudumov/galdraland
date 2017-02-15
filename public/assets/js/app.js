@@ -262,7 +262,32 @@ app.config(["$urlRouterProvider", "$locationProvider", "$stateProvider", "$httpP
                 "right-side@adventureEdit": {templateUrl: "/assets/partials/adventure/edit.html"}
             },
             requireLogin: true
+        }).state("adventureBlogCreate", {
+            url: "/adventures/blogcreate/:id",
+            views: {
+                "main": {templateUrl: "/assets/partials/main.html"},
+                "left-side@adventureBlogCreate": {templateUrl: "/assets/partials/adventure/left-side.html"},
+                "right-side@adventureBlogCreate": {templateUrl: "/assets/partials/adventure/createblog.html"}
+            },
+            requireLogin: true
+        }).state("adventureBlogEdit", {
+            url: "/adventures/blogedit/:adventureid/:blogid",
+            views: {
+                "main": {templateUrl: "/assets/partials/main.html"},
+                "left-side@adventureBlogEdit": {templateUrl: "/assets/partials/adventure/left-side.html"},
+                "right-side@adventureBlogEdit": {templateUrl: "/assets/partials/adventure/editblog.html"}
+            },
+            requireLogin: true
+        }).state("adventureBlogView", {
+            url: "/adventures/blogview/:adventureid/:blogid",
+            views: {
+                "main": {templateUrl: "/assets/partials/main.html"},
+                "left-side@adventureBlogView": {templateUrl: "/assets/partials/adventure/left-side.html"},
+                "right-side@adventureBlogView": {templateUrl: "/assets/partials/adventure/viewblog.html"}
+            },
+            requireLogin: true
         })
+
 
         $locationProvider.html5Mode(true);
         $urlRouterProvider.otherwise("/");
@@ -534,6 +559,36 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
                 console.log("response = ", response);
             });
         }
+
+        $scope.removeblog = function (blogid, title) {
+            var modalInstance = $uibModal.open({
+                templateUrl: '/assets/partials/modal/yesandno.html',
+                controller: "YesAndNoController",
+                resolve: {
+                    msg: function () {
+                        return "Do you want to remove this blog?";
+                    },
+                    title: function () {
+                        return "Remove Blog";
+                    }
+                }
+            });
+
+            modalInstance.result.then(function (result) {
+                console.log(blogid);
+                console.log(result);
+                if (result == "YES") {
+                    console.log(result);
+                    $http({method: "POST", url: "adventure/deleteblog", api: true, data: {id: blogid}}).then(function (data) {
+                        console.log($scope.adventure._id);
+                        $scope.refresh();
+                    });
+                }
+            });
+
+            return false;
+        }
+
         $scope.refresh();
     }]);
 app.controller("usersResultController", ["$scope", "$http", "User", "$location", function ($scope, $http, User, $location) {
@@ -916,6 +971,146 @@ app.controller("editAdventureController", ["$scope", "$http", "$location", "$sta
 
         $scope.refresh();
     }]);
+
+app.controller("createAdventureBlogController", ["$scope", "$http", "$location", "$stateParams", "Upload", function ($scope, $http, $location, $stateParams, Upload) {
+    var id = $stateParams.id;
+    $scope.uploadInProgress = false;
+    $scope.uploadProgress = 0;
+
+    console.log("calling... createAdventureBlogController");
+
+    $scope.onFileSelect = function (image) {
+        console.log(image);
+        $scope.blogImage = image.files[0];
+        if (angular.isArray($scope.blogImage)) {
+            $scope.blogImage = $scope.blogImage[0];
+        }
+
+        $scope.uploadInProgress = true;
+        $scope.uploadProgress = 0;
+
+        var fd = new FormData();
+        fd.append('file', $scope.blogImage);
+
+        $scope.upload = Upload.upload({
+            url: 'upload/image',
+            method: 'POST',
+            api: true,
+            file: $scope.blogImage
+        }).success(function (data, status, headers, config) {
+                $scope.uploadInProgress = false;
+                // If you need uploaded file immediately
+                console.log(data);
+                $scope.uploadedBlogImage = "/api/assets/images/upload/" + data.data;
+            }).error(function (err) {
+                $scope.uploadInProgress = false;
+                console.log('Error uploading file: ' + err.message || err);
+            });
+    }
+    $scope.createBlog = function () {
+        console.log("calling... createBlog");
+        $http({method: "POST", url: "adventure/createblog", api: true, data: {adventure: id, blogTitle: $scope.blogTitle, blogImage:$scope.uploadedBlogImage, blogBody: $scope.blogBody}}).then(function (data) {
+            console.log("ending... createBlog");
+            $location.path("/adventures/view/" + id);
+        });
+    }
+    $scope.goBack = function () {
+        $location.path("/adventures/view/" + id);
+    }
+}]);
+
+app.controller("editAdventureBlogController", ["$scope", "$http", "$location", "$stateParams", "Upload", function ($scope, $http, $location, $stateParams, Upload) {
+    var adventureid = $stateParams.adventureid;
+    var blogid = $stateParams.blogid;
+    $scope.uploadInProgress = false;
+    $scope.uploadProgress = 0;
+
+    console.log("calling... editAdventureBlogController");
+
+    $http({
+        method: "POST",
+        url: "adventure/blogget",
+        api: true,
+        data: {id: blogid}
+    }).then(function (data) {
+            console.log(data);
+            $scope.blogTitle = data.data.adventureblog.title;
+            $scope.blogBody = data.data.adventureblog.body;
+            $scope.uploadedBlogImage = data.data.adventureblog.image;
+        });
+
+    $scope.onFileSelect = function (image) {
+        console.log(image);
+        $scope.blogImage = image.files[0];
+        if (angular.isArray($scope.blogImage)) {
+            $scope.blogImage = $scope.blogImage[0];
+        }
+
+        $scope.uploadInProgress = true;
+        $scope.uploadProgress = 0;
+
+        var fd = new FormData();
+        fd.append('file', $scope.blogImage);
+
+        $scope.upload = Upload.upload({
+            url: 'upload/image',
+            method: 'POST',
+            api: true,
+            file: $scope.blogImage
+        }).success(function (data, status, headers, config) {
+                $scope.uploadInProgress = false;
+                // If you need uploaded file immediately
+                console.log(data);
+                $scope.uploadedBlogImage = "/api/assets/images/upload/" + data.data;
+            }).error(function (err) {
+                $scope.uploadInProgress = false;
+                console.log('Error uploading file: ' + err.message || err);
+            });
+    }
+
+    $scope.updateBlog = function () {
+        console.log("calling... updateBlog");
+        $http({method: "POST", url: "adventure/updateblog", api: true, data: {id: blogid, blogTitle: $scope.blogTitle, blogImage:$scope.uploadedBlogImage, blogBody: $scope.blogBody}}).then(function (data) {
+            console.log("ending... updateBlog");
+            $location.path("/adventures/view/" + adventureid);
+        });
+    }
+    $scope.goBack = function () {
+        $location.path("/adventures/view/" + adventureid);
+    }
+}]);
+
+app.controller("adventureBlogViewController", ["$scope", "$http", "$sce", "$location", "$stateParams", "Upload", function ($scope, $http, $sce, $location, $stateParams, Upload) {
+    var adventureid = $stateParams.adventureid;
+    var blogid = $stateParams.blogid;
+
+    console.log("calling... viewAdventureBlogController");
+    $scope.refresh = function () {
+        $http({
+            method: "POST",
+            url: "adventure/blogget",
+            api: true,
+            data: {id: blogid}
+        }).then(function (data) {
+                console.log(data);
+                $scope.blogTitle = data.data.adventureblog.title;
+                $scope.blogBody = data.data.adventureblog.body;
+                $scope.uploadedBlogImage = data.data.adventureblog.image;
+                if ($scope.blogBody && $scope.blogBody != "") {
+                    var find = "\n";
+                    var re = new RegExp(find, 'g');
+                    $scope.blogBody = $sce.trustAsHtml($scope.blogBody.replace(re,"<br>"));
+                    $scope.blogBody = $scope.blogBody;
+                }
+            });
+    };
+
+    $scope.goBack = function () {
+        $location.path("/adventures/view/" + adventureid);
+    }
+
+    $scope.refresh();
+}]);
 
 app.controller("myAdventuresController", ["$scope", "$http", "$location", "User", function ($scope, $http, $location, User) {
         $scope.user = User.isLoggedIn();
@@ -3092,6 +3287,7 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
 
             return false;
         }
+
         $scope.refresh();
     }]);
 

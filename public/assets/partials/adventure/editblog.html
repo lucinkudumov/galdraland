@@ -1,0 +1,18 @@
+<div class="row" ng-controller="editAdventureBlogController">
+    <div class="col-md-8">
+        <p><a href="#" ng-click="goBack()"><span class="glyphicon glyphicon-chevron-left"></span> Back</a></p>
+        <p>Edit Blog</p>
+        <div class="form-group">
+            <input class="form-control" type="text" ng-model="blogTitle" placeholder="Title">
+        </div>
+        <div class="form-group">
+            <input ng-model="blogImage" type="file" class="form-control" onchange="angular.element(this).scope().onFileSelect(this)">
+            <span ng-show="uploadInProgress">Upload progress: {{ uploadProgress }}</span>
+            <img src="{{uploadedBlogImage}}" ng-show="uploadedBlogImage">
+        </div>
+        <div class="form-group">
+            <textarea ng-model="blogBody" rows="10" class="form-control" placeholder="Body"></textarea>
+        </div>
+        <button class="btn btn-primary" ng-disabled="!blogTitle || !blogBody"  ng-click="updateBlog()">Save</button>
+    </div>
+</div>
