@@ -93,9 +93,8 @@
                     <td>{{ blog.createdAt}}</td>
                     <td>
                         <a href="/teams/blogview/{{ blog._id}}" class="btn btn-same-size btn-primary">View</a>
-                        <a href="/teams/blogedit/{{ blog._id}}" class="btn btn-same-size btn-primary">Edit</a>
-                        <a href="#" class="btn btn-same-size btn-danger" ng-show="user._id != t.owner._id">Leave</a>
-                        <a href="/teams/view/{{ t._id}}" class="btn btn-same-size btn-primary" ng-show="user._id == t.owner._id">Manage</a>
+                        <a ng-show="isManager" href="/teams/blogedit/{{ team._id }}/{{ blog._id}}" class="btn btn-same-size btn-primary">Edit</a>
+                        <a ng-show="isManager" href="#" ng-click="removeblog({{ blog._id}});" class="btn btn-same-size btn-danger">Remove</a>
                     </td>
                 </tr>
             </table>

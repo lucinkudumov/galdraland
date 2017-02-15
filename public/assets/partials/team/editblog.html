@@ -1,8 +1,9 @@
-<div class="row" ng-controller="createTeamBlogController">
+<div class="row" ng-controller="editTeamBlogController">
     <div class="col-md-8">
-        <p>Create Blog</p>
+        <p><a href="#" ng-click="goBack()"><span class="glyphicon glyphicon-chevron-left"></span> Back</a></p>
+        <p>Edit Blog</p>
         <div class="form-group">
-            <input class="form-control" type="text" ng-model="blogTitle" placeholder="">
+            <input class="form-control" type="text" ng-model="blogTitle" placeholder="Title">
         </div>
         <div class="form-group">
             <input ng-model="blogImage" type="file" class="form-control" onchange="angular.element(this).scope().onFileSelect(this)">
@@ -10,8 +11,8 @@
             <img src="{{uploadedBlogImage}}" ng-show="uploadedBlogImage">
         </div>
         <div class="form-group">
-            <textarea ng-model="blogBody" class="form-control" placeholder=""></textarea>
+            <textarea ng-model="blogBody" class="form-control" placeholder="Body"></textarea>
         </div>
-        <button class="btn btn-primary" ng-disabled="!blogTitle || !blogBody"  ng-click="updateBlog()">Create</button>
+        <button class="btn btn-primary" ng-disabled="!blogTitle || !blogBody"  ng-click="updateBlog()">Save</button>
     </div>
 </div>

@@ -32,8 +32,32 @@ module.exports = function (opts) {
                 }
             });
         },
-        "post#team/editblog": function (req, res) {
+        "post#team/updateblog": function (req, res) {
+            var id = req.body.id,
+                title = req.body.blogTitle,
+                body = req.body.blogBody,
+                image = req.body.blogImage;
 
+            teamBlogModel.findOne({_id: id}, function (err, team) {
+                if (err) {
+                    console.log(err);
+                    return res.json({success: false});
+                } else if (teamblog) {
+                    teamblog.name = title;
+                    teamblog.body = body;
+                    teamblog.image = image;
+                    teamblog.save(function (err, team) {
+                        if (err) {
+                            console.log(err);
+                            return res.json({success: false});
+                        } else {
+                            return res.json({success: true});
+                        }
+                    });
+                } else {
+                    return res.json({success: false});
+                }
+            });
         },
         "post#team/deleteblog": function (req, res) {
 
