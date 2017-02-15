@@ -3030,6 +3030,31 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
                 $compile($('#fbComment'))($scope1);
             }
         }, true);
+
+        $scope.removeblog = function (title, blogid) {
+            var modalInstance = $uibModal.open({
+                templateUrl: '/assets/partials/modal/yesandno.html',
+                controller: "YesAndNoController",
+                resolve: {
+                    msg: function () {
+                        return "Do you want to remove \"" + title + "\" blog?"
+                    },
+                    title: function () {
+                        return "Remove \"" + title + "\""
+                    }
+                }
+            });
+
+            modalInstance.result.then(function (result) {
+                if (result == "YES") {
+                    $http({method: "POST", url: "removeTeam", api: true, data: {id: $scope.team._id}}).then(function () {
+                        $location.path("/teams/view/" + $scope.team._id);
+                    });
+                }
+            });
+
+            return false;
+        }
         $scope.refresh();
     }]);
 

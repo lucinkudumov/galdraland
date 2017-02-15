@@ -94,7 +94,7 @@
                     <td>
                         <a href="/teams/blogview/{{ blog._id}}" class="btn btn-same-size btn-primary">View</a>
                         <a ng-show="isManager" href="/teams/blogedit/{{ team._id }}/{{ blog._id}}" class="btn btn-same-size btn-primary">Edit</a>
-                        <a ng-show="isManager" href="#" ng-click="removeblog({{ blog._id}});" class="btn btn-same-size btn-danger">Remove</a>
+                        <a ng-show="isManager" href="#" ng-click="removeblog({{ blog._id}}, {{blog.title}});" class="btn btn-same-size btn-danger">Remove</a>
                     </td>
                 </tr>
             </table>
