@@ -2604,8 +2604,6 @@ app.controller("editTeamBlogController", ["$scope", "$http", "$location", "$stat
 app.controller("teamBlogViewController", ["$scope", "$http", "$sce", "$location", "$stateParams", "Upload", function ($scope, $http, $sce, $location, $stateParams, Upload) {
     var teamid = $stateParams.teamid;
     var blogid = $stateParams.blogid;
-    $scope.uploadInProgress = false;
-    $scope.uploadProgress = 0;
 
     console.log("calling... viewTeamBlogController");
     $scope.refresh = function () {
