@@ -43,7 +43,7 @@ module.exports = function (opts) {
                     console.log(err);
                     return res.json({success: false});
                 } else if (teamblog) {
-                    teamblog.name = title;
+                    teamblog.title = title;
                     teamblog.body = body;
                     teamblog.image = image;
                     teamblog.save(function (err, teamblog) {
