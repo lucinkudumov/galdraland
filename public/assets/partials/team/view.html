@@ -82,8 +82,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-2"></div>
-        <div class="col-md-8" ng-show="teamblogs.length" style="padding-right: 0px;">
+        <div class="col-md-12" ng-show="teamblogs.length" style="padding-right: 0px;">
             <h2 style="color:#394b59; margin-top:35px;font-size:18px; font-weight:700;"><center>BLOG</center></h2>
             <br>
             <table class="table teams">
@@ -94,12 +93,11 @@
                     <td width="30%">
                         <a href="/teams/blogview/{{ blog._id}}" class="btn btn-same-size btn-primary">View</a>
                         <a ng-show="isManager" href="/teams/blogedit/{{ team._id }}/{{ blog._id}}" class="btn btn-same-size btn-primary">Edit</a>
-                        <a ng-show="isManager" href="#" ng-click="removeblog({{ blog._id}}, {{blog.title}});" class="btn btn-same-size btn-danger">Remove</a>
+                        <a ng-show="isManager" href="#" ng-click="removeblog('{{ blog._id}}', '{{blog.title}}');" class="btn btn-same-size btn-danger">Remove</a>
                     </td>
                 </tr>
             </table>
         </div>
-        <div class="col-md-2"></div>
     </div>
 
     <!--<div ng-controller="teamViewController" class="teamMembers">-->
