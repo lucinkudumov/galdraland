@@ -2535,6 +2535,9 @@ app.controller("createTeamBlogController", ["$scope", "$http", "$location", "$st
             $location.path("/teams/view/" + id);
         });
     }
+    $scope.goBack = function () {
+        $location.path("/teams/view/" + id);
+    }
 }]);
 
 app.controller("editTeamBlogController", ["$scope", "$http", "$location", "$stateParams", "Upload", function ($scope, $http, $location, $stateParams, Upload) {
