@@ -85,18 +85,20 @@
         <div class="col-md-2"></div>
         <div class="col-md-8" ng-show="teamblogs.length" style="padding-right: 0px;">
             <h2 style="color:#394b59; margin-top:35px;font-size:18px; font-weight:700;"><center>BLOG</center></h2>
-            <div style="margin-top:0px;" ng-repeat="blog in teamblogs">
-                <div class="col-md-8" style="padding-left: 0px; padding-right: 0px;">
-                <span>{{blog.title}}</span>
-                </div>
-                <div class="col-md-2" style="padding-left: 0px; padding-right: 0px;">
-                    <span ng-show="blog.image"><img src="{{blog.image}}" alt="image" ng-show="blog.image" style="margin-bottom: 10px; margin-top: 10px; width:20px; height:20px;"></span>
-                </div>
-                <div class="col-md-2" style="padding-left: 0px; padding-right: 0px;">
-                    <a href="/teams/blogview/{{ blog._id}}" class="btn btn-primary">View</a>
-                    <a href="/teams/blogedit/{{ blog._id}}" class="btn btn-primary">Edit</a>
-                </div>
-            </div>
+            <br>
+            <table class="table teams">
+                <tr ng-repeat="blog in teamblogs">
+                    <td>{{ blog.title}}</td>
+                    <td><span ng-show="blog.image"><img src="{{blog.image}}" alt="image" ng-show="blog.image" style="margin-bottom: 10px; margin-top: 10px; width:20px; height:20px;"></span></td>
+                    <td>{{ blog.createdAt}}</td>
+                    <td>
+                        <a href="/teams/blogview/{{ blog._id}}" class="btn btn-same-size btn-primary">View</a>
+                        <a href="/teams/blogedit/{{ blog._id}}" class="btn btn-same-size btn-primary">Edit</a>
+                        <a href="#" class="btn btn-same-size btn-danger" ng-show="user._id != t.owner._id">Leave</a>
+                        <a href="/teams/view/{{ t._id}}" class="btn btn-same-size btn-primary" ng-show="user._id == t.owner._id">Manage</a>
+                    </td>
+                </tr>
+            </table>
         </div>
         <div class="col-md-2"></div>
     </div>
