@@ -3049,7 +3049,10 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
                 console.log(blogid);
                 console.log(result);
                 if (result == "YES") {
-                    $http({method: "POST", url: "team/deleteblog", api: true, data: {id: blogid}}).then(function () {
+                    console.log(result);
+                    $http({method: "POST", url: "team/deleteblog", api: true, data: {id: blogid}}).then(function (data) {
+                        console.log($scope.team._id);
+                        console.log(data);
                         $location.path("/teams/view/" + $scope.team._id);
                     });
                 }
