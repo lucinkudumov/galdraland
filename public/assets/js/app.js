@@ -466,6 +466,17 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
                 }).then ( function success (data) {
                     $scope.photo = data.data.user.photo;
                 });
+
+                $http({
+                    method: "POST",
+                    url: "adventure/bloglist",
+                    api: true,
+                    data: {team: $stateParams.id}
+                }).then(function (data) {
+                        $scope.adventureblogs = data.data.adventureblogs;
+                        console.log("teamblogs = ", teamblogs);
+                });
+
             });
         }
 
