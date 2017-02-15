@@ -60,6 +60,25 @@ module.exports = function (opts) {
             });
         },
         "post#team/deleteblog": function (req, res) {
+            var id = req.body.id;
+            teamBlogModel.findOne({_id: id}, function (err, teamblog) {
+                if (err) {
+                    console.log(err);
+                    return res.json({success: false});
+                } else if (teamblog) {
+                    teamblog.remove(function (err, teamblog) {
+                        if (err) {
+                            console.log(err);
+                            return res.json({success: false});
+                        } else {
+                            return res.json({success: true});
+                        }
+                    });
+                } else {
+                    return res.json({success: false});
+                }
+            });
+
 
         },
         "post#team/bloglist": function (req, res) {
