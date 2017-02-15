@@ -207,7 +207,7 @@ app.config(["$urlRouterProvider", "$locationProvider", "$stateProvider", "$httpP
             },
             requireLogin: true
         }).state("teamBlogView", {
-            url: "/teams/blogview/:id",
+            url: "/teams/blogview/:teamid/:blogid",
             views: {
                 "main": {templateUrl: "/assets/partials/main.html"},
                 "left-side@teamBlogView": {templateUrl: "/assets/partials/team/left-side.html"},
@@ -2596,6 +2596,36 @@ app.controller("editTeamBlogController", ["$scope", "$http", "$location", "$stat
             $location.path("/teams/view/" + teamid);
         });
     }
+    $scope.goBack = function () {
+        $location.path("/teams/view/" + teamid);
+    }
+}]);
+
+app.controller("teamBlogViewController", ["$scope", "$http", "$location", "$stateParams", "Upload", function ($scope, $http, $location, $stateParams, Upload) {
+    var teamid = $stateParams.teamid;
+    var blogid = $stateParams.blogid;
+    $scope.uploadInProgress = false;
+    $scope.uploadProgress = 0;
+
+    console.log("calling... viewTeamBlogController");
+    $http({
+        method: "POST",
+        url: "team/blogget",
+        api: true,
+        data: {id: blogid}
+    }).then(function (data) {
+        console.log(data);
+        $scope.blogTitle = data.data.teamblog.title;
+        $scope.blogBody = data.data.teamblog.body;
+        $scope.uploadedBlogImage = data.data.teamblog.image;
+        if ($scope.blogBody && $scope.blogBody != "") {
+            var find = "\n";
+            var re = new RegExp(find, 'g');
+            $scope.blogBody = $sce.trustAsHtml($scope.blogBody.replace(re,"<br>"));
+            $scope.blogBody = $scope.blogBody;
+        }
+    });
+
     $scope.goBack = function () {
         $location.path("/teams/view/" + teamid);
     }
