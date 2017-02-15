@@ -471,10 +471,9 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
                     method: "POST",
                     url: "adventure/bloglist",
                     api: true,
-                    data: {team: $stateParams.id}
+                    data: {adventure: $stateParams.id}
                 }).then(function (data) {
                         $scope.adventureblogs = data.data.adventureblogs;
-                        console.log("teamblogs = ", teamblogs);
                 });
 
             });
