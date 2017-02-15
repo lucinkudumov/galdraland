@@ -91,7 +91,7 @@
                     <td width="10%"><span ng-show="blog.image"><img src="{{blog.image}}" alt="image" ng-show="blog.image" style="margin-bottom: 10px; margin-top: 10px; width:40px; height:40px;"></span></td>
                     <td width="20%">{{ blog.createdAt | date:'yyyy-MM-dd HH:mm:ss'}}</td>
                     <td width="30%">
-                        <a href="/teams/blogview/{{ blog._id}}" class="btn btn-same-size btn-primary">View</a>
+                        <a href="/teams/blogview/{{ team._id }}/{{ blog._id}}" class="btn btn-same-size btn-primary">View</a>
                         <a ng-show="isManager" href="/teams/blogedit/{{ team._id }}/{{ blog._id}}" class="btn btn-same-size btn-primary">Edit</a>
                         <a ng-show="isManager" href="#" ng-click="removeblog(blog._id, blog.title);" class="btn btn-same-size btn-danger">Remove</a>
                     </td>
