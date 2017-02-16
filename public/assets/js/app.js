@@ -1115,6 +1115,12 @@ app.controller("adventureBlogViewController", ["$scope", "$http", "$sce", "$loca
             });
     };
 
+    $scope.$watch("blogid", function(newValue, oldValue){
+        console.log("newValue = ", newValue);
+        console.log("oldValue = ", oldValue);
+    }, true);
+
+
     $scope.goBack = function () {
         $location.path("/adventures/view/" + adventureid);
     }
