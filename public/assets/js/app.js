@@ -1111,8 +1111,26 @@ app.controller("adventureBlogViewController", ["$scope", "$http", "$sce", "$loca
                     var re = new RegExp(find, 'g');
                     $scope.blogBody = $sce.trustAsHtml($scope.blogBody.replace(re,"<br>"));
                     $scope.blogBody = $scope.blogBody;
+
+                    /* FB commenting*/
+                    var htmlcontent = "<div id='fb-root'>" +
+                        "</div><script>window.fbAsyncInit = function () {FB.init({appId: '110469289012320',status: true,cookie: true,xfbml: true,version: 'v2.6'});};window.fbAsyncInit();(function (d, s, id) {var js, fjs = d.getElementsByTagName(s)[0];if (d.getElementById(id)) {return;}js = d.createElement(s);js.id = id;js.src = '//connect.facebook.net/en_US/sdk.js';fjs.parentNode.insertBefore(js, fjs);}(document, 'script', 'facebook-jssdk'));" +
+                        "function fbshare() {" +
+                        "window.open('https://www.facebook.com/sharer/sharer.php?app_id=110469289012320&sdk=joey&u=http://galdraland-1-0.herokuapp.com/teams/blogview/"+blogid+"&display=popup&ref=plugin&src=share_button&description="+$scope.description+"&picture=http://galdraland-1-0.herokuapp.com"+$scope.team.image+"', '','width=200,height=100');" +
+                        "}" +
+                        "</script>" +
+                        "<img onclick='fbshare();' style='cursor:pointer;' src='/assets/images/fbshare.png'/>";
+
+                    var $scope1 = $('#fbshare').html(htmlcontent).scope();
+                    $compile($('#fbshare'))($scope1);
+
+                    htmlcontent = "<div id='fb-root'>" +
+                        "</div><script>window.fbAsyncInit = function () {FB.init({appId: '110469289012320',status: true,cookie: true,xfbml: true,version: 'v2.6'});};window.fbAsyncInit();(function (d, s, id) {var js, fjs = d.getElementsByTagName(s)[0];if (d.getElementById(id)) {return;}js = d.createElement(s);js.id = id;js.src = '//connect.facebook.net/en_US/sdk.js';fjs.parentNode.insertBefore(js, fjs);}(document, 'script', 'facebook-jssdk'));</script>" +
+                        "<div class='fb-comments' data-href='http://webascender.com/blog/#teamblog" + blogid +"' data-numposts='5' data-colorscheme='light' data-width='350'></div>";
+                    $scope1 = $('#fbComment').html(htmlcontent).scope();
+                    $compile($('#fbComment'))($scope1);
                 }
-            });
+        });
     };
 
     $scope.$watch("blogid", function(newValue, oldValue){
