@@ -1713,10 +1713,10 @@ app.controller("sendRecommendationController", ["$scope", "$uibModalInstance", "
                             continue;
 
                         //Check If Exists in Team
-                        for (var j = 0; j < $scope.team.teamMembers.length; j++) {
-                            if ($scope.team.teamMembers[j].user._id == user._id)
-                                exist_in_team = true;
-                        }
+//                        for (var j = 0; j < $scope.team.teamMembers.length; j++) {
+//                            if ($scope.team.teamMembers[j].user._id == user._id)
+//                                exist_in_team = true;
+//                        }
 
                         if (exist_in_team)
                             continue;
