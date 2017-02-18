@@ -3246,18 +3246,6 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
                         $scope.isMember = true;
                 }
 
-                if(!$scope.isManager) {
-                    console.log("No Manager ownerid = " + $scope.team.owner._id);
-                    $http({
-                        method: "GET",
-                        url: "getUser",
-                        api: true,
-                        data: {id: $scope.team.owner._id}
-                    }).then(function success(data) {
-                        $scope.owner = data.data.user;
-                    });
-                }
-
                 $http({
                     method: "POST",
                     url: "team/bloglist",
@@ -3418,19 +3406,28 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
                     function send_recommendation() {
                         if (result.recommendates.length == 0)
                             return;
-//                        var msg = "User "+$scope.user.fullname+" has recommended User C for such role in your team T"
-                        console.log("owner = ", $scope.owner);
-                        console.log(result.recommendates);
-                        for (var i = 0; i < result.recommendates.length; i++) {
-                            var toMasterMsg = "User '"+$scope.user.fullname+"' has recommended User '"+
-                                result.recommendates[i].user+"' for role '"+result.recommendates[i].title.title+
-                                "' in your team '" + $scope.team.name + "'";
-                            var toSlaveMsg = "User '"+$scope.user.fullname+"' has recommended you for role '"+result.recommendates[i].title.title+
-                                "' in '"+$scope.owner.fullname+"'`s team '" + $scope.team.name+"'";
+                        $http({
+                            method: "GET",
+                            url: "getUser",
+                            api: true,
+                            data: {id: $scope.team.owner._id}
+                        }).then(function success(data) {
+                           $scope.owner = data.data.user;
+                            console.log("owner = ", $scope.owner);
+                            console.log(result.recommendates);
+                            for (var i = 0; i < result.recommendates.length; i++) {
+                                var toMasterMsg = "User '"+$scope.user.fullname+"' has recommended User '"+
+                                    result.recommendates[i].user+"' for role '"+result.recommendates[i].title.title+
+                                    "' in your team '" + $scope.team.name + "'";
+                                var toSlaveMsg = "User '"+$scope.user.fullname+"' has recommended you for role '"+result.recommendates[i].title.title+
+                                    "' in '"+$scope.owner.fullname+"'`s team '" + $scope.team.name+"'";
 
-                            console.log(toMasterMsg);
-                            console.log(toSlaveMsg);
-                        }
+                                console.log(toMasterMsg);
+                                console.log(toSlaveMsg);
+                            }
+                        });
+
+//                        var msg = "User "+$scope.user.fullname+" has recommended User C for such role in your team T"
 //                        $http({method: "POST", url: "sendRecommendation", api: true, data: {team: $scope.team._id, recommendates: result.recommendates, msg: msg, roles: result.roles}}).then(function (data) {
 
 //                        });
