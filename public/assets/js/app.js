@@ -3247,6 +3247,7 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
                 }
 
                 if(!$scope.isManager) {
+                    console.log("No Manager ownerid = " + $scope.team.owner._id);
                     $http({
                         method: "GET",
                         url: "getUser",
@@ -3418,6 +3419,7 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
                         if (result.recommendates.length == 0)
                             return;
 //                        var msg = "User "+$scope.user.fullname+" has recommended User C for such role in your team T"
+                        console.log("owner = ", $scope.owner);
                         console.log(result.recommendates);
                         for (var i = 0; i < result.recommendates.length; i++) {
                             var toMasterMsg = "User '"+$scope.user.fullname+"' has recommended User '"+
