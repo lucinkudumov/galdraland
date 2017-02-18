@@ -3247,7 +3247,12 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
                 }
 
                 if(!$scope.isManager) {
-                    $http.get("/api/getUser").then(function (data) {
+                    $http({
+                        method: "GET",
+                        url: "getUser",
+                        api: true,
+                        data: {id: $scope.team.owner._id}
+                    }).then(function success(data) {
                         $scope.owner = data.data.user;
                     });
                 }
