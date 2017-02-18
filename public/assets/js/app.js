@@ -1807,7 +1807,7 @@ app.controller("sendRecommendationController", ["$scope", "$uibModalInstance", "
     }
 
     $scope.send = function () {
-        $uibModalInstance.close({type: "SEND", to: $scope.values.to, msg: $scope.values.msg, roles: $scope.values.roles, recommendates: $scope.values.recommendates});
+        $uibModalInstance.close({type: "SEND", to: $scope.values.to, recommendates: $scope.values.recommendates});
     }
 
     function validateEmail(email) {
@@ -3377,9 +3377,9 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
                         result.roles = result.roles.split(/\s*,\s*/);
                     }
 
-                    for (var i = 0; i < result.invites.length; i++) {
-                        if (result.invites[i].fb_id != -1)
-                            fb_ids.push(result.invites[i].fb_id);
+                    for (var i = 0; i < result.recommendates.length; i++) {
+                        if (result.recommendates[i].fb_id != -1)
+                            fb_ids.push(result.recommendates[i].fb_id);
                     }
                     if (fb_ids.length) {
                         FB.ui({method: 'apprequests',
@@ -3399,14 +3399,16 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
                             }
                         });
                     }
-                    function send_invite() {
-                        if (result.invites.length == 0)
+                    function send_recommendation() {
+                        if (result.recommendates.length == 0)
                             return;
-                        $http({method: "POST", url: "sendInvite", api: true, data: {team: $scope.team._id, invites: result.invites, msg: result.msg, roles: result.roles}}).then(function (data) {
+//                        var msg = "User "+$scope.user.fullname+" has recommended User C for such role in your team T"
+                        console.log(result.recommendates);
+//                        $http({method: "POST", url: "sendRecommendation", api: true, data: {team: $scope.team._id, recommendates: result.recommendates, msg: msg, roles: result.roles}}).then(function (data) {
 
-                        });
+//                        });
                     }
-                    send_invite();
+                    send_recommendation();
                 }
             });
         }
