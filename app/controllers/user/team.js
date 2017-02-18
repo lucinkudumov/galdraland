@@ -199,7 +199,7 @@ module.exports = function (opts) {
                 }
             });
         },
-        "get#getUserById": function (req, res) {
+        "post#getUserById": function (req, res) {
             console.log("aaaaaaaaaa = ",  req.body.id);
             userModel.findOne({_id: req.body.id}).select("_id profileId fullname username email signin photo skype experience goals categories").exec(function (err, user) {
                 if (err) {

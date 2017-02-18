@@ -3408,7 +3408,7 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
                             return;
                         console.log("abc = " + $scope.team.owner._id);
                         $http({
-                            method: "GET",
+                            method: "POST",
                             url: "getUserById",
                             api: true,
                             data: {id: $scope.team.owner._id}
