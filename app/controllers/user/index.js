@@ -145,7 +145,6 @@ module.exports = function (opts) {
                     res.cookie("user", encodeURIComponent(JSON.stringify(user)), { 'path': '/', 'domain': 'galdraland-1-0.herokuapp.com' });
                     res.redirect(redirect);
                 } else {
-                    console.log("failing cookie");
                     return res.redirect(failRedirect);
                 }
             });
