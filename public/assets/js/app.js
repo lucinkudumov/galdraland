@@ -1802,7 +1802,7 @@ app.controller("sendRecommendationController", ["$scope", "$uibModalInstance", "
     }
 
     $scope.removeRecommendation = function (index) {
-        $scope.values._emptyMembers.push($scope.values.recommendates[index].title);
+        $scope.values._emptyRecMembers.push($scope.values.recommendates[index].title);
         $scope.values.recommendates.splice(index, 1);
     }
 
