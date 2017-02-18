@@ -35,6 +35,7 @@ module.exports = function (opts) {
             });
         },
         "get#getUser": function (req, res) {
+            console.log("aaaaaaaaaa = " + req.user._id);
             userModel.findOne({_id: req.user._id}).select("_id profileId fullname username email signin photo skype experience goals categories").exec(function (err, user) {
                 if (err) {
                     console.log(err);
