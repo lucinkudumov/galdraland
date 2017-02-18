@@ -1718,8 +1718,8 @@ app.controller("sendRecommendationController", ["$scope", "$uibModalInstance", "
 //                                exist_in_team = true;
 //                        }
 
-                        if (exist_in_team)
-                            continue;
+//                        if (exist_in_team)
+//                            continue;
 
                         //Check If Exists in Facebook Friends List
                         for (j = 0; j < $scope.values.fb_friends.length; j++) {
@@ -1730,17 +1730,18 @@ app.controller("sendRecommendationController", ["$scope", "$uibModalInstance", "
                         }
 
                         //Check If Exists in Recommendation List
-                        if ($scope.values.recommendates.length > 0) {
-                            for (j = 0; j < $scope.values.recommendates.length; j++) {
-                                if (user.username == $scope.values.recommendates[j].user || (user.is_fb_friend != -1 && user.is_fb_friend == $scope.values.invites[j].profileId)) {
-                                    break;
-                                } else if (j == $scope.values.recommendates.length - 1) {
-                                    users.push(user);
-                                }
-                            }
-                        } else {
-                            users.push(user);
-                        }
+//                        if ($scope.values.recommendates.length > 0) {
+//                            for (j = 0; j < $scope.values.recommendates.length; j++) {
+//                                if (user.username == $scope.values.recommendates[j].user || (user.is_fb_friend != -1 && user.is_fb_friend == $scope.values.recommendates[j].profileId)) {
+//                                    break;
+//                                } else if (j == $scope.values.recommendates.length - 1) {
+//                                    users.push(user);
+//                                }
+//                            }
+//                        } else {
+//                            users.push(user);
+//                        }
+                        users.push(user);
                     }
 
                     for (i = 0; i < $scope.values.fb_friends.length; i++) {
