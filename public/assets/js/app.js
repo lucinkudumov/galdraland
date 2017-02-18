@@ -3204,7 +3204,7 @@ app.controller("userViewController", ["$scope", "$http", "$stateParams", "User",
 app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "$stateParams", "User", "$uibModal", "$location", "$compile", function ($rootScope, $scope, $http, $sce, $stateParams, User, $uibModal, $location, $compile) {
         $scope.user = User.isLoggedIn();
         $scope.description = "";
-        $scope.owner = $scope.user;
+        $scope.owner = null;
 
     $scope.emptyMembers = [];
     $scope.emptyRecMembers = [];
@@ -3406,11 +3406,12 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
                     function send_recommendation() {
                         if (result.recommendates.length == 0)
                             return;
+                        console.log("abc = " + $scope.team.owner._id);
                         $http({
                             method: "GET",
                             url: "getUser",
                             api: true,
-                            data: {id: $scope.team.owner._id}
+                            data: {user: $scope.team.owner}
                         }).then(function success(data) {
                            $scope.owner = data.data.user;
                             console.log("owner = ", $scope.owner);
