@@ -212,27 +212,31 @@ module.exports = function (opts) {
             return res.json({success: true});
         },
         "get#getRecommendates": function (req, res) {
+            var recommendateObjs = [];
             async.parallel([
                 function (cb) {
                     recommendationModel.find({masterId: req.user._id, viewed: false}, function (err, recommendates) {
-                        var recommendateObjs = [];
+                        console.log("1 = ", recommendates);
+
                         async.forEach(recommendates, function (item, callback) {
+                                console.log("1 - 1 = ", item);
                                 item = item.toObject();
                                 recommendateObjs.push(item);
                             });
                         }, function (err) {
-                            cb(err, inviteObjs);
+                            cb(err, recommendateObjs);
                         });
                 },
                 function (cb) {
                     recommendationModel.find({slaveId: req.user._id, accepted: false}, function (err, recommendates) {
-                        var recommendateObjs = [];
+                        console.log("2 = ", recommendates);
                         async.forEach(recommendates, function (item, callback) {
+                            console.log("2 - 1= ", item);
                             item = item.toObject();
                             recommendateObjs.push(item);
                         });
                     }, function (err) {
-                        cb(err, inviteObjs);
+                        cb(err, recommendateObjs);
                     });
                 }
             ], function (err, recommendates) {
