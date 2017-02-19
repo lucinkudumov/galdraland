@@ -154,8 +154,8 @@ module.exports = function (opts) {
             });
         },
         "post#sendRecommendation": function (req, res) {
+            console.log("calling..");
             var recommendation_user = req.body.recommendation_user,
-                master_user = req.body.master_user,
                 master_user = req.body.master_user,
                 team = req.body.team,
                 adventure = req.body.adventure,
@@ -163,6 +163,14 @@ module.exports = function (opts) {
                 toMasterMsg = req.body.toMasterMsg,
                 toSlaveMsg = req.body.toSlaveMsg,
                 type = req.body.type;
+            console.log("calling..");
+            console.log("recommendation_user = ", recommendation_user);
+            console.log("master_user = ", master_user);
+            console.log("team = ", team);
+            console.log("adventure = ", adventure);
+            console.log("recommendates = ", recommendates);
+            console.log("toMasterMsg = ", toMasterMsg);
+            console.log("type = ", type);
 
             async.forEach(recommendates, function (item, cb) {
                 if(item.fb_id != -1)
@@ -185,11 +193,10 @@ module.exports = function (opts) {
                     if (err) {
                         cb(err);
                         return res.json({success: false});
-                    } else {
-                        return res.json({success: true});
                     }
                 });
             });
+            return res.json({success: true});
         },
         "post#acceptInvite": function (req, res) {
             var id = req.body.id;
