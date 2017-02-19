@@ -188,7 +188,7 @@ module.exports = function (opts) {
                 recommendation.roleId = item.title._id;
                 recommendation.roleId = item.title.title;
                 recommendation.type = type;
-                recommendation.team = team != null;
+                recommendation.team = team;
                 console.log("3");
 //                recommendation.adventrue = adventure;
                 console.log("4");
