@@ -180,8 +180,18 @@ module.exports = function (opts) {
                     recommendation.team = team._id;
                 if (adventure != null)
                     recommendation.adventure = adventure._id;
-                recommendation.toMasterMsg = toMasterMsg;
-                recommendation.toSlaveMsg = toSlaveMsg;
+
+                recommendation.kind = "master";
+                recommendation.msg = toMasterMsg;
+                recommendation.save(function (err, recommendation) {
+                    if (err) {
+                        cb(err);
+                        console.log(err);
+                        return res.json({success: false});
+                    }
+                });
+                recommendation.kind = "slave";
+                recommendation.msg = toSlaveMsg;
                 recommendation.save(function (err, recommendation) {
                     if (err) {
                         cb(err);

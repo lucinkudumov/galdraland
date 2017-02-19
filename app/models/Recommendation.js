@@ -36,21 +36,21 @@ module.exports = function (opts) {
             type: String,
             required: true
         },
+        kind: {
+            type: String,
+            required: true
+        },
         adventure: {
             type: String
         },
         team: {
             type: String
         },
-        toMasterMsg : {
+        msg : {
             type: String,
             required: true
         },
-        toSlaveMsg : {
-            type: String,
-            required: true
-        },
-        accepted : {
+        viewed : {
             type: Boolean,
             "default": false
         }

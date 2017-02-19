@@ -1318,6 +1318,10 @@ app.controller("headerController", ["$scope", "$rootScope", "$http", "$location"
                 method: "GET", url: "getRecommendates", api: true
             }).then (function (result) {
                 console.log("getRecommendates = ",result);
+                if (result !== undefined && result.data !== undefined && result.data.recommendates !== undefined)
+                    $scope.recommendates = result.data.recommendates;
+                else
+                    $scope.recommendates = [];
                 refresh_feeds();
             });
         });
@@ -1354,6 +1358,12 @@ app.controller("headerController", ["$scope", "$rootScope", "$http", "$location"
                     }
                     $scope.feeds.push(feed);
                 }
+            }
+
+            for (var i = 0; i < $scope.recommendates.length; i++) {
+                var feed = $scope.recommendates[i];
+                feed.category = 2;
+                $scope.feeds.push(feed);
             }
         }
 
@@ -3423,7 +3433,7 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
 
                                 console.log(toMasterMsg);
                                 console.log(toSlaveMsg);
-                                $http({method: "POST", url: "sendRecommendation", api: true, data: {recommendation_user: $scope.user, master_user: $scope.owner, adventure: null, team: $scope.team, type: "team", recommendates: result.recommendates, toMasterMsg: toMasterMsg,toSlaveMsg: toSlaveMsg}}).then(function (data) {
+                                $http({method: "POST", url: "sendRecommendation", api: true, data: {recommendation_user: $scope.user, master_user: $scope.owner, adventure: null, team: $scope.team, type: "teams", recommendates: result.recommendates, toMasterMsg: toMasterMsg,toSlaveMsg: toSlaveMsg}}).then(function (data) {
                                     console.log(data.data.success);
                                 });
                             }

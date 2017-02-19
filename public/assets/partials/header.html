@@ -21,12 +21,21 @@
                       </div>
                   </li-->
 				  <li ng-repeat="i in feeds">
-					  <h5>{{i.alert}}</h5>
-                      <p>Role: {{ i.title }}</p>
-                      <p ng-show="i.message">{{ i.message }}</p>
-                      <div class="view">
-                          <button class="btn btn-primary" ng-click="showApply(i)" ng-show="i.category == 1">View</button>
-						  <button class="btn btn-primary" ng-click="showInvite(i)" ng-show="i.category == 0">View</button>
+                      <div ng-show="i.category != 2">
+                          <h5>{{i.alert}}</h5>
+                          <p>Role: {{ i.title }}</p>
+                          <p ng-show="i.message">{{ i.message }}</p>
+                          <div class="view">
+                              <button class="btn btn-primary" ng-click="showApply(i)" ng-show="i.category == 1">View</button>
+                              <button class="btn btn-primary" ng-click="showInvite(i)" ng-show="i.category == 0">View</button>
+                          </div>
+                      </div>
+                      <div ng-show="i.category == 2">
+                          <h5>{{i.msg}}</h5>
+                          <div class="view">
+                              <a class="btn btn-primary" ng-click="/teams/view/i.team" ng-show="i.type == 'teams'">View</a>
+                              <a class="btn btn-primary" ng-click="/adventures/view/i.adventure" ng-show="i.type == 'adventures'">View</a>
+                          </div>
                       </div>
                   </li>
               </ul>
