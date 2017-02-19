@@ -37,12 +37,10 @@ module.exports = function (opts) {
             required: true
         },
         adventure: {
-            type: mongoose.Schema.ObjectId,
-            ref: "Adventure"
+            type: String
         },
         team: {
-            type: mongoose.Schema.ObjectId,
-            ref: "Team"
+            type: String
         },
         toMasterMsg : {
             type: String,
