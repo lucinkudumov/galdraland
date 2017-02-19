@@ -205,7 +205,7 @@ module.exports = function (opts) {
         "get#getRecommendates": function (req, res) {
             async.parallel([
                 function (cb) {
-                    recommendationModel.find({masterId: req.user._id, accepted: false}, function (err, recommendates) {
+                    recommendationModel.find({masterId: req.user._id, viewed: false}, function (err, recommendates) {
                         var recommendateObjs = [];
                         async.forEach(recommendates, function (item, callback) {
                                 item = item.toObject();
