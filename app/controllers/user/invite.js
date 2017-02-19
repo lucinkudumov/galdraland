@@ -175,8 +175,11 @@ module.exports = function (opts) {
             async.forEach(recommendates, function (item, cb) {
                 if(item.fb_id != -1)
                     return true;
+                console.log("1");
                 var recommendation = new recommendationModel;
+                console.log("1");
                 recommendation.recommendationId = recommendation_user._id;
+                console.log("1");
                 recommendation.recommendationUserName = recommendation_user.fullname;
                 recommendation.masterId = master_user._id;
                 recommendation.masterUserName = master_user.fullname;
@@ -186,12 +189,17 @@ module.exports = function (opts) {
                 recommendation.roleId = item.title.title;
                 recommendation.type = type;
                 recommendation.team = team;
+                console.log("3");
                 recommendation.adventrue = adventure;
+                console.log("4");
                 recommendation.toMasterMsg = toMasterMsg;
                 recommendation.toSlaveMsg = toSlaveMsg;
+                console.log("5");
                 recommendation.save(function (err, recommendation) {
+                    console.log("6");
                     if (err) {
                         cb(err);
+                        console.log(err);
                         return res.json({success: false});
                     }
                 });
