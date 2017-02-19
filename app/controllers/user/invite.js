@@ -181,24 +181,33 @@ module.exports = function (opts) {
                 if (adventure != null)
                     recommendation.adventure = adventure._id;
 
-                recommendation.kind = "master";
-                recommendation.msg = toMasterMsg;
-                recommendation.save(function (err, recommendation) {
-                    if (err) {
-                        cb(err);
-                        console.log(err);
-                        return res.json({success: false});
+                async.parallel([
+                    function (cb) {
+                        recommendation.kind = "master";
+                        recommendation.msg = toMasterMsg;
+                        recommendation.save(function (err, recommendation) {
+                            if (err) {
+                                cb(err);
+                                console.log(err);
+                                return res.json({success: false});
+                            }
+                        });
+                    },
+                    function (cb) {
+                        recommendation.kind = "slave";
+                        recommendation.msg = toSlaveMsg;
+                        recommendation.save(function (err, recommendation) {
+                            if (err) {
+                                cb(err);
+                                console.log(err);
+                                return res.json({success: false});
+                            }
+                        });
                     }
-                });
-                recommendation.kind = "slave";
-                recommendation.msg = toSlaveMsg;
-                recommendation.save(function (err, recommendation) {
-                    if (err) {
-                        cb(err);
-                        console.log(err);
-                        return res.json({success: false});
-                    }
-                });
+                ], function (err) {
+                    console.log(err);
+                    return res.json({success: false});
+                })
             });
             return res.json({success: true});
         },
