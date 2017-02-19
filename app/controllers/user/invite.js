@@ -163,23 +163,11 @@ module.exports = function (opts) {
                 toMasterMsg = req.body.toMasterMsg,
                 toSlaveMsg = req.body.toSlaveMsg,
                 type = req.body.type;
-            console.log("calling..");
-            console.log("recommendation_user = ", recommendation_user);
-            console.log("master_user = ", master_user);
-            console.log("team = ", team);
-            console.log("adventure = ", adventure);
-            console.log("recommendates = ", recommendates);
-            console.log("toMasterMsg = ", toMasterMsg);
-            console.log("type = ", type);
-
             async.forEach(recommendates, function (item, cb) {
                 if(item.fb_id != -1)
                     return true;
-                console.log("1");
                 var recommendation = new recommendationModel;
-                console.log("1");
                 recommendation.recommendationId = recommendation_user._id;
-                console.log("1");
                 recommendation.recommendationUserName = recommendation_user.fullname;
                 recommendation.masterId = master_user._id;
                 recommendation.masterUserName = master_user.fullname;
@@ -190,15 +178,11 @@ module.exports = function (opts) {
                 recommendation.type = type;
                 if (team != null)
                     recommendation.team = team._id;
-                console.log("3");
                 if (adventure != null)
                     recommendation.adventure = adventure._id;
-                console.log("4");
                 recommendation.toMasterMsg = toMasterMsg;
                 recommendation.toSlaveMsg = toSlaveMsg;
-                console.log("5");
                 recommendation.save(function (err, recommendation) {
-                    console.log("6");
                     if (err) {
                         cb(err);
                         console.log(err);
@@ -207,6 +191,40 @@ module.exports = function (opts) {
                 });
             });
             return res.json({success: true});
+        },
+        "get#getRecommendates": function (req, res) {
+            async.parallel([
+                function (cb) {
+                    recommendationModel.find({masterId: req.user._id, accepted: false}, function (err, recommendates) {
+                        var recommendateObjs = [];
+                        async.forEach(recommendates, function (item, callback) {
+                                item = item.toObject();
+                                recommendateObjs.push(item);
+                            });
+                        }, function (err) {
+                            cb(err, inviteObjs);
+                        });
+                },
+                function (cb) {
+                    recommendationModel.find({slaveId: req.user._id, accepted: false}, function (err, recommendates) {
+                        var recommendateObjs = [];
+                        async.forEach(recommendates, function (item, callback) {
+                            item = item.toObject();
+                            recommendateObjs.push(item);
+                        });
+                    }, function (err) {
+                        cb(err, inviteObjs);
+                    });
+                }
+            ], function (err, recommendates) {
+                if (err) {
+                    console.log(err);
+                    return res.json({success: false, recommendates: []});
+                } else {
+                    console.log("recommendateObjs = ", recommendateObjs);
+                    return res.json({success: true, recommendates: recommendateObjs});
+                }
+            })
         },
         "post#acceptInvite": function (req, res) {
             var id = req.body.id;

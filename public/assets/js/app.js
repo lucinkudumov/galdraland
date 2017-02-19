@@ -1314,8 +1314,12 @@ app.controller("headerController", ["$scope", "$rootScope", "$http", "$location"
                 $scope.applies = result.data.applies;
             else
                 $scope.applies = [];
-
-            refresh_feeds();
+            $http({
+                method: "GET", url: "getRecommendates", api: true
+            }).then (function (result) {
+                console.log("getRecommendates = ",result);
+                refresh_feeds();
+            });
         });
 
         function refresh_feeds() {
