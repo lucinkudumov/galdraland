@@ -15,6 +15,7 @@ module.exports = function (opts) {
             teamModel = opts.models.Team,
             teamMemberModel = opts.models.TeamMember,
             inviteModel = opts.models.Invite;
+            recommendationModel = opts.models.Recommendation;
 
     function validateEmail(email) {
         var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -150,6 +151,44 @@ module.exports = function (opts) {
                 else {
                     return res.json({success: false});
                 }
+            });
+        },
+        "post#sendRecommendation": function (req, res) {
+            var recommendation_user = req.body.recommendation_user,
+                master_user = req.body.master_user,
+                master_user = req.body.master_user,
+                team = req.body.team,
+                adventure = req.body.adventure,
+                recommendates = req.body.recommendates,
+                toMasterMsg = req.body.toMasterMsg,
+                toSlaveMsg = req.body.toSlaveMsg,
+                type = req.body.type;
+
+            async.forEach(recommendates, function (item, cb) {
+                if(item.fb_id != -1)
+                    return true;
+                var recommendation = new recommendationModel;
+                recommendation.recommendationId = recommendation_user._id;
+                recommendation.recommendationUserName = recommendation_user.fullname;
+                recommendation.masterId = master_user._id;
+                recommendation.masterUserName = master_user.fullname;
+                recommendation.slaveId = item.memberId;
+                recommendation.slaveUserName = item.user;
+                recommendation.roleId = item.title._id;
+                recommendation.roleId = item.title.title;
+                recommendation.type = type;
+                recommendation.team = team;
+                recommendation.adventrue = adventure;
+                recommendation.toMasterMsg = toMasterMsg;
+                recommendation.toSlaveMsg = toSlaveMsg;
+                recommendation.save(function (err, recommendation) {
+                    if (err) {
+                        cb(err);
+                        return res.json({success: false});
+                    } else {
+                        return res.json({success: true});
+                    }
+                });
             });
         },
         "post#acceptInvite": function (req, res) {

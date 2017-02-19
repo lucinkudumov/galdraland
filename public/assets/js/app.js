@@ -3377,10 +3377,6 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
                 if (result.type == "SEND") {
                     var fb_ids = [];
 
-                    if (result.roles) {
-                        result.roles = result.roles.split(/\s*,\s*/);
-                    }
-
                     for (var i = 0; i < result.recommendates.length; i++) {
                         if (result.recommendates[i].fb_id != -1)
                             fb_ids.push(result.recommendates[i].fb_id);
@@ -3406,7 +3402,6 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
                     function send_recommendation() {
                         if (result.recommendates.length == 0)
                             return;
-                        console.log("abc = " + $scope.team.owner._id);
                         $http({
                             method: "POST",
                             url: "getUserById",
@@ -3414,7 +3409,6 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
                             data: {id: $scope.team.owner._id}
                         }).then(function success(data) {
                            $scope.owner = data.data.user;
-                            console.log("owner = ", $scope.owner);
                             console.log(result.recommendates);
                             for (var i = 0; i < result.recommendates.length; i++) {
                                 var toMasterMsg = "User '"+$scope.user.fullname+"' has recommended User '"+
@@ -3425,13 +3419,13 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
 
                                 console.log(toMasterMsg);
                                 console.log(toSlaveMsg);
+                                $http({method: "POST", url: "sendRecommendation", api: true, data: {recommendation_user: $scope.user, master_user: $scope.owner, adventure: null, team: $scope.team, type: "team", recommendates: result.recommendates, toMasterMsg: toMasterMsg,toSlaveMsg: toSlaveMsg}}).then(function (data) {
+                                    console.log(data.data.success);
+                                });
                             }
                         });
 
 //                        var msg = "User "+$scope.user.fullname+" has recommended User C for such role in your team T"
-//                        $http({method: "POST", url: "sendRecommendation", api: true, data: {team: $scope.team._id, recommendates: result.recommendates, msg: msg, roles: result.roles}}).then(function (data) {
-
-//                        });
                     }
                     send_recommendation();
                 }
