@@ -259,7 +259,6 @@ module.exports = function (opts) {
         "get#getRecommendates": function (req, res) {
             var t = [];
             recommendationModel.find({masterId: req.user._id, masterViewed: false}, function (err, recommendates) {
-                console.log(recommendates);
                 for (i=0; i < recommendates.length; i++) {
                     recommendates[i].position = 'master';
                     t.push(recommendates[i]);
@@ -269,6 +268,7 @@ module.exports = function (opts) {
                         recommendates[j].position = 'slave';
                         t.push(recommendates[j]);
                     }
+                    console.log("qqq = ", t);
                     return res.json({success: true, recommendates: t});
                 }, function (err) {
                     console.log(err);
