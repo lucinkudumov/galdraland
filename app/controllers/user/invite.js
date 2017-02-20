@@ -257,7 +257,6 @@ module.exports = function (opts) {
             return res.json({success: true, msgs: msgs});
         },
         "get#getMasterRecommendates": function (req, res) {
-            console.log("calling master");
             recommendationModel.find({masterId: req.user._id, masterViewed: false}, function (err, recommendates) {
                 return res.json({success: true, recommendates: recommendates});
             }, function (err) {
@@ -265,7 +264,6 @@ module.exports = function (opts) {
             });
         },
         "get#getSlaveRecommendates": function (req, res) {
-            console.log("calling slave");
             recommendationModel.find({slaveId: req.user._id, slaveViewed: false}, function (err, recommendates) {
                 return res.json({success: true, recommendates: recommendates});
             }, function (err) {

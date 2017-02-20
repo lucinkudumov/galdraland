@@ -1504,16 +1504,14 @@ app.controller("headerController", ["$scope", "$rootScope", "$http", "$location"
             $http({
                 method: "GET", url: "getMasterRecommendates", api: true
             }).then (function (result) {
-                console.log("getMasterRecommendates = ",result);
                 if (result !== undefined && result.data !== undefined && result.data.recommendates !== undefined)
                     $scope.masterRecommendates = result.data.recommendates;
                 else
                     $scope.masterRecommendates = [];
 
-                http({
+                $http({
                     method: "GET", url: "getSlaveRecommendates", api: true
                 }).then (function (result) {
-                    console.log("getSlaveRecommendates = ",result);
                     if (result !== undefined && result.data !== undefined && result.data.recommendates !== undefined)
                         $scope.slaveRecommendates = result.data.recommendates;
                     else
