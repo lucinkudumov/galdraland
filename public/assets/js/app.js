@@ -1509,6 +1509,7 @@ app.controller("headerController", ["$scope", "$rootScope", "$http", "$location"
                     $scope.masterRecommendates = result.data.recommendates;
                 else
                     $scope.masterRecommendates = [];
+
                 http({
                     method: "GET", url: "getSlaveRecommendates", api: true
                 }).then (function (result) {
@@ -1517,7 +1518,6 @@ app.controller("headerController", ["$scope", "$rootScope", "$http", "$location"
                         $scope.slaveRecommendates = result.data.recommendates;
                     else
                         $scope.slaveRecommendates = [];
-
                     refresh_feeds();
                 });
             });
