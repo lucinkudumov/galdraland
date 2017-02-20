@@ -742,6 +742,7 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
         }
 
         $scope.sendRecommendation = function () {
+            console.log("aaaaaaaa");
             var modalInstance = $uibModal.open({
                 templateUrl: "/assets/partials/modal/sendAdvRecommendation.html",
                 controller: "sendAdvRecommendationController",
