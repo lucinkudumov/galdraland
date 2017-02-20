@@ -172,8 +172,10 @@ module.exports = function (opts) {
                 recommendation.masterUserName = master_user.fullname;
                 recommendation.slaveId = item.memberId;
                 recommendation.slaveUserName = item.user;
-                recommendation.roleId = item.title._id;
-                recommendation.roleTitle = item.title.title;
+                if (type == "teams") {
+                    recommendation.roleId = item.title._id;
+                    recommendation.roleTitle = item.title.title;
+                }
                 recommendation.type = type;
                 if (team != null) {
                     recommendation.teamId = team._id;

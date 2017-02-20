@@ -515,7 +515,7 @@ app.controller("sendAdvRecommendationController", ["$scope", "$uibModalInstance"
     }
 
     $scope.send = function () {
-        $uibModalInstance.close({type: "SEND", to: $scope.values.to, recommendates: $scope.values.recommendates});
+        $uibModalInstance.close({type: "SEND", recommendates: $scope.values.recommendates});
     }
 
     function validateEmail(email) {
@@ -774,11 +774,11 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
                             method: "POST",
                             url: "getUserById",
                             api: true,
-                            data: {id: $scope.team.owner._id}
+                            data: {id: $scope.adventure.owner._id}
                         }).then(function success(data) {
                                 $scope.owner = data.data.user;
                                 console.log(result.recommendates);
-                                $http({method: "POST", url: "sendRecommendation", api: true, data: {recommendation_user: $scope.user, master_user: $scope.owner, adventure: null, team: $scope.team, type: "teams", recommendates: result.recommendates}}).then(function (data) {
+                                $http({method: "POST", url: "sendRecommendation", api: true, data: {recommendation_user: $scope.user, master_user: $scope.owner, adventure: $scope.adventure, team: null, type: "adventures", recommendates: result.recommendates}}).then(function (data) {
                                     console.log(data.data.success);
                                 });
                             });
