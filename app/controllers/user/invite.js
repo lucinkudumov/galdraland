@@ -265,7 +265,7 @@ module.exports = function (opts) {
                 console.log(err);
             });
         },
-        "get#applyRecommendates": function (req, res) {
+        "post#applyRecommendates": function (req, res) {
             var id = req.body.id;
             console.log("bbbbb = " + id);
             recommendationModel.findOneAndUpdate({_id: id}, {$set: {viewed: true}}, {new: true}, function (err, recommendate) {
