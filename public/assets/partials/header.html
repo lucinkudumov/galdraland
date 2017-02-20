@@ -33,8 +33,7 @@
                       <div ng-show="i.category == 2">
                           <h5>{{i.msg}}</h5>
                           <div class="view">
-                              <a class="btn btn-primary" href="/teams/view/{{i.teamId}}" ng-show="i.type == 'teams'">View</a>
-                              <a class="btn btn-primary" href="/adventures/view/{{i.adventureId}}" ng-show="i.type == 'adventures'">View</a>
+                              <button class="btn btn-primary" ng-click="showRecommendation(i)">View</button>
                           </div>
                       </div>
                   </li>

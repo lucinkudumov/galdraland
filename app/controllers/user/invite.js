@@ -265,6 +265,17 @@ module.exports = function (opts) {
                 console.log(err);
             });
         },
+        "get#applyRecommendates": function (req, res) {
+            var id = req.body.id;
+            recommendationModel.findOneAndUpdate({_id: id}, {viewed: true}, function (err, recommendate) {
+                if (err) {
+                    console.log(err);
+                    return res.json({success: false});
+                } else if (recommendate) {
+                    return res.json({success: true});
+                }
+            });
+        },
         "post#acceptInvite": function (req, res) {
             var id = req.body.id;
 
