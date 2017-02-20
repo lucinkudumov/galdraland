@@ -272,7 +272,7 @@ module.exports = function (opts) {
         },
         "post#applyRecommendates": function (req, res) {
             var id = req.body.id;
-            var type = req.body.position;
+            var position = req.body.position;
             if (position == "master") {
                 recommendationModel.findOneAndUpdate({_id: id}, {$set: {masterViewed: true}}, {new: true}, function (err, recommendate) {
                     if (err) {
