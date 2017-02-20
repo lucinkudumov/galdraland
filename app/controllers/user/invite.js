@@ -256,23 +256,17 @@ module.exports = function (opts) {
             });
             return res.json({success: true, msgs: msgs});
         },
-        "get#getRecommendates": function (req, res) {
+        "get#getMasterRecommendates": function (req, res) {
             var t = [];
             recommendationModel.find({masterId: req.user._id, masterViewed: false}, function (err, recommendates) {
-                for (i=0; i < recommendates.length; i++) {
-                    recommendates[i].position = 'master';
-                    t.push(recommendates[i]);
-                }
-                recommendationModel.find({slaveId: req.user._id, slaveViewed: false}, function (err, recommendates) {
-                    for (j=0; j < recommendates.length; j++) {
-                        recommendates[j].position = 'slave';
-                        t.push(recommendates[j]);
-                    }
-                    console.log("qqq = ", t);
-                    return res.json({success: true, recommendates: t});
-                }, function (err) {
-                    console.log(err);
-                });
+                return res.json({success: true, recommendates: recommendates});
+            }, function (err) {
+                console.log(err);
+            });
+        },
+        "get#getSlaveRecommendates": function (req, res) {
+            recommendationModel.find({slaveId: req.user._id, slaveViewed: false}, function (err, recommendates) {
+                return res.json({success: true, recommendates: recommendates});
             }, function (err) {
                 console.log(err);
             });

@@ -1502,14 +1502,24 @@ app.controller("headerController", ["$scope", "$rootScope", "$http", "$location"
             else
                 $scope.applies = [];
             $http({
-                method: "GET", url: "getRecommendates", api: true
+                method: "GET", url: "getMasterRecommendates", api: true
             }).then (function (result) {
-                console.log("getRecommendates = ",result);
+                console.log("getMasterRecommendates = ",result);
                 if (result !== undefined && result.data !== undefined && result.data.recommendates !== undefined)
-                    $scope.recommendates = result.data.recommendates;
+                    $scope.masterRecommendates = result.data.recommendates;
                 else
-                    $scope.recommendates = [];
-                refresh_feeds();
+                    $scope.masterRecommendates = [];
+                http({
+                    method: "GET", url: "getSlaveRecommendates", api: true
+                }).then (function (result) {
+                    console.log("getSlaveRecommendates = ",result);
+                    if (result !== undefined && result.data !== undefined && result.data.recommendates !== undefined)
+                        $scope.slaveRecommendates = result.data.recommendates;
+                    else
+                        $scope.slaveRecommendates = [];
+
+                    refresh_feeds();
+                });
             });
         });
 
@@ -1547,13 +1557,19 @@ app.controller("headerController", ["$scope", "$rootScope", "$http", "$location"
                 }
             }
 
-            for (var i = 0; i < $scope.recommendates.length; i++) {
-                var feed = $scope.recommendates[i];
+            for (var i = 0; i < $scope.masterRecommendates.length; i++) {
+                var feed = $scope.masterRecommendates[i];
                 feed.category = 2;
-                if ($scope.user._id == feed.masterId)
-                    feed.msg = feed.masterMsg;
-                if ($scope.user._id == feed.slaveId)
-                    feed.msg = feed.slaveMsg;
+                feed.msg = feed.masterMsg;
+                feed.position = "master";
+                $scope.feeds.push(feed);
+            }
+
+            for (var i = 0; i < $scope.slaveRecommendates.length; i++) {
+                var feed = $scope.slaveRecommendates[i];
+                feed.category = 2;
+                feed.msg = feed.slaveMsg;
+                feed.position = "slave";
                 $scope.feeds.push(feed);
             }
         }
@@ -1644,6 +1660,7 @@ app.controller("headerController", ["$scope", "$rootScope", "$http", "$location"
         }
 
         $scope.showRecommendation = function (recommendate) {
+            console.log("abc = ", recommendate);
             $http({
                 method: "POST", url: "applyRecommendates", api: true, data: {id: recommendate._id, position: recommendate.position}
             }).then (function (result) {
