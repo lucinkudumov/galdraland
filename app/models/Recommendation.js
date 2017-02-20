@@ -56,10 +56,15 @@ module.exports = function (opts) {
             type: String,
             required: true
         },
-        viewed : {
+        masterViewed : {
+            type: Boolean,
+            "default": false
+        },
+        slaveViewed : {
             type: Boolean,
             "default": false
         }
+
     });
     
     return Schema;

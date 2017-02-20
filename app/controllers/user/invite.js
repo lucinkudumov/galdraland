@@ -257,23 +257,48 @@ module.exports = function (opts) {
             return res.json({success: true, msgs: msgs});
         },
         "get#getRecommendates": function (req, res) {
-            recommendationModel.find({$or:[{masterId: req.user._id}, {slaveId: req.user._id}], viewed: false}, function (err, recommendates) {
+            var t = [];
+            recommendationModel.find({masterId: req.user._id, masterViewed: false}, function (err, recommendates) {
                 console.log(recommendates);
-                return res.json({success: true, recommendates: recommendates});
+                for (i=0; i < recommendates.length; i++) {
+                    recommendates[i]['position'] = 'master';
+                    t.push(recommendates[i]);
+                }
+                recommendationModel.find({slaveId: req.user._id, slaveViewed: false}, function (err, recommendates) {
+                    for (j=0; j < recommendates.length; j++) {
+                        recommendates[j]['position'] = 'slave';
+                        t.push(recommendates[j]);
+                    }
+                    return res.json({success: true, recommendates: t});
+                }, function (err) {
+                    console.log(err);
+                });
             }, function (err) {
                 console.log(err);
             });
         },
         "post#applyRecommendates": function (req, res) {
             var id = req.body.id;
-            recommendationModel.findOneAndUpdate({_id: id}, {$set: {viewed: true}}, {new: true}, function (err, recommendate) {
-                if (err) {
-                    console.log(err);
-                    return res.json({success: false});
-                } else if (recommendate) {
-                    return res.json({success: true});
-                }
-            });
+            var type = req.body.position;
+            if (position == "master") {
+                recommendationModel.findOneAndUpdate({_id: id}, {$set: {masterViewed: true}}, {new: true}, function (err, recommendate) {
+                    if (err) {
+                        console.log(err);
+                        return res.json({success: false});
+                    } else if (recommendate) {
+                        return res.json({success: true});
+                    }
+                });
+            } else if (position == "slave") {
+                recommendationModel.findOneAndUpdate({_id: id}, {$set: {slaveViewed: true}}, {new: true}, function (err, recommendate) {
+                    if (err) {
+                        console.log(err);
+                        return res.json({success: false});
+                    } else if (recommendate) {
+                        return res.json({success: true});
+                    }
+                });
+            }
         },
         "post#acceptInvite": function (req, res) {
             var id = req.body.id;

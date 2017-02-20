@@ -1645,7 +1645,7 @@ app.controller("headerController", ["$scope", "$rootScope", "$http", "$location"
 
         $scope.showRecommendation = function (recommendate) {
             $http({
-                method: "POST", url: "applyRecommendates", api: true, data: {id: recommendate._id}
+                method: "POST", url: "applyRecommendates", api: true, data: {id: recommendate._id, position: recommendate.position}
             }).then (function (result) {
                 console.log(result);
             });
