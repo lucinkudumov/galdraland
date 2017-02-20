@@ -1460,10 +1460,10 @@ app.controller("headerController", ["$scope", "$rootScope", "$http", "$location"
             $http({
                 method: "POST", url: "applyRecommendates", api: true, data: {id: recommendate._id}
             }).then (function (result) {
-                $scope.refresh_feeds();
                 console.log(result);
+                refresh_feeds();
             });
-            
+
             if (recommendate.type = "teams") {
                 $location.path("/teams/view/" + recommendate.teamId);
             } else {
