@@ -453,7 +453,7 @@ app.controller("sendAdvRecommendationController", ["$scope", "$uibModalInstance"
                             continue;
 
                         //Check If Owner User
-                        if ($scope.adventure.owner._id == user._id)
+                        if ($scope.adventure.owner == user._id)
                             continue;
 
                         //Check If Exists in Facebook Friends List
@@ -774,7 +774,7 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
                             method: "POST",
                             url: "getUserById",
                             api: true,
-                            data: {id: $scope.adventure.owner._id}
+                            data: {id: $scope.adventure.owner}
                         }).then(function success(data) {
                                 $scope.owner = data.data.user;
                                 console.log(result.recommendates);
