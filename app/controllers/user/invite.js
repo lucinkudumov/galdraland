@@ -258,42 +258,12 @@ module.exports = function (opts) {
             return res.json({success: true, msgs: msgs});
         },
         "get#getRecommendates": function (req, res) {
-            var recommendateObjs = [];
-            async.parallel([
-                function (cb) {
-                    recommendationModel.find({masterId: req.user._id, viewed: false}, function (err, recommendates) {
-                        console.log("1 = ", recommendates);
-
-                        async.forEach(recommendates, function (item, callback) {
-                                console.log("1 - 1 = ", item);
-                                item = item.toObject();
-                                recommendateObjs.push(item);
-                            });
-                        }, function (err) {
-                            cb(err, recommendateObjs);
-                        });
-                },
-                function (cb) {
-                    recommendationModel.find({slaveId: req.user._id, accepted: false}, function (err, recommendates) {
-                        console.log("2 = ", recommendates);
-                        async.forEach(recommendates, function (item, callback) {
-                            console.log("2 - 1= ", item);
-                            item = item.toObject();
-                            recommendateObjs.push(item);
-                        });
-                    }, function (err) {
-                        cb(err, recommendateObjs);
-                    });
-                }
-            ], function (err, recommendates) {
-                if (err) {
-                    console.log(err);
-                    return res.json({success: false, recommendates: []});
-                } else {
-                    console.log("recommendateObjs = ", recommendateObjs);
-                    return res.json({success: true, recommendates: recommendateObjs});
-                }
-            })
+            recommendationModel.find({$or:[{masterId: req.user._id}, {slaveId: req.user._id}], viewed: false}, function (err, recommendates) {
+                console.log(recommendates);
+                return res.json({success: true, recommendates: recommendates});
+            }, function (err) {
+                console.log(err);
+            });
         },
         "post#acceptInvite": function (req, res) {
             var id = req.body.id;

@@ -1318,10 +1318,10 @@ app.controller("headerController", ["$scope", "$rootScope", "$http", "$location"
                 method: "GET", url: "getRecommendates", api: true
             }).then (function (result) {
                 console.log("getRecommendates = ",result);
-                if (result !== undefined && result.data !== undefined && result.data.recommendates !== undefined)
-                    $scope.recommendates = result.data.recommendates;
-                else
-                    $scope.recommendates = [];
+//                if (result !== undefined && result.data !== undefined && result.data.recommendates !== undefined)
+//                    $scope.recommendates = result.data.recommendates;
+//                else
+//                    $scope.recommendates = [];
                 refresh_feeds();
             });
         });
