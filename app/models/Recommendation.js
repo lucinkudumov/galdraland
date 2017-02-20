@@ -36,17 +36,17 @@ module.exports = function (opts) {
             type: String,
             required: true
         },
-        kind: {
-            type: String,
-            required: true
-        },
         adventure: {
             type: String
         },
         team: {
             type: String
         },
-        msg : {
+        masterMsg : {
+            type: String,
+            required: true
+        },
+        slaveMsg : {
             type: String,
             required: true
         },
