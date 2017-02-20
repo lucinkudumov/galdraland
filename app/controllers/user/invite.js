@@ -167,19 +167,33 @@ module.exports = function (opts) {
                 if(item.fb_id != -1)
                     return true;
                 var recommendation = new recommendationModel;
+                var recommendation2 = new recommendationModel;
                 recommendation.recommendationId = recommendation_user._id;
+                recommendation2.recommendationId = recommendation_user._id;
                 recommendation.recommendationUserName = recommendation_user.fullname;
+                recommendation2.recommendationUserName = recommendation_user.fullname;
                 recommendation.masterId = master_user._id;
+                recommendation2.masterId = master_user._id;
                 recommendation.masterUserName = master_user.fullname;
+                recommendation2.masterUserName = master_user.fullname;
                 recommendation.slaveId = item.memberId;
+                recommendation2.slaveId = item.memberId;
                 recommendation.slaveUserName = item.user;
+                recommendation2.slaveUserName = item.user;
                 recommendation.roleId = item.title._id;
+                recommendation2.roleId = item.title._id;
                 recommendation.roleId = item.title.title;
+                recommendation2.roleId = item.title.title;
                 recommendation.type = type;
-                if (team != null)
+                recommendation2.type = type;
+                if (team != null) {
                     recommendation.team = team._id;
-                if (adventure != null)
+                    recommendation2.team = team._id;
+                }
+                if (adventure != null) {
                     recommendation.adventure = adventure._id;
+                    recommendation2.adventure = adventure._id;
+                }
 
                 async.parallel([
                     function (cb) {
@@ -194,9 +208,9 @@ module.exports = function (opts) {
                         });
                     },
                     function (cb) {
-                        recommendation.kind = "slave";
-                        recommendation.msg = toSlaveMsg;
-                        recommendation.save(function (err, recommendation) {
+                        recommendation2.kind = "slave";
+                        recommendation2.msg = toSlaveMsg;
+                        recommendation2.save(function (err, recommendation) {
                             if (err) {
                                 cb(err);
                                 console.log(err);
