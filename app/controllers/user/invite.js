@@ -207,7 +207,7 @@ module.exports = function (opts) {
                 });
                 recommendation2.kind = "slave";
                 recommendation2.msg = toSlaveMsg;
-                recommendation2.save(function (err, recommendation) {
+                recommendation2.save(function (err, recommendation2) {
                     if (err) {
                         cb(err);
                         console.log(err);
