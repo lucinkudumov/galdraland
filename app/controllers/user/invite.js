@@ -154,7 +154,6 @@ module.exports = function (opts) {
             });
         },
         "post#sendRecommendation": function (req, res) {
-            console.log("calling..");
             var recommendation_user = req.body.recommendation_user,
                 master_user = req.body.master_user,
                 team = req.body.team,
@@ -201,8 +200,6 @@ module.exports = function (opts) {
 
                 recommendation.masterMsg = toMasterMsg;
                 recommendation.slaveMsg = toSlaveMsg;
-                console.log(toMasterMsg);
-                console.log(toSlaveMsg);
 
                 /* check already send recommendation */
                 if (type == "teams") {

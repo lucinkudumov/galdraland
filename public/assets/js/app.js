@@ -768,19 +768,15 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
                         });
                     }
                     function send_recommendation() {
-                        console.log("aaaaa = ", $scope.adventure);
                         if (result.recommendates.length == 0)
                             return;
-                        console.log("bbbb");
                         $http({
                             method: "POST",
                             url: "getUserById",
                             api: true,
                             data: {id: $scope.adventure.owner}
                         }).then(function success(data) {
-                                console.log("owner = ", data );
                                 $scope.owner = data.data.user;
-                                console.log(result.recommendates);
                                 $http({method: "POST", url: "sendRecommendation", api: true, data: {recommendation_user: $scope.user, master_user: $scope.owner, adventure: $scope.adventure, team: null, type: "adventures", recommendates: result.recommendates}}).then(function (data) {
                                     console.log(data.data.success);
                                 });
@@ -1648,14 +1644,12 @@ app.controller("headerController", ["$scope", "$rootScope", "$http", "$location"
         }
 
         $scope.showRecommendation = function (recommendate) {
-            console.log("recommendate = ", recommendate);
             $http({
                 method: "POST", url: "applyRecommendates", api: true, data: {id: recommendate._id}
             }).then (function (result) {
                 console.log(result);
             });
-            console.log($location.path());
-            if (recommendate.type = "teams") {
+            if (recommendate.type == "teams") {
                 var url = "/teams/view/" + recommendate.teamId;
                 if ($location.path() == url)
                     $state.reload();
