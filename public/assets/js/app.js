@@ -1464,11 +1464,18 @@ app.controller("headerController", ["$scope", "$rootScope", "$http", "$location"
             });
             console.log($location.path());
             if (recommendate.type = "teams") {
-                $location.path("/teams/view/" + recommendate.teamId);
+                var url = "/teams/view/" + recommendate.teamId;
+                if ($location.path() == url)
+                    $state.reload();
+                else
+                    $location.path(url);
             } else {
-                $location.path("/adventures/view/" + recommendate.adventureId);
+                var url = "/adventures/view/" + recommendate.adventureId;
+                if ($location.path() == url)
+                    $state.reload();
+                else
+                    $location.path(url);
             }
-//            $state.reload();
         }
     }]);
 
