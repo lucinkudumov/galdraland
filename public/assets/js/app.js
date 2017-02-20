@@ -1457,7 +1457,6 @@ app.controller("headerController", ["$scope", "$rootScope", "$http", "$location"
         }
 
         $scope.showRecommendation = function (recommendate) {
-            console.log("aaaaa = " + recommendate._id);
             $http({
                 method: "POST", url: "applyRecommendates", api: true, data: {id: recommendate._id}
             }).then (function (result) {
@@ -1468,6 +1467,7 @@ app.controller("headerController", ["$scope", "$rootScope", "$http", "$location"
             } else {
                 $location.path("/adventures/view/" + recommendate.adventureId);
             }
+            $location.reload();
         }
     }]);
 
