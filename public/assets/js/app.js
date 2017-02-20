@@ -1468,7 +1468,6 @@ app.controller("headerController", ["$scope", "$rootScope", "$http", "$location"
                 $location.path("/adventures/view/" + recommendate.adventureId);
             }
         }
-
     }]);
 
 app.controller("indexController", ["$scope", "$location", "$window", "$stateParams", "$http", "$filter", function ($scope, $location, $window, $stateParams, $http, $filter) {
