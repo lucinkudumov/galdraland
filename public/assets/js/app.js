@@ -399,16 +399,6 @@ app.controller("sendAdvRecommendationController", ["$scope", "$uibModalInstance"
     $scope.values.fb_friends = [];
     $scope.user = User.isLoggedIn();
     $scope.adventure = values.adventure;
-    $scope.values._emptyRecMembers = [];
-    console.log("1");
-    $scope.init = function(values){
-        console.log("2");
-        for(var i = 0; i < values.emptyRecMembers.length; i++)
-            $scope.values._emptyRecMembers.push(values.emptyRecMembers[i]);
-    }
-
-    $scope.init(values);
-    console.log("3");
     //Get FaceBook Friends list.
     console.log("Facebook friends response");
     FB.getLoginStatus(function(response) {
@@ -517,12 +507,10 @@ app.controller("sendAdvRecommendationController", ["$scope", "$uibModalInstance"
         $scope.values.newMember = null;
         $scope.values.users = [];
         $scope.values.recommendates.push({user: user.username, memberId: user._id, fb_id: user.is_fb_friend});
-        $scope.values._emptyRecMembers.splice(i, 1);
         return false;
     }
 
     $scope.removeAdvRecommendation = function (index) {
-        $scope.values._emptyRecMembers.push($scope.values.recommendates[index].title);
         $scope.values.recommendates.splice(index, 1);
     }
 
@@ -748,7 +736,7 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
                 controller: "sendAdvRecommendationController",
                 resolve: {
                     values: function () {
-                        return {title: "0", adventure: $scope.adventure, emptyRecMembers: $scope.emptyRecMembers}
+                        return {title: "0", adventure: $scope.adventure}
                     }
                 }
             });
