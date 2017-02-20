@@ -10,7 +10,7 @@
                     <div class="form-group">
                         <input type="text" class="form-control" ng-model="values.newMember" placeholder="Email, username" ng-change="findUser(values.newMember)">
                         <ul class="dropdown-menu users-list" ng-show="values.users.length > 0">
-                            <li ng-repeat="user in values.users"><a href="#" ng-click="addRecommendation(user)">{{ user.username}}</a></li>
+                            <li ng-repeat="user in values.users"><a href="#" ng-click="addAdvRecommendation(user)">{{ user.username}}</a></li>
                         </ul>
                     </div>
                 </form>
@@ -19,9 +19,9 @@
             <li ng-repeat="i in values.recommendates">
                 <form role="form" class="form-inline">
                     <div class="form-group">
-                        <div>{{i.user}} as {{i.title.title}}</div>
+                        <div>{{i.user}}</div>
                     </div>
-                    <button type="submit" class="btn btn-danger" ng-click="removeRecommendation($index)">-</button>
+                    <button type="submit" class="btn btn-danger" ng-click="removeAdvRecommendation($index)">-</button>
                 </form>
             </li>
         </ul>

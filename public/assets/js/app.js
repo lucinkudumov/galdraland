@@ -393,6 +393,148 @@ app.controller("loginController", ["$scope", "$location", "$anchorScroll", funct
 //    };
 }]);
 
+app.controller("sendAdvRecommendationController", ["$scope", "$uibModalInstance", "values", "$http", "User", function ($scope, $uibModalInstance, values, $http, User) {
+    $scope.values = angular.copy(values);
+    $scope.values.recommendates = [];
+    $scope.values.fb_friends = [];
+    $scope.user = User.isLoggedIn();
+    $scope.adventure = values.adventure;
+    $scope.values._emptyRecMembers = [];
+
+    $scope.init = function(values){
+        for(var i = 0; i < values.emptyRecMembers.length; i++)
+            $scope.values._emptyRecMembers.push(values.emptyRecMembers[i]);
+    }
+
+    $scope.init(values);
+
+    //Get FaceBook Friends list.
+    console.log("Facebook friends response");
+    FB.getLoginStatus(function(response) {
+        if (response.status == 'connected') {
+            FB.api('/me/taggable_friends', function(response) {
+                console.log("Logged in already");
+                console.log("response = ", response);
+                if (response && !response.error) {
+                    $scope.values.fb_friends = response.data;
+                    console.log(response.data);
+                }
+            });
+        } else if (response.status == 'not_authorized') {
+            FB.login(function(response) {
+                console.log("Logging in now");
+                console.log(response);
+                if (response.authResponse) {
+                    FB.api('/me/taggable_friends', function(response) {
+                        if (response && !response.error) {
+                            $scope.values.fb_friends = response.data;
+//                               alert("Logging in now.");
+                            console.log(response.data);
+                        }
+                    });
+                } else {
+                    console.log("Error");
+                }
+            }, {scope: 'public_profile,user_friends'});
+        }
+    });
+
+    $scope.cancel = function () {
+        $uibModalInstance.close({type: "CLOSE"});
+    }
+
+    $scope.findUser = function (usernameOrEmail) {
+        if(usernameOrEmail != "")
+        {
+            $http({
+                method: "POST",
+                url: "getUsers",
+                api: true,
+                data: {usernameOrEmail: usernameOrEmail}
+            }).then(function (r) {
+                    var users = [];
+                    for (var i = 0; i < r.data.users.length; i++) {
+                        var user = r.data.users[i];
+                        user.is_fb_friend = -1;
+
+                        //Check If Current User
+                        if ($scope.user._id == user._id)
+                            continue;
+
+                        //Check If Owner User
+                        if ($scope.adventure.owner._id == user._id)
+                            continue;
+
+                        //Check If Exists in Facebook Friends List
+                        for (j = 0; j < $scope.values.fb_friends.length; j++) {
+                            if ($scope.values.fb_friends[j].id == user.profileId) {
+                                user.is_fb_friend = user.profileId;
+                                user.username = user.username + "(facebook friend - " + $scope.values.fb_friends[j].name + ")";
+                            }
+                        }
+                        users.push(user);
+                    }
+
+                    for (i = 0; i < $scope.values.fb_friends.length; i++) {
+                        var user = {username: $scope.values.fb_friends[i].name + "(facebook friend)", is_fb_friend: $scope.values.fb_friends[i].id, id: -1};
+                        var add = true;
+
+                        for (var j = 0; j < users.length; j++) {
+                            if (users[j].profileId == user.is_fb_friend)
+                                add = false;
+                        }
+
+                        if ($scope.values.recommendates.length > 0)
+                            for (j = 0; j < $scope.values.recommendates.length; j++) {
+                                if ($scope.values.recommendates[j].fb_id == user.is_fb_friend)
+                                    add = false;
+                            }
+
+                        if (!add)
+                            continue;
+
+                        if ($scope.values.recommendates.length > 0) {
+                            for (j = 0; j < $scope.values.recommendates.length; j++) {
+                                if (user.username == $scope.values.recommendates[j].user) {
+                                    break;
+                                } else if (j == $scope.values.recommendates.length - 1) {
+                                    users.push(user);
+                                }
+                            }
+                        } else {
+                            users.push(user);
+                        }
+                    }
+                    $scope.values.users = users;
+                });
+        }
+        else
+            $scope.values.users = [];
+    }
+
+    $scope.addAdvRecommendation = function (user) {
+        $scope.values.newMember = null;
+        $scope.values.users = [];
+        $scope.values.recommendates.push({user: user.username, memberId: user._id, fb_id: user.is_fb_friend});
+        $scope.values._emptyRecMembers.splice(i, 1);
+        return false;
+    }
+
+    $scope.removeAdvRecommendation = function (index) {
+        $scope.values._emptyRecMembers.push($scope.values.recommendates[index].title);
+        $scope.values.recommendates.splice(index, 1);
+    }
+
+    $scope.send = function () {
+        $uibModalInstance.close({type: "SEND", to: $scope.values.to, recommendates: $scope.values.recommendates});
+    }
+
+    function validateEmail(email) {
+        var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(email);
+    }
+}]);
+
 app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$sce", "User", "$uibModal", "$location", "$compile", "simpleCalendarConfig", function ($scope, $http, $stateParams, $sce, User, $uibModal, $location, $compile, simpleCalendarConfig) {
         $scope.user = User.isLoggedIn();
         $scope.photo = "";
@@ -605,7 +747,7 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
                 controller: "sendAdvRecommendationController",
                 resolve: {
                     values: function () {
-                        return {to: "", msg: "", title: "0", adventure: $scope.adventure}
+                        return {title: "0", adventure: $scope.adventure, emptyRecMembers: $scope.emptyRecMembers}
                     }
                 }
             });
