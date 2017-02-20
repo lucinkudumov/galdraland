@@ -1288,7 +1288,7 @@ app.controller("emailController", ["$scope", "$location", "$http", "User", funct
         $scope.validateEmail();
         $scope.validateUsername();
     }]);
-app.controller("headerController", ["$scope", "$rootScope", "$http", "$location", "User", "$uibModal", "$stateParams", function ($scope, $rootScope, $http, $location, User, $uibModal, $stateParams) {
+app.controller("headerController", ["$scope", "$rootScope", "$http", "$location", "User", "$uibModal", "$stateParams", "$route", function ($scope, $rootScope, $http, $location, User, $uibModal, $stateParams, $route) {
         $scope.user = User.isLoggedIn();
         $temp = $stateParams.scategory;
         if ($temp == "aa")
@@ -1467,7 +1467,7 @@ app.controller("headerController", ["$scope", "$rootScope", "$http", "$location"
             } else {
                 $location.path("/adventures/view/" + recommendate.adventureId);
             }
-            $location.reload();
+            $route.reload();
         }
     }]);
 
