@@ -768,6 +768,7 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
                         });
                     }
                     function send_recommendation() {
+                        console.log("aaaaa = ", $scope.adventure);
                         if (result.recommendates.length == 0)
                             return;
                         $http({
