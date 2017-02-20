@@ -267,7 +267,8 @@ module.exports = function (opts) {
         },
         "get#applyRecommendates": function (req, res) {
             var id = req.body.id;
-            recommendationModel.findOneAndUpdate({_id: id}, {viewed: true}, function (err, recommendate) {
+            console.log("bbbbb = " + id);
+            recommendationModel.findOneAndUpdate({_id: id}, {$set: {viewed: true}}, {new: true}, function (err, recommendate) {
                 if (err) {
                     console.log(err);
                     return res.json({success: false});
