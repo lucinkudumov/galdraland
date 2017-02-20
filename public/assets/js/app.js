@@ -1461,15 +1461,14 @@ app.controller("headerController", ["$scope", "$rootScope", "$http", "$location"
                 method: "POST", url: "applyRecommendates", api: true, data: {id: recommendate._id}
             }).then (function (result) {
                 console.log(result);
-                refresh_feeds();
             });
-
+            console.log($location.path());
             if (recommendate.type = "teams") {
                 $location.path("/teams/view/" + recommendate.teamId);
             } else {
                 $location.path("/adventures/view/" + recommendate.adventureId);
             }
-            $state.reload();
+//            $state.reload();
         }
     }]);
 
