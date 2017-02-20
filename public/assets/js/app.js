@@ -453,8 +453,8 @@ app.controller("sendAdvRecommendationController", ["$scope", "$uibModalInstance"
                             continue;
 
                         //Check If Owner User
-//                        if ($scope.adventure.owner == user._id)
-//                            continue;
+                        if ($scope.adventure.owner == user._id)
+                            continue;
 
                         //Check If Exists in Facebook Friends List
                         for (j = 0; j < $scope.values.fb_friends.length; j++) {
@@ -1954,8 +1954,8 @@ app.controller("sendRecommendationController", ["$scope", "$uibModalInstance", "
                             continue;
 
                         //Check If Owner User
-//                        if ($scope.team.owner._id == user._id)
-//                            continue;
+                        if ($scope.team.owner._id == user._id)
+                            continue;
                         //Check If Exists in Team
 //                        for (var j = 0; j < $scope.team.teamMembers.length; j++) {
 //                            if ($scope.team.teamMembers[j].user._id == user._id)
