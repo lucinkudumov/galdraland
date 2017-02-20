@@ -215,6 +215,7 @@ module.exports = function (opts) {
                     }
                 });
             });
+            return res.json({success: true});
         },
         "get#getRecommendates": function (req, res) {
             var recommendateObjs = [];
