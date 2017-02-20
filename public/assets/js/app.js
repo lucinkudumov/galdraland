@@ -3422,21 +3422,11 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
                             api: true,
                             data: {id: $scope.team.owner._id}
                         }).then(function success(data) {
-                           $scope.owner = data.data.user;
+                            $scope.owner = data.data.user;
                             console.log(result.recommendates);
-                            for (var i = 0; i < result.recommendates.length; i++) {
-                                var toMasterMsg = "User '"+$scope.user.fullname+"' has recommended User '"+
-                                    result.recommendates[i].user+"' for role '"+result.recommendates[i].title.title+
-                                    "' in your team '" + $scope.team.name + "'";
-                                var toSlaveMsg = "User '"+$scope.user.fullname+"' has recommended you for role '"+result.recommendates[i].title.title+
-                                    "' in '"+$scope.owner.fullname+"'`s team '" + $scope.team.name+"'";
-
-                                console.log(toMasterMsg);
-                                console.log(toSlaveMsg);
-                                $http({method: "POST", url: "sendRecommendation", api: true, data: {recommendation_user: $scope.user, master_user: $scope.owner, adventure: null, team: $scope.team, type: "teams", recommendates: result.recommendates, toMasterMsg: toMasterMsg,toSlaveMsg: toSlaveMsg}}).then(function (data) {
-                                    console.log(data.data.success);
-                                });
-                            }
+                            $http({method: "POST", url: "sendRecommendation", api: true, data: {recommendation_user: $scope.user, master_user: $scope.owner, adventure: null, team: $scope.team, type: "teams", recommendates: result.recommendates, toMasterMsg: toMasterMsg,toSlaveMsg: toSlaveMsg}}).then(function (data) {
+                                console.log(data.data.success);
+                            });
                         });
 
 //                        var msg = "User "+$scope.user.fullname+" has recommended User C for such role in your team T"

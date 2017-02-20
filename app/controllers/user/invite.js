@@ -185,8 +185,24 @@ module.exports = function (opts) {
                     recommendation.adventureId = adventure._id;
                     recommendation.adventureName = adventure.name;
                 }
+                var toMasterMsg = "";
+                var toSlaveMsg = "";
+
+                if (type == "teams") {
+                    toMasterMsg = "User '"+recommendation.recommendationUserName+"' has recommended User '"+
+                        recommendation.slaveUserName+"' for role '"+recommendation.roleTitle+"' in your team '" + recommendation.teamName + "'";
+                    toSlaveMsg = "User '"+ recommendation.recommendationUserName+"' has recommended you for role '"+recommendation.roleTitle+
+                        "' in '"+recommendation.masterUserName+"'`s team '" + recommendation.teamName+"'";
+                } else {
+                    toMasterMsg = "User '"+ recommendation.recommendationUserName+"' has recommended User '"+
+                        recommendation.slaveUserName +"' in your adventure '" + recommendation.adventureName + "'";
+                    toSlaveMsg = "User '" + recommendation.recommendationUserName + "' has recommended you in '"+recommendation.masterUserName+"'`s adventure '" + recommendation.adventureName+"'";
+                }
+
                 recommendation.masterMsg = toMasterMsg;
                 recommendation.slaveMsg = toSlaveMsg;
+                console.log(toMasterMsg);
+                console.log(toSlaveMsg);
 
                 /* check already send recommendation */
                 if (type == "teams") {
