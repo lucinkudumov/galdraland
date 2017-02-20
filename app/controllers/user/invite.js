@@ -235,7 +235,6 @@ module.exports = function (opts) {
                         recommendationId: recommendation.recommendationId,
                         masterId: recommendation.masterId,
                         slaveId: recommendation.slaveId,
-                        roleId: recommendation.roleId,
                         adventureId: recommendation.adventureId
                     }, function (success, recommendates) {
                         if (recommendates.length == 0) {
