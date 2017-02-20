@@ -68,6 +68,7 @@
                 </div>
             </div>
             <div class="col-md-4" style="padding-right: 0px;">
+                <button ng-show="!isMember && !isManager" class="btn btn-primary pull-left" ng-click="sendRecommendation()" style="margin-left: 15px; padding-bottom: 1%;">Recommendation</button>
                 <h2 style="color:#394b59; margin-top:5px;font-size:18px; font-weight:700;">RATINGS</h2>
                 <div style="text-align: center; margin-top : 20px; padding-right: 10px; padding-left: 10px;">
                     <rating-widget ref="adventure._id" ></rating-widget>

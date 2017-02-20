@@ -599,6 +599,67 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
             return false;
         }
 
+        $scope.sendRecommendation = function () {
+            var modalInstance = $uibModal.open({
+                templateUrl: "/assets/partials/modal/sendAdvRecommendation.html",
+                controller: "sendAdvRecommendationController",
+                resolve: {
+                    values: function () {
+                        return {to: "", msg: "", title: "0", adventure: $scope.adventure}
+                    }
+                }
+            });
+
+            modalInstance.result.then(function (result) {
+                if (result.type == "SEND") {
+                    var fb_ids = [];
+
+                    for (var i = 0; i < result.recommendates.length; i++) {
+                        if (result.recommendates[i].fb_id != -1)
+                            fb_ids.push(result.recommendates[i].fb_id);
+                    }
+                    if (fb_ids.length) {
+                        FB.ui({method: 'apprequests',
+                            title: 'Recommendation to Galdraland Team',
+                            message: 'You have been invited to "' + $scope.team.name + '" team ',
+                            to: fb_ids,
+                            new_style_message: true
+                        }, function (response) {
+                            if (response.error_code !== undefined && response.error_code == 4201) {
+                                for (i = 0; i < fb_ids.length; i++) {
+                                    for (var j = result.invites.length - 1; j >= 0; j--) {
+                                        if (result.invites[j].fb_id == fb_ids[i]) {
+                                            result.invites.splice(j, 1);
+                                        }
+                                    }
+                                }
+                            }
+                        });
+                    }
+                    function send_recommendation() {
+                        if (result.recommendates.length == 0)
+                            return;
+                        $http({
+                            method: "POST",
+                            url: "getUserById",
+                            api: true,
+                            data: {id: $scope.team.owner._id}
+                        }).then(function success(data) {
+                                $scope.owner = data.data.user;
+                                console.log(result.recommendates);
+                                $http({method: "POST", url: "sendRecommendation", api: true, data: {recommendation_user: $scope.user, master_user: $scope.owner, adventure: null, team: $scope.team, type: "teams", recommendates: result.recommendates}}).then(function (data) {
+                                    console.log(data.data.success);
+                                });
+                            });
+
+    //                        var msg = "User "+$scope.user.fullname+" has recommended User C for such role in your team T"
+                    }
+                    send_recommendation();
+                }
+            });
+        }
+
+
         $scope.refresh();
     }]);
 app.controller("usersResultController", ["$scope", "$http", "User", "$location", function ($scope, $http, User, $location) {
