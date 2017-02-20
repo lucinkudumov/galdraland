@@ -163,6 +163,7 @@ module.exports = function (opts) {
                 toMasterMsg = req.body.toMasterMsg,
                 toSlaveMsg = req.body.toSlaveMsg,
                 type = req.body.type;
+            var msgs = [];
             async.forEach(recommendates, function (item, cb) {
                 if(item.fb_id != -1)
                     return true;
@@ -173,27 +174,75 @@ module.exports = function (opts) {
                 recommendation.masterUserName = master_user.fullname;
                 recommendation.slaveId = item.memberId;
                 recommendation.slaveUserName = item.user;
-                recommendation.slaveUserName = item.user;
                 recommendation.roleId = item.title._id;
                 recommendation.roleTitle = item.title.title;
                 recommendation.type = type;
                 if (team != null) {
-                    recommendation.team = team._id;
+                    recommendation.teamId = team._id;
+                    recommendation.teamName = team.name;
                 }
                 if (adventure != null) {
-                    recommendation.adventure = adventure._id;
+                    recommendation.adventureId = adventure._id;
+                    recommendation.adventureName = adventure.name;
                 }
                 recommendation.masterMsg = toMasterMsg;
                 recommendation.slaveMsg = toSlaveMsg;
-                recommendation.save(function (err, recommendation) {
-                    if (err) {
-                        cb(err);
+
+                /* check already send recommendation */
+                if (type == "teams") {
+                    recommendationModel.find({
+                        recommendationId: recommendation.recommendationId,
+                        masterId: recommendation.masterId,
+                        slaveId: recommendation.slaveId,
+                        roleId: recommendation.roleId,
+                        teamId: recommendation.teamId
+                    }, function (success, recommendates) {
+                        if (recommendates.length == 0) {
+                            recommendation.save(function (err, recommendation) {
+                                if (err) {
+                                    cb(err);
+                                    return res.json({success: false, msg:"Occurs Error!"});
+                                }
+                            });
+                        } else {
+                            var msg = "You have already recommendated User '"+
+                            recommendation.slaveUserName+"' for role '" + recommendation.roleTitle + "' in '" +
+                            recommendation.masterUserName + "'`s team '" + recommendation.teamName +"'";
+                            msgs.push(msg);
+                        }
+                    }, function (err) {
                         console.log(err);
-                        return res.json({success: false});
-                    }
-                });
+                        return res.json({success: false, msg:"Occurs Error!"});
+                    });
+                } else {
+                    recommendationModel.find({
+                        recommendationId: recommendation.recommendationId,
+                        masterId: recommendation.masterId,
+                        slaveId: recommendation.slaveId,
+                        roleId: recommendation.roleId,
+                        adventureId: recommendation.adventureId
+                    }, function (success, recommendates) {
+                        if (recommendates.length == 0) {
+                            recommendation.save(function (err, recommendation) {
+                                if (err) {
+                                    cb(err);
+                                    console.log(err);
+                                    return res.json({success: false, msg:"Occurs Error!"});
+                                }
+                            });
+                        } else {
+                            var msg = "You have already recommendated User '"+
+                                recommendation.slaveUserName+" in '" +
+                                recommendation.masterUserName + "'`s adventure '" + recommendation.teamName +"'";
+                            msgs.push(msg);
+                        }
+                    }, function (err) {
+                        console.log(err);
+                        return res.json({success: false, msg:"Occurs Error!"});
+                    });
+                }
             });
-            return res.json({success: true});
+            return res.json({success: true, msgs: msgs});
         },
         "get#getRecommendates": function (req, res) {
             var recommendateObjs = [];

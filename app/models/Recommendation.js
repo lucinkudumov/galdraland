@@ -36,10 +36,16 @@ module.exports = function (opts) {
             type: String,
             required: true
         },
-        adventure: {
+        adventureId: {
             type: String
         },
-        team: {
+        adventureName: {
+            type: String
+        },
+        teamId: {
+            type: String
+        },
+        teamName: {
             type: String
         },
         masterMsg : {
