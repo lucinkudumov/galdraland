@@ -8,8 +8,8 @@ var express = require("express"),
     nodemailer = require("nodemailer"),
     emailTemplates = require('email-templates'),
     path = require('path');
-var imageModel = require('./app/models/Imagestore');
-var app       = express(),
+    var imageModel = require('./app/models/Imagestore');
+    var app       = express(),
     secretKey = "hJKQg7dxMGzEWqf",
     smtpTransport = nodemailer.createTransport("SMTP", config.smtpOptions),
     templatesDir = path.join(__dirname, "emails");
@@ -98,8 +98,8 @@ async.parallel([
     },
     function (callback) {
         utils.loadControllers({}, callback);
-    },
-], function (err, results) {
+    }
+    ], function (err, results) {
     async.parallel([
         function (callback) {
             utils.sync(app, results, callback);
