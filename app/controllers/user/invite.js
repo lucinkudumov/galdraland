@@ -160,8 +160,6 @@ module.exports = function (opts) {
                 team = req.body.team,
                 adventure = req.body.adventure,
                 recommendates = req.body.recommendates,
-                toMasterMsg = req.body.toMasterMsg,
-                toSlaveMsg = req.body.toSlaveMsg,
                 type = req.body.type;
             var msgs = [];
             async.forEach(recommendates, function (item, cb) {

@@ -3424,7 +3424,7 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
                         }).then(function success(data) {
                             $scope.owner = data.data.user;
                             console.log(result.recommendates);
-                            $http({method: "POST", url: "sendRecommendation", api: true, data: {recommendation_user: $scope.user, master_user: $scope.owner, adventure: null, team: $scope.team, type: "teams", recommendates: result.recommendates, toMasterMsg: toMasterMsg,toSlaveMsg: toSlaveMsg}}).then(function (data) {
+                            $http({method: "POST", url: "sendRecommendation", api: true, data: {recommendation_user: $scope.user, master_user: $scope.owner, adventure: null, team: $scope.team, type: "teams", recommendates: result.recommendates}}).then(function (data) {
                                 console.log(data.data.success);
                             });
                         });
