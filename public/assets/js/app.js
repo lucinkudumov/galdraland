@@ -400,14 +400,15 @@ app.controller("sendAdvRecommendationController", ["$scope", "$uibModalInstance"
     $scope.user = User.isLoggedIn();
     $scope.adventure = values.adventure;
     $scope.values._emptyRecMembers = [];
-
+    console.log("1");
     $scope.init = function(values){
+        console.log("2");
         for(var i = 0; i < values.emptyRecMembers.length; i++)
             $scope.values._emptyRecMembers.push(values.emptyRecMembers[i]);
     }
 
     $scope.init(values);
-
+    console.log("3");
     //Get FaceBook Friends list.
     console.log("Facebook friends response");
     FB.getLoginStatus(function(response) {
@@ -742,7 +743,6 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
         }
 
         $scope.sendRecommendation = function () {
-            console.log("aaaaaaaa");
             var modalInstance = $uibModal.open({
                 templateUrl: "/assets/partials/modal/sendAdvRecommendation.html",
                 controller: "sendAdvRecommendationController",
