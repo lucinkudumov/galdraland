@@ -1318,10 +1318,10 @@ app.controller("headerController", ["$scope", "$rootScope", "$http", "$location"
                 method: "GET", url: "getRecommendates", api: true
             }).then (function (result) {
                 console.log("getRecommendates = ",result);
-//                if (result !== undefined && result.data !== undefined && result.data.recommendates !== undefined)
-//                    $scope.recommendates = result.data.recommendates;
-//                else
-//                    $scope.recommendates = [];
+                if (result !== undefined && result.data !== undefined && result.data.recommendates !== undefined)
+                    $scope.recommendates = result.data.recommendates;
+                else
+                    $scope.recommendates = [];
                 refresh_feeds();
             });
         });
@@ -1363,6 +1363,10 @@ app.controller("headerController", ["$scope", "$rootScope", "$http", "$location"
             for (var i = 0; i < $scope.recommendates.length; i++) {
                 var feed = $scope.recommendates[i];
                 feed.category = 2;
+                if ($scope.user._id == feed.masterId)
+                    feed.msg = feed.masterMsg;
+                if ($scope.user._id == feed.slaveId)
+                    feed.msg = feed.slaveMsg;
                 $scope.feeds.push(feed);
             }
         }
