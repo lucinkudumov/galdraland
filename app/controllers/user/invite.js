@@ -261,12 +261,12 @@ module.exports = function (opts) {
             recommendationModel.find({masterId: req.user._id, masterViewed: false}, function (err, recommendates) {
                 console.log(recommendates);
                 for (i=0; i < recommendates.length; i++) {
-                    recommendates[i]['position'] = 'master';
+                    recommendates[i].position = 'master';
                     t.push(recommendates[i]);
                 }
                 recommendationModel.find({slaveId: req.user._id, slaveViewed: false}, function (err, recommendates) {
                     for (j=0; j < recommendates.length; j++) {
-                        recommendates[j]['position'] = 'slave';
+                        recommendates[j].position = 'slave';
                         t.push(recommendates[j]);
                     }
                     return res.json({success: true, recommendates: t});
