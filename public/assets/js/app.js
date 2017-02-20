@@ -651,15 +651,11 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
                                     console.log(data.data.success);
                                 });
                             });
-
-    //                        var msg = "User "+$scope.user.fullname+" has recommended User C for such role in your team T"
                     }
                     send_recommendation();
                 }
             });
         }
-
-
         $scope.refresh();
     }]);
 app.controller("usersResultController", ["$scope", "$http", "User", "$location", function ($scope, $http, User, $location) {
