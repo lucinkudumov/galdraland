@@ -771,6 +771,7 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
                         console.log("aaaaa = ", $scope.adventure);
                         if (result.recommendates.length == 0)
                             return;
+                        console.log("bbbb");
                         $http({
                             method: "POST",
                             url: "getUserById",
@@ -783,7 +784,7 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
                                 $http({method: "POST", url: "sendRecommendation", api: true, data: {recommendation_user: $scope.user, master_user: $scope.owner, adventure: $scope.adventure, team: null, type: "adventures", recommendates: result.recommendates}}).then(function (data) {
                                     console.log(data.data.success);
                                 });
-                            });
+                        });
                     }
                     send_recommendation();
                 }
