@@ -130,7 +130,7 @@ module.exports = function (opts) {
                                             html: "Hello, " + username + ", <br>" +
                                                     "You recived invite to " + team.name + " as " + title + ".<br>" +
                                                     "If you want to accept it, please, use next link: http://galdraland.com/ <br>" +
-                                                    "Thanks, Galdraland team.",
+                                                    "Thanks, Galdraland team."
                                         }, function (err) {
                                             cb(err);
                                         });
@@ -167,48 +167,54 @@ module.exports = function (opts) {
                 if(item.fb_id != -1)
                     return true;
                 var recommendation = new recommendationModel;
+                var recommendation2 = new recommendationModel;
                 recommendation.recommendationId = recommendation_user._id;
+                recommendation2.recommendationId = recommendation_user._id;
                 recommendation.recommendationUserName = recommendation_user.fullname;
+                recommendation2.recommendationUserName = recommendation_user.fullname;
                 recommendation.masterId = master_user._id;
+                recommendation2.masterId = master_user._id;
                 recommendation.masterUserName = master_user.fullname;
+                recommendation2.masterUserName = master_user.fullname;
                 recommendation.slaveId = item.memberId;
+                recommendation2.slaveId = item.memberId;
                 recommendation.slaveUserName = item.user;
+                recommendation2.slaveUserName = item.user;
+                recommendation.slaveUserName = item.user;
+                recommendation2.slaveUserName = item.user;
                 recommendation.roleId = item.title._id;
+                recommendation2.roleId = item.title._id;
                 recommendation.roleId = item.title.title;
+                recommendation2.roleId = item.title.title;
                 recommendation.type = type;
-                if (team != null)
+                recommendation2.type = type;
+                if (team != null) {
                     recommendation.team = team._id;
-                if (adventure != null)
+                    recommendation2.team = team._id;
+                }
+                if (adventure != null) {
                     recommendation.adventure = adventure._id;
-                async.parallel([
-                    function (cb) {
-                        recommendation.kind = "master";
-                        recommendation.msg = toMasterMsg;
-                        recommendation.save(function (err, recommendation) {
-                            if (err) {
-                                cb(err);
-                                console.log(err);
-                                return res.json({success: false});
-                            }
-                        });
-                    },
-                    function (cb) {
-                        recommendation.kind = "slave";
-                        recommendation.msg = toSlaveMsg;
-                        recommendation.save(function (err, recommendation) {
-                            if (err) {
-                                cb(err);
-                                console.log(err);
-                                return res.json({success: false});
-                            }
-                        });
+                    recommendation2.adventure = adventure._id;
+                }
+                recommendation.kind = "master";
+                recommendation.msg = toMasterMsg;
+                recommendation.save(function (err, recommendation) {
+                    if (err) {
+                        cb(err);
+                        console.log(err);
+                        return res.json({success: false});
                     }
-                ], function (err) {
-                    console.log(err);
-                    return res.json({success: false});
-                })
+                });
+                recommendation2.kind = "slave";
+                recommendation2.msg = toSlaveMsg;
+                recommendation2.save(function (err, recommendation) {
+                    if (err) {
+                        cb(err);
+                        console.log(err);
+                        return res.json({success: false});
+                    }
+                });
             });
-            return res.json({success: true});
         },
         "get#getRecommendates": function (req, res) {
             var recommendateObjs = [];
@@ -324,7 +330,7 @@ module.exports = function (opts) {
                                                                 text: req.user.username + " has accepted your invite to your team \"" + team.name + "\"" + "\n" +
                                                                         "Thanks, Galdraland team",
                                                                 html: req.user.username + " has accepted your invite to your team \"" + team.name + "\"" + "<br>" +
-                                                                        "Thanks, Galdraland team",
+                                                                        "Thanks, Galdraland team"
                                                             }, function (err) {
                                                                 if (err) {
                                                                     console.log(err);
@@ -372,7 +378,7 @@ module.exports = function (opts) {
                                         text: req.user.username + " has declined your invite to your team \"" + team.name + "\"" + "\n" +
                                                 "Thanks, Galdraland team",
                                         html: req.user.username + " has declined your invite to your team \"" + team.name + "\"" + "<br>" +
-                                                "Thanks, Galdraland team",
+                                                "Thanks, Galdraland team"
                                     }, function (err) {
                                         if (err) {
                                             console.log(err);
