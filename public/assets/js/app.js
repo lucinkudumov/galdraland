@@ -777,6 +777,7 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
                             api: true,
                             data: {id: $scope.adventure.owner}
                         }).then(function success(data) {
+                                console.log("owner = ", data );
                                 $scope.owner = data.data.user;
                                 console.log(result.recommendates);
                                 $http({method: "POST", url: "sendRecommendation", api: true, data: {recommendation_user: $scope.user, master_user: $scope.owner, adventure: $scope.adventure, team: null, type: "adventures", recommendates: result.recommendates}}).then(function (data) {
