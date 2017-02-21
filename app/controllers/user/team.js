@@ -4,7 +4,8 @@ module.exports = function (opts) {
     var userModel = opts.models.User,
             teamModel = opts.models.Team,
             teamMemberModel = opts.models.TeamMember;
-    adventureModel = opts.models.Adventure;
+    var adventureModel = opts.models.Adventure;
+    var recommendationModel = opts.models.Recommendation;
 
     return {
         "post#upload/image": function (req, res) {
@@ -265,6 +266,21 @@ module.exports = function (opts) {
                 } else {
                     return res.json({success: true, teams: teams});
                 }
+            });
+        },
+        "post#myRecommendationTeams": function (req, res) {
+            recommendationModel.find({
+                slaveId: req.user._id,
+                type: "teams"
+            }, function (success, recommendates) {
+                if (recommendates.length > 0) {
+                    return res.json({success: true, recommendates : recommendates});
+                } else {
+                    return res.json({success: true, recommendates : []});
+                }
+            }, function (err) {
+                console.log(err);
+                return res.json({success: false, recommendates : []});
             });
         },
 //        "POST#teams/getMembers": function (req, res) {

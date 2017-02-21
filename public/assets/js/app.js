@@ -2325,6 +2325,26 @@ app.controller("profileLeftSideController", ["$scope", "$http", "$location", "Us
             });
         }
 
+        $scope.getRecommendationTeams = function () {
+            $http({
+                method: "GET",
+                url: "myRecommendationTeams", api: true
+            }).then(function (data) {
+                    console.log(data);
+                    $scope.rteams = data.data.recommendates;
+                });
+        }
+
+        $scope.getRecommendationAdventures = function () {
+            $http({
+                method: "GET",
+                url: "myRecommendationAdventures", api: true
+            }).then(function (data) {
+                    console.log(data);
+                    $scope.radventures = data.data.recommendates;
+                });
+        }
+
         var userTeams = [];
         var users = [];
         $scope.getUsers = function () {
@@ -2393,6 +2413,9 @@ app.controller("profileLeftSideController", ["$scope", "$http", "$location", "Us
 //            $scope.getUsers();
         });
 
+        $scope.$watch("rteams", function () {
+            $scope.getRecommendationAdventures();
+        });
 //        $scope.$watch("users", function () {
 //            $scope.calculateRecomendation();
 //            $scope.getAdventures();
@@ -2409,6 +2432,7 @@ app.controller("profileLeftSideController", ["$scope", "$http", "$location", "Us
             }
         }
         $scope.getTeams();
+        $scope.getRecommendationTeams();
     }]);
 app.controller("profileSettingsController", ["$scope", "$rootScope", "$location", "$http", "User", function ($scope, $rootScope, $location, $http, User) {
         $scope.username = "";

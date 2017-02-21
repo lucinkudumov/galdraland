@@ -36,6 +36,26 @@
             <!--<p ng-show="recomendation.length > 0">Complete your profile</p>-->
             <!--<ul ng-show="recomendation.length > 0">-->
             <!--<li ng-repeat="r in recomendation">{{ r }}</li>-->
+            <uib-accordion close-others="false">
+                <div uib-accordion-group class="panel-default" is-open="true">
+                    <uib-accordion-heading>
+                        <p style="margin-top : 7px;">Teams</p>
+                    </uib-accordion-heading>
+                    <small ng-show="rteams.length == 0">No recommendation teams</small>
+                    <ul ng-show = "rteams.length > 0">
+                        <li ng-repeat = "t in rteams"><a href="/teams/view/{{ t.teamId }}">{{ t.teamName }} ( {{t.roleTitle}} )</a></li>
+                    </ul>
+                </div>
+                <div uib-accordion-group class="panel-default" is-open="true">
+                    <uib-accordion-heading>
+                        <p style="margin-top : 7px;">Adventures</p>
+                    </uib-accordion-heading>
+                    <small ng-show="radventures.length == 0">No recommendation adventures</small>
+                    <ul ng-show = "radventures.length > 0">
+                        <li ng-repeat = "a in radventures"><a href="/adventures/view/{{ a.adventureId }}">{{ a.adventureName }}</a></li>
+                    </ul>
+                </div>
+            </uib-accordion>
         </div>
     </div>
 </div>

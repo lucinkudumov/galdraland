@@ -9,7 +9,7 @@ module.exports = function (opts) {
             teamModel = opts.models.Team,
             adventureModel = opts.models.Adventure,
             imageModel = opts.models.Imagestore;
-
+    var recommendationModel = opts.models.Recommendation;
     return {
         "post#upload/image": function (req, res) {
             var file = req.files.file;
@@ -334,6 +334,21 @@ module.exports = function (opts) {
                 } else {
                     return res.json({success: true, adventure: adventure});
                 }
+            });
+        },
+        "post#myRecommendationAdventures": function (req, res) {
+            recommendationModel.find({
+                slaveId: req.user._id,
+                type: "adventures"
+            }, function (success, recommendates) {
+                if (recommendates.length > 0) {
+                    return res.json({success: true, recommendates : recommendates});
+                } else {
+                    return res.json({success: true, recommendates : []});
+                }
+            }, function (err) {
+                console.log(err);
+                return res.json({success: false, recommendates : []});
             });
         }
     }
