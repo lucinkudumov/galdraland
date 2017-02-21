@@ -336,7 +336,7 @@ module.exports = function (opts) {
                 }
             });
         },
-        "post#myRecommendationAdventures": function (req, res) {
+        "get#myRecommendationAdventures": function (req, res) {
             recommendationModel.find({
                 slaveId: req.user._id,
                 type: "adventures"

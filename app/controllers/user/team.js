@@ -268,7 +268,7 @@ module.exports = function (opts) {
                 }
             });
         },
-        "post#myRecommendationTeams": function (req, res) {
+        "get#myRecommendationTeams": function (req, res) {
             recommendationModel.find({
                 slaveId: req.user._id,
                 type: "teams"
