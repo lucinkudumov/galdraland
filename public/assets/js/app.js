@@ -1658,24 +1658,31 @@ app.controller("headerController", ["$scope", "$rootScope", "$http", "$location"
         }
 
         $scope.showRecommendation = function (recommendate) {
-            console.log("abc = ", recommendate);
             $http({
                 method: "POST", url: "applyRecommendates", api: true, data: {id: recommendate._id, position: recommendate.position}
             }).then (function (result) {
                 console.log(result);
             });
-            if (recommendate.type == "teams") {
-                var url = "/teams/view/" + recommendate.teamId;
+            if (recommendate.position == "master") {
+                var url = "/users/view/" + recommendate.slaveId;
                 if ($location.path() == url)
                     $state.reload();
                 else
                     $location.path(url);
             } else {
-                var url = "/adventures/view/" + recommendate.adventureId;
-                if ($location.path() == url)
-                    $state.reload();
-                else
-                    $location.path(url);
+                if (recommendate.type == "teams") {
+                    var url = "/teams/view/" + recommendate.teamId;
+                    if ($location.path() == url)
+                        $state.reload();
+                    else
+                        $location.path(url);
+                } else {
+                    var url = "/adventures/view/" + recommendate.adventureId;
+                    if ($location.path() == url)
+                        $state.reload();
+                    else
+                        $location.path(url);
+                }
             }
         }
     }]);
