@@ -189,13 +189,13 @@ module.exports = function (opts) {
 
                 if (type == "teams") {
                     toMasterMsg = "User '"+recommendation.recommendationUserName+"' has recommended User '"+
-                        recommendation.slaveUserName+"' for role '"+recommendation.roleTitle+"' in your team '" + recommendation.teamName + "'";
-                    toSlaveMsg = "User '"+ recommendation.recommendationUserName+"' has recommended you for role '"+recommendation.roleTitle+
-                        "' in '"+recommendation.masterUserName+"'`s team '" + recommendation.teamName+"'";
+                        recommendation.slaveUserName+"' for Role -"+recommendation.roleTitle+"- in your Team '" + recommendation.teamName + "'";
+                    toSlaveMsg = "User '"+ recommendation.recommendationUserName+"' has recommended you for Role -"+recommendation.roleTitle+
+                        "- in "+recommendation.masterUserName+"'s Team '" + recommendation.teamName+"'";
                 } else {
                     toMasterMsg = "User '"+ recommendation.recommendationUserName+"' has recommended User '"+
-                        recommendation.slaveUserName +"' in your adventure '" + recommendation.adventureName + "'";
-                    toSlaveMsg = "User '" + recommendation.recommendationUserName + "' has recommended you in '"+recommendation.masterUserName+"'`s adventure '" + recommendation.adventureName+"'";
+                        recommendation.slaveUserName +"' in your Adventure '" + recommendation.adventureName + "'";
+                    toSlaveMsg = "User '" + recommendation.recommendationUserName + "' has recommended you in "+recommendation.masterUserName+"'s Adventure '" + recommendation.adventureName+"'";
                 }
 
                 recommendation.masterMsg = toMasterMsg;

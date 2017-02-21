@@ -33,7 +33,9 @@
                       <div ng-show="i.category == 2">
                           <h5>{{i.msg}}</h5>
                           <div class="view">
-                              <button class="btn btn-primary" ng-click="showRecommendation(i)">View</button>
+                              <button class="btn btn-primary" ng-click="showRecommendation(i)" ng-show="i.position=='master'">View {{i.slaveUserName}}</button>
+                              <button class="btn btn-primary" ng-click="showRecommendation(i)" ng-show="i.position=='slave' && i.type=='teams'">View {{i.teamName}}</button>
+                              <button class="btn btn-primary" ng-click="showRecommendation(i)" ng-show="i.position=='slave' && i.type=='adventures'">View {{i.adventureName}}</button>
                           </div>
                       </div>
                   </li>
