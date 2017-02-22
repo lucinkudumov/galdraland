@@ -43,7 +43,7 @@
                     </uib-accordion-heading>
                     <small ng-show="rteams.length == 0">No recommendation teams</small>
                     <ul ng-show = "rteams.length > 0">
-                        <li ng-repeat = "t in rteams"><a href="/teams/view/{{ t.teamId }}">{{ t.teamName }} ( {{t.roleTitle}} )</a></li>
+                        <li ng-repeat = "t in rteams"><a href="/teams/view/{{ t.teamId }}">{{ t.teamName }}({{t.roleTitle}}) - {{t.recommendationUserName}}</a></li>
                     </ul>
                 </div>
                 <div uib-accordion-group class="panel-default" is-open="true">
@@ -52,7 +52,7 @@
                     </uib-accordion-heading>
                     <small ng-show="radventures.length == 0">No recommendation adventures</small>
                     <ul ng-show = "radventures.length > 0">
-                        <li ng-repeat = "a in radventures"><a href="/adventures/view/{{ a.adventureId }}">{{ a.adventureName }}</a></li>
+                        <li ng-repeat = "a in radventures"><a href="/adventures/view/{{ a.adventureId }}">{{ a.adventureName }}  - {{a.recommendationUserName}}</a></li>
                     </ul>
                 </div>
             </uib-accordion>
