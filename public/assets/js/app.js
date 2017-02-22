@@ -2352,6 +2352,16 @@ app.controller("profileLeftSideController", ["$scope", "$http", "$location", "Us
                 });
         }
 
+        $scope.getRecommendationUsers = function () {
+            $http({
+                method: "GET",
+                url: "myRecommendationUsers", api: true
+            }).then(function (data) {
+                    console.log(data);
+                    $scope.rusers = data.data.recommendates;
+                });
+        }
+
         var userTeams = [];
         var users = [];
         $scope.getUsers = function () {
@@ -2423,6 +2433,10 @@ app.controller("profileLeftSideController", ["$scope", "$http", "$location", "Us
         $scope.$watch("rteams", function () {
             $scope.getRecommendationAdventures();
         });
+        $scope.$watch("radventures", function () {
+            $scope.getRecommendationUsers();
+        });
+
 //        $scope.$watch("users", function () {
 //            $scope.calculateRecomendation();
 //            $scope.getAdventures();
