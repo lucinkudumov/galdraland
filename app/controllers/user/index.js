@@ -635,7 +635,7 @@ module.exports = function (opts) {
                                     e.email = email;
                                     e.save(function (err, e) {
                                         if (err) {
-                                            recommendationModel                       console.log(err);
+                                            console.log(err);
                                             return res.json({success: false});
                                         } else {
                                             return res.json({success: true});
@@ -654,25 +654,25 @@ module.exports = function (opts) {
             });
         },
         "get#myRecommendationUsers": function (req, res) {
-//            recommendationModel.aggregate(
-//                {$match:{'slaveId': req.user._id }},
-//                {$group:{_id: "$recommendationId"}},
-//                function (success, recommendates) {
-//                    console.log(recommendates);
-//                }
-//            );
-            recommendationModel.find({
-                slaveId: req.user._id
-            }, function (success, recommendates) {
-                if (recommendates.length > 0) {
-                    return res.json({success: true, recommendates : recommendates});
-                } else {
-                    return res.json({success: true, recommendates : []});
+            recommendationModel.aggregate(
+                {$match:{'slaveId': req.user._id }},
+                {$group:{_id: "$recommendationId"}},
+                function (success, recommendates) {
+                    console.log(recommendates);
                 }
-            }, function (err) {
-                console.log(err);
-                return res.json({success: false, recommendates : []});
-            });
+            );
+//            recommendationModel.find({
+//                slaveId: req.user._id
+//            }, function (success, recommendates) {
+//                if (recommendates.length > 0) {
+//                    return res.json({success: true, recommendates : recommendates});
+//                } else {
+//                    return res.json({success: true, recommendates : []});
+//                }
+//            }, function (err) {
+//                console.log(err);
+//                return res.json({success: false, recommendates : []});
+//            });
         }
     }
 }
