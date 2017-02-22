@@ -2434,9 +2434,9 @@ app.controller("profileLeftSideController", ["$scope", "$http", "$location", "Us
             $scope.getRecommendationAdventures();
         });
 
-        $scope.$watch("radventures", function () {
-            $scope.getRecommendationUsers();
-        });
+//        $scope.$watch("radventures", function () {
+//            $scope.getRecommendationUsers();
+//        });
 
 //        $scope.$watch("users", function () {
 //            $scope.calculateRecomendation();
