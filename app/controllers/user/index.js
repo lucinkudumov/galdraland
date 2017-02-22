@@ -652,27 +652,6 @@ module.exports = function (opts) {
                     return res.json({success: false});
                 }
             });
-        },
-        "get#myRecommendationUsers": function (req, res) {
-            recommendationModel.aggregate(
-                {$match:{'slaveId': req.user._id }},
-                {$group:{_id: "$recommendationId"}},
-                function (success, recommendates) {
-                    console.log(recommendates);
-                }
-            );
-//            recommendationModel.find({
-//                slaveId: req.user._id
-//            }, function (success, recommendates) {
-//                if (recommendates.length > 0) {
-//                    return res.json({success: true, recommendates : recommendates});
-//                } else {
-//                    return res.json({success: true, recommendates : []});
-//                }
-//            }, function (err) {
-//                console.log(err);
-//                return res.json({success: false, recommendates : []});
-//            });
         }
     }
 }

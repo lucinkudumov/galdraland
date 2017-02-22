@@ -55,6 +55,15 @@
                         <li ng-repeat = "a in radventures"><a href="/adventures/view/{{ a.adventureId }}">{{ a.adventureName }}  - {{a.recommendationUserName}}</a></li>
                     </ul>
                 </div>
+                <div uib-accordion-group class="panel-default" is-open="true">
+                    <uib-accordion-heading>
+                        <p style="margin-top : 7px;">Users</p>
+                    </uib-accordion-heading>
+                    <small ng-show="rusers.length == 0">No recommendation users</small>
+                    <ul ng-show = "rusers.length > 0">
+                        <li ng-repeat = "u in rusers"><a href="/users/view/{{ u.id }}">{{ u.name }}</a></li>
+                    </ul>
+                </div>
             </uib-accordion>
         </div>
     </div>

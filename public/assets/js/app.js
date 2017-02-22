@@ -2285,6 +2285,7 @@ app.controller("profileLeftSideController", ["$scope", "$http", "$location", "Us
         $scope.selTeam = "";
         $scope.selAdv = "";
         $scope.users = [];
+        $scope.rusers = [];
 
         $http.get("/api/getUserDetail").then(function (data) {
             $scope.user = data.data.user;
@@ -2331,7 +2332,7 @@ app.controller("profileLeftSideController", ["$scope", "$http", "$location", "Us
                 $scope.teams = data.data.teams;
             });
         }
-
+        var ruserIds = [];
         $scope.getRecommendationTeams = function () {
             $http({
                 method: "GET",
@@ -2339,6 +2340,16 @@ app.controller("profileLeftSideController", ["$scope", "$http", "$location", "Us
             }).then(function (data) {
                     console.log(data);
                     $scope.rteams = data.data.recommendates;
+                    for (var i = 0; i < data.data.recommendates.length; i++) {
+                        if (ruserIds.indexOf(data.data.recommendates[i].recommendationId) != -1 ) {
+                            continue;
+                        }
+                        var result = {};
+                        result.name = data.data.recommendates[i].recommendationUserName;
+                        result.id = data.data.recommendates[i].recommendationId;
+                        $scope.rusers.push(result);
+                        ruserIds.push(result.id);
+                    }
                 });
         }
 
@@ -2349,16 +2360,16 @@ app.controller("profileLeftSideController", ["$scope", "$http", "$location", "Us
             }).then(function (data) {
                     console.log(data);
                     $scope.radventures = data.data.recommendates;
-                });
-        }
-
-        $scope.getRecommendationUsers = function () {
-            $http({
-                method: "GET",
-                url: "myRecommendationUsers", api: true
-            }).then(function (data) {
-                    console.log(data);
-                    $scope.rusers = data.data.recommendates;
+                    for (var i = 0; i < data.data.recommendates.length; i++) {
+                        if (ruserIds.indexOf(data.data.recommendates[i].recommendationId) != -1 ) {
+                            continue;
+                        }
+                        var result = {};
+                        result.name = data.data.recommendates[i].recommendationUserName;
+                        result.id = data.data.recommendates[i].recommendationId;
+                        $scope.rusers.push(result);
+                        ruserIds.push(result.id);
+                    }
                 });
         }
 
@@ -2434,9 +2445,6 @@ app.controller("profileLeftSideController", ["$scope", "$http", "$location", "Us
             $scope.getRecommendationAdventures();
         });
 
-        $scope.$watch("radventures", function () {
-            $scope.getRecommendationUsers();
-        });
 
 //        $scope.$watch("users", function () {
 //            $scope.calculateRecomendation();
