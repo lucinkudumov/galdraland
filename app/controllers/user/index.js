@@ -4,7 +4,6 @@ module.exports = function (opts) {
     var userModel = opts.models.User,
             emailModel = opts.models.Email,
             topicModel = opts.models.Topic;
-    var recommendationModel = opts.models.Recommendation;
 
     return {
         "post#createDefaultUser": function (req, res) {
@@ -652,6 +651,7 @@ module.exports = function (opts) {
                     return res.json({success: false});
                 }
             });
+
         }
     }
 }
