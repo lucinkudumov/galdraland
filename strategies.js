@@ -138,6 +138,7 @@ module.exports.facebook = function (opts, cb) {
 }
 
 module.exports.slack = function (opts, cb) {
+    console.log("calling slack....");
     var userModel = opts.models.User;
     var emailModel = opts.models.Email;
 

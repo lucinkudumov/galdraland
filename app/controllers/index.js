@@ -49,6 +49,7 @@ module.exports = function (opts) {
 		                res.end(data, 'binary');
                 	}
                 });
-            }
+            },
+        "get#callback/slack" : passport.authorize('slack', { failureRedirect: fail, successRedirect : "/api/slack" })
     }
 }
