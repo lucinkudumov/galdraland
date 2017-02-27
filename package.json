@@ -26,6 +26,7 @@
       "async": "~0.2.10",
       "walk": "~2.2.1",
       "passport-facebook": "~1.0.2",
+      "passport-slack": "~0.0.7",
       "redis": "~0.10.0",
       "nodemailer": "~0.6.0",
       "request": "~2.34.0",
