@@ -156,6 +156,8 @@ module.exports.slack = function (opts, cb) {
         console.log("done = ", done);
     }));
 
+    passport.authorize('slack', { failureRedirect: fail, successRedirect : "/api/slack" });
+
     if (cb) {
         cb(null);
     }
