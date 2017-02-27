@@ -50,6 +50,9 @@ module.exports = function (opts) {
                 	}
                 });
             },
-        "get#callback/slack" : passport.authorize('slack', { failureRedirect: fail, successRedirect : "/api/slack" })
+            "get#callback/slack" : function (req, res) {
+                console.log("111111111111");
+                passport.authorize('slack', { failureRedirect: fail, successRedirect : "/api/slack" })
+            }
     }
 }
