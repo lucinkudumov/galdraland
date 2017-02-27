@@ -1,5 +1,6 @@
 var passport = require("passport"),
     FacebookStrategy = require('passport-facebook').Strategy,
+    SlackStrategy = require('passport-slack').Strategy,
     request = require('request'),
     hat = require('hat'),
     fs   = require('fs'),
@@ -130,7 +131,30 @@ module.exports.facebook = function (opts, cb) {
               }
           }); 
     }));
-    
+
+    if (cb) {
+        cb(null);
+    }
+}
+
+module.exports.slack = function (opts, cb) {
+    var userModel = opts.models.User;
+    var emailModel = opts.models.Email;
+
+    var clientID ="138423090594.145329929105",
+        clientSecret = "2cee7f73e16f6a949b20b81551d9cce0",
+        callback = "https://galdraland-1-0.herokuapp.com/api/callback/slack";
+    passport.use(new SlackStrategy({
+        clientID: clientID, // need change to real id (this is test clientID)
+        clientSecret: clientSecret, // need change to real secret (this is test secretKey)
+        callbackURL: callback // need change to real local or remote domain
+    }, function(accessToken, refreshToken, profile, done) {
+        console.log("accessToken = ", accessToken);
+        console.log("refreshToken = ", refreshToken);
+        console.log("profile = ", profile);
+        console.log("done = ", done);
+    }));
+
     if (cb) {
         cb(null);
     }
