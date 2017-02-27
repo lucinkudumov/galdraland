@@ -7,7 +7,7 @@ var passport = require("passport"),
     utils = require('./utils'),
     path = require('path'),
     cloudinary = require('cloudinary');
-    
+
 passport.serializeUser(function(user, done) {
     done(null, user);
 });
