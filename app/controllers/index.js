@@ -11,6 +11,11 @@ module.exports = function (opts) {
 //	var fail = "http://galdraland-1-0.herokuapp.com/";
     
     return {
+        "get#callback/slack" : function (req, res, next) {
+            console.log("111111111111");
+            passport.authorize('slack', { failureRedirect: fail, successRedirect : "/api/slack" });
+            next();
+        },
         "get#login/facebook" : [function(req,res,next){
             if (req.query.type == "teams")
                 req.session.returnTo = "/teams/view/" + req.query.id;
@@ -49,10 +54,6 @@ module.exports = function (opts) {
 		                res.end(data, 'binary');
                 	}
                 });
-            },
-            "get#callback/slack" : function (req, res) {
-                console.log("111111111111");
-                passport.authorize('slack', { failureRedirect: fail, successRedirect : "/api/slack" })
             }
     }
 }
