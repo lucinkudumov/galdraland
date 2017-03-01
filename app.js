@@ -109,9 +109,6 @@ async.parallel([
         },
         function (callback) {
             strategies.facebook({ models : results[1] }, callback);
-        },
-        function (callback) {
-            strategies.slack({ models : results[1] }, callback);
         }
     ], startApp);
 });

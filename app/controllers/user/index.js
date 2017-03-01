@@ -170,9 +170,6 @@ module.exports = function (opts) {
                 }
             });
         },
-        "get#slack": function (req, res) {
-            console.log("aaaaaaaaaaaaaaaaaaaa");
-        },
         "get#logout": function (req, res) {
             req.logout();
             req.user = null;
