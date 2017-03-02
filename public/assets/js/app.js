@@ -3078,6 +3078,13 @@ app.controller("createTeamController", ["$scope", "$rootScope", "Upload", "$http
                 else
                     $location.path("/teams/view/" + data.data.id);
             });
+            $http({
+                method: "POST",
+                url: "slack/createChannel",
+                api: true
+            }).then(function (data) {
+                console.log(data);
+            });
         }
 
         $scope.tags = [];

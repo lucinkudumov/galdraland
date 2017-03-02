@@ -61,6 +61,28 @@ module.exports = function (opts) {
                 return res.json({success: false});
 //                console.log("code = " + req.param('code'));
             }
+        },
+        "post#slack/createChannel": function (req, res) {
+            console.log("calling createChannel..." + req.user._id);
+            userModel.findOne({_id: req.user._id}, function (err, user) {
+                if (err) {
+                    console.log(err);
+                } else if (user) {
+                    console.log("token = " + user.slackToken);
+                    request.get({
+                        url: 'https://slack.com/api/channels.create?token='+user.slackToken+'&name=mychannel&validate=true'
+                    }, function (err, response) {
+                        if(err) {
+                            console.log("error");
+                            return res.json({success: false});
+                        } else {
+                            console.log("success");
+                            console.log("response = ", response.body);
+                            return res.json({success: true});
+                        }
+                    });
+                }
+            });
         }
     }
 }
