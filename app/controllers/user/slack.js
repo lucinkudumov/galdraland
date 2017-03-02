@@ -17,9 +17,10 @@ module.exports = function (opts) {
         },
         "get#slack/auth" : function (req, res, next) {
             console.log("1111111");
-            console.log("req = ", req);
-            console.log("res= ", res);
-            console.log("next= ", next);
+            console.log("code = " + req.param('code'));
+//            console.log("req = ", req);
+//            console.log("res= ", res);
+//            console.log("next= ", next);
         }
     }
 }
