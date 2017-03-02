@@ -7,7 +7,7 @@ module.exports = function (opts) {
         "post#slack/requestAuth": function (req, res) {
             console.log("calling requestAuth...");
             request.get({
-                url: 'https://slack.com/oauth/authorize?client_id=146827931650.146151726865&team=galdralandmarketing&scope=identity.basic'
+                url: 'https://slack.com/oauth/authorize?client_id=146827931650.146151726865&scope=identity.basic'
             }, function (err, response) {
                 console.log(JSON.parse(response.body));
             });
