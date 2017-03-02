@@ -55,6 +55,7 @@ module.exports = function (opts) {
                         } else {
                             console.log("success");
                             var result = JSON.parse(response.body);
+                            console.log("aaaaaaaa = ", result);
                             return res.json({success: true});
                         }
                     });
