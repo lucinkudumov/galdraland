@@ -11,14 +11,6 @@ module.exports = function (opts) {
 //	var fail = "http://galdraland-1-0.herokuapp.com/";
     
     return {
-        "get#slack/auth" : function (req, res, next) {
-            console.log("1111111");
-            next();
-        },
-        "post#slack/auth" : function (req, res, next) {
-            console.log("2222222");
-            next();
-        },
         "get#login/facebook" : [function(req,res,next){
             if (req.query.type == "teams")
                 req.session.returnTo = "/teams/view/" + req.query.id;
