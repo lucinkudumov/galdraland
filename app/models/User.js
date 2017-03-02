@@ -107,6 +107,9 @@ module.exports = function (opts) {
                     type: String
                 }
             }]
+        },
+        slackToken : {
+            type: String
         }
     });
     

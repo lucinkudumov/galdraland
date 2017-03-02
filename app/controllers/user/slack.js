@@ -7,14 +7,14 @@ var WebClient = require('@slack/client').WebClient;
 module.exports = function (opts) {
     return {
         "post#slack/requestAuth": function (req, res) {
-            console.log("calling requestAuth...");
+            console.log("calling requestAuth..." + req.user._id);
             request.get({
-                url: 'https://slack.com/oauth/authorize?client_id=146827931650.146151726865&scope=identity.basic'
+                url: 'https://slack.com/oauth/authorize?client_id=146827931650.146151726865&scope=identity.basic&redirect_uri=https://galdraland-1-0.herokuapp.com/api/slack/auth'
             }, function (err, response) {
                 if(err)
-                    console.log("err = ", err);
+                    console.log("error");
                 else
-                    console.log("response = ", response);
+                    console.log("success");
             });
         },
         "get#slack/auth" : function (req, res, next) {
