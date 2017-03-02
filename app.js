@@ -14,7 +14,6 @@ var express = require("express"),
     smtpTransport = nodemailer.createTransport("SMTP", config.smtpOptions),
     templatesDir = path.join(__dirname, "emails");
 
-var WebClient = require('@slack/client').WebClient;
 //var Slack = require('slack-node');
 
 

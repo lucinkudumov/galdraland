@@ -2,6 +2,9 @@ var validator = require('validator'),
         async = require('async');
 var request = require('request');
 
+var test_token = "xoxp-146827931650-147519431415-149290441270-b18b55d38979b50d182fa41eb8860a8a";
+var WebClient = require('@slack/client').WebClient;
+
 module.exports = function (opts) {
     return {
         "post#slack/requestAuth": function (req, res) {
