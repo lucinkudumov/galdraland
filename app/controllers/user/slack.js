@@ -39,7 +39,7 @@ module.exports = function (opts) {
                     }
                     else {
                         console.log("response = ", response.body);
-                        return res.json({success: true});
+                        return res.json("Slack Authorization OK!");
                     }
                 });
             } else {
