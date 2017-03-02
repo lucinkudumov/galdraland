@@ -6,6 +6,7 @@ var WebClient = require('@slack/client').WebClient;
 
 module.exports = function (opts) {
     var userModel = opts.models.User;
+    var inviteModel = opts.models.Invite;
     return {
         "get#slack/auth" : function (req, res, next) {
             if (req.param('code') != null) {
@@ -59,6 +60,17 @@ module.exports = function (opts) {
                             return res.json({success: true});
                         }
                     });
+                }
+            });
+        },
+        "post#slack/sendInvite": function (req, res) {
+            var inviteId = req.body.id;
+            inviteModel.findOne({_id: inviteId}, function (err, invite) {
+                if (err) {
+                    console.log(err);
+                } else if (invite) {
+                    console.log("from = " + invite.from);
+                    console.log("to = " + invite.toId);
                 }
             });
         }
