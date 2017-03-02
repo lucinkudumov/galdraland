@@ -9,7 +9,10 @@ module.exports = function (opts) {
             request.get({
                 url: 'https://slack.com/oauth/authorize?client_id=146827931650.146151726865&scope=identity.basic'
             }, function (err, response) {
-                console.log(JSON.parse(response.body));
+                if(err)
+                    console.log("err = ", err);
+                else
+                    console.log("response = ", response);
             });
         },
         "get#slack/auth" : function (req, res, next) {
