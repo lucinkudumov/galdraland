@@ -56,7 +56,7 @@ module.exports = function (opts) {
                         } else {
                             console.log("success");
                             var result = JSON.parse(response.body);
-                            console.log("aaaaaaaa = ", result);
+                            console.log("createChannel = ", result);
                             return res.json({success: true});
                         }
                     });
@@ -68,9 +68,11 @@ module.exports = function (opts) {
             inviteModel.findOne({_id: inviteId}, function (err, invite) {
                 if (err) {
                     console.log(err);
+                    return res.json({success: false});
                 } else if (invite) {
                     console.log("from = " + invite.from);
                     console.log("to = " + invite.toId);
+                    return res.json({success: true});
                 }
             });
         }
