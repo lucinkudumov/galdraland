@@ -40,7 +40,7 @@ module.exports = function (opts) {
             }
         },
         "post#slack/createChannel": function (req, res) {
-            var channelName = req.body.name + " channel";
+            var channelName = req.body.name.replace(/ /g,'') + "channel";
             userModel.findOne({_id: req.user._id}, function (err, user) {
                 if (err) {
                     console.log(err);
