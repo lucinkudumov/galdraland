@@ -45,6 +45,7 @@ module.exports = function (opts) {
                                 console.log(err);
                             } else if (user) {
                                 user.slackToken = response.body.access_token;
+                                console.log("slackToken = " + user.slackToken);
                                 user.save(function (err) {
                                     if (err) console.log(err);
                                 });
