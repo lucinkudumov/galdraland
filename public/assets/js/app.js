@@ -3854,6 +3854,7 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
         }
 
         $scope.slackAuth = function () {
+            console.log("123...");
             $http({method: "POST", url: "slack/requestAuth", api: true}).then(function (data) {
                 console.log("calling requestAuth....");
             });
