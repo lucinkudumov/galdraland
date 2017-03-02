@@ -5,6 +5,7 @@ var request = require('request');
 var WebClient = require('@slack/client').WebClient;
 
 module.exports = function (opts) {
+    var userModel = opts.models.User;
     return {
         "post#slack/requestAuth": function (req, res) {
             console.log("calling requestAuth..." + req.user._id);
@@ -22,7 +23,7 @@ module.exports = function (opts) {
             });
         },
         "get#slack/auth" : function (req, res, next) {
-            console.log("1111111" + req.user._id);
+            console.log("userID = " + req.user._id);
             if (req.param('code') != null) {
                 console.log("aaaaa");
                 console.log("code = " + req.param('code'));
@@ -39,6 +40,16 @@ module.exports = function (opts) {
                     }
                     else {
                         console.log("response = ", response.body);
+                        userModel.findOne({_id: req.user._id}, function (err, user) {
+                            if (err) {
+                                console.log(err);
+                            } else if (user) {
+                                user.slackToken = response.body.access_token;
+                                user.save(function (err) {
+                                    if (err) console.log(err);
+                                });
+                            }
+                        });
                         return res.json("Slack Authorization OK!");
                     }
                 });
