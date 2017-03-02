@@ -11,10 +11,14 @@ module.exports = function (opts) {
             request.get({
                 url: 'https://slack.com/oauth/authorize?client_id=146827931650.146151726865&scope=identity.basic&redirect_uri=https://galdraland-1-0.herokuapp.com/api/slack/auth'
             }, function (err, response) {
-                if(err)
+                if(err) {
                     console.log("error");
-                else
+                    return res.json({success: false});
+                } else {
                     console.log("success");
+                    return res.json({success: true});
+                }
+
             });
         },
         "get#slack/auth" : function (req, res, next) {
@@ -29,13 +33,18 @@ module.exports = function (opts) {
                         '&code=' + req.param('code')
                 }, function (err, response) {
                     console.log("bbbbb");
-                    if(err)
+                    if(err) {
                         console.log("err = ", err);
-                    else
+                        return res.json({success: false});
+                    }
+                    else {
                         console.log("response = ", response.body);
+                        return res.json({success: true});
+                    }
                 });
             } else {
                 console.log("bbbbb");
+                return res.json({success: false});
 //                console.log("code = " + req.param('code'));
             }
         }
