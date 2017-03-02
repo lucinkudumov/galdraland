@@ -22,7 +22,7 @@ module.exports = function (opts) {
             });
         },
         "get#slack/auth" : function (req, res, next) {
-            console.log("1111111");
+            console.log("1111111" + req.user._id);
             if (req.param('code') != null) {
                 console.log("aaaaa");
                 console.log("code = " + req.param('code'));
