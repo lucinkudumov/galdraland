@@ -26,10 +26,11 @@ module.exports = function (opts) {
                         '&redirect_uri=https://galdraland-1-0.herokuapp.com/api/slack/auth' +
                         '&code=' + req.param('code')
                 }, function (err, response) {
+                    console.log("bbbbb");
                     if(err)
                         console.log("err = ", err);
                     else
-                        console.log("response = ", response);
+                        console.log("response = ", response.body);
                 });
             } else {
                 console.log("bbbbb");
