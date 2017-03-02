@@ -40,11 +40,13 @@ module.exports = function (opts) {
                     }
                     else {
                         console.log("response = ", response.body);
+                        var result = JSON.parse(response.body);
+                        console.log("token = ", result.access_token);
                         userModel.findOne({_id: req.user._id}, function (err, user) {
                             if (err) {
                                 console.log(err);
                             } else if (user) {
-                                user.slackToken = response.body.access_token;
+                                user.slackToken = result.access_token;
                                 console.log("slackToken = " + user.slackToken);
                                 user.save(function (err) {
                                     if (err) console.log(err);
