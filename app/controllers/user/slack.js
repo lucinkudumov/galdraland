@@ -40,8 +40,8 @@ module.exports = function (opts) {
                                 for (i=0; i<result.groups.length; i++) {
                                     console.log("id = " + result.groups[i].id);
                                     console.log("name = " + result.groups[i].name);
-                                    if (count(result.groups[i].members) > 0) {
-                                        for (j=0; j<count(result.groups[i].members; j++ )
+                                    if (result.groups[i].members.length > 0) {
+                                        for (j=0; j < groups[i].members.length; j++ )
                                             console.log("member = " + result.groups[i].members[j]);
                                     } else {
                                         console.log("no members");
