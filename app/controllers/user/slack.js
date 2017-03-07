@@ -37,12 +37,17 @@ module.exports = function (opts) {
                             }
                             else {
                                 var result = JSON.parse(response.body);
-                                for (i=0; i<result.channels.length; i++) {
-                                    console.log("id = " + result.channels[i].id);
-                                    console.log("name = " + result.channels[i].name);
-                                    console.log("num_members = " + result.channels[i].num_members);
-                                    console.log("id = " + result.channels[i].id);
-                                    if (result.channels[i].name == "david_galdra_test") {
+                                for (i=0; i<result.groups.length; i++) {
+                                    console.log("id = " + result.groups[i].id);
+                                    console.log("name = " + result.groups[i].name);
+                                    if (count(result.groups[i].members) > 0) {
+                                        for (j=0; j<count(result.groups[i].members; j++ )
+                                            console.log("member = " + result.groups[i].members[j]);
+                                    } else {
+                                        console.log("no members");
+                                    }
+
+                                    if (result.groups[i].name == "david_galdra_test") {
                                         console.log("find my channel");
                                     }
                                 }
