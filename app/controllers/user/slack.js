@@ -27,16 +27,37 @@ module.exports = function (opts) {
                         console.log("slack_auth_response = ", response.body);
                         var result = JSON.parse(response.body);
                         console.log("token = ", result.access_token);
-                        userModel.findOne({_id: req.user._id}, function (err, user) {
-                            if (err) {
+                        request.get({
+                            url: 'https://slack.com/api/channels.list?token='+result.access_token+
+                                '&exclude_archived=true'
+                        }, function (err, response) {
+                            if(err) {
+                                console.log("get channel list error = ", err);
                                 return res.json("Slack Authorization FAIL!");
-                            } else if (user) {
-                                user.slackToken = result.access_token;
-                                user.save(function (err) {
-                                    if (err) res.json("Slack Authorization FAIL! - No User");
-                                });
+                            }
+                            else {
+                                var result = JSON.parse(response.body);
+                                for (i=0; i<result.channels.length; i++) {
+                                    console.log("id = " + result.channels[i].id);
+                                    console.log("name = " + result.channels[i].name);
+                                    console.log("num_members = " + result.channels[i].num_members);
+                                    console.log("id = " + result.channels[i].id);
+                                    if (result.channels[i].name == "david_galdra_test") {
+                                        console.log("find my channel");
+                                    }
+                                }
                             }
                         });
+//                        userModel.findOne({_id: req.user._id}, function (err, user) {
+//                            if (err) {
+//                                return res.json("Slack Authorization FAIL!");
+//                            } else if (user) {
+//                                user.slackToken = result.access_token;
+//                                user.save(function (err) {
+//                                    if (err) res.json("Slack Authorization FAIL! - No User");
+//                                });
+//                            }
+//                        });
                         return res.json("Slack Authorization OK!");
                     }
                 });
