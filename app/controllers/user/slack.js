@@ -28,7 +28,7 @@ module.exports = function (opts) {
                         var result = JSON.parse(response.body);
                         console.log("token = ", result.access_token);
                         request.get({
-                            url: 'https://slack.com/api/channels.list?token='+result.access_token+
+                            url: 'https://slack.com/api/groups.list?token='+result.access_token+
                                 '&exclude_archived=true'
                         }, function (err, response) {
                             if(err) {
