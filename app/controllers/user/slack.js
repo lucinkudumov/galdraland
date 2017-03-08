@@ -32,18 +32,6 @@ module.exports = function (opts) {
                         console.log("user_id = ", result.user_id);
 //                        user = "U4F5CNKTN";
                         request.get({
-                            url: 'https://galdralandmarketing.slack.com/api/users.admin.invite?token='+result.access_token+
-                                '&email=davidmakow16@gmail.com&set_active=true'
-                        }, function (err, response) {
-                            if(err) {
-                                console.log("invite admin error = ", err);
-                            }
-                            else {
-                                var result = JSON.parse(response.body);
-                                console.log("invite admin result = ", result);
-                            }
-                        });
-                        request.get({
                             url: 'https://slack.com/api/groups.list?token='+result.access_token+
                                 '&exclude_archived=true'
                         }, function (err, response) {
@@ -66,18 +54,30 @@ module.exports = function (opts) {
                                     if (result.groups[i].name == "david_galdra_test") {
                                         console.log("find my channel");
                                         request.get({
-                                            url: 'https://slack.com/api/groups.invite?token='+access_token+
-                                                '&channel='+result.groups[i].id+
-                                                '&user=U4F5CNKTN'
+                                            url: 'https://slack.com/api/users.admin.invite?token='+result.access_token+
+                                                '&email=davidmakow16@gmail.com&channels='+result.groups[i].id
                                         }, function (err, response) {
                                             if(err) {
-                                                console.log("invited error = ", err);
-                                                return res.json("Slack Authorization FAIL!");
+                                                console.log("invite admin error = ", err);
                                             }
                                             else {
-                                                console.log("invited result = ", response.body);
+                                                var result = JSON.parse(response.body);
+                                                console.log("invite admin result = ", result);
                                             }
                                         });
+//                                        request.get({
+//                                            url: 'https://slack.com/api/groups.invite?token='+access_token+
+//                                                '&channel='+result.groups[i].id+
+//                                                '&user=U4F5CNKTN'
+//                                        }, function (err, response) {
+//                                            if(err) {
+//                                                console.log("invited error = ", err);
+//                                                return res.json("Slack Authorization FAIL!");
+//                                            }
+//                                            else {
+//                                                console.log("invited result = ", response.body);
+//                                            }
+//                                        });
                                     }
                                 }
                             }
