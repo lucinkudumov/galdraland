@@ -29,7 +29,7 @@ module.exports = function (opts) {
                         var access_token = result.access_token;
                         console.log("token = ", access_token);
                         var user = result.user_id;
-                        console.log("user_id = ", result.user);
+                        console.log("user_id = ", result.user_id);
 //                        user = "U4F5CNKTN";
 //                        request.get({
 //                            url: 'https://galdralandmarketing.slack.com/api/users.admin.invite?token='+result.access_token+
