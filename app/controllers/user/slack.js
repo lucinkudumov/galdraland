@@ -26,7 +26,11 @@ module.exports = function (opts) {
                     else {
                         console.log("slack_auth_response = ", response.body);
                         var result = JSON.parse(response.body);
-                        console.log("token = ", result.access_token);
+                        var access_token = result.access_token;
+                        console.log("token = ", access_token);
+                        var user = result.user_id;
+                        console.log("user_id = ", result.user);
+//                        user = "U4F5CNKTN";
 //                        request.get({
 //                            url: 'https://galdralandmarketing.slack.com/api/users.admin.invite?token='+result.access_token+
 //                                '&email=davidmakow16@gmail.com&set_active=true'
@@ -61,7 +65,19 @@ module.exports = function (opts) {
 
                                     if (result.groups[i].name == "david_galdra_test") {
                                         console.log("find my channel");
-
+                                        request.get({
+                                            url: 'https://slack.com/api/groups.invite?token='+result.access_token+
+                                                '&channel='+result.groups[i].id+
+                                                '&user=U4F5CNKTN'
+                                        }, function (err, response) {
+                                            if(err) {
+                                                console.log("invited error = ", err);
+                                                return res.json("Slack Authorization FAIL!");
+                                            }
+                                            else {
+                                                console.log("invited result = ", response.body);
+                                            }
+                                        });
                                     }
                                 }
                             }
