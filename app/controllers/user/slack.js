@@ -27,18 +27,18 @@ module.exports = function (opts) {
                         console.log("slack_auth_response = ", response.body);
                         var result = JSON.parse(response.body);
                         console.log("token = ", result.access_token);
-                        request.get({
-                            url: 'https://galdralandmarketing.slack.com/api/users.admin.invite?token='+result.access_token+
-                                '&email=davidmakow16@gmail.com&set_active=true'
-                        }, function (err, response) {
-                            if(err) {
-                                console.log("invite admin error = ", err);
-                            }
-                            else {
-                                var result = JSON.parse(response.body);
-                                console.log("invite admin result = ", result);
-                            }
-                        });
+//                        request.get({
+//                            url: 'https://galdralandmarketing.slack.com/api/users.admin.invite?token='+result.access_token+
+//                                '&email=davidmakow16@gmail.com&set_active=true'
+//                        }, function (err, response) {
+//                            if(err) {
+//                                console.log("invite admin error = ", err);
+//                            }
+//                            else {
+//                                var result = JSON.parse(response.body);
+//                                console.log("invite admin result = ", result);
+//                            }
+//                        });
                         request.get({
                             url: 'https://slack.com/api/groups.list?token='+result.access_token+
                                 '&exclude_archived=true'
