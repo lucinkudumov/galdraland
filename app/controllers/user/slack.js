@@ -66,7 +66,7 @@ module.exports = function (opts) {
                                     if (result.groups[i].name == "david_galdra_test") {
                                         console.log("find my channel");
                                         request.get({
-                                            url: 'https://slack.com/api/groups.invite?token='+result.access_token+
+                                            url: 'https://slack.com/api/groups.invite?token='+access_token+
                                                 '&channel='+result.groups[i].id+
                                                 '&user=U4F5CNKTN'
                                         }, function (err, response) {
