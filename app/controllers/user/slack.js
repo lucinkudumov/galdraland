@@ -10,6 +10,7 @@ var slackClientSecret = "80c8c252dabe4cbc46cfe0e29fb6272c";
 module.exports = function (opts) {
     var userModel = opts.models.User;
     var teamModel = opts.models.Team;
+    var masterSlackModel = opts.models.MasterSlack;
 
     return {
         "get#slack/auth" : function (req, res, next) {

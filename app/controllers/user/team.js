@@ -7,6 +7,7 @@ module.exports = function (opts) {
     var adventureModel = opts.models.Adventure;
     var recommendationModel = opts.models.Recommendation;
 
+
     return {
         "post#upload/image": function (req, res) {
             var file = req.files.file;
