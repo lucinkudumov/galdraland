@@ -227,7 +227,6 @@ module.exports = function (opts) {
                                                 var slackUser = "";
                                                 if (result.messages[0]) {
                                                 slackUser = result.messages[0].user;
-//                                                var t = new Date(result.messages[0].ts);
                                                 var date = new Date(result.messages[0].ts * 1000);
                                                 result.messages[0].dateTime =dateFormat(date, "yyyy-mm-dd h:MM:ss");
                                                 userModel.findOne({slackUser: slackUser}, function (err, user) {
@@ -237,7 +236,8 @@ module.exports = function (opts) {
                                                 result.messages[0].userName = user.fullname;
                                                 if (result.messages[1]) {
                                                 slackUser = result.messages[1].user;
-                                                result.messages[1].dateTime =dateFormat(result.messages[1].ts, "yyyy-mm-dd h:MM:ss");
+                                                var date = new Date(result.messages[1].ts * 1000);
+                                                result.messages[1].dateTime =dateFormat(date, "yyyy-mm-dd h:MM:ss");
                                                 userModel.findOne({slackUser: slackUser}, function (err, user) {
                                                 if (err) {
                                                 console.log(err);
@@ -245,7 +245,9 @@ module.exports = function (opts) {
                                                 result.messages[1].userName = user.fullname;
                                                 if (result.messages[2]) {
                                                 slackUser = result.messages[2].user;
-                                                    result.messages[2].dateTime =dateFormat(result.messages[2].ts, "yyyy-mm-dd h:MM:ss");
+                                                    var date = new Date(result.messages[2].ts * 1000);
+                                                    result.messages[2].dateTime =dateFormat(date, "yyyy-mm-dd h:MM:ss");
+
                                                 userModel.findOne({slackUser: slackUser}, function (err, user) {
                                                 if (err) {
                                                 console.log(err);
@@ -253,7 +255,9 @@ module.exports = function (opts) {
                                                 result.messages[2].userName = user.fullname;
                                                 if (result.messages[3]) {
                                                 slackUser = result.messages[3].user;
-                                                    result.messages[3].dateTime =dateFormat(result.messages[3].ts, "yyyy-mm-dd h:MM:ss");
+                                                    var date = new Date(result.messages[3].ts * 1000);
+                                                    result.messages[3].dateTime =dateFormat(date, "yyyy-mm-dd h:MM:ss");
+
                                                 userModel.findOne({slackUser: slackUser}, function (err, user) {
                                                 if (err) {
                                                 console.log(err);
@@ -261,7 +265,8 @@ module.exports = function (opts) {
                                                 result.messages[3].userName = user.fullname;
                                                     if (result.messages[4]) {
                                                         slackUser = result.messages[4].user;
-                                                        result.messages[4].dateTime =dateFormat(result.messages[4].ts, "yyyy-mm-dd h:MM:ss");
+                                                        var date = new Date(result.messages[4].ts * 1000);
+                                                        result.messages[4].dateTime =dateFormat(date, "yyyy-mm-dd h:MM:ss");
                                                         userModel.findOne({slackUser: slackUser}, function (err, user) {
                                                             if (err) {
                                                                 console.log(err);
@@ -269,7 +274,8 @@ module.exports = function (opts) {
                                                                 result.messages[4].userName = user.fullname;
                                                                 if (result.messages[5]) {
                                                                     slackUser = result.messages[5].user;
-                                                                    result.messages[5].dateTime =dateFormat(result.messages[5].ts, "yyyy-mm-dd h:MM:ss");
+                                                                    var date = new Date(result.messages[5].ts * 1000);
+                                                                    result.messages[5].dateTime =dateFormat(date, "yyyy-mm-dd h:MM:ss");
                                                                     userModel.findOne({slackUser: slackUser}, function (err, user) {
                                                                         if (err) {
                                                                             console.log(err);
@@ -283,7 +289,8 @@ module.exports = function (opts) {
                                                                                         console.log(err);
                                                                                     } else if (user) {
                                                                                         result.messages[6].userName = user.fullname;
-                                                                                        result.messages[7].dateTime =dateFormat(result.messages[7].ts, "yyyy-mm-dd h:MM:ss");
+                                                                                        var date = new Date(result.messages[7].ts * 1000);
+                                                                                        result.messages[7].dateTime =dateFormat(date, "yyyy-mm-dd h:MM:ss");
                                                                                         if (result.messages[7]) {
                                                                                             slackUser = result.messages[7].user;
                                                                                             userModel.findOne({slackUser: slackUser}, function (err, user) {
@@ -293,7 +300,8 @@ module.exports = function (opts) {
                                                                                                     result.messages[7].userName = user.fullname;
                                                                                                     if (result.messages[8]) {
                                                                                                         slackUser = result.messages[8].user;
-                                                                                                        result.messages[8].dateTime =dateFormat(result.messages[8].ts, "yyyy-mm-dd h:MM:ss");
+                                                                                                        var date = new Date(result.messages[8].ts * 1000);
+                                                                                                        result.messages[8].dateTime =dateFormat(date, "yyyy-mm-dd h:MM:ss");
                                                                                                         userModel.findOne({slackUser: slackUser}, function (err, user) {
                                                                                                             if (err) {
                                                                                                                 console.log(err);
@@ -301,7 +309,8 @@ module.exports = function (opts) {
                                                                                                                 result.messages[8].userName = user.fullname;
                                                                                                                 if (result.messages[9]) {
                                                                                                                     slackUser = result.messages[9].user;
-                                                                                                                    result.messages[9].dateTime =dateFormat(result.messages[9].ts, "yyyy-mm-dd h:MM:ss");
+                                                                                                                    var date = new Date(result.messages[9].ts * 1000);
+                                                                                                                    result.messages[9].dateTime =dateFormat(date, "yyyy-mm-dd h:MM:ss");
                                                                                                                     userModel.findOne({slackUser: slackUser}, function (err, user) {
                                                                                                                         if (err) {
                                                                                                                             console.log(err);
