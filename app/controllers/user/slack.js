@@ -225,6 +225,7 @@ module.exports = function (opts) {
                                                 console.log("groups.history  OK");
                                                 var slackUsers = [];
                                                 for (i = 0; i < result.messages.length; i++) {
+                                                    result.messages[i].userName = "abc";
                                                     var slackUser = result.messages[i].user;
                                                     if (slackUser in slackUsers == false) {
                                                         userModel.findOne({slackUser: slackUser}, function (err, slackuser) {
