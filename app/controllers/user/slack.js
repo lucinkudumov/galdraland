@@ -122,33 +122,35 @@ module.exports = function (opts) {
                 } else if (user) {
                     console.log("token = " + user.slackToken);
                     var accessToken = user.slackToken;
-                    request.get({
-                        url: 'https://slack.com/api/groups.create?token='+accessToken+'&name='+channelName+'&validate=true'
-                    }, function (err, response) {
-                        if(err) {
-                            console.log("error");
-                            return res.json({success: false});
-                        } else {
-                            console.log("success");
-                            var result = JSON.parse(response.body);
-                            console.log("createChannel = ", result);
-                            teamModel.findOne({_id: teamId}, function (err, team) {
-                                if(err) {
-                                    console.log("error");
-                                    return res.json({success: false});
-                                } else {
-                                    team.slackGroupId = result.group.id;
-                                    team.slackGroupName = result.group.name;
-                                    team.save(function (err, team) {
-                                        if (err) {
-                                            console.log(err);
-                                        }
-                                    })
-                                }
-                            });
-                            return res.json({success: true});
-                        }
-                    });
+                    if (accessToken != null && accessToken != '') {
+                        request.get({
+                            url: 'https://slack.com/api/groups.create?token='+accessToken+'&name='+channelName+'&validate=true'
+                        }, function (err, response) {
+                            if(err) {
+                                console.log("error");
+                                return res.json({success: false});
+                            } else {
+                                console.log("success");
+                                var result = JSON.parse(response.body);
+                                console.log("createChannel = ", result);
+                                teamModel.findOne({_id: teamId}, function (err, team) {
+                                    if(err) {
+                                        console.log("error");
+                                        return res.json({success: false});
+                                    } else {
+                                        team.slackGroupId = result.group.id;
+                                        team.slackGroupName = result.group.name;
+                                        team.save(function (err, team) {
+                                            if (err) {
+                                                console.log(err);
+                                            }
+                                        })
+                                    }
+                                });
+                                return res.json({success: true});
+                            }
+                        });
+                    }
                 }
             });
         },
