@@ -175,16 +175,16 @@ module.exports = function (opts) {
                                             url: 'https://slack.com/api/groups.invite?token='+accessToken+'&channel='+slackGroupId+'&user='+slackUser
                                         }, function (err, response) {
                                             if(err) {
-                                                console.log("error");
+                                                console.log("sub-group invitation  error");
                                                 return res.json({success: false});
                                             } else {
-                                                console.log("success");
+                                                console.log("sub-group invitation success");
                                                 var result = JSON.parse(response.body);
-                                                console.log("invite result = ", result);
+//                                                console.log("invite result = ", result);
                                                 if (result.ok == true) {
-                                                    console.log("invite OK");
+                                                    console.log("sub-group invitation  OK");
                                                 } else {
-                                                    console.log("invite Fail");
+                                                    console.log("sub-group invitation  Fail");
                                                 }
                                             }
                                         });
