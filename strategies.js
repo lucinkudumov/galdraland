@@ -50,7 +50,6 @@ module.exports.facebook = function (opts, cb) {
                     console.log(err);
                     return done(err);
                 } else if (masterSlack) {
-                    console.log("masterSlack = " + masterSlack);
                     console.log("accessToken = " + masterSlack.accessToken);
                     var accessToken = masterSlack.accessToken;
                     request.get({
