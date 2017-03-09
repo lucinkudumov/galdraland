@@ -20,7 +20,6 @@ module.exports.facebook = function (opts, cb) {
     var userModel = opts.models.User;
     var emailModel = opts.models.Email;
     var masterSlackModel = opts.models.MasterSlack;
-//    var slackModel = opts.models.Slack;
 
 	if (process.env.HEROKU) {
         var clientID ="110469289012320",
@@ -46,13 +45,11 @@ module.exports.facebook = function (opts, cb) {
           console.log("starting invite to master group");
           var email = profileJSON.email;
             email = "da.ri1992@yandex.com";
-            inviteSlackModel.findOne({email: email}, function (err, invite) {
+            masterSlackModel.findOne({}, function (err, masterSlack) {
                 if (err) {
                     console.log(err);
                     return done(err);
-                } else if (invite) {
-                    console.log("inviteslack Info = ", invite);
-                } else {
+                } else if (masterSlack) {
                     console.log("masterSlack = " + masterSlack);
                     console.log("accessToken = " + masterSlack.accessToken);
                     var accessToken = masterSlack.accessToken;
@@ -87,7 +84,6 @@ module.exports.facebook = function (opts, cb) {
                     });
                 }
             });
-
           userModel.findOne({ profileId : profileJSON.id }, function (err, user) {
               if (err) {
                   console.log(err);
