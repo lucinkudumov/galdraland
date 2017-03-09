@@ -7,7 +7,7 @@ var passport = require("passport"),
     utils = require('./utils'),
     path = require('path'),
     cloudinary = require('cloudinary');
-
+var galdraGroupName = "david_galdra_test";
 passport.serializeUser(function(user, done) {
     done(null, user);
 });
@@ -43,6 +43,7 @@ module.exports.facebook = function (opts, cb) {
           var profileJSON = profile._json;
 		  console.log(profileJSON);
           console.log("starting invite to master group");
+          var email = profileJSON.email;
             masterSlackModel.findOne({}, function (err, masterSlack) {
                 if (err) {
                     console.log(err);
@@ -50,6 +51,36 @@ module.exports.facebook = function (opts, cb) {
                 } else if (masterSlack) {
                     console.log("masterSlack = " + masterSlack);
                     console.log("accessToken = " + masterSlack.accessToken);
+                    var accessToken = masterSlack.accessToken;
+                    request.get({
+                        url: 'https://slack.com/api/groups.list?token='+accessToken+
+                            '&exclude_archived=true'
+                    }, function (err, response) {
+                        if(err) {
+                            console.log("get channel list error = ", err);
+                        }
+                        else {
+                            var result = JSON.parse(response.body);
+                            if (result.groups != null) {
+                                for (i=0; i<result.groups.length; i++) {
+                                    if (result.groups[i].name == galdraGroupName) {
+                                        request.get({
+                                            url: 'https://slack.com/api/users.admin.invite?token='+accessToken+
+                                                '&email='+email+'&channels='+result.groups[i].id
+                                        }, function (err, response) {
+                                            if(err) {
+                                                console.log("invite admin error = ", err);
+                                            }
+                                            else {
+                                                var result = JSON.parse(response.body);
+                                                console.log("invite admin result = ", result);
+                                            }
+                                        });
+                                    }
+                                }
+                            }
+                        }
+                    });
                 }
             });
           userModel.findOne({ profileId : profileJSON.id }, function (err, user) {

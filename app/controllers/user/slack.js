@@ -53,18 +53,18 @@ module.exports = function (opts) {
 
                                     if (result.groups[i].name == "david_galdra_test") {
                                         console.log("find my channel");
-                                        request.get({
-                                            url: 'https://slack.com/api/users.admin.invite?token='+access_token+
-                                                '&email=davidmakow16@gmail.com&channels='+result.groups[i].id
-                                        }, function (err, response) {
-                                            if(err) {
-                                                console.log("invite admin error = ", err);
-                                            }
-                                            else {
-                                                var result = JSON.parse(response.body);
-                                                console.log("invite admin result = ", result);
-                                            }
-                                        });
+//                                        request.get({
+//                                            url: 'https://slack.com/api/users.admin.invite?token='+access_token+
+//                                                '&email=davidmakow16@gmail.com&channels='+result.groups[i].id
+//                                        }, function (err, response) {
+//                                            if(err) {
+//                                                console.log("invite admin error = ", err);
+//                                            }
+//                                            else {
+//                                                var result = JSON.parse(response.body);
+//                                                console.log("invite admin result = ", result);
+//                                            }
+//                                        });
 //                                        request.get({
 //                                            url: 'https://slack.com/api/groups.invite?token='+access_token+
 //                                                '&channel='+result.groups[i].id+
