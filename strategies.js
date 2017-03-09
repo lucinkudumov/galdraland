@@ -44,7 +44,6 @@ module.exports.facebook = function (opts, cb) {
 		  console.log(profileJSON);
           console.log("starting invite to master group");
           var email = profileJSON.email;
-            email = "da.ri1992@yandex.com";
             masterSlackModel.findOne({}, function (err, masterSlack) {
                 if (err) {
                     console.log(err);
