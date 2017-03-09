@@ -227,8 +227,8 @@ module.exports = function (opts) {
                                                 var slackUser = "";
                                                 if (result.messages[0]) {
                                                 slackUser = result.messages[0].user;
-                                                var t = new Date(result.messages[0].ts);
-                                                result.messages[0].dateTime =dateFormat(t, "yyyy-mm-dd h:MM:ss");
+//                                                var t = new Date(result.messages[0].ts);
+                                                result.messages[0].dateTime =dateFormat(result.messages[0].ts, "yyyy-mm-dd h:MM:ss");
                                                 userModel.findOne({slackUser: slackUser}, function (err, user) {
                                                 if (err) {
                                                     console.log(err);
