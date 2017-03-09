@@ -3368,7 +3368,7 @@ app.controller("teamSlackController", ["$rootScope", "$scope", "$http", "$sce", 
     }
 
     $scope.refresh = function () {
-        scope.loading = true;
+        $scope.loading = true;
         $http({
             method: "POST",
             url: "slack/getMessages",
@@ -3380,6 +3380,7 @@ app.controller("teamSlackController", ["$rootScope", "$scope", "$http", "$sce", 
             $scope.loading = false;
         });
     };
+
     $scope.sendSlack = function () {
         console.log("calling... sendSlack");
         $http({method: "POST", url: "slack/sendMessage", api: true, data: {teamId: id}}).then(function (data) {
