@@ -223,10 +223,25 @@ module.exports = function (opts) {
                                             console.log("groups.history result = ", result);
                                             if (result.ok == true) {
                                                 console.log("groups.history  OK");
+                                                var slackUsers = [];
+                                                for (i = 0; i < result.messages.length; i++) {
+                                                    var slackUser = result.messages[i].user;
+                                                    if (slackUser in slackUsers == false) {
+                                                        userModel.findOne({slackUser: slackUser}, function (err, slackuser) {
+                                                            if (err) {
+                                                                console.log(err);
+                                                            } else if (slackuser) {
+                                                                result.messages[i].userName = slackuser.fullname;
+                                                                slackUsers.push({slackUser:slackuser.fullname});
+                                                            }
+                                                        });
+                                                    }
+                                                }
+                                                return res.json({success: true, data: result});
                                             } else {
                                                 console.log("groups.history  Fail");
+                                                return res.json({success: false});
                                             }
-                                            return res.json({success: true});
                                         }
                                     });
                                 }
