@@ -155,24 +155,41 @@ module.exports = function (opts) {
             });
         },
         "post#slack/sendInvite": function (req, res) {
+            var invites = req.body.invites;
+            var slackGroupId = req.body.slackGroupId;
+            console.log("slackGroupId = " + slackGroupId);
             userModel.findOne({_id: req.user._id}, function (err, user) {
                 if (err) {
                     console.log(err);
                 } else if (user) {
-                    console.log(user.email);
-                    request.get({
-                        url: 'https://slack.com/api/channels.invite?token='+user.slackToken+'&email='+user.email+'&set_active=true'
-                    }, function (err, response) {
-                        if(err) {
-                            console.log("error");
-                            return res.json({success: false});
-                        } else {
-                            console.log("success");
-                            var result = JSON.parse(response.body);
-                            console.log("sendInvite = ", result);
-                            return res.json({success: true});
-                        }
-                    });
+                    var accessToken = user.slackToken;
+                    if (accessToken != null && accessToken != '') {
+                        async.forEach(invites, function (item, cb) {
+                            userModel.findOne({_id: item.memberId}).exec(function (err, user) {
+                                if (err) {
+                                    console.log(err);
+                                } else {
+                                    var slackUser = user.slackUser;
+                                    request.get({
+                                        url: 'https://slack.com/api/groups.invite?token='+accessToken+'&channel='+slackGroupId+'&user='+slackUser
+                                    }, function (err, response) {
+                                        if(err) {
+                                            console.log("error");
+                                            return res.json({success: false});
+                                        } else {
+                                            console.log("success");
+                                            var result = JSON.parse(response.body);
+                                            if (result.ok == true) {
+                                                console.log("invite OK");
+                                            } else {
+                                                console.log("invite Fail");
+                                            }
+                                        }
+                                    });
+                                }
+                            });
+                        });
+                    }
                 }
             });
         }

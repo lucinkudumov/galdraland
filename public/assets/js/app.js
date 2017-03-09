@@ -1609,8 +1609,6 @@ app.controller("headerController", ["$scope", "$rootScope", "$http", "$location"
                 if (index > -1) {
                     if (result.action == "ACCEPT") {
                         $http({method: "POST", url: "acceptInvite", api: true, data: {id: invite._id}});
-                        $http({method: "POST", url: "slack/sendInvite", api: true, data: {id: invite._id}});
-
                     } else if (result.action == "DECLINE") {
                         $http({method: "POST", url: "declineInvite", api: true, data: {id: invite._id}});
                     } else if (result.action == "CLOSE") {
@@ -2237,6 +2235,11 @@ app.controller("sendInviteController", ["$scope", "$uibModalInstance", "values",
 
         $scope.send = function () {
             $uibModalInstance.close({type: "SEND", to: $scope.values.to, msg: $scope.values.msg, roles: $scope.values.roles, invites: $scope.values.invites});
+            console.log("sending invitation...");
+            if ($scope.team.slackGroupId && $scope.team.slackGroupId != "") {
+                console.log("slackGroupId = " + $scope.team.slackGroupId);
+                $http({method: "POST", url: "slack/sendInvite", api: true, data: {invites: $scope.values.invites, slackGroupId: $scope.team.slackGroupId}});
+            }
         }
 
         function validateEmail(email) {
