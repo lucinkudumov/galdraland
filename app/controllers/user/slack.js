@@ -225,22 +225,108 @@ module.exports = function (opts) {
                                             if (result.ok == true) {
                                                 console.log("groups.history  OK");
                                                 var max = result.messages.length;
-                                                for (i = 0; i < max; i++) {
-                                                    var flag = false;
-                                                    while(!flag) {
-                                                        var slackUser = result.messages[i].user;
+                                                var slackUser = "";
+                                                if (result.messages[0]) {
+                                                slackUser = result.messages[0].user;
+                                                userModel.findOne({slackUser: slackUser}, function (err, user) {
+                                                if (err) {
+                                                    console.log(err);
+                                                } else if (user) {
+                                                result.messages[0].userName = user.fullname;
+                                                if (result.messages[1]) {
+                                                slackUser = result.messages[1].user;
+                                                userModel.findOne({slackUser: slackUser}, function (err, user) {
+                                                if (err) {
+                                                console.log(err);
+                                                } else if (user) {
+                                                result.messages[1].userName = user.fullname;
+                                                if (result.messages[2]) {
+                                                slackUser = result.messages[2].user;
+                                                userModel.findOne({slackUser: slackUser}, function (err, user) {
+                                                if (err) {
+                                                console.log(err);
+                                                } else if (user) {
+                                                result.messages[2].userName = user.fullname;
+                                                if (result.messages[3]) {
+                                                slackUser = result.messages[3].user;
+                                                userModel.findOne({slackUser: slackUser}, function (err, user) {
+                                                if (err) {
+                                                console.log(err);
+                                                } else if (user) {
+                                                result.messages[3].userName = user.fullname;
+                                                    if (result.messages[4]) {
+                                                        slackUser = result.messages[4].user;
                                                         userModel.findOne({slackUser: slackUser}, function (err, user) {
                                                             if (err) {
                                                                 console.log(err);
                                                             } else if (user) {
-                                                                result.messages[i].userName = user.fullname
+                                                                result.messages[4].userName = user.fullname;
+                                                                if (result.messages[5]) {
+                                                                    slackUser = result.messages[5].user;
+                                                                    userModel.findOne({slackUser: slackUser}, function (err, user) {
+                                                                        if (err) {
+                                                                            console.log(err);
+                                                                        } else if (user) {
+                                                                            result.messages[5].userName = user.fullname;
+                                                                            if (result.messages[6]) {
+                                                                                slackUser = result.messages[6].user;
+                                                                                userModel.findOne({slackUser: slackUser}, function (err, user) {
+                                                                                    if (err) {
+                                                                                        console.log(err);
+                                                                                    } else if (user) {
+                                                                                        result.messages[6].userName = user.fullname;
+                                                                                        if (result.messages[7]) {
+                                                                                            slackUser = result.messages[7].user;
+                                                                                            userModel.findOne({slackUser: slackUser}, function (err, user) {
+                                                                                                if (err) {
+                                                                                                    console.log(err);
+                                                                                                } else if (user) {
+                                                                                                    result.messages[7].userName = user.fullname;
+                                                                                                    if (result.messages[8]) {
+                                                                                                        slackUser = result.messages[8].user;
+                                                                                                        userModel.findOne({slackUser: slackUser}, function (err, user) {
+                                                                                                            if (err) {
+                                                                                                                console.log(err);
+                                                                                                            } else if (user) {
+                                                                                                                result.messages[8].userName = user.fullname;
+                                                                                                                if (result.messages[9]) {
+                                                                                                                    slackUser = result.messages[9].user;
+                                                                                                                    userModel.findOne({slackUser: slackUser}, function (err, user) {
+                                                                                                                        if (err) {
+                                                                                                                            console.log(err);
+                                                                                                                        } else if (user) {
+                                                                                                                            result.messages[9].userName = user.fullname;
+                                                                                                                            return res.json({success: true, data: result});
+                                                                                                                        }
+                                                                                                                    });
+                                                                                                                } else return res.json({success: true, data: result});
+                                                                                                            }
+                                                                                                        });
+                                                                                                    } else return res.json({success: true, data: result});
+                                                                                                }
+                                                                                            });
+                                                                                        } else return res.json({success: true, data: result});
+                                                                                    }
+                                                                                });
+                                                                            } else return res.json({success: true, data: result});
+                                                                        }
+                                                                    });
+                                                                } else return res.json({success: true, data: result});
                                                             }
-                                                            flag = true;
                                                         });
-                                                    }
+                                                    } else return res.json({success: true, data: result});
                                                 }
-
-                                                return res.json({success: true, data: result});
+                                                });
+                                                } else return res.json({success: true, data: result});
+                                                }
+                                                });
+                                                } else return res.json({success: true, data: result});
+                                                }
+                                                });
+                                                } else return res.json({success: true, data: result});
+                                                }
+                                                });
+                                                } else return res.json({success: true, data: result});
                                             } else {
                                                 console.log("groups.history  Fail");
                                                 return res.json({success: false});
