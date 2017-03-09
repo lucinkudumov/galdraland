@@ -195,6 +195,44 @@ module.exports = function (opts) {
                     }
                 }
             });
+        },
+        "post#slack/getMessages": function (req, res) {
+            var teamId = req.body.teamId;
+            console.log("teamId = " + teamId);
+            teamModel.findOne({_id: teamId}, function (err, team) {
+                if (err) {
+                    console.log(err);
+                } else if (team) {
+                    var slackGroupId = team.slackGroupId;
+                    if (slackGroupId != null && slackGroupId != '') {
+                        userModel.findOne({_id: req.user._id}, function (err, user) {
+                            if (err) {
+                                console.log(err);
+                            } else if (user) {
+                                var accessToken = user.slackToken;
+                                if (accessToken != null && accessToken != '') {
+                                    request.get({
+                                        url: 'https://slack.com/api/groups.history?token='+accessToken+'&channel='+slackGroupId+'&inclusive=true&count=10&unreads=true'
+                                    }, function (err, response) {
+                                        if(err) {
+                                            console.log("groups.history  error");
+                                            return res.json({success: false});
+                                        } else {
+                                            console.log("groups.history success");
+                                            var result = JSON.parse(response.body);
+                                            if (result.ok == true) {
+                                                console.log("groups.history  OK");
+                                            } else {
+                                                console.log("groups.history  Fail");
+                                            }
+                                        }
+                                    });
+                                }
+                            }
+                        });
+                    }
+                }
+            });
         }
     }
 }

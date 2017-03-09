@@ -3362,9 +3362,22 @@ app.controller("teamBlogViewController", ["$scope", "$http", "$sce", "$location"
 
 app.controller("teamSlackController", ["$rootScope", "$scope", "$http", "$sce", "$stateParams", "User", "$location", "$compile", function ($rootScope, $scope, $http, $sce, $stateParams, User, $location, $compile) {
     var id = $stateParams.id;
+
     $scope.goBack = function () {
         $location.path("/teams/view/" + id);
     }
+
+    $scope.refresh = function () {
+        $http({
+            method: "POST",
+            url: "slack/getMessages",
+            api: true,
+            data: {teamId: id}
+        }).then(function (data) {
+            console.log(data);
+        });
+    };
+    $scope.refresh();
 }]);
 
 app.controller("myTeamsController", ["$scope", "$http", "$location", "User", function ($scope, $http, $location, User) {
