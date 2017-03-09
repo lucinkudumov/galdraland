@@ -49,7 +49,7 @@ module.exports.facebook = function (opts, cb) {
                     return done(err);
                 } else if (masterSlack) {
                     console.log("masterSlack = " + masterSlack);
-                    console.log("accessToken = " + masterSlack._json.accessToken);
+                    console.log("accessToken = " + masterSlack.accessToken);
                 }
             });
           userModel.findOne({ profileId : profileJSON.id }, function (err, user) {
