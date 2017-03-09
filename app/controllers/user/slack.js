@@ -33,7 +33,7 @@ module.exports = function (opts) {
 //                        user = "U4F5CNKTN";
                         request.get({
                             url: 'https://slack.com/api/groups.list?token='+result.access_token+
-                                '&exclude_archived=true'
+                                '&exclude_archived=false'
                         }, function (err, response) {
                             if(err) {
                                 console.log("get channel list error = ", err);
@@ -106,17 +106,25 @@ module.exports = function (opts) {
                     console.log(err);
                 } else if (user) {
                     console.log("token = " + user.slackToken);
-                    request.get({
-                        url: 'https://slack.com/api/channels.create?token='+user.slackToken+'&name='+channelName+'&validate=true'
-                    }, function (err, response) {
-                        if(err) {
-                            console.log("error");
-                            return res.json({success: false});
-                        } else {
-                            console.log("success");
-                            var result = JSON.parse(response.body);
-                            console.log("createChannel = ", result);
-                            return res.json({success: true});
+                    masterSlackModel.findOne({}, function (err, masterSlack) {
+                        if (err) {
+                            console.log(err);
+                            return done(err);
+                        } else if (masterSlack) {
+                            var accessToken = masterSlack.accessToken;
+                            request.get({
+                                url: 'https://slack.com/api/groups.create?token='+accessToken+'&name='+channelName+'&validate=true'
+                            }, function (err, response) {
+                                if(err) {
+                                    console.log("error");
+                                    return res.json({success: false});
+                                } else {
+                                    console.log("success");
+                                    var result = JSON.parse(response.body);
+                                    console.log("createChannel = ", result);
+                                    return res.json({success: true});
+                                }
+                            });
                         }
                     });
                 }
