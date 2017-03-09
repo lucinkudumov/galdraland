@@ -121,6 +121,7 @@ module.exports.facebook = function (opts, cb) {
                   u.bio = "";
                   u.interests = [];
                   u.slackToken = "";
+                  u.slackUser = "";
 
                   var saveToUser = function (url) {
                       u.photo = url;

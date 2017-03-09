@@ -72,6 +72,8 @@ module.exports = function (opts) {
             team.fb_page = fb_page;
             team.mission = mission;
             team.teamMembers = [];
+            team.slackGroupId = "";
+            team.slackGroupName = "";
 
             var i = 0;
             if (roles) {

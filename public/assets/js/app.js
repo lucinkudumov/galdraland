@@ -3074,14 +3074,21 @@ app.controller("createTeamController", ["$scope", "$rootScope", "Upload", "$http
                 api: true,
                 data: {name: $scope.name, description: $scope.description, rols: $scope.roles, defuser: $rootScope.defUser, fb_page: $scope.fb_page, mission: $scope.mission, image: $scope.uploadedImage, tags: tmpTags}
             }).then(function (data) {
-                $http({
-                    method: "POST",
-                    url: "slack/createChannel",
-                    api: true,
-                    data: {name : $scope.name}
-                }).then(function (data) {
-                        console.log(data);
-                });
+
+                if (data&& data.data && data.data.success == true) {
+                    $http({
+                        method: "POST",
+                        url: "slack/createChannel",
+                        api: true,
+                        data: {
+                            name : $scope.name,
+                            teamId:  data.data.id
+                        }
+                    }).then(function (data) {
+                            console.log(data);
+                    });
+                }
+
                 if ($rootScope.return2Adventure == "return")
                 {
                     $rootScope.return2Adventure = "normal";

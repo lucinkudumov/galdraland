@@ -9,7 +9,8 @@ var slackClientSecret = "80c8c252dabe4cbc46cfe0e29fb6272c";
 
 module.exports = function (opts) {
     var userModel = opts.models.User;
-    var inviteModel = opts.models.Invite;
+    var teamModel = opts.models.Team;
+
     return {
         "get#slack/auth" : function (req, res, next) {
             if (req.param('code') != null) {
@@ -101,6 +102,7 @@ module.exports = function (opts) {
         },
         "post#slack/createChannel": function (req, res) {
             var channelName = req.body.name.replace(/ /g,'') + "channel";
+            var teamId = req.body.teamId;
             userModel.findOne({_id: req.user._id}, function (err, user) {
                 if (err) {
                     console.log(err);
@@ -122,6 +124,20 @@ module.exports = function (opts) {
                                     console.log("success");
                                     var result = JSON.parse(response.body);
                                     console.log("createChannel = ", result);
+                                    teamModel.findOne({_id: teamId}, function (err, team) {
+                                        if(err) {
+                                            console.log("error");
+                                            return res.json({success: false});
+                                        } else {
+                                            team.slackGroupId = result.group.id;
+                                            team.slackGroupName = result.group.name;
+                                            team.save(function (err, team) {
+                                                if (err) {
+                                                    console.log(err);
+                                                }
+                                            })
+                                        }
+                                    });
                                     return res.json({success: true});
                                 }
                             });

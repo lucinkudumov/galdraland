@@ -33,6 +33,12 @@ module.exports = function (opts) {
         },
         mission: {
             type: String
+        },
+        slackGroupId: {
+            type: String
+        },
+        slackGroupName: {
+            type: String
         }
     });
     

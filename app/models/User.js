@@ -108,6 +108,9 @@ module.exports = function (opts) {
                 }
             }]
         },
+        slackUser : {
+            type: String
+        },
         slackToken : {
             type: String
         }
