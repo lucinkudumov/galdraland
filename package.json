@@ -40,7 +40,7 @@
       "sendgrid": "~2.0.0",
       "email-templates": "~2.4.0",
       "bower": "1.8.0",
-      "@slack/client": "~3.8.1"
+      "dateformat": "2.0.0"
   },
     "devDependencies": {
         "grunt": "~0.4.2",
