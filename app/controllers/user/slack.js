@@ -364,6 +364,7 @@ module.exports = function (opts) {
         "post#slack/sendMessage": function (req, res) {
             var teamId = req.body.teamId;
             console.log("teamId = " + teamId);
+            var msg = req.body.msg;
             teamModel.findOne({_id: teamId}, function (err, team) {
                 if (err) {
                     console.log(err);
@@ -377,7 +378,7 @@ module.exports = function (opts) {
                                 var accessToken = user.slackToken;
                                 if (accessToken != null && accessToken != '') {
                                     request.get({
-                                        url: 'https://slack.com/api/chat.postMessage?token='+accessToken+'&channel='+slackGroupId+'&text='+$scope.slackMsg
+                                        url: 'https://slack.com/api/chat.postMessage?token='+accessToken+'&channel='+slackGroupId+'&text='+msg
                                     }, function (err, response) {
                                         if(err) {
                                             console.log("chat.postMessage  error");
