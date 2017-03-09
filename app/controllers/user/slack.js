@@ -12,6 +12,17 @@ module.exports = function (opts) {
     var teamModel = opts.models.Team;
     var masterSlackModel = opts.models.MasterSlack;
 
+    function getUserName(slackUser) {
+        userModel.findOne({slackUser: slackUser}, function (err, slackuser) {
+            if (err) {
+                console.log(err);
+            } else if (slackuser) {
+                return slackuser.fullname;
+            }
+        });
+        return "";
+    }
+
     return {
         "get#slack/auth" : function (req, res, next) {
             if (req.param('code') != null) {
@@ -228,14 +239,10 @@ module.exports = function (opts) {
                                                     result.messages[i].userName = "abc";
                                                     var slackUser = result.messages[i].user;
                                                     if (slackUser in slackUsers == false) {
-                                                        userModel.findOne({slackUser: slackUser}, function (err, slackuser) {
-                                                            if (err) {
-                                                                console.log(err);
-                                                            } else if (slackuser) {
-                                                                result.messages[i].userName = slackuser.fullname;
-                                                                slackUsers.push({slackUser:slackuser.fullname});
-                                                            }
-                                                        });
+                                                        var userName = getUserName(slackUser);
+                                                        console.log("userName = " + userName);
+                                                        result.messages[i].userName = userName;
+                                                        slackUsers.push({slackUser:userName});
                                                     }
                                                 }
                                                 return res.json({success: true, data: result});
