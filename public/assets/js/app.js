@@ -214,6 +214,14 @@ app.config(["$urlRouterProvider", "$locationProvider", "$stateProvider", "$httpP
                 "right-side@teamBlogView": {templateUrl: "/assets/partials/team/viewblog.html"}
             },
             requireLogin: true
+        }).state("teamSlack", {
+            url: "/teams/slack/:id",
+            views: {
+                "main": {templateUrl: "/assets/partials/main.html"},
+                "left-side@teamSlack": {templateUrl: "/assets/partials/team/left-side.html"},
+                "right-side@teamSlack": {templateUrl: "/assets/partials/team/slack.html"}
+            },
+            requireLogin: true
         }).state("adventureList", {
             url: "/adventures",
             views: {
@@ -3350,6 +3358,13 @@ app.controller("teamBlogViewController", ["$scope", "$http", "$sce", "$location"
     }
 
     $scope.refresh();
+}]);
+
+app.controller("teamSlackController", ["$rootScope", "$scope", "$http", "$sce", "$stateParams", "User", "$location", "$compile", function ($rootScope, $scope, $http, $sce, $stateParams, User, $location, $compile) {
+    var id = $stateParams.id;
+    $scope.goBack = function () {
+        $location.path("/teams/view/" + id);
+    }
 }]);
 
 app.controller("myTeamsController", ["$scope", "$http", "$location", "User", function ($scope, $http, $location, User) {
