@@ -14,11 +14,11 @@ module.exports = function (opts) {
 
     function getUserName(slackUser) {
         userModel.findOne({slackUser: slackUser}, function (err, slackuser) {
-            console.log("getUsername = ", slackuser);
             if (err) {
                 console.log(err);
                 return "";
             } else if (slackuser) {
+                console.log("getUsername = ", slackuser.fullname);
                 return slackuser.fullname;
             } else {
                 return "";
