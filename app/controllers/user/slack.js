@@ -12,18 +12,6 @@ module.exports = function (opts) {
     var teamModel = opts.models.Team;
     var masterSlackModel = opts.models.MasterSlack;
     var slackUsers = [];
-    function getUserName(slackUser, message) {
-        userModel.findOne({slackUser: slackUser}, function (err, user) {
-            if (err) {
-                console.log(err);
-            } else if (user) {
-                message.userName = user.fullname;
-//                slackUsers.push(slackUser);
-                console.log("getUsername = ", user.fullname);
-            } else {
-            }
-        });
-    }
 
     return {
         "get#slack/auth" : function (req, res, next) {
@@ -236,18 +224,22 @@ module.exports = function (opts) {
                                             console.log("groups.history result = ", result);
                                             if (result.ok == true) {
                                                 console.log("groups.history  OK");
-//                                                slackUsers = [];
-                                                for (i = 0; i < result.messages.length; i++) {
-                                                    result.messages[i].userName = "abc";
-                                                    var slackUser = result.messages[i].user;
-                                                    if (slackUser in slackUsers == false) {
-                                                        console.log("slackUser = " + slackUser);
-                                                        getUserName(slackUser, result.messages[i]);
-//                                                        console.log("userName = " + userName);
-//                                                        result.messages[i].userName = userName;
-//                                                        slackUsers.push({slackUser:userName});
+                                                var max = result.messages.length;
+                                                for (i = 0; i < max; i++) {
+                                                    var flag = false;
+                                                    while(!flag) {
+                                                        var slackUser = result.messages[i].user;
+                                                        userModel.findOne({slackUser: slackUser}, function (err, user) {
+                                                            if (err) {
+                                                                console.log(err);
+                                                            } else if (user) {
+                                                                result.messages[i].userName = user.fullname
+                                                            }
+                                                            flag = true;
+                                                        });
                                                     }
                                                 }
+
                                                 return res.json({success: true, data: result});
                                             } else {
                                                 console.log("groups.history  Fail");
