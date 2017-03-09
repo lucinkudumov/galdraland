@@ -360,6 +360,39 @@ module.exports = function (opts) {
                     }
                 }
             });
+        },
+        "post#slack/sendMessage": function (req, res) {
+            var teamId = req.body.teamId;
+            console.log("teamId = " + teamId);
+            teamModel.findOne({_id: teamId}, function (err, team) {
+                if (err) {
+                    console.log(err);
+                } else if (team) {
+                    var slackGroupId = team.slackGroupId;
+                    if (slackGroupId != null && slackGroupId != '') {
+                        userModel.findOne({_id: req.user._id}, function (err, user) {
+                            if (err) {
+                                console.log(err);
+                            } else if (user) {
+                                var accessToken = user.slackToken;
+                                if (accessToken != null && accessToken != '') {
+                                    request.get({
+                                        url: 'https://slack.com/api/chat.postMessage?token='+accessToken+'&channel='+slackGroupId+'&text='+$scope.slackMsg
+                                    }, function (err, response) {
+                                        if(err) {
+                                            console.log("chat.postMessage  error");
+                                            return res.json({success: false});
+                                        } else {
+                                            console.log("chat.postMessage  error");
+                                            return res.json({success: true});
+                                        }
+                                    });
+                                }
+                            }
+                        });
+                    }
+                }
+            });
         }
     }
 }

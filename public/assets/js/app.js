@@ -3375,8 +3375,17 @@ app.controller("teamSlackController", ["$rootScope", "$scope", "$http", "$sce", 
             data: {teamId: id}
         }).then(function (data) {
             console.log(data);
+            $scope.messages = data.data.messages;
         });
     };
+    $scope.sendSlack = function () {
+        console.log("calling... sendSlack");
+        $http({method: "POST", url: "slack/sendMessage", api: true, data: {teamId: id}}).then(function (data) {
+            console.log("ending... sendSlack");
+            $location.path("/teams/slack/" + id);
+        });
+    };
+
     $scope.refresh();
 }]);
 
