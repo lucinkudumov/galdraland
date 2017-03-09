@@ -30,31 +30,43 @@ module.exports = function (opts) {
                         var result = JSON.parse(response.body);
                         var access_token = result.access_token;
                         console.log("token = ", access_token);
-                        var user = result.user_id;
-                        console.log("user_id = ", result.user_id);
-//                        user = "U4F5CNKTN";
-                        request.get({
-                            url: 'https://slack.com/api/groups.list?token='+result.access_token+
-                                '&exclude_archived=false'
-                        }, function (err, response) {
-                            if(err) {
-                                console.log("get channel list error = ", err);
+                        var slackUserId = result.user_id;
+                        console.log("slackUserId = ", slackUserId);
+                        userModel.findOne({_id: req.user._id}, function (err, user) {
+                            if (err) {
                                 return res.json("Slack Authorization FAIL!");
+                            } else if (user) {
+                                user.slackToken = access_token;
+                                user.slackUser = slackUserId;
+                                user.save(function (err) {
+                                    if (err) res.json("Slack Authorization FAIL! - No User");
+                                });
                             }
-                            else {
-                                var result = JSON.parse(response.body);
-                                for (i=0; i<result.groups.length; i++) {
-                                    console.log("id = " + result.groups[i].id);
-                                    console.log("name = " + result.groups[i].name);
-                                    if (result.groups[i].members.length > 0) {
-                                        for (j=0; j < result.groups[i].members.length; j++ )
-                                            console.log("member = " + result.groups[i].members[j]);
-                                    } else {
-                                        console.log("no members");
-                                    }
+                        });
 
-                                    if (result.groups[i].name == "david_galdra_test") {
-                                        console.log("find my channel");
+
+//                        request.get({
+//                            url: 'https://slack.com/api/groups.list?token='+result.access_token+
+//                                '&exclude_archived=false'
+//                        }, function (err, response) {
+//                            if(err) {
+//                                console.log("get channel list error = ", err);
+//                                return res.json("Slack Authorization FAIL!");
+//                            }
+//                            else {
+//                                var result = JSON.parse(response.body);
+//                                for (i=0; i<result.groups.length; i++) {
+//                                    console.log("id = " + result.groups[i].id);
+//                                    console.log("name = " + result.groups[i].name);
+//                                    if (result.groups[i].members.length > 0) {
+//                                        for (j=0; j < result.groups[i].members.length; j++ )
+//                                            console.log("member = " + result.groups[i].members[j]);
+//                                    } else {
+//                                        console.log("no members");
+//                                    }
+//
+//                                    if (result.groups[i].name == "david_galdra_test") {
+//                                        console.log("find my channel");
 //                                        request.get({
 //                                            url: 'https://slack.com/api/users.admin.invite?token='+access_token+
 //                                                '&email=davidmakow16@gmail.com&channels='+result.groups[i].id
@@ -80,10 +92,10 @@ module.exports = function (opts) {
 //                                                console.log("invited result = ", response.body);
 //                                            }
 //                                        });
-                                    }
-                                }
-                            }
-                        });
+//                                    }
+//                                }
+//                            }
+//                        });
 //                        userModel.findOne({_id: req.user._id}, function (err, user) {
 //                            if (err) {
 //                                return res.json("Slack Authorization FAIL!");
@@ -109,39 +121,32 @@ module.exports = function (opts) {
                     console.log(err);
                 } else if (user) {
                     console.log("token = " + user.slackToken);
-                    masterSlackModel.findOne({}, function (err, masterSlack) {
-                        if (err) {
-                            console.log(err);
-                            return done(err);
-                        } else if (masterSlack) {
-                            var accessToken = masterSlack.accessToken;
-                            request.get({
-                                url: 'https://slack.com/api/groups.create?token='+accessToken+'&name='+channelName+'&validate=true'
-                            }, function (err, response) {
+                    var accessToken = user.slackToken;
+                    request.get({
+                        url: 'https://slack.com/api/groups.create?token='+accessToken+'&name='+channelName+'&validate=true'
+                    }, function (err, response) {
+                        if(err) {
+                            console.log("error");
+                            return res.json({success: false});
+                        } else {
+                            console.log("success");
+                            var result = JSON.parse(response.body);
+                            console.log("createChannel = ", result);
+                            teamModel.findOne({_id: teamId}, function (err, team) {
                                 if(err) {
                                     console.log("error");
                                     return res.json({success: false});
                                 } else {
-                                    console.log("success");
-                                    var result = JSON.parse(response.body);
-                                    console.log("createChannel = ", result);
-                                    teamModel.findOne({_id: teamId}, function (err, team) {
-                                        if(err) {
-                                            console.log("error");
-                                            return res.json({success: false});
-                                        } else {
-                                            team.slackGroupId = result.group.id;
-                                            team.slackGroupName = result.group.name;
-                                            team.save(function (err, team) {
-                                                if (err) {
-                                                    console.log(err);
-                                                }
-                                            })
+                                    team.slackGroupId = result.group.id;
+                                    team.slackGroupName = result.group.name;
+                                    team.save(function (err, team) {
+                                        if (err) {
+                                            console.log(err);
                                         }
-                                    });
-                                    return res.json({success: true});
+                                    })
                                 }
                             });
+                            return res.json({success: true});
                         }
                     });
                 }
