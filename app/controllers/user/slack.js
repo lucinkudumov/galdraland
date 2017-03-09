@@ -220,11 +220,13 @@ module.exports = function (opts) {
                                         } else {
                                             console.log("groups.history success");
                                             var result = JSON.parse(response.body);
+                                            console.log("groups.history result = ", result);
                                             if (result.ok == true) {
                                                 console.log("groups.history  OK");
                                             } else {
                                                 console.log("groups.history  Fail");
                                             }
+                                            return res.json({success: true});
                                         }
                                     });
                                 }
