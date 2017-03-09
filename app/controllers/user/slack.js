@@ -11,17 +11,16 @@ module.exports = function (opts) {
     var userModel = opts.models.User;
     var teamModel = opts.models.Team;
     var masterSlackModel = opts.models.MasterSlack;
-
-    function getUserName(slackUser) {
-        userModel.findOne({slackUser: slackUser}, function (err, slackuser) {
+    var slackUsers = [];
+    function getUserName(slackUser, message) {
+        userModel.findOne({slackUser: slackUser}, function (err, user) {
             if (err) {
                 console.log(err);
-                return "";
-            } else if (slackuser) {
-                console.log("getUsername = ", slackuser.fullname);
-                return slackuser.fullname;
+            } else if (user) {
+                message.userName = user.fullname;
+//                slackUsers.push(slackUser);
+                console.log("getUsername = ", user.fullname);
             } else {
-                return "";
             }
         });
     }
@@ -237,16 +236,16 @@ module.exports = function (opts) {
                                             console.log("groups.history result = ", result);
                                             if (result.ok == true) {
                                                 console.log("groups.history  OK");
-                                                var slackUsers = [];
+//                                                slackUsers = [];
                                                 for (i = 0; i < result.messages.length; i++) {
                                                     result.messages[i].userName = "abc";
                                                     var slackUser = result.messages[i].user;
                                                     if (slackUser in slackUsers == false) {
                                                         console.log("slackUser = " + slackUser);
-                                                        var userName = getUserName(slackUser);
-                                                        console.log("userName = " + userName);
-                                                        result.messages[i].userName = userName;
-                                                        slackUsers.push({slackUser:userName});
+                                                        getUserName(slackUser, result.messages[i]);
+//                                                        console.log("userName = " + userName);
+//                                                        result.messages[i].userName = userName;
+//                                                        slackUsers.push({slackUser:userName});
                                                     }
                                                 }
                                                 return res.json({success: true, data: result});
