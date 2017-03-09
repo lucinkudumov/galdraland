@@ -170,22 +170,25 @@ module.exports = function (opts) {
                                     console.log(err);
                                 } else {
                                     var slackUser = user.slackUser;
-                                    request.get({
-                                        url: 'https://slack.com/api/groups.invite?token='+accessToken+'&channel='+slackGroupId+'&user='+slackUser
-                                    }, function (err, response) {
-                                        if(err) {
-                                            console.log("error");
-                                            return res.json({success: false});
-                                        } else {
-                                            console.log("success");
-                                            var result = JSON.parse(response.body);
-                                            if (result.ok == true) {
-                                                console.log("invite OK");
+                                    if (slackUser != null && slackUser != '') {
+                                        request.get({
+                                            url: 'https://slack.com/api/groups.invite?token='+accessToken+'&channel='+slackGroupId+'&user='+slackUser
+                                        }, function (err, response) {
+                                            if(err) {
+                                                console.log("error");
+                                                return res.json({success: false});
                                             } else {
-                                                console.log("invite Fail");
+                                                console.log("success");
+                                                var result = JSON.parse(response.body);
+                                                console.log("invite result = ", result);
+                                                if (result.ok == true) {
+                                                    console.log("invite OK");
+                                                } else {
+                                                    console.log("invite Fail");
+                                                }
                                             }
-                                        }
-                                    });
+                                        });
+                                    }
                                 }
                             });
                         });
