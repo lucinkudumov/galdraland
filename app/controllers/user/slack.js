@@ -384,7 +384,7 @@ module.exports = function (opts) {
                                             console.log("chat.postMessage  error");
                                             return res.json({success: false});
                                         } else {
-                                            console.log("chat.postMessage  error");
+                                            console.log("chat.postMessage  ok");
                                             return res.json({success: true});
                                         }
                                     });
