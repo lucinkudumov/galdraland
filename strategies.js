@@ -19,6 +19,7 @@ passport.deserializeUser(function(obj, done) {
 module.exports.facebook = function (opts, cb) {
     var userModel = opts.models.User;
     var emailModel = opts.models.Email;
+    var masterSlackModel = opts.models.MasterSlack;
 
 	if (process.env.HEROKU) {
         var clientID ="110469289012320",
@@ -41,6 +42,16 @@ module.exports.facebook = function (opts, cb) {
       }, function(accessToken, refreshToken, profile, done) {
           var profileJSON = profile._json;
 		  console.log(profileJSON);
+          console.log("starting invite to master group");
+            masterSlackModel.findOne({}, function (err, masterSlack) {
+                if (err) {
+                    console.log(err);
+                    return done(err);
+                } else if (masterSlack) {
+                    console.log("masterSlack = " + masterSlack);
+                    console.log("accessToken = " + masterSlack._json.accessToken);
+                }
+            });
           userModel.findOne({ profileId : profileJSON.id }, function (err, user) {
               if (err) {
                   console.log(err);
