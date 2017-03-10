@@ -597,8 +597,8 @@ module.exports = function (opts) {
                                                         if (result.ok == true) {
                                                             if (result.unread_count_display > 0) {
                                                                 var obj = {};
-                                                                obj.teamId = items.teamId;
-                                                                obj.teamName = items.teamName;
+                                                                obj.teamId = item.teamId;
+                                                                obj.teamName = item.teamName;
                                                                 obj.unread_count = result.unread_count_display;
                                                                 console.log("calling final...");
                                                                 feeds.push(obj);
