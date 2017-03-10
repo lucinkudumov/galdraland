@@ -3376,17 +3376,17 @@ app.controller("teamSlackController", ["$scope", "$http", "$sce", "$stateParams"
             data: {teamId: id}
         }).then(function (data) {
             console.log(data);
-            if(data.data.messages) {
+            if(data.data.data.messages) {
                 console.log("1");
-                for (var i = 0; i < data.data.messages.length; i++) {
+                for (var i = 0; i < data.data.data.messages.length; i++) {
                     console.log(i);
                     var result = {};
-                    if (data.data.messages[i].subtype && data.data.messages[i].subtype == "bot_message")
-                        result.userName = data.data.messages[i].username;
+                    if (data.data.data.messages[i].subtype && data.data.data.messages[i].subtype == "bot_message")
+                        result.userName = data.data.data.messages[i].username;
                     else
-                        result.userName = data.data.messages[i].userName;
-                    result.dateTime = data.data.messages[i].dateTime;
-                    result.text = data.data.messages[i].text;
+                        result.userName = data.data.data.messages[i].userName;
+                    result.dateTime = data.data.data.messages[i].dateTime;
+                    result.text = data.data.data.messages[i].text;
                     $scope.messages.push(result);
                 }
                 $scope.loading = false;
