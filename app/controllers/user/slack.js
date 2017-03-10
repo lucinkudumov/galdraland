@@ -228,7 +228,20 @@ module.exports = function (opts) {
                                             var result = JSON.parse(response.body);
                                             console.log("groups.archive OK");
                                             console.log("groups.archive result = " + result);
-                                            return res.json({success: true});
+                                            request.get({
+                                                url: 'https://slack.com/api/groups.close?token='+accessToken+'&channel='+slackGroupId
+                                            }, function (err, response) {
+                                                if(err) {
+                                                    console.log("groups.close  error");
+                                                    return res.json({success: false});
+                                                } else {
+                                                    var result = JSON.parse(response.body);
+                                                    console.log("groups.close OK");
+                                                    console.log("groups.close result = " + result);
+                                                    return res.json({success: true});
+                                                }
+                                            });
+
                                         }
                                     });
                                 } else {
