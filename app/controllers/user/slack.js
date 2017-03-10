@@ -604,9 +604,9 @@ module.exports = function (opts) {
                                                 if (qqq != null) feeds.push(qqq);
                                                 console.log(i);
                                             }
+                                            console.log("end");
+                                            return res.json({success: true, feeds: feeds});
                                         }
-                                        console.log("end");
-                                        return res.json({success: true, feeds: feeds});
                                     } else {
                                         return res.json({success: true, feeds: []});
                                     }
