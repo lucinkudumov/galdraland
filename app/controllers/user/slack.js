@@ -11,31 +11,6 @@ module.exports = function (opts) {
     var userModel = opts.models.User;
     var teamModel = opts.models.Team;
     var teamMemberModel = opts.models.TeamMember;
-    function f (accessToken, slackGroupId, teamId, teamName ) {
-        request.get({
-            url: 'https://slack.com/api/groups.history?token='+accessToken+'&channel='+slackGroupId+'&inclusive=true&count=10&unreads=true'
-        }, function (err, response) {
-            if (err) {
-                console.log(err);
-                return null;
-            } else {
-                var result = JSON.parse(response.body);
-                console.log("groups.history result = ", result);
-                if (result.ok == true) {
-                    if (result.unread_count_display > 0) {
-                        var obj = {};
-                        obj.teamId = teamId;
-                        obj.teamName = teamName;
-                        obj.unread_count = result.unread_count_display;
-                        console.log("calling final...");
-                        return obj;
-                    }
-                }
-                return null;
-            }
-            return null;
-        });
-    }
     return {
         "get#slack/auth" : function (req, res, next) {
             if (req.param('code') != null) {
@@ -569,6 +544,33 @@ module.exports = function (opts) {
         "get#slack/getFeeds": function (req, res) {
             console.log("userId = " + req.user._id);
             var feeds = [];
+            
+            function f (accessToken, slackGroupId, teamId, teamName ) {
+                request.get({
+                    url: 'https://slack.com/api/groups.history?token='+accessToken+'&channel='+slackGroupId+'&inclusive=true&count=10&unreads=true'
+                }, function (err, response) {
+                    if (err) {
+                        console.log(err);
+                        return null;
+                    } else {
+                        var result = JSON.parse(response.body);
+                        console.log("groups.history result = ", result);
+                        if (result.ok == true) {
+                            if (result.unread_count_display > 0) {
+                                var obj = {};
+                                obj.teamId = teamId;
+                                obj.teamName = teamName;
+                                obj.unread_count = result.unread_count_display;
+                                console.log("calling final...");
+                                return obj;
+                            }
+                        }
+                        return null;
+                    }
+                    return null;
+                });
+            }
+
             userModel.findOne({_id: req.user._id}, function (err, user) {
                 if (err) {
                     console.log(err);
