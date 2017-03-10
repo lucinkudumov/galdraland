@@ -2,8 +2,7 @@ var validator = require('validator'),
         async = require('async');
 var request = require('request');
 var dateFormat = require('dateformat');
-var wait = require('wait.for');
-//var sync_request = require('sync-request');
+var sync_request = require('sync-request');
 
 var slackClientID = "146827931650.146151726865";
 var slackClientSecret = "80c8c252dabe4cbc46cfe0e29fb6272c";
@@ -578,8 +577,8 @@ module.exports = function (opts) {
                                             var slackGroupId = teams[i].slackGroupId;
                                             var teamId = teams[i]._id;
                                             var teamName = teams[i].name;
-//                                            var res = sync_request('GET', 'https://slack.com/api/groups.history?token='+accessToken+'&channel='+slackGroupId+'&inclusive=true&count=10&unreads=true');
-//                                            console.log(res.getBody());
+                                            var res = sync_request('GET', 'https://slack.com/api/groups.history?token='+accessToken+'&channel='+slackGroupId+'&inclusive=true&count=10&unreads=true');
+                                            console.log(res.getBody());
 //                                                .get({
 //                                                url: 'https://slack.com/api/groups.history?token='+accessToken+'&channel='+slackGroupId+'&inclusive=true&count=10&unreads=true'
 //                                            }, function (err, response) {
