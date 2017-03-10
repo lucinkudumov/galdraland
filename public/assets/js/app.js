@@ -1497,6 +1497,7 @@ app.controller("headerController", ["$scope", "$rootScope", "$http", "$location"
         $scope.scategory = ($temp) ? $temp : "a";
         $scope.stext = ($stateParams.sterm) ? $stateParams.sterm : "";
         $scope.slackAuthentication = false;
+        $scope.loading = true;
         $http({
             method: "POST",
             url: "getUserById",
@@ -1505,6 +1506,7 @@ app.controller("headerController", ["$scope", "$rootScope", "$http", "$location"
         }).then(function success(data) {
             if (data.data.user.slackToken && data.data.user.slackToken != '' && data.data.user.slackUser && data.data.user.slackUser != '') {
                 $scope.slackAuthentication = true;
+                $scope.loading = false;
             }
             $http({
                 method: "GET", url: "getInvites", api: true
