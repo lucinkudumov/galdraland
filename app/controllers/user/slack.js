@@ -221,9 +221,8 @@ module.exports = function (opts) {
                                             console.log("groups.history success");
                                             var result = JSON.parse(response.body);
                                             console.log("groups.history result = ", result);
-                                            if (result.ok == true) {
+                                            if (result.ok == true && result.messages.length > 0) {
                                                 console.log("groups.history  OK");
-                                                var max = result.messages.length;
                                                 var slackUser = "";
                                                 if (result.messages[0]) {
                                                 slackUser = result.messages[0].user;
@@ -257,7 +256,6 @@ module.exports = function (opts) {
                                                 slackUser = result.messages[3].user;
                                                     var date = new Date(result.messages[3].ts * 1000);
                                                     result.messages[3].dateTime =dateFormat(date, "yyyy-mm-dd h:MM:ss");
-
                                                 userModel.findOne({slackUser: slackUser}, function (err, user) {
                                                 if (err) {
                                                 console.log(err);
@@ -387,6 +385,8 @@ module.exports = function (opts) {
                                             return res.json({success: false});
                                         } else {
                                             console.log("chat.postMessage  ok");
+                                            var result = JSON.parse(response.body);
+                                            console.log("chat.postMessage result = ", result);
                                             return res.json({success: true});
                                         }
                                     });
