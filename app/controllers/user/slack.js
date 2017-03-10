@@ -2,6 +2,7 @@ var validator = require('validator'),
         async = require('async');
 var request = require('request');
 var dateFormat = require('dateformat');
+var wait = require('wait.for');
 
 var slackClientID = "146827931650.146151726865";
 var slackClientSecret = "80c8c252dabe4cbc46cfe0e29fb6272c";
@@ -569,27 +570,29 @@ module.exports = function (opts) {
                                 } else {
                                     if (teams.length > 0) {
                                         for (i= 0; i < teams.length; i++) {
-                                            var slackGroupId = teams[i].slackGroupId;
-                                            request.get({
-                                                url: 'https://slack.com/api/groups.history?token='+accessToken+'&channel='+slackGroupId+'&inclusive=true&count=10&unreads=true'
-                                            }, function (err, response) {
-                                                if (err) {
-                                                    console.log(err);
-                                                    return res.json({success: false, feeds: []});
-                                                } else {
-                                                    var result = JSON.parse(response.body);
-                                                    console.log("groups.history result = ", result);
-                                                    if (result.ok) {
-                                                        if (result.unread_count_display > 0) {
-                                                            var obj = {};
-                                                            obj.teamId = teams[i]._id;
-                                                            obj.teamName = teams[i].name;
-                                                            obj.unread_count = result.unread_count_display;
-                                                            feeds.push(obj);
+//                                            var slackGroupId = teams[i].slackGroupId;
+                                            wait.for (
+                                                request.get({
+                                                    url: 'https://slack.com/api/groups.history?token='+accessToken+'&channel='+teams[i].slackGroupId+'&inclusive=true&count=10&unreads=true'
+                                                }, function (err, response) {
+                                                    if (err) {
+                                                        console.log(err);
+                                                        return res.json({success: false, feeds: []});
+                                                    } else {
+                                                        var result = JSON.parse(response.body);
+                                                        console.log("groups.history result = ", result);
+                                                        if (result.ok) {
+                                                            if (result.unread_count_display > 0) {
+                                                                var obj = {};
+                                                                obj.teamId = teams[i]._id;
+                                                                obj.teamName = teams[i].name;
+                                                                obj.unread_count = result.unread_count_display;
+                                                                feeds.push(obj);
+                                                            }
                                                         }
                                                     }
-                                                }
-                                            });
+                                                })
+                                            );
                                         }
                                         return res.json({success: true, feeds: feeds});
                                     }
