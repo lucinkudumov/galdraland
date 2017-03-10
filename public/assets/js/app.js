@@ -1496,37 +1496,46 @@ app.controller("headerController", ["$scope", "$rootScope", "$http", "$location"
             $temp = "p";
         $scope.scategory = ($temp) ? $temp : "a";
         $scope.stext = ($stateParams.sterm) ? $stateParams.sterm : "";
-
+        $scope.slackAuthentication = false;
         $http({
-            method: "GET", url: "getInvites", api: true
-        }).then (function (result) {
-            if (result !== undefined && result.data !== undefined && result.data.invites !== undefined)
-                $scope.invites = result.data.invites;
-            else
-                $scope.invites = [];
-
-            return $http({method: "GET", url: "getApplies", api: true});
-        }).then(function (result) {
-            if (result !== undefined && result.data !== undefined && result.data.applies !== undefined)
-                $scope.applies = result.data.applies;
-            else
-                $scope.applies = [];
+            method: "POST",
+            url: "getUserById",
+            api: true,
+            data: {id: $scope.user._id}
+        }).then(function success(data) {
+            if (data.data.user.slackToken && data.data.user.slackToken != '' && data.data.user.slackUser && data.data.user.slackUser != '') {
+                $scope.slackAuthentication = true;
+            }
             $http({
-                method: "GET", url: "getMasterRecommendates", api: true
+                method: "GET", url: "getInvites", api: true
             }).then (function (result) {
-                if (result !== undefined && result.data !== undefined && result.data.recommendates !== undefined)
-                    $scope.masterRecommendates = result.data.recommendates;
+                if (result !== undefined && result.data !== undefined && result.data.invites !== undefined)
+                    $scope.invites = result.data.invites;
                 else
-                    $scope.masterRecommendates = [];
-
+                    $scope.invites = [];
+                return $http({method: "GET", url: "getApplies", api: true});
+            }).then(function (result) {
+                if (result !== undefined && result.data !== undefined && result.data.applies !== undefined)
+                    $scope.applies = result.data.applies;
+                else
+                    $scope.applies = [];
                 $http({
-                    method: "GET", url: "getSlaveRecommendates", api: true
+                    method: "GET", url: "getMasterRecommendates", api: true
                 }).then (function (result) {
                     if (result !== undefined && result.data !== undefined && result.data.recommendates !== undefined)
-                        $scope.slaveRecommendates = result.data.recommendates;
+                        $scope.masterRecommendates = result.data.recommendates;
                     else
-                        $scope.slaveRecommendates = [];
-                    refresh_feeds();
+                        $scope.masterRecommendates = [];
+
+                    $http({
+                        method: "GET", url: "getSlaveRecommendates", api: true
+                    }).then (function (result) {
+                        if (result !== undefined && result.data !== undefined && result.data.recommendates !== undefined)
+                            $scope.slaveRecommendates = result.data.recommendates;
+                        else
+                            $scope.slaveRecommendates = [];
+                        refresh_feeds();
+                    });
                 });
             });
         });
