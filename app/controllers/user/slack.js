@@ -216,32 +216,42 @@ module.exports = function (opts) {
                                 return res.json({success: false});
                             } else if (user) {
                                 var accessToken = user.slackToken;
-                                var slackUser = user.slackUser;
                                 if (accessToken != null && accessToken != '') {
                                     request.get({
-                                        url: 'https://slack.com/api/groups.archive?token='+accessToken+'&channel='+slackGroupId
+                                        url: 'https://slack.com/api/groups.leave?token='+accessToken+'&channel='+slackGroupId
                                     }, function (err, response) {
                                         if(err) {
-                                            console.log("groups.archive  error");
+                                            console.log("groups.leave  error");
                                             return res.json({success: false});
                                         } else {
                                             var result = JSON.parse(response.body);
-                                            console.log("groups.archive OK");
-                                            console.log("groups.archive result = " + result);
+                                            console.log("groups.leave OK");
+                                            console.log("groups.leave result = " + result);
                                             request.get({
-                                                url: 'https://slack.com/api/groups.close?token='+accessToken+'&channel='+slackGroupId
+                                                url: 'https://slack.com/api/groups.archive?token='+accessToken+'&channel='+slackGroupId
                                             }, function (err, response) {
                                                 if(err) {
-                                                    console.log("groups.close  error");
+                                                    console.log("groups.archive  error");
                                                     return res.json({success: false});
                                                 } else {
                                                     var result = JSON.parse(response.body);
-                                                    console.log("groups.close OK");
-                                                    console.log("groups.close result = " + result);
-                                                    return res.json({success: true});
+                                                    console.log("groups.archive OK");
+                                                    console.log("groups.archive result = " + result);
+                                                    request.get({
+                                                        url: 'https://slack.com/api/groups.close?token='+accessToken+'&channel='+slackGroupId
+                                                    }, function (err, response) {
+                                                        if(err) {
+                                                            console.log("groups.close  error");
+                                                            return res.json({success: false});
+                                                        } else {
+                                                            var result = JSON.parse(response.body);
+                                                            console.log("groups.close OK");
+                                                            console.log("groups.close result = " + result);
+                                                            return res.json({success: true});
+                                                        }
+                                                    });
                                                 }
                                             });
-
                                         }
                                     });
                                 } else {
