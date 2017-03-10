@@ -1506,8 +1506,8 @@ app.controller("headerController", ["$scope", "$rootScope", "$http", "$location"
         }).then(function success(data) {
             if (data.data.user.slackToken && data.data.user.slackToken != '' && data.data.user.slackUser && data.data.user.slackUser != '') {
                 $scope.slackAuthentication = true;
-                $scope.loading = false;
             }
+            $scope.loading = false;
             $http({
                 method: "GET", url: "getInvites", api: true
             }).then (function (result) {
