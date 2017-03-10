@@ -3360,7 +3360,7 @@ app.controller("teamBlogViewController", ["$scope", "$http", "$sce", "$location"
     $scope.refresh();
 }]);
 
-app.controller("teamSlackController", ["$scope", "$http", "$sce", "$stateParams", "User", "$location", "$compile", function ($scope, $http, $sce, $stateParams, User, $location, $compile) {
+app.controller("teamSlackController", ["$scope", "$http", "$sce", "$stateParams", "User", "$location", "$compile", "$state", function ($scope, $http, $sce, $stateParams, User, $location, $compile, $state) {
     var id = $stateParams.id;
 
     $scope.goBack = function () {
@@ -3397,7 +3397,8 @@ app.controller("teamSlackController", ["$scope", "$http", "$sce", "$stateParams"
         console.log("calling... sendSlack msg = " + $scope.slackMsg);
         $http({method: "POST", url: "slack/sendMessage", api: true, data: {teamId: id, msg: $scope.slackMsg}}).then(function (data) {
             console.log("ending... sendSlack");
-            $location.path("/teams/slack/" + id);
+//            $location.path("/teams/slack/" + id);
+            $state.reload();
         });
     };
 
