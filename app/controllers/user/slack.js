@@ -22,12 +22,13 @@ module.exports = function (opts) {
             } else {
                 var result = JSON.parse(response.body);
                 console.log("groups.history result = ", result);
-                if (result.ok) {
+                if (result.ok == true) {
                     if (result.unread_count_display > 0) {
                         var obj = {};
                         obj.teamId = teamId;
                         obj.teamName = teamName;
                         obj.unread_count = result.unread_count_display;
+                        console.log("calling final...");
                         feeds.push(obj);
                     }
                 }
