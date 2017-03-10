@@ -597,7 +597,9 @@ module.exports = function (opts) {
                                             var teamId = teams[i]._id;
                                             var teamName = teams[i].name;
                                             wait.launchFiber (f ,accessToken, slackGroupId, teamId, teamName);
+                                            console.log(i);
                                         }
+                                        console.log("end");
                                         return res.json({success: true, feeds: feeds});
                                     } else {
                                         return res.json({success: true, feeds: []});
