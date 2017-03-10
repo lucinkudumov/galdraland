@@ -578,27 +578,29 @@ module.exports = function (opts) {
                                             var slackGroupId = teams[i].slackGroupId;
                                             var teamId = teams[i]._id;
                                             var teamName = teams[i].name;
-                                            request.get({
-                                                url: 'https://slack.com/api/groups.history?token='+accessToken+'&channel='+slackGroupId+'&inclusive=true&count=10&unreads=true'
-                                            }, function (err, response) {
-                                                if (err) {
-                                                    console.log(err);
-                                                    return null;
-                                                } else {
-                                                    var result = JSON.parse(response.body);
-                                                    console.log("groups.history result = ", result);
-                                                    if (result.ok == true) {
-                                                        if (result.unread_count_display > 0) {
-                                                            var obj = {};
-                                                            obj.teamId = teamId;
-                                                            obj.teamName = teamName;
-                                                            obj.unread_count = result.unread_count_display;
-                                                            console.log("calling final...");
-                                                            feeds.push(obj);
-                                                        }
-                                                    }
-                                                }
-                                            });
+                                            var res = sync_request('GET', 'https://slack.com/api/groups.history?token='+accessToken+'&channel='+slackGroupId+'&inclusive=true&count=10&unreads=true');
+                                            console.log(res.getBody());
+//                                                .get({
+//                                                url: 'https://slack.com/api/groups.history?token='+accessToken+'&channel='+slackGroupId+'&inclusive=true&count=10&unreads=true'
+//                                            }, function (err, response) {
+//                                                if (err) {
+//                                                    console.log(err);
+//                                                    return null;
+//                                                } else {
+//                                                    var result = JSON.parse(response.body);
+//                                                    console.log("groups.history result = ", result);
+//                                                    if (result.ok == true) {
+//                                                        if (result.unread_count_display > 0) {
+//                                                            var obj = {};
+//                                                            obj.teamId = teamId;
+//                                                            obj.teamName = teamName;
+//                                                            obj.unread_count = result.unread_count_display;
+//                                                            console.log("calling final...");
+//                                                            feeds.push(obj);
+//                                                        }
+//                                                    }
+//                                                }
+//                                            });
                                             console.log(i);
                                         }
                                         console.log("end");
