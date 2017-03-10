@@ -21,7 +21,7 @@
                 <td>{{ t.teamMembers.length}} members</td>
                 <td>
                     <a href="/teams/view/{{ t._id}}" class="btn btn-same-size btn-primary" ng-show="user._id != t.owner._id">View</a>
-                    <a href="#" class="btn btn-same-size btn-danger" ng-show="user._id != t.owner._id">Leave</a>
+                    <!--<a href="#" class="btn btn-same-size btn-danger" ng-show="user._id != t.owner._id">Leave</a>-->
                     <a href="/teams/view/{{ t._id}}" class="btn btn-same-size btn-primary" ng-show="user._id == t.owner._id">Manage</a>
                 </td>
                 </tr>
