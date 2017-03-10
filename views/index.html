@@ -91,6 +91,10 @@
                 js.src = "//connect.facebook.net/en_US/sdk.js";
                 fjs.parentNode.insertBefore(js, fjs);
             }(document, 'script', 'facebook-jssdk'));
+            
+            function alertSlackAuth() {
+                alert("First You should authorize for SLACK Team Galdra");
+            }
         </script>
         <div ng-controller="loginController">
         <div ui-view="main">

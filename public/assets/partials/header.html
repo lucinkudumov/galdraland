@@ -70,9 +70,6 @@
                 message: 'Invite your friends to Galdraland'
             });
         }
-        function alertSlackAuth() {
-            alert("First You should authorize for SLACK Team Galdra");
-        }
     </script>
     <div id='fb-root'></div>
 	<div class="col-md-12 search-menu darkblue">
@@ -81,7 +78,7 @@
             <li ng-show="slackAuthentication == false"><a onclick="window.open('https://slack.com/oauth/authorize?scope=groups:read+groups:write&client_id=146827931650.146151726865&redirect_uri=https://galdraland-1-0.herokuapp.com/api/slack/auth', '_blank', 'location=yes,height=570,width=520,scrollbars=yes,status=yes');"><img style="width: 150px; height: 35px;" src="https://api.slack.com/img/sign_in_with_slack.png" /></a></li>
             <li><a class="btn btn-success" href="#" onclick='FacebookInviteFriends1();'>Invite your friends</a></li>
             <li ng-show="slackAuthentication == true"><a class="btn btn-success" href="/teams/create">Create a new team</a></li>
-            <li ng-show="slackAuthentication == false"><a class="btn btn-disable" href="#" onclick='alertSlackAuth();'>Create a new team</a></li>
+            <li ng-show="slackAuthentication == false"><a class="btn btn-success" href="#" onclick='alertSlackAuth();'>Create a new team</a></li>
             <li><a class="btn btn-success" href="/adventures/create">Create a new Adventure</a></li>
             <li><select ng-model="scategory">
 				<option value="a">Adventure</option>

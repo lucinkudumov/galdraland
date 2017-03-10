@@ -3585,54 +3585,63 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
         $scope.description = "";
         $scope.owner = null;
 
+
     $scope.emptyMembers = [];
     $scope.emptyRecMembers = [];
-
+    $scope.slackAuthentication = false;
         $scope.refresh = function () {
             console.log("refreshing.....");
             $http({
                 method: "POST",
-                url: "getTeam",
+                url: "getUserById",
                 api: true,
-                data: {id: $stateParams.id}
-            }).then(function (data) {
-                if (data.data.team.description && data.data.team.description != "") {
-                    var find = "\n";
-                    var re = new RegExp(find, 'g');
-                    data.data.team.description = $sce.trustAsHtml(data.data.team.description.replace(re,"<br>"));
-                    $scope.description = data.data.team.description;
+                data: {id: $scope.user._id}
+            }).then(function success(data) {
+                if (data.data.user.slackToken && data.data.user.slackToken != '' && data.data.user.slackUser && data.data.user.slackUser != '') {
+                    $scope.slackAuthentication = true;
                 }
-
-                if (data.data.team.mission && data.data.team.mission != "") {
-                    var find = "\n";
-                    var re = new RegExp(find, 'g');
-                    data.data.team.mission = $sce.trustAsHtml(data.data.team.mission.replace(re,"<br>"));
-                }
-
-                if (data.data.team.tags && data.data.team.tags.length > 0) {
-                    if (data.data.team.tags[0] == "") data.data.team.tags = [];
-                }
-                $scope.team = data.data.team;
-                $scope.adventures = data.data.advs;
-                $scope.isManager = data.data.team.owner._id == $scope.user._id;
-                $scope.isMember = false;
-                for (var i = 0; i < data.data.team.teamMembers.length; i++) {
-                    if (data.data.team.teamMembers[i].user.profileId == '000000000000000000000000') {
-                        $scope.emptyMembers.push(data.data.team.teamMembers[i]);
-                        $scope.emptyRecMembers.push(data.data.team.teamMembers[i]);
-                    }
-                    if (data.data.team.teamMembers[i].user._id == $scope.user._id)
-                        $scope.isMember = true;
-                }
-
                 $http({
                     method: "POST",
-                    url: "team/bloglist",
+                    url: "getTeam",
                     api: true,
-                    data: {team: $stateParams.id}
+                    data: {id: $stateParams.id}
                 }).then(function (data) {
-                    $scope.teamblogs = data.data.teamblogs;
-                    console.log("teamblogs = ", teamblogs);
+                    if (data.data.team.description && data.data.team.description != "") {
+                        var find = "\n";
+                        var re = new RegExp(find, 'g');
+                        data.data.team.description = $sce.trustAsHtml(data.data.team.description.replace(re,"<br>"));
+                        $scope.description = data.data.team.description;
+                    }
+                    if (data.data.team.mission && data.data.team.mission != "") {
+                        var find = "\n";
+                        var re = new RegExp(find, 'g');
+                        data.data.team.mission = $sce.trustAsHtml(data.data.team.mission.replace(re,"<br>"));
+                    }
+                    if (data.data.team.tags && data.data.team.tags.length > 0) {
+                        if (data.data.team.tags[0] == "") data.data.team.tags = [];
+                    }
+                    $scope.team = data.data.team;
+                    $scope.adventures = data.data.advs;
+                    $scope.isManager = data.data.team.owner._id == $scope.user._id;
+                    $scope.isMember = false;
+                    for (var i = 0; i < data.data.team.teamMembers.length; i++) {
+                        if (data.data.team.teamMembers[i].user.profileId == '000000000000000000000000') {
+                            $scope.emptyMembers.push(data.data.team.teamMembers[i]);
+                            $scope.emptyRecMembers.push(data.data.team.teamMembers[i]);
+                        }
+                        if (data.data.team.teamMembers[i].user._id == $scope.user._id)
+                            $scope.isMember = true;
+                    }
+
+                    $http({
+                        method: "POST",
+                        url: "team/bloglist",
+                        api: true,
+                        data: {team: $stateParams.id}
+                    }).then(function (data) {
+                            $scope.teamblogs = data.data.teamblogs;
+                            console.log("teamblogs = ", teamblogs);
+                    });
                 });
             });
         }
