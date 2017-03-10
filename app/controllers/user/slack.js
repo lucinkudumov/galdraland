@@ -2,7 +2,6 @@ var validator = require('validator'),
         async = require('async');
 var request = require('request');
 var dateFormat = require('dateformat');
-var request1 = require('sync-request');
 
 var slackClientID = "146827931650.146151726865";
 var slackClientSecret = "80c8c252dabe4cbc46cfe0e29fb6272c";
@@ -570,42 +569,51 @@ module.exports = function (opts) {
                                     console.log(err);
                                     return res.json({success: false, feeds: []});
                                 } else {
+                                    var items = [];
                                     if (teams.length > 0) {
-                                        console.log(teams.length);
-                                        console.log(accessToken);
                                         for (i= 0; i < teams.length; i++) {
                                             var slackGroupId = teams[i].slackGroupId;
                                             var teamId = teams[i]._id;
                                             var teamName = teams[i].name;
-                                            try {
-                                                var res = request1('GET', 'https://slack.com/api/groups.history?token='+accessToken+'&channel='+slackGroupId+'&inclusive=true&count=10&unreads=true');
-                                                console.log(res.getBody());
-                                            } catch (e) {
-                                                console.log(e);
-                                            }
-//                                                .get({
-//                                                url: 'https://slack.com/api/groups.history?token='+accessToken+'&channel='+slackGroupId+'&inclusive=true&count=10&unreads=true'
-//                                            }, function (err, response) {
-//                                                if (err) {
-//                                                    console.log(err);
-//                                                    return null;
-//                                                } else {
-//                                                    var result = JSON.parse(response.body);
-//                                                    console.log("groups.history result = ", result);
-//                                                    if (result.ok == true) {
-//                                                        if (result.unread_count_display > 0) {
-//                                                            var obj = {};
-//                                                            obj.teamId = teamId;
-//                                                            obj.teamName = teamName;
-//                                                            obj.unread_count = result.unread_count_display;
-//                                                            console.log("calling final...");
-//                                                            feeds.push(obj);
-//                                                        }
-//                                                    }
-//                                                }
-//                                            });
-                                            console.log(i);
+                                            var url = 'https://slack.com/api/groups.history?token='+accessToken+'&channel='+slackGroupId+'&inclusive=true&count=10&unreads=true'
+                                            var obj = {};
+                                            obj.url = url;
+                                            obj.teamId = teamId;
+                                            obj.teamId = teamName;
+                                            items.push(obj);
                                         }
+
+                                        function synchAPICalls(items) {
+                                            var item = items.pop();
+                                            setTimeout(function(){
+                                                request.get({
+                                                    url: item.url
+                                                }, function (err, response) {
+                                                    if(err) {
+                                                        console.log("groups.history  error");
+                                                    } else {
+                                                        var result = JSON.parse(response.body);
+                                                        console.log("groups.history result = ", result);
+                                                        if (result.ok == true) {
+                                                            if (result.unread_count_display > 0) {
+                                                                var obj = {};
+                                                                obj.teamId = items.teamId;
+                                                                obj.teamName = items.teamName;
+                                                                obj.unread_count = result.unread_count_display;
+                                                                console.log("calling final...");
+                                                                feeds.push(obj);
+                                                            }
+                                                        }
+                                                        if (items.length) {
+                                                            syschAPICalls(items);
+                                                        } else {
+                                                            console.log("all done!");
+                                                        }
+                                                    }
+                                                });
+                                            },5000);
+                                        }
+                                        synchAPICalls(items)
                                         console.log("end");
                                     } else {
                                         return res.json({success: true, feeds: []});
