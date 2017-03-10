@@ -3664,11 +3664,10 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
 
             modalInstance.result.then(function (result) {
                 if (result == "YES") {
-                    $http({method: "POST", url: "removeTeam", api: true, data: {id: $scope.team._id}}).then(function () {
-                        $location.path("/teams");
-                    });
                     $http({method: "POST", url: "slack/closeChannel", api: true, data: {id: $scope.team._id}}).then(function (data) {
-                        console.log("calling closeChannel....");
+                        $http({method: "POST", url: "removeTeam", api: true, data: {id: $scope.team._id}}).then(function () {
+                            $location.path("/teams");
+                        });
                     });
                 }
             });
