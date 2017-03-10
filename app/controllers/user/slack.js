@@ -608,6 +608,7 @@ module.exports = function (opts) {
                                 } else {
                                     if (teams.length > 0) {
                                         wait.launchFiber(b , teams, accessToken);
+                                        console.log("lll");
                                     } else {
                                         return res.json({success: true, feeds: []});
                                     }
