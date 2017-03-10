@@ -542,27 +542,65 @@ module.exports = function (opts) {
         },
         "get#slack/getFeeds": function (req, res) {
             console.log("userId = " + req.user._id);
-            teamMemberModel.find({user: req.user._id}, function (err, members) {
+            var feeds = [];
+            userModel.findOne({_id: req.user._id}, function (err, user) {
                 if (err) {
                     console.log(err);
-                    return res.json({success: false});
-                } else {
-                    var member_ids = [];
-                    if (!members)
-                        member_ids = [];
-                    else {
-                        for (var i = 0; i < members.length; i++)
-                            member_ids.push(members[i]._id);
-                    }
-                    teamModel.find({$or: [{owner: req.user._id}, {teamMembers: {$in: member_ids}}]}).populate("owner teamMembers").exec(function (err, teams) {
+                    return res.json({success: false, feeds: []});
+                } else if (user) {
+                    var accessToken = user.slackToken;
+                    var slackUser = user.slackUser;
+                    teamMemberModel.find({user: req.user._id}, function (err, members) {
                         if (err) {
                             console.log(err);
-                            return res.json({success: false});
+                            return res.json({success: false, feeds: []});
                         } else {
-                            console.log("my Teams = ", teams);
-                            return res.json({success: true, teams: teams});
+                            var member_ids = [];
+                            if (!members)
+                                member_ids = [];
+                            else {
+                                for (var i = 0; i < members.length; i++)
+                                    member_ids.push(members[i]._id);
+                            }
+                            teamModel.find({$or: [{owner: req.user._id}, {teamMembers: {$in: member_ids}}]}).populate("owner teamMembers").exec(function (err, teams) {
+                                if (err) {
+                                    console.log(err);
+                                    return res.json({success: false, feeds: []});
+                                } else {
+                                    console.log("my Teams = ", teams);
+                                    if (teams.length > 0) {
+                                        for (i= 0; i < teams.length; i++) {
+                                            var slackGroupId = teams[i].slackGroupId;
+                                            request.get({
+                                                url: 'https://slack.com/api/groups.history?token='+accessToken+'&channel='+slackGroupId+'&inclusive=true&count=10&unreads=true'
+                                            }, function (err, response) {
+                                                if (err) {
+                                                    console.log(err);
+                                                    return res.json({success: false, feeds: []});
+                                                } else {
+                                                    var result = JSON.parse(response.body);
+                                                    console.log("groups.history result = ", result);
+                                                    if (result.ok) {
+                                                        if (result.unread_count_display > 0) {
+                                                            var obj = {};
+                                                            obj.teamId = teams[i]._id;
+                                                            obj.teamName = teams[i].name;
+                                                            obj.unread_count = result.unread_count_display;
+                                                            feeds.push(obj);
+                                                        }
+                                                    }
+                                                }
+                                            });
+                                        }
+                                        return res.json({success: true, feeds: feeds});
+                                    }
+                                    return res.json({success: true, feeds: []});
+                                }
+                            });
                         }
                     });
+                } else {
+                    return res.json({success: false, feeds: []});
                 }
             });
         },
