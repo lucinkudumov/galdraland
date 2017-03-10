@@ -47,7 +47,6 @@ module.exports = function (opts) {
                             }
                         });
 
-
                         request.get({
                             url: 'https://slack.com/api/groups.list?token='+result.access_token+
                                 '&exclude_archived=false'
