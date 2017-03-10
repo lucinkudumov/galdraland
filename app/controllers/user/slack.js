@@ -544,7 +544,7 @@ module.exports = function (opts) {
         "get#slack/getFeeds": function (req, res) {
             console.log("userId = " + req.user._id);
             var feeds = [];
-            
+
             function f (accessToken, slackGroupId, teamId, teamName ) {
                 request.get({
                     url: 'https://slack.com/api/groups.history?token='+accessToken+'&channel='+slackGroupId+'&inclusive=true&count=10&unreads=true'
@@ -600,6 +600,7 @@ module.exports = function (opts) {
                                             var slackGroupId = teams[i].slackGroupId;
                                             var teamId = teams[i]._id;
                                             var teamName = teams[i].name;
+                                            wait.launchFiber(f ,accessToken, slackGroupId, teamId, teamName);
                                             var qqq = wait.for (f ,accessToken, slackGroupId, teamId, teamName);
                                             if (qqq != null) feeds.push(qqq);
                                             console.log(i);
