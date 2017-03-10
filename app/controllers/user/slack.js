@@ -219,15 +219,15 @@ module.exports = function (opts) {
                                 var slackUser = user.slackUser;
                                 if (accessToken != null && accessToken != '') {
                                     request.get({
-                                        url: 'https://slack.com/api/groups.close?token='+accessToken+'&channel='+slackGroupId
+                                        url: 'https://slack.com/api/groups.archive?token='+accessToken+'&channel='+slackGroupId
                                     }, function (err, response) {
                                         if(err) {
-                                            console.log("groups.close  error");
+                                            console.log("groups.archive  error");
                                             return res.json({success: false});
                                         } else {
                                             var result = JSON.parse(response.body);
-                                            console.log("groups.close OK");
-                                            console.log("groups.close result = " + result);
+                                            console.log("groups.archive OK");
+                                            console.log("groups.archive result = " + result);
                                             return res.json({success: true});
                                         }
                                     });
