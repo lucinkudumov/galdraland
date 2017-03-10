@@ -9,9 +9,7 @@ var slackClientSecret = "80c8c252dabe4cbc46cfe0e29fb6272c";
 module.exports = function (opts) {
     var userModel = opts.models.User;
     var teamModel = opts.models.Team;
-    var masterSlackModel = opts.models.MasterSlack;
-    var slackUsers = [];
-
+    var teamMemberModel = opts.models.TeamMember;
     return {
         "get#slack/auth" : function (req, res, next) {
             if (req.param('code') != null) {
@@ -539,6 +537,32 @@ module.exports = function (opts) {
                             }
                         });
                     }
+                }
+            });
+        },
+        "get#slack/getFeeds": function (req, res) {
+            console.log("userId = " + req.user._id);
+            teamMemberModel.find({user: req.user._id}, function (err, members) {
+                if (err) {
+                    console.log(err);
+                    return res.json({success: false});
+                } else {
+                    var member_ids = [];
+                    if (!members)
+                        member_ids = [];
+                    else {
+                        for (var i = 0; i < members.length; i++)
+                            member_ids.push(members[i]._id);
+                    }
+                    teamModel.find({$or: [{owner: req.user._id}, {teamMembers: {$in: member_ids}}]}).populate("owner teamMembers").exec(function (err, teams) {
+                        if (err) {
+                            console.log(err);
+                            return res.json({success: false});
+                        } else {
+                            console.log("my Teams = ", teams);
+                            return res.json({success: true, teams: teams});
+                        }
+                    });
                 }
             });
         },
