@@ -12,13 +12,15 @@ module.exports = function (opts) {
     var teamModel = opts.models.Team;
     var teamMemberModel = opts.models.TeamMember;
 
-    function f (accessToken, teams ) {
-        var feeds = [];
+
+    function b(teams, accessToken) {
+        console.log(teams.length);
+        console.log(accessToken);
         for (i= 0; i < teams.length; i++) {
             var slackGroupId = teams[i].slackGroupId;
             var teamId = teams[i]._id;
             var teamName = teams[i].name;
-            request.get({
+            wait.for(request.get({
                 url: 'https://slack.com/api/groups.history?token='+accessToken+'&channel='+slackGroupId+'&inclusive=true&count=10&unreads=true'
             }, function (err, response) {
                 if (err) {
@@ -38,19 +40,10 @@ module.exports = function (opts) {
                         }
                     }
                 }
-            });
+            }));
             console.log(i);
         }
         console.log("end");
-        return feeds;
-    }
-
-    function b(teams, accessToken) {
-        console.log(teams.length);
-        console.log(accessToken);
-        var obj = wait.for (f ,accessToken, teams);
-        console.log("asdfsdf = ", obj);
-        return obj;
     }
 
     return {
