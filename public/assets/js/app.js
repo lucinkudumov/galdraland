@@ -3376,8 +3376,19 @@ app.controller("teamSlackController", ["$scope", "$http", "$sce", "$stateParams"
             data: {teamId: id}
         }).then(function (data) {
             console.log(data);
-            $scope.messages = data.data.messages;
-            $scope.loading = false;
+            if(data.data.messages) {
+                for (var i = 0; i < data.data.messages.length; i++) {
+                    var result = {};
+                    if (data.data.messages[i].subtype && data.data.messages[i].subtype == "bot_message")
+                        result.userName = data.data.messages[i].username;
+                    else
+                        result.userName = data.data.messages[i].userName;
+                    result.dateTime = data.data.messages[i].dateTime;
+                    result.text = data.data.messages[i].text;
+                    $scope.messages.push(result);
+                }
+                $scope.loading = false;
+            }
         });
     };
 
