@@ -354,6 +354,8 @@ module.exports = function (opts) {
                                             }
                                         }
                                     });
+                                } else {
+                                    return res.json({success: false});
                                 }
                             }
                         });
@@ -388,6 +390,8 @@ module.exports = function (opts) {
                                             return res.json({success: true});
                                         }
                                     });
+                                } else {
+                                    return res.json({success: false});
                                 }
                             }
                         });
