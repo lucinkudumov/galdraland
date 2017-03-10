@@ -198,7 +198,6 @@ module.exports = function (opts) {
                     return res.json({success: false});
                 }
             });
-
         },
         "post#slack/closeChannel": function (req, res) {
             var teamId = req.body.id;
@@ -457,10 +456,12 @@ module.exports = function (opts) {
                                                                                         console.log(err);
                                                                                     } else if (user) {
                                                                                         result.messages[6].userName = user.fullname;
-                                                                                        var date = new Date(result.messages[7].ts * 1000);
-                                                                                        result.messages[7].dateTime =dateFormat(date, "yyyy-mm-dd h:MM:ss");
+                                                                                        var date = new Date(result.messages[6].ts * 1000);
+                                                                                        result.messages[6].dateTime =dateFormat(date, "yyyy-mm-dd h:MM:ss");
                                                                                         if (result.messages[7]) {
                                                                                             slackUser = result.messages[7].user;
+                                                                                            var date = new Date(result.messages[7].ts * 1000);
+                                                                                            result.messages[7].dateTime =dateFormat(date, "yyyy-mm-dd h:MM:ss");
                                                                                             userModel.findOne({slackUser: slackUser}, function (err, user) {
                                                                                                 if (err) {
                                                                                                     console.log(err);
