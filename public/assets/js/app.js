@@ -3377,7 +3377,9 @@ app.controller("teamSlackController", ["$scope", "$http", "$sce", "$stateParams"
         }).then(function (data) {
             console.log(data);
             if(data.data.messages) {
+                console.log("1");
                 for (var i = 0; i < data.data.messages.length; i++) {
+                    console.log(i);
                     var result = {};
                     if (data.data.messages[i].subtype && data.data.messages[i].subtype == "bot_message")
                         result.userName = data.data.messages[i].username;
