@@ -3667,7 +3667,7 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
                     $http({method: "POST", url: "removeTeam", api: true, data: {id: $scope.team._id}}).then(function () {
                         $location.path("/teams");
                     });
-                    $http({method: "POST", url: "slack/leaveChannel", api: true, data: {id: $scope.team._id}}).then(function (data) {
+                    $http({method: "POST", url: "slack/closeChannel", api: true, data: {id: $scope.team._id}}).then(function (data) {
                         console.log("calling leaveChannel....");
                     });
                 }

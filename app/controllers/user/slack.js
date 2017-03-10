@@ -200,6 +200,51 @@ module.exports = function (opts) {
             });
 
         },
+        "post#slack/closeChannel": function (req, res) {
+            var teamId = req.body.id;
+            console.log("teamId = " + teamId);
+            teamModel.findOne({_id: teamId}, function (err, team) {
+                if (err) {
+                    console.log(err);
+                    return res.json({success: false});
+                } else if (team) {
+                    var slackGroupId = team.slackGroupId;
+                    if (slackGroupId != null && slackGroupId != '') {
+                        userModel.findOne({_id: req.user._id}, function (err, user) {
+                            if (err) {
+                                console.log(err);
+                                return res.json({success: false});
+                            } else if (user) {
+                                var accessToken = user.slackToken;
+                                var slackUser = user.slackUser;
+                                if (accessToken != null && accessToken != '') {
+                                    request.get({
+                                        url: 'https://slack.com/api/groups.close?token='+accessToken+'&channel='+slackGroupId
+                                    }, function (err, response) {
+                                        if(err) {
+                                            console.log("groups.close  error");
+                                            return res.json({success: false});
+                                        } else {
+                                            var result = JSON.parse(response.body);
+                                            console.log("groups.close OK");
+                                            console.log("groups.close result = " + result);
+                                            return res.json({success: true});
+                                        }
+                                    });
+                                } else {
+                                    return res.json({success: false});
+                                }
+                            }
+                        });
+                    } else {
+                        return res.json({success: false});
+                    }
+                } else {
+                    return res.json({success: false});
+                }
+            });
+
+        },
         "post#slack/kickChannel": function (req, res) {
             var teamId = req.body.id;
             console.log("teamId = " + teamId);
