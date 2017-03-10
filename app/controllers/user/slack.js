@@ -396,7 +396,16 @@ module.exports = function (opts) {
                                                 slackUser = result.messages[0].user;
                                                 var date = new Date(result.messages[0].ts * 1000);
                                                 result.messages[0].dateTime =dateFormat(date, "yyyy-mm-dd h:MM:ss");
-                                                userModel.findOne({slackUser: slackUser}, function (err, user) {
+                                                    request.get({
+                                                        url: 'https://slack.com/api/groups.mark?token='+accessToken+'&channel='+slackGroupId+'&ts='+result.messages[0].ts
+                                                    }, function (err, response) {
+                                                        if(err) {
+                                                            console.log("groups.mark  error");
+                                                        } else {
+                                                            console.log("groups.mark  OK");
+                                                        }
+                                                    });
+                                                        userModel.findOne({slackUser: slackUser}, function (err, user) {
                                                 if (err) {
                                                     console.log(err);
                                                 } else if (user) {
