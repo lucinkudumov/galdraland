@@ -569,7 +569,6 @@ module.exports = function (opts) {
                                     return res.json({success: false, feeds: []});
                                 } else {
                                     if (teams.length > 0) {
-                                        wait.launchFiber(b , teams, accessToken);
                                         function f (accessToken, slackGroupId, teamId, teamName ) {
                                             request.get({
                                                 url: 'https://slack.com/api/groups.history?token='+accessToken+'&channel='+slackGroupId+'&inclusive=true&count=10&unreads=true'
@@ -599,6 +598,8 @@ module.exports = function (opts) {
                                             });
                                         }
                                         function b(teams, accessToken) {
+                                            console.log(teams.length);
+                                            console.log(accessToken);
                                             for (i= 0; i < teams.length; i++) {
                                                 var slackGroupId = teams[i].slackGroupId;
                                                 var teamId = teams[i]._id;
@@ -610,6 +611,7 @@ module.exports = function (opts) {
                                             console.log("end");
                                             return res.json({success: true, feeds: feeds});
                                         }
+                                        wait.launchFiber(b , teams, accessToken);
                                     } else {
                                         return res.json({success: true, feeds: []});
                                     }
