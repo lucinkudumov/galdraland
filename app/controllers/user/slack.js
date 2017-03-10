@@ -589,10 +589,10 @@ module.exports = function (opts) {
                                                             console.log("calling final...");
                                                             return obj;
                                                         }
+                                                    } else {
+                                                        return null;
                                                     }
-                                                    return null;
                                                 }
-                                                return null;
                                             });
                                         }
                                         function b(teams, accessToken) {
