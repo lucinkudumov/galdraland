@@ -544,33 +544,6 @@ module.exports = function (opts) {
         "get#slack/getFeeds": function (req, res) {
             console.log("userId = " + req.user._id);
             var feeds = [];
-
-            function f (accessToken, slackGroupId, teamId, teamName ) {
-                request.get({
-                    url: 'https://slack.com/api/groups.history?token='+accessToken+'&channel='+slackGroupId+'&inclusive=true&count=10&unreads=true'
-                }, function (err, response) {
-                    if (err) {
-                        console.log(err);
-                        return null;
-                    } else {
-                        var result = JSON.parse(response.body);
-                        console.log("groups.history result = ", result);
-                        if (result.ok == true) {
-                            if (result.unread_count_display > 0) {
-                                var obj = {};
-                                obj.teamId = teamId;
-                                obj.teamName = teamName;
-                                obj.unread_count = result.unread_count_display;
-                                console.log("calling final...");
-                                return obj;
-                            }
-                        }
-                        return null;
-                    }
-                    return null;
-                });
-            }
-
             userModel.findOne({_id: req.user._id}, function (err, user) {
                 if (err) {
                     console.log(err);
@@ -596,14 +569,41 @@ module.exports = function (opts) {
                                     return res.json({success: false, feeds: []});
                                 } else {
                                     if (teams.length > 0) {
-                                        for (i= 0; i < teams.length; i++) {
-                                            var slackGroupId = teams[i].slackGroupId;
-                                            var teamId = teams[i]._id;
-                                            var teamName = teams[i].name;
-                                            wait.launchFiber(f ,accessToken, slackGroupId, teamId, teamName);
-                                            var qqq = wait.for (f ,accessToken, slackGroupId, teamId, teamName);
-                                            if (qqq != null) feeds.push(qqq);
-                                            console.log(i);
+                                        wait.launchFiber(b , teams, accessToken);
+                                        function f (accessToken, slackGroupId, teamId, teamName ) {
+                                            request.get({
+                                                url: 'https://slack.com/api/groups.history?token='+accessToken+'&channel='+slackGroupId+'&inclusive=true&count=10&unreads=true'
+                                            }, function (err, response) {
+                                                if (err) {
+                                                    console.log(err);
+                                                    return null;
+                                                } else {
+                                                    var result = JSON.parse(response.body);
+                                                    console.log("groups.history result = ", result);
+                                                    if (result.ok == true) {
+                                                        if (result.unread_count_display > 0) {
+                                                            var obj = {};
+                                                            obj.teamId = teamId;
+                                                            obj.teamName = teamName;
+                                                            obj.unread_count = result.unread_count_display;
+                                                            console.log("calling final...");
+                                                            return obj;
+                                                        }
+                                                    }
+                                                    return null;
+                                                }
+                                                return null;
+                                            });
+                                        }
+                                        function b(teams, accessToken) {
+                                            for (i= 0; i < teams.length; i++) {
+                                                var slackGroupId = teams[i].slackGroupId;
+                                                var teamId = teams[i]._id;
+                                                var teamName = teams[i].name;
+                                                var qqq = wait.for (f ,accessToken, slackGroupId, teamId, teamName);
+                                                if (qqq != null) feeds.push(qqq);
+                                                console.log(i);
+                                            }
                                         }
                                         console.log("end");
                                         return res.json({success: true, feeds: feeds});
