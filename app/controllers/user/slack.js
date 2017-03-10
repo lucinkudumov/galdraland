@@ -3,7 +3,7 @@ var validator = require('validator'),
 var request = require('request');
 var dateFormat = require('dateformat');
 var wait = require('wait.for');
-var sync_request = require('sync-request');
+//var sync_request = require('sync-request');
 
 var slackClientID = "146827931650.146151726865";
 var slackClientSecret = "80c8c252dabe4cbc46cfe0e29fb6272c";
