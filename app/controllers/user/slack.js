@@ -608,6 +608,7 @@ module.exports = function (opts) {
                                                             synchAPICalls(items);
                                                         } else {
                                                             console.log("all done!");
+                                                            return res.json({success: true, feeds: feeds});
                                                         }
                                                     }
                                                 });
