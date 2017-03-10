@@ -41,12 +41,15 @@ module.exports = function (opts) {
             console.log(i);
         }
         console.log("end");
+        return feeds;
     }
 
     function b(teams, accessToken) {
         console.log(teams.length);
         console.log(accessToken);
-        wait.for (f ,accessToken, teams);
+        var obj = wait.for (f ,accessToken, teams);
+        console.log("asdfsdf = ", obj);
+        return obj;
     }
 
     return {
@@ -607,8 +610,8 @@ module.exports = function (opts) {
                                     return res.json({success: false, feeds: []});
                                 } else {
                                     if (teams.length > 0) {
-                                        wait.launchFiber(b , teams, accessToken);
-                                        console.log("lll");
+                                        var obj = wait.launchFiber(b , teams, accessToken);
+                                        console.log("lll = ", obj);
                                     } else {
                                         return res.json({success: true, feeds: []});
                                     }
