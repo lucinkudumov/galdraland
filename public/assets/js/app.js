@@ -3378,6 +3378,7 @@ app.controller("teamSlackController", ["$scope", "$http", "$sce", "$stateParams"
             console.log(data);
             if(data.data.data.messages) {
                 console.log("1");
+                $scope.messages = [];
                 for (var i = 0; i < data.data.data.messages.length; i++) {
                     console.log(i);
                     var result = {};
