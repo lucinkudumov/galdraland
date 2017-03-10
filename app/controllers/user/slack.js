@@ -578,8 +578,8 @@ module.exports = function (opts) {
                                             var slackGroupId = teams[i].slackGroupId;
                                             var teamId = teams[i]._id;
                                             var teamName = teams[i].name;
-                                            var res = sync_request('GET', 'https://slack.com/api/groups.history?token='+accessToken+'&channel='+slackGroupId+'&inclusive=true&count=10&unreads=true');
-                                            console.log(res.getBody());
+//                                            var res = sync_request('GET', 'https://slack.com/api/groups.history?token='+accessToken+'&channel='+slackGroupId+'&inclusive=true&count=10&unreads=true');
+//                                            console.log(res.getBody());
 //                                                .get({
 //                                                url: 'https://slack.com/api/groups.history?token='+accessToken+'&channel='+slackGroupId+'&inclusive=true&count=10&unreads=true'
 //                                            }, function (err, response) {
