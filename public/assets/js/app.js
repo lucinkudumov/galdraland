@@ -3733,8 +3733,9 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
         $scope.leave = function () {
             $http({method: "POST", url: "leaveTeam", api: true, data: {id: $scope.team._id}});
             $http({method: "POST", url: "slack/kickChannel", api: true, data: {id: $scope.team._id}}).then(function (data) {
-                console.log("calling leaveChannel....");
+                console.log("calling kickChannel....");
             });
+            $location.path("/teams");
         }
 
         $scope.addMemberTitle = function () {
