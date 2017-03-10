@@ -567,7 +567,6 @@ module.exports = function (opts) {
                                     console.log(err);
                                     return res.json({success: false, feeds: []});
                                 } else {
-                                    console.log("my Teams = ", teams);
                                     if (teams.length > 0) {
                                         for (i= 0; i < teams.length; i++) {
                                             var slackGroupId = teams[i].slackGroupId;
