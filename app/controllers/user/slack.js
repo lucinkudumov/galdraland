@@ -571,7 +571,7 @@ module.exports = function (opts) {
                                     if (teams.length > 0) {
                                         for (i= 0; i < teams.length; i++) {
 //                                            var slackGroupId = teams[i].slackGroupId;
-                                            wait.for (
+                                            wait.launchFiber (
                                                 request.get({
                                                     url: 'https://slack.com/api/groups.history?token='+accessToken+'&channel='+teams[i].slackGroupId+'&inclusive=true&count=10&unreads=true'
                                                 }, function (err, response) {
