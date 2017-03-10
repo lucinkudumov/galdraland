@@ -74,13 +74,13 @@
                         <a href="/teams/edit/{{ team._id}}" class="btn btn-primary">Edit</a>
                         <a href="#" ng-click="modal()" class="btn btn-danger">Remove</a>
                         <a href="/teams/blogcreate/{{ team._id}}" class="btn btn-primary">Blog</a>
-                        <span ng-show="slackAuthentication == true"><a href="/teams/slack/{{ team._id}}" class="btn btn-success">Slack</a></span>
-                        <span ng-show="slackAuthentication == false"><a href="#" onclick='alertSlackAuth();' class="btn btn-success">Slack</a></span>
+                        <a ng-show="slackAuthentication == true" href="/teams/slack/{{ team._id}}" class="btn btn-success">Slack</a>
+                        <a ng-show="slackAuthentication == false" href="#" onclick='alertSlackAuth();' class="btn btn-success">Slack</a>
                     </div>
                     <div ng-show="isMember && !isManager" class="btn-group btn-group-justified">
                         <a href="#" class="btn btn-danger" ng-click="leave();">Leave</a>
-                        <span ng-show="slackAuthentication == true"><a href="/teams/slack/{{ team._id}}" class="btn btn-success">Slack</a></span>
-                        <span ng-show="slackAuthentication == false"><a href="#" onclick='alertSlackAuth();' class="btn btn-success">Slack</a></span>
+                        <a ng-show="slackAuthentication == true" href="/teams/slack/{{ team._id}}" class="btn btn-success">Slack</a>
+                        <a ng-show="slackAuthentication == false" href="#" onclick='alertSlackAuth();' class="btn btn-success">Slack</a>
                     </div>
                 </div>
             </div>
