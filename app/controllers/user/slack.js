@@ -119,6 +119,7 @@ module.exports = function (opts) {
             userModel.findOne({_id: req.user._id}, function (err, user) {
                 if (err) {
                     console.log(err);
+                    return res.json({success: false});
                 } else if (user) {
                     console.log("token = " + user.slackToken);
                     var accessToken = user.slackToken;
@@ -154,6 +155,96 @@ module.exports = function (opts) {
                 }
             });
         },
+        "post#slack/leaveChannel": function (req, res) {
+            var teamId = req.body.id;
+            console.log("teamId = " + teamId);
+            teamModel.findOne({_id: teamId}, function (err, team) {
+                if (err) {
+                    console.log(err);
+                    return res.json({success: false});
+                } else if (team) {
+                    var slackGroupId = team.slackGroupId;
+                    if (slackGroupId != null && slackGroupId != '') {
+                        userModel.findOne({_id: req.user._id}, function (err, user) {
+                            if (err) {
+                                console.log(err);
+                                return res.json({success: false});
+                            } else if (user) {
+                                var accessToken = user.slackToken;
+                                var slackUser = user.slackUser;
+                                if (accessToken != null && accessToken != '') {
+                                    request.get({
+                                        url: 'https://slack.com/api/groups.leave?token='+accessToken+'&channel='+slackGroupId
+                                    }, function (err, response) {
+                                        if(err) {
+                                            console.log("groups.leave  error");
+                                            return res.json({success: false});
+                                        } else {
+                                            var result = JSON.parse(response.body);
+                                            console.log("groups.leave OK");
+                                            console.log("groups.leave result = " + result);
+                                            return res.json({success: true});
+                                        }
+                                    });
+                                } else {
+                                    return res.json({success: false});
+                                }
+                            }
+                        });
+                    } else {
+                        return res.json({success: false});
+                    }
+                } else {
+                    return res.json({success: false});
+                }
+            });
+
+        },
+        "post#slack/kickChannel": function (req, res) {
+            var teamId = req.body.id;
+            console.log("teamId = " + teamId);
+            teamModel.findOne({_id: teamId}, function (err, team) {
+                if (err) {
+                    console.log(err);
+                    return res.json({success: false});
+                } else if (team) {
+                    var slackGroupId = team.slackGroupId;
+                    if (slackGroupId != null && slackGroupId != '') {
+                        userModel.findOne({_id: req.user._id}, function (err, user) {
+                            if (err) {
+                                console.log(err);
+                                return res.json({success: false});
+                            } else if (user) {
+                                var accessToken = user.slackToken;
+                                var slackUser = user.slackUser;
+                                if (accessToken != null && accessToken != '' && slackUser != null && slackUser != '') {
+                                    request.get({
+                                        url: 'https://slack.com/api/groups.kick?token='+accessToken+'&channel='+slackGroupId+'&user='+slackUser
+                                    }, function (err, response) {
+                                        if(err) {
+                                            console.log("groups.kick  error");
+                                            return res.json({success: false});
+                                        } else {
+                                            var result = JSON.parse(response.body);
+                                            console.log("groups.kick OK");
+                                            console.log("groups.kick result = " + result);
+                                            return res.json({success: true});
+                                        }
+                                    });
+                                } else {
+                                    return res.json({success: false});
+                                }
+                            }
+                        });
+                    } else {
+                        return res.json({success: false});
+                    }
+                } else {
+                    return res.json({success: false});
+                }
+            });
+
+        },
         "post#slack/sendInvite": function (req, res) {
             var invites = req.body.invites;
             var slackGroupId = req.body.slackGroupId;
@@ -168,6 +259,7 @@ module.exports = function (opts) {
                             userModel.findOne({_id: item.memberId}).exec(function (err, user) {
                                 if (err) {
                                     console.log(err);
+                                    return res.json({success: false});
                                 } else {
                                     var slackUser = user.slackUser;
                                     if (slackUser != null && slackUser != '') {
@@ -188,11 +280,17 @@ module.exports = function (opts) {
                                                 }
                                             }
                                         });
+                                    } else {
+                                        return res.json({success: false});
                                     }
                                 }
                             });
                         });
+                    } else {
+                        return res.json({success: false});
                     }
+                } else {
+                    return res.json({success: false});
                 }
             });
         },
@@ -202,12 +300,14 @@ module.exports = function (opts) {
             teamModel.findOne({_id: teamId}, function (err, team) {
                 if (err) {
                     console.log(err);
+                    return res.json({success: false});
                 } else if (team) {
                     var slackGroupId = team.slackGroupId;
                     if (slackGroupId != null && slackGroupId != '') {
                         userModel.findOne({_id: req.user._id}, function (err, user) {
                             if (err) {
                                 console.log(err);
+                                return res.json({success: false});
                             } else if (user) {
                                 var accessToken = user.slackToken;
                                 if (accessToken != null && accessToken != '') {
@@ -355,6 +455,8 @@ module.exports = function (opts) {
                                 } else {
                                     return res.json({success: false});
                                 }
+                            } else {
+                                return res.json({success: false});
                             }
                         });
                     }
@@ -368,12 +470,14 @@ module.exports = function (opts) {
             teamModel.findOne({_id: teamId}, function (err, team) {
                 if (err) {
                     console.log(err);
+                    return res.json({success: false});
                 } else if (team) {
                     var slackGroupId = team.slackGroupId;
                     if (slackGroupId != null && slackGroupId != '') {
                         userModel.findOne({_id: req.user._id}, function (err, user) {
                             if (err) {
                                 console.log(err);
+                                return res.json({success: false});
                             } else if (user) {
                                 var accessToken = user.slackToken;
                                 if (accessToken != null && accessToken != '') {
@@ -393,6 +497,8 @@ module.exports = function (opts) {
                                 } else {
                                     return res.json({success: false});
                                 }
+                            } else {
+                                return res.json({success: false});
                             }
                         });
                     }

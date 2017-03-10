@@ -3667,6 +3667,9 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
                     $http({method: "POST", url: "removeTeam", api: true, data: {id: $scope.team._id}}).then(function () {
                         $location.path("/teams");
                     });
+                    $http({method: "POST", url: "slack/leaveChannel", api: true, data: {id: $scope.team._id}}).then(function (data) {
+                        console.log("calling leaveChannel....");
+                    });
                 }
             });
 
@@ -3729,6 +3732,9 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
 
         $scope.leave = function () {
             $http({method: "POST", url: "leaveTeam", api: true, data: {id: $scope.team._id}});
+            $http({method: "POST", url: "slack/kickChannel", api: true, data: {id: $scope.team._id}}).then(function (data) {
+                console.log("calling leaveChannel....");
+            });
         }
 
         $scope.addMemberTitle = function () {
