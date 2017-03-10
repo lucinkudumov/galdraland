@@ -11,8 +11,9 @@ module.exports = function (opts) {
     var userModel = opts.models.User;
     var teamModel = opts.models.Team;
     var teamMemberModel = opts.models.TeamMember;
-    var feeds = [];
+
     function f (accessToken, teams ) {
+        var feeds = [];
         for (i= 0; i < teams.length; i++) {
             var slackGroupId = teams[i].slackGroupId;
             var teamId = teams[i]._id;
