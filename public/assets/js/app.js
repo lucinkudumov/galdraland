@@ -1541,6 +1541,11 @@ app.controller("headerController", ["$scope", "$rootScope", "$http", "$location"
                             method: "GET", url: "slack/getFeeds", api: true
                         }).then (function (result) {
                             console.log(result);
+                            if (result !== undefined && result.data !== undefined && result.data.feeds !== undefined)
+                                $scope.slackFeeds = result.data.feeds;
+                            else
+                                $scope.slackFeeds = [];
+
                             refresh_feeds();
                         });
                     });
@@ -1595,6 +1600,13 @@ app.controller("headerController", ["$scope", "$rootScope", "$http", "$location"
                 feed.category = 2;
                 feed.msg = feed.slaveMsg;
                 feed.position = "slave";
+                $scope.feeds.push(feed);
+            }
+
+            for (var i = 0; i < $scope.slackFeeds.length; i++) {
+                var feed = $scope.slackFeeds[i];
+                feed.category = 3;
+                feed.msg = "You didn't show slack messages for team '"+feed.teamName+"'";
                 $scope.feeds.push(feed);
             }
         }
@@ -1711,6 +1723,14 @@ app.controller("headerController", ["$scope", "$rootScope", "$http", "$location"
                         $location.path(url);
                 }
             }
+        }
+
+        $scope.showSlackMsg = function (slackFeed) {
+            var url = "/teams/slack/" + slackFeed.teamId;
+            if ($location.path() == url)
+                $state.reload();
+            else
+                $location.path(url);
         }
     }]);
 

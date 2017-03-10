@@ -21,7 +21,7 @@
                       </div>
                   </li-->
 				  <li ng-repeat="i in feeds">
-                      <div ng-show="i.category != 2">
+                      <div ng-show="i.category == 1">
                           <h5>{{i.alert}}</h5>
                           <p>Role: {{ i.title }}</p>
                           <p ng-show="i.message">{{ i.message }}</p>
@@ -36,6 +36,12 @@
                               <button class="btn btn-primary" ng-click="showRecommendation(i)" ng-show="i.position=='master'">View {{i.slaveUserName}}</button>
                               <button class="btn btn-primary" ng-click="showRecommendation(i)" ng-show="i.position=='slave' && i.type=='teams'">View {{i.teamName}}</button>
                               <button class="btn btn-primary" ng-click="showRecommendation(i)" ng-show="i.position=='slave' && i.type=='adventures'">View {{i.adventureName}}</button>
+                          </div>
+                      </div>
+                      <div ng-show="i.category == 3">
+                          <h5>{{i.msg}}</h5>
+                          <div class="view">
+                              <button class="btn btn-primary" ng-click="showSlackMsg(i)">View</button>
                           </div>
                       </div>
                   </li>

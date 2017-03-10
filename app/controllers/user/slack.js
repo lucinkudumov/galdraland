@@ -579,7 +579,7 @@ module.exports = function (opts) {
                                             var obj = {};
                                             obj.url = url;
                                             obj.teamId = teamId;
-                                            obj.teamId = teamName;
+                                            obj.teamName = teamName;
                                             items.push(obj);
                                         }
 
@@ -593,7 +593,6 @@ module.exports = function (opts) {
                                                         console.log("groups.history  error");
                                                     } else {
                                                         var result = JSON.parse(response.body);
-                                                        console.log("groups.history result = ", result);
                                                         if (result.ok == true) {
                                                             if (result.unread_count_display > 0) {
                                                                 var obj = {};
