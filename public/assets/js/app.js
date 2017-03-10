@@ -1536,7 +1536,12 @@ app.controller("headerController", ["$scope", "$rootScope", "$http", "$location"
                             $scope.slaveRecommendates = result.data.recommendates;
                         else
                             $scope.slaveRecommendates = [];
-                        refresh_feeds();
+                        $http({
+                            method: "GET", url: "slack/getFeeds", api: true
+                        }).then (function (result) {
+                            console.log(result);
+                            refresh_feeds();
+                        });
                     });
                 });
             });
