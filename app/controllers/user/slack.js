@@ -221,6 +221,7 @@ module.exports = function (opts) {
                                     request.get({
                                         url: 'https://slack.com/api/groups.kick?token='+accessToken+'&channel='+slackGroupId+'&user='+slackUser
                                     }, function (err, response) {
+                                        console.log("groups.kick = " + response);
                                         if(err) {
                                             console.log("groups.kick  error");
                                             return res.json({success: false});
