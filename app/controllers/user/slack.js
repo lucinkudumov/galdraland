@@ -588,6 +588,9 @@ module.exports = function (opts) {
                                                             obj.unread_count = result.unread_count_display;
                                                             console.log("calling final...");
                                                             return obj;
+                                                        } else {
+                                                            console.log("count = 0");
+                                                            return null;
                                                         }
                                                     } else {
                                                         return null;
