@@ -605,7 +605,7 @@ module.exports = function (opts) {
                                                             }
                                                         }
                                                         if (items.length) {
-                                                            syschAPICalls(items);
+                                                            synchAPICalls(items);
                                                         } else {
                                                             console.log("all done!");
                                                         }
