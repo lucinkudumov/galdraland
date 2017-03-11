@@ -359,8 +359,8 @@ app.config(["$urlRouterProvider", "$locationProvider", "$stateProvider", "$httpP
 app.run(["$rootScope", "$http", "$location", "User", function ($rootScope, $http, $location, User) {
 
 //      Debugging
-        $rootScope.slackClientID = "146827931650.146151726865";
-        $rootScope.slackClientSecret = "80c8c252dabe4cbc46cfe0e29fb6272c";
+        $rootScope.slackClientID = "152964900435.152966006611";
+        $rootScope.slackClientSecret = "c0086daa9f0fa36c1531572490d00832";
 //        $rootScope.slackClientID = "138423090594.145329929105";
 //        $rootScope.slackClientSecret = "2cee7f73e16f6a949b20b81551d9cce0";
 
