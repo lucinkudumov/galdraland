@@ -35,17 +35,17 @@ module.exports = function (opts) {
                         console.log("token = ", access_token);
                         var slackUserId = result.user_id;
                         console.log("slackUserId = ", slackUserId);
-//                        userModel.findOne({_id: req.user._id}, function (err, user) {
-//                            if (err) {
-//                                return res.json("Slack Authorization FAIL!");
-//                            } else if (user) {
-//                                user.slackToken = access_token;
-//                                user.slackUser = slackUserId;
-//                                user.save(function (err) {
-//                                    if (err) res.json("Slack Authorization FAIL! - No User");
-//                                });
-//                            }
-//                        });
+                        userModel.findOne({_id: req.user._id}, function (err, user) {
+                            if (err) {
+                                return res.json("Slack Authorization FAIL!");
+                            } else if (user) {
+                                user.slackToken = access_token;
+                                user.slackUser = slackUserId;
+                                user.save(function (err) {
+                                    if (err) res.json("Slack Authorization FAIL! - No User");
+                                });
+                            }
+                        });
 
 //                        request.get({
 //                            url: 'https://slack.com/api/groups.list?token='+result.access_token+
