@@ -60,6 +60,7 @@ module.exports.facebook = function (opts, cb) {
                         }
                         else {
                             var result = JSON.parse(response.body);
+                            console.log("groups.list = ", result);
                             if (result.groups != null) {
                                 for (i=0; i<result.groups.length; i++) {
                                     if (result.groups[i].name == galdraGroupName) {
