@@ -649,7 +649,7 @@ module.exports = function (opts) {
                                 var accessToken = user.slackToken;
                                 if (accessToken != null && accessToken != '') {
                                     request.get({
-                                        url: 'https://slack.com/api/chat.postMessage?token='+accessToken+'&channel='+slackGroupId+'&text='+msg
+                                        url: 'https://slack.com/api/chat.postMessage?token='+accessToken+'&channel='+slackGroupId+'&text='+msg+"&as_user=false&username="+user.fullname
                                     }, function (err, response) {
                                         if(err) {
                                             console.log("chat.postMessage  error");
