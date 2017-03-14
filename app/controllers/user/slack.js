@@ -614,7 +614,7 @@ module.exports = function (opts) {
                                                         }
                                                     }
                                                 });
-                                            },5000);
+                                            },3500);
                                         }
                                         synchAPICalls(items)
                                         console.log("end");
