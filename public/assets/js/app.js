@@ -3490,6 +3490,15 @@ app.controller("myTeamsTagController", ["$scope", "$http", "$location", "$stateP
     $scope.refresh();
 }]);
 
+app.controller("homeController", ["$scope", "$http", "$location", "$stateParams", "User", function ($scope, $http, $location, $stateParams, User) {
+    $scope.user = User.isLoggedIn();
+    $scope.refresh = function () {
+        $scope.loading = true;
+        console.log("calling... home");
+    }
+    $scope.refresh();
+}]);
+
 app.controller("newsController", ["$scope", "$http", "$location", "User", function ($scope, $http, $location, User) {
         $scope.user = User.isLoggedIn();
         $scope.adventures = [];
