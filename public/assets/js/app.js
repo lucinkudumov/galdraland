@@ -152,7 +152,7 @@ app.config(["$urlRouterProvider", "$locationProvider", "$stateProvider", "$httpP
         }).state("home", {
             url: "/home",
             views: {
-                "main": {templateUrl: "/assets/partials/home.html"},
+                "main": {templateUrl: "/assets/partials/main.html"},
                 "left-side@home": {templateUrl: "/assets/partials/home/left-side.html"},
                 "right-side@home": {templateUrl: "/assets/partials/home/home.html"}
             },
