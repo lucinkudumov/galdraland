@@ -1,0 +1,22 @@
+<div ng-controller="usersResultController">
+    <div class="row" style="margin-top:15px;">
+        <div class="col-md-8">
+            <br>
+            <table class="table">
+                <tr ng-show="!loading && results.length == 0">
+                    <td class="err-msg">No Users</td>
+                </tr>
+                <tr ng-repeat="r in results">
+                    <td ng-show="r.photo"><div class="avatar" style="background-image: url('{{ r.photo}}')"></div></td>
+                    <td>{{ r.name}}</td>
+                    <!--<td>{{ r.team_role}}</td>-->
+                    <td><p ng-repeat="tr in r.team_role">{{tr}}</p></td>
+                    <td ng-show="r.href">
+                        <a href="{{r.href}}" class="btn btn-primary">View</a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+</div>
