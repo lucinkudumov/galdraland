@@ -153,8 +153,8 @@ app.config(["$urlRouterProvider", "$locationProvider", "$stateProvider", "$httpP
             url: "/home",
             views: {
                 "main": {templateUrl: "/assets/partials/home.html"},
-                "left-side@users": {templateUrl: "/assets/partials/home/left-side.html"},
-                "right-side@users": {templateUrl: "/assets/partials/home/home.html"}
+                "left-side@home": {templateUrl: "/assets/partials/home/left-side.html"},
+                "right-side@home": {templateUrl: "/assets/partials/home/home.html"}
             },
             requireLogin: true
         }).state("news", {
