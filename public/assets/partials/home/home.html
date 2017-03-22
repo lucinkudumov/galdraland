@@ -114,7 +114,7 @@
                                         </div>
                                         <div class="cont-col2">
                                             <div class="desc">
-                                                {{i.msg}}
+                                                {{s.msg}}
                                             </div>
                                         </div>
                                     </div>
@@ -143,27 +143,32 @@
                 </div>
                 <div class="portlet-body">
                     <div class="scroller" style="height: 300px; overflow-y: scroll;" data-always-visible="1" data-rail-visible="0">
-                        <ul class="feeds">
+                        <ul class="feeds" ng-show="!feedloading && feeds.length==0">
                             <li>
+                                <div class="col1">
+                                    No Recommendations recently.
+                                </div>
+                            </li>
+                        </ul>
+                        <ul class="feeds">
+                            <li ng-repeat="f in feeds">
                                 <div class="col1">
                                     <div class="cont">
                                         <div class="cont-col1">
                                             <div class="label label-sm label-info">
-                                                <i class="fa fa-check"></i>
+                                                <i class="fa fa-cog"></i>
                                             </div>
                                         </div>
                                         <div class="cont-col2">
                                             <div class="desc">
-                                                You have 4 pending tasks. <span class="label label-sm label-warning ">
-                                                                                    Take action <i class="fa fa-share"></i>
-                                                                                    </span>
+                                                {{f.msg}}
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col2">
                                     <div class="date">
-                                        Just now
+                                        <button class="btn btn-primary" ng-click="showRecommendation(f)">View</button>
                                     </div>
                                 </div>
                             </li>
