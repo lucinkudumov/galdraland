@@ -3496,8 +3496,10 @@ app.controller("homeController", ["$scope", "$http", "$location", "$stateParams"
     $scope.teams = [];
     $scope.peoples = [];
     $scope.feeds = [];
+    $scope.slacks = [];
     $scope.newsloading = true;
     $scope.feedloading = true;
+    $scope.slackloading = true;
 
     $scope.refresh = function () {
         $scope.newsloading = true;
@@ -3526,21 +3528,23 @@ app.controller("homeController", ["$scope", "$http", "$location", "$stateParams"
                     $scope.slaveRecommendates = result.data.recommendates;
                 else
                     $scope.slaveRecommendates = [];
-
-                $http({
-                    method: "GET", url: "slack/getFeeds", api: true
-                }).then (function (result) {
-                    console.log(result);
-                    if (result !== undefined && result.data !== undefined && result.data.feeds !== undefined)
-                        $scope.slackFeeds = result.data.feeds;
-                    else
-                        $scope.slackFeeds = [];
-
-                    refresh_home_feeds();
-                    $scope.feedloading = false;
-                });
+                refresh_home_feeds();
+                $scope.feedloading = false;
             });
         });
+        $http({
+            method: "GET", url: "slack/getFeeds", api: true
+        }).then (function (result) {
+            console.log(result);
+            if (result !== undefined && result.data !== undefined && result.data.feeds !== undefined)
+                $scope.slackFeeds = result.data.feeds;
+            else
+                $scope.slackFeeds = [];
+
+            refresh_home_slacks();
+            $scope.slackloading = false;
+        });
+
     }
 
     function prettyDate(startDate) {
@@ -3612,11 +3616,14 @@ app.controller("homeController", ["$scope", "$http", "$location", "$stateParams"
             feed.position = "slave";
             $scope.feeds.push(feed);
         }
+    }
+
+    function refresh_home_slacks() {
         for (var i = 0; i < $scope.slackFeeds.length; i++) {
             var feed = $scope.slackFeeds[i];
             feed.category = 3;
             feed.msg = "You have not seen " + $scope.slackFeeds[i].unread_count + " slack messages for team '"+feed.teamName+"'";
-            $scope.feeds.push(feed);
+            $scope.slacks.push(feed);
         }
     }
 
