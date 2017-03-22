@@ -11,25 +11,74 @@
                 </div>
                 <div class="portlet-body">
                     <div class="scroller" style="height: 300px; overflow-y: scroll;" data-always-visible="1" data-rail-visible="0">
-                        <ul class="feeds">
+                        <ul class="feeds" ng-show="!loading && peoples.length==0 && teams.length == 0 && adventures.length == 0">
                             <li>
+                                <div class="col1">
+                                    No News created recently.
+                                </div>
+                            </li>
+                        </ul>
+                        <ul class="feeds">
+                            <li ng-repeat="p in peoples">
                                 <div class="col1">
                                     <div class="cont">
                                         <div class="cont-col1">
                                             <div class="label label-sm label-info">
-                                                <i class="fa fa-check"></i>
+                                                <i class="fa fa-user"></i>
                                             </div>
                                         </div>
                                         <div class="cont-col2">
                                             <div class="desc">
-                                                You have 4 pending tasks.You have 4 pending tasks.You have 4 pending tasks.You have 4 pending tasks.
+                                                <a href="/users/view/{{p._id}}">{{ p.name}}</a> <small>SignIn</small>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col2">
                                     <div class="date">
-                                        Just now
+                                        {{ p.signin}}
+                                    </div>
+                                </div>
+                            </li>
+                            <li ng-repeat="t in teams">
+                                <div class="col1">
+                                    <div class="cont">
+                                        <div class="cont-col1">
+                                            <div class="label label-sm label-info">
+                                                <i class="fa fa-group"></i>
+                                            </div>
+                                        </div>
+                                        <div class="cont-col2">
+                                            <div class="desc">
+                                                <a href="/teams/view/{{t._id}}">{{ t.name}}</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col2">
+                                    <div class="date">
+                                        {{ t.createdAt}}
+                                    </div>
+                                </div>
+                            </li>
+                            <li ng-repeat="a in adventures">
+                                <div class="col1">
+                                    <div class="cont">
+                                        <div class="cont-col1">
+                                            <div class="label label-sm label-info">
+                                                <i class="fa fa-group"></i>
+                                            </div>
+                                        </div>
+                                        <div class="cont-col2">
+                                            <div class="desc">
+                                                <a href="/adventures/view/{{a._id}}">{{ a.name}}</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col2">
+                                    <div class="date">
+                                        {{ a.createdAt}}
                                     </div>
                                 </div>
                             </li>
