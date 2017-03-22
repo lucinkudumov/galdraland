@@ -3490,13 +3490,175 @@ app.controller("myTeamsTagController", ["$scope", "$http", "$location", "$stateP
     $scope.refresh();
 }]);
 
-app.controller("homeController", ["$scope", "$http", "$location", "$stateParams", "User", function ($scope, $http, $location, $stateParams, User) {
+app.controller("homeController", ["$scope", "$http", "$location", "$stateParams", "User", "$state", function ($scope, $http, $location, $stateParams, User, $state) {
     $scope.user = User.isLoggedIn();
+    $scope.adventures = [];
+    $scope.teams = [];
+    $scope.peoples = [];
+    $scope.feeds = [];
+    $scope.newsloading = true;
+    $scope.feedloading = true;
+
     $scope.refresh = function () {
-        $scope.loading = true;
-        console.log("calling... home");
+        $scope.newsloading = true;
+        $scope.feedloading = true;
+
+        $http({method: "POST", url: "newAdventure", api: true, data: {term: ""}}).then($scope.parse_adventures);
+
+        $http({method: "POST", url: "newTeam", api: true, data: {term: ""}}).then($scope.parse_teams);
+
+        $http({method: "POST", url: "newUser", api: true, data: {term: ""}}).then($scope.parse_users).then(function () {
+            $scope.newsloading = false;
+        });
+
+        $http({
+            method: "GET", url: "getMasterRecommendates", api: true
+        }).then (function (result) {
+            if (result !== undefined && result.data !== undefined && result.data.recommendates !== undefined)
+                $scope.masterRecommendates = result.data.recommendates;
+            else
+                $scope.masterRecommendates = [];
+
+            $http({
+                method: "GET", url: "getSlaveRecommendates", api: true
+            }).then (function (result) {
+                if (result !== undefined && result.data !== undefined && result.data.recommendates !== undefined)
+                    $scope.slaveRecommendates = result.data.recommendates;
+                else
+                    $scope.slaveRecommendates = [];
+
+                $http({
+                    method: "GET", url: "slack/getFeeds", api: true
+                }).then (function (result) {
+                    console.log(result);
+                    if (result !== undefined && result.data !== undefined && result.data.feeds !== undefined)
+                        $scope.slackFeeds = result.data.feeds;
+                    else
+                        $scope.slackFeeds = [];
+
+                    refresh_home_feeds();
+                    $scope.feedloading = false;
+                });
+            });
+        });
     }
+
+    function prettyDate(startDate) {
+        var date = new Date();
+        var secs = Math.floor((date.getTime() - Date.parse(startDate)) / 1000);
+        if (secs < 60)
+            return secs + " sec(s) ago";
+        if (secs < 3600)
+            return Math.floor(secs / 60) + " min(s) ago";
+        if (secs < 86400)
+            return Math.floor(secs / 3600) + " hour(s) ago";
+        if (secs < 604800)
+            return Math.floor(secs / 86400) + " day(s) ago";
+        return date.toDateString();
+    }
+
+    $scope.parse_adventures = function (data) {
+        $scope.adventures = [];
+        for (var i = 0; i < data.data.adventures.length; i++) {
+            var result = {};
+            result._id = data.data.adventures[i]._id;
+            result.name = data.data.adventures[i].name;
+            result.text1 = data.data.adventures[i].tags.join(" ");
+            result.text2 = data.data.adventures[i].start + " - " + data.data.adventures[i].end;
+            result.href = "/adventures/view/" + data.data.adventures[i]._id;
+            result.createdAt = prettyDate(data.data.adventures[i].createdAt);
+            $scope.adventures.push(result);
+        }
+    }
+
+    $scope.parse_teams = function (data) {
+        $scope.teams = [];
+        for (var i = 0; i < data.data.teams.length; i++) {
+            var result = {};
+            result._id = data.data.teams[i]._id;
+            result.name = data.data.teams[i].name;
+            result.text1 = data.data.teams[i].teamMembers.length + " Members";
+            result.href = "/teams/view/" + data.data.teams[i]._id;
+            result.createdAt = prettyDate(data.data.teams[i].createdAt);
+            $scope.teams.push(result);
+        }
+    }
+
+    $scope.parse_users = function (data) {
+        $scope.peoples = [];
+        for (var i = 0; i < data.data.users.length; i++) {
+            var result = {};
+            result._id = data.data.users[i]._id;
+            result.name = data.data.users[i].username;
+            result.text1 = data.data.users[i].fullname;
+            result.photo = data.data.users[i].photo;
+            result.signin = prettyDate(data.data.users[i].signin);
+            $scope.peoples.push(result);
+        }
+    }
+
+    function refresh_home_feeds() {
+        for (var i = 0; i < $scope.masterRecommendates.length; i++) {
+            var feed = $scope.masterRecommendates[i];
+            feed.category = 2;
+            feed.msg = feed.masterMsg;
+            feed.position = "master";
+            $scope.feeds.push(feed);
+        }
+        for (var i = 0; i < $scope.slaveRecommendates.length; i++) {
+            var feed = $scope.slaveRecommendates[i];
+            feed.category = 2;
+            feed.msg = feed.slaveMsg;
+            feed.position = "slave";
+            $scope.feeds.push(feed);
+        }
+        for (var i = 0; i < $scope.slackFeeds.length; i++) {
+            var feed = $scope.slackFeeds[i];
+            feed.category = 3;
+            feed.msg = "You have not seen " + $scope.slackFeeds[i].unread_count + " slack messages for team '"+feed.teamName+"'";
+            $scope.feeds.push(feed);
+        }
+    }
+
+    $scope.showHomeRecommendation = function (recommendate) {
+        $http({
+            method: "POST", url: "applyRecommendates", api: true, data: {id: recommendate._id, position: recommendate.position}
+        }).then (function (result) {
+            console.log(result);
+        });
+        if (recommendate.position == "master") {
+            var url = "/users/view/" + recommendate.slaveId;
+            if ($location.path() == url)
+                $state.reload();
+            else
+                $location.path(url);
+        } else {
+            if (recommendate.type == "teams") {
+                var url = "/teams/view/" + recommendate.teamId;
+                if ($location.path() == url)
+                    $state.reload();
+                else
+                    $location.path(url);
+            } else {
+                var url = "/adventures/view/" + recommendate.adventureId;
+                if ($location.path() == url)
+                    $state.reload();
+                else
+                    $location.path(url);
+            }
+        }
+    }
+
+    $scope.showHomeSlackMsg = function (slackFeed) {
+        var url = "/teams/slack/" + slackFeed.teamId;
+        if ($location.path() == url)
+            $state.reload();
+        else
+            $location.path(url);
+    }
+
     $scope.refresh();
+
 }]);
 
 app.controller("newsController", ["$scope", "$http", "$location", "User", function ($scope, $http, $location, User) {
