@@ -1619,7 +1619,6 @@ jQuery Slimscroll
 .scroller {
   padding: 0px;
   margin: 0px;
-  padding-right: 12px;
   overflow: hidden;
 }
 
