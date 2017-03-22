@@ -385,7 +385,7 @@ app.run(["$rootScope", "$http", "$location", "User", function ($rootScope, $http
                 var url = "/redirect/?r=" + $location.path();
                 $location.url(url);
             } else if (!toState.requireLogin && User.isLoggedIn()) {
-                $location.path("/profile");
+                $location.path("/home");
             } else if (User.isLoggedIn() && !User.isLoggedIn().email.validated) {
                 $location.path("/emailVerification");
             }
@@ -1454,7 +1454,7 @@ app.controller("emailController", ["$scope", "$location", "$http", "User", funct
             }).then(function success(r) {
                 if (r.data.success) {
                     User.update(function () {
-                        $location.path("/profile");
+                        $location.path("/home");
                     });
                 } else {
                     $scope.error = r.data.error;
