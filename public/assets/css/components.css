@@ -3958,3 +3958,74 @@ Blue Default
   border: 1px solid #dfdbe8;
   color: #edebf2;
 }
+
+
+/***
+System feeds
+***/
+.feeds {
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+}
+.feeds li {
+    background-color: #fafafa;
+    color: #82949a;
+    margin-bottom: 7px;
+}
+.feeds li:before, .feeds li:after {
+    display: table;
+    line-height: 0;
+    content: "";
+}
+.feeds li:after {
+    clear: both;
+}
+.feeds li:last-child {
+    margin-bottom: 0px;
+}
+.feeds li .col1 {
+    float: left;
+    width: 100%;
+    clear: both;
+}
+.feeds li .col1 > .cont {
+    float: left;
+    margin-right: 75px;
+    overflow: hidden;
+}
+.feeds li .col1 > .cont > .cont-col1 {
+    float: left;
+    margin-right: -100%;
+}
+.feeds li .col1 > .cont > .cont-col1 > .label {
+    display: inline-block;
+    padding: 5px 4px 6px 5px;
+    vertical-align: middle;
+    text-align: center;
+}
+.feeds li .col1 > .cont > .cont-col1 > .label > i {
+    text-align: center;
+    font-size: 14px;
+}
+.feeds li .col1 > .cont > .cont-col2 {
+    float: left;
+    width: 100%;
+}
+.feeds li .col1 > .cont > .cont-col2 > .desc {
+    margin-left: 35px;
+    padding-top: 4px;
+    padding-bottom: 5px;
+    overflow: hidden;
+}
+.feeds li .col2 {
+    float: left;
+    width: 75px;
+    margin-left: -75px;
+}
+.feeds li .col2 > .date {
+    padding: 4px 9px 5px 4px;
+    text-align: right;
+    font-style: italic;
+    color: #c1cbd0;
+}
