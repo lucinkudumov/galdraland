@@ -4020,12 +4020,13 @@ System feeds
 }
 .feeds li .col2 {
     float: left;
-    width: 75px;
-    margin-left: -75px;
+    width: 85px;
+    margin-left: -85px;
 }
 .feeds li .col2 > .date {
     padding: 4px 1px 4px 1px;
     text-align: right;
     font-style: italic;
     color: #c1cbd0;
+    font-size: 13px;
 }
