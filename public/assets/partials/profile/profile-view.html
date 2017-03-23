@@ -14,7 +14,7 @@
         </div>
         <div uib-accordion-group class="panel-default" is-open="true">
         <uib-accordion-heading>
-        <p ng-show="user.educations.length > 0">Education</p>
+        <p>Education</p>
         </uib-accordion-heading>
         <small ng-show="!user.educations || user.educations.length == 0">No educations, <a href="/settings">add</a> now.</small>
         <small ng-repeat="e in user.educations" title="Education-{{ e.school.id}}">{{ e.type}}, {{ e.school.name}}, {{ e.year.name}}</small>
