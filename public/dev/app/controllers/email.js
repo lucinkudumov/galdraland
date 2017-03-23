@@ -44,7 +44,7 @@ app.controller("emailController", ["$scope", "$location", "$http", "User", funct
         request.then(function (r) {
             if (r.data.success) {
                 User.update(function () {
-                    $location.path("/profile");
+                    $location.path("/home");
                 });    
             } else {
                 $scope.error = r.data.error;
