@@ -58,22 +58,23 @@ module.exports = function (opts) {
                             console.log(err);
                             return res.json({success: false});
                         } else {
-                            smtpTransport.sendMail({
-                                from: "noreply@holomathics.com", // sender address
-                                to: toEmail, // list of receivers
-                                subject: "Team member request to " + team.name, // Subject line
-                                text: "Hello, " + username + ", \n" +
-                                        "You have received a request from " + req.user.username + " for the member role " + " to \"" + team.name + "\" team as " + apply.title + ".\n" +
-                                        "If you want to accept it, please, use next link: http://galdraland.com \n" +
-                                        "Thanks, Galdraland team.",
-                                html: "Hello, " + username + ", <br>" +
-                                        "You have received a request from " + req.user.username + " for the member role " + " to \"" + team.name + "\" team as " + apply.title + ".<br>" +
-                                        "If you want to accept it, please, use next link: http://galdraland.com/ <br>" +
-                                        "Thanks, Galdraland team.",
-                            }, function (err) {
-                                console.log(err);
-                                return res.json({success: false});
-                            });
+//                            smtpTransport.sendMail({
+//                                from: "noreply@holomathics.com", // sender address
+//                                to: toEmail, // list of receivers
+//                                subject: "Team member request to " + team.name, // Subject line
+//                                text: "Hello, " + username + ", \n" +
+//                                        "You have received a request from " + req.user.username + " for the member role " + " to \"" + team.name + "\" team as " + apply.title + ".\n" +
+//                                        "If you want to accept it, please, use next link: http://galdraland.com \n" +
+//                                        "Thanks, Galdraland team.",
+//                                html: "Hello, " + username + ", <br>" +
+//                                        "You have received a request from " + req.user.username + " for the member role " + " to \"" + team.name + "\" team as " + apply.title + ".<br>" +
+//                                        "If you want to accept it, please, use next link: http://galdraland.com/ <br>" +
+//                                        "Thanks, Galdraland team.",
+//                            }, function (err) {
+//                                console.log(err);
+//                                return res.json({success: false});
+//                            });
+                            return res.json({success: true});
                         }
                     });
                 }
@@ -112,21 +113,21 @@ module.exports = function (opts) {
                                                     console.log(err);
                                                     return res.json({success: false});
                                                 } else {
-                                                    smtpTransport.sendMail({
-                                                        from: "noreply@holomathics.com",
-                                                        to: user.email,
-                                                        subject: "Your request has been approved by " + req.user.username,
-                                                        text: "Your request to join " + team.name + " has been approved by " + req.user.username + "\n" +
-                                                                ">>> " + apply.message + "\n" +
-                                                                "Thanks, Galdraland team",
-                                                        html: "Your request to join " + team.name + " has been approved by " + req.user.username + +"<br>" +
-                                                                ">>> " + apply.message + "<br>" +
-                                                                "Thanks, Galdraland team",
-                                                    }, function (err) {
-                                                        if (err) {
-                                                            console.log(err);
-                                                        }
-                                                    });
+//                                                    smtpTransport.sendMail({
+//                                                        from: "noreply@holomathics.com",
+//                                                        to: user.email,
+//                                                        subject: "Your request has been approved by " + req.user.username,
+//                                                        text: "Your request to join " + team.name + " has been approved by " + req.user.username + "\n" +
+//                                                                ">>> " + apply.message + "\n" +
+//                                                                "Thanks, Galdraland team",
+//                                                        html: "Your request to join " + team.name + " has been approved by " + req.user.username + +"<br>" +
+//                                                                ">>> " + apply.message + "<br>" +
+//                                                                "Thanks, Galdraland team",
+//                                                    }, function (err) {
+//                                                        if (err) {
+//                                                            console.log(err);
+//                                                        }
+//                                                    });
                                                     return res.json({success: true});
                                                 }
                                             });
@@ -160,21 +161,21 @@ module.exports = function (opts) {
                                     console.log(err);
                                     return res.json({success: false});
                                 } else {
-                                    smtpTransport.sendMail({
-                                        from: "noreply@holomathics.com",
-                                        to: user.email,
-                                        subject: "Your request has been rejected by " + req.user.username,
-                                        text: "Your request to join " + team.name + " has been rejected by " + req.user.username + "\n" +
-                                                ">>> " + apply.message + "\n" +
-                                                "Thanks, Galdraland team",
-                                        html: "Your request to join " + team.name + " has been rejected by " + req.user.username + +"<br>" +
-                                                ">>> " + apply.message + "<br>" +
-                                                "Thanks, Galdraland team",
-                                    }, function (err) {
-                                        if (err) {
-                                            console.log(err);
-                                        }
-                                    });
+//                                    smtpTransport.sendMail({
+//                                        from: "noreply@holomathics.com",
+//                                        to: user.email,
+//                                        subject: "Your request has been rejected by " + req.user.username,
+//                                        text: "Your request to join " + team.name + " has been rejected by " + req.user.username + "\n" +
+//                                                ">>> " + apply.message + "\n" +
+//                                                "Thanks, Galdraland team",
+//                                        html: "Your request to join " + team.name + " has been rejected by " + req.user.username + +"<br>" +
+//                                                ">>> " + apply.message + "<br>" +
+//                                                "Thanks, Galdraland team",
+//                                    }, function (err) {
+//                                        if (err) {
+//                                            console.log(err);
+//                                        }
+//                                    });
                                     return res.json({success: true});
                                 }
                             });
