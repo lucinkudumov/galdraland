@@ -14,6 +14,7 @@ module.exports = function (opts) {
     var userModel = opts.models.User;
     var teamModel = opts.models.Team;
     var teamMemberModel = opts.models.TeamMember;
+    var applyModel = opts.models.Apply;
 
     return {
         "get#slack/auth" : function (req, res, next) {
@@ -348,6 +349,7 @@ module.exports = function (opts) {
                                                 } else {
                                                     console.log("sub-group invitation  Fail");
                                                 }
+                                                return res.json({success: true});
                                             }
                                         });
                                     } else {
@@ -361,6 +363,68 @@ module.exports = function (opts) {
                     }
                 } else {
                     return res.json({success: false});
+                }
+            });
+        },
+        "post#slack/sendInviteByApply": function (req, res) {
+            var id = req.body.id;
+            applyModel.findOneAndUpdate({_id: id}, function (err, apply) {
+                if (err) {
+                    console.log(err);
+                    return res.json({success: false});
+                } else if (apply) {
+                    teamModel.findOne({_id: apply.team}, function (err, team) {
+                        if (err) {
+                            console.log(err);
+                            return res.json({success: false});
+                        } else if (team) {
+                            var slackGroupId = team.slackGroupId;
+                            userModel.findOne({_id: req.user._id}, function (err, user) {
+                                if (err) {
+                                    console.log(err);
+                                    return res.json({success: false});
+                                } else if (user) {
+                                    var accessToken = user.slackToken;
+                                    if (accessToken != null && accessToken != '') {
+                                        userModel.findOne({_id: apply.from}).exec(function (err, user1) {
+                                            if (err) {
+                                                console.log(err);
+                                                return res.json({success: false});
+                                            } else {
+                                                var slackUser = user1.slackUser;
+                                                console.log("aaaaaaa = " + slackUser);
+                                                if (slackUser != null && slackUser != '') {
+                                                    request.get({
+                                                        url: 'https://slack.com/api/groups.invite?token='+accessToken+'&channel='+slackGroupId+'&user='+slackUser
+                                                    }, function (err, response) {
+                                                        if(err) {
+                                                            console.log("sub-group invitation  error");
+                                                            return res.json({success: false});
+                                                        } else {
+                                                            console.log("sub-group invitation success");
+                                                            var result = JSON.parse(response.body);
+                                                            if (result.ok == true) {
+                                                                console.log("sub-group invitation  OK");
+                                                            } else {
+                                                                console.log("sub-group invitation  Fail");
+                                                            }
+                                                            return res.json({success: true});
+                                                        }
+                                                    });
+                                                } else {
+                                                    return res.json({success: false});
+                                                }
+                                            }
+                                        });
+                                    } else {
+                                        return res.json({success: false});
+                                    }
+                                } else {
+                                    return res.json({success: false});
+                                }
+                            });
+                        }
+                    });
                 }
             });
         },
