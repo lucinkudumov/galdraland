@@ -46,6 +46,10 @@ module.exports = function (opts) {
         },
         fb_page: {
             type: String
+        },
+        homeview: {
+            type: Boolean,
+            "default": true
         }
     });
 

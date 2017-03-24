@@ -3509,11 +3509,11 @@ app.controller("homeController", ["$scope", "$http", "$location", "$stateParams"
         $scope.newsloading = true;
         $scope.feedloading = true;
 
-        $http({method: "POST", url: "newAdventure", api: true, data: {term: ""}}).then($scope.parse_adventures);
+        $http({method: "POST", url: "newAdventureHome", api: true, data: {term: ""}}).then($scope.parse_adventures);
 
-        $http({method: "POST", url: "newTeam", api: true, data: {term: ""}}).then($scope.parse_teams);
+        $http({method: "POST", url: "newTeamHome", api: true, data: {term: ""}}).then($scope.parse_teams);
 
-        $http({method: "POST", url: "newUser", api: true, data: {term: ""}}).then($scope.parse_users).then(function () {
+        $http({method: "POST", url: "newUserHome", api: true, data: {term: ""}}).then($scope.parse_users).then(function () {
             $scope.newsloading = false;
         });
 
@@ -3659,6 +3659,43 @@ app.controller("homeController", ["$scope", "$http", "$location", "$stateParams"
             }
         }
     }
+
+    $scope.showHomeUser = function (userId) {
+        $http({
+            method: "POST", url: "updateUserHomeView", api: true, data: {id: userId}
+        }).then (function (result) {
+            var url = "/users/view/" + userId;
+            if ($location.path() == url)
+                $state.reload();
+            else
+                $location.path(url);
+        });
+    }
+
+    $scope.showHomeTeam = function (teamId) {
+        $http({
+            method: "POST", url: "updateTeamHomeView", api: true, data: {id: teamId}
+        }).then (function (result) {
+            var url = "/teams/view/" + teamId;
+            if ($location.path() == url)
+                $state.reload();
+            else
+                $location.path(url);
+        });
+    }
+
+    $scope.showHomeAdv = function (advId) {
+        $http({
+            method: "POST", url: "updateAdventureHomeView", api: true, data: {id: advId}
+        }).then (function (result) {
+            var url = "/adventures/view/" + advId;
+            if ($location.path() == url)
+                $state.reload();
+            else
+                $location.path(url);
+        });
+    }
+
 
     $scope.showHomeSlackMsg = function (slackFeed) {
         var url = "/teams/slack/" + slackFeed.teamId;

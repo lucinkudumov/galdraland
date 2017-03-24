@@ -39,6 +39,10 @@ module.exports = function (opts) {
         },
         slackGroupName: {
             type: String
+        },
+        homeview: {
+            type: Boolean,
+            "default": true
         }
     });
     

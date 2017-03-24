@@ -113,6 +113,10 @@ module.exports = function (opts) {
         },
         slackToken : {
             type: String
+        },
+        homeview: {
+            type: Boolean,
+            "default": true
         }
     });
     

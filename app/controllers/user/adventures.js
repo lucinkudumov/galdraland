@@ -79,6 +79,7 @@ module.exports = function (opts) {
                     adventure.end = req.body.end;
                     adventure.description = req.body.description;
                     adventure.link = req.body.link;
+                    adventure.homeview = true;
 
                     adventure.save(function (err, adventure) {
                         if (err) {
@@ -128,6 +129,37 @@ module.exports = function (opts) {
                     return res.json({adventures: []});
                 } else {
                     return res.json({adventures: adventures});
+                }
+            });
+        },
+        "post#newAdventureHome": function (req, res) {
+            var date = new Date();
+            date.setDate(date.getDate() - 7);
+            adventureModel.find({$and: [{"createdAt": {$gt: date}}, {"homeview": true}]}, function (err, adventures) {
+                if (err) {
+                    console.log(err);
+                    return res.json({adventures: []});
+                } else {
+                    return res.json({adventures: adventures});
+                }
+            });
+        },
+        "post#updateAdventureHomeView": function (req, res) {
+            var id = req.body.id;
+            adventureModel.findOne({_id: id}, function (err, adv) {
+                if (err) {
+                    console.log(err);
+                    return res.json({success: false});
+                } else if (adv) {
+                    adv.homeview = false;
+                    adv.save(function (err) {
+                        if (err) {
+                            console.log(err);
+                            return res.json({success: false});
+                        } else {
+                            return res.json({success: true});
+                        }
+                    });
                 }
             });
         },

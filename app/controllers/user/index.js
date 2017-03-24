@@ -140,6 +140,37 @@ module.exports = function (opts) {
                 }
             });
         },
+        "post#newUserHome": function (req, res) {
+            var date = new Date();
+            date.setDate(date.getDate() - 7);
+            userModel.find({$and: [{"signin": {$gt: date}}, {"homeview": true}]}, function (err, users) {
+                if (err) {
+                    console.log(err);
+                    return res.json({users: []});
+                } else {
+                    return res.json({users: users});
+                }
+            });
+        },
+        "post#updateUserHomeView": function (req, res) {
+            var id = req.body.id;
+            userModel.findOne({_id: id}, function (err, user) {
+                if (err) {
+                    console.log(err);
+                    return res.json({success: false});
+                } else if (user) {
+                    user.homeview = false;
+                    user.save(function (err) {
+                        if (err) {
+                            console.log(err);
+                            return res.json({success: false});
+                        } else {
+                            return res.json({success: true});
+                        }
+                    });
+                }
+            });
+        },
         "get#cookie": function (req, res) {
             if (req.session.returnTo)
                 var returnTo = req.session.returnTo;

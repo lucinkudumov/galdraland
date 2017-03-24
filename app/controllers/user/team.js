@@ -75,6 +75,7 @@ module.exports = function (opts) {
             team.teamMembers = [];
             team.slackGroupId = "";
             team.slackGroupName = "";
+            team.homeview = true;
 
             var i = 0;
             if (roles) {
@@ -180,6 +181,37 @@ module.exports = function (opts) {
                     return res.json({teams: []});
                 } else {
                     return res.json({teams: teams});
+                }
+            });
+        },
+        "post#newTeamHome": function (req, res) {
+            var date = new Date();
+            date.setDate(date.getDate() - 7);
+            teamModel.find({$and: [{"createdAt": {$gt: date}}, {"homeview": true}]}, function (err, teams) {
+                if (err) {
+                    console.log(err);
+                    return res.json({teams: []});
+                } else {
+                    return res.json({teams: teams});
+                }
+            });
+        },
+        "post#updateTeamHomeView": function (req, res) {
+            var id = req.body.id;
+            teamModel.findOne({_id: id}, function (err, team) {
+                if (err) {
+                    console.log(err);
+                    return res.json({success: false});
+                } else if (team) {
+                    team.homeview = false;
+                    team.save(function (err) {
+                        if (err) {
+                            console.log(err);
+                            return res.json({success: false});
+                        } else {
+                            return res.json({success: true});
+                        }
+                    });
                 }
             });
         },
