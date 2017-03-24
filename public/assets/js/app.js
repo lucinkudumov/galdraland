@@ -1695,7 +1695,7 @@ app.controller("headerController", ["$scope", "$rootScope", "$http", "$location"
                     if (result.action == "APPROVE") {
                         $http({method: "POST", url: "approveApply", api: true, data: {id: apply._id}});
                         console.log("calling APPROVE...");
-                        $http({method: "POST", url: "slack/sendInviteByApply", api: true, data: {id: apply._id}});
+                        $http({method: "POST", url: "slack/aaaaa", api: true, data: {id: apply._id}});
 
                     } else if (result.action == "REJECT") {
                         $http({method: "POST", url: "rejectApply", api: true, data: {id: apply._id}});

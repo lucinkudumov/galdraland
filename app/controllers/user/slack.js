@@ -366,7 +366,7 @@ module.exports = function (opts) {
                 }
             });
         },
-        "post#slack/sendInviteByApply": function (req, res) {
+        "post#slack/aaaaa": function (req, res) {
             var id = req.body.id;
             console.log("applyId = " + id);
             applyModel.findOneAndUpdate({_id: id}, function (err, apply) {
