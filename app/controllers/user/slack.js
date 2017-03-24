@@ -368,9 +368,7 @@ module.exports = function (opts) {
         },
         "post#slack/sendInviteByApply": function (req, res) {
             var id = req.body.id;
-            console.log("applyId = " + id);
             applyModel.findOne({_id: id}, function (err, apply) {
-                console.log("apply = ", apply);
                 if (err) {
                     console.log(err);
                     return res.json({success: false});
@@ -381,15 +379,12 @@ module.exports = function (opts) {
                             return res.json({success: false});
                         } else if (team) {
                             var slackGroupId = team.slackGroupId;
-                            console.log("slackGroupId = " + slackGroupId);
-                            console.log("req.user._id = " + req.user._id);
                             userModel.findOne({_id: req.user._id}, function (err, user) {
                                 if (err) {
                                     console.log(err);
                                     return res.json({success: false});
                                 } else if (user) {
                                     var accessToken = user.slackToken;
-                                    console.log("accessToken = " + accessToken);
                                     if (accessToken != null && accessToken != '') {
                                         userModel.findOne({_id: apply.from}).exec(function (err, user1) {
                                             if (err) {
@@ -397,7 +392,6 @@ module.exports = function (opts) {
                                                 return res.json({success: false});
                                             } else {
                                                 var slackUser = user1.slackUser;
-                                                console.log("aaaaaaa = " + slackUser);
                                                 if (slackUser != null && slackUser != '') {
                                                     request.get({
                                                         url: 'https://slack.com/api/groups.invite?token='+accessToken+'&channel='+slackGroupId+'&user='+slackUser
