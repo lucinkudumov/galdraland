@@ -95,7 +95,7 @@ module.exports = function (opts) {
                                     });
                                 } else {
                                     console.log("error = " + result.detail);
-                                    var msg = result.detail;
+                                    var msg = "Slack Error : " + result.detail;
                                     return res.json({success: false, msg: msg});
                                 }
                             }
@@ -624,7 +624,7 @@ module.exports = function (opts) {
                                                         }
                                                     }
                                                 });
-                                            },3500);
+                                            },10000);
                                         }
                                         console.log("slack items = ", items);
                                         if (items.length > 0)
