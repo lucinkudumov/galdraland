@@ -1497,7 +1497,7 @@ app.controller("emailController", ["$scope", "$location", "$http", "User", funct
         $scope.validateEmail();
         $scope.validateUsername();
     }]);
-app.controller("headerController", ["$scope", "$rootScope", "$http", "$location", "User", "$uibModal", "$stateParams", "$state", , function ($scope, $rootScope, $http, $location, User, $uibModal, $stateParams, $state) {
+app.controller("headerController", ["$scope", "$rootScope", "$http", "$location", "User", "$uibModal", "$stateParams", "$state", function ($scope, $rootScope, $http, $location, User, $uibModal, $stateParams, $state) {
         $scope.user = User.isLoggedIn();
         $temp = $stateParams.scategory;
         if ($temp == "aa")
