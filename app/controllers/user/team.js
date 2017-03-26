@@ -65,56 +65,70 @@ module.exports = function (opts) {
                 roles = req.body.roles.split(",");
             }
 
-            team.owner = req.user._id;
-            team.name = name;
-            team.description = description;
-            team.image = image;
-            team.tags = tags;
-            team.fb_page = fb_page;
-            team.mission = mission;
-            team.teamMembers = [];
-            team.slackGroupId = "";
-            team.slackGroupName = "";
-            team.homeview = true;
-
-            var i = 0;
-            if (roles) {
-                for (i = 0; i < roles.length; i++) {
-                    var member = new teamMemberModel();
-                    member.title = roles[i];
-                    member.user = req.body.defuser._id;
-                    member.save(function (err, member) {
-                        if (err) {
-                            console.log(err);
-                            return res.json({success: false});
-                        } else {
-                            team.teamMembers.push(member._id);
-                        }
-                    });
-                }
-            }
-
-            var founder = new teamMemberModel();
-            founder.title = "Founder";
-            founder.user = req.user._id;
-
-            founder.save(function (err, founder) {
+            var teamName = name;
+            teamModel.find({name: new RegExp(teamName, 'i')}).populate("owner teamMembers").exec(function (err, teams) {
                 if (err) {
                     console.log(err);
-                    return res.json({success: false});
-                } else {
-                    team.teamMembers.unshift(founder._id);
+                    return res.json({success: false, msg : "Occur Unknown Error"});
+                } else if (teams) {
+                    if (teams.length <= 0) {
+                        team.owner = req.user._id;
+                        team.name = name;
+                        team.description = description;
+                        team.image = image;
+                        team.tags = tags;
+                        team.fb_page = fb_page;
+                        team.mission = mission;
+                        team.teamMembers = [];
+                        team.slackGroupId = "";
+                        team.slackGroupName = "";
+                        team.homeview = true;
 
-                    team.save(function (err, team) {
-                        if (err) {
-                            console.log(err);
-                            founder.remove(function () {
-                                return res.json({success: false});
-                            });
-                        } else {
-                            return res.json({success: true, id: team._id});
+                        var i = 0;
+                        if (roles) {
+                            for (i = 0; i < roles.length; i++) {
+                                var member = new teamMemberModel();
+                                member.title = roles[i];
+                                member.user = req.body.defuser._id;
+                                member.save(function (err, member) {
+                                    if (err) {
+                                        console.log(err);
+                                        return res.json({success: false, msg : "Occur Unknown Error"});
+                                    } else {
+                                        team.teamMembers.push(member._id);
+                                    }
+                                });
+                            }
                         }
-                    });
+
+                        var founder = new teamMemberModel();
+                        founder.title = "Founder";
+                        founder.user = req.user._id;
+
+                        founder.save(function (err, founder) {
+                            if (err) {
+                                console.log(err);
+                                return res.json({success: false, msg : "Occur Unknown Error"});
+                            } else {
+                                team.teamMembers.unshift(founder._id);
+
+                                team.save(function (err, team) {
+                                    if (err) {
+                                        console.log(err);
+                                        founder.remove(function () {
+                                            return res.json({success: false, msg : "Occur Unknown Error"});
+                                        });
+                                    } else {
+                                        return res.json({success: true, id: team._id});
+                                    }
+                                });
+                            }
+                        });
+                    } else {
+                        return res.json({success: false, msg : "The Same Name already exists." });
+                    }
+                } else {
+                    return res.json({success: false, msg : "Occur Unknown Error"});
                 }
             });
         },

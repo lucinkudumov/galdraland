@@ -3139,7 +3139,7 @@ app.controller("createTeamController", ["$scope", "$rootScope", "Upload", "$http
                 api: true,
                 data: {name: $scope.name, description: $scope.description, rols: $scope.roles, defuser: $rootScope.defUser, fb_page: $scope.fb_page, mission: $scope.mission, image: $scope.uploadedImage, tags: tmpTags}
             }).then(function (data) {
-                if (data&& data.data && data.data.success == true) {
+                if (data && data.data && data.data.success == true) {
                     $http({
                         method: "POST",
                         url: "slack/createChannel",
@@ -3151,7 +3151,7 @@ app.controller("createTeamController", ["$scope", "$rootScope", "Upload", "$http
                     }).then(function (data1) {
                         console.log(data1);
                         if (data1.data.success ==  false) {
-                            var htmlcontent = data.data1.msg;
+                            var htmlcontent = data1.data.msg;
                             $scope1 = $('#err').html(htmlcontent).scope();
                             $compile($('#err'))($scope1);
                         } else {
@@ -3164,12 +3164,17 @@ app.controller("createTeamController", ["$scope", "$rootScope", "Upload", "$http
                                 $location.path("/teams/view/" + data.data.id);
                         }
                     });
+                } else {
+                    if (data && data.data) {
+                        var htmlcontent = data.data.msg;
+                        $scope1 = $('#err').html(htmlcontent).scope();
+                        $compile($('#err'))($scope1);
+                    }
                 }
             });
         }
 
         $scope.tags = [];
-
         $scope.onFileSelect = function (image1) {
             $scope.image = image1.files[0];
             if (angular.isArray($scope.image)) {
