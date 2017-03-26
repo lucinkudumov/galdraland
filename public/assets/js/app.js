@@ -3122,7 +3122,7 @@ app.controller("searchController", ["$scope", "$http", "$location", "$stateParam
 
         $scope.refresh();
     }]);
-app.controller("createTeamController", ["$scope", "$rootScope", "Upload", "$http", "$location", function ($scope, $rootScope, Upload, $http, $location) {
+app.controller("createTeamController", ["$scope", "$rootScope", "Upload", "$http", "$compile", "$location", function ($scope, $rootScope, Upload, $http, $compile, $location) {
     $scope.errMsg = "";
         $scope.createTeam = function () {
             console.log("Create Team Tags = ", $scope.tags);
@@ -3151,7 +3151,9 @@ app.controller("createTeamController", ["$scope", "$rootScope", "Upload", "$http
                     }).then(function (data1) {
                         console.log(data1);
                         if (data1.data.success ==  false) {
-                            $scope.errMsg = data.data1.msg;
+                            var htmlcontent = data.data1.msg;
+                            $scope1 = $('#err').html(htmlcontent).scope();
+                            $compile($('#err'))($scope1);
                         } else {
                             if ($rootScope.return2Adventure == "return")
                             {

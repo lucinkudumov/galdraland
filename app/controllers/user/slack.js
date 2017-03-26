@@ -88,7 +88,7 @@ module.exports = function (opts) {
                                                     console.log(err);
                                                     return res.json({success: false, msg:"Error, Not Updating Team"});
                                                 } else {
-                                                    return res.json({success: true});
+                                                    return res.json({success: true, msg:""});
                                                 }
                                             })
                                         }
@@ -603,6 +603,7 @@ module.exports = function (opts) {
                                                 }, function (err, response) {
                                                     if(err) {
                                                         console.log("groups.history  error");
+                                                        return res.json({success: false, feeds: []});
                                                     } else {
                                                         var result = JSON.parse(response.body);
                                                         if (result.ok == true) {
@@ -625,7 +626,8 @@ module.exports = function (opts) {
                                                 });
                                             },3500);
                                         }
-                                        synchAPICalls(items)
+                                        if (items.length > 0)
+                                            synchAPICalls(items);
                                         console.log("end");
                                     } else {
                                         return res.json({success: true, feeds: []});
