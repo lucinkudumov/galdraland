@@ -624,7 +624,7 @@ module.exports = function (opts) {
                                                         }
                                                     }
                                                 });
-                                            },3500);
+                                            },5000);
                                         }
                                         if (items.length > 0)
                                             synchAPICalls(items);
