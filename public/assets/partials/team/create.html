@@ -30,5 +30,6 @@
             <img src="{{uploadedImage}}" ng-show="uploadedImage">
         </div>
         <button class="btn btn-primary" ng-disabled="!name || !image || !mission"  ng-click="createTeam()">Create team</button>
+        <p ng-show="errMsg" style="color:#ff0000;">{{ errMsg }}</p>
     </div>
 </div>

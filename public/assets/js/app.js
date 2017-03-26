@@ -3123,6 +3123,7 @@ app.controller("searchController", ["$scope", "$http", "$location", "$stateParam
         $scope.refresh();
     }]);
 app.controller("createTeamController", ["$scope", "$rootScope", "Upload", "$http", "$location", function ($scope, $rootScope, Upload, $http, $location) {
+    $scope.errMsg = "";
         $scope.createTeam = function () {
             console.log("Create Team Tags = ", $scope.tags);
             var tmpTags = [];
@@ -3148,7 +3149,10 @@ app.controller("createTeamController", ["$scope", "$rootScope", "Upload", "$http
                             teamId:  data.data.id
                         }
                     }).then(function (data) {
-                            console.log(data);
+                        console.log(data);
+                        if (data.data.success ==  false) {
+                            $scope.errMsg = data.data.msg;
+                        } else {
                             if ($rootScope.return2Adventure == "return")
                             {
                                 $rootScope.return2Adventure = "normal";
@@ -3156,6 +3160,7 @@ app.controller("createTeamController", ["$scope", "$rootScope", "Upload", "$http
                             }
                             else
                                 $location.path("/teams/view/" + data.data.id);
+                        }
                     });
                 }
             });
