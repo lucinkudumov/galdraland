@@ -45,71 +45,9 @@ module.exports = function (opts) {
                                 user.save(function (err) {
                                     if (err) res.json("Slack Authorization FAIL! - No User");
                                 });
+                                return res.json("Slack Authorization OK! Please refresh Galdraland");
                             }
                         });
-
-//                        request.get({
-//                            url: 'https://slack.com/api/groups.list?token='+result.access_token+
-//                                '&exclude_archived=false'
-//                        }, function (err, response) {
-//                            if(err) {
-//                                console.log("get channel list error = ", err);
-//                                return res.json("Slack Authorization FAIL!");
-//                            }
-//                            else {
-//                                var result = JSON.parse(response.body);
-//                                for (i=0; i<result.groups.length; i++) {
-//                                    console.log("id = " + result.groups[i].id);
-//                                    console.log("name = " + result.groups[i].name);
-//                                    if (result.groups[i].members.length > 0) {
-//                                        for (j=0; j < result.groups[i].members.length; j++ )
-//                                            console.log("member = " + result.groups[i].members[j]);
-//                                    } else {
-//                                        console.log("no members");
-//                                    }
-//
-//                                    if (result.groups[i].name == "david_galdra_test") {
-//                                        console.log("find my channel");
-//                                        request.get({
-//                                            url: 'https://slack.com/api/users.admin.invite?token='+access_token+
-//                                                '&email=davidmakow16@gmail.com&channels='+result.groups[i].id
-//                                        }, function (err, response) {
-//                                            if(err) {
-//                                                console.log("invite admin error = ", err);
-//                                            }
-//                                            else {
-//                                                var result = JSON.parse(response.body);
-//                                                console.log("invite admin result = ", result);
-//                                            }
-//                                        });
-//                                        request.get({
-//                                            url: 'https://slack.com/api/groups.invite?token='+access_token+
-//                                                '&channel='+result.groups[i].id+
-//                                                '&user=U4F5CNKTN'
-//                                        }, function (err, response) {
-//                                            if(err) {
-//                                                console.log("invited error = ", err);
-//                                                return res.json("Slack Authorization FAIL!");
-//                                            }
-//                                            else {
-//                                                console.log("invited result = ", response.body);
-//                                            }
-//                                        });
-//                                    }
-//                                }
-//                            }
-//                        });
-//                        userModel.findOne({_id: req.user._id}, function (err, user) {
-//                            if (err) {
-//                                return res.json("Slack Authorization FAIL!");
-//                            } else if (user) {
-//                                user.slackToken = result.access_token;
-//                                user.save(function (err) {
-//                                    if (err) res.json("Slack Authorization FAIL! - No User");
-//                                });
-//                            }
-//                        });
-                        return res.json("Slack Authorization OK!");
                     }
                 });
             } else {
