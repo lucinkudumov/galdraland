@@ -94,6 +94,7 @@ module.exports = function (opts) {
                                         }
                                     });
                                 } else {
+                                    console.log("error = " + result.detail);
                                     var msg = result.detail;
                                     return res.json({success: false, msg: msg});
                                 }
