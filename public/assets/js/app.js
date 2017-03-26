@@ -3149,15 +3149,15 @@ app.controller("createTeamController", ["$scope", "$rootScope", "Upload", "$http
                         }
                     }).then(function (data) {
                             console.log(data);
+                            if ($rootScope.return2Adventure == "return")
+                            {
+                                $rootScope.return2Adventure = "normal";
+                                $location.path("/adventures/create");
+                            }
+                            else
+                                $location.path("/teams/view/" + data.data.id);
                     });
                 }
-                if ($rootScope.return2Adventure == "return")
-                {
-                    $rootScope.return2Adventure = "normal";
-                    $location.path("/adventures/create");
-                }
-                else
-                    $location.path("/teams/view/" + data.data.id);
             });
         }
 
