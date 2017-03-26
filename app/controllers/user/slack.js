@@ -616,7 +616,7 @@ module.exports = function (opts) {
                                                                 feeds.push(obj);
                                                             }
                                                         }
-                                                        if (items.length) {
+                                                        if (items.length > 0) {
                                                             synchAPICalls(items);
                                                         } else {
                                                             console.log("all done!");
@@ -626,6 +626,7 @@ module.exports = function (opts) {
                                                 });
                                             },5000);
                                         }
+                                        console.log("slack items = ", items);
                                         if (items.length > 0)
                                             synchAPICalls(items);
                                         else

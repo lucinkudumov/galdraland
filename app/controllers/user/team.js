@@ -125,7 +125,7 @@ module.exports = function (opts) {
                             }
                         });
                     } else {
-                        return res.json({success: false, msg : "The Same Name already exists." });
+                        return res.json({success: false, msg : "The Same Team Name already exists." });
                     }
                 } else {
                     return res.json({success: false, msg : "Occur Unknown Error"});
