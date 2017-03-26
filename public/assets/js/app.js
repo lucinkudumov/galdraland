@@ -3148,10 +3148,10 @@ app.controller("createTeamController", ["$scope", "$rootScope", "Upload", "$http
                             name : $scope.name,
                             teamId:  data.data.id
                         }
-                    }).then(function (data) {
-                        console.log(data);
-                        if (data.data.success ==  false) {
-                            $scope.errMsg = data.data.msg;
+                    }).then(function (data1) {
+                        console.log(data1);
+                        if (data1.data.success ==  false) {
+                            $scope.errMsg = data.data1.msg;
                         } else {
                             if ($rootScope.return2Adventure == "return")
                             {
