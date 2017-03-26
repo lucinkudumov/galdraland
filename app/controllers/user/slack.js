@@ -75,21 +75,28 @@ module.exports = function (opts) {
                                 console.log("success");
                                 var result = JSON.parse(response.body);
                                 console.log("createChannel = ", result);
-                                teamModel.findOne({_id: teamId}, function (err, team) {
-                                    if(err) {
-                                        console.log("error");
-                                        return res.json({success: false});
-                                    } else {
-                                        team.slackGroupId = result.group.id;
-                                        team.slackGroupName = result.group.name;
-                                        team.save(function (err, team) {
-                                            if (err) {
-                                                console.log(err);
-                                            }
-                                        })
-                                    }
-                                });
-                                return res.json({success: true});
+                                if (result.ok == true) {
+                                    teamModel.findOne({_id: teamId}, function (err, team) {
+                                        if(err) {
+                                            console.log("error");
+                                            return res.json({success: false, msg:"Error, No Team"});
+                                        } else {
+                                            team.slackGroupId = result.group.id;
+                                            team.slackGroupName = result.group.name;
+                                            team.save(function (err, team) {
+                                                if (err) {
+                                                    console.log(err);
+                                                    return res.json({success: false, msg:"Error, Not Updating Team"});
+                                                } else {
+                                                    return res.json({success: true});
+                                                }
+                                            })
+                                        }
+                                    });
+                                } else {
+                                    var msg = result.detail;
+                                    return res.json({success: false, msg: msg});
+                                }
                             }
                         });
                     }
