@@ -603,7 +603,7 @@ module.exports = function (opts) {
                                                 }, function (err, response) {
                                                     if(err) {
                                                         console.log("groups.history  error");
-                                                        return res.json({success: false, feeds: []});
+                                                        return res.json({success: true, feeds: []});
                                                     } else {
                                                         var result = JSON.parse(response.body);
                                                         if (result.ok == true) {
@@ -630,17 +630,17 @@ module.exports = function (opts) {
                                         if (items.length > 0)
                                             synchAPICalls(items);
                                         else
-                                            return res.json({success: false, feeds: []});
+                                            return res.json({success: true, feeds: []});
                                         console.log("end");
                                     } else {
-                                        return res.json({success: false, feeds: []});
+                                        return res.json({success: true, feeds: []});
                                     }
                                 }
                             });
                         }
                     });
                 } else {
-                    return res.json({success: false, feeds: []});
+                    return res.json({success: true, feeds: []});
                 }
             });
         },
