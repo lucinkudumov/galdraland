@@ -624,7 +624,7 @@ module.exports = function (opts) {
                                                         }
                                                     }
                                                 });
-                                            },10000);
+                                            }, 3500);
                                         }
                                         console.log("slack items = ", items);
                                         if (items.length > 0)

@@ -303,7 +303,7 @@ app.config(["$urlRouterProvider", "$locationProvider", "$stateProvider", "$httpP
             requireLogin: true
         })
 
-
+        $httpProvider.defaults.timeout = 10000;
         $locationProvider.html5Mode(true);
         $urlRouterProvider.otherwise("/");
 
