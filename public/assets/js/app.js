@@ -1497,7 +1497,7 @@ app.controller("emailController", ["$scope", "$location", "$http", "User", funct
         $scope.validateEmail();
         $scope.validateUsername();
     }]);
-app.controller("headerController", ["$scope", "$rootScope", "$http", "$location", "User", "$uibModal", "$stateParams", "$state", "$timeout", function ($scope, $rootScope, $http, $location, User, $uibModal, $stateParams, $state, $timeout) {
+app.controller("headerController", ["$scope", "$rootScope", "$http", "$location", "User", "$uibModal", "$stateParams", "$state", , function ($scope, $rootScope, $http, $location, User, $uibModal, $stateParams, $state) {
         $scope.user = User.isLoggedIn();
         $temp = $stateParams.scategory;
         if ($temp == "aa")
@@ -1550,7 +1550,7 @@ app.controller("headerController", ["$scope", "$rootScope", "$http", "$location"
                             $scope.slaveRecommendates = [];
 
                         $http({
-                            method: "GET", url: "slack/getFeeds", api: true, timeout : $timeout( function () {alert('request timed out'); $scope.slackFeeds = []; refresh_feeds();}, 10000)
+                            method: "GET", url: "slack/getFeeds", api: true)
                         }).then (function (result) {
                             console.log(result);
                             if (result !== undefined && result.data !== undefined && result.data.feeds !== undefined)
