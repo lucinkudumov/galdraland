@@ -628,6 +628,8 @@ module.exports = function (opts) {
                                         }
                                         if (items.length > 0)
                                             synchAPICalls(items);
+                                        else
+                                            return res.json({success: true, feeds: []});
                                         console.log("end");
                                     } else {
                                         return res.json({success: true, feeds: []});
