@@ -1550,7 +1550,7 @@ app.controller("headerController", ["$scope", "$rootScope", "$http", "$location"
                             $scope.slaveRecommendates = [];
 
                         $http({
-                            method: "GET", url: "slack/getFeeds", api: true})
+                            method: "GET", url: "slack/getFeeds", api: true
                         }).then (function (result) {
                             console.log(result);
                             if (result !== undefined && result.data !== undefined && result.data.feeds !== undefined)
