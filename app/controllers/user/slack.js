@@ -70,7 +70,7 @@ module.exports = function (opts) {
                         }, function (err, response) {
                             if(err) {
                                 console.log("error");
-                                return res.json({success: false});
+                                return res.json({success: false, msg:"Occurs Unknown Error"});
                             } else {
                                 console.log("success");
                                 var result = JSON.parse(response.body);
@@ -624,16 +624,16 @@ module.exports = function (opts) {
                                                         }
                                                     }
                                                 });
-                                            },5000);
+                                            },3500);
                                         }
                                         console.log("slack items = ", items);
                                         if (items.length > 0)
                                             synchAPICalls(items);
                                         else
-                                            return res.json({success: true, feeds: []});
+                                            return res.json({success: false, feeds: []});
                                         console.log("end");
                                     } else {
-                                        return res.json({success: true, feeds: []});
+                                        return res.json({success: false, feeds: []});
                                     }
                                 }
                             });
