@@ -20,59 +20,36 @@
                         </ul>
                         <ul class="feeds">
                             <li ng-repeat="p in peoples">
-                                <div class="col1">
-                                    <div class="cont">
-                                        <div class="cont-col1">
-                                            <img src="{{ .teamImg }}" style="width:30px; height:30px; padding-top: 4px;" />                                        </div>
-                                        <div class="cont-col2">
-                                            <div class="desc">
-                                                <a href="" ng-click="showHomeUser(p._id)">{{ p.name}}</a> <small>SignIn</small>
-                                            </div>
-                                        </div>
-                                    </div>
+                                <div class="col-md-3 col-sm-3">
+                                    <img src="{{ p.photo }}" style="width:30px; height:30px; padding-top: 4px;"/>
                                 </div>
-                                <div class="col2">
-                                    <div class="date">
-                                        {{ p.signin}}
-                                    </div>
+                                <div class="col-md-6 col-sm-6">
+                                    <a href="" ng-click="showHomeUser(p._id)">{{ p.name}}</a> <small>SignIn</small>
+                                </div>
+                                <div class="col-md-3 col-sm-3" style="text-align: right;font-style: italic;color: #c1cbd0;font-size: 13px;">
+                                    {{ p.signin}}
                                 </div>
                             </li>
                             <li ng-repeat="t in teams">
-                                <div class="col1">
-                                    <div class="cont">
-                                        <div class="cont-col1">
-                                            <img src="{{ t.teamImg }}" style="width:30px; height:30px; padding-top: 4px;" />
-                                        </div>
-                                        <div class="cont-col2">
-                                            <div class="desc">
-                                                <a href="" ng-click="showHomeTeam(t._id)">{{ t.name}} created by user {{ t.username}} <img src="{{ t.userImg }}" style="width:30px; height:30px;"></a>
-                                            </div>
-                                        </div>
-                                    </div>
+                                <div class="col-md-3 col-sm-3">
+                                    <img src="{{ t.teamImg }}" style="width:30px; height:30px; padding-top: 4px;"/>
                                 </div>
-                                <div class="col2">
-                                    <div class="date">
-                                        {{ t.createdAt}}
-                                    </div>
+                                <div class="col-md-6 col-sm-6">
+                                    <a href="" ng-click="showHomeTeam(t._id)">{{ t.name}} created by user {{ t.username}} <img src="{{ t.userImg }}" style="width:30px; height:30px;"></a>
+                                </div>
+                                <div class="col-md-3 col-sm-3" style="text-align: right;font-style: italic;color: #c1cbd0;font-size: 13px;">
+                                    {{ t.createdAt}}
                                 </div>
                             </li>
                             <li ng-repeat="a in adventures">
-                                <div class="col1">
-                                    <div class="cont">
-                                        <div class="cont-col1">
-                                            <img src="{{ a.advImg }}" style="width:30px; height:30px; padding-top: 4px;" />
-                                        </div>
-                                        <div class="cont-col2">
-                                            <div class="desc">
-                                                <a href="" ng-click="showHomeAdv(a._id)">{{ a.name}} created by user {{ a.username}} <img src="{{ a.userImg }}" style="width:30px; height:30px;"></a>
-                                            </div>
-                                        </div>
-                                    </div>
+                                <div class="col-md-3 col-sm-3">
+                                    <img src="{{ a.advImg }}" style="width:30px; height:30px; padding-top: 4px;"/>
                                 </div>
-                                <div class="col2">
-                                    <div class="date">
-                                        {{ a.createdAt}}
-                                    </div>
+                                <div class="col-md-6 col-sm-6">
+                                    <a href="" ng-click="showHomeAdv(a._id)">{{ a.name}} created by user {{ a.username}} <img src="{{ a.userImg }}" style="width:30px; height:30px;"></a>
+                                </div>
+                                <div class="col-md-3 col-sm-3" style="text-align: right;font-style: italic;color: #c1cbd0;font-size: 13px;">
+                                    {{ a.createdAt}}
                                 </div>
                             </li>
                         </ul>
