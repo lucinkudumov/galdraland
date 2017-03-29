@@ -3595,6 +3595,9 @@ app.controller("homeController", ["$scope", "$http", "$location", "$stateParams"
             var result = {};
             result._id = data.data.teams[i]._id;
             result.name = data.data.teams[i].name;
+            result.teamImg = data.data.teams[i].image;
+            result.username = data.data.teams[i].owner.fullname;
+            result.userImg = data.data.teams[i].owner.photo;
             result.text1 = data.data.teams[i].teamMembers.length + " Members";
             result.href = "/teams/view/" + data.data.teams[i]._id;
             result.createdAt = prettyDate(data.data.teams[i].createdAt);

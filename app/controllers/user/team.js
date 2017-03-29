@@ -206,7 +206,6 @@ module.exports = function (opts) {
                     console.log(err);
                     return res.json({teams: []});
                 } else {
-                    console.log("aaaaa= ",teams);
                     return res.json({teams: teams});
                 }
             });
