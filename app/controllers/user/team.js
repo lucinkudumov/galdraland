@@ -201,11 +201,12 @@ module.exports = function (opts) {
         "post#newTeamHome": function (req, res) {
             var date = new Date();
             date.setDate(date.getDate() - 7);
-            teamModel.find({$and: [{"createdAt": {$gt: date}}, {"homeview": true}]}, function (err, teams) {
+            teamModel.find({$and: [{"createdAt": {$gt: date}}, {"homeview": true}]}).populate("owner").exec(function (err, teams) {
                 if (err) {
                     console.log(err);
                     return res.json({teams: []});
                 } else {
+                    console.log("aaaaa= ",teams);
                     return res.json({teams: teams});
                 }
             });
