@@ -10,6 +10,9 @@ module.exports = function (opts) {
             type: String,
             required: true
         },
+        recommendationUserPhoto: {
+            type: String
+        },
         masterId: {
             type: String,
             required: true
@@ -18,6 +21,9 @@ module.exports = function (opts) {
             type: String,
             required: true
         },
+        masterUserPhoto : {
+            type: String
+        },
         slaveId: {
             type: String,
             required: true
@@ -25,6 +31,9 @@ module.exports = function (opts) {
         slaveUserName: {
             type: String,
             required: true
+        },
+        slaveUserPhoto : {
+            type: String
         },
         roleId: {
             type: String
@@ -42,10 +51,16 @@ module.exports = function (opts) {
         adventureName: {
             type: String
         },
+        adventureImage: {
+            type: String
+        },
         teamId: {
             type: String
         },
         teamName: {
+            type: String
+        },
+        teamImage: {
             type: String
         },
         masterMsg : {

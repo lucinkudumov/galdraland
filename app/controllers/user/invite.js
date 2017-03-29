@@ -167,10 +167,13 @@ module.exports = function (opts) {
                 var recommendation = new recommendationModel;
                 recommendation.recommendationId = recommendation_user._id;
                 recommendation.recommendationUserName = recommendation_user.fullname;
+                recommendation.recommendationUserPhoto = recommendation_user.photo;
                 recommendation.masterId = master_user._id;
                 recommendation.masterUserName = master_user.fullname;
+                recommendation.masterUserPhoto = master_user.photo;
                 recommendation.slaveId = item.memberId;
                 recommendation.slaveUserName = item.user;
+                recommendation.slaveUserPhoto = item.photo;
                 if (type == "teams") {
                     recommendation.roleId = item.title._id;
                     recommendation.roleTitle = item.title.title;
@@ -179,10 +182,12 @@ module.exports = function (opts) {
                 if (team != null) {
                     recommendation.teamId = team._id;
                     recommendation.teamName = team.name;
+                    recommendation.teamImage = team.image;
                 }
                 if (adventure != null) {
                     recommendation.adventureId = adventure._id;
                     recommendation.adventureName = adventure.name;
+                    recommendation.adventureImage = adventure.image;
                 }
                 var toMasterMsg = "";
                 var toSlaveMsg = "";

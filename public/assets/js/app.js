@@ -528,7 +528,7 @@ app.controller("sendAdvRecommendationController", ["$scope", "$uibModalInstance"
     $scope.addAdvRecommendation = function (user) {
         $scope.values.newMember = null;
         $scope.values.users = [];
-        $scope.values.recommendates.push({user: user.username, memberId: user._id, fb_id: user.is_fb_friend});
+        $scope.values.recommendates.push({user: user.username, memberId: user._id, photo: user.photo, fb_id: user.is_fb_friend});
         return false;
     }
 
@@ -2110,7 +2110,7 @@ app.controller("sendRecommendationController", ["$scope", "$uibModalInstance", "
                 break;
             }
         $scope.values.title = "0";
-        $scope.values.recommendates.push({user: user.username, memberId: user._id, fb_id: user.is_fb_friend, title: title});
+        $scope.values.recommendates.push({user: user.username, memberId: user._id, photo: user.photo, fb_id: user.is_fb_friend, title: title});
         $scope.values._emptyRecMembers.splice(i, 1);
         return false;
     }
@@ -3534,7 +3534,7 @@ app.controller("homeController", ["$scope", "$http", "$location", "$stateParams"
                 $scope.masterRecommendates = result.data.recommendates;
             else
                 $scope.masterRecommendates = [];
-
+            console.log("marster = ", $scope.masterRecommendates);
             $http({
                 method: "GET", url: "getSlaveRecommendates", api: true
             }).then (function (result) {
@@ -3542,6 +3542,7 @@ app.controller("homeController", ["$scope", "$http", "$location", "$stateParams"
                     $scope.slaveRecommendates = result.data.recommendates;
                 else
                     $scope.slaveRecommendates = [];
+                console.log("slave = ", $scope.slaveRecommendates);
                 refresh_home_feeds();
                 $scope.feedloading = false;
             });
