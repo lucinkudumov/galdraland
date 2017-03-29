@@ -21,7 +21,7 @@
                         <ul class="feeds">
                             <li ng-repeat="p in peoples">
                                 <div class="col-md-10 col-sm-10">
-                                    <a href="" ng-click="showHomeUser(p._id)"> User <img src="{{ p.photo }}" style="width:30px; height:30px;"/> <b>{{ p.name}}</b></a> <small>SignIn</small>
+                                    <a href="" ng-click="showHomeUser(p._id)"> <img src="{{ p.photo }}" style="width:30px; height:30px;"/> <b>{{ p.name}}</b></a> <small>SignIn</small>
                                 </div>
                                 <div class="col-md-2 col-sm-2" style="text-align: right;font-style: italic;color: #c1cbd0;font-size: 13px;">
                                     {{ p.signin}}
@@ -29,7 +29,7 @@
                             </li>
                             <li ng-repeat="t in teams">
                                 <div class="col-md-10 col-sm-10">
-                                    <a href="" ng-click="showHomeTeam(t._id)"> Team <img src="{{ t.teamImg }}" style="width:30px; height:30px; "/> <b>{{ t.name}}</b> created by user <img src="{{ t.userImg }}" style="width:30px; height:30px;"> {{ t.username}} </a>
+                                    <a href="" ng-click="showHomeTeam(t._id)"> <img src="{{ t.teamImg }}" style="width:30px; height:30px;"/> <b>{{ t.name}}</b> created by user <img src="{{ t.userImg }}" style="width:30px; height:30px;"> {{ t.username}} </a>
                                 </div>
                                 <div class="col-md-2 col-sm-2" style="text-align: right;font-style: italic;color: #c1cbd0;font-size: 13px;">
                                     {{ t.createdAt}}
@@ -37,7 +37,7 @@
                             </li>
                             <li ng-repeat="a in adventures">
                                 <div class="col-md-10 col-sm-10">
-                                    <a href="" ng-click="showHomeAdv(a._id)"> Adventure <img src="{{ a.advImg }}" style="width:30px; height:30px;"/> <b>{{ a.name}}</b> created by user <img src="{{ a.userImg }}" style="width:30px; height:30px;"> {{ a.username}} </a>
+                                    <a href="" ng-click="showHomeAdv(a._id)"> <img src="{{ a.advImg }}" style="width:30px; height:30px;"/> <b>{{ a.name}}</b> created by user <img src="{{ a.userImg }}" style="width:30px; height:30px;"> {{ a.username}} </a>
                                 </div>
                                 <div class="col-md-2 col-sm-2" style="text-align: right;font-style: italic;color: #c1cbd0;font-size: 13px;">
                                     {{ a.createdAt}}
@@ -113,24 +113,20 @@
                         </ul>
                         <ul class="feeds">
                             <li ng-repeat="f in feeds">
-                                <div class="col1">
-                                    <div class="cont">
-                                        <div class="cont-col1">
-                                            <div class="label label-sm label-info">
-                                                <i class="fa fa-cog"></i>
-                                            </div>
-                                        </div>
-                                        <div class="cont-col2">
-                                            <div class="desc">
-                                                {{f.msg}}
-                                            </div>
-                                        </div>
-                                    </div>
+                                <div class="col-md-10 col-sm-10" ng-show ="f.position == 'master' && f.type == 'adventures'">
+                                    master-adventure
                                 </div>
-                                <div class="col2">
-                                    <div class="date">
-                                        <button class="btn btn-primary" ng-click="showHomeRecommendation(f)">View</button>
-                                    </div>
+                                <div class="col-md-10 col-sm-10" ng-show ="f.position == 'master' && f.type == 'teams'">
+                                    master-team
+                                </div>
+                                <div class="col-md-10 col-sm-10" ng-show ="f.position == 'slave' && f.type == 'adventures'">
+                                    slave-adventure
+                                </div>
+                                <div class="col-md-10 col-sm-10" ng-show ="f.position == 'slave' && f.type == 'teams'">
+                                    slave-team
+                                </div>
+                                <div class="col-md-2 col-sm-2" style="text-align: right;font-style: italic;color: #c1cbd0;font-size: 13px;">
+                                    <button class="btn btn-primary" ng-click="showHomeRecommendation(f)">View</button>
                                 </div>
                             </li>
                         </ul>
