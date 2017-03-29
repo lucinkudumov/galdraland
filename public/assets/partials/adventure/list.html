@@ -9,14 +9,14 @@
         <!--</div>-->
     <!--</div>-->
     <div class="row">
-        <div class="col-md-10">
+        <div class="col-md-10 col-sm-10">
             <br>
             <table class="table adventures">
                 <tr ng-show="!loading && adventures.length == 0">
                     <td class="err-msg">No adventures, <a href="/adventures/create">add</a> new adventure now.</td>
                 </tr>
                 <tr ng-repeat="a in adventures">
-                    <td ng-show="a.image"><img src="{{a.image}}" /></td>
+                    <td ng-show="a.image" width="20%"><img src="{{a.image}}"/></td>
                     <td>{{ a.name}}</td>
                     <td><rating-widget isstatic="1" ref="a._id" ></rating-widget></td>
                 <td>{{ a.start + " - " + a.end}}</td>
