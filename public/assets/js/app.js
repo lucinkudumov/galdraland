@@ -3581,6 +3581,9 @@ app.controller("homeController", ["$scope", "$http", "$location", "$stateParams"
             var result = {};
             result._id = data.data.adventures[i]._id;
             result.name = data.data.adventures[i].name;
+            result.advImg = data.data.adventures[i].image;
+            result.username = data.data.adventures[i].owner.fullname;
+            result.userImg = data.data.adventures[i].owner.photo;
             result.text1 = data.data.adventures[i].tags.join(" ");
             result.text2 = data.data.adventures[i].start + " - " + data.data.adventures[i].end;
             result.href = "/adventures/view/" + data.data.adventures[i]._id;
