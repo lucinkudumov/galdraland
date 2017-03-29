@@ -3626,7 +3626,15 @@ app.controller("homeController", ["$scope", "$http", "$location", "$stateParams"
         for (var i = 0; i < $scope.masterRecommendates.length; i++) {
             var feed = $scope.masterRecommendates[i];
             feed.category = 2;
-            feed.msg = feed.masterMsg;
+            if (feed.type == "teams") {
+                feed.msg = "User '" + feed.recommendationUserName + "' "
+                + "<img src='"+feed.recommendationUserPhoto+"' style='width:30px; height:30px'/>" + " has recommended User '"
+                + feed.slaveUserName + "' " + "<img src='"+feed.slaveUserPhoto+"' style='width:30px; height:30px'/>"
+                + " for Role -" + feed.roleTitle + "- in your Team '" + feed.teamName + "' "
+                + "<img src='"+feed.teamImage+"' style='width:30px; height:30px'/>";
+            } else {
+                feed.msg = feed.masterMsg;
+            }
             feed.position = "master";
             $scope.feeds.push(feed);
         }
