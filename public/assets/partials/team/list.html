@@ -16,7 +16,7 @@
                     <td class="err-msg">No teams, <a href="/teams/create">add</a> new team now.</td>
                 </tr>
                 <tr ng-repeat="t in teams">
-                    <td ng-show="t.image"><img src="'{{t.image}}'" /></td>
+                    <td ng-show="t.image"><img src="{{t.image}}" /></td>
                     <td>{{ t.name}}</td>
                     <td><rating-widget isstatic="1" ref="t._id" ></rating-widget></td>
                 <td>{{ t.teamMembers.length}} members</td>
