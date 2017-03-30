@@ -217,7 +217,7 @@ module.exports = function (opts) {
                                 var view = false;
                                 var teamId = teams[i]._id;
                                 for(j = 0; j < homeviewteams.length; j++) {
-                                    var homeviewteamId = homeviewteams[j].user;
+                                    var homeviewteamId = homeviewteams[j].team;
                                     if (teamId.toString() == homeviewteamId.toString()) {
                                         view = true;
                                         break;
