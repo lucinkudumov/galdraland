@@ -148,14 +148,35 @@ module.exports = function (opts) {
                 if (err) {
                     console.log(err);
                     return res.json({users: []});
-                } else {
+                } else if (users) {
                     console.log("newUserHome = ", users);
                     homeviewModel.find({$and: [{"master" : req.user}, {"type" : "user"}]}, function (err, homeviewusers) {
-                        for(i = 0; i < users.length; i++) {
-
+                        var unviewusers = [];
+                        if (err) {
+                            console.log(err);
+                            return res.json({users: []});
+                        } else if (homeviewusers) {
+                            for(i = 0; i < users.length; i++) {
+                                var view = false;
+                                for(j = 0; j < homeviewusers.length; j++) {
+                                    if (users[i]._id == homeviewusers[j].user._id) {
+                                        view = true;
+                                        break;
+                                    }
+                                }
+                                if (view == false) {
+                                    unviewusers.push(users[i]);
+                                }
+                            }
+                            console.log("unviewusers = ", unviewusers);
+                            return res.json({users: unviewusers});
+                        } else {
+                            return res.json({users: users});
                         }
                     });
                     return res.json({users: users});
+                } else {
+                    return res.json({users: []});
                 }
             });
         },
