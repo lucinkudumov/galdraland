@@ -708,7 +708,7 @@ module.exports = function (opts) {
 //                    } else {
 //                        return res.json({success: true, feeds: []});
 //                    }
-//                }
+                }
             });
         },
         "post#slack/sendMessage": function (req, res) {
