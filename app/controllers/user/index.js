@@ -149,10 +149,8 @@ module.exports = function (opts) {
                     console.log(err);
                     return res.json({users: []});
                 } else if (users) {
-                    console.log("newUserHome = ", users);
                     homeviewModel.find({$and: [{"master" : req.user._id}, {"type" : "user"}]}, function (err, homeviewusers) {
                         var unviewusers = [];
-                        console.log("homeviewusers = ", homeviewusers);
                         if (err) {
                             console.log(err);
                             return res.json({users: []});
@@ -160,25 +158,17 @@ module.exports = function (opts) {
                             for(i = 0; i < users.length; i++) {
                                 var view = false;
                                 var userId = users[i]._id;
-                                console.log("user_id = " + userId);
                                 for(j = 0; j < homeviewusers.length; j++) {
                                     var homeviewuserId = homeviewusers[j].user;
-                                    console.log("homeviewusers_id = " + homeviewuserId);
-                                    console.log("compare user_id = " + userId);
                                     if (userId.toString() == homeviewuserId.toString()) {
-                                        console.log("finding.........");
                                         view = true;
                                         break;
-                                    } else {
-                                        console.log("No find =" + i);
                                     }
                                 }
                                 if (view === false) {
-                                    console.log("aaaaa = " + i);
                                     unviewusers.push(users[i]);
                                 }
                             }
-                            console.log("unviewusers = ", unviewusers);
                             return res.json({users: unviewusers});
                         } else {
                             return res.json({users: users});
@@ -200,7 +190,6 @@ module.exports = function (opts) {
                     homeviewmodel.master = req.user._id;
                     homeviewmodel.user = user._id;
                     homeviewmodel.type = "user";
-                    console.log("calling... update user home view");
                     homeviewmodel.save(function (err) {
                         if (err) {
                             console.log(err);

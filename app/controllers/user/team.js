@@ -201,12 +201,38 @@ module.exports = function (opts) {
         "post#newTeamHome": function (req, res) {
             var date = new Date();
             date.setDate(date.getDate() - 7);
-            teamModel.find({$and: [{"createdAt": {$gt: date}}, {"homeview": true}]}).populate("owner").exec(function (err, teams) {
+            teamModel.find({"createdAt": {$gt: date}}).populate("owner").exec(function (err, teams) {
                 if (err) {
                     console.log(err);
                     return res.json({teams: []});
+                } else if(teams) {
+                    homeviewModel.find({$and: [{"master" : req.user._id}, {"type" : "team"}]}, function (err, homeviewteams) {
+                        var unviewteams = [];
+                        if (err) {
+                            console.log(err);
+                            return res.json({teams: []});
+                        } else if (homeviewteams) {
+                            for(i = 0; i < teams.length; i++) {
+                                var view = false;
+                                var teamId = teams[i]._id;
+                                for(j = 0; j < homeviewteams.length; j++) {
+                                    var homeviewteamId = homeviewteams[j].user;
+                                    if (teamId.toString() == homeviewteamId.toString()) {
+                                        view = true;
+                                        break;
+                                    }
+                                }
+                                if (view === false) {
+                                    unviewteams.push(teams[i]);
+                                }
+                            }
+                            return res.json({users: unviewteams});
+                        } else {
+                            return res.json({teams: teams});
+                        }
+                    })
                 } else {
-                    return res.json({teams: teams});
+                    return res.json({teams: []});
                 }
             });
         },
@@ -217,8 +243,11 @@ module.exports = function (opts) {
                     console.log(err);
                     return res.json({success: false});
                 } else if (team) {
-                    team.homeview = false;
-                    team.save(function (err) {
+                    var homeviewmodel = new homeviewModel();
+                    homeviewmodel.master = req.user._id;
+                    homeviewmodel.team = team._id;
+                    homeviewmodel.type = "team";
+                    homeviewmodel.save(function (err) {
                         if (err) {
                             console.log(err);
                             return res.json({success: false});
@@ -226,6 +255,8 @@ module.exports = function (opts) {
                             return res.json({success: true});
                         }
                     });
+                } else {
+                    return res.json({success: false});
                 }
             });
         },
