@@ -168,7 +168,7 @@ module.exports = function (opts) {
                                         break;
                                     }
                                 }
-                                if (view == false) {
+                                if (view === false) {
                                     console.log("aaaaa = " + i);
                                     unviewusers.push(users[i]);
                                 }
