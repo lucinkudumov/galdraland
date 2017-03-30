@@ -159,10 +159,12 @@ module.exports = function (opts) {
                         } else if (homeviewusers) {
                             for(i = 0; i < users.length; i++) {
                                 var view = false;
-                                console.log("user_id = " + users[i]._id);
+                                var userId = users[i]._id;
+                                console.log("user_id = " + userId);
                                 for(j = 0; j < homeviewusers.length; j++) {
-                                    console.log("homeviewusers_id = " + homeviewusers[j].user);
-                                    if (users[i]._id === homeviewusers[j].user) {
+                                    var homeviewuserId = homeviewusers[j].user;
+                                    console.log("homeviewusers_id = " + homeviewuserId);
+                                    if (userId === homeviewuserId) {
                                         console.log("finding.........");
                                         view = true;
                                         break;
