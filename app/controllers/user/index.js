@@ -152,13 +152,16 @@ module.exports = function (opts) {
                     console.log("newUserHome = ", users);
                     homeviewModel.find({$and: [{"master" : req.user._id}, {"type" : "user"}]}, function (err, homeviewusers) {
                         var unviewusers = [];
+                        console.log("homeviewusers = ", homeviewusers);
                         if (err) {
                             console.log(err);
                             return res.json({users: []});
                         } else if (homeviewusers) {
                             for(i = 0; i < users.length; i++) {
                                 var view = false;
+                                console.log("user_id = " + users[i]._id);
                                 for(j = 0; j < homeviewusers.length; j++) {
+                                    console.log("homeviewusers_id = " + homeviewusers[j].user._id);
                                     if (users[i]._id == homeviewusers[j].user._id) {
                                         view = true;
                                         break;
