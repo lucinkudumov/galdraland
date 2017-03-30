@@ -168,6 +168,8 @@ module.exports = function (opts) {
                                         console.log("finding.........");
                                         view = true;
                                         break;
+                                    } else {
+                                        console.log("No find =" + i);
                                     }
                                 }
                                 if (view === false) {
