@@ -161,7 +161,7 @@ module.exports = function (opts) {
                                 var view = false;
                                 console.log("user_id = " + users[i]._id);
                                 for(j = 0; j < homeviewusers.length; j++) {
-                                    console.log("homeviewusers_id = " + homeviewusers[j].user._id);
+                                    console.log("homeviewusers_id = " + homeviewusers[j].user);
                                     if (users[i]._id == homeviewusers[j].user._id) {
                                         view = true;
                                         break;
