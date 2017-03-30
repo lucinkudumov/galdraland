@@ -3626,30 +3626,14 @@ app.controller("homeController", ["$scope", "$http", "$location", "$stateParams"
         for (var i = 0; i < $scope.masterRecommendates.length; i++) {
             var feed = $scope.masterRecommendates[i];
             feed.category = 2;
-//            if (feed.type == "teams") {
-//                feed.msg = "User " + "<img src='"+feed.recommendationUserPhoto+"' style='width:30px; height:30px'/>"+ "'" + feed.recommendationUserName + "'"
-//                + " has recommended User " + "<img src='"+feed.slaveUserPhoto+"' style='width:30px; height:30px'/>"
-//                + "'" + feed.slaveUserName + "' " +
-//                + " for Role -" + feed.roleTitle + "- in your Team '" + feed.teamName + "' "
-//                + "<img src='"+feed.teamImage+"' style='width:30px; height:30px'/>";
-//            } else {
-                feed.msg = feed.masterMsg;
-//            }
+            feed.msg = feed.masterMsg;
             feed.position = "master";
             $scope.feeds.push(feed);
         }
         for (var i = 0; i < $scope.slaveRecommendates.length; i++) {
             var feed = $scope.slaveRecommendates[i];
             feed.category = 2;
-//            if (feed.type == "teams") {
-//                feed.msg = "User "+"<img src='"+feed.recommendationUserPhoto+"' style='width:30px; height:30px'/>"
-//                    +"'" + feed.recommendationUserName + "' "
-//                    + " has recommended you"
-//                    + " for Role -" + feed.roleTitle + "- in " + "<img src='"+feed.masterUserPhoto+"' style='width:30px; height:30px'/> " +feed.masterUserName+"'s Team '"
-//                    + feed.teamName + "'" + "<img src='"+feed.teamImage+"' style='width:30px; height:30px'/>";
-//            } else {
-                feed.msg = feed.masterMsg;
-//            }
+            feed.msg = feed.masterMsg;
             feed.position = "slave";
             $scope.feeds.push(feed);
         }

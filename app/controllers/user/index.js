@@ -3,7 +3,8 @@ var validator = require('validator');
 module.exports = function (opts) {
     var userModel = opts.models.User,
             emailModel = opts.models.Email,
-            topicModel = opts.models.Topic;
+            topicModel = opts.models.Topic,
+            homeviewModel = opts.models.HomeView;
 
     return {
         "post#createDefaultUser": function (req, res) {
@@ -143,11 +144,17 @@ module.exports = function (opts) {
         "post#newUserHome": function (req, res) {
             var date = new Date();
             date.setDate(date.getDate() - 7);
-            userModel.find({$and: [{"signin": {$gt: date}}, {"homeview": true}]}, function (err, users) {
+            userModel.find({"signin": {$gt: date}}, function (err, users) {
                 if (err) {
                     console.log(err);
                     return res.json({users: []});
                 } else {
+                    console.log("newUserHome = ", users);
+                    homeviewModel.find({$and: [{"master" : req.user}, {"type" : "user"}]}, function (err, homeviewusers) {
+                        for(i = 0; i < users.length; i++) {
+
+                        }
+                    });
                     return res.json({users: users});
                 }
             });
