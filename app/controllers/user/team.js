@@ -227,7 +227,7 @@ module.exports = function (opts) {
                                     unviewteams.push(teams[i]);
                                 }
                             }
-                            return res.json({users: unviewteams});
+                            return res.json({teams: unviewteams});
                         } else {
                             return res.json({teams: teams});
                         }
