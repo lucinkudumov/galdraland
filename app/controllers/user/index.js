@@ -164,6 +164,7 @@ module.exports = function (opts) {
                                 for(j = 0; j < homeviewusers.length; j++) {
                                     var homeviewuserId = homeviewusers[j].user;
                                     console.log("homeviewusers_id = " + homeviewuserId);
+                                    console.log("compare user_id = " + userId);
                                     if (userId === homeviewuserId) {
                                         console.log("finding.........");
                                         view = true;
