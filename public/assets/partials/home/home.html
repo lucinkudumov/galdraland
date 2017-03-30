@@ -123,7 +123,7 @@
                                     <span>User <img src='{{f.recommendationUserPhoto}}' style='width:30px; height:30px'/> {{f.recommendationUserName}} has recommended User <img src='{{f.slaveUserPhoto}}' style='width:30px; height:30px'/> {{f.slaveUserName}} for Role -{{f.roleTitle}}- in your Team <img src='{{f.teamImage}}' style='width:30px; height:30px'/>  {{f.teamName}}</span>
                                 </div>
                                 <div class="col-md-10 col-sm-10" ng-show ="f.position == 'slave' && f.type == 'teams'">
-                                    <span>User <img src='{{f.recommendationUserPhoto}}' style='width:30px; height:30px'/> {{f.recommendationUserName}} has recommended you for Role - {{ f.roleTitle }} - in <img src='{{ f.masterUserPhoto }}' style='width:30px; height:30px'/> {{f.masterUserName}}'s Team '{{f.teamName}}' <img src='{{f.teamImage}}' style='width:30px; height:30px'/></span>
+                                    <span>User <img src='{{f.recommendationUserPhoto}}' style='width:30px; height:30px'/> {{f.recommendationUserName}} has recommended you for Role - {{ f.roleTitle }} - in <img src='{{ f.masterUserPhoto }}' style='width:30px; height:30px'/> {{f.masterUserName}}'s Team <img src='{{f.teamImage}}' style='width:30px; height:30px'/> '{{f.teamName}}' </span>
                                 </div>
                                 <div class="col-md-2 col-sm-2" style="text-align: right;font-style: italic;color: #c1cbd0;font-size: 13px;">
                                     <button class="btn btn-primary" ng-click="showHomeRecommendation(f)">View</button>
