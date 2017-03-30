@@ -1549,17 +1549,18 @@ app.controller("headerController", ["$scope", "$rootScope", "$http", "$location"
                         else
                             $scope.slaveRecommendates = [];
 
-                        $http({
-                            method: "GET", url: "slack/getFeeds", api: true
-                        }).then (function (result) {
-                            console.log(result);
-                            if (result !== undefined && result.data !== undefined && result.data.feeds !== undefined)
-                                $scope.slackFeeds = result.data.feeds;
-                            else
-                                $scope.slackFeeds = [];
-
-                            refresh_feeds();
-                        });
+//                        $http({
+//                            method: "GET", url: "slack/getFeeds", api: true
+//                        }).then (function (result) {
+//                            console.log(result);
+//                            if (result !== undefined && result.data !== undefined && result.data.feeds !== undefined)
+//                                $scope.slackFeeds = result.data.feeds;
+//                            else
+//                                $scope.slackFeeds = [];
+//
+//                            refresh_feeds();
+//                        });
+                        refresh_feeds();
                     });
                 });
             });
