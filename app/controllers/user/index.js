@@ -150,7 +150,7 @@ module.exports = function (opts) {
                     return res.json({users: []});
                 } else if (users) {
                     console.log("newUserHome = ", users);
-                    homeviewModel.find({"type" : "user"}, function (err, homeviewusers) {
+                    homeviewModel.find({$and: [{"master" : req.user._id}, {"type" : "user"}]}, function (err, homeviewusers) {
                         var unviewusers = [];
                         if (err) {
                             console.log(err);
