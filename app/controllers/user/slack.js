@@ -647,6 +647,7 @@ module.exports = function (opts) {
         "get#slack/getFeeds1": function (req, res) {
             console.log("userId = " + req.user._id);
             var teams = req.body.teams;
+            console.log("slackTeam = ", teams);
 //            var feeds = [];
             userModel.findOne({_id: req.user._id}, function (err, user) {
                 if (err) {
@@ -654,60 +655,60 @@ module.exports = function (opts) {
                     return res.json({success: false, feeds: []});
                 } else if (user) {
                     var accessToken = user.slackToken;
-                    if (teams.length > 0) {
-                        for (i= 0; i < teams.length; i++) {
-                            var slackGroupId = teams[i].slackGroupId;
-                            var teamId = teams[i]._id;
-                            var teamName = teams[i].name;
-                            var url = 'https://slack.com/api/groups.history?token='+accessToken+'&channel='+slackGroupId+'&inclusive=true&count=10&unreads=true'
-                            var obj = {};
-                            obj.url = url;
-                            obj.teamId = teamId;
-                            obj.teamName = teamName;
-                            items.push(obj);
-                        }
-
-                        function synchAPICalls(items) {
-                            var item = items.pop();
-                            setTimeout(function(){
-                                request.get({
-                                    url: item.url
-                                }, function (err, response) {
-                                    if(err) {
-                                        console.log("groups.history  error");
-                                        return res.json({success: true, feeds: []});
-                                    } else {
-                                        var result = JSON.parse(response.body);
-                                        if (result.ok == true) {
-                                            if (result.unread_count_display > 0) {
-                                                var obj = {};
-                                                obj.teamId = item.teamId;
-                                                obj.teamName = item.teamName;
-                                                obj.unread_count = result.unread_count_display;
-                                                console.log("calling final...");
-                                                feeds.push(obj);
-                                            }
-                                        }
-                                        if (items.length > 0) {
-                                            synchAPICalls(items);
-                                        } else {
-                                            console.log("all done!");
-                                            return res.json({success: true, feeds: feeds});
-                                        }
-                                    }
-                                });
-                            }, 3500);
-                        }
-                        console.log("slack items = ", items);
-                        if (items.length > 0)
-                            synchAPICalls(items);
-                        else
-                            return res.json({success: true, feeds: []});
-                        console.log("end");
-                    } else {
-                        return res.json({success: true, feeds: []});
-                    }
-                }
+//                    if (teams.length > 0) {
+//                        for (i= 0; i < teams.length; i++) {
+//                            var slackGroupId = teams[i].slackGroupId;
+//                            var teamId = teams[i]._id;
+//                            var teamName = teams[i].name;
+//                            var url = 'https://slack.com/api/groups.history?token='+accessToken+'&channel='+slackGroupId+'&inclusive=true&count=10&unreads=true'
+//                            var obj = {};
+//                            obj.url = url;
+//                            obj.teamId = teamId;
+//                            obj.teamName = teamName;
+//                            items.push(obj);
+//                        }
+//
+//                        function synchAPICalls(items) {
+//                            var item = items.pop();
+//                            setTimeout(function(){
+//                                request.get({
+//                                    url: item.url
+//                                }, function (err, response) {
+//                                    if(err) {
+//                                        console.log("groups.history  error");
+//                                        return res.json({success: true, feeds: []});
+//                                    } else {
+//                                        var result = JSON.parse(response.body);
+//                                        if (result.ok == true) {
+//                                            if (result.unread_count_display > 0) {
+//                                                var obj = {};
+//                                                obj.teamId = item.teamId;
+//                                                obj.teamName = item.teamName;
+//                                                obj.unread_count = result.unread_count_display;
+//                                                console.log("calling final...");
+//                                                feeds.push(obj);
+//                                            }
+//                                        }
+//                                        if (items.length > 0) {
+//                                            synchAPICalls(items);
+//                                        } else {
+//                                            console.log("all done!");
+//                                            return res.json({success: true, feeds: feeds});
+//                                        }
+//                                    }
+//                                });
+//                            }, 3500);
+//                        }
+//                        console.log("slack items = ", items);
+//                        if (items.length > 0)
+//                            synchAPICalls(items);
+//                        else
+//                            return res.json({success: true, feeds: []});
+//                        console.log("end");
+//                    } else {
+//                        return res.json({success: true, feeds: []});
+//                    }
+//                }
             });
         },
         "post#slack/sendMessage": function (req, res) {
