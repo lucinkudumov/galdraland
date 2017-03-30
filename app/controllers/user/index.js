@@ -162,12 +162,14 @@ module.exports = function (opts) {
                                 console.log("user_id = " + users[i]._id);
                                 for(j = 0; j < homeviewusers.length; j++) {
                                     console.log("homeviewusers_id = " + homeviewusers[j].user);
-                                    if (users[i]._id == homeviewusers[j].user._id) {
+                                    if (users[i]._id == homeviewusers[j].user) {
+                                        console.log("finding.........");
                                         view = true;
                                         break;
                                     }
                                 }
                                 if (view == false) {
+                                    console.log("aaaaa = " + i);
                                     unviewusers.push(users[i]);
                                 }
                             }
