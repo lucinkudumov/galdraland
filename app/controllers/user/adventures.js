@@ -10,6 +10,7 @@ module.exports = function (opts) {
             adventureModel = opts.models.Adventure,
             imageModel = opts.models.Imagestore;
     var recommendationModel = opts.models.Recommendation;
+    var homeviewModel = opts.models.HomeView;
     return {
         "post#upload/image": function (req, res) {
             var file = req.files.file;
@@ -135,12 +136,38 @@ module.exports = function (opts) {
         "post#newAdventureHome": function (req, res) {
             var date = new Date();
             date.setDate(date.getDate() - 7);
-            adventureModel.find({$and: [{"createdAt": {$gt: date}}, {"homeview": true}]}).populate("owner").exec(function (err, adventures) {
+            adventureModel.find({"createdAt": {$gt: date}}).populate("owner").exec(function (err, adventures) {
                 if (err) {
                     console.log(err);
                     return res.json({adventures: []});
+                } else if (adventures) {
+                    homeviewModel.find({$and: [{"master" : req.user._id}, {"type" : "adventure"}]}, function (err, homeviewadventures) {
+                        var unviewadventures = [];
+                        if (err) {
+                            console.log(err);
+                            return res.json({adventures: []});
+                        } else if (homeviewadventures) {
+                            for(i = 0; i < adventures.length; i++) {
+                                var view = false;
+                                var adventureId = adventures[i]._id;
+                                for(j = 0; j < homeviewadventures.length; j++) {
+                                    var homeviewadventureId = homeviewadventures[j].adventure;
+                                    if (adventureId.toString() == homeviewadventureId.toString()) {
+                                        view = true;
+                                        break;
+                                    }
+                                }
+                                if (view === false) {
+                                    unviewadventures.push(adventures[i]);
+                                }
+                            }
+                            return res.json({adventures: unviewadventures});
+                        } else {
+                            return res.json({adventures: adventures});
+                        }
+                    });
                 } else {
-                    return res.json({adventures: adventures});
+                    return res.json({adventures: []});
                 }
             });
         },
@@ -151,8 +178,11 @@ module.exports = function (opts) {
                     console.log(err);
                     return res.json({success: false});
                 } else if (adv) {
-                    adv.homeview = false;
-                    adv.save(function (err) {
+                    var homeviewmodel = new homeviewModel();
+                    homeviewmodel.master = req.user._id;
+                    homeviewmodel.adventure = adv._id;
+                    homeviewmodel.type = "adventure";
+                    homeviewmodel.save(function (err) {
                         if (err) {
                             console.log(err);
                             return res.json({success: false});
@@ -160,6 +190,8 @@ module.exports = function (opts) {
                             return res.json({success: true});
                         }
                     });
+                } else {
+                    return res.json({success: false});
                 }
             });
         },

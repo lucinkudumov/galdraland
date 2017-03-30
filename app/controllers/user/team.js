@@ -231,7 +231,7 @@ module.exports = function (opts) {
                         } else {
                             return res.json({teams: teams});
                         }
-                    })
+                    });
                 } else {
                     return res.json({teams: []});
                 }
