@@ -174,7 +174,6 @@ module.exports = function (opts) {
                             return res.json({users: users});
                         }
                     });
-                    return res.json({users: users});
                 } else {
                     return res.json({users: []});
                 }
@@ -187,8 +186,11 @@ module.exports = function (opts) {
                     console.log(err);
                     return res.json({success: false});
                 } else if (user) {
-                    user.homeview = false;
-                    user.save(function (err) {
+                    homeviewmodel = new homeviewModel();
+                    homeviewmodel.master = req.user;
+                    homeviewmodel.user = user;
+                    homeviewmodel.type = "user";
+                    homeviewmodel.save(function (err) {
                         if (err) {
                             console.log(err);
                             return res.json({success: false});
