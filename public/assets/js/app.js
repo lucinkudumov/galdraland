@@ -3557,7 +3557,7 @@ app.controller("homeController", ["$scope", "$http", "$location", "$stateParams"
             var slackTeams = [];
             slackTeams = data.data.teams;
             $http({
-                method: "GET", url: "slack/getFeeds1", api: true, data : {teams : slackTeams}
+                method: "POST", url: "slack/getFeeds1", api: true, data : {teams : slackTeams}
             }).then (function (result) {
                 console.log(result);
                 if (result !== undefined && result.data !== undefined && result.data.feeds !== undefined)

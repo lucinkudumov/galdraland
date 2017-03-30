@@ -644,7 +644,7 @@ module.exports = function (opts) {
                 }
             });
         },
-        "get#slack/getFeeds1": function (req, res) {
+        "post#slack/getFeeds1": function (req, res) {
             console.log("userId = " + req.user._id);
             var teams = req.body.teams;
             console.log("slackTeam = ", teams);
