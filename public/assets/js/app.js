@@ -3556,18 +3556,27 @@ app.controller("homeController", ["$scope", "$http", "$location", "$stateParams"
         }).then(function (data) {
             var slackTeams = [];
             slackTeams = data.data.teams;
-            $http({
-                method: "POST", url: "slack/getFeeds1", api: true, data : {teams : slackTeams}
-            }).then (function (result) {
-                console.log(result);
-                if (result !== undefined && result.data !== undefined && result.data.feeds !== undefined)
-                    $scope.slackFeeds = result.data.feeds;
-                else
-                    $scope.slackFeeds = [];
+            if(data && data.data && data.data.teams) {
+                for (i=0; i<data.data.teams.length;i++){
+                    var result = {};
+                    result._id = data.data.teams[i]._id;
+                    result.name = data.data.teams[i].name;
+                    result.slackGroupId = data.data.teams[i].slackGroupId;
+                    slackTeams.push(result);
+                }
+                $http({
+                    method: "POST", url: "slack/getFeeds1", api: true, data : {teams : slackTeams}
+                }).then (function (result) {
+                    console.log(result);
+                    if (result !== undefined && result.data !== undefined && result.data.feeds !== undefined)
+                        $scope.slackFeeds = result.data.feeds;
+                    else
+                        $scope.slackFeeds = [];
 
-                refresh_home_slacks();
-                $scope.slackloading = false;
-            });
+                    refresh_home_slacks();
+                    $scope.slackloading = false;
+                });
+            }
         });
 
 //        $http({
