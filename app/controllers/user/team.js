@@ -6,6 +6,7 @@ module.exports = function (opts) {
             teamMemberModel = opts.models.TeamMember;
     var adventureModel = opts.models.Adventure;
     var recommendationModel = opts.models.Recommendation;
+    var homeviewModel = opts.models.HomeView;
 
 
     return {
