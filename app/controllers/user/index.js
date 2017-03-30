@@ -187,8 +187,8 @@ module.exports = function (opts) {
                     return res.json({success: false});
                 } else if (user) {
                     var homeviewmodel = new homeviewModel();
-                    homeviewmodel.master = req.user;
-                    homeviewmodel.user = user;
+                    homeviewmodel.master = req.user._id;
+                    homeviewmodel.user = user._id;
                     homeviewmodel.type = "user";
                     console.log("calling... update user home view");
                     homeviewmodel.save(function (err) {
