@@ -656,6 +656,7 @@ module.exports = function (opts) {
                 } else if (user) {
                     var accessToken = user.slackToken;
                     var items = [];
+                    var feeds = [];
                     if (teams.length > 0) {
                         for (i= 0; i < teams.length; i++) {
                             var slackGroupId = teams[i].slackGroupId;
