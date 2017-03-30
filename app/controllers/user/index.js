@@ -186,10 +186,11 @@ module.exports = function (opts) {
                     console.log(err);
                     return res.json({success: false});
                 } else if (user) {
-                    homeviewmodel = new homeviewModel();
+                    var homeviewmodel = new homeviewModel();
                     homeviewmodel.master = req.user;
                     homeviewmodel.user = user;
                     homeviewmodel.type = "user";
+                    console.log("calling... update user home view");
                     homeviewmodel.save(function (err) {
                         if (err) {
                             console.log(err);
@@ -198,6 +199,8 @@ module.exports = function (opts) {
                             return res.json({success: true});
                         }
                     });
+                } else {
+                    return res.json({success: false});
                 }
             });
         },
