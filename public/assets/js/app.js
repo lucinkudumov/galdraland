@@ -3575,12 +3575,9 @@ app.controller("homeController", ["$scope", "$http", "$location", "$stateParams"
                     $http({
                         method: "POST", url: "slack/getFeeds1", api: true, data : {teams : slackTeams1[i]}
                     }).then (function (result) {
-                        if (result !== undefined && result.data !== undefined && result.data.feeds !== undefined)
-                            $scope.slackFeeds = result.data.feeds;
-                        else
-                            $scope.slackFeeds = [];
-                            refresh_home_slacks();
-                        console.log("slackFeeds = ", $scope.slackFeeds);
+                        if (result !== undefined && result.data !== undefined && result.data.feeds !== undefined) {
+                            refresh_home_slacks(result.data.feeds);
+                        }
                         $scope.slackloading = false;
                     });
                 }
@@ -3679,11 +3676,11 @@ app.controller("homeController", ["$scope", "$http", "$location", "$stateParams"
         }
     }
 
-    function refresh_home_slacks() {
-        for (var i = 0; i < $scope.slackFeeds.length; i++) {
-            var feed = $scope.slackFeeds[i];
+    function refresh_home_slacks(feeds) {
+        for (var i = 0; i < feeds.length; i++) {
+            var feed = feeds[i];
             feed.category = 3;
-            feed.msg = "You have not seen " + $scope.slackFeeds[i].unread_count + " slack messages for team '"+feed.teamName+"'";
+            feed.msg = "You have not seen " + feed.unread_count + " slack messages for team '"+feed.teamName+"'";
             $scope.slacks.push(feed);
         }
     }
