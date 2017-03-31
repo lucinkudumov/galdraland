@@ -3567,6 +3567,7 @@ app.controller("homeController", ["$scope", "$http", "$location", "$stateParams"
                         k += 1;
                     }
                 }
+                console.log("aaaaa", slackTeams);
                 for (i = 0; i < slackTeams.length; i++) {
                     console.log(i + " = " + slackTeams[i].name);
                 }
