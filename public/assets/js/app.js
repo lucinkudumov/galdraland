@@ -3555,6 +3555,7 @@ app.controller("homeController", ["$scope", "$http", "$location", "$stateParams"
             api: true
         }).then(function (data) {
             var slackTeams = [];
+                console.log("qqqqq = ", data);
             if(data && data.data && data.data.teams) {
                 var k = 0;
                 for (i=0; i<data.data.teams.length;i++){
