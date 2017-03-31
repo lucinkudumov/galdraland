@@ -672,6 +672,7 @@ module.exports = function (opts) {
 
                         function synchAPICalls(items) {
                             var item = items.pop();
+                            console.log("slackItem = ", item.url);
                             setTimeout(function(){
                                 request.get({
                                     url: item.url
@@ -681,6 +682,7 @@ module.exports = function (opts) {
                                         return res.json({success: true, feeds: []});
                                     } else {
                                         var result = JSON.parse(response.body);
+                                        console.log(result);
                                         if (result.ok == true) {
                                             if (result.unread_count_display > 0) {
                                                 var obj = {};
