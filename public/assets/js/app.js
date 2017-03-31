@@ -3584,20 +3584,6 @@ app.controller("homeController", ["$scope", "$http", "$location", "$stateParams"
                 }
             }
         });
-
-//        $http({
-//            method: "GET", url: "slack/getFeeds", api: true
-//        }).then (function (result) {
-//            console.log(result);
-//            if (result !== undefined && result.data !== undefined && result.data.feeds !== undefined)
-//                $scope.slackFeeds = result.data.feeds;
-//            else
-//                $scope.slackFeeds = [];
-//
-//            refresh_home_slacks();
-//            $scope.slackloading = false;
-//        });
-
     }
 
     function prettyDate(startDate) {
