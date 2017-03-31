@@ -3555,22 +3555,25 @@ app.controller("homeController", ["$scope", "$http", "$location", "$stateParams"
             api: true
         }).then(function (data) {
             var slackTeams = [];
-                console.log("qqqqq = ", data);
+            var slackTeams1 = [];
+            console.log("qqqqq = ", data);
             if(data && data.data && data.data.teams) {
                 var k = 0;
-                for (i=0; i<data.data.teams.length;i++){
+                for (i=0; i< data.data.teams.length;i++){
                     var result = {};
                     result._id = data.data.teams[i]._id;
                     result.name = data.data.teams[i].name;
                     result.slackGroupId = data.data.teams[i].slackGroupId;
-                    slackTeams[k].push(result);
+                    slackTeams.push(result);
                     if (i != 0 && i % 5 == 0) {
-                        k += 1;
+                        slackTeams1.push(slackTeams);
+                        slackTeams = [];
                     }
                 }
-                console.log("aaaaa", slackTeams);
-                for (i = 0; i < slackTeams.length; i++) {
-                    console.log(i + " = " + slackTeams[i].name);
+                console.log("aaaaa", slackTeams1);
+                for (i = 0; i < slackTeams1.length; i++) {
+                    for (j = 0; j < slackTeams1[i].length; j++)
+                    console.log(i + " : " + j + " : " + slackTeams1[i][j].name);
                 }
 //                $http({
 //                    method: "POST", url: "slack/getFeeds1", api: true, data : {teams : slackTeams}
