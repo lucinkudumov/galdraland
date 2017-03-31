@@ -3570,26 +3570,23 @@ app.controller("homeController", ["$scope", "$http", "$location", "$stateParams"
                         slackTeams = [];
                     }
                 }
-                
                 slackTeams1.push(slackTeams);
-
-                console.log("aaaaa", slackTeams1);
                 for (i = 0; i < slackTeams1.length; i++) {
-                    for (j = 0; j < slackTeams1[i].length; j++)
-                    console.log(i + " : " + j + " : " + slackTeams1[i][j].name);
+                    for (j = 0; j < slackTeams1[i].length; j++) {
+                        $http({
+                            method: "POST", url: "slack/getFeeds1", api: true, data : {teams : slackTeams1[i][j]}
+                        }).then (function (result) {
+                            console.log(result);
+                            if (result !== undefined && result.data !== undefined && result.data.feeds !== undefined)
+                                $scope.slackFeeds = result.data.feeds;
+                            else
+                                $scope.slackFeeds = [];
+//                            refresh_home_slacks();
+                            console.log("slack Team = ", $scope.slackFeeds);
+                            $scope.slackloading = false;
+                        });
+                    }
                 }
-//                $http({
-//                    method: "POST", url: "slack/getFeeds1", api: true, data : {teams : slackTeams}
-//                }).then (function (result) {
-//                    console.log(result);
-//                    if (result !== undefined && result.data !== undefined && result.data.feeds !== undefined)
-//                        $scope.slackFeeds = result.data.feeds;
-//                    else
-//                        $scope.slackFeeds = [];
-//
-//                    refresh_home_slacks();
-//                    $scope.slackloading = false;
-//                });
             }
         });
 
