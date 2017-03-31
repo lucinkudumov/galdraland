@@ -3570,6 +3570,9 @@ app.controller("homeController", ["$scope", "$http", "$location", "$stateParams"
                         slackTeams = [];
                     }
                 }
+                
+                slackTeams1.push(slackTeams);
+
                 console.log("aaaaa", slackTeams1);
                 for (i = 0; i < slackTeams1.length; i++) {
                     for (j = 0; j < slackTeams1[i].length; j++)
