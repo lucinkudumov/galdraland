@@ -3573,10 +3573,10 @@ app.controller("homeController", ["$scope", "$http", "$location", "$stateParams"
                 slackTeams1.push(slackTeams);
                 for (i = 0; i < slackTeams1.length; i++) {
                     for (j = 0; j < slackTeams1[i].length; j++) {
+                        console.log("slack Team = ", slackTeams1[i][j].name);
                         $http({
                             method: "POST", url: "slack/getFeeds1", api: true, data : {teams : slackTeams1[i][j]}
                         }).then (function (result) {
-                            console.log(result);
                             if (result !== undefined && result.data !== undefined && result.data.feeds !== undefined)
                                 $scope.slackFeeds = result.data.feeds;
                             else
