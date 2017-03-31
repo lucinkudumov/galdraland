@@ -3575,6 +3575,7 @@ app.controller("homeController", ["$scope", "$http", "$location", "$stateParams"
                     $http({
                         method: "POST", url: "slack/getFeeds1", api: true, data : {teams : slackTeams1[i]}
                     }).then (function (result) {
+                        console.log("slack Feeds = ", result);
                         if (result !== undefined && result.data !== undefined && result.data.feeds !== undefined) {
                             refresh_home_slacks(result.data.feeds);
                         }
