@@ -3579,7 +3579,7 @@ app.controller("homeController", ["$scope", "$http", "$location", "$stateParams"
                             $scope.slackFeeds = result.data.feeds;
                         else
                             $scope.slackFeeds = [];
-//                            refresh_home_slacks();
+                            refresh_home_slacks();
                         console.log("slackFeeds = ", $scope.slackFeeds);
                         $scope.slackloading = false;
                     });
