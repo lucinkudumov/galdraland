@@ -92,9 +92,9 @@
             <uib-accordion-heading>
                 <p>Badges</p>
             </uib-accordion-heading>
-            <span ng-repeat="b in badges" class="badges">
+            <small ng-repeat="b in badgesData" class="badges">
                 <a href="{{ b.href }}" title="{{ b.title }}"> <img src="/assets/images/badge.png" style="width: 76px; height: 76px;"/></a>
-            </span>
+            </small>
         </div>
         </uib-accordion>
         <a href="/settings" class="btn btn-same-size btn-primary" style="float: right;">Edit</a>

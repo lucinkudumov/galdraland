@@ -3029,7 +3029,7 @@ app.controller("contactController", ['$scope', '$http', '$rootScope', function($
 }]);
 
 app.controller("profileViewController", ["$scope", "$http", "User", function ($scope, $http, User) {
-    $scope.badges = [];
+    $scope.badgesData = [];
     $http.get("/api/getUserDetail").then(function (data) {
         console.log("getUserDetail = ",data.data.user);
         $scope.user = data.data.user;
@@ -3045,7 +3045,7 @@ app.controller("profileViewController", ["$scope", "$http", "User", function ($s
                 result.title = "Create adventure("+result.name+")";
                 result.kind = "adventure";
                 result.href = "/adventures/view/" + data.data.badges[i]._id;
-                $scope.badges.push(result);
+                $scope.badgesData.push(result);
             }
         }
     });
@@ -3060,11 +3060,10 @@ app.controller("profileViewController", ["$scope", "$http", "User", function ($s
                 result.title = "Create team("+result.name+")";
                 result.kind = "team";
                 result.href = "/teams/view/" + data.data.badges[i]._id;
-                $scope.badges.push(result);
+                $scope.badgesData.push(result);
             }
         }
     });
-
 }]);
 
 app.controller("advancedSearchController", ["$scope", "$http", "$location", "User", function ($scope, $http, $location, User) {
