@@ -3040,7 +3040,7 @@ app.controller("profileViewController", ["$scope", "$http", "User", function ($s
                 result._id = data.data.badges[i]._id;
                 result.name = data.data.badges[i].name;
                 result.image = data.data.badges[i].image;
-                result.title = "Create adventure("+result.name+")";
+                result.title = "You create adventure '"+result.name+"'";
                 result.kind = "adventure";
                 result.href = "/adventures/view/" + data.data.badges[i]._id;
                 $scope.badgesData.push(result);
@@ -3054,7 +3054,7 @@ app.controller("profileViewController", ["$scope", "$http", "User", function ($s
                 result._id = data.data.badges[i]._id;
                 result.name = data.data.badges[i].name;
                 result.image = data.data.badges[i].image;
-                result.title = "Create team("+result.name+")";
+                result.title = "You create team '"+result.name+"'";
                 result.kind = "team";
                 result.href = "/teams/view/" + data.data.badges[i]._id;
                 $scope.badgesData.push(result);
