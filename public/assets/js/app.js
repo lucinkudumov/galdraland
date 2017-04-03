@@ -3066,7 +3066,9 @@ app.controller("profileViewController", ["$scope", "$http", "User", function ($s
         var teamId = recommendate.teamId;
         var roleId = recommendate.roleId;
         var masterId = recommendate.masterId;
+        var masterUserName = recommendate.masterUserName;
         var slaveId = recommendate.slaveId;
+        var slaveUserName = recommendate.slaveUserName;
         var teamName = recommendate.teamName;
         var roleTitle = recommendate.roleTitle;
         $http({
@@ -3077,7 +3079,7 @@ app.controller("profileViewController", ["$scope", "$http", "User", function ($s
         }).then(function (data) {
             if (data && data.data && data.data.success == true) {
                 var result = {};
-                result.title = "Recommendation ( For role '"+roleTitle+"' of team '"+teamName+"')";
+                result.title = "You recommendate "+slaveUserName+" for role '"+roleTitle+"' of user "+masterUserName+"'s team '"+teamName+"')";
                 result.kind = "recommend";
                 result.href = "/teams/view/" + teamId;
                 $scope.badgesData.push(result);
