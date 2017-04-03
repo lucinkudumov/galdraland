@@ -209,6 +209,27 @@ module.exports = function (opts) {
                 }
             });
         },
+        "post#updateBadgesTeamHomeView": function (req, res) {
+            var id = req.body.id;
+            teamModel.findOne({_id: id}, function (err, team) {
+                if (err) {
+                    console.log(err);
+                    return res.json({success: false});
+                } else if (team) {
+                    team.homeview = false;
+                    team.save(function (err) {
+                        if (err) {
+                            console.log(err);
+                            return res.json({success: false});
+                        } else {
+                            return res.json({success: true});
+                        }
+                    });
+                } else {
+                    return res.json({success: false});
+                }
+            });
+        },
         "post#newTeamHome": function (req, res) {
             var date = new Date();
             date.setDate(date.getDate() - 7);

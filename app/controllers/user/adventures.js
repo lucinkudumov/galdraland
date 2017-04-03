@@ -143,6 +143,27 @@ module.exports = function (opts) {
                 }
             });
         },
+        "post#updateBadgesAdventureHomeView": function (req, res) {
+            var id = req.body.id;
+            adventureModel.findOne({_id: id}, function (err, adventure) {
+                if (err) {
+                    console.log(err);
+                    return res.json({success: false});
+                } else if (adventure) {
+                    adventure.homeview = false;
+                    adventure.save(function (err) {
+                        if (err) {
+                            console.log(err);
+                            return res.json({success: false});
+                        } else {
+                            return res.json({success: true});
+                        }
+                    });
+                } else {
+                    return res.json({success: false});
+                }
+            });
+        },
         "post#newAdventureHome": function (req, res) {
             var date = new Date();
             date.setDate(date.getDate() - 7);

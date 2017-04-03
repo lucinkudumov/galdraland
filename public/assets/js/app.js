@@ -3840,6 +3840,31 @@ app.controller("homeController", ["$scope", "$http", "$location", "$stateParams"
             $location.path(url);
     }
 
+
+    $scope.showHomeBadges = function (badge) {
+        if (badge.kind == "team") {
+            $http({
+                method: "POST", url: "updateBadgesTeamHomeView", api: true, data: {id: badge._id}
+            }).then (function (result) {
+                var url = badge.href;
+                if ($location.path() == url)
+                    $state.reload();
+                else
+                    $location.path(url);
+            });
+        }
+        if (badge.kind == "adventure") {
+            $http({
+                method: "POST", url: "updateBadgesAdventureHomeView", api: true, data: {id: badge._id}
+            }).then (function (result) {
+                var url = badge.href;
+                if ($location.path() == url)
+                    $state.reload();
+                else
+                    $location.path(url);
+            });
+        }
+    }
     $scope.refresh();
 
 }]);
