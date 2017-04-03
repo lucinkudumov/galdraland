@@ -88,6 +88,14 @@
         <small ng-show="!user.roles || user.roles.length == 0">No Data, <a href="/settings">add</a> now.</small>
         <small ng-repeat="r in user.roles">{{ r.role }}</small>
         </div>
+        <div uib-accordion-group class="panel-default" is-open="true">
+            <uib-accordion-heading>
+                <p>Badges</p>
+            </uib-accordion-heading>
+            <span ng-repeat="b in badges" class="badges">
+                <a href="{{ b.href }}" title="{{ b.title }}"> <img src="/assets/images/badge.png" style="width: 76px; height: 76px;"/></a>
+            </span>
+        </div>
         </uib-accordion>
         <a href="/settings" class="btn btn-same-size btn-primary" style="float: right;">Edit</a>
         </blockquote>

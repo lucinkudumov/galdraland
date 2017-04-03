@@ -338,6 +338,19 @@ module.exports = function (opts) {
                 }
             });
         },
+        "get#getBadgesByCreateTeam": function (req, res) {
+            teamModel.find({owner: req.user._id}, function (err, badges) {
+                if (err) {
+                    console.log(err);
+                    return res.json({success: false, badges: []});
+                } else if (badges) {
+                    return res.json({success: true, badges: badges});
+                } else {
+                    console.log(err);
+                    return res.json({success: false, badges: []});
+                }
+            });
+        },
         "post#teamTag/list": function (req, res) {
             var tag = req.body.tag;
             teamModel.find({"tags" : {$in : [tag]}}, function (err, teams) {

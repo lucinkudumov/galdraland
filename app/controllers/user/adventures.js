@@ -414,6 +414,18 @@ module.exports = function (opts) {
                 console.log(err);
                 return res.json({success: false, recommendates : []});
             });
+        },
+        "get#getBadgesByCreateAdv": function (req, res) {
+            adventureModel.find({owner: req.user._id}, function (err, badges) {
+                if (err) {
+                    console.log(err);
+                    return res.json({success: false, badges: []});
+                } else if (badges){
+                    return res.json({success: true, badges: badges});
+                } else {
+                    return res.json({success: false, badges: []});
+                }
+            });
         }
     }
 }

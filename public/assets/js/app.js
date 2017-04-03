@@ -3029,11 +3029,43 @@ app.controller("contactController", ['$scope', '$http', '$rootScope', function($
 }]);
 
 app.controller("profileViewController", ["$scope", "$http", "User", function ($scope, $http, User) {
-        $http.get("/api/getUserDetail").then(function (data) {
-            console.log("getUserDeatail = ",data.data.user);
-            $scope.user = data.data.user;
-        });
-    }]);
+    $scope.badges = [];
+    $http.get("/api/getUserDetail").then(function (data) {
+        console.log("getUserDetail = ",data.data.user);
+        $scope.user = data.data.user;
+    });
+    $http.get("/api/getBadgesByCreateAdv").then(function (data) {
+        console.log("getBadgesByCreateAdv = ",data.data.badges);
+        if (data && data.data.badges && data.data.badges) {
+            for (i = 0; i < count(data.data.badges); i++) {
+                var result = {};
+                result._id = data.data.badges[i]._id;
+                result.name = data.data.badges[i].name;
+                result.image = data.data.badges[i].image;
+                result.title = "Create adventure("+result.name+")";
+                result.kind = "adventure";
+                result.href = "/adventures/view/" + data.data.badges[i]._id;
+                $scope.badges.push(result);
+            }
+        }
+    });
+    $http.get("/api/getBadgesByCreateTeam").then(function (data) {
+        console.log("getBadgesByCreateTeam = ",data.data.badges);
+        if (data && data.data.badges && data.data.badges) {
+            for (i = 0; i < count(data.data.badges); i++) {
+                var result = {};
+                result._id = data.data.badges[i]._id;
+                result.name = data.data.badges[i].name;
+                result.image = data.data.badges[i].image;
+                result.title = "Create team("+result.name+")";
+                result.kind = "team";
+                result.href = "/teams/view/" + data.data.badges[i]._id;
+                $scope.badges.push(result);
+            }
+        }
+    });
+
+}]);
 
 app.controller("advancedSearchController", ["$scope", "$http", "$location", "User", function ($scope, $http, $location, User) {
         $scope.scategory = "aa";
