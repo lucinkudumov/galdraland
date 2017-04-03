@@ -3037,7 +3037,7 @@ app.controller("profileViewController", ["$scope", "$http", "User", function ($s
     $http.get("/api/getBadgesByCreateAdv").then(function (data) {
         console.log("getBadgesByCreateAdv = ",data.data.badges);
         if (data && data.data.badges && data.data.badges) {
-            for (i = 0; i < count(data.data.badges); i++) {
+            for (i = 0; i < data.data.badges.length; i++) {
                 var result = {};
                 result._id = data.data.badges[i]._id;
                 result.name = data.data.badges[i].name;
@@ -3052,7 +3052,7 @@ app.controller("profileViewController", ["$scope", "$http", "User", function ($s
     $http.get("/api/getBadgesByCreateTeam").then(function (data) {
         console.log("getBadgesByCreateTeam = ",data.data.badges);
         if (data && data.data.badges && data.data.badges) {
-            for (i = 0; i < count(data.data.badges); i++) {
+            for (i = 0; i < data.data.badges.length; i++) {
                 var result = {};
                 result._id = data.data.badges[i]._id;
                 result.name = data.data.badges[i].name;
