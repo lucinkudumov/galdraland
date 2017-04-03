@@ -3656,6 +3656,7 @@ app.controller("homeController", ["$scope", "$http", "$location", "$stateParams"
                 for (i = 0; i < data.data.recommendates.length; i++) {
                     processBadgesHomeViewByRecommend(data.data.recommendates[i]);
                 }
+                $scope.badgeloading = false;
             }
         });
 
