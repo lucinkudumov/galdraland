@@ -199,6 +199,16 @@ module.exports = function (opts) {
                 }
             });
         },
+        "post#badgesTeam": function (req, res) {
+            teamModel.find({$and:[{owner: req.user._id}, {"homeview": true}]}, function (err, teams) {
+                if (err) {
+                    console.log(err);
+                    return res.json({teams: []});
+                } else {
+                    return res.json({teams: teams});
+                }
+            });
+        },
         "post#newTeamHome": function (req, res) {
             var date = new Date();
             date.setDate(date.getDate() - 7);

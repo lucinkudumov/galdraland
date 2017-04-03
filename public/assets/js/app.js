@@ -3574,9 +3574,11 @@ app.controller("homeController", ["$scope", "$http", "$location", "$stateParams"
     $scope.peoples = [];
     $scope.feeds = [];
     $scope.slacks = [];
+    $scope.badges = [];
     $scope.newsloading = true;
     $scope.feedloading = true;
     $scope.slackloading = true;
+    $scope.badgeloading = true;
 
     $scope.refresh = function () {
         $scope.newsloading = true;
@@ -3618,7 +3620,6 @@ app.controller("homeController", ["$scope", "$http", "$location", "$stateParams"
         }).then(function (data) {
             var slackTeams = [];
             var slackTeams1 = [];
-            console.log("qqqqq = ", data);
             if(data && data.data && data.data.teams) {
                 var k = 0;
                 for (i=0; i< data.data.teams.length;i++){
@@ -3645,6 +3646,11 @@ app.controller("homeController", ["$scope", "$http", "$location", "$stateParams"
                     });
                 }
             }
+        });
+
+        $http({method: "POST", url: "badgesAdventure", api: true}).then($scope.parse_badgeAdventures);
+        $http({method: "POST", url: "badgesTeam", api: true}).then($scope.parse_badgeTeams).then(function (data) {
+            $scope.badgeloading = false;
         });
     }
 
@@ -3731,6 +3737,32 @@ app.controller("homeController", ["$scope", "$http", "$location", "$stateParams"
             feed.category = 3;
             feed.msg = "You have not seen " + feed.unread_count + " slack messages for team '"+feed.teamName+"'";
             $scope.slacks.push(feed);
+        }
+    }
+
+    $scope.parse_badgeAdventures = function (data) {
+        for (var i = 0; i < data.data.adventures.length; i++) {
+            var result = {};
+            result._id = data.data.adventures[i]._id;
+            result.name = data.data.adventures[i].name;
+            result.image = data.data.adventures[i].image;
+            result.title = "You create adventure '"+result.name+"'";
+            result.kind = "adventure";
+            result.href = "/adventures/view/" + data.data.adventures[i]._id;
+            $scope.badges.push(result);
+        }
+    }
+
+    $scope.parse_badgeTeams = function (data) {
+        for (var i = 0; i < data.data.teams.length; i++) {
+            var result = {};
+            result._id = data.data.teams[i]._id;
+            result.name = data.data.teams[i].name;
+            result.image = data.data.teams[i].image;
+            result.title = "You create team '"+result.name+"'";
+            result.kind = "team";
+            result.href = "/teams/view/" + data.data.teams[i]._id;
+            $scope.badges.push(result);
         }
     }
 

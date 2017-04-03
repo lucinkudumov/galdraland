@@ -133,6 +133,16 @@ module.exports = function (opts) {
                 }
             });
         },
+        "post#badgesAdventure": function (req, res) {
+            adventureModel.find({$and:[{owner: req.user._id}, {"homeview": true}]}, function (err, adventures) {
+                if (err) {
+                    console.log(err);
+                    return res.json({adventures: []});
+                } else {
+                    return res.json({adventures: adventures});
+                }
+            });
+        },
         "post#newAdventureHome": function (req, res) {
             var date = new Date();
             date.setDate(date.getDate() - 7);
