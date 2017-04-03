@@ -413,6 +413,27 @@ module.exports = function (opts) {
                 return res.json({success: false, recommendates : []});
             });
         },
+        "post#updateBadgesRecommendHomeView": function (req, res) {
+            var id = req.body.id;
+            recommendationModel.findOne({_id: id}, function (err, recommendate) {
+                if (err) {
+                    console.log(err);
+                    return res.json({success: false});
+                } else if (recommendate) {
+                    recommendate.homeview = false;
+                    recommendate.save(function (err) {
+                        if (err) {
+                            console.log(err);
+                            return res.json({success: false});
+                        } else {
+                            return res.json({success: true});
+                        }
+                    });
+                } else {
+                    return res.json({success: false});
+                }
+            });
+        },
         "post#getBadgesByRecommend": function (req, res) {
             var teamId = req.body.teamId,
                 roleId = req.body.roleId,
