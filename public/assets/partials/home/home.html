@@ -113,19 +113,19 @@
                         </ul>
                         <ul class="feeds">
                             <li ng-repeat="f in feeds">
-                                <div class="col-md-10 col-sm-10" ng-show ="f.position == 'master' && f.type == 'adventures'">
+                                <div class="col-md-11 col-sm-11" ng-show ="f.position == 'master' && f.type == 'adventures'">
                                     <span>User <img src='{{f.recommendationUserPhoto}}' style='width:30px; height:30px'/> {{f.recommendationUserName}} has recommended User <img src='{{ f.slaveUserPhoto }}' style='width:30px; height:30px'/> {{f.slaveUserName}} in your Adventure <img src='{{f.adventureImage}}' style='width:30px; height:30px'/> {{f.adventureName}}</span>
                                 </div>
-                                <div class="col-md-10 col-sm-10" ng-show ="f.position == 'slave' && f.type == 'adventures'">
+                                <div class="col-md-11 col-sm-11" ng-show ="f.position == 'slave' && f.type == 'adventures'">
                                     <span>User <img src='{{f.recommendationUserPhoto}}' style='width:30px; height:30px'/> {{f.recommendationUserName}} has recommended you in <img src='{{f.masterUserPhoto}}' style='width:30px; height:30px'/> {{f.masterUserName}}'s Adventure <img src='{{f.adventureImage}}' style='width:30px; height:30px'/> {{f.adventureName}}</span>
                                 </div>
-                                <div class="col-md-10 col-sm-10" ng-show ="f.position == 'master' && f.type == 'teams'">
+                                <div class="col-md-11 col-sm-11" ng-show ="f.position == 'master' && f.type == 'teams'">
                                     <span>User <img src='{{f.recommendationUserPhoto}}' style='width:30px; height:30px'/> {{f.recommendationUserName}} has recommended User <img src='{{f.slaveUserPhoto}}' style='width:30px; height:30px'/> {{f.slaveUserName}} for Role -{{f.roleTitle}}- in your Team <img src='{{f.teamImage}}' style='width:30px; height:30px'/>  {{f.teamName}}</span>
                                 </div>
-                                <div class="col-md-10 col-sm-10" ng-show ="f.position == 'slave' && f.type == 'teams'">
+                                <div class="col-md-11 col-sm-11" ng-show ="f.position == 'slave' && f.type == 'teams'">
                                     <span>User <img src='{{f.recommendationUserPhoto}}' style='width:30px; height:30px'/> {{f.recommendationUserName}} has recommended you for Role - {{ f.roleTitle }} - in <img src='{{ f.masterUserPhoto }}' style='width:30px; height:30px'/> {{f.masterUserName}}'s Team <img src='{{f.teamImage}}' style='width:30px; height:30px'/> '{{f.teamName}}' </span>
                                 </div>
-                                <div class="col-md-2 col-sm-2" style="text-align: right;font-style: italic;color: #c1cbd0;font-size: 13px;">
+                                <div class="col-md-1 col-sm-1" style="text-align: right;font-style: italic;color: #c1cbd0;font-size: 13px;">
                                     <button class="btn btn-primary" ng-click="showHomeRecommendation(f)">View</button>
                                 </div>
                             </li>
@@ -156,10 +156,10 @@
                         </ul>
                         <ul class="feeds">
                             <li ng-repeat="b in badges">
-                                <div class="col-md-10 col-sm-10">
+                                <div class="col-md-11 col-sm-11">
                                     <img src="/assets/images/badge.png" style="width: 30px; height: 30px;"/><span style="margin-left: 10px;">{{ b.title}}</span>
                                 </div>
-                                <div class="col-md-2 col-sm-2" style="text-align: right;font-style: italic;color: #c1cbd0;font-size: 13px;">
+                                <div class="col-md-1 col-sm-1" style="text-align: right;font-style: italic;color: #c1cbd0;font-size: 13px;">
                                     <button class="btn btn-primary" ng-click="showHomeBadges(b)">View</button>
                                 </div>
                             </li>
