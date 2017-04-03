@@ -3040,7 +3040,7 @@ app.controller("profileViewController", ["$scope", "$http", "User", function ($s
                 result._id = data.data.badges[i]._id;
                 result.name = data.data.badges[i].name;
                 result.image = data.data.badges[i].image;
-                result.title = "You create adventure '"+result.name+"'";
+                result.title = "You created adventure '"+result.name+"'";
                 result.kind = "adventure";
                 result.href = "/adventures/view/" + data.data.badges[i]._id;
                 $scope.badgesData.push(result);
@@ -3054,7 +3054,7 @@ app.controller("profileViewController", ["$scope", "$http", "User", function ($s
                 result._id = data.data.badges[i]._id;
                 result.name = data.data.badges[i].name;
                 result.image = data.data.badges[i].image;
-                result.title = "You create team '"+result.name+"'";
+                result.title = "You created team '"+result.name+"'";
                 result.kind = "team";
                 result.href = "/teams/view/" + data.data.badges[i]._id;
                 $scope.badgesData.push(result);
@@ -3079,7 +3079,7 @@ app.controller("profileViewController", ["$scope", "$http", "User", function ($s
         }).then(function (data) {
             if (data && data.data && data.data.success == true) {
                 var result = {};
-                result.title = "You recommendate "+slaveUserName+" for role '"+roleTitle+"' of user "+masterUserName+"'s team '"+teamName+"')";
+                result.title = "You recommendated "+slaveUserName+" for role '"+roleTitle+"' of user "+masterUserName+"'s team '"+teamName+"')";
                 result.kind = "recommend";
                 result.href = "/teams/view/" + teamId;
                 $scope.badgesData.push(result);
@@ -3746,7 +3746,7 @@ app.controller("homeController", ["$scope", "$http", "$location", "$stateParams"
             result._id = data.data.adventures[i]._id;
             result.name = data.data.adventures[i].name;
             result.image = data.data.adventures[i].image;
-            result.title = "You create adventure '"+result.name+"'";
+            result.title = "You created adventure '"+result.name+"'";
             result.kind = "adventure";
             result.href = "/adventures/view/" + data.data.adventures[i]._id;
             $scope.badges.push(result);
@@ -3759,7 +3759,7 @@ app.controller("homeController", ["$scope", "$http", "$location", "$stateParams"
             result._id = data.data.teams[i]._id;
             result.name = data.data.teams[i].name;
             result.image = data.data.teams[i].image;
-            result.title = "You create team '"+result.name+"'";
+            result.title = "You created team '"+result.name+"'";
             result.kind = "team";
             result.href = "/teams/view/" + data.data.teams[i]._id;
             $scope.badges.push(result);
