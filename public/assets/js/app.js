@@ -3031,11 +3031,9 @@ app.controller("contactController", ['$scope', '$http', '$rootScope', function($
 app.controller("profileViewController", ["$scope", "$http", "User", function ($scope, $http, User) {
     $scope.badgesData = [];
     $http.get("/api/getUserDetail").then(function (data) {
-        console.log("getUserDetail = ",data.data.user);
         $scope.user = data.data.user;
     });
     $http.get("/api/getBadgesByCreateAdv").then(function (data) {
-        console.log("getBadgesByCreateAdv = ",data.data.badges);
         if (data && data.data.badges && data.data.badges) {
             for (i = 0; i < data.data.badges.length; i++) {
                 var result = {};
@@ -3050,7 +3048,6 @@ app.controller("profileViewController", ["$scope", "$http", "User", function ($s
         }
     });
     $http.get("/api/getBadgesByCreateTeam").then(function (data) {
-        console.log("getBadgesByCreateTeam = ",data.data.badges);
         if (data && data.data.badges && data.data.badges) {
             for (i = 0; i < data.data.badges.length; i++) {
                 var result = {};
@@ -3061,6 +3058,38 @@ app.controller("profileViewController", ["$scope", "$http", "User", function ($s
                 result.kind = "team";
                 result.href = "/teams/view/" + data.data.badges[i]._id;
                 $scope.badgesData.push(result);
+            }
+        }
+    });
+
+    function processBadgesByRecommend(recommendate) {
+        var teamId = recommendate.teamId;
+        var roleId = recommendate.roleId;
+        var masterId = recommendate.masterId;
+        var slaveId = recommendate.slaveId;
+        var teamName = recommendate.teamName;
+        var roleTitle = recommendate.roleTitle;
+        $http({
+            method: "POST",
+            url: "getBadgesByRecommend",
+            api: true,
+            data: {teamId: teamId, roleId: roleId, masterId: masterId, slaveId: slaveId}
+        }).then(function (data) {
+            if (data && data.data && data.data.success == true) {
+                var result = {};
+                result.title = "Recommendation ( For role '"+roleTitle+"' of team '"+teamName+"')";
+                result.kind = "recommend";
+                result.href = "/teams/view/" + teamId;
+                $scope.badgesData.push(result);
+            }
+        });
+    }
+
+    $http.get("/api/RecommendationTeams").then(function (data) {
+        console.log("RecommendationTeams = ",data.data.recommendates);
+        if (data && data.data.recommendates && data.data.recommendates) {
+            for (i = 0; i < data.data.recommendates.length; i++) {
+                processBadgesByRecommend(data.data.recommendates[i]);
             }
         }
     });

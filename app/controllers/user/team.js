@@ -7,7 +7,7 @@ module.exports = function (opts) {
     var adventureModel = opts.models.Adventure;
     var recommendationModel = opts.models.Recommendation;
     var homeviewModel = opts.models.HomeView;
-
+    var inviteModel = opts.models.Invite;
 
     return {
         "post#upload/image": function (req, res) {
@@ -348,6 +348,37 @@ module.exports = function (opts) {
                 } else {
                     console.log(err);
                     return res.json({success: false, badges: []});
+                }
+            });
+        },
+        "get#RecommendationTeams": function (req, res) {
+            recommendationModel.find({
+                recommendationId: req.user._id,
+                type: "teams"
+            }, function (success, recommendates) {
+                if (recommendates.length > 0) {
+                    return res.json({success: true, recommendates : recommendates});
+                } else {
+                    return res.json({success: true, recommendates : []});
+                }
+            }, function (err) {
+                console.log(err);
+                return res.json({success: false, recommendates : []});
+            });
+        },
+        "post#getBadgesByRecommend": function (req, res) {
+            var teamId = req.body.teamId,
+                roleId = req.body.roleId,
+                masterId = req.body.masterId,
+                slaveId = req.body.slaveId;
+            inviteModel.findOne({$and: [{"team" : teamId}, {"title_id" : roleId}, {"from" : masterId}, {"toId" : slaveId}]}, function (err, invites) {
+                if (err) {
+                    console.log(err);
+                    return res.json({success: false});
+                } else if (invites) {
+                    return res.json({success: true});
+                } else {
+                    return res.json({success: false});
                 }
             });
         },
