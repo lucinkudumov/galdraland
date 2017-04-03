@@ -78,8 +78,11 @@ module.exports = function (opts) {
         slaveViewed : {
             type: Boolean,
             "default": false
+        },
+        homeview: {
+            type: Boolean,
+            "default": true
         }
-
     });
     
     return Schema;

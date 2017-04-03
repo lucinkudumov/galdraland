@@ -3649,8 +3649,42 @@ app.controller("homeController", ["$scope", "$http", "$location", "$stateParams"
         });
 
         $http({method: "POST", url: "badgesAdventure", api: true}).then($scope.parse_badgeAdventures);
-        $http({method: "POST", url: "badgesTeam", api: true}).then($scope.parse_badgeTeams).then(function (data) {
-            $scope.badgeloading = false;
+        $http({method: "POST", url: "badgesTeam", api: true}).then($scope.parse_badgeTeams);
+        $http.get("/api/HomeRecommendationTeams").then(function (data) {
+            console.log("HomeRecommendationTeams = ",data.data.recommendates);
+            if (data && data.data.recommendates && data.data.recommendates) {
+                for (i = 0; i < data.data.recommendates.length; i++) {
+                    processBadgesHomeViewByRecommend(data.data.recommendates[i]);
+                }
+            }
+        });
+
+    }
+
+    function processBadgesHomeViewByRecommend(recommendate) {
+        var id = recommendate._id;
+        var teamId = recommendate.teamId;
+        var roleId = recommendate.roleId;
+        var masterId = recommendate.masterId;
+        var masterUserName = recommendate.masterUserName;
+        var slaveId = recommendate.slaveId;
+        var slaveUserName = recommendate.slaveUserName;
+        var teamName = recommendate.teamName;
+        var roleTitle = recommendate.roleTitle;
+        $http({
+            method: "POST",
+            url: "getBadgesByRecommend",
+            api: true,
+            data: {teamId: teamId, roleId: roleId, masterId: masterId, slaveId: slaveId}
+        }).then(function (data) {
+            if (data && data.data && data.data.success == true) {
+                var result = {};
+                result._id = id;
+                result.title = "You recommendated "+slaveUserName+" for role '"+roleTitle+"' of user "+masterUserName+"'s team '"+teamName+"')";
+                result.kind = "recommend";
+                result.href = "/teams/view/" + teamId;
+                $scope.badges.push(result);
+            }
         });
     }
 
@@ -3856,6 +3890,17 @@ app.controller("homeController", ["$scope", "$http", "$location", "$stateParams"
         if (badge.kind == "adventure") {
             $http({
                 method: "POST", url: "updateBadgesAdventureHomeView", api: true, data: {id: badge._id}
+            }).then (function (result) {
+                var url = badge.href;
+                if ($location.path() == url)
+                    $state.reload();
+                else
+                    $location.path(url);
+            });
+        }
+        if (badge.kind == "recommend") {
+            $http({
+                method: "POST", url: "updateBadgesRecommendHomeView", api: true, data: {id: badge._id}
             }).then (function (result) {
                 var url = badge.href;
                 if ($location.path() == url)

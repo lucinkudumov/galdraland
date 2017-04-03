@@ -397,6 +397,22 @@ module.exports = function (opts) {
                 return res.json({success: false, recommendates : []});
             });
         },
+        "get#HomeRecommendationTeams": function (req, res) {
+            recommendationModel.find({
+                recommendationId: req.user._id,
+                type: "teams",
+                homeview: true
+            }, function (success, recommendates) {
+                if (recommendates.length > 0) {
+                    return res.json({success: true, recommendates : recommendates});
+                } else {
+                    return res.json({success: true, recommendates : []});
+                }
+            }, function (err) {
+                console.log(err);
+                return res.json({success: false, recommendates : []});
+            });
+        },
         "post#getBadgesByRecommend": function (req, res) {
             var teamId = req.body.teamId,
                 roleId = req.body.roleId,
