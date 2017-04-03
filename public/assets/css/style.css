@@ -123,6 +123,8 @@ footer ul li a {
 
 .badges {
     float : left;
+    margin-left: 5px;
+    margin-bottom: 3px;
 }
 .badges a {
     background: #fff;
