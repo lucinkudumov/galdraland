@@ -446,8 +446,9 @@ module.exports = function (opts) {
                 return res.json({success: false, recommendates : []});
             });
         },
-        "get#getBadgesByCreateAdv": function (req, res) {
-            adventureModel.find({owner: req.user._id}, function (err, badges) {
+        "post#getBadgesByCreateAdv": function (req, res) {
+            var id = req.body.id;
+            adventureModel.find({owner: id}, function (err, badges) {
                 if (err) {
                     console.log(err);
                     return res.json({success: false, badges: []});

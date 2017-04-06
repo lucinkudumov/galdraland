@@ -3029,11 +3029,18 @@ app.controller("contactController", ['$scope', '$http', '$rootScope', function($
 }]);
 
 app.controller("profileViewController", ["$scope", "$http", "User", function ($scope, $http, User) {
+    $scope.user = User.isLoggedIn();
     $scope.badgesData = [];
     $http.get("/api/getUserDetail").then(function (data) {
         $scope.user = data.data.user;
     });
-    $http.get("/api/getBadgesByCreateAdv").then(function (data) {
+
+    $http({
+        method: "POST",
+        url: "getBadgesByCreateAdv",
+        api: true,
+        data: {id: $scope.user._id}
+    }).then(function (data) {
         if (data && data.data.badges && data.data.badges) {
             for (i = 0; i < data.data.badges.length; i++) {
                 var result = {};
@@ -3047,7 +3054,13 @@ app.controller("profileViewController", ["$scope", "$http", "User", function ($s
             }
         }
     });
-    $http.get("/api/getBadgesByCreateTeam").then(function (data) {
+
+    $http({
+        method: "POST",
+        url: "getBadgesByCreateTeam",
+        api: true,
+        data: {id: $scope.user._id}
+    }).then(function (data) {
         if (data && data.data.badges && data.data.badges) {
             for (i = 0; i < data.data.badges.length; i++) {
                 var result = {};
@@ -3086,8 +3099,12 @@ app.controller("profileViewController", ["$scope", "$http", "User", function ($s
             }
         });
     }
-
-    $http.get("/api/RecommendationTeams").then(function (data) {
+    $http({
+        method: "POST",
+        url: "RecommendationTeams",
+        api: true,
+        data: {id: $scope.user._id}
+    }).then(function (data) {
         console.log("RecommendationTeams = ",data.data.recommendates);
         if (data && data.data.recommendates && data.data.recommendates) {
             for (i = 0; i < data.data.recommendates.length; i++) {
@@ -4042,7 +4059,12 @@ app.controller("userViewController", ["$scope", "$http", "$stateParams", "User",
                 $scope.adventures = r.data.adventures;
             });
 
-            $http.get("/api/getBadgesByCreateAdv").then(function (data) {
+            $http({
+                method: "POST",
+                url: "getBadgesByCreateAdv",
+                api: true,
+                data: {id: $stateParams.id}
+            }).then(function (data) {
                 if (data && data.data.badges && data.data.badges) {
                     for (i = 0; i < data.data.badges.length; i++) {
                         var result = {};
@@ -4056,7 +4078,13 @@ app.controller("userViewController", ["$scope", "$http", "$stateParams", "User",
                     }
                 }
             });
-            $http.get("/api/getBadgesByCreateTeam").then(function (data) {
+
+            $http({
+                method: "POST",
+                url: "getBadgesByCreateTeam",
+                api: true,
+                data: {id: $stateParams.id}
+            }).then(function (data) {
                 if (data && data.data.badges && data.data.badges) {
                     for (i = 0; i < data.data.badges.length; i++) {
                         var result = {};
@@ -4071,7 +4099,12 @@ app.controller("userViewController", ["$scope", "$http", "$stateParams", "User",
                 }
             });
 
-            $http.get("/api/RecommendationTeams").then(function (data) {
+            $http({
+                method: "POST",
+                url: "RecommendationTeams",
+                api: true,
+                data: {id: $stateParams.id}
+            }).then(function (data) {
                 console.log("RecommendationTeams = ",data.data.recommendates);
                 if (data && data.data.recommendates && data.data.recommendates) {
                     for (i = 0; i < data.data.recommendates.length; i++) {
@@ -4096,14 +4129,14 @@ app.controller("userViewController", ["$scope", "$http", "$stateParams", "User",
                 api: true,
                 data: {teamId: teamId, roleId: roleId, masterId: masterId, slaveId: slaveId}
             }).then(function (data) {
-                    if (data && data.data && data.data.success == true) {
-                        var result = {};
-                        result.title = "You recommendated "+slaveUserName+" for role '"+roleTitle+"' of user "+masterUserName+"'s team '"+teamName+"')";
-                        result.kind = "recommend";
-                        result.href = "/teams/view/" + teamId;
-                        $scope.badgesData.push(result);
-                    }
-                });
+                if (data && data.data && data.data.success == true) {
+                    var result = {};
+                    result.title = "You recommendated "+slaveUserName+" for role '"+roleTitle+"' of user "+masterUserName+"'s team '"+teamName+"')";
+                    result.kind = "recommend";
+                    result.href = "/teams/view/" + teamId;
+                    $scope.badgesData.push(result);
+                }
+            });
         }
 
         $scope.refresh();

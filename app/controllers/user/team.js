@@ -369,8 +369,9 @@ module.exports = function (opts) {
                 }
             });
         },
-        "get#getBadgesByCreateTeam": function (req, res) {
-            teamModel.find({owner: req.user._id}, function (err, badges) {
+        "post#getBadgesByCreateTeam": function (req, res) {
+            var id = req.body.id;
+            teamModel.find({owner: id}, function (err, badges) {
                 if (err) {
                     console.log(err);
                     return res.json({success: false, badges: []});
@@ -382,9 +383,10 @@ module.exports = function (opts) {
                 }
             });
         },
-        "get#RecommendationTeams": function (req, res) {
+        "post#RecommendationTeams": function (req, res) {
+            var id = req.body.id;
             recommendationModel.find({
-                recommendationId: req.user._id,
+                recommendationId: id,
                 type: "teams"
             }, function (success, recommendates) {
                 if (recommendates.length > 0) {
