@@ -3049,6 +3049,7 @@ app.controller("profileViewController", ["$scope", "$http", "User", function ($s
                 result.image = data.data.badges[i].image;
                 result.title = "You created adventure '"+result.name+"'";
                 result.kind = "adventure";
+                result.badgeImg = "/assets/images/badge.png";
                 result.href = "/adventures/view/" + data.data.badges[i]._id;
                 $scope.badgesData.push(result);
             }
@@ -3069,6 +3070,7 @@ app.controller("profileViewController", ["$scope", "$http", "User", function ($s
                 result.image = data.data.badges[i].image;
                 result.title = "You created team '"+result.name+"'";
                 result.kind = "team";
+                result.badgeImg = "/assets/images/badge.png";
                 result.href = "/teams/view/" + data.data.badges[i]._id;
                 $scope.badgesData.push(result);
             }
@@ -3094,6 +3096,7 @@ app.controller("profileViewController", ["$scope", "$http", "User", function ($s
                 var result = {};
                 result.title = "You recommendated "+slaveUserName+" for role '"+roleTitle+"' of user "+masterUserName+"'s team '"+teamName+"')";
                 result.kind = "recommend";
+                result.badgeImg = "/assets/images/bag.png";
                 result.href = "/teams/view/" + teamId;
                 $scope.badgesData.push(result);
             }
@@ -4076,6 +4079,7 @@ app.controller("userViewController", ["$scope", "$http", "$stateParams", "User",
                         result.image = data.data.badges[i].image;
                         result.title = "You created adventure '"+result.name+"'";
                         result.kind = "adventure";
+                        result.badgeImg = "/assets/images/badge.png";
                         result.href = "/adventures/view/" + data.data.badges[i]._id;
                         $scope.badgesData.push(result);
                     }
@@ -4096,6 +4100,7 @@ app.controller("userViewController", ["$scope", "$http", "$stateParams", "User",
                         result.image = data.data.badges[i].image;
                         result.title = "You created team '"+result.name+"'";
                         result.kind = "team";
+                        result.badgeImg = "/assets/images/badge.png";
                         result.href = "/teams/view/" + data.data.badges[i]._id;
                         $scope.badgesData.push(result);
                     }
@@ -4136,6 +4141,7 @@ app.controller("userViewController", ["$scope", "$http", "$stateParams", "User",
                     var result = {};
                     result.title = "You recommendated "+slaveUserName+" for role '"+roleTitle+"' of user "+masterUserName+"'s team '"+teamName+"')";
                     result.kind = "recommend";
+                    result.badgeImg = "/assets/images/bag.png";
                     result.href = "/teams/view/" + teamId;
                     $scope.badgesData.push(result);
                 }

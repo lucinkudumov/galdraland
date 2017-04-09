@@ -130,7 +130,7 @@
             </uib-accordion-heading>
             <small ng-show="!badgesData || badgesData.length == 0">No Badges</small>
             <span ng-repeat="b in badgesData" class="badges">
-                <a href="{{ b.href }}" title="{{ b.title }}"> <img src="/assets/images/badge.png" style="width: 76px; height: 76px;"/></a>
+                <a href="{{ b.href }}" title="{{ b.title }}"> <img src="{{b.badgeImg}}" style="width: 76px; height: 76px;"/></a>
             </span>
         </div>
         </uib-accordion>
