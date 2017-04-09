@@ -3700,6 +3700,7 @@ app.controller("homeController", ["$scope", "$http", "$location", "$stateParams"
                 result._id = id;
                 result.title = "You recommendated "+slaveUserName+" for role '"+roleTitle+"' of user "+masterUserName+"'s team '"+teamName+"')";
                 result.kind = "recommend";
+                result.badgeImg = "/assets/images/bag.png";
                 result.href = "/teams/view/" + teamId;
                 $scope.badges.push(result);
             }
@@ -3800,6 +3801,7 @@ app.controller("homeController", ["$scope", "$http", "$location", "$stateParams"
             result.image = data.data.adventures[i].image;
             result.title = "You created adventure '"+result.name+"'";
             result.kind = "adventure";
+            result.badgeImg = "/assets/images/badge.png";
             result.href = "/adventures/view/" + data.data.adventures[i]._id;
             $scope.badges.push(result);
         }
@@ -3813,6 +3815,7 @@ app.controller("homeController", ["$scope", "$http", "$location", "$stateParams"
             result.image = data.data.teams[i].image;
             result.title = "You created team '"+result.name+"'";
             result.kind = "team";
+            result.badgeImg = "/assets/images/badge.png";
             result.href = "/teams/view/" + data.data.teams[i]._id;
             $scope.badges.push(result);
         }

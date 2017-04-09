@@ -1,4 +1,38 @@
 <div ng-controller="homeController">
+    <div class="clearfix">
+    </div>
+    <div class="row ">
+        <div class="col-md-12 col-sm-12">
+            <div class="portlet box darkblue">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="fa fa-joomla"></i>Recent Badges
+                    </div>
+                </div>
+                <div class="portlet-body">
+                    <div class="scroller" style="height: 300px; overflow-y: scroll;" data-always-visible="1" data-rail-visible="0">
+                        <ul class="feeds" ng-show="!badgeloading && badges.length==0">
+                            <li>
+                                <div class="col1">
+                                    No Badges recently.
+                                </div>
+                            </li>
+                        </ul>
+                        <ul class="feeds">
+                            <li ng-repeat="b in badges">
+                                <div class="col-md-11 col-sm-11">
+                                    <img src="{{b.badgeImg}}" style="width: 30px; height: 30px;"/><span style="margin-left: 10px;">{{ b.title}}</span>
+                                </div>
+                                <div class="col-md-1 col-sm-1" style="text-align: right;font-style: italic;color: #c1cbd0;font-size: 13px;">
+                                    <button class="btn btn-primary" ng-click="showHomeBadges(b)">View</button>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="clearfix" style="margin-top: 15px;">
     </div>
     <div class="row">
@@ -127,40 +161,6 @@
                                 </div>
                                 <div class="col-md-1 col-sm-1" style="text-align: right;font-style: italic;color: #c1cbd0;font-size: 13px;">
                                     <button class="btn btn-primary" ng-click="showHomeRecommendation(f)">View</button>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="clearfix">
-    </div>
-    <div class="row ">
-        <div class="col-md-12 col-sm-12">
-            <div class="portlet box darkblue">
-                <div class="portlet-title">
-                    <div class="caption">
-                        <i class="fa fa-joomla"></i>Recent Badges
-                    </div>
-                </div>
-                <div class="portlet-body">
-                    <div class="scroller" style="height: 300px; overflow-y: scroll;" data-always-visible="1" data-rail-visible="0">
-                        <ul class="feeds" ng-show="!badgeloading && badges.length==0">
-                            <li>
-                                <div class="col1">
-                                    No Badges recently.
-                                </div>
-                            </li>
-                        </ul>
-                        <ul class="feeds">
-                            <li ng-repeat="b in badges">
-                                <div class="col-md-11 col-sm-11">
-                                    <img src="/assets/images/badge.png" style="width: 30px; height: 30px;"/><span style="margin-left: 10px;">{{ b.title}}</span>
-                                </div>
-                                <div class="col-md-1 col-sm-1" style="text-align: right;font-style: italic;color: #c1cbd0;font-size: 13px;">
-                                    <button class="btn btn-primary" ng-click="showHomeBadges(b)">View</button>
                                 </div>
                             </li>
                         </ul>
