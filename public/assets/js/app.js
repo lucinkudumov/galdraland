@@ -1913,18 +1913,28 @@ app.controller("MemberViewController", ["$scope", "user", "$uibModalInstance", f
 
 }]);
 
+
 app.controller("YesAndNoController", ["$scope", "msg", "title", "$uibModalInstance", function ($scope, msg, title, $uibModalInstance) {
-        $scope.msg = msg;
-        $scope.title = title;
+    $scope.msg = msg;
+    $scope.title = title;
 
-        $scope.yes = function () {
-            $uibModalInstance.close("YES");
-        }
+    $scope.yes = function () {
+        $uibModalInstance.close("YES");
+    }
 
-        $scope.no = function () {
-            $uibModalInstance.close("NO");
-        }
-    }]);
+    $scope.no = function () {
+        $uibModalInstance.close("NO");
+    }
+}]);
+
+app.controller("YesController", ["$scope", "msg", "title", "$uibModalInstance", function ($scope, msg, title, $uibModalInstance) {
+    $scope.msg = msg;
+    $scope.title = title;
+
+    $scope.yes = function () {
+        $uibModalInstance.close("YES");
+    }
+}]);
 
 app.controller("applyTeamController", ["$scope", "$uibModalInstance", "values", "$http", function ($scope, $uibModalInstance, values, $http) {
         $scope.values = angular.copy(values);
@@ -4539,7 +4549,7 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
         $scope.favoriteModal = function () {
             var modalInstance = $uibModal.open({
                 templateUrl: '/assets/partials/modal/yes.html',
-//                controller: "YesAndNoController",
+                controller: "YesController",
                 resolve: {
                     msg: function () {
                         return $scope.favoriteMsg;
