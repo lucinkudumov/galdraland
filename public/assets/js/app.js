@@ -4540,11 +4540,29 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
         }
         $scope.favoriteMsg = "";
         $scope.addFavorite = function () {
-            var teamId = $stateParams.id;
-            $http({method: "POST", url: "addFavoriteTeam", api: true, data: {teamId: teamId}}).then(function (data) {
-                $scope.favoriteMsg = data.data.msg;
-                $scope.favoriteModal();
+            var modalInstance = $uibModal.open({
+                templateUrl: '/assets/partials/modal/yesandno.html',
+                controller: "YesAndNoController",
+                resolve: {
+                    msg: function () {
+                        return "Do you want to favorite this team?";
+                    },
+                    title: function () {
+                        return "Favorite Team";
+                    }
+                }
             });
+            modalInstance.result.then(function (result) {
+                if (result == "YES") {
+                    var teamId = $stateParams.id;
+                    $http({method: "POST", url: "addFavoriteTeam", api: true, data: {teamId: teamId}}).then(function (data) {
+                        $scope.favoriteMsg = data.data.msg;
+                        $scope.favoriteModal();
+                    });
+                }
+            });
+
+            return false;
         }
         $scope.favoriteModal = function () {
             var modalInstance = $uibModal.open({
@@ -4558,8 +4576,6 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
                         return "Favorite Team";
                     }
                 }
-            });
-            modalInstance.result.then(function (result) {
             });
             return false;
         }
