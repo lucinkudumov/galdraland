@@ -1,6 +1,6 @@
 <div class="view-user" ng-controller="userViewController">
     <div class="avatar" style="background-image: url('{{ photo}}')"></div>
-    <h1>{{ fullname}}</h1>
+    <h1>{{ fullname}} <button ng-show="!isManager" class="btn btn-primary pull-left" ng-click="addFavoriteUser()" style="margin-left: 15px; padding-bottom: 1%;">Add to favorites</button></h1>
     <blockquote>
     <uib-accordion close-others="false">
         <div uib-accordion-group class="panel-default" is-open="true">
