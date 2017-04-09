@@ -4524,10 +4524,34 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
         }
 
         $scope.slackAuth = function () {
-            console.log("123...");
             $http({method: "POST", url: "slack/requestAuth", api: true}).then(function (data) {
                 console.log("calling requestAuth....");
             });
+        }
+        $scope.favoriteMsg = "";
+        $scope.addFavorite = function () {
+            var teamId = $stateParams.id;
+            $http({method: "POST", url: "addFavoriteTeam", api: true, data: {teamId: teamId}}).then(function (data) {
+                $scope.favoriteMsg = data.data.msg;
+                $scope.favoriteModal();
+            });
+        }
+        $scope.favoriteModal = function () {
+            var modalInstance = $uibModal.open({
+                templateUrl: '/assets/partials/modal/yes.html',
+//                controller: "YesAndNoController",
+                resolve: {
+                    msg: function () {
+                        return $scope.favoriteMsg;
+                    },
+                    title: function () {
+                        return "Favorite Team";
+                    }
+                }
+            });
+            modalInstance.result.then(function (result) {
+            });
+            return false;
         }
         $scope.refresh();
     }]);
