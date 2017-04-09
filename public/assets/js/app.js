@@ -4044,6 +4044,62 @@ app.controller("userViewController", ["$scope", "$http", "$stateParams", "User",
                 $scope.skills= data.data.user.skills;
                 $scope.looks= data.data.user.looks;
                 $scope.roles= data.data.user.roles;
+
+                $http({
+                    method: "POST",
+                    url: "getBadgesByCreateAdv",
+                    api: true,
+                    data: {id: $stateParams.id}
+                }).then(function (data) {
+                    if (data && data.data.badges && data.data.badges) {
+                        for (i = 0; i < data.data.badges.length; i++) {
+                            var result = {};
+                            result._id = data.data.badges[i]._id;
+                            result.name = data.data.badges[i].name;
+                            result.image = data.data.badges[i].image;
+                            result.title = $scope.username + " created adventure '"+result.name+"'";
+                            result.kind = "adventure";
+                            result.badgeImg = "/assets/images/badge.png";
+                            result.href = "/adventures/view/" + data.data.badges[i]._id;
+                            $scope.badgesData.push(result);
+                        }
+                    }
+                });
+
+                $http({
+                    method: "POST",
+                    url: "getBadgesByCreateTeam",
+                    api: true,
+                    data: {id: $stateParams.id}
+                }).then(function (data) {
+                    if (data && data.data.badges && data.data.badges) {
+                        for (i = 0; i < data.data.badges.length; i++) {
+                            var result = {};
+                            result._id = data.data.badges[i]._id;
+                            result.name = data.data.badges[i].name;
+                            result.image = data.data.badges[i].image;
+                            result.title = $scope.username + " created team '"+result.name+"'";
+                            result.kind = "team";
+                            result.badgeImg = "/assets/images/badge.png";
+                            result.href = "/teams/view/" + data.data.badges[i]._id;
+                            $scope.badgesData.push(result);
+                        }
+                    }
+                });
+
+                $http({
+                    method: "POST",
+                    url: "RecommendationTeams",
+                    api: true,
+                    data: {id: $stateParams.id}
+                }).then(function (data) {
+                    console.log("RecommendationTeams = ",data.data.recommendates);
+                    if (data && data.data.recommendates && data.data.recommendates) {
+                        for (i = 0; i < data.data.recommendates.length; i++) {
+                            processBadgesByRecommend(data.data.recommendates[i]);
+                        }
+                    }
+                });
             });
 
             $scope.teams = [];
@@ -4064,62 +4120,6 @@ app.controller("userViewController", ["$scope", "$http", "$stateParams", "User",
             }).then(function (r) {
                 $scope.adventures = r.data.adventures;
             });
-
-            $http({
-                method: "POST",
-                url: "getBadgesByCreateAdv",
-                api: true,
-                data: {id: $stateParams.id}
-            }).then(function (data) {
-                if (data && data.data.badges && data.data.badges) {
-                    for (i = 0; i < data.data.badges.length; i++) {
-                        var result = {};
-                        result._id = data.data.badges[i]._id;
-                        result.name = data.data.badges[i].name;
-                        result.image = data.data.badges[i].image;
-                        result.title = "You created adventure '"+result.name+"'";
-                        result.kind = "adventure";
-                        result.badgeImg = "/assets/images/badge.png";
-                        result.href = "/adventures/view/" + data.data.badges[i]._id;
-                        $scope.badgesData.push(result);
-                    }
-                }
-            });
-
-            $http({
-                method: "POST",
-                url: "getBadgesByCreateTeam",
-                api: true,
-                data: {id: $stateParams.id}
-            }).then(function (data) {
-                if (data && data.data.badges && data.data.badges) {
-                    for (i = 0; i < data.data.badges.length; i++) {
-                        var result = {};
-                        result._id = data.data.badges[i]._id;
-                        result.name = data.data.badges[i].name;
-                        result.image = data.data.badges[i].image;
-                        result.title = "You created team '"+result.name+"'";
-                        result.kind = "team";
-                        result.badgeImg = "/assets/images/badge.png";
-                        result.href = "/teams/view/" + data.data.badges[i]._id;
-                        $scope.badgesData.push(result);
-                    }
-                }
-            });
-
-            $http({
-                method: "POST",
-                url: "RecommendationTeams",
-                api: true,
-                data: {id: $stateParams.id}
-            }).then(function (data) {
-                console.log("RecommendationTeams = ",data.data.recommendates);
-                if (data && data.data.recommendates && data.data.recommendates) {
-                    for (i = 0; i < data.data.recommendates.length; i++) {
-                        processBadgesByRecommend(data.data.recommendates[i]);
-                    }
-                }
-            });
         }
 
         function processBadgesByRecommend(recommendate) {
@@ -4139,7 +4139,7 @@ app.controller("userViewController", ["$scope", "$http", "$stateParams", "User",
             }).then(function (data) {
                 if (data && data.data && data.data.success == true) {
                     var result = {};
-                    result.title = "You recommendated "+slaveUserName+" for role '"+roleTitle+"' of user "+masterUserName+"'s team '"+teamName+"')";
+                    result.title = $scope.username + " recommendated "+slaveUserName+" for role '"+roleTitle+"' of user "+masterUserName+"'s team '"+teamName+"')";
                     result.kind = "recommend";
                     result.badgeImg = "/assets/images/bag.png";
                     result.href = "/teams/view/" + teamId;
