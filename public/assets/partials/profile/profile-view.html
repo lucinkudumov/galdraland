@@ -12,6 +12,15 @@
         <small ng-show="user.categories">Categories: <cite title="Categories">{{ user.categories}}</cite></small>
         </div>
         <div uib-accordion-group class="panel-default" is-open="true">
+            <uib-accordion-heading>
+                <p>Badges</p>
+            </uib-accordion-heading>
+            <small ng-show="!badgesData || badgesData.length == 0">No Badges</small>
+        <span ng-repeat="b in badgesData" class="badges">
+            <a href="{{ b.href }}" title="{{ b.title }}"> <img src="{{b.badgeImg}}" style="width: 76px; height: 76px;"/></a>
+        </span>
+        </div>            
+        <div uib-accordion-group class="panel-default" is-open="true">
         <uib-accordion-heading>
         <p>Education</p>
         </uib-accordion-heading>
@@ -87,15 +96,6 @@
         </uib-accordion-heading>
         <small ng-show="!user.roles || user.roles.length == 0">No Data, <a href="/settings">add</a> now.</small>
         <small ng-repeat="r in user.roles">{{ r.role }}</small>
-        </div>
-        <div uib-accordion-group class="panel-default" is-open="true">
-            <uib-accordion-heading>
-                <p>Badges</p>
-            </uib-accordion-heading>
-            <small ng-show="!badgesData || badgesData.length == 0">No Badges</small>
-            <span ng-repeat="b in badgesData" class="badges">
-                <a href="{{ b.href }}" title="{{ b.title }}"> <img src="{{b.badgeImg}}" style="width: 76px; height: 76px;"/></a>
-            </span>
         </div>
         </uib-accordion>
         <a href="/settings" class="btn btn-same-size btn-primary" style="float: right;">Edit</a>
