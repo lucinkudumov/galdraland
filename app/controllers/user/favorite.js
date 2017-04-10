@@ -107,7 +107,6 @@ module.exports = function (opts) {
         },
         "post#getFavoriteUser": function (req, res) {
             var user_ids = [];
-            console.log("favorite User = ", req.body.users);
             for (var i = 0; i < req.body.users.length; i++) {
                 user_ids.push(req.body.users[i]);
             }

@@ -913,7 +913,6 @@ app.controller("usersResultController", ["$scope", "$http", "User", "$location",
                             api: true,
                             data: {users: users}
                         }).then(function success(data) {
-                                console.log(data.data.fusers);
                             if (data && data.data.fusers) {
                                 $scope.fusers = data.data.fusers
                             }
