@@ -53,6 +53,9 @@
                             </li>
                         </ul>
                         <ul class="feeds">
+                            <li ng-show="slackAuthentication == false">
+                                <a onclick="window.open('https://slack.com/oauth/authorize?scope=team:read+groups:read+groups:write+groups:history+chat:write:bot&client_id=152964900435.152966006611&team=T4GUCSGCT&redirect_uri=https://galdraland-1-0.herokuapp.com/api/slack/auth', '_blank', 'location=yes,height=570,width=520,scrollbars=yes,status=yes');"><img style="width: 150px; height: 35px;" src="https://api.slack.com/img/sign_in_with_slack.png" /></a>
+                            </li>
                             <li ng-repeat="p in peoples">
                                 <div class="col-md-10 col-sm-10">
                                     <a href="" ng-click="showHomeUser(p._id)"> <img src="{{ p.photo }}" style="width:30px; height:30px;"/> <b>{{ p.name}}</b></a> <small>SignIn</small>

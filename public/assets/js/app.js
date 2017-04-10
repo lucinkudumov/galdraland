@@ -3692,10 +3692,22 @@ app.controller("homeController", ["$scope", "$http", "$location", "$stateParams"
     $scope.feedloading = true;
     $scope.slackloading = true;
     $scope.badgeloading = true;
+    $scope.slackAuthentication = false;
 
     $scope.refresh = function () {
         $scope.newsloading = true;
         $scope.feedloading = true;
+
+        $http({
+            method: "POST",
+            url: "getUserById",
+            api: true,
+            data: {id: $scope.user._id}
+        }).then(function success(data) {
+            if (data.data.user.slackToken && data.data.user.slackToken != '' && data.data.user.slackUser && data.data.user.slackUser != '') {
+                $scope.slackAuthentication = true;
+            }
+        });
 
         $http({method: "POST", url: "newAdventureHome", api: true, data: {term: ""}}).then($scope.parse_adventures);
 
