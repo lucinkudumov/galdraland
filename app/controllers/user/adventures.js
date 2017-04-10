@@ -11,6 +11,9 @@ module.exports = function (opts) {
             imageModel = opts.models.Imagestore;
     var recommendationModel = opts.models.Recommendation;
     var homeviewModel = opts.models.HomeView;
+    var fhomeviewModel = opts.models.FavoriteHomeView;
+    var faModel = opts.models.FavoriteAdventure;
+
     return {
         "post#upload/image": function (req, res) {
             var file = req.files.file;
@@ -214,6 +217,68 @@ module.exports = function (opts) {
                     homeviewmodel.adventure = adv._id;
                     homeviewmodel.type = "adventure";
                     homeviewmodel.save(function (err) {
+                        if (err) {
+                            console.log(err);
+                            return res.json({success: false});
+                        } else {
+                            return res.json({success: true});
+                        }
+                    });
+                } else {
+                    return res.json({success: false});
+                }
+            });
+        },
+        "post#newFavoriteAdventureHome": function (req, res) {
+            var date = new Date();
+            date.setDate(date.getDate() - 7);
+            faModel.find({"createdAt": {$gt: date}}).populate("user adventure").populate("owner").exec(function (err, fadventures) {
+                if (err) {
+                    console.log(err);
+                    return res.json({fadventures: []});
+                } else if (fadventures) {
+                    fhomeviewModel.find({$and: [{"master" : req.user._id}, {"type" : "adventure"}]}, function (err, homeviewfadventures) {
+                        var unviewfadventures = [];
+                        if (err) {
+                            console.log(err);
+                            return res.json({fadventures: []});
+                        } else if (homeviewfadventures) {
+                            for(i = 0; i < fadventures.length; i++) {
+                                var view = false;
+                                var fadventureId = fadventures[i]._id;
+                                for(j = 0; j < homeviewfadventures.length; j++) {
+                                    var homeviewfadventureId = homeviewfadventures[j].adventure;
+                                    if (fadventureId.toString() == homeviewfadventureId.toString()) {
+                                        view = true;
+                                        break;
+                                    }
+                                }
+                                if (view === false) {
+                                    unviewfadventures.push(fadventures[i]);
+                                }
+                            }
+                            return res.json({fadventures: unviewfadventures});
+                        } else {
+                            return res.json({fadventures: fadventures});
+                        }
+                    });
+                } else {
+                    return res.json({fadventures: []});
+                }
+            });
+        },
+        "post#updateFavoriteAdventureHomeView": function (req, res) {
+            var id = req.body.id;
+            faModel.findOne({_id: id}, function (err, fadv) {
+                if (err) {
+                    console.log(err);
+                    return res.json({success: false});
+                } else if (fadv) {
+                    var fhomeviewmodel = new fhomeviewModel();
+                    fhomeviewmodel.master = req.user._id;
+                    fhomeviewmodel.adventure = fadv._id;
+                    fhomeviewmodel.type = "adventure";
+                    fhomeviewmodel.save(function (err) {
                         if (err) {
                             console.log(err);
                             return res.json({success: false});

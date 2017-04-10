@@ -3712,7 +3712,9 @@ app.controller("homeController", ["$scope", "$http", "$location", "$stateParams"
 
         $http({method: "POST", url: "newTeamHome", api: true, data: {term: ""}}).then($scope.parse_teams);
 
-        $http({method: "POST", url: "newUserHome", api: true, data: {term: ""}}).then($scope.parse_users).then(function () {
+        $http({method: "POST", url: "newUserHome", api: true, data: {term: ""}}).then($scope.parse_users);
+
+        $http({method: "POST", url: "newFavoriteAdventureHome", api: true, data: {term: ""}}).then($scope.parse_fadventures).then(function () {
             $scope.newsloading = false;
         });
 
@@ -3843,6 +3845,24 @@ app.controller("homeController", ["$scope", "$http", "$location", "$stateParams"
             result.createdAt = prettyDate(data.data.adventures[i].createdAt);
             $scope.adventures.push(result);
         }
+    }
+
+    $scope.parse_fadventures = function (data) {
+        $scope.fadventures = [];
+        console.log("fadventures = ", data.data.fadventures);
+//        for (var i = 0; i < data.data.fadventures.length; i++) {
+//            var result = {};
+//            result._id = data.data.fadventures[i]._id;
+//            result.name = data.data.fadventures[i].name;
+//            result.advImg = data.data.fadventures[i].image;
+//            result.username = data.data.fadventures[i].owner.fullname;
+//            result.userImg = data.data.fadventures[i].owner.photo;
+//            result.text1 = data.data.fadventures[i].tags.join(" ");
+//            result.text2 = data.data.fadventures[i].start + " - " + data.data.adventures[i].end;
+//            result.href = "/adventures/view/" + data.data.adventures[i]._id;
+//            result.createdAt = prettyDate(data.data.adventures[i].createdAt);
+//            $scope.adventures.push(result);
+//        }
     }
 
     $scope.parse_teams = function (data) {
