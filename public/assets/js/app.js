@@ -908,14 +908,13 @@ app.controller("usersResultController", ["$scope", "$http", "User", "$location",
                                 $scope.results.push(result);
                             }
                         }
-                        console.log("users = ", users);
                         $http({
                             method: "POST",
                             url: "getFavoriteUser",
                             api: true,
                             data: {users: users}
                         }).then(function success(data) {
-                                console.log("users = ", data.data.fusers);
+                                console.log("111 = ", data.data.fusers);
                             if (data && data.data.fusers) {
                                 $scope.fusers = data.data.fusers
                             }
@@ -930,7 +929,7 @@ app.controller("usersResultController", ["$scope", "$http", "User", "$location",
                         api: true,
                         data: {users: []}
                     }).then(function success(data) {
-                        console.log("users = ", data.data.fusers);
+                            console.log("aaa = ", data.data.fusers);
                         if (data && data.data.fusers) {
                             $scope.fusers = data.data.fusers
                         }
