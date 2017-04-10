@@ -399,6 +399,7 @@ module.exports = function (opts) {
             var id = req.body.id;
 
             inviteModel.findOneAndUpdate({_id: id, closed: false, toId: req.user._id}, {declined: true, approved: false}, function (err, numberAffected, invite) {
+//            inviteModel.findOneAndUpdate({_id: id, closed: false, toId: req.user._id}, {declined: true, approved: false}, function (err, numberAffected, invite) {
                 if (err) {
                     console.log(err);
                     return res.json({success: false});

@@ -2408,7 +2408,6 @@ app.controller("viewInviteController", ["$scope", "invite", "$uibModalInstance",
         $scope.user = User.isLoggedIn();
 
         $scope.accept = function () {
-            console.log("calling accept");
             $uibModalInstance.close({action: "ACCEPT", model: invite});
         }
 

@@ -28,8 +28,8 @@
     <h5 ng-show="invite.rejected">{{invite.to}} has declined your invitation.</h5>
 </div>
 <div class="modal-footer">
-    <button class="btn btn-primary" ng-click="accept()" ng-hide="invite.accepted || invite.rejected">Accept</button>
-    <button class="btn btn-warning" ng-click="decline()" ng-hide="invite.accepted || invite.rejected">Decline</button>
+    <button class="btn btn-primary" ng-click="accept()" ng-hide="invite.accepted || invite.declined">Accept</button>
+    <button class="btn btn-warning" ng-click="decline()" ng-hide="invite.accepted || invite.declined">Decline</button>
     <!--button class="btn btn-primary" ng-click="publish()" ng-show="invite.accepted">Publish To FB</button-->
-    <button class="btn btn-warning" ng-click="close()" ng-show="invite.accepted || invite.rejected">Close</button>
+    <button class="btn btn-warning" ng-click="close()" ng-show="invite.accepted || invite.declined">Close</button>
 </div>
