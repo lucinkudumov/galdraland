@@ -53,6 +53,14 @@
                                     {{ a.createdAt}}
                                 </div>
                             </li>
+                            <li ng-repeat="ft in fteams">
+                                <div class="col-md-10 col-sm-10">
+                                    <a href="" ng-click="showHomeFavoriteTeam(ft)"> <img src="{{ ft.userImg }}" style="width:30px; height:30px;"> {{ ft.userName}} has favored <img src="{{ ft.teamImg }}" style="width:30px; height:30px;"/> <b>{{ ft.teamName}}</b> created by user <img src="{{ ft.ownerImg }}" style="width:30px; height:30px;"> {{ ft.ownerName}} </a>
+                                </div>
+                                <div class="col-md-2 col-sm-2" style="text-align: right;font-style: italic;color: #c1cbd0;font-size: 13px;">
+                                    {{ fa.createdAt}}
+                                </div>
+                            </li>
                             <li ng-repeat="fa in fadventures">
                                 <div class="col-md-10 col-sm-10">
                                     <a href="" ng-click="showHomeFavoriteAdv(fa)"> <img src="{{ fa.userImg }}" style="width:30px; height:30px;"> {{ fa.userName}} has favored <img src="{{ fa.advImg }}" style="width:30px; height:30px;"/> <b>{{ fa.advName}}</b> created by user <img src="{{ fa.ownerImg }}" style="width:30px; height:30px;"> {{ fa.ownerName}} </a>
