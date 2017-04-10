@@ -1719,9 +1719,6 @@ app.controller("headerController", ["$scope", "$rootScope", "$http", "$location"
                 var invite = result.model;
                 var index = $scope.invites.indexOf(invite);
                 $scope.invites.splice(index, 1);
-                console.log("aaa" + result.action);
-                console.log("index" + index);
-                console.log("debugging....");
 //                refresh_feeds();
                 if (index > -1) {
                     if (result.action == "ACCEPT") {
@@ -1766,7 +1763,6 @@ app.controller("headerController", ["$scope", "$rootScope", "$http", "$location"
                             console.log("calling APPROVE...");
                             $http({method: "POST", url: "slack/sendInviteByApply", api: true, data: {id: apply._id}});
                         });
-
                     } else if (result.action == "REJECT") {
                         $http({method: "POST", url: "rejectApply", api: true, data: {id: apply._id}});
                     } else if (result.action == "CLOSE") {
