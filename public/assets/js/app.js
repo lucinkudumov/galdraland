@@ -1416,18 +1416,24 @@ app.controller("myAdventuresController", ["$scope", "$http", "$location", "User"
                     $scope.loading = false;
                 }
             }).then(function (r) {
-                if (r != null) $scope.adventures = r.data.adventures;
-                $scope.loading = false;
-            });
-
-            $http({
-                method: "POST",
-                url: "getFavoriteAdventure",
-                api: true
-            }).then(function success(data) {
-                if (data && data.data.fadventures) {
-                    $scope.fadventures = data.data.fadventures
+                var advs = [];
+                if (r != null) {
+                    $scope.adventures = r.data.adventures;
+                    advs = $scope.adventures;
                 }
+
+                $http({
+                    method: "POST",
+                    url: "getFavoriteAdventure",
+                    api: true,
+                    data : {adventures: advs}
+                }).then(function success(data) {
+                    if (data && data.data.fadventures) {
+                        $scope.fadventures = data.data.fadventures
+                    }
+                    $scope.loading = false;
+                });
+
                 $scope.loading = false;
             });
         }

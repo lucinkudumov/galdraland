@@ -74,7 +74,11 @@ module.exports = function (opts) {
             });
         },
         "post#getFavoriteAdventure": function (req, res) {
-            favoriteAdvModel.find({user: req.user._id}).populate("user adventure").exec(function (err, favorites) {
+            var adv_ids = [];
+            for (var i = 0; i < req.body.adventures.length; i++) {
+                adv_ids.push(req.body.adventures[i]._id);
+            }
+            favoriteAdvModel.find({$and : [{user: req.user._id}, {adventure : {$nin: adv_ids}}]}).populate("user adventure").exec(function (err, favorites) {
                 if (err) {
                     console.log(err);
                     return res.json({success: false, fadventures: []});
