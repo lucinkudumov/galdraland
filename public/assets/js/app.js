@@ -3693,6 +3693,7 @@ app.controller("homeController", ["$scope", "$http", "$location", "$stateParams"
     $scope.feedloading = true;
     $scope.slackloading = true;
     $scope.badgeloading = true;
+    $scope.slackloading = true;
     $scope.slackAuthentication = false;
 
     $scope.refresh = function () {
@@ -3708,6 +3709,7 @@ app.controller("homeController", ["$scope", "$http", "$location", "$stateParams"
             if (data.data.user.slackToken && data.data.user.slackToken != '' && data.data.user.slackUser && data.data.user.slackUser != '') {
                 $scope.slackAuthentication = true;
             }
+            $scope.slackloading = false;
         });
 
         $http({method: "POST", url: "newAdventureHome", api: true, data: {term: ""}}).then($scope.parse_adventures);
