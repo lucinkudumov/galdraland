@@ -855,6 +855,7 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
 app.controller("usersResultController", ["$scope", "$http", "User", "$location", function ($scope, $http, User, $location) {
     $scope.user = User.isLoggedIn();
     $scope.results = [];
+    $scope.fusers = [];
     $scope.refresh = function () {
         $scope.loading = true;
         $http({
