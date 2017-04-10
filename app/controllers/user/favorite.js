@@ -74,7 +74,7 @@ module.exports = function (opts) {
             });
         },
         "post#getFavoriteAdventure": function (req, res) {
-            favoriteAdvModel({user: req.user._id}).populate("user adventure").exec(function (err, favorites) {
+            favoriteAdvModel.find({user: req.user._id}).populate("user adventure").exec(function (err, favorites) {
                 if (err) {
                     console.log(err);
                     return res.json({success: false, fadventures: []});
