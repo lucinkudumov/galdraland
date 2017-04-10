@@ -25,6 +25,16 @@
                     <a href="/adventures/view/{{ a._id}}" class="btn btn-same-size btn-primary" ng-show="user._id == a.owner">Manage</a>
                 </td>
                 </tr>
+                <tr ng-repeat="fa in fadventures">
+                    <td ng-show="fa.adventure.image" width="20%"><img src="{{fa.adventure.image}}" style="width:114px; height:80px;"/></td>
+                    <td>{{ fa.adventure.name}}</td>
+                    <td><rating-widget isstatic="1" ref="fa.adventure._id" ></rating-widget></td>
+                    <td>{{ fa.adventure.start + " - " + fa.adventure.end}}</td>
+                    <td>
+                        <a href="/adventures/view/{{ fa.adventure._id}}" class="btn btn-same-size btn-primary" ng-show="user._id != fa.adventure.owner">View</a>
+                        <a href="/adventures/view/{{ fa.adventure._id}}" class="btn btn-same-size btn-primary" ng-show="user._id == fa.adventure.owner">Manage</a>
+                    </td>
+                </tr>
             </table>
         </div>
     </div>
