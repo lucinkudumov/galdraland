@@ -1720,7 +1720,8 @@ app.controller("headerController", ["$scope", "$rootScope", "$http", "$location"
                 var index = $scope.invites.indexOf(invite);
                 $scope.invites.splice(index, 1);
                 refresh_feeds();
-
+                console.log("aaa" + result.action);
+                console.log("index" + index);
                 if (index > -1) {
                     if (result.action == "ACCEPT") {
                         $http({method: "POST", url: "acceptInvite", api: true, data: {id: invite._id}});
