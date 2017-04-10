@@ -860,14 +860,17 @@ app.controller("usersResultController", ["$scope", "$http", "User", "$location",
     $scope.fusers = [];
     var users = [];
     $scope.refresh = function () {
+        console.log("111");
         $scope.loading = true;
         $http({
             method: "GET",
             url: "myTeams",
             api: true
         }).then (function success(data) {
+            console.log("222");
             $scope.teams = data.data.teams;
             if ($scope.teams.length) {
+                console.log("333");
                 var userIds = [];
                 for (var i = 0; i < $scope.teams.length; i++) {
                     for (var j = 0; j < $scope.teams[i].teamMembers.length; j ++) {
@@ -880,12 +883,14 @@ app.controller("usersResultController", ["$scope", "$http", "User", "$location",
                     }
                 }
                 if (userIds.length) {
+                    console.log("444");
                     $http({
                         method: "POST",
                         url: "getUsersByIds",
                         api: true,
                         data: {ids: userIds}
                     }).then(function success(data) {
+                            console.log("555");
                         $scope.users = data.data.users
                         if ($scope.users.length) {
                             for (var i = 0; i < $scope.users.length; i++) {
@@ -923,12 +928,14 @@ app.controller("usersResultController", ["$scope", "$http", "User", "$location",
 
                     });
                 } else {
+                    console.log("666");
                     $http({
                         method: "POST",
                         url: "getFavoriteUser",
                         api: true,
                         data: {users: users}
                     }).then(function success(data) {
+                            console.log("777");
                         if (data && data.data.fusers) {
                             $scope.fusers = data.data.fusers
                         }
@@ -936,12 +943,14 @@ app.controller("usersResultController", ["$scope", "$http", "User", "$location",
                     });
                 }
             } else {
+                console.log("888");
                 $http({
                     method: "POST",
                     url: "getFavoriteUser",
                     api: true,
                     data: {users: users}
                 }).then(function success(data) {
+                        console.log("999");
                     if (data && data.data.fusers) {
                         $scope.fusers = data.data.fusers
                     }
