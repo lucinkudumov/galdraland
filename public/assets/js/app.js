@@ -3720,7 +3720,9 @@ app.controller("homeController", ["$scope", "$http", "$location", "$stateParams"
 
         $http({method: "POST", url: "newFavoriteAdventureHome", api: true, data: {term: ""}}).then($scope.parse_fadventures);
 
-        $http({method: "POST", url: "newFavoriteTeamHome", api: true, data: {term: ""}}).then($scope.parse_fteams).then(function () {
+        $http({method: "POST", url: "newFavoriteTeamHome", api: true, data: {term: ""}}).then($scope.parse_fteams);
+
+        $http({method: "POST", url: "newFavoriteUserHome", api: true, data: {term: ""}}).then($scope.parse_fusers).then(function () {
             $scope.newsloading = false;
         });
 
@@ -3921,6 +3923,23 @@ app.controller("homeController", ["$scope", "$http", "$location", "$stateParams"
         }
     }
 
+    $scope.parse_fusers = function (data) {
+        $scope.fusers = [];
+        console.log("fusers = ", data.data.fusers);
+        for (var i = 0; i < data.data.fusers.length; i++) {
+            var result = {};
+            result._id = data.data.fusers[i]._id;
+            result.userName = data.data.fusers[i].user.fullname;
+            result.userImg = data.data.fusers[i].user.photo;
+            result.fuserName = data.data.fusers[i].fuser.fullname;
+            result.fuserImg = data.data.fusers[i].fuser.photo;
+            result.fuserId = data.data.fusers[i].fuser._id;
+            result.href = "/users/view/" + data.data.fusers[i].fuser._id;
+            result.createdAt = prettyDate(data.data.fusers[i].createdAt);
+            $scope.fusers.push(result);
+        }
+    }
+
     function refresh_home_feeds() {
         for (var i = 0; i < $scope.masterRecommendates.length; i++) {
             var feed = $scope.masterRecommendates[i];
@@ -4057,6 +4076,18 @@ app.controller("homeController", ["$scope", "$http", "$location", "$stateParams"
             method: "POST", url: "updateFavoriteTeamHomeView", api: true, data: {id: ft._id}
         }).then (function (result) {
             var url = "/teams/view/" + ft.teamId;
+            if ($location.path() == url)
+                $state.reload();
+            else
+                $location.path(url);
+        });
+    }
+
+    $scope.showHomeFavoriteUser = function (fu) {
+        $http({
+            method: "POST", url: "updateFavoriteUserHomeView", api: true, data: {id: fu._id}
+        }).then (function (result) {
+            var url = "/users/view/" + fu.fuserId;
             if ($location.path() == url)
                 $state.reload();
             else

@@ -5,7 +5,8 @@ module.exports = function (opts) {
             emailModel = opts.models.Email,
             topicModel = opts.models.Topic,
             homeviewModel = opts.models.HomeView;
-
+    var fhomeviewModel = opts.models.FavoriteHomeView;
+    var fuModel = opts.models.FavoriteUser;
     return {
         "post#createDefaultUser": function (req, res) {
             var defaultUser = new userModel();
@@ -191,6 +192,69 @@ module.exports = function (opts) {
                     homeviewmodel.user = user._id;
                     homeviewmodel.type = "user";
                     homeviewmodel.save(function (err) {
+                        if (err) {
+                            console.log(err);
+                            return res.json({success: false});
+                        } else {
+                            return res.json({success: true});
+                        }
+                    });
+                } else {
+                    return res.json({success: false});
+                }
+            });
+        },
+        "post#newFavoriteUserHome": function (req, res) {
+            var date = new Date();
+            date.setDate(date.getDate() - 7);
+            var populateQuery = [{path:'user', model:'User'}, {path:'fuser', model: 'User'}];
+            fuModel.find({"createdAt": {$gt: date}}).populate(populateQuery).exec(function (err, fusers) {
+                if (err) {
+                    console.log(err);
+                    return fusers.json({fusers: []});
+                } else if (fusers) {
+                    fhomeviewModel.find({$and: [{"master" : req.user._id}, {"type" : "user"}]}, function (err, homeviewfusers) {
+                        var unviewfusers = [];
+                        if (err) {
+                            console.log(err);
+                            return res.json({fusers: []});
+                        } else if (homeviewfusers) {
+                            for(i = 0; i < fusers.length; i++) {
+                                var view = false;
+                                var fuserId = fusers[i]._id;
+                                for(j = 0; j < homeviewfusers.length; j++) {
+                                    var homeviewfuserId = homeviewfusers[j].user;
+                                    if (fuserId.toString() == homeviewfuserId.toString()) {
+                                        view = true;
+                                        break;
+                                    }
+                                }
+                                if (view === false) {
+                                    unviewfusers.push(fusers[i]);
+                                }
+                            }
+                            return res.json({fusers: unviewfusers});
+                        } else {
+                            return res.json({fusers: fusers});
+                        }
+                    });
+                } else {
+                    return res.json({fusers: []});
+                }
+            });
+        },
+        "post#updateFavoriteUserHomeView": function (req, res) {
+            var id = req.body.id;
+            faModel.findOne({_id: id}, function (err, fuser) {
+                if (err) {
+                    console.log(err);
+                    return res.json({success: false});
+                } else if (fuser) {
+                    var fhomeviewmodel = new fhomeviewModel();
+                    fhomeviewmodel.master = req.user._id;
+                    fhomeviewmodel.user = fuser._id;
+                    fhomeviewmodel.type = "user";
+                    fhomeviewmodel.save(function (err) {
                         if (err) {
                             console.log(err);
                             return res.json({success: false});
