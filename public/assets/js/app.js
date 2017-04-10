@@ -1719,9 +1719,9 @@ app.controller("headerController", ["$scope", "$rootScope", "$http", "$location"
                 var invite = result.model;
                 var index = $scope.invites.indexOf(invite);
                 $scope.invites.splice(index, 1);
-                refresh_feeds();
                 console.log("aaa" + result.action);
                 console.log("index" + index);
+                refresh_feeds();
                 if (index > -1) {
                     if (result.action == "ACCEPT") {
                         $http({method: "POST", url: "acceptInvite", api: true, data: {id: invite._id}});
@@ -2410,6 +2410,7 @@ app.controller("viewInviteController", ["$scope", "invite", "$uibModalInstance",
         $scope.user = User.isLoggedIn();
 
         $scope.accept = function () {
+            console.log("calling accept");
             $uibModalInstance.close({action: "ACCEPT", model: invite});
         }
 
