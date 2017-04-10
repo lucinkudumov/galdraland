@@ -16,12 +16,12 @@
                     </td>
                 </tr>
                 <tr ng-repeat="f in fusers">
-                    <td ng-show="f.fuser.photo"><div class="avatar" style="background-image: url('{{ r.photo}}')"></div></td>
-                    <td>{{ f.fuser.name}}</td>
+                    <td ng-show="f.fuser.photo"><div class="avatar" style="background-image: url('{{ f.fuser.photo}}')"></div></td>
+                    <td>{{ f.fuser.fullname}}</td>
                     <!--<td>{{ r.team_role}}</td>-->
                     <td>&nbsp;</td>
-                    <td ng-show="f.fuser.href">
-                        <a href="{{f.fuser.href}}" class="btn btn-primary">View</a>
+                    <td ng-show="f.fuser._id">
+                        <a href="/users/view/{{f.fuser._id}}" class="btn btn-primary">View</a>
                     </td>
                 </tr>
             </table>
