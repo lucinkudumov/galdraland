@@ -300,7 +300,8 @@ module.exports = function (opts) {
         },
         "post#acceptInvite": function (req, res) {
             var id = req.body.id;
-
+            console.log("id = " + id);
+            console.log("toId = " + req.user._id);
             inviteModel.findOneAndUpdate({_id: id, closed: false, toId: req.user._id}, {accepted: true, declined: false}, function (err, invite) {
                 if (err) {
                     console.log(err);
