@@ -84,6 +84,30 @@ module.exports = function (opts) {
                     return res.json({success: true, fadventures: []});
                 }
             });
+        },
+        "post#getFavoriteTeam": function (req, res) {
+            favoriteTeamModel.find({user: req.user._id}).populate("user team").exec(function (err, favorites) {
+                if (err) {
+                    console.log(err);
+                    return res.json({success: false, fteams: []});
+                } else if (favorites) {
+                    return res.json({success: true, fteams: favorites});
+                } else {
+                    return res.json({success: true, fteams: []});
+                }
+            });
+        },
+        "post#getFavoriteUser": function (req, res) {
+            favoriteUserModel.find({user: req.user._id}).populate("user fuser").exec(function (err, favorites) {
+                if (err) {
+                    console.log(err);
+                    return res.json({success: false, fusers: []});
+                } else if (favorites) {
+                    return res.json({success: true, fusers: favorites});
+                } else {
+                    return res.json({success: true, fusers: []});
+                }
+            });
         }
     }
 }

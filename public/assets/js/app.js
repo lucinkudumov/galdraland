@@ -913,6 +913,17 @@ app.controller("usersResultController", ["$scope", "$http", "User", "$location",
                 $scope.loading = false;
             }
         });
+
+        $http({
+            method: "POST",
+            url: "getFavoriteUser",
+            api: true
+        }).then(function success(data) {
+            if (data && data.data.fusers) {
+                $scope.fusers = data.data.fusers
+            }
+            $scope.loading = false;
+        });
     }
 
     $scope.refresh();
@@ -1415,7 +1426,6 @@ app.controller("myAdventuresController", ["$scope", "$http", "$location", "User"
                 api: true
             }).then(function success(data) {
                 if (data && data.data.fadventures) {
-                    console.log(data.data.fadventures);
                     $scope.fadventures = data.data.fadventures
                 }
                 $scope.loading = false;
@@ -3627,6 +3637,16 @@ app.controller("myTeamsController", ["$scope", "$http", "$location", "User", fun
                 api: true
             }).then(function (data) {
                 $scope.teams = data.data.teams;
+                $scope.loading = false;
+            });
+            $http({
+                method: "POST",
+                url: "getFavoriteTeam",
+                api: true
+            }).then(function success(data) {
+                if (data && data.data.fteams) {
+                    $scope.fteams = data.data.fteams
+                }
                 $scope.loading = false;
             });
         }
