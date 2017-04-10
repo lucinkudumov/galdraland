@@ -90,7 +90,7 @@ app.controller("headerController", ["$scope", "$http", "$location", "User", "$mo
 				if (result.action == "ACCEPT") {
 					$http({ method : "POST", url : "acceptInvite", api : true, data : { id : invite._id }});
 				} else if (result.action == "DECLINE") {
-                    $http({ method : "POST", url : "declineInvite", api : true, data : { id : invite._id }});
+                    $http({ method : "POST", url : "rejectInvite", api : true, data : { id : invite._id }});
                 } else if (result.action == "CLOSE") {
                     $http({ method : "POST", url : "closeInvite", api : true, data : { id : invite._id }});
                 } else if (result.action == "PUBLISH") {
