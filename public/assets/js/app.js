@@ -552,6 +552,7 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
         $scope.description = "";
         $scope.timeStart = "";
         $scope.timeEnd = "";
+        $scope.ownerId = "";
 
         function onDayClick(day){
             console.log(day);
@@ -611,6 +612,7 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
                 $scope.timeEnd = data.data.adventure.end;
                 $scope.adventure = data.data.adventure;
                 $scope.isManager = data.data.adventure.owner == $scope.user._id;
+                $scope.ownerId = data.data.adventure.owner;
                 $http({
                     method: "POST",
                     url: "getViewUser",
@@ -826,7 +828,7 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
             modalInstance.result.then(function (result) {
                 if (result == "YES") {
                     var adventureId = $stateParams.id;
-                    $http({method: "POST", url: "addFavoriteAdventure", api: true, data: {adventureId: adventureId}}).then(function (data) {
+                    $http({method: "POST", url: "addFavoriteAdventure", api: true, data: {adventureId: adventureId, ownerId:$scope.ownerId}}).then(function (data) {
                         $scope.favoriteMsg = data.data.msg;
                         $scope.favoriteModal();
                     });
@@ -4321,6 +4323,7 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
         $scope.user = User.isLoggedIn();
         $scope.description = "";
         $scope.owner = null;
+        $scope.ownerId = "";
 
 
     $scope.emptyMembers = [];
@@ -4360,6 +4363,7 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
                     $scope.team = data.data.team;
                     $scope.adventures = data.data.advs;
                     $scope.isManager = data.data.team.owner._id == $scope.user._id;
+                    $scope.ownerId = data.data.team.owner._id;
                     $scope.isMember = false;
                     for (var i = 0; i < data.data.team.teamMembers.length; i++) {
                         if (data.data.team.teamMembers[i].user.profileId == '000000000000000000000000') {
@@ -4712,7 +4716,7 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
             modalInstance.result.then(function (result) {
                 if (result == "YES") {
                     var teamId = $stateParams.id;
-                    $http({method: "POST", url: "addFavoriteTeam", api: true, data: {teamId: teamId}}).then(function (data) {
+                    $http({method: "POST", url: "addFavoriteTeam", api: true, data: {teamId: teamId, ownerId: $scope.ownerId}}).then(function (data) {
                         $scope.favoriteMsg = data.data.msg;
                         $scope.favoriteModal();
                     });

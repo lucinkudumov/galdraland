@@ -232,7 +232,7 @@ module.exports = function (opts) {
         "post#newFavoriteAdventureHome": function (req, res) {
             var date = new Date();
             date.setDate(date.getDate() - 7);
-            var populateQuery = [{path:'user', model:'User'}, {path:'adventure', model: 'Adventure', populate:{path: 'adventure.owner', model:'User'}}];
+            var populateQuery = [{path:'user', model:'User'}, {path:'adventure', model: 'Adventure'}, {path:'owner', model: 'User'}];
             faModel.find({"createdAt": {$gt: date}}).populate(populateQuery).exec(function (err, fadventures) {
                 if (err) {
                     console.log(err);

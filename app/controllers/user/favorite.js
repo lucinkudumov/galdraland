@@ -21,6 +21,7 @@ module.exports = function (opts) {
                     var ft = new favoriteTeamModel();
                     ft.user = req.user._id;
                     ft.team = req.body.teamId;
+                    ft.owner = req.body.ownerId;
                     ft.save(function (err, favorite) {
                         if (err) {
                             console.log(err);
@@ -42,6 +43,7 @@ module.exports = function (opts) {
                     var fa = new favoriteAdvModel();
                     fa.user = req.user._id;
                     fa.adventure = req.body.adventureId;
+                    fa.owner = req.body.ownerId;
                     fa.save(function (err, favorite) {
                         if (err) {
                             console.log(err);

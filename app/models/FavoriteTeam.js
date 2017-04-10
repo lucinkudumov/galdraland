@@ -4,11 +4,17 @@ module.exports = function (opts) {
     var Schema = mongoose.Schema({
         user : {
             type: mongoose.Schema.ObjectId,
-            ref: "User"
+            ref: "User",
+            required: true
         },
         team: {
             type: mongoose.Schema.ObjectId,
             ref: "Team",
+            required: true
+        },
+        owner: {
+            type: mongoose.Schema.ObjectId,
+            ref: "User",
             required: true
         },
         createdAt: {
