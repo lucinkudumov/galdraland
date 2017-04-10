@@ -8,15 +8,15 @@ module.exports = function (opts) {
         },
         team: {
             type: mongoose.Schema.ObjectId,
-            ref: "Team"
+            ref: "FavoriteTeam"
         },
         adventure: {
             type: mongoose.Schema.ObjectId,
-            ref: "Adventure"
+            ref: "FavoriteAdventure"
         },
         user: {
             type: mongoose.Schema.ObjectId,
-            ref: "User"
+            ref: "FavoriteUser"
         },
         type: {
             type: String,

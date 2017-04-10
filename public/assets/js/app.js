@@ -3857,6 +3857,7 @@ app.controller("homeController", ["$scope", "$http", "$location", "$stateParams"
             result._id = data.data.fadventures[i]._id;
             result.advName = data.data.fadventures[i].adventure.name;
             result.advImg = data.data.fadventures[i].adventure.image;
+            result.advId = data.data.fadventures[i].adventure._id;
             result.userName = data.data.fadventures[i].user.fullname;
             result.userImg = data.data.fadventures[i].user.photo;
             result.ownerName = data.data.fadventures[i].owner.fullname;
@@ -4015,6 +4016,17 @@ app.controller("homeController", ["$scope", "$http", "$location", "$stateParams"
         });
     }
 
+    $scope.showHomeFavoriteAdv = function (fa) {
+        $http({
+            method: "POST", url: "updateFavoriteAdventureHomeView", api: true, data: {id: fa._id}
+        }).then (function (result) {
+            var url = "/adventures/view/" + fa.advId;
+            if ($location.path() == url)
+                $state.reload();
+            else
+                $location.path(url);
+        });
+    }
 
     $scope.showHomeSlackMsg = function (slackFeed) {
         var url = "/teams/slack/" + slackFeed.teamId;
