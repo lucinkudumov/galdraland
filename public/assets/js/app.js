@@ -1389,6 +1389,7 @@ app.controller("adventureBlogViewController", ["$scope", "$http", "$sce", "$loca
 app.controller("myAdventuresController", ["$scope", "$http", "$location", "User", function ($scope, $http, $location, User) {
         $scope.user = User.isLoggedIn();
         $scope.adventures = [];
+        $scope.fadventures = [];
         $scope.teams = [];
         $scope.refresh = function () {
             $scope.loading = true;
@@ -1405,6 +1406,18 @@ app.controller("myAdventuresController", ["$scope", "$http", "$location", "User"
                 }
             }).then(function (r) {
                 if (r != null) $scope.adventures = r.data.adventures;
+                $scope.loading = false;
+            });
+
+            $http({
+                method: "POST",
+                url: "getFavoriteAdventure",
+                api: true
+            }).then(function success(data) {
+                if (data && data.data.fadventures) {
+                    console.log(data.data.fadventures);
+                    $scope.fadventures = data.data.fadventures
+                }
                 $scope.loading = false;
             });
         }

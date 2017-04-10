@@ -12,7 +12,7 @@
         <div class="col-md-8 col-sm-8">
             <br>
             <table class="table adventures">
-                <tr ng-show="!loading && adventures.length == 0">
+                <tr ng-show="!loading && adventures.length == 0 && fadventures.length == 0">
                     <td class="err-msg">No adventures, <a href="/adventures/create">add</a> new adventure now.</td>
                 </tr>
                 <tr ng-repeat="a in adventures">
