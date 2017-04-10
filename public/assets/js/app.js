@@ -923,6 +923,19 @@ app.controller("usersResultController", ["$scope", "$http", "User", "$location",
                         });
 
                     });
+                } else {
+                    $http({
+                        method: "POST",
+                        url: "getFavoriteUser",
+                        api: true,
+                        data: {users: []}
+                    }).then(function success(data) {
+                        console.log("users = ", data.data.fusers);
+                        if (data && data.data.fusers) {
+                            $scope.fusers = data.data.fusers
+                        }
+                        $scope.loading = false;
+                    });
                 }
             } else {
                 $scope.loading = false;
