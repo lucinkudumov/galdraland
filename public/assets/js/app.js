@@ -883,10 +883,12 @@ app.controller("usersResultController", ["$scope", "$http", "User", "$location",
                         data: {ids: userIds}
                     }).then(function success(data) {
                         $scope.users = data.data.users
+                        var users = [];
                         if ($scope.users.length) {
                             for (var i = 0; i < $scope.users.length; i++) {
                                 if ($scope.users[i].profileId == "000000000000000000000000") continue;
                                 if ($scope.user._id == $scope.users[i]._id) continue;
+                                users.push($scope.user._id);
                                 var result = {};
                                 result.name = $scope.users[i].fullname;
                                 result.href = "/users/view/" + $scope.users[i]._id;
@@ -900,29 +902,27 @@ app.controller("usersResultController", ["$scope", "$http", "User", "$location",
                                         }
                                     }
                                 }
-
                                 $scope.results.push(result);
                             }
-                            $scope.loading = false;
-                        } else {
-                            $scope.loading = false;
                         }
+
+                        $http({
+                            method: "POST",
+                            url: "getFavoriteUser",
+                            api: true,
+                            data: {users: users}
+                        }).then(function success(data) {
+                            if (data && data.data.fusers) {
+                                $scope.fusers = data.data.fusers
+                            }
+                            $scope.loading = false;
+                        });
+
                     });
                 }
             } else {
                 $scope.loading = false;
             }
-        });
-
-        $http({
-            method: "POST",
-            url: "getFavoriteUser",
-            api: true
-        }).then(function success(data) {
-            if (data && data.data.fusers) {
-                $scope.fusers = data.data.fusers
-            }
-            $scope.loading = false;
         });
     }
 

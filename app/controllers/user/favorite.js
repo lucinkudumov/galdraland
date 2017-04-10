@@ -106,7 +106,12 @@ module.exports = function (opts) {
             });
         },
         "post#getFavoriteUser": function (req, res) {
-            favoriteUserModel.find({user: req.user._id}).populate("user fuser").exec(function (err, favorites) {
+            var user_ids = [];
+            for (var i = 0; i < req.body.users.length; i++) {
+                user_ids.push(req.body.users[i]._id);
+            }
+
+            favoriteUserModel.find({$and : [{user: req.user._id}, {fuser : {$nin : user_ids}}]}).populate("user fuser").exec(function (err, favorites) {
                 if (err) {
                     console.log(err);
                     return res.json({success: false, fusers: []});
