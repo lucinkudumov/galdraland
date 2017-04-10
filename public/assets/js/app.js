@@ -3852,19 +3852,19 @@ app.controller("homeController", ["$scope", "$http", "$location", "$stateParams"
     $scope.parse_fadventures = function (data) {
         $scope.fadventures = [];
         console.log("fadventures = ", data.data.fadventures);
-//        for (var i = 0; i < data.data.fadventures.length; i++) {
-//            var result = {};
-//            result._id = data.data.fadventures[i]._id;
-//            result.name = data.data.fadventures[i].name;
-//            result.advImg = data.data.fadventures[i].image;
-//            result.username = data.data.fadventures[i].owner.fullname;
-//            result.userImg = data.data.fadventures[i].owner.photo;
-//            result.text1 = data.data.fadventures[i].tags.join(" ");
-//            result.text2 = data.data.fadventures[i].start + " - " + data.data.adventures[i].end;
-//            result.href = "/adventures/view/" + data.data.adventures[i]._id;
-//            result.createdAt = prettyDate(data.data.adventures[i].createdAt);
-//            $scope.adventures.push(result);
-//        }
+        for (var i = 0; i < data.data.fadventures.length; i++) {
+            var result = {};
+            result._id = data.data.fadventures[i]._id;
+            result.advName = data.data.fadventures[i].adventure.name;
+            result.advImg = data.data.fadventures[i].adventure.image;
+            result.userName = data.data.fadventures[i].user.fullname;
+            result.userImg = data.data.fadventures[i].user.photo;
+            result.ownerName = data.data.fadventures[i].owner.fullname;
+            result.ownerImg = data.data.fadventures[i].owner.photo;
+            result.href = "/adventures/view/" + data.data.fadventures[i].adventure._id;
+            result.createdAt = prettyDate(data.data.fadventures[i].createdAt);
+            $scope.fadventures.push(result);
+        }
     }
 
     $scope.parse_teams = function (data) {
