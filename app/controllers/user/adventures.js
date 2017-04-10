@@ -232,8 +232,8 @@ module.exports = function (opts) {
         "post#newFavoriteAdventureHome": function (req, res) {
             var date = new Date();
             date.setDate(date.getDate() - 7);
-            var populateQuery = [{path:'user'}, {path:'adventure', populate:[{path: 'owner'}]}];
-            faModel.find({"createdAt": {$gt: date}}).populate(populateQuery).exec(function (err, fadventures) {
+            var populateQuery = [{path:'user', model:'User'}, {path:'adventure', model: 'Adventure', populate:{path: 'owner', model:'User'}}];
+            faModel.find({"createdAt": {$gt: date}}).populate([{path:'user', model:'User'}, {path:'adventure', model: 'Adventure', populate:{path: 'owner', model:'User'}}]).exec(function (err, fadventures) {
                 if (err) {
                     console.log(err);
                     return res.json({fadventures: []});
