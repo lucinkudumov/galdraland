@@ -858,6 +858,7 @@ app.controller("usersResultController", ["$scope", "$http", "User", "$location",
     $scope.user = User.isLoggedIn();
     $scope.results = [];
     $scope.fusers = [];
+    var users = [];
     $scope.refresh = function () {
         $scope.loading = true;
         $http({
@@ -886,7 +887,6 @@ app.controller("usersResultController", ["$scope", "$http", "User", "$location",
                         data: {ids: userIds}
                     }).then(function success(data) {
                         $scope.users = data.data.users
-                        var users = [];
                         if ($scope.users.length) {
                             for (var i = 0; i < $scope.users.length; i++) {
                                 if ($scope.users[i].profileId == "000000000000000000000000") continue;
@@ -927,9 +927,8 @@ app.controller("usersResultController", ["$scope", "$http", "User", "$location",
                         method: "POST",
                         url: "getFavoriteUser",
                         api: true,
-                        data: {users: []}
+                        data: {users: users}
                     }).then(function success(data) {
-                            console.log("aaa = ", data.data.fusers);
                         if (data && data.data.fusers) {
                             $scope.fusers = data.data.fusers
                         }
@@ -937,7 +936,17 @@ app.controller("usersResultController", ["$scope", "$http", "User", "$location",
                     });
                 }
             } else {
-                $scope.loading = false;
+                $http({
+                    method: "POST",
+                    url: "getFavoriteUser",
+                    api: true,
+                    data: {users: users}
+                }).then(function success(data) {
+                    if (data && data.data.fusers) {
+                        $scope.fusers = data.data.fusers
+                    }
+                    $scope.loading = false;
+                });
             }
         });
     }
