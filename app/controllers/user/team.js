@@ -8,6 +8,8 @@ module.exports = function (opts) {
     var recommendationModel = opts.models.Recommendation;
     var homeviewModel = opts.models.HomeView;
     var inviteModel = opts.models.Invite;
+    var fhomeviewModel = opts.models.FavoriteHomeView;
+    var ftModel = opts.models.FavoriteTeam;
 
     return {
         "post#upload/image": function (req, res) {
@@ -280,6 +282,69 @@ module.exports = function (opts) {
                     homeviewmodel.team = team._id;
                     homeviewmodel.type = "team";
                     homeviewmodel.save(function (err) {
+                        if (err) {
+                            console.log(err);
+                            return res.json({success: false});
+                        } else {
+                            return res.json({success: true});
+                        }
+                    });
+                } else {
+                    return res.json({success: false});
+                }
+            });
+        },
+        "post#newFavoriteTeamHome": function (req, res) {
+            var date = new Date();
+            date.setDate(date.getDate() - 7);
+            var populateQuery = [{path:'user', model:'User'}, {path:'team', model: 'Team'}, {path:'owner', model: 'User'}];
+            ftModel.find({"createdAt": {$gt: date}}).populate(populateQuery).exec(function (err, fteams) {
+                if (err) {
+                    console.log(err);
+                    return res.json({fteams: []});
+                } else if(fteams) {
+                    fhomeviewModel.find({$and: [{"master" : req.user._id}, {"type" : "team"}]}, function (err, homeviewfteams) {
+                        var unviewfteams = [];
+                        if (err) {
+                            console.log(err);
+                            return res.json({fteams: []});
+                        } else if (homeviewfteams) {
+                            for(i = 0; i < fteams.length; i++) {
+                                var view = false;
+                                var fteamId = fteams[i]._id;
+                                for(j = 0; j < homeviewfteams.length; j++) {
+                                    var homeviewfteamId = homeviewfteams[j].team;
+                                    if (fteamId.toString() == homeviewfteamId.toString()) {
+                                        view = true;
+                                        break;
+                                    }
+                                }
+                                if (view === false) {
+                                    unviewfteams.push(fteams[i]);
+                                }
+                            }
+                            return res.json({fteams: unviewfteams});
+                        } else {
+                            return res.json({fteams: fteams});
+                        }
+                    });
+                } else {
+                    return res.json({fteams: []});
+                }
+            });
+        },
+        "post#updateFavoriteTeamHomeView": function (req, res) {
+            var id = req.body.id;
+            ftModel.findOne({_id: id}, function (err, fteam) {
+                if (err) {
+                    console.log(err);
+                    return res.json({success: false});
+                } else if (fteam) {
+                    var fhomeviewmodel = new fhomeviewModel();
+                    fhomeviewmodel.master = req.user._id;
+                    fhomeviewmodel.team = fteam._id;
+                    fhomeviewmodel.type = "team";
+                    fhomeviewmodel.save(function (err) {
                         if (err) {
                             console.log(err);
                             return res.json({success: false});

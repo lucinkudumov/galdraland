@@ -3716,7 +3716,9 @@ app.controller("homeController", ["$scope", "$http", "$location", "$stateParams"
 
         $http({method: "POST", url: "newUserHome", api: true, data: {term: ""}}).then($scope.parse_users);
 
-        $http({method: "POST", url: "newFavoriteAdventureHome", api: true, data: {term: ""}}).then($scope.parse_fadventures).then(function () {
+        $http({method: "POST", url: "newFavoriteAdventureHome", api: true, data: {term: ""}}).then($scope.parse_fadventures);
+
+        $http({method: "POST", url: "newFavoriteTeamHome", api: true, data: {term: ""}}).then($scope.parse_fteams).then(function () {
             $scope.newsloading = false;
         });
 
@@ -3884,6 +3886,26 @@ app.controller("homeController", ["$scope", "$http", "$location", "$stateParams"
         }
     }
 
+    $scope.parse_fteams = function (data) {
+        $scope.fteams = [];
+        console.log("fteams = ", data.data.fteams);
+        for (var i = 0; i < data.data.fteams.length; i++) {
+            var result = {};
+            result._id = data.data.fteams[i]._id;
+            result.teamName = data.data.fteams[i].team.name;
+            result.teamImg = data.data.fteams[i].team.image;
+            result.teamId = data.data.fteams[i].team._id;
+            result.userName = data.data.fteams[i].user.fullname;
+            result.userImg = data.data.fteams[i].user.photo;
+            result.ownerName = data.data.fteams[i].owner.fullname;
+            result.ownerImg = data.data.fteams[i].owner.photo;
+            result.href = "/teams/view/" + data.data.fteams[i].team._id;
+            result.createdAt = prettyDate(data.data.fteams[i].createdAt);
+            $scope.fteams.push(result);
+        }
+    }
+
+
     $scope.parse_users = function (data) {
         $scope.peoples = [];
         for (var i = 0; i < data.data.users.length; i++) {
@@ -4021,6 +4043,18 @@ app.controller("homeController", ["$scope", "$http", "$location", "$stateParams"
             method: "POST", url: "updateFavoriteAdventureHomeView", api: true, data: {id: fa._id}
         }).then (function (result) {
             var url = "/adventures/view/" + fa.advId;
+            if ($location.path() == url)
+                $state.reload();
+            else
+                $location.path(url);
+        });
+    }
+
+    $scope.showHomeFavoriteTeam = function (ft) {
+        $http({
+            method: "POST", url: "updateFavoriteTeamHomeView", api: true, data: {id: ft._id}
+        }).then (function (result) {
+            var url = "/teams/view/" + ft.teamId;
             if ($location.path() == url)
                 $state.reload();
             else
