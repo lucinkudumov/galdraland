@@ -233,7 +233,7 @@ module.exports = function (opts) {
             var date = new Date();
             date.setDate(date.getDate() - 7);
 //            var populateQuery = [{path:'user', model:'User'}, {path:'adventure', model: 'Adventure', populate:{path: 'owner', model:'User'}}];
-            faModel.find({"createdAt": {$gt: date}}).populate('user','adventure','adventure.owner').exec(function (err, fadventures) {
+            faModel.find({"createdAt": {$gt: date}}).populate([{path:'user', model:'User'}, {path:'adventure', model: 'Adventure', populate:{path: 'owner', model:'User'}}]).exec(function (err, fadventures) {
                 if (err) {
                     console.log(err);
                     return res.json({fadventures: []});
