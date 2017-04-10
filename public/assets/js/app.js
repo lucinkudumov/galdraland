@@ -1722,8 +1722,10 @@ app.controller("headerController", ["$scope", "$rootScope", "$http", "$location"
                 console.log("aaa" + result.action);
                 console.log("index" + index);
                 refresh_feeds();
+                console.log("debugging....");
                 if (index > -1) {
                     if (result.action == "ACCEPT") {
+                        console.log("debugging222....");
                         $http({method: "POST", url: "acceptInvite", api: true, data: {id: invite._id}});
                     } else if (result.action == "DECLINE") {
                         $http({method: "POST", url: "declineInvite", api: true, data: {id: invite._id}});
