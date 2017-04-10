@@ -889,7 +889,7 @@ app.controller("usersResultController", ["$scope", "$http", "User", "$location",
                             for (var i = 0; i < $scope.users.length; i++) {
                                 if ($scope.users[i].profileId == "000000000000000000000000") continue;
                                 if ($scope.user._id == $scope.users[i]._id) continue;
-                                users.push($scope.user._id);
+                                users.push($scope.users[i]._id);
                                 var result = {};
                                 result.name = $scope.users[i].fullname;
                                 result.href = "/users/view/" + $scope.users[i]._id;
