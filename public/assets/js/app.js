@@ -1721,8 +1721,8 @@ app.controller("headerController", ["$scope", "$rootScope", "$http", "$location"
                 $scope.invites.splice(index, 1);
                 console.log("aaa" + result.action);
                 console.log("index" + index);
-                refresh_feeds();
                 console.log("debugging....");
+//                refresh_feeds();
                 if (index > -1) {
                     if (result.action == "ACCEPT") {
                         console.log("debugging222....");
@@ -1739,6 +1739,7 @@ app.controller("headerController", ["$scope", "$rootScope", "$http", "$location"
                         $http({method: "POST", url: "closeInvite", api: true, data: {id: invite._id}});
                     }
                 }
+                refresh_feeds();
             });
         }
 
@@ -1758,8 +1759,7 @@ app.controller("headerController", ["$scope", "$rootScope", "$http", "$location"
                 var apply = result.model;
                 var index = $scope.applies.indexOf(apply);
                 $scope.applies.splice(index, 1);
-                refresh_feeds();
-
+//                refresh_feeds();
                 if (index > -1) {
                     if (result.action == "APPROVE") {
                         $http({method: "POST", url: "approveApply", api: true, data: {id: apply._id}}).then(function (result) {
@@ -1778,6 +1778,7 @@ app.controller("headerController", ["$scope", "$rootScope", "$http", "$location"
                         $http({method: "POST", url: "closeApply", api: true, data: {id: apply._id}});
                     }
                 }
+                refresh_feeds();
             });
         }
 
