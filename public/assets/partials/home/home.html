@@ -55,7 +55,9 @@
                         <ul class="feeds">
                             <li ng-show="slackAuthentication == false">
                                 <div class="col-md-10 col-sm-10">
-                                    <a href="" ng-click="showHomeTeam(t._id)"> <img src="{{ t.teamImg }}" style="width:30px; height:30px;"/> <b>{{ t.name}}</b> created by user <img src="{{ t.userImg }}" style="width:30px; height:30px;"> {{ t.username}} </a>
+                                    <div class="desc">
+                                        please sign in to slack , else you will not be able to create teams and participate in team discussions. Thanks!
+                                    </div>
                                 </div>
                                 <div class="col-md-2 col-sm-2" style="text-align: right;font-style: italic;color: #c1cbd0;font-size: 13px;">
                                     <a onclick="window.open('https://slack.com/oauth/authorize?scope=team:read+groups:read+groups:write+groups:history+chat:write:bot&client_id=152964900435.152966006611&team=T4GUCSGCT&redirect_uri=https://galdraland-1-0.herokuapp.com/api/slack/auth', '_blank', 'location=yes,height=570,width=520,scrollbars=yes,status=yes');"><img style="width: 150px; height: 35px;" src="https://api.slack.com/img/sign_in_with_slack.png" /></a>
