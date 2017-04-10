@@ -245,7 +245,7 @@ module.exports = function (opts) {
         },
         "post#updateFavoriteUserHomeView": function (req, res) {
             var id = req.body.id;
-            faModel.findOne({_id: id}, function (err, fuser) {
+            fuModel.findOne({_id: id}, function (err, fuser) {
                 if (err) {
                     console.log(err);
                     return res.json({success: false});
