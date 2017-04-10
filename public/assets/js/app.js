@@ -1421,7 +1421,6 @@ app.controller("myAdventuresController", ["$scope", "$http", "$location", "User"
                     $scope.adventures = r.data.adventures;
                     advs = $scope.adventures;
                 }
-
                 $http({
                     method: "POST",
                     url: "getFavoriteAdventure",
@@ -1433,8 +1432,6 @@ app.controller("myAdventuresController", ["$scope", "$http", "$location", "User"
                     }
                     $scope.loading = false;
                 });
-
-                $scope.loading = false;
             });
         }
         $scope.refresh();
@@ -3641,18 +3638,22 @@ app.controller("myTeamsController", ["$scope", "$http", "$location", "User", fun
                 url: "myTeams",
                 api: true
             }).then(function (data) {
-                $scope.teams = data.data.teams;
-                $scope.loading = false;
-            });
-            $http({
-                method: "POST",
-                url: "getFavoriteTeam",
-                api: true
-            }).then(function success(data) {
-                if (data && data.data.fteams) {
-                    $scope.fteams = data.data.fteams
+                var teams = [];
+                if (data && data.data.teams) {
+                    $scope.teams = data.data.teams;
+                    teams = $scope.teams;
                 }
-                $scope.loading = false;
+                $http({
+                    method: "POST",
+                    url: "getFavoriteTeam",
+                    api: true,
+                    data : {teams: teams}
+                }).then(function success(data) {
+                    if (data && data.data.fteams) {
+                        $scope.fteams = data.data.fteams;
+                    }
+                    $scope.loading = false;
+                });
             });
         }
 

@@ -90,7 +90,11 @@ module.exports = function (opts) {
             });
         },
         "post#getFavoriteTeam": function (req, res) {
-            favoriteTeamModel.find({user: req.user._id}).populate("user team").exec(function (err, favorites) {
+            var team_ids = [];
+            for (var i = 0; i < req.body.teams.length; i++) {
+                team_ids.push(req.body.teams[i]._id);
+            }
+            favoriteTeamModel.find({$and : [{user: req.user._id}, {team : {$nin : team_ids}}]}).populate("user team").exec(function (err, favorites) {
                 if (err) {
                     console.log(err);
                     return res.json({success: false, fteams: []});
