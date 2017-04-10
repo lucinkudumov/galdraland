@@ -110,7 +110,6 @@ module.exports = function (opts) {
             for (var i = 0; i < req.body.users.length; i++) {
                 user_ids.push(req.body.users[i]._id);
             }
-
             favoriteUserModel.find({$and : [{user: req.user._id}, {fuser : {$nin : user_ids}}]}).populate("user fuser").exec(function (err, favorites) {
                 if (err) {
                     console.log(err);
