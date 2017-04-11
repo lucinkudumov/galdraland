@@ -65,7 +65,6 @@
                 <button ng-show="isManager" class="btn btn-success pull-left" ng-click="addMemberTitle()" style="margin-left: 5px; padding-bottom: 1%;">Add a new role</button>
                 <button ng-show="!isMember && !isManager && emptyMembers.length > 0" class="btn btn-success pull-left" ng-click="applyTeam()" style="margin-left: 15px; padding-bottom: 1%;">Apply for this team</button>
                 <button ng-show="!isManager" class="btn btn-primary pull-left" ng-click="sendRecommendation()" style="margin-left: 15px; padding-bottom: 1%;">Recommendation</button>
-                <button ng-show="!isManager" class="btn btn-primary pull-left" ng-click="addFavoriteTeam()" style="margin-left: 15px; padding-bottom: 1%;">Add to favorites</button>
                 <br/>
                 <h2 style="color:#394b59; margin-top:35px;font-size:18px; font-weight:700;">RATINGS</h2>
                 <div style="text-align: center; margin-top : 20px; padding-right: 10px; padding-left: 10px;">
@@ -83,6 +82,7 @@
                         <a ng-show="slackAuthentication == true" href="/teams/slack/{{ team._id}}" class="btn btn-success">Slack</a>
                         <a ng-show="slackAuthentication == false" href="#" onclick='alertSlackAuth();' class="btn btn-success">Slack</a>
                     </div>
+                    <button ng-show="!isManager" class="btn btn-primary pull-left" ng-click="addFavoriteTeam()" style="margin-top: 5px; padding-bottom: 1%;">Add to favorites</button>
                 </div>
             </div>
         </div>
