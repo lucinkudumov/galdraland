@@ -868,7 +868,6 @@ app.controller("usersResultController", ["$scope", "$http", "User", "$location",
         }).then (function success(data) {
             $scope.teams = data.data.teams;
             if ($scope.teams.length) {
-                console.log("333");
                 var userIds = [];
                 for (var i = 0; i < $scope.teams.length; i++) {
                     for (var j = 0; j < $scope.teams[i].teamMembers.length; j ++) {
