@@ -4480,9 +4480,10 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
                         api: true,
                         data: {teamId: $stateParams.id}
                     }).then(function (data) {
-                            if (data.data.sucess == true) {
+                            console.log(data);
+                            if (data && data.data.sucess == true) {
                                 $scope.isFavorite = true;
-                                $scope.favoriteTeamId = data.data.favotie._id;
+                                $scope.favoriteTeamId = data.data.favrite._id;
                             }
                     });
 
