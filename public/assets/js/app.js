@@ -1849,7 +1849,7 @@ app.controller("indexController", ["$scope", "$location", "$window", "$statePara
         $scope.users = [];
         $scope.loading = true;
 
-        $scope.ourEmail = 'info@holomathics.com';
+        $scope.ourEmail = 'info@galdratekcorp.com';
         $scope.yourEmail = '';
         $scope.description = '';
         $scope.sentSuccess = false;
