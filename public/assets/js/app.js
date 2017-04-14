@@ -4481,7 +4481,7 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
                         data: {teamId: $stateParams.id}
                     }).then(function (data) {
                             console.log(data);
-                            if (data && data.data.sucess == true) {
+                            if (data && data.data.success == true) {
                                 console.log("okokokokok");
                                 $scope.isFavorite = true;
                                 $scope.favoriteTeamId = data.data.favorite._id;
