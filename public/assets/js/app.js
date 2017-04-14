@@ -1951,7 +1951,6 @@ app.controller("indexController", ["$scope", "$location", "$window", "$statePara
                     text: $scope.description,
                     subject: 'Contact Galdraland Support Center'}
             }).then( function success(data) {
-                    console.log('Mail Sent Success');
                     console.log(data);
                     if (data.data.success == true)
                         $scope.sentSuccess = true;
