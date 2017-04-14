@@ -4418,7 +4418,7 @@ app.controller("userViewController", ["$scope", "$http", "$stateParams", "User",
         $scope.refresh();
     }]);
 
-app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "$stateParams", "User", "$uibModal", "$location", "$compile", function ($rootScope, $scope, $http, $sce, $stateParams, User, $uibModal, $location, $compile) {
+app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "$stateParams", "User", "$uibModal", "$location", "$compile", "$state", function ($rootScope, $scope, $http, $sce, $stateParams, User, $uibModal, $location, $compile, $state) {
         $scope.user = User.isLoggedIn();
         $scope.description = "";
         $scope.owner = null;
@@ -4480,9 +4480,7 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
                         api: true,
                         data: {teamId: $stateParams.id}
                     }).then(function (data) {
-                            console.log(data);
                             if (data && data.data.success == true) {
-                                console.log("okokokokok");
                                 $scope.isFavorite = true;
                                 $scope.favoriteTeamId = data.data.favorite._id;
                             }
@@ -4850,6 +4848,34 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
                     title: function () {
                         return "Favorite Team";
                     }
+                }
+            });
+            modalInstance.result.then(function (result) {
+                if (result == "YES") {
+                    $state.reload();
+                }
+            });
+            return false;
+        }
+
+        $scope.removeFavoriteTeam = function (favoriteId) {
+            var modalInstance = $uibModal.open({
+                templateUrl: '/assets/partials/modal/yesandno.html',
+                controller: "YesAndNoController",
+                resolve: {
+                    msg: function () {
+                        return "Do you want to remove from favorites?";
+                    },
+                    title: function () {
+                        return "Remove From Favorites";
+                    }
+                }
+            });
+            modalInstance.result.then(function (result) {
+                if (result == "YES") {
+                    $http({method: "POST", url: "removeFavoriteTeam", api: true, data: {favoriteId: favoriteId}}).then(function (data) {
+                        $state.reload();
+                    });
                 }
             });
             return false;

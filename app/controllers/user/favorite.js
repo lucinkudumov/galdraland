@@ -43,6 +43,24 @@ module.exports = function (opts) {
                 }
             });
         },
+        "post#removeFavoriteTeam": function (req, res) {
+            favoriteTeamModel.findOne({_id: req.body.favoriteId}).exec(function (err, favorite) {
+                if (err) {
+                    return res.json({success: false});
+                } else if (favorite) {
+                    favorite.remove(function (err) {
+                        if (err) {
+                            console.log(err);
+                            return res.json({success: false});
+                        } else {
+                            return res.json({success: true});
+                        }
+                    });
+                } else {
+                    return res.json({success: false});
+                }
+            });
+        },
         "post#addFavoriteAdventure": function (req, res) {
             favoriteAdvModel.findOne({user: req.user._id, adventure: req.body.adventureId}).populate("user adventure").exec(function (err, favorite) {
                 if (err) {
