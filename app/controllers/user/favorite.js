@@ -32,6 +32,17 @@ module.exports = function (opts) {
                 }
             });
         },
+        "post#existFavoriteTeam": function (req, res) {
+            favoriteTeamModel.findOne({user: req.user._id, team: req.body.teamId}).exec(function (err, favorite) {
+                if (err) {
+                    return res.json({success: false, favorite:[]});
+                } else if (favorite) {
+                    return res.json({success: true, favorite: favorite});
+                } else {
+                    return res.json({success: false, fadventures:[]});
+                }
+            });
+        },
         "post#addFavoriteAdventure": function (req, res) {
             favoriteAdvModel.findOne({user: req.user._id, adventure: req.body.adventureId}).populate("user adventure").exec(function (err, favorite) {
                 if (err) {

@@ -4423,6 +4423,7 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
         $scope.description = "";
         $scope.owner = null;
         $scope.ownerId = "";
+    $scope.isFavorite = false;
 
 
     $scope.emptyMembers = [];
@@ -4472,6 +4473,18 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
                         if (data.data.team.teamMembers[i].user._id == $scope.user._id)
                             $scope.isMember = true;
                     }
+
+                    $http({
+                        method: "POST",
+                        url: "existFavoriteTeam",
+                        api: true,
+                        data: {teamId: $stateParams.id}
+                    }).then(function (data) {
+                            if (data.data.sucess == true) {
+                                $scope.isFavorite = true;
+                                $scope.favoriteTeamId = data.data.favotie._id;
+                            }
+                    });
 
                     $http({
                         method: "POST",
