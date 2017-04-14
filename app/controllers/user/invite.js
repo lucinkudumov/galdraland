@@ -77,7 +77,7 @@ module.exports = function (opts) {
             }, function(err, json){
                 console.log("send mail result = ", json);
                 if(err) {
-                    console.log("send mail error = ", json);
+                    console.log("send mail error = ", err);
                     return res.json({success: false});
                 }
                 else
