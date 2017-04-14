@@ -1,13 +1,12 @@
 <div class="view-user" ng-controller="userViewController">
     <div class="avatar" style="background-image: url('{{ photo}}')"></div>
-    <div style="height: auto;">
-        <center>
-            <span ng-repeat="b in badgesData" class="badges">
-                <a href="{{ b.href }}" title="{{ b.title }}"> <img src="{{b.badgeImg}}" style="width: 76px; height: 76px;"/></a>
-            </span>
-        </center>
-        <h1>{{ fullname}} <button ng-show="!isManager" class="btn btn-primary" ng-click="addFavoriteUser()" style="margin-left: 15px; padding-bottom: 1%;">Add to favorites</button></h1>
+    <div style="height: 80px;">
+        <span ng-repeat="b in badgesData" class="badges">
+            <a href="{{ b.href }}" title="{{ b.title }}"> <img src="{{b.badgeImg}}" style="width: 76px; height: 76px;"/></a>
+        </span>
     </div>
+    <br/>
+    <h1>{{ fullname}} <button ng-show="!isManager" class="btn btn-primary" ng-click="addFavoriteUser()" style="margin-left: 15px; padding-bottom: 1%;">Add to favorites</button></h1>
     <blockquote>
     <uib-accordion close-others="false">
         <div uib-accordion-group class="panel-default" is-open="true">
