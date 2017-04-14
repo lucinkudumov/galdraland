@@ -4519,7 +4519,7 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
 
         $scope.showMember = function (member) {
             $scope.activeMember = member;
-
+            if (member.user.profileId != "000000000000000000000000") return;
             if ($scope.isManager) {
                 var modalInstance = $uibModal.open({
                     templateUrl: '/assets/partials/modal/memberEdit.html',
