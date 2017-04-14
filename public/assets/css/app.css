@@ -19025,7 +19025,7 @@ padding20 {
 select.ng-pristine.ng-valid,
 select.ng-valid.ng-dirty,
 input.ng-valid.ng-dirty {
-    font-size: 11px;
+    font-size: 16px;
     color: #483d8b;
     text-transform: uppercase
 }
