@@ -1946,7 +1946,7 @@ app.controller("indexController", ["$scope", "$location", "$window", "$statePara
                 url: "sendContact",
                 api: true,
                 data: {
-                    toEmail: $scope.yourEmail,//'info@galdratekcorp.com',
+                    toEmail: 'info@galdratekcorp.com',
                     fromEmail: $scope.yourEmail,
                     text: $scope.description,
                     subject: 'Contact Galdraland Support Center'}

@@ -13,12 +13,6 @@
     <div class="row">
         <div style="margin-top:0px;">
             <div class="col-md-4" style="padding-right: 10px;">
-                <h2 style="color:#394b59; margin-top:0px;font-size:18px; font-weight:700;" ng-show="adventures.length > 0">ADVENTURES</h2>
-                <div style="margin-top:5px;" ng-show="adventures.length > 0" class="members-list">
-                    <div style="margin-top:0px;" ng-repeat="adv in adventures">
-                        <p class="name bold" style="margin:0px; margin-left:5px; cursor: pointer; color: #1ab8f3; font-size:22px;" ng-bind="adv.name" ng-click="viewAdventure(adv)"></p>
-                    </div>
-                </div>
                 <!--<h2 style="color:#394b59; margin-top:5px;font-size:18px; font-weight:700;" ng-show="team.image">PHOTO</h2>-->
                 <div style="margin-top:5px;" ng-show="team.image">
                     <img src="{{team.image}}" alt="image" ng-show="team.image" style="margin-bottom: 10px; margin-top: 10px; width:396px; height:297px;">
@@ -32,6 +26,12 @@
                 <h2 style="color:#394b59; margin-top:5px;font-size:18px; font-weight:700;" ng-show="team.description">DESCRIPTION</h2>
                 <div style="margin-top:5px;" ng-show="team.description" class="description">
                     <p class="description" style="margin-left:5px; text-align:left; padding: 10px 5px 10px 5px; word-wrap: break-word; word-break: break-word; font-size: 15px; border: 1px solid #ddd;" ng-bind-html="team.description"></p>
+                </div>
+                <h2 style="color:#394b59; margin-top:0px;font-size:18px; font-weight:700;" ng-show="adventures.length > 0">ADVENTURES</h2>
+                <div style="margin-top:5px;" ng-show="adventures.length > 0" class="members-list">
+                    <div style="margin-top:0px;" ng-repeat="adv in adventures">
+                        <p class="name bold" style="margin:0px; margin-left:5px; cursor: pointer; color: #1ab8f3; font-size:22px;" ng-bind="adv.name" ng-click="viewAdventure(adv)"></p>
+                    </div>
                 </div>
                 <h2 style="color:#394b59; margin-top:5px;font-size:18px; font-weight:700;" ng-show="team.mission">MISSION</h2>
                 <div style="margin-top:5px;" ng-show="team.mission" class="description">
