@@ -1,4 +1,9 @@
 <div ng-controller="profileViewController">
+        <div>
+            <span ng-repeat="b in badgesData" class="badges">
+                <a href="{{ b.href }}" title="{{ b.title }}"> <img src="{{b.badgeImg}}" style="width: 76px; height: 76px;"/></a>
+            </span>
+        </div>
         <blockquote>
         <uib-accordion close-others="false">
         <div uib-accordion-group class="panel-default" is-open="true">
@@ -10,15 +15,6 @@
         <small ng-show="user.location"><cite title="Location">{{ user.location}}  <i class="glyphicon glyphicon-map-marker"></i></cite></small>
         <small ng-show="user.skype">Skype: <cite title="Skype">{{ user.skype}}</cite></small>
         <small ng-show="user.categories">Categories: <cite title="Categories">{{ user.categories}}</cite></small>
-        </div>
-        <div uib-accordion-group class="panel-default" is-open="true">
-            <uib-accordion-heading>
-                <p>Badges</p>
-            </uib-accordion-heading>
-            <small ng-show="!badgesData || badgesData.length == 0">No Badges</small>
-        <span ng-repeat="b in badgesData" class="badges">
-            <a href="{{ b.href }}" title="{{ b.title }}"> <img src="{{b.badgeImg}}" style="width: 76px; height: 76px;"/></a>
-        </span>
         </div>
         <div uib-accordion-group class="panel-default" is-open="true">
         <uib-accordion-heading>
