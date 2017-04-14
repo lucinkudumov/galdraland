@@ -1,9 +1,11 @@
 <div class="view-user" ng-controller="userViewController">
     <div class="avatar" style="background-image: url('{{ photo}}')"></div>
-    <div style="text-align: center;">
-        <span ng-repeat="b in badgesData" class="badges">
-            <a href="{{ b.href }}" title="{{ b.title }}"> <img src="{{b.badgeImg}}" style="width: 76px; height: 76px;"/></a>
-        </span>
+    <div style="height: 80px;">
+        <center>
+            <span ng-repeat="b in badgesData" class="badges">
+                <a href="{{ b.href }}" title="{{ b.title }}"> <img src="{{b.badgeImg}}" style="width: 76px; height: 76px;"/></a>
+            </span>
+        </center>
     </div>
     <br/>
     <h1>{{ fullname}} <button ng-show="!isManager" class="btn btn-primary" ng-click="addFavoriteUser()" style="margin-left: 15px; padding-bottom: 1%;">Add to favorites</button></h1>
