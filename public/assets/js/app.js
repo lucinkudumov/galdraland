@@ -4483,7 +4483,7 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
                             console.log(data);
                             if (data && data.data.sucess == true) {
                                 $scope.isFavorite = true;
-                                $scope.favoriteTeamId = data.data.favrite._id;
+                                $scope.favoriteTeamId = data.data.favorite._id;
                             }
                     });
 
