@@ -3104,7 +3104,7 @@ app.controller("aboutViewController", ["$scope", "$http", "User", function ($sco
 }]);
 
 app.controller("contactController", ['$scope', '$http', '$rootScope', function($scope, $http, $rootScope){
-    $scope.ourEmail = 'info@holomathics.com';
+    $scope.ourEmail = 'info@galdratekcorp.com';
     $scope.yourEmail = '';
     $scope.description = '';
     $scope.sentSuccess = false;
