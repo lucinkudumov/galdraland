@@ -3167,7 +3167,7 @@ abbr[title] {
 blockquote {
     padding: 10px 20px;
     margin: 0 0 20px;
-    font-size: 17.5px;
+    font-size: 22px;
     border-left: 5px solid #eee
 }
 
@@ -18486,7 +18486,7 @@ html body ul.left-side-menu {
 }
 
 html body ul.left-side-menu li {
-    font-size: 14px;
+    font-size: 16px;
     border-right: 2px solid #34495E;
     cursor: pointer;
     padding: 7px 0;
@@ -18849,7 +18849,7 @@ ul.left-side-menu li:hover {
 
 .search-menu ul li a {
     color: #000;
-    font-size: 15px;
+    font-size: 18px;
     font-weight: 300
 }
 
