@@ -25,7 +25,7 @@
                                         please sign in to slack , else you will not be able to create teams and participate in team discussions. Thanks!
                                     </div>
                                 </div>
-                                <div class="col-md-2 col-sm-2" style="text-align: right;font-style: italic;color: #c1cbd0;font-size: 13px;">
+                                <div class="col-md-2 col-sm-2" style="text-align: right;font-style: italic;color: #c1cbd0;font-size: 16px;">
                                     <a style="cursor: pointer;" onclick="window.open('https://slack.com/oauth/authorize?scope=team:read+groups:read+groups:write+groups:history+chat:write:bot&client_id=152964900435.152966006611&team=T4GUCSGCT&redirect_uri=https://galdraland-1-0.herokuapp.com/api/slack/auth', '_blank', 'location=yes,height=570,width=520,scrollbars=yes,status=yes');"><img style="width: 150px; height: 35px;" src="https://api.slack.com/img/sign_in_with_slack.png" /></a>
                                 </div>
                             </li>
@@ -33,47 +33,47 @@
                                 <div class="col-md-10 col-sm-10">
                                     <a href="" ng-click="showHomeUser(p._id)"> <img src="{{ p.photo }}" style="width:30px; height:30px;"/> <b>{{ p.name}}</b></a> <small>SignIn</small>
                                 </div>
-                                <div class="col-md-2 col-sm-2" style="text-align: right;font-style: italic;color: #c1cbd0;font-size: 13px;">
+                                <div class="col-md-2 col-sm-2" style="text-align: right;font-style: italic;color: #c1cbd0;font-size: 16px;">
                                     {{ p.signin}}
                                 </div>
                             </li>
                             <li ng-repeat="t in teams">
                                 <div class="col-md-10 col-sm-10">
-                                    <a href="" ng-click="showHomeTeam(t._id)"> <img src="{{ t.teamImg }}" style="width:30px; height:30px;"/> <b>{{ t.name}}</b> created by user <img src="{{ t.userImg }}" style="width:30px; height:30px;"> {{ t.username}} </a>
+                                    <a href="" ng-click="showHomeTeam(t._id)"> <img src="{{ t.teamImg }}" style="width:30px; height:30px;"/> <b>{{ t.name}}</b> created by user <img src="{{ t.userImg }}" style="width:30px; height:30px;"> <b>{{ t.username}}</b> </a>
                                 </div>
-                                <div class="col-md-2 col-sm-2" style="text-align: right;font-style: italic;color: #c1cbd0;font-size: 13px;">
+                                <div class="col-md-2 col-sm-2" style="text-align: right;font-style: italic;color: #c1cbd0;font-size: 16px;">
                                     {{ t.createdAt}}
                                 </div>
                             </li>
                             <li ng-repeat="a in adventures">
                                 <div class="col-md-10 col-sm-10">
-                                    <a href="" ng-click="showHomeAdv(a._id)"> <img src="{{ a.advImg }}" style="width:30px; height:30px;"/> <b>{{ a.name}}</b> created by user <img src="{{ a.userImg }}" style="width:30px; height:30px;"> {{ a.username}} </a>
+                                    <a href="" ng-click="showHomeAdv(a._id)"> <img src="{{ a.advImg }}" style="width:30px; height:30px;"/> <b>{{ a.name}}</b> created by user <img src="{{ a.userImg }}" style="width:30px; height:30px;"> <b>{{ a.username}}</b> </a>
                                 </div>
-                                <div class="col-md-2 col-sm-2" style="text-align: right;font-style: italic;color: #c1cbd0;font-size: 13px;">
+                                <div class="col-md-2 col-sm-2" style="text-align: right;font-style: italic;color: #c1cbd0;font-size: 16px;">
                                     {{ a.createdAt}}
                                 </div>
                             </li>
                             <li ng-repeat="fu in fusers">
                                 <div class="col-md-10 col-sm-10">
-                                    <a href="" ng-click="showHomeFavoriteUser(fu)"> <img src="{{ fu.userImg }}" style="width:30px; height:30px;"> {{ fu.userName}} has favored user <img src="{{ fu.fuserImg }}" style="width:30px; height:30px;"> {{ fu.fuserName}} </a>
+                                    <a href="" ng-click="showHomeFavoriteUser(fu)"> <img src="{{ fu.userImg }}" style="width:30px; height:30px;"> <b>{{ fu.userName}}</b> has favored user <img src="{{ fu.fuserImg }}" style="width:30px; height:30px;"> <b>{{ fu.fuserName}}</b> </a>
                                 </div>
-                                <div class="col-md-2 col-sm-2" style="text-align: right;font-style: italic;color: #c1cbd0;font-size: 13px;">
+                                <div class="col-md-2 col-sm-2" style="text-align: right;font-style: italic;color: #c1cbd0;font-size: 16px;">
                                     {{ fu.createdAt}}
                                 </div>
                             </li>
                             <li ng-repeat="ft in fteams">
                                 <div class="col-md-10 col-sm-10">
-                                    <a href="" ng-click="showHomeFavoriteTeam(ft)"> <img src="{{ ft.userImg }}" style="width:30px; height:30px;"> {{ ft.userName}} has favored <img src="{{ ft.teamImg }}" style="width:30px; height:30px;"/> <b>{{ ft.teamName}}</b> created by user <img src="{{ ft.ownerImg }}" style="width:30px; height:30px;"> {{ ft.ownerName}} </a>
+                                    <a href="" ng-click="showHomeFavoriteTeam(ft)"> <img src="{{ ft.userImg }}" style="width:30px; height:30px;"> <b>{{ ft.userName}}</b> has favored <img src="{{ ft.teamImg }}" style="width:30px; height:30px;"/> <b>{{ ft.teamName}}</b> created by user <img src="{{ ft.ownerImg }}" style="width:30px; height:30px;"> <b>{{ ft.ownerName}}</b> </a>
                                 </div>
-                                <div class="col-md-2 col-sm-2" style="text-align: right;font-style: italic;color: #c1cbd0;font-size: 13px;">
+                                <div class="col-md-2 col-sm-2" style="text-align: right;font-style: italic;color: #c1cbd0;font-size: 16px;">
                                     {{ fa.createdAt}}
                                 </div>
                             </li>
                             <li ng-repeat="fa in fadventures">
                                 <div class="col-md-10 col-sm-10">
-                                    <a href="" ng-click="showHomeFavoriteAdv(fa)"> <img src="{{ fa.userImg }}" style="width:30px; height:30px;"> {{ fa.userName}} has favored <img src="{{ fa.advImg }}" style="width:30px; height:30px;"/> <b>{{ fa.advName}}</b> created by user <img src="{{ fa.ownerImg }}" style="width:30px; height:30px;"> {{ fa.ownerName}} </a>
+                                    <a href="" ng-click="showHomeFavoriteAdv(fa)"> <img src="{{ fa.userImg }}" style="width:30px; height:30px;"> <b>{{ fa.userName}}</b> has favored <img src="{{ fa.advImg }}" style="width:30px; height:30px;"/> <b>{{ fa.advName}}</b> created by user <img src="{{ fa.ownerImg }}" style="width:30px; height:30px;"> <b>{{ fa.ownerName}}</b> </a>
                                 </div>
-                                <div class="col-md-2 col-sm-2" style="text-align: right;font-style: italic;color: #c1cbd0;font-size: 13px;">
+                                <div class="col-md-2 col-sm-2" style="text-align: right;font-style: italic;color: #c1cbd0;font-size: 16px;">
                                     {{ fa.createdAt}}
                                 </div>
                             </li>
@@ -148,18 +148,18 @@
                         <ul class="feeds">
                             <li ng-repeat="f in feeds">
                                 <div class="col-md-11 col-sm-11" ng-show ="f.position == 'master' && f.type == 'adventures'">
-                                    <span>User <img src='{{f.recommendationUserPhoto}}' style='width:30px; height:30px'/> {{f.recommendationUserName}} has recommended User <img src='{{ f.slaveUserPhoto }}' style='width:30px; height:30px'/> {{f.slaveUserName}} in your Adventure <img src='{{f.adventureImage}}' style='width:30px; height:30px'/> {{f.adventureName}}</span>
+                                    <span>User <img src='{{f.recommendationUserPhoto}}' style='width:30px; height:30px'/> <b>{{f.recommendationUserName}}</b> has recommended User <img src='{{ f.slaveUserPhoto }}' style='width:30px; height:30px'/> <b>{{f.slaveUserName}}</b> in your Adventure <img src='{{f.adventureImage}}' style='width:30px; height:30px'/> <b>{{f.adventureName}}</b></span>
                                 </div>
                                 <div class="col-md-11 col-sm-11" ng-show ="f.position == 'slave' && f.type == 'adventures'">
-                                    <span>User <img src='{{f.recommendationUserPhoto}}' style='width:30px; height:30px'/> {{f.recommendationUserName}} has recommended you in <img src='{{f.masterUserPhoto}}' style='width:30px; height:30px'/> {{f.masterUserName}}'s Adventure <img src='{{f.adventureImage}}' style='width:30px; height:30px'/> {{f.adventureName}}</span>
+                                    <span>User <img src='{{f.recommendationUserPhoto}}' style='width:30px; height:30px'/> <b>{{f.recommendationUserName}}</b> has recommended you in <img src='{{f.masterUserPhoto}}' style='width:30px; height:30px'/> <b>{{f.masterUserName}}</b>'s Adventure <img src='{{f.adventureImage}}' style='width:30px; height:30px'/> <b>{{f.adventureName}}</b></span>
                                 </div>
                                 <div class="col-md-11 col-sm-11" ng-show ="f.position == 'master' && f.type == 'teams'">
-                                    <span>User <img src='{{f.recommendationUserPhoto}}' style='width:30px; height:30px'/> {{f.recommendationUserName}} has recommended User <img src='{{f.slaveUserPhoto}}' style='width:30px; height:30px'/> {{f.slaveUserName}} for Role -{{f.roleTitle}}- in your Team <img src='{{f.teamImage}}' style='width:30px; height:30px'/>  {{f.teamName}}</span>
+                                    <span>User <img src='{{f.recommendationUserPhoto}}' style='width:30px; height:30px'/> <b>{{f.recommendationUserName}}</b> has recommended User <img src='{{f.slaveUserPhoto}}' style='width:30px; height:30px'/> <b>{{f.slaveUserName}}</b> for Role -{{f.roleTitle}}- in your Team <img src='{{f.teamImage}}' style='width:30px; height:30px'/>  <b>{{f.teamName}}</b></span>
                                 </div>
                                 <div class="col-md-11 col-sm-11" ng-show ="f.position == 'slave' && f.type == 'teams'">
-                                    <span>User <img src='{{f.recommendationUserPhoto}}' style='width:30px; height:30px'/> {{f.recommendationUserName}} has recommended you for Role - {{ f.roleTitle }} - in <img src='{{ f.masterUserPhoto }}' style='width:30px; height:30px'/> {{f.masterUserName}}'s Team <img src='{{f.teamImage}}' style='width:30px; height:30px'/> '{{f.teamName}}' </span>
+                                    <span>User <img src='{{f.recommendationUserPhoto}}' style='width:30px; height:30px'/> <b>{{f.recommendationUserName}}</b> has recommended you for Role - {{ f.roleTitle }} - in <img src='{{ f.masterUserPhoto }}' style='width:30px; height:30px'/> <b>{{f.masterUserName}}</b>'s Team <img src='{{f.teamImage}}' style='width:30px; height:30px'/> <b>{{f.teamName}}</b> </span>
                                 </div>
-                                <div class="col-md-1 col-sm-1" style="text-align: right;font-style: italic;color: #c1cbd0;font-size: 13px;">
+                                <div class="col-md-1 col-sm-1" style="text-align: right;font-style: italic;color: #c1cbd0;font-size: 16px;">
                                     <button class="btn btn-primary" ng-click="showHomeRecommendation(f)">View</button>
                                 </div>
                             </li>
@@ -193,7 +193,7 @@
                                 <div class="col-md-11 col-sm-11">
                                     <img src="{{b.badgeImg}}" style="width: 30px; height: 30px;"/><span style="margin-left: 10px;">{{ b.title}}</span>
                                 </div>
-                                <div class="col-md-1 col-sm-1" style="text-align: right;font-style: italic;color: #c1cbd0;font-size: 13px;">
+                                <div class="col-md-1 col-sm-1" style="text-align: right;font-style: italic;color: #c1cbd0;font-size: 16px;">
                                     <button class="btn btn-primary" ng-click="showHomeBadges(b)">View</button>
                                 </div>
                             </li>
