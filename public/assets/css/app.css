@@ -10858,7 +10858,7 @@ abbr[title] {
 blockquote {
     padding: 10px 20px;
     margin: 0 0 20px;
-    font-size: 17.5px;
+    font-size: 22px;
     border-left: 5px solid #eee
 }
 
@@ -12131,7 +12131,7 @@ output {
     width: 100%;
     height: 34px;
     padding: 6px 12px;
-    font-size: 14px;
+    font-size: 18px;
     line-height: 1.42857143;
     color: #555;
     background-color: #fff;
@@ -18463,13 +18463,13 @@ html body .teams tr td {
 
 html body .teams tr td.err-msg {
     text-align: center!important;
-    font-size: 15px;
+    font-size: 18px;
     color: #999
 }
 
 html body .adventures tr td.err-msg {
     text-align: center!important;
-    font-size: 15px;
+    font-size: 18px;
     color: #999
 }
 
