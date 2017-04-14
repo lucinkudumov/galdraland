@@ -1946,7 +1946,7 @@ app.controller("indexController", ["$scope", "$location", "$window", "$statePara
                 url: "sendContact",
                 api: true,
                 data: {
-                    toEmail: 'info@holomathics.com',
+                    toEmail: 'info@galdratekcorp.com',
                     fromEmail: $scope.yourEmail,
                     text: $scope.description,
                     subject: 'Contact Galdraland Support Center'}
@@ -3112,7 +3112,7 @@ app.controller("contactController", ['$scope', '$http', '$rootScope', function($
     $scope.sendEmail = function () {
         $http({
             method: "POST", url: "sendContact", api: true,
-            data: {toEmail: 'info@holomathics.com',
+            data: {toEmail: 'info@galdratekcorp.com',
                 fromEmail: $scope.yourEmail,
                 text: $scope.description,
                 subject: 'Contact Galdraland Support Center'}
