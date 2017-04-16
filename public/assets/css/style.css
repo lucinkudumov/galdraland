@@ -147,10 +147,10 @@ footer ul li a {
 
 div.login-social {
     position: relative;
-    margin-top: 20px;
-    padding-top: 35px;
+    padding-top: 5px;
     padding-bottom: 0;
     text-align: center;
+    width: 100%;
 }
 
 div.login-social .button {
@@ -160,6 +160,13 @@ div.login-social .button {
     height: 50px;
     font-size: 18px;
     line-height: 50px;
+    width : 50px;
+    text-align: center;
+    cursor: pointer;
+    border: 1px solid;
+    text-shadow: 1px 1px 0 rgba(0,0,0,0.15);
+    border-radius: 1px;
+    transition: box-shadow 0.1s ease-in-out, border-color 0.1s ease-in-out;
 }
 
 div.login-social .button.linkedin {
