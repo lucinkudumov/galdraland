@@ -147,8 +147,8 @@ footer ul li a {
 
 div.login-social {
     position: relative;
-    padding-top: 5px;
-    padding-bottom: 0;
+    padding-top: 55px;
+    margin-bottom: 55px;
     text-align: center;
     width: 100%;
 }
