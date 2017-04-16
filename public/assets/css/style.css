@@ -218,7 +218,7 @@ div.login-social .button.disable {
 }
 
 div.login-social .button.disable {
-    border-color: #eee #eee #282828;
-    background-color: #eee;
-    background: -webkit-linear-gradient(top, #eee 0, #151515 100%);
+    border-color: #EEEEEE #EEEEEE #EEEEEE;
+    background-color: #EEEEEE;
+    background: -webkit-linear-gradient(top, #EEEEEE 0, #151515 100%);
 }
