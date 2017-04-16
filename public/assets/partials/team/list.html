@@ -17,6 +17,7 @@
                 </tr>
                 <tr ng-repeat="t in teams">
                     <td ng-show="t.image" width="20%"><img src="{{t.image}}" style="width:114px; height:80px;"/></td>
+                    <td ng-show="!t.image" width="20%">&nbsp;</td>
                     <td>{{ t.name}}</td>
                     <td><rating-widget isstatic="1" ref="t._id" ></rating-widget></td>
                 <td>{{ t.teamMembers.length}} members</td>
