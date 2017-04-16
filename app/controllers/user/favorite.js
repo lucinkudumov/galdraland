@@ -39,7 +39,7 @@ module.exports = function (opts) {
                 } else if (favorite) {
                     return res.json({success: true, favorite: favorite});
                 } else {
-                    return res.json({success: false, fadventures:[]});
+                    return res.json({success: false, favorite:[]});
                 }
             });
         },
@@ -83,6 +83,35 @@ module.exports = function (opts) {
                 }
             });
         },
+        "post#existFavoriteAdventure": function (req, res) {
+            favoriteAdvModel.findOne({user: req.user._id, adventure: req.body.adventureId}).exec(function (err, favorite) {
+                if (err) {
+                    return res.json({success: false, favorite:[]});
+                } else if (favorite) {
+                    return res.json({success: true, favorite: favorite});
+                } else {
+                    return res.json({success: false, favorite:[]});
+                }
+            });
+        },
+        "post#removeFavoriteAdventure": function (req, res) {
+            favoriteAdvModel.findOne({user: req.user._id, adventure: req.body.adventureId}).exec(function (err, favorite) {
+                if (err) {
+                    return res.json({success: false});
+                } else if (favorite) {
+                    favorite.remove(function (err) {
+                        if (err) {
+                            console.log(err);
+                            return res.json({success: false});
+                        } else {
+                            return res.json({success: true});
+                        }
+                    });
+                } else {
+                    return res.json({success: false});
+                }
+            });
+        },
         "post#addFavoriteUser": function (req, res) {
             favoriteUserModel.findOne({user: req.user._id, fuser: req.body.userId}).populate("user fuser").exec(function (err, favorite) {
                 if (err) {
@@ -101,6 +130,35 @@ module.exports = function (opts) {
                         }
                         return res.json({success: true, msg:'Favorite Successfully'});
                     });
+                }
+            });
+        },
+        "post#existFavoriteUser": function (req, res) {
+            favoriteUserModel.findOne({user: req.user._id, fuser: req.body.userId}).exec(function (err, favorite) {
+                if (err) {
+                    return res.json({success: false, favorite:[]});
+                } else if (favorite) {
+                    return res.json({success: true, favorite: favorite});
+                } else {
+                    return res.json({success: false, favorite:[]});
+                }
+            });
+        },
+        "post#removeFavoriteUser": function (req, res) {
+            favoriteUserModel.findOne({user: req.user._id, fuser: req.body.userId}).exec(function (err, favorite) {
+                if (err) {
+                    return res.json({success: false});
+                } else if (favorite) {
+                    favorite.remove(function (err) {
+                        if (err) {
+                            console.log(err);
+                            return res.json({success: false});
+                        } else {
+                            return res.json({success: true});
+                        }
+                    });
+                } else {
+                    return res.json({success: false});
                 }
             });
         },

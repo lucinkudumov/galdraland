@@ -21,7 +21,7 @@
             </div>
         </div>
         <div class="col-md-4" style="padding: 0px;">
-            <button ng-show="!isManager" class="btn btn-primary pull-left" ng-click="sendRecommendation()" style="margin-left: 15px; padding-bottom: 1%;">Recommendation</button>
+            <button ng-show="!isManager" class="btn btn-primary pull-left" ng-click="sendRecommendation()" style="margin-left: 15px; padding-bottom: 1%;">Recommend someone</button>
         </div>
     </div>
     <div class="row">
@@ -80,9 +80,8 @@
                         <a href="#" ng-click="modal()" class="btn btn-danger">Remove</a>
                         <a href="/adventures/blogcreate/{{ adventure._id}}" class="btn btn-primary">Blog</a>
                     </div>
-                    <div ng-show="!isManager" class="btn-group btn-group-justified">
-                        <button class="btn btn-primary pull-left" ng-click="addFavoriteAdventure()" style="padding-bottom: 1%;">Add to favorites</button>
-                    </div>
+                    <button ng-show="!isManager && isFavorite" class="btn btn-danger pull-left" ng-click="removeFavoriteAdventure()" style="margin-top: 5px; padding-bottom: 1%;">Remove from favorites</button>
+                    <button ng-show="!isManager && !isFavorite" class="btn btn-primary pull-left" ng-click="addFavoriteAdventure()" style="padding-bottom: 1%;">Add to favorites</button>
                 </div>
 
             </div>

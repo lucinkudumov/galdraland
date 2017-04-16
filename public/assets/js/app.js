@@ -560,6 +560,7 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
         $scope.timeStart = "";
         $scope.timeEnd = "";
         $scope.ownerId = "";
+        $scope.isFavorite = false;
 
         function onDayClick(day){
             console.log(day);
@@ -627,6 +628,17 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
                     data: {userid: data.data.adventure.owner}
                 }).then ( function success (data) {
                     $scope.photo = data.data.user.photo;
+                });
+
+                $http({
+                    method: "POST",
+                    url: "existFavoriteAdventure",
+                    api: true,
+                    data: {adventureId: $stateParams.id}
+                }).then(function (data) {
+                    if (data && data.data.success == true) {
+                        $scope.isFavorite = true;
+                    }
                 });
 
                 $http({
@@ -855,6 +867,35 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
                     title: function () {
                         return "Favorite Adventure";
                     }
+                }
+            });
+            modalInstance.result.then(function (result) {
+                if (result == "YES") {
+                    $scope.isFavorite = true;
+                }
+            });
+            return false;
+        }
+
+        $scope.removeFavoriteAdventure = function () {
+            var modalInstance = $uibModal.open({
+                templateUrl: '/assets/partials/modal/yesandno.html',
+                controller: "YesAndNoController",
+                resolve: {
+                    msg: function () {
+                        return "Do you want to remove from favorites?";
+                    },
+                    title: function () {
+                        return "Remove From Favorites";
+                    }
+                }
+            });
+            modalInstance.result.then(function (result) {
+                if (result == "YES") {
+                    var adventureId = $stateParams.id;
+                    $http({method: "POST", url: "removeFavoriteTeam", api: true, data: {adventureId: adventureId}}).then(function (data) {
+                        $scope.isFavorite = false;
+                    });
                 }
             });
             return false;
@@ -4262,6 +4303,7 @@ app.controller("newsController", ["$scope", "$http", "$location", "User", functi
 app.controller("userViewController", ["$scope", "$http", "$stateParams", "User", "$uibModal", "$location", function ($scope, $http, $stateParams, User, $uibModal, $location) {
         $scope.user = User.isLoggedIn();
         $scope.badgesData = [];
+        $scope.isFavorite = false;
 
         $scope.refresh = function () {
             $http({
@@ -4346,6 +4388,17 @@ app.controller("userViewController", ["$scope", "$http", "$stateParams", "User",
                         }
                     }
                 });
+            });
+
+            $http({
+                method: "POST",
+                url: "existFavoriteUser",
+                api: true,
+                data: {userId: $stateParams.id}
+            }).then(function (data) {
+                if (data && data.data.success == true) {
+                    $scope.isFavorite = true;
+                }
             });
 
             $scope.teams = [];
@@ -4433,8 +4486,38 @@ app.controller("userViewController", ["$scope", "$http", "$stateParams", "User",
                     }
                 }
             });
+            modalInstance.result.then(function (result) {
+                if (result == "YES") {
+                    $scope.isFavorite = true;
+                }
+            });
             return false;
         }
+
+        $scope.removeFavoriteUser = function () {
+            var modalInstance = $uibModal.open({
+                templateUrl: '/assets/partials/modal/yesandno.html',
+                controller: "YesAndNoController",
+                resolve: {
+                    msg: function () {
+                        return "Do you want to remove from favorites?";
+                    },
+                    title: function () {
+                        return "Remove From Favorites";
+                    }
+                }
+            });
+            modalInstance.result.then(function (result) {
+                if (result == "YES") {
+                    var userId = $stateParams.id;
+                    $http({method: "POST", url: "removeFavoriteUser", api: true, data: {userId: userId}}).then(function (data) {
+                        $scope.isFavorite = false;
+                    });
+                }
+            });
+            return false;
+        }
+
         $scope.refresh();
     }]);
 
