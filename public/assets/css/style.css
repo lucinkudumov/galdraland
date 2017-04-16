@@ -146,13 +146,11 @@ footer ul li a {
 }
 
 div.login-social {
-    margin: 0 5px 0 0;
-    padding: 0 15px;
-    float: left;
-    height: 30px;
-    font-size: 13px;
-    line-height: 30px;
-    text-align: center;
+    position: relative;
+    margin-top: 20px;
+    padding-top: 35px;
+    padding-bottom: 0;
+    border-top: 1px solid #96d2c0;
 }
 
 div.login-social .linkedin {
