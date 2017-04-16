@@ -154,13 +154,13 @@ div.login-social {
     line-height: 30px;
 }
 
-div.login-social.linkedin {
+div.login-social .linkedin {
     border-color: #2a80c3 #2a80c3 #0060b1;
     background-color: #519bd4;
     background: -webkit-linear-gradient(top, #519bd4 0, #046fc1 100%);
 }
 
-div.login-social.facebook {
+div.login-social .facebook {
     border-color: #4b5c86 #4b5c86 #1a3e99;
     background-color: #6678a6;
     background: -webkit-linear-gradient(top, #6678a6 0, #374f8a 100%);
