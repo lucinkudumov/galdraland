@@ -7,7 +7,7 @@
 			<ul class="pull-right">
 				<li class="header-navigation">
                     <!--<a href="/api/login/facebook{{(r)?'?r='+r:''}}" target="_self" class="link" style="margin-right: 10px;">Sign in</a>-->
-                    <a href="/api/login/facebook{{(r)?'?r='+r:''}}" target="_self" class="link" style="margin-right: 10px;">Sign in</a>
+                    <!--<a href="/api/login/facebook{{(r)?'?r='+r:''}}" target="_self" class="link" style="margin-right: 10px;">Sign in</a>-->
                     <a href="/" target="_self" style="margin-right: 10px;"> Home </a>
 				</li>
 			</ul>
@@ -17,14 +17,21 @@
 	</div>
     <div class="row header" style="background: #ffffff; width: 100%;">
          <div class="login-social">
-             <center>
+             <a href="/api/login/facebook{{(r)?'?r='+r:''}}" target="_self" class="link" class="button facebook" title="Login with Facebook">
+                 <span><i class="fa fa-facebook-square"></i></span>
+             </a>
+             <a href="#" class="button slack" title="Login with Slack">
+                 <span><i class="fa fa-slack"></i></span>
+             </a>
             <a href="#" class="button linkedin" title="Login with LinkedIn">
                 <span><i class="fa fa-linkedin"></i></span>
             </a>
-            <a href="#" class="button facebook" title="Login with Facebook">
-                <span><i class="fa fa-facebook"></i></span>
-            </a>
-             </center>
+             <a href="#" class="button pinterest" title="Login with Pinterest">
+                 <span><i class="fa fa-pinterest-square"></i></span>
+             </a>
+             <a href="#" class="button instagram" title="Login with Instagram">
+                 <span><i class="fa fa-instagram"></i></span>
+             </a>
         </div>
     </div>
 </div>

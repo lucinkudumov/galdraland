@@ -171,10 +171,9 @@ div.login-social .button {
 }
 
 div.login-social .button:hover {
-    color: #ff0000;
     border: 2px solid;
+    font-size: 20px;
 }
-
 
 div.login-social .button.linkedin {
     border-color: #2a80c3 #2a80c3 #0060b1;
@@ -186,4 +185,28 @@ div.login-social .button.facebook {
     border-color: #4b5c86 #4b5c86 #1a3e99;
     background-color: #6678a6;
     background: -webkit-linear-gradient(top, #6678a6 0, #374f8a 100%);
+}
+
+div.login-social .button.slack {
+    border-color: #2f96b4 #2f96b4 #1f6377;
+    background-color: #45abc9;
+    background: -webkit-linear-gradient(top, #5abfdd 0, #2f96b4 100%);
+}
+
+div.login-social .button.pinterest {
+    border-color: #d1610f #d1610f #ac581a;
+    background-color: #f47a20;
+    background: -webkit-linear-gradient(top, #f47a20 0, #818185 100%);
+}
+
+div.login-social .button.instagram {
+    border-color: #d1610f #d1610f #ac581a;
+    background-color: #f47a20;
+    background: -webkit-linear-gradient(top, #f47a20 0, #818185 100%);
+}
+
+div.login-social .button.instagram {
+    border-color: #303030 #303030 #282828;
+    background-color: #363636;
+    background: -webkit-linear-gradient(top, #363636 0, #151515 100%);
 }
