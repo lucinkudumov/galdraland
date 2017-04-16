@@ -166,9 +166,15 @@ div.login-social .button {
     cursor: pointer;
     border: 1px solid;
     text-shadow: 1px 1px 0 rgba(0,0,0,0.15);
-    border-radius: 1px;
+    border-radius: 3px;
     transition: box-shadow 0.1s ease-in-out, border-color 0.1s ease-in-out;
 }
+
+div.login-social .button:hover {
+    color: #ff0000;
+    border: 2px solid;
+}
+
 
 div.login-social .button.linkedin {
     border-color: #2a80c3 #2a80c3 #0060b1;
