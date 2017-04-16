@@ -1964,8 +1964,11 @@ app.controller("indexController", ["$scope", "$location", "$window", "$statePara
 
         $scope.refresh();
 
-        if (search !== null)
+        if (search !== null) {
+            console.log(search.r);
             $scope.r = search.r;
+        }
+
     }]);
 
 app.controller("leftMenuController", ["$scope", "$location", function ($scope, $location) {
