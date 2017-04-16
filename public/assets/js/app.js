@@ -1978,6 +1978,16 @@ app.controller("indexController", ["$scope", "$location", "$window", "$statePara
 
     }]);
 
+app.controller("signinController", ["$scope", "$location", "$window", "$stateParams", "$http", "$filter", function ($scope, $location, $window, $stateParams, $http, $filter) {
+    $scope.r = "";
+    var search = $location.search();
+    if (search !== null) {
+        console.log(search.r);
+        $scope.r = search.r;
+    }
+
+}]);
+
 app.controller("leftMenuController", ["$scope", "$location", function ($scope, $location) {
         $scope.go = function (url) {
             $location.path(url);
