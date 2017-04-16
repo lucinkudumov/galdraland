@@ -210,3 +210,15 @@ div.login-social .button.instagram {
     background-color: #363636;
     background: -webkit-linear-gradient(top, #363636 0, #151515 100%);
 }
+
+div.login-social .button.disable {
+    border-color: #303030 #303030 #282828;
+    background-color: #363636;
+    background: -webkit-linear-gradient(top, #363636 0, #151515 100%);
+}
+
+div.login-social .button.disable {
+    border-color: #eee #eee #282828;
+    background-color: #eee;
+    background: -webkit-linear-gradient(top, #eee 0, #151515 100%);
+}
