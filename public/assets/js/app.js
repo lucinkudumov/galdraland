@@ -12,6 +12,13 @@ app.config(["$urlRouterProvider", "$locationProvider", "$stateProvider", "$httpP
                     templateUrl: "/assets/partials/login.html"
                 }
             }
+        }).state("signin", {
+            url: "/signin",
+            views: {
+                "main": {
+                    templateUrl: "/assets/partials/signin.html"
+                }
+            }
 //        }).state("who", {
 //            url: "/#who",
 //            views: {
