@@ -212,13 +212,5 @@ div.login-social .button.instagram {
 }
 
 div.login-social .button.disable {
-    border-color: #303030 #303030 #282828;
-    background-color: #363636;
-    background: -webkit-linear-gradient(top, #363636 0, #151515 100%);
-}
-
-div.login-social .button.disable {
-    border-color: #EEEEEE #EEEEEE #EEEEEE;
-    background-color: #EEEEEE;
-    background: -webkit-linear-gradient(top, #EEEEEE 0, #151515 100%);
+    color: #EEEEEE !important;
 }
