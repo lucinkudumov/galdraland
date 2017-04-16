@@ -44,7 +44,7 @@ module.exports = function (opts) {
             });
         },
         "post#removeFavoriteTeam": function (req, res) {
-            favoriteTeamModel.findOne({_id: req.body.favoriteId}).exec(function (err, favorite) {
+            favoriteTeamModel.findOne({user: req.user._id, team: req.body.teamId}).exec(function (err, favorite) {
                 if (err) {
                     return res.json({success: false});
                 } else if (favorite) {

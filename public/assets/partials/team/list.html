@@ -29,7 +29,7 @@
                 </tr>
                 <tr ng-repeat="ft in fteams">
                     <td ng-show="ft.team.image" width="20%"><img src="{{ft.team.image}}" style="width:114px; height:80px;"/></td>
-                    <td ng-show="!ft.team.image" width="20%"><img src="{{ft.team.image}}" style="width:114px; height:80px;"/></td>
+                    <td ng-show="!ft.team.image" width="20%">&nbsp;</td>
                     <td>{{ ft.team.name}}</td>
                     <td><rating-widget isstatic="1" ref="ft.team._id" ></rating-widget></td>
                     <td>{{ ft.team.teamMembers.length}} members</td>

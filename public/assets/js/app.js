@@ -4852,13 +4852,13 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
             });
             modalInstance.result.then(function (result) {
                 if (result == "YES") {
-                    $state.reload();
+                    $scope.isFavorite = true;
                 }
             });
             return false;
         }
 
-        $scope.removeFavoriteTeam = function (favoriteId) {
+        $scope.removeFavoriteTeam = function () {
             var modalInstance = $uibModal.open({
                 templateUrl: '/assets/partials/modal/yesandno.html',
                 controller: "YesAndNoController",
@@ -4873,8 +4873,9 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
             });
             modalInstance.result.then(function (result) {
                 if (result == "YES") {
-                    $http({method: "POST", url: "removeFavoriteTeam", api: true, data: {favoriteId: favoriteId}}).then(function (data) {
-                        $state.reload();
+                    var teamId = $stateParams.id;
+                    $http({method: "POST", url: "removeFavoriteTeam", api: true, data: {teamId: teamId}}).then(function (data) {
+                        $scope.isFavorite = false;
                     });
                 }
             });

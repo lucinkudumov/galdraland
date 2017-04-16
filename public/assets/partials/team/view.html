@@ -82,7 +82,7 @@
                         <a ng-show="slackAuthentication == true" href="/teams/slack/{{ team._id}}" class="btn btn-success">Slack</a>
                         <a ng-show="slackAuthentication == false" href="#" onclick='alertSlackAuth();' class="btn btn-success">Slack</a>
                     </div>
-                    <button ng-show="!isManager && isFavorite" class="btn btn-danger pull-left" ng-click="removeFavoriteTeam(favoriteTeamId)" style="margin-top: 5px; padding-bottom: 1%;">Remove from favorites</button>
+                    <button ng-show="!isManager && isFavorite" class="btn btn-danger pull-left" ng-click="removeFavoriteTeam()" style="margin-top: 5px; padding-bottom: 1%;">Remove from favorites</button>
                     <button ng-show="!isManager && !isFavorite" class="btn btn-primary pull-left" ng-click="addFavoriteTeam()" style="margin-top: 5px; padding-bottom: 1%;">Add to favorites</button>
                 </div>
             </div>
