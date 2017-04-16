@@ -893,7 +893,7 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
             modalInstance.result.then(function (result) {
                 if (result == "YES") {
                     var adventureId = $stateParams.id;
-                    $http({method: "POST", url: "removeFavoriteTeam", api: true, data: {adventureId: adventureId}}).then(function (data) {
+                    $http({method: "POST", url: "removeFavoriteAdventure", api: true, data: {adventureId: adventureId}}).then(function (data) {
                         $scope.isFavorite = false;
                     });
                 }
