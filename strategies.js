@@ -20,6 +20,9 @@ module.exports.facebook = function (opts, cb) {
     var userModel = opts.models.User;
     var emailModel = opts.models.Email;
     var masterSlackModel = opts.models.MasterSlack;
+    var teamModel = opts.models.Team;
+    var teamMemberModel = opts.models.TeamMember;
+
 
 	if (process.env.HEROKU) {
         var clientID ="110469289012320",
@@ -141,7 +144,53 @@ module.exports.facebook = function (opts, cb) {
                                       console.log(err);
                                       return done(err);
                                   } else {
-                                      return done(null, user);
+                                      var defaultUser = null;
+                                      var masterTeam = null;
+                                      userModel.findOne({profileId: "000000000000000000000000"}, function (err, user) {
+                                          if (err) {
+                                              console.log(err);
+                                              return done(err);
+                                          } else {
+                                              defaultUser = user;
+                                              teamModel.findOne({name: "GALDRALANDERS"}, {"sort" : ['createdAt', 'asc']}).populate("owner teamMembers").exec(function (err, team) {
+                                                  if (err) {
+                                                      console.log(err);
+                                                      return done(err);
+                                                  } else {
+                                                      masterTeam = team;
+                                                      var member_ids = [];
+                                                      for (i = 0; i < masterTeam.teamMembers.length; i++) {
+                                                          member_ids.push(masterTeam.teamMembers[i]._id);
+                                                      }
+
+                                                      var member = new teamMemberModel();
+                                                      member.title = "GaldraLander#" + masterTeam.teamMembers.length;
+                                                      member.user = defaultUser._id;
+                                                      member.description = "";
+                                                      member.skills = "";
+                                                      member.whatisthere = "";
+                                                      member.save(function (err, member) {
+                                                          if (err) {
+                                                              console.log(err);
+                                                              return done(err);
+                                                          } else {
+                                                              member_ids.push(member._id);
+                                                              masterTeam.teamMembers = [];
+                                                              masterTeam.teamMembers = member_ids;
+                                                              masterTeam.save(function (err, team) {
+                                                                  if (err) {
+                                                                      console.log(err);
+                                                                      return done(err);
+                                                                  } else {
+                                                                      return done(null, user);
+                                                                  }
+                                                              });
+                                                          }
+                                                      });
+                                                  }
+                                              });
+                                          }
+                                      });
                                   }
                               });
                           }
