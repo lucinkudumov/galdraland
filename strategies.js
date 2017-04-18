@@ -22,7 +22,7 @@ module.exports.facebook = function (opts, cb) {
     var masterSlackModel = opts.models.MasterSlack;
     var teamModel = opts.models.Team;
     var teamMemberModel = opts.models.TeamMember;
-
+    var inviteModel = opts.models.Invite;
 
 	if (process.env.HEROKU) {
         var clientID ="110469289012320",
@@ -146,12 +146,12 @@ module.exports.facebook = function (opts, cb) {
                                   } else {
                                       var defaultUser = null;
                                       var masterTeam = null;
-                                      userModel.findOne({profileId: "000000000000000000000000"}, function (err, user) {
+                                      userModel.findOne({profileId: "000000000000000000000000"}, function (err, duser) {
                                           if (err) {
                                               console.log(err);
                                               return done(err);
                                           } else {
-                                              defaultUser = user;
+                                              defaultUser = duser;
                                               teamModel.findOne({name: "GALDRALANDERS"}, {"sort" : ['createdAt', 'asc']}).populate("owner teamMembers").exec(function (err, team) {
                                                   if (err) {
                                                       console.log(err);
@@ -182,7 +182,23 @@ module.exports.facebook = function (opts, cb) {
                                                                       console.log(err);
                                                                       return done(err);
                                                                   } else {
-                                                                      return done(null, user);
+                                                                      var invite = new inviteModel;
+                                                                      invite.to = user.fullname;
+                                                                      invite.toId = user._id;
+                                                                      invite.from = masterTeam.owner._id;
+                                                                      invite.title = member.title;
+                                                                      invite.title_id = member._id;
+                                                                      invite.roles = [];
+                                                                      invite.message = "Hello, Please join our team.";
+                                                                      invite.team = masterTeam._id;
+                                                                      invite.save(function (err, invite) {
+                                                                          if (err) {
+                                                                              console.log(err);
+                                                                              return done(err);
+                                                                          } else {
+                                                                              return done(null, user);
+                                                                          }
+                                                                      });
                                                                   }
                                                               });
                                                           }
