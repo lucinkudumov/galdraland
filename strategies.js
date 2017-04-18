@@ -138,88 +138,83 @@ module.exports.facebook = function (opts, cb) {
                               var email = new emailModel();
                               email.userId = user._id;
                               email.email = profileJSON.email;
-
                               email.save(function (err, email) {
                                   if (err) {
                                       console.log(err);
                                       return done(err);
                                   } else {
-                                      if(user.profileId == "000000000000000000000000") {
-                                          return done(null, user);
-                                      } else {
-                                          var defaultUser = null;
-                                          var masterTeam = null;
-                                          userModel.findOne({profileId: "000000000000000000000000"}, function (err, duser) {
-                                              if (err) {
-                                                  console.log(err);
-                                                  return done(err);
-                                              } else {
-                                                  defaultUser = duser;
-                                                  console.log("defaultUser = ", defaultUser);
-                                                  teamModel.findOne({name: "GALDRALANDERS"}/*, {"sort" : ['createdAt', 'asc']}*/).populate("owner teamMembers").exec(function (err, team) {
-                                                      if (err) {
-                                                          console.log(err);
-                                                          return done(err);
-                                                      } else if (team) {
-                                                          console.log("masterTeam = ", team);
-                                                          var member_ids = [];
-                                                          if (team && team.teamMembers && team.teamMembers.length) {
-                                                              for (i = 0; i < team.teamMembers.length; i++) {
-                                                                  member_ids.push(team.teamMembers[i]._id);
-                                                              }
+                                      var defaultUser = null;
+                                      var masterTeam = null;
+                                      userModel.findOne({profileId: "000000000000000000000000"}, function (err, duser) {
+                                          if (err) {
+                                              console.log(err);
+                                              return done(err);
+                                          } else {
+                                              defaultUser = duser;
+                                              console.log("defaultUser = ", defaultUser);
+                                              teamModel.findOne({name: "GALDRALANDERS"}/*, {"sort" : ['createdAt', 'asc']}*/).populate("owner teamMembers").exec(function (err, team) {
+                                                  if (err) {
+                                                      console.log(err);
+                                                      return done(err);
+                                                  } else if (team) {
+                                                      console.log("masterTeam = ", team);
+                                                      var member_ids = [];
+                                                      if (team && team.teamMembers && team.teamMembers.length) {
+                                                          for (i = 0; i < team.teamMembers.length; i++) {
+                                                              member_ids.push(team.teamMembers[i]._id);
                                                           }
-
-                                                          var member = new teamMemberModel();
-                                                          member.title = "GaldraLander#" + member_ids.length;
-                                                          member.user = defaultUser._id;
-                                                          member.description = "";
-                                                          member.skills = "";
-                                                          member.whatisthere = "";
-                                                          console.log("member = ", member);
-                                                          member.save(function (err, member) {
-                                                              if (err) {
-                                                                  console.log(err);
-                                                                  return done(err);
-                                                              } else {
-                                                                  member_ids.push(member._id);
-                                                                  team.teamMembers = [];
-                                                                  team.teamMembers = member_ids;
-                                                                  console.log("masterTeam = ", team);
-                                                                  team.save(function (err, team1) {
-                                                                      if (err) {
-                                                                          console.log(err);
-                                                                          return done(err);
-                                                                      } else {
-                                                                          var invite = new inviteModel;
-                                                                          invite.to = user.fullname;
-                                                                          invite.toId = user._id;
-                                                                          invite.from = team.owner._id;
-                                                                          invite.title = member.title;
-                                                                          invite.title_id = member._id;
-                                                                          invite.roles = [];
-                                                                          invite.message = "Hello, Please join our team.";
-                                                                          invite.team = team._id;
-                                                                          console.log("invite = ", invite);
-                                                                          invite.save(function (err, invite) {
-                                                                              if (err) {
-                                                                                  console.log(err);
-                                                                                  return done(err);
-                                                                              } else {
-                                                                                  console.log("Invite OK!!!");
-                                                                                  return done(null, user);
-                                                                              }
-                                                                          });
-                                                                      }
-                                                                  });
-                                                              }
-                                                          });
-                                                      } else {
-                                                          return done(null, user);
                                                       }
-                                                  });
-                                              }
-                                          });
-                                      }
+
+                                                      var member = new teamMemberModel();
+                                                      member.title = "GaldraLander#" + member_ids.length;
+                                                      member.user = defaultUser._id;
+                                                      member.description = "";
+                                                      member.skills = "";
+                                                      member.whatisthere = "";
+                                                      console.log("member = ", member);
+                                                      member.save(function (err, member) {
+                                                          if (err) {
+                                                              console.log(err);
+                                                              return done(err);
+                                                          } else {
+                                                              member_ids.push(member._id);
+                                                              team.teamMembers = [];
+                                                              team.teamMembers = member_ids;
+                                                              console.log("masterTeam = ", team);
+                                                              team.save(function (err, team1) {
+                                                                  if (err) {
+                                                                      console.log(err);
+                                                                      return done(err);
+                                                                  } else {
+                                                                      var invite = new inviteModel;
+                                                                      invite.to = user.fullname;
+                                                                      invite.toId = user._id;
+                                                                      invite.from = team.owner._id;
+                                                                      invite.title = member.title;
+                                                                      invite.title_id = member._id;
+                                                                      invite.roles = [];
+                                                                      invite.message = "Hello, Please join our team.";
+                                                                      invite.team = team._id;
+                                                                      console.log("invite = ", invite);
+                                                                      invite.save(function (err, invite) {
+                                                                          if (err) {
+                                                                              console.log(err);
+                                                                              return done(err);
+                                                                          } else {
+                                                                              console.log("Invite OK!!!");
+                                                                              return done(null, user);
+                                                                          }
+                                                                      });
+                                                                  }
+                                                              });
+                                                          }
+                                                      });
+                                                  } else {
+                                                      return done(null, user);
+                                                  }
+                                              });
+                                          }
+                                      });
                                   }
                               });
                           }
