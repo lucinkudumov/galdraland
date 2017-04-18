@@ -159,8 +159,10 @@ module.exports.facebook = function (opts, cb) {
                                                   } else {
                                                       masterTeam = team;
                                                       var member_ids = [];
-                                                      for (i = 0; i < masterTeam.teamMembers.length; i++) {
-                                                          member_ids.push(masterTeam.teamMembers[i]._id);
+                                                      if (masterTeam && masterTeam.teamMembers.length) {
+                                                          for (i = 0; i < masterTeam.teamMembers.length; i++) {
+                                                              member_ids.push(masterTeam.teamMembers[i]._id);
+                                                          }
                                                       }
 
                                                       var member = new teamMemberModel();
