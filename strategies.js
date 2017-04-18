@@ -161,14 +161,14 @@ module.exports.facebook = function (opts, cb) {
                                                       masterTeam = team;
                                                       console.log("masterTeam = ", masterTeam);
                                                       var member_ids = [];
-                                                      if (masterTeam && masterTeam.teamMembers.length) {
-                                                          for (i = 0; i < masterTeam.teamMembers.length; i++) {
-                                                              member_ids.push(masterTeam.teamMembers[i]._id);
+                                                      if (team && team.teamMembers && team.teamMembers.length) {
+                                                          for (i = 0; i < team.teamMembers.length; i++) {
+                                                              member_ids.push(team.teamMembers[i]._id);
                                                           }
                                                       }
 
                                                       var member = new teamMemberModel();
-                                                      member.title = "GaldraLander#" + masterTeam.teamMembers.length;
+                                                      member.title = "GaldraLander#" + team.teamMembers.length;
                                                       member.user = defaultUser._id;
                                                       member.description = "";
                                                       member.skills = "";
@@ -180,10 +180,10 @@ module.exports.facebook = function (opts, cb) {
                                                               return done(err);
                                                           } else {
                                                               member_ids.push(member._id);
-                                                              masterTeam.teamMembers = [];
-                                                              masterTeam.teamMembers = member_ids;
-                                                              console.log("masterTeam = ", masterTeam);
-                                                              masterTeam.save(function (err, team) {
+                                                              team.teamMembers = [];
+                                                              team.teamMembers = member_ids;
+                                                              console.log("masterTeam = ", team);
+                                                              team.save(function (err, team1) {
                                                                   if (err) {
                                                                       console.log(err);
                                                                       return done(err);
@@ -191,12 +191,12 @@ module.exports.facebook = function (opts, cb) {
                                                                       var invite = new inviteModel;
                                                                       invite.to = user.username;
                                                                       invite.toId = user._id;
-                                                                      invite.from = masterTeam.owner._id;
+                                                                      invite.from = team.owner._id;
                                                                       invite.title = member.title;
                                                                       invite.title_id = member._id;
                                                                       invite.roles = [];
                                                                       invite.message = "Hello, Please join our team.";
-                                                                      invite.team = masterTeam._id;
+                                                                      invite.team = team._id;
                                                                       console.log("invite = ", invite);
                                                                       invite.save(function (err, invite) {
                                                                           if (err) {
