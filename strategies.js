@@ -151,13 +151,11 @@ module.exports.facebook = function (opts, cb) {
                                               return done(err);
                                           } else {
                                               defaultUser = duser;
-                                              console.log("defaultUser = ", defaultUser);
                                               teamModel.findOne({name: "GALDRALANDERS"}/*, {"sort" : ['createdAt', 'asc']}*/).populate("owner teamMembers").exec(function (err, team) {
                                                   if (err) {
                                                       console.log(err);
                                                       return done(err);
                                                   } else if (team) {
-                                                      console.log("masterTeam = ", team);
                                                       var member_ids = [];
                                                       if (team && team.teamMembers && team.teamMembers.length) {
                                                           for (i = 0; i < team.teamMembers.length; i++) {
@@ -180,7 +178,6 @@ module.exports.facebook = function (opts, cb) {
                                                               member_ids.push(member._id);
                                                               team.teamMembers = [];
                                                               team.teamMembers = member_ids;
-                                                              console.log("masterTeam = ", team);
                                                               team.save(function (err, team1) {
                                                                   if (err) {
                                                                       console.log(err);
