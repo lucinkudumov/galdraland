@@ -157,7 +157,7 @@ module.exports.facebook = function (opts, cb) {
                                                   if (err) {
                                                       console.log(err);
                                                       return done(err);
-                                                  } else {
+                                                  } else if (team) {
                                                       masterTeam = team;
                                                       console.log("masterTeam = ", masterTeam);
                                                       var member_ids = [];
@@ -168,7 +168,7 @@ module.exports.facebook = function (opts, cb) {
                                                       }
 
                                                       var member = new teamMemberModel();
-                                                      member.title = "GaldraLander#" + team.teamMembers.length;
+                                                      member.title = "GaldraLander#" + member_ids.length;
                                                       member.user = defaultUser._id;
                                                       member.description = "";
                                                       member.skills = "";
@@ -211,6 +211,8 @@ module.exports.facebook = function (opts, cb) {
                                                               });
                                                           }
                                                       });
+                                                  } else {
+                                                      return done(null, user);
                                                   }
                                               });
                                           }
