@@ -147,8 +147,6 @@ footer ul li a {
 
 div.login-social {
     position: relative;
-    padding-top: 55px;
-    margin-bottom: 115px;
     text-align: center;
     width: 100%;
 }
@@ -212,5 +210,8 @@ div.login-social .button.instagram {
 }
 
 div.login-social .button.disable {
-    color: #b3b3b3!important;
+    border-color: #EEEEEE #EEEEEE #EEEEEE !important;
+    background-color: #EEEEEE !important;
+    background: -webkit-linear-gradient(top, #EEEEEE 0, #EEEEEE 100%) !important;
+    color: #b3b3b3 !important;
 }
