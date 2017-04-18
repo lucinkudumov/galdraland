@@ -11,6 +11,7 @@
         <button ng-show="!isManager && isFavorite" class="btn btn-danger" ng-click="removeFavoriteUser()" style="margin-left: 15px; padding-bottom: 1%;">Remove from favorites</button>
         <button ng-show="!isManager && !isFavorite" class="btn btn-primary" ng-click="addFavoriteUser()" style="margin-left: 15px; padding-bottom: 1%;">Add to favorites</button>
     </h1>
+    <div>
     <blockquote>
     <uib-accordion close-others="false">
         <div uib-accordion-group class="panel-default" is-open="true">
@@ -136,4 +137,5 @@
         </div>
         </uib-accordion>
     </blockquote>
+    </div>
 </div>
