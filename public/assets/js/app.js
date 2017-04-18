@@ -12,13 +12,6 @@ app.config(["$urlRouterProvider", "$locationProvider", "$stateProvider", "$httpP
                     templateUrl: "/assets/partials/login.html"
                 }
             }
-        }).state("signin", {
-            url: "/signin",
-            views: {
-                "main": {
-                    templateUrl: "/assets/partials/signin.html"
-                }
-            }
 //        }).state("who", {
 //            url: "/#who",
 //            views: {
@@ -308,7 +301,7 @@ app.config(["$urlRouterProvider", "$locationProvider", "$stateProvider", "$httpP
                 "right-side@adventureBlogView": {templateUrl: "/assets/partials/adventure/viewblog.html"}
             },
             requireLogin: true
-        })
+        });
 
         $httpProvider.defaults.timeout = 10000;
         $locationProvider.html5Mode(true);
@@ -2018,16 +2011,6 @@ app.controller("indexController", ["$scope", "$location", "$window", "$statePara
         }
 
     }]);
-
-app.controller("signinController", ["$scope", "$location", "$window", "$stateParams", "$http", "$filter", function ($scope, $location, $window, $stateParams, $http, $filter) {
-    $scope.r = "";
-    var search = $location.search();
-    if (search !== null) {
-        console.log(search.r);
-        $scope.r = search.r;
-    }
-
-}]);
 
 app.controller("leftMenuController", ["$scope", "$location", function ($scope, $location) {
         $scope.go = function (url) {
