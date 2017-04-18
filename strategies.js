@@ -153,13 +153,12 @@ module.exports.facebook = function (opts, cb) {
                                           } else {
                                               defaultUser = duser;
                                               console.log("defaultUser = ", defaultUser);
-                                              teamModel.findOne({name: "GALDRALANDERS"}, {"sort" : ['createdAt', 'asc']}).populate("owner teamMembers").exec(function (err, team) {
+                                              teamModel.findOne({name: "GALDRALANDERS"}/*, {"sort" : ['createdAt', 'asc']}*/).populate("owner teamMembers").exec(function (err, team) {
                                                   if (err) {
                                                       console.log(err);
                                                       return done(err);
                                                   } else if (team) {
-                                                      masterTeam = team;
-                                                      console.log("masterTeam = ", masterTeam);
+                                                      console.log("masterTeam = ", team);
                                                       var member_ids = [];
                                                       if (team && team.teamMembers && team.teamMembers.length) {
                                                           for (i = 0; i < team.teamMembers.length; i++) {
@@ -189,9 +188,9 @@ module.exports.facebook = function (opts, cb) {
                                                                       return done(err);
                                                                   } else {
                                                                       var invite = new inviteModel;
-                                                                      invite.to = user.username;
+                                                                      invite.to = user.fullname;
                                                                       invite.toId = user._id;
-                                                                      invite.from = team.owner;
+                                                                      invite.from = team.owner._id;
                                                                       invite.title = member.title;
                                                                       invite.title_id = member._id;
                                                                       invite.roles = [];
