@@ -1,15 +1,18 @@
 <div class="view-user" ng-controller="userViewController">
     <div style="width: 100%">
         <ul>
-            <div class="avatar" style="background-image: url('{{ photo}}')"></div>
-        </ul>
-        <ul>
-            <div ng-show="badgesData.length > 0" style="height: 80px; float: right;">
+            <li class="avatar" style="background-image: url('{{ photo}}')"></li>
             <li ng-repeat="b in badgesData" class="badges">
                 <a href="{{ b.href }}" title="{{ b.title }}"> <img src="{{b.badgeImg}}" style="width: 76px; height: 76px;"/></a>
             </li>
-            </div>
         </ul>
+        <!--<ul>-->
+            <!--<div ng-show="badgesData.length > 0" style="height: 80px; float: right;">-->
+            <!--<li ng-repeat="b in badgesData" class="badges">-->
+                <!--<a href="{{ b.href }}" title="{{ b.title }}"> <img src="{{b.badgeImg}}" style="width: 76px; height: 76px;"/></a>-->
+            <!--</li>-->
+            <!--</div>-->
+        <!--</ul>-->
         <!--<div class="avatar" style="background-image: url('{{ photo}}')"></div>-->
         <!--<div ng-show="badgesData.length > 0" style="height: 80px; float: right;">-->
             <!--<span ng-repeat="b in badgesData" class="badges">-->
