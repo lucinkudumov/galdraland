@@ -189,7 +189,7 @@ module.exports.facebook = function (opts, cb) {
                                                                       return done(err);
                                                                   } else {
                                                                       var invite = new inviteModel;
-                                                                      invite.to = user.fullname;
+                                                                      invite.to = user.username;
                                                                       invite.toId = user._id;
                                                                       invite.from = masterTeam.owner._id;
                                                                       invite.title = member.title;
