@@ -218,10 +218,36 @@
 <!-- END fast view of a product -->
 <script src="/assets/js/fancybox/source/jquery.fancybox.pack.js" type="text/javascript"></script><!-- pop up -->
 <script>
+    var handleFancybox = function () {
+        if (!jQuery.fancybox) {
+            return;
+        }
+
+        jQuery(".fancybox-fast-view").fancybox();
+
+        if (jQuery(".fancybox-button").size() > 0) {
+            jQuery(".fancybox-button").fancybox({
+                groupAttr: 'data-rel',
+                prevEffect: 'none',
+                nextEffect: 'none',
+                closeBtn: true,
+                helpers: {
+                    title: {
+                        type: 'inside'
+                    }
+                }
+            });
+
+            $('.fancybox-video').fancybox({
+                type: 'iframe'
+            });
+        }
+    }
     $(document).ready(function() {
         $(".header-navigation").onePageNav({
             currentClass: "current",
             scrollThreshold: 0
         });
+        handleFancybox();
     });
 </script>
