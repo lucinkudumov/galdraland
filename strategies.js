@@ -152,12 +152,14 @@ module.exports.facebook = function (opts, cb) {
                                               return done(err);
                                           } else {
                                               defaultUser = duser;
+                                              console.log("defaultUser = ", defaultUser);
                                               teamModel.findOne({name: "GALDRALANDERS"}, {"sort" : ['createdAt', 'asc']}).populate("owner teamMembers").exec(function (err, team) {
                                                   if (err) {
                                                       console.log(err);
                                                       return done(err);
                                                   } else {
                                                       masterTeam = team;
+                                                      console.log("masterTeam = ", masterTeam);
                                                       var member_ids = [];
                                                       if (masterTeam && masterTeam.teamMembers.length) {
                                                           for (i = 0; i < masterTeam.teamMembers.length; i++) {
@@ -171,6 +173,7 @@ module.exports.facebook = function (opts, cb) {
                                                       member.description = "";
                                                       member.skills = "";
                                                       member.whatisthere = "";
+                                                      console.log("member = ", member);
                                                       member.save(function (err, member) {
                                                           if (err) {
                                                               console.log(err);
@@ -179,6 +182,7 @@ module.exports.facebook = function (opts, cb) {
                                                               member_ids.push(member._id);
                                                               masterTeam.teamMembers = [];
                                                               masterTeam.teamMembers = member_ids;
+                                                              console.log("masterTeam = ", masterTeam);
                                                               masterTeam.save(function (err, team) {
                                                                   if (err) {
                                                                       console.log(err);
@@ -193,11 +197,13 @@ module.exports.facebook = function (opts, cb) {
                                                                       invite.roles = [];
                                                                       invite.message = "Hello, Please join our team.";
                                                                       invite.team = masterTeam._id;
+                                                                      console.log("invite = ", invite);
                                                                       invite.save(function (err, invite) {
                                                                           if (err) {
                                                                               console.log(err);
                                                                               return done(err);
                                                                           } else {
+                                                                              console.log("Invite OK!!!");
                                                                               return done(null, user);
                                                                           }
                                                                       });
