@@ -163,7 +163,7 @@ div.login-social .button {
     padding: 0 15px;
     float: left;
     height: 80px;
-    font-size: 65px;
+    font-size: 45px;
     line-height: 80px;
     width : 80px;
     text-align: center;
@@ -176,7 +176,7 @@ div.login-social .button {
 
 div.login-social .button:hover {
     border: 2px solid;
-    font-size: 67px;
+    font-size: 45px;
 }
 
 div.login-social .button.linkedin {
