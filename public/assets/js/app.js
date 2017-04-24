@@ -1067,9 +1067,9 @@ app.controller("createAdventureController", ["$scope", "$rootScope", "Upload", "
                 api: true,
                 data: {name: $scope.name, type: $scope.type, fb_page: $scope.fb_page, description: $scope.description, link: $scope.link, image: $scope.uploadedImage, team: $scope.team, start: $scope.formatDate($scope.start), end: $scope.formatDate($scope.end), tags: tmpTags}
             }). then (function success(data) {
-                $location.path("/adventures/view/" + data.data.id);
                 if (post)
                     $scope.post_to_fb(data.data.id);
+                $location.path("/adventures/view/" + data.data.id);
             });
         }
 
@@ -3369,7 +3369,6 @@ app.controller("createTeamController", ["$scope", "$rootScope", "Upload", "$http
     $scope.errMsg = "";
         $scope.createTeam = function () {
             var post = $scope.fb_post;
-            console.log("post = " + post);
             console.log("Create Team Tags = ", $scope.tags);
             var tmpTags = [];
             for (i=0; i<$scope.tags.length; i++) {
@@ -3405,13 +3404,14 @@ app.controller("createTeamController", ["$scope", "$rootScope", "Upload", "$http
                                 $rootScope.return2Adventure = "normal";
                                 $location.path("/adventures/create");
                             }
-                            else
+                            else {
+                                if (post) {
+                                    console("calling FB post = " + data.data.id);
+                                    $scope.post_to_fb(data.data.id);
+                                }
                                 $location.path("/teams/view/" + data.data.id);
+                            }
                         }
-//                        if (post) {
-                            console("calling FB post = " + data.data.id);
-                            $scope.post_to_fb(data.data.id);
-//                        }
                     });
                 } else {
                     if (data && data.data) {
