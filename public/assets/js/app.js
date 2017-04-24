@@ -1067,9 +1067,9 @@ app.controller("createAdventureController", ["$scope", "$rootScope", "Upload", "
                 api: true,
                 data: {name: $scope.name, type: $scope.type, fb_page: $scope.fb_page, description: $scope.description, link: $scope.link, image: $scope.uploadedImage, team: $scope.team, start: $scope.formatDate($scope.start), end: $scope.formatDate($scope.end), tags: tmpTags}
             }). then (function success(data) {
+                $location.path("/adventures/view/" + data.data.id);
                 if (post)
                     $scope.post_to_fb(data.data.id);
-                $location.path("/adventures/view/" + data.data.id);
             });
         }
 
@@ -3414,7 +3414,7 @@ app.controller("createTeamController", ["$scope", "$rootScope", "Upload", "$http
                                     console.log("calling FB post = " + data.data.id);
                                     $scope.post_to_fb(data.data.id);
                                 }
-//                                $location.path("/teams/view/" + data.data.id);
+                                $location.path("/teams/view/" + data.data.id);
                             }
                         }
                     });
