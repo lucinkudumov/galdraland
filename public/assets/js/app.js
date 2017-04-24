@@ -3406,9 +3406,9 @@ app.controller("createTeamController", ["$scope", "$rootScope", "Upload", "$http
                             }
                             else {
                                 $location.path("/teams/view/" + data.data.id);
-                                if (post) {
-                                    $scope.post_to_fb(data.data.id);
-                                }
+//                                if (post) {
+//                                    $scope.post_to_fb(data.data.id);
+//                                }
                             }
                         }
                     });
