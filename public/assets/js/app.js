@@ -4983,6 +4983,23 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
             });
             return false;
         }
+
+        $scope.alertSlackAuth = function () {
+            var modalInstance = $uibModal.open({
+                templateUrl: '/assets/partials/modal/yes.html',
+                controller: "YesController",
+                resolve: {
+                    msg: function () {
+                        return "You must first register with slack to be able to create teams!";
+                    },
+                    title: function () {
+                        return "Authorize SLACK";
+                    }
+                }
+            });
+            return false;
+        }
+
         $scope.refresh();
     }]);
 

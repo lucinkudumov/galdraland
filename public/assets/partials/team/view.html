@@ -75,12 +75,12 @@
                         <a href="#" ng-click="modal()" class="btn btn-danger">Remove</a>
                         <a href="/teams/blogcreate/{{ team._id}}" class="btn btn-primary">Blog</a>
                         <a ng-show="slackAuthentication == true" href="/teams/slack/{{ team._id}}" class="btn btn-success">Slack</a>
-                        <a ng-show="slackAuthentication == false" href="#" onclick='alertSlackAuth();' class="btn btn-success">Slack</a>
+                        <a ng-show="slackAuthentication == false" href="#" ng-click='alertSlackAuth();' class="btn btn-success">Slack</a>
                     </div>
                     <div ng-show="isMember && !isManager" class="btn-group btn-group-justified">
                         <a href="#" class="btn btn-danger" ng-click="leave();">Leave</a>
                         <a ng-show="slackAuthentication == true" href="/teams/slack/{{ team._id}}" class="btn btn-success">Slack</a>
-                        <a ng-show="slackAuthentication == false" href="#" onclick='alertSlackAuth();' class="btn btn-success">Slack</a>
+                        <a ng-show="slackAuthentication == false" href="#" ng-click='alertSlackAuth();' class="btn btn-success">Slack</a>
                     </div>
                     <button ng-show="!isManager && isFavorite" class="btn btn-danger pull-left" ng-click="removeFavoriteTeam()" style="margin-top: 5px; padding-bottom: 1%;">Remove from favorites</button>
                     <button ng-show="!isManager && !isFavorite" class="btn btn-primary pull-left" ng-click="addFavoriteTeam()" style="margin-top: 5px; padding-bottom: 1%;">Add to favorites</button>
