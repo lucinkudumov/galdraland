@@ -221,3 +221,6 @@ div.login-social .button.disable {
     background: -webkit-linear-gradient(top, #EEEEEE 0, #EEEEEE 100%) !important;
     color: #b3b3b3 !important;
 }
+.fa-angellist:before{
+    content:"\f209"
+}
