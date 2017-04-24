@@ -29,6 +29,9 @@
             <span ng-show="uploadInProgress">Upload progress: {{ uploadProgress }}</span>
             <img src="{{uploadedImage}}" ng-show="uploadedImage">
         </div>
+        <div class="form-group">
+            <input type="checkbox" ng-model="fb_post">Would like to post it on your Facebook Page?
+        </div>
         <button class="btn btn-primary" ng-disabled="!name || !image || !mission || !uploadedImage"  ng-click="createTeam()">Create team</button>
         <p id="err" style="color:#ff0000;"></p>
     </div>

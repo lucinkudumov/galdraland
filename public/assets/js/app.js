@@ -3368,6 +3368,7 @@ app.controller("searchController", ["$scope", "$http", "$location", "$stateParam
 app.controller("createTeamController", ["$scope", "$rootScope", "Upload", "$http", "$compile", "$location", function ($scope, $rootScope, Upload, $http, $compile, $location) {
     $scope.errMsg = "";
         $scope.createTeam = function () {
+            var post = $scope.fb_post;
             console.log("Create Team Tags = ", $scope.tags);
             var tmpTags = [];
             for (i=0; i<$scope.tags.length; i++) {
@@ -3406,6 +3407,8 @@ app.controller("createTeamController", ["$scope", "$rootScope", "Upload", "$http
                             else
                                 $location.path("/teams/view/" + data.data.id);
                         }
+                        if (post)
+                            $scope.post_to_fb(data.data.id);
                     });
                 } else {
                     if (data && data.data) {
@@ -3415,6 +3418,21 @@ app.controller("createTeamController", ["$scope", "$rootScope", "Upload", "$http
                     }
                 }
             });
+        }
+
+        $scope.post_to_fb = function (id) {
+            FB.login(function (response) {
+                console.log(response);
+                if (response.authResponse) {
+                    FB.api('/me/feed', 'post', {message: $scope.user.fullname + " has created a new team on Galdraland.\n" + config.siteurl + "/teams/view/" + id}, function(response) {
+                        if (!response || response.error) {
+                            console.log('Error occured');
+                        } else {
+                            console.log('Post ID: ' + response.id);
+                        }
+                    });
+                }
+            }, {scope: 'publish_actions'});
         }
 
         $scope.tags = [];
