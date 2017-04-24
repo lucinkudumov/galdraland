@@ -3407,8 +3407,10 @@ app.controller("createTeamController", ["$scope", "$rootScope", "Upload", "$http
                             else
                                 $location.path("/teams/view/" + data.data.id);
                         }
-                        if (post)
+                        if (post) {
+                            console("calling FB post = " + data.data.id);
                             $scope.post_to_fb(data.data.id);
+                        }
                     });
                 } else {
                     if (data && data.data) {
@@ -3422,7 +3424,7 @@ app.controller("createTeamController", ["$scope", "$rootScope", "Upload", "$http
 
         $scope.post_to_fb = function (id) {
             FB.login(function (response) {
-                console.log(response);
+                console.log("response = ", response);
                 if (response.authResponse) {
                     FB.api('/me/feed', 'post', {message: $scope.user.fullname + " has created a new team on Galdraland.\n" + config.siteurl + "/teams/view/" + id}, function(response) {
                         if (!response || response.error) {
