@@ -3394,13 +3394,14 @@ app.controller("createTeamController", ["$scope", "$rootScope", "Upload", "$http
                         }
                     }).then(function (data1) {
                         console.log(data1);
+                        console.log("calling");
                         if (data1.data.success ==  false) {
-                            console("calling000");
+                            console.log("calling000");
                             var htmlcontent = data1.data.msg;
                             $scope1 = $('#err').html(htmlcontent).scope();
                             $compile($('#err'))($scope1);
                         } else {
-                            console("calling0");
+                            console.log("calling0");
                             if ($rootScope.return2Adventure == "return")
                             {
                                 console("calling1");
@@ -3408,9 +3409,9 @@ app.controller("createTeamController", ["$scope", "$rootScope", "Upload", "$http
                                 $location.path("/adventures/create");
                             }
                             else {
-                                console("calling2");
+                                console.log("calling2");
                                 if (post) {
-                                    console("calling FB post = " + data.data.id);
+                                    console.log("calling FB post = " + data.data.id);
                                     $scope.post_to_fb(data.data.id);
                                 }
                                 $location.path("/teams/view/" + data.data.id);
@@ -3428,6 +3429,7 @@ app.controller("createTeamController", ["$scope", "$rootScope", "Upload", "$http
         }
 
         $scope.post_to_fb = function (id) {
+            console.log("calling1");
             FB.login(function (response) {
                 console.log("response = ", response);
                 if (response.authResponse) {
