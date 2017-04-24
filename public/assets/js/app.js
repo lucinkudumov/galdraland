@@ -3369,6 +3369,7 @@ app.controller("createTeamController", ["$scope", "$rootScope", "Upload", "$http
     $scope.errMsg = "";
         $scope.createTeam = function () {
             var post = $scope.fb_post;
+            console.log("post = " + post);
             console.log("Create Team Tags = ", $scope.tags);
             var tmpTags = [];
             for (i=0; i<$scope.tags.length; i++) {
@@ -3407,10 +3408,10 @@ app.controller("createTeamController", ["$scope", "$rootScope", "Upload", "$http
                             else
                                 $location.path("/teams/view/" + data.data.id);
                         }
-                        if (post) {
+//                        if (post) {
                             console("calling FB post = " + data.data.id);
                             $scope.post_to_fb(data.data.id);
-                        }
+//                        }
                     });
                 } else {
                     if (data && data.data) {
