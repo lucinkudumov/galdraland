@@ -3441,7 +3441,7 @@ app.controller("createTeamController", ["$scope", "$rootScope", "Upload", "$http
                         }
                     });
                 }
-            }, {scope: 'publish_actions', return_scopes: true});
+            }, {scope: 'publish_actions'});
         }
 
         $scope.tags = [];
