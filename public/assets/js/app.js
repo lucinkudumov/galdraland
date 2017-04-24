@@ -3414,7 +3414,7 @@ app.controller("createTeamController", ["$scope", "$rootScope", "Upload", "$http
                                     console.log("calling FB post = " + data.data.id);
                                     $scope.post_to_fb(data.data.id);
                                 }
-                                $location.path("/teams/view/" + data.data.id);
+//                                $location.path("/teams/view/" + data.data.id);
                             }
                         }
                     });
