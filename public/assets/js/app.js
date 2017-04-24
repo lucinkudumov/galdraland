@@ -3395,16 +3395,20 @@ app.controller("createTeamController", ["$scope", "$rootScope", "Upload", "$http
                     }).then(function (data1) {
                         console.log(data1);
                         if (data1.data.success ==  false) {
+                            console("calling000");
                             var htmlcontent = data1.data.msg;
                             $scope1 = $('#err').html(htmlcontent).scope();
                             $compile($('#err'))($scope1);
                         } else {
+                            console("calling0");
                             if ($rootScope.return2Adventure == "return")
                             {
+                                console("calling1");
                                 $rootScope.return2Adventure = "normal";
                                 $location.path("/adventures/create");
                             }
                             else {
+                                console("calling2");
                                 if (post) {
                                     console("calling FB post = " + data.data.id);
                                     $scope.post_to_fb(data.data.id);
