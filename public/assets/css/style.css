@@ -69,6 +69,12 @@ footer ul li a {
     /*top: 50px;*/
   margin-top: 0px;
 }
+#copyright a {
+    color: #FFFFFF;
+}
+#copyright a:hover {
+    color: #337ab7;
+}
 @media (min-width: 1200px) {
 	.container {width: 100%;}
 }
@@ -156,10 +162,10 @@ div.login-social .button {
     margin: 0 5px 0 0;
     padding: 0 15px;
     float: left;
-    height: 100px;
-    font-size: 78px;
-    line-height: 100px;
-    width : 100px;
+    height: 80px;
+    font-size: 65px;
+    line-height: 80px;
+    width : 80px;
     text-align: center;
     cursor: pointer;
     border: 1px solid;
@@ -170,7 +176,7 @@ div.login-social .button {
 
 div.login-social .button:hover {
     border: 2px solid;
-    font-size: 80px;
+    font-size: 67px;
 }
 
 div.login-social .button.linkedin {
