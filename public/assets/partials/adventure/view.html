@@ -7,7 +7,9 @@
                     <img src="{{photo}}" alt="image" style="width:100px; height:100px; border-radius: 30px; cursor: pointer;">
                 </a>
             </div>
-            <div class="col-md-5"></div>
+            <div class="col-md-5">
+                <button ng-show="!isManager && !isFavorite" class="btn btn-primary pull-right" ng-click="addFavoriteAdventure()" style="padding-bottom: 1%;">Add to favorites</button>
+            </div>
         </div>
     </div>
     <div class="row">
@@ -81,7 +83,6 @@
                         <a href="/adventures/blogcreate/{{ adventure._id}}" class="btn btn-primary">Blog</a>
                     </div>
                     <button ng-show="!isManager && isFavorite" class="btn btn-danger pull-left" ng-click="removeFavoriteAdventure()" style="margin-top: 5px; padding-bottom: 1%;">Remove from favorites</button>
-                    <button ng-show="!isManager && !isFavorite" class="btn btn-primary pull-left" ng-click="addFavoriteAdventure()" style="padding-bottom: 1%;">Add to favorites</button>
                 </div>
 
             </div>
