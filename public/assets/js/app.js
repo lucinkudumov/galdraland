@@ -1913,7 +1913,7 @@ app.controller("indexController", ["$scope", "$location", "$window", "$statePara
         $scope.sentFailed = false;
 
         var search = $location.search();
-    console.log("cookie = ", $cookies.get("user", { 'path': '/', 'domain': 'galdraland-1-0.herokuapp.com' }));
+    console.log("cookie = ", $cookies.get("user", { 'path': '/', 'domain': '.galdraland-1-0.herokuapp.com' }));
     if (User.isLoggedIn())
         console.log("User is already logged IN");
     else
