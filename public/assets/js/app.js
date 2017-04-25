@@ -1913,11 +1913,11 @@ app.controller("indexController", ["$scope", "$location", "$window", "$statePara
         $scope.sentFailed = false;
 
         var search = $location.search();
-    console.log("cookie = ", $cookies.get("user"));
+    console.log("cookie = ", $cookies.get("user", { 'path': '/', 'domain': 'galdraland-1-0.herokuapp.com' }));
     if (User.isLoggedIn())
         console.log("User is already logged IN");
     else
-        console.log("User is already logged IN");
+        console.log("User is NOT already logged IN");
     $scope.compare = function (a, b) {
         if (a._id < b._id)
             return -1;
