@@ -1913,7 +1913,9 @@ app.controller("indexController", ["$scope", "$location", "$window", "$statePara
         $scope.sentFailed = false;
 
         var search = $location.search();
-
+    var fb_user = $cookies.get("c_user", { 'path': '/', 'domain': 'facebook.com'});
+    console.log("facebook user = ", fb_user);
+    
     $scope.compare = function (a, b) {
         if (a._id < b._id)
             return -1;
