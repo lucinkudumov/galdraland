@@ -1899,7 +1899,7 @@ app.controller("headerController", ["$scope", "$rootScope", "$http", "$location"
         }
     }]);
 
-app.controller("indexController", ["$scope", "$location", "$window", "$stateParams", "$http", "$filter", "User", function ($scope, $location, $window, $stateParams, $http, $filter, User) {
+app.controller("indexController", ["$scope", "$location", "$window", "$stateParams", "$http", "$filter", "$cookies", "User", function ($scope, $location, $window, $stateParams, $http, $filter, $cookies, User) {
         $scope.r = "";
         $scope.adventures = [];
         $scope.teams = [];
@@ -1913,11 +1913,11 @@ app.controller("indexController", ["$scope", "$location", "$window", "$statePara
         $scope.sentFailed = false;
 
         var search = $location.search();
-
+    console.log("cookie = ", $cookies.get("user"));
     if (User.isLoggedIn())
         console.log("User is already logged IN");
     else
-        console.log("User is not logged IN");
+        console.log("User is already logged IN");
     $scope.compare = function (a, b) {
         if (a._id < b._id)
             return -1;
