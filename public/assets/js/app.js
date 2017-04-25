@@ -4031,7 +4031,7 @@ app.controller("homeController", ["$scope", "$http", "$location", "$stateParams"
             result._id = data.data.fusers[i]._id;
             result.userName = data.data.fusers[i].user.fullname;
             result.userImg = data.data.fusers[i].user.photo;
-            if (user._id == data.data.fusers[i]._id)
+            if ($scope.user._id == data.data.fusers[i]._id)
                 result.fuserName = "you";
             else
                 result.fuserName = data.data.fusers[i].fuser.fullname;
