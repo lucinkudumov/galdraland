@@ -98,6 +98,7 @@ module.exports = function (opts) {
                             console.log(err);
                             return res.json({success: false, error: "Internal server error"});
                         } else {
+                            console.log("created adv = ", adventure);
                             return res.json({success: true, id: adventure._id});
                         }
                     });
