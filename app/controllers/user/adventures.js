@@ -87,11 +87,11 @@ module.exports = function (opts) {
                     adventure.link = req.body.link;
                     adventure.homeview = true;
 
-                    if (team.owner.toString() != req.user._id) {
-                        console.log("aaaaaaaaaaaaaaaa");
-                    } else {
-                        console.log("bbbbbbbbbbbbbb");
-                    }
+//                    if (team.owner.toString() != req.user._id) {
+//                        console.log("aaaaaaaaaaaaaaaa");
+//                    } else {
+//                        console.log("bbbbbbbbbbbbbb");
+//                    }
 
                     adventure.save(function (err, adventure) {
                         if (err) {
