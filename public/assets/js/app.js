@@ -1095,6 +1095,7 @@ app.controller("createAdventureController", ["$scope", "$rootScope", "Upload", "
                 api: true,
                 data: {name: name}
             }).then (function success(r) {
+                console.log("bbb = ", r.data.teams);
                 var teams = [];
                 for (var i = 0; i < r.data.teams.length; i++) {
                     if ($scope.values.team != null) {
@@ -4450,7 +4451,6 @@ app.controller("userViewController", ["$scope", "$http", "$stateParams", "User",
                 api: true,
                 data: {fuserid: $stateParams.id}
             }).then(function (r) {
-                    console.log("aaaa=", r.data.favorites);
                     $scope.favorites = r.data.favorites;
             });
 
