@@ -157,6 +157,15 @@
             <small ng-show="!roles || roles.length == 0">No Data</small>
             <small ng-repeat="r in roles">{{ r.role }}</small>
         </div>
+        <div uib-accordion-group class="panel-default" is-open="true" ng-show="isFavorite">
+            <uib-accordion-heading>
+                <p>List of Favorites</p>
+            </uib-accordion-heading>
+            <small ng-show="favorites.length == 0">No favorites</small>
+            <ul ng-show="favorites.length > 0">
+                <li ng-repeat="f in favorites"><a href="/users/view/{{ f.user._id}}">{{ f.user.fullname}}</a></li>
+            </ul>
+        </div>
         </uib-accordion>
     </blockquote>
     </div>

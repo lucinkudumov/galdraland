@@ -209,6 +209,18 @@ module.exports = function (opts) {
                     return res.json({success: true, fusers: []});
                 }
             });
+        },
+        "post#getFavoritedUsers": function (req, res) {
+            favoriteUserModel.find({$and : [{user: {$ne: req.user._id}}, {fuser : req.body.fuserid}]}).populate("user").exec(function (err, favorites) {
+                if (err) {
+                    console.log(err);
+                    return res.json({success: false, favorites: []});
+                } else if (favorites) {
+                    return res.json({success: true, favorites: favorites});
+                } else {
+                    return res.json({success: true, favorites: []});
+                }
+            });
         }
     }
 }

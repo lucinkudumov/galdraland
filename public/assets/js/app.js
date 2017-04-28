@@ -4443,6 +4443,17 @@ app.controller("userViewController", ["$scope", "$http", "$stateParams", "User",
             }).then(function (r) {
                 $scope.adventures = r.data.adventures;
             });
+
+            $http({
+                method: "POST",
+                url: "getFavoritedUsers",
+                api: true,
+                data: {fuserid: $stateParams.id}
+            }).then(function (r) {
+                    console.log("aaaa=", r.data.favorites);
+                    $scope.favorites = r.data.favorites;
+            });
+
         }
 
         function processBadgesByRecommend(recommendate) {
