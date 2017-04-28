@@ -110,37 +110,37 @@ module.exports = function (opts) {
             var teamname = req.body.name,
                     userId = req.user._id;
 
-            teamMemberModel.find({user: userId}, function (err, members) {
-                if (err) {
-                    console.log(err);
-                    return res.json({teams: []});
-                } else {
-                    var member_ids = [];
-                    if (!members)
-                        member_ids = [];
-                    else {
-                        for (var i = 0; i < members.length; i++)
-                            member_ids.push(members[i]._id);
-                    }
-                    teamModel.find({$or: [{owner: userId}, {teamMembers: {$in: member_ids}}], $and: [{name: new RegExp(teamname, 'i')}]}).populate("owner teamMembers").exec(function (err, teams) {
-                        if (err) {
-                            console.log(err);
-                            return res.json({teams: []});
-                        } else {
-                            return res.json({teams: teams});
-                        }
-                    });
-                }
-            });
-
-//            teamModel.find({$or: [{owner: userId}, {teamMembers: userId}], $and: [{name: new RegExp(teamname, 'i')}]}).populate("owner teamMembers").exec(function (err, teams) {
+//            teamMemberModel.find({user: userId}, function (err, members) {
 //                if (err) {
 //                    console.log(err);
 //                    return res.json({teams: []});
 //                } else {
-//                    return res.json({teams: teams});
+//                    var member_ids = [];
+//                    if (!members)
+//                        member_ids = [];
+//                    else {
+//                        for (var i = 0; i < members.length; i++)
+//                            member_ids.push(members[i]._id);
+//                    }
+//                    teamModel.find({$or: [{owner: userId}, {teamMembers: {$in: member_ids}}], $and: [{name: new RegExp(teamname, 'i')}]}).populate("owner teamMembers").exec(function (err, teams) {
+//                        if (err) {
+//                            console.log(err);
+//                            return res.json({teams: []});
+//                        } else {
+//                            return res.json({teams: teams});
+//                        }
+//                    });
 //                }
 //            });
+
+            teamModel.find({$or: [{owner: userId}, {teamMembers: userId}], $and: [{name: new RegExp(teamname, 'i')}]}).populate("owner teamMembers").exec(function (err, teams) {
+                if (err) {
+                    console.log(err);
+                    return res.json({teams: []});
+                } else {
+                    return res.json({teams: teams});
+                }
+            });
         },
         "post#adventure/search": function (req, res) {
             var term = req.body.term;
