@@ -103,6 +103,7 @@ module.exports = function (opts) {
                         }
                     });
                 } else {
+                    console.log("not Found");
                     return res.json({success: false, error: "Team not found"});
                 }
             });
