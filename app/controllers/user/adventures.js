@@ -87,6 +87,10 @@ module.exports = function (opts) {
                     adventure.homeview = true;
                     adventure.feedview = false;
 
+                    if (team.owner.toString() != req.user._id) {
+                        adventure.feedview = true;
+                    }
+
                     adventure.save(function (err, adventure) {
                         if (err) {
                             console.log(err);

@@ -1095,7 +1095,6 @@ app.controller("createAdventureController", ["$scope", "$rootScope", "Upload", "
                 api: true,
                 data: {name: name}
             }).then (function success(r) {
-                console.log("bbb = ", r.data.teams);
                 var teams = [];
                 for (var i = 0; i < r.data.teams.length; i++) {
                     if ($scope.values.team != null) {
