@@ -66,6 +66,7 @@ module.exports = function (opts) {
             if (!validator.isLength(validator.trim(name), 1)) {
                 return res.json({success: false, error: "Provide adventure name"});
             }
+            console.log("teamId = " + team);
 
             teamModel.findOne({id: team, owner: req.user._id}, function (err, team) {
                 if (err) {
