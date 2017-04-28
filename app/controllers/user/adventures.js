@@ -68,7 +68,7 @@ module.exports = function (opts) {
             }
             console.log("teamId = " + team);
 
-            teamModel.findOne({id: team, owner: req.user._id}, function (err, team) {
+            teamModel.findOne({id: team/*, owner: req.user._id*/}, function (err, team) {
                 if (err) {
                     console.log(err);
                     return res.json({success: false, error: "Internal server error"});
