@@ -50,6 +50,10 @@ module.exports = function (opts) {
         homeview: {
             type: Boolean,
             "default": true
+        },
+        teamview: {
+            type: Boolean,
+            "default": false
         }
     });
 
