@@ -1769,7 +1769,7 @@ app.controller("headerController", ["$scope", "$rootScope", "$http", "$location"
             for (var i = 0; i < $scope.notifications.length; i++) {
                 var feed = $scope.notifications[i];
                 feed.category = 4;
-                feed.msg = feed.master.fullname + " has added your team " + feed.team.name + " in his adventure"+feed.adventure.name;
+                feed.msg = feed.master.fullname + " has added your team '" + feed.team.name + "' in his adventure '"+feed.adventure.name + "'";
                 $scope.feeds.push(feed);
             }
         }
@@ -1919,7 +1919,6 @@ app.controller("headerController", ["$scope", "$rootScope", "$http", "$location"
             $http({
                 method: "POST", url: "adventure/viewnotification", api: true, data: {id: notification._id}
             }).then (function (result) {
-                console.log(result);
                 var url = "/adventures/view/" + notification.adventure._id;
                 if ($location.path() == url)
                     $state.reload();
