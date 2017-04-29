@@ -1768,6 +1768,7 @@ app.controller("headerController", ["$scope", "$rootScope", "$http", "$location"
             }
 
             for (var i = 0; i < $scope.notifications.length; i++) {
+                console.log("getting....");
                 var feed = $scope.notifications[i];
                 feed.category = 4;
                 feed.msg = feed.master.fullname + " has added your team " + feed.team.name + " in his adventure"+feed.adventure.name;
