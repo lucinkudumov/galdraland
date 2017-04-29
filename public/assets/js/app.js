@@ -1762,12 +1762,12 @@ app.controller("headerController", ["$scope", "$rootScope", "$http", "$location"
                 $scope.feeds.push(feed);
             }
 
-            for (var i = 0; i < $scope.slackFeeds.length; i++) {
-                var feed = $scope.slackFeeds[i];
-                feed.category = 3;
-                feed.msg = "You have not seen " + $scope.slackFeeds[i].unread_count + " slack messages for team '"+feed.teamName+"'";
-                $scope.feeds.push(feed);
-            }
+//            for (var i = 0; i < $scope.slackFeeds.length; i++) {
+//                var feed = $scope.slackFeeds[i];
+//                feed.category = 3;
+//                feed.msg = "You have not seen " + $scope.slackFeeds[i].unread_count + " slack messages for team '"+feed.teamName+"'";
+//                $scope.feeds.push(feed);
+//            }
 
             console.log("3333");
             console.log("len = " + $scope.notifications.length);
