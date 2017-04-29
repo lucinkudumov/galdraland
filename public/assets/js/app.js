@@ -1686,11 +1686,13 @@ app.controller("headerController", ["$scope", "$rootScope", "$http", "$location"
                             method: "POST", url: "adventure/notification", api: true
                         }).then (function (result) {
                             console.log(result);
-                            if (result !== undefined && result.data !== undefined && result.data.notifications !== undefined)
+                            if (result !== undefined && result.data !== undefined && result.data.notifications !== undefined) {
+                                console.log("11111");
                                 $scope.notifications = result.data.notifications;
+                            }
                             else
                                 $scope.notifications = [];
-
+                            console.log("2222");
                             refresh_feeds();
                         });
 //                        $http({
@@ -1767,6 +1769,8 @@ app.controller("headerController", ["$scope", "$rootScope", "$http", "$location"
                 $scope.feeds.push(feed);
             }
 
+            console.log("3333");
+            console.log("len = " + $scope.notifications.length);
             for (var i = 0; i < $scope.notifications.length; i++) {
                 console.log("getting....");
                 var feed = $scope.notifications[i];
