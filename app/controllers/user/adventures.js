@@ -122,10 +122,30 @@ module.exports = function (opts) {
                     console.log(err);
                     return res.json({notifications: []});
                 } else if (notifications) {
-                    console.log("notifications = ", notifications);
                     return res.json({notifications: notifications});
                 } else {
                     return res.json({notifications: []});
+                }
+            });
+        },
+        "post#adventure/viewnotification": function (req, res) {
+            var id = req.body.id;
+            notificationModel.findOne({_id: id}, function (err, notification) {
+                if (err) {
+                    console.log(err);
+                    return res.json({success: false});
+                } else if (notification) {
+                    notification.homeview = true;
+                    notification.save(function (err) {
+                        if (err) {
+                            console.log(err);
+                            return res.json({success: false});
+                        } else {
+                            return res.json({success: true});
+                        }
+                    });
+                } else {
+                    return res.json({success: false});
                 }
             });
         },

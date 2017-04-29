@@ -1685,14 +1685,11 @@ app.controller("headerController", ["$scope", "$rootScope", "$http", "$location"
                         $http({
                             method: "POST", url: "adventure/notification", api: true
                         }).then (function (result) {
-                            console.log(result);
                             if (result !== undefined && result.data !== undefined && result.data.notifications !== undefined) {
-                                console.log("11111");
                                 $scope.notifications = result.data.notifications;
                             }
                             else
                                 $scope.notifications = [];
-                            console.log("2222");
                             refresh_feeds();
                         });
 //                        $http({
@@ -1769,10 +1766,7 @@ app.controller("headerController", ["$scope", "$rootScope", "$http", "$location"
 //                $scope.feeds.push(feed);
 //            }
 
-            console.log("3333");
-            console.log("len = " + $scope.notifications.length);
             for (var i = 0; i < $scope.notifications.length; i++) {
-                console.log("getting....");
                 var feed = $scope.notifications[i];
                 feed.category = 4;
                 feed.msg = feed.master.fullname + " has added your team " + feed.team.name + " in his adventure"+feed.adventure.name;
@@ -1919,6 +1913,19 @@ app.controller("headerController", ["$scope", "$rootScope", "$http", "$location"
                 }
             });
             return false;
+        }
+
+        $scope.showNotification = function (notification) {
+            $http({
+                method: "POST", url: "adventure/viewnotification", api: true, data: {id: notification._id}
+            }).then (function (result) {
+                console.log(result);
+                var url = "/adventures/view/" + notification.adventure._id;
+                if ($location.path() == url)
+                    $state.reload();
+                else
+                    $location.path(url);
+            });
         }
     }]);
 
