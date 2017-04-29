@@ -94,7 +94,6 @@ module.exports = function (opts) {
                             return res.json({success: false, error: "Internal server error"});
                         } else {
                             if (team.owner.toString() != req.user._id) {
-                                console.log("aaaaaaaaaaaaaaaa");
                                 var notification = new notificationModel();
                                 notification.master = req.user._id;
                                 notification.slave = team.owner;
@@ -104,7 +103,7 @@ module.exports = function (opts) {
                                     if (err) {
                                         console.log(err);
                                     } else {
-                                        console.log("notification = ", notification);
+
                                     }
                                 });
                             }
@@ -113,6 +112,20 @@ module.exports = function (opts) {
                     });
                 } else {
                     return res.json({success: false, error: "Team not found"});
+                }
+            });
+        },
+        "post#adventure/notification": function (req, res) {
+            var userId = req.user._id;
+            notificationModel.find({slave: userId, homeview: false}).populate("master slave team adventure").exec(function (err, notifications) {
+                if (err) {
+                    console.log(err);
+                    return res.json({notifications: []});
+                } else if (notifications) {
+                    console.log("notifications = ", notifications);
+                    return res.json({notifications: notifications});
+                } else {
+                    return res.json({notifications: []});
                 }
             });
         },

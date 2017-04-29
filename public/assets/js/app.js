@@ -1682,7 +1682,17 @@ app.controller("headerController", ["$scope", "$rootScope", "$http", "$location"
                         else
                             $scope.slaveRecommendates = [];
 
+                        $http({
+                            method: "POST", url: "adventure/notification", api: true
+                        }).then (function (result) {
+                            console.log(result);
+                            if (result !== undefined && result.data !== undefined && result.data.notifications !== undefined)
+                                $scope.notifications = result.data.notifications;
+                            else
+                                $scope.notifications = [];
 
+                            refresh_feeds();
+                        });
 //                        $http({
 //                            method: "GET", url: "slack/getFeeds", api: true
 //                        }).then (function (result) {
@@ -1694,7 +1704,7 @@ app.controller("headerController", ["$scope", "$rootScope", "$http", "$location"
 //
 //                            refresh_feeds();
 //                        });
-                        refresh_feeds();
+//                        refresh_feeds();
                     });
                 });
             });
