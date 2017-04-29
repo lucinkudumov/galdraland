@@ -45,6 +45,12 @@
                               <button class="btn btn-primary" ng-click="showSlackMsg(i)">View</button>
                           </div>
                       </div>
+                      <div ng-show="i.category == 4">
+                          <h5>{{i.msg}}</h5>
+                          <div class="view">
+                              <button class="btn btn-primary" ng-click="showNotification(i)">View</button>
+                          </div>
+                      </div>
                   </li>
               </ul>
             </li>
