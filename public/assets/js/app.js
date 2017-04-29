@@ -1773,7 +1773,6 @@ app.controller("headerController", ["$scope", "$rootScope", "$http", "$location"
                 feed.msg = feed.master.fullname + " has added your team " + feed.team.name + " in his adventure"+feed.adventure.name;
                 $scope.feeds.push(feed);
             }
-
         }
 
         $scope.logout = function () {
