@@ -14,6 +14,7 @@ module.exports = function (opts) {
     var fhomeviewModel = opts.models.FavoriteHomeView;
     var faModel = opts.models.FavoriteAdventure;
     var teamMemberModel = opts.models.TeamMember;
+    var notificationModel = opts.models.Notification;
 
     return {
         "post#upload/image": function (req, res) {
@@ -87,23 +88,30 @@ module.exports = function (opts) {
                     adventure.link = req.body.link;
                     adventure.homeview = true;
 
-                    if (team.owner.toString() != req.user._id) {
-                        console.log("aaaaaaaaaaaaaaaa");
-                    } else {
-                        console.log("bbbbbbbbbbbbbb");
-                    }
-
                     adventure.save(function (err, adventure) {
                         if (err) {
                             console.log(err);
                             return res.json({success: false, error: "Internal server error"});
                         } else {
-                            console.log("created adv = ", adventure);
+                            if (team.owner.toString() != req.user._id) {
+                                console.log("aaaaaaaaaaaaaaaa");
+                                var notification = new notificationModel();
+                                notification.master = req.user;
+                                notification.slave = team.owner;
+                                notification.team = team;
+                                notification.adventure = adventure;
+                                notification.save(function (err, notification) {
+                                    if (err) {
+                                        console.log(err);
+                                    } else {
+                                        console.log("notification = ", notification);
+                                    }
+                                });
+                            }
                             return res.json({success: true, id: adventure._id});
                         }
                     });
                 } else {
-                    console.log("not Found");
                     return res.json({success: false, error: "Team not found"});
                 }
             });
