@@ -96,7 +96,7 @@ module.exports = function (opts) {
                             if (team.owner.toString() != req.user._id) {
                                 console.log("aaaaaaaaaaaaaaaa");
                                 var notification = new notificationModel();
-                                notification.master = req.user;
+                                notification.master = req.user._id;
                                 notification.slave = team.owner;
                                 notification.team = team;
                                 notification.adventure = adventure;
