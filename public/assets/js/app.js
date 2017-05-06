@@ -1237,7 +1237,7 @@ app.controller("editAdventureController", ["$scope", "$http", "$location", "$sta
             }
 
             console.log("teamteam = ", $scope.values.team);
-            var teamId = ""
+            var teamId = "";
             if ($scope.values.team)
                 teamId = $scope.values.team._id;
 
