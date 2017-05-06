@@ -565,8 +565,10 @@ module.exports = function (opts) {
                         console.log(err);
                         return res.json({success: false, error: "Internal server error"});
                     } else if (invite) {
+                        console.log("update team = ", invite);
                         return res.json({success: true});
                     } else {
+                        console.log("Not found");
                         return res.json({success: false, error: "Not found"});
                     }
                 });
