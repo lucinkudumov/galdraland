@@ -54,10 +54,6 @@ module.exports = function (opts) {
         temp_team: {
             type: mongoose.Schema.ObjectId,
             ref: "Team"
-        },
-        confirm_team: {
-            type: Boolean,
-            "default": false
         }
     });
 

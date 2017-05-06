@@ -81,7 +81,11 @@ module.exports = function (opts) {
                         adventure.name = name;
                         adventure.type = req.body.type;
                         adventure.owner = req.user._id;
-                        adventure.team = team;
+                        if (team.owner.toString() != req.user._id) {
+                            adventure.temp_team = team;
+                        } else {
+                            adventure.team = team;
+                        }
                         adventure.image = req.body.image;
                         adventure.tags = req.body.tags;
                         adventure.fb_page = req.body.fb_page;
