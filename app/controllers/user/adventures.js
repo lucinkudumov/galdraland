@@ -110,11 +110,18 @@ module.exports = function (opts) {
                                         if (err) {
                                             console.log(err);
                                         } else {
+                                            adventureModel.findOneAndUpdate({_id: adventure._id}, {notification:notification._id}, function (err, invite) {
+                                                if (err) {
+                                                    console.log(err);
+                                                    return res.json({success: false, error: "Internal server error"});
+                                                } else if (invite) {
+                                                    return res.json({success: true, id: adventure._id});                                                }
+                                            });
 
                                         }
                                     });
                                 }
-                                return res.json({success: true, id: adventure._id});
+
                             }
                         });
                     } else {
