@@ -1020,12 +1020,6 @@ app.controller("createAdventureController", ["$scope", "$rootScope", "Upload", "
                 $scope.image = $scope.image[0];
             }
 
-//            // This is how I handle file types in client side
-//            if (image.type !== 'image/png' && image.type !== 'image/jpeg') {
-//                alert('Only PNG and JPEG are accepted.');
-//                return;
-//            }
-
             $scope.uploadInProgress = true;
             $scope.uploadProgress = 0;
 
@@ -1065,7 +1059,7 @@ app.controller("createAdventureController", ["$scope", "$rootScope", "Upload", "
                 method: "POST",
                 url: "adventure/create",
                 api: true,
-                data: {name: $scope.name, type: $scope.type, fb_page: $scope.fb_page, description: $scope.description, link: $scope.link, image: $scope.uploadedImage, team: $scope.values.team._id, start: $scope.formatDate($scope.start), end: $scope.formatDate($scope.end), tags: tmpTags}
+                data: {name: $scope.name, type: $scope.type, fb_page: $scope.fb_page, description: $scope.description, link: $scope.link, image: $scope.uploadedImage, team: $scope.values.team._id ? $scope.values.team._id : null, start: $scope.formatDate($scope.start), end: $scope.formatDate($scope.end), tags: tmpTags}
             }). then (function success(data) {
                 $location.path("/adventures/view/" + data.data.id);
                 if (post)
@@ -1091,10 +1085,12 @@ app.controller("createAdventureController", ["$scope", "$rootScope", "Upload", "
         $scope.findTeam = function (name) {
             $http({
                 method: "POST",
-                url: "adventure/getTeams",
+//                url: "adventure/getTeams",
+                url: "adventure/getAllTeams",
                 api: true,
                 data: {name: name}
             }).then (function success(r) {
+                console.log("getAllTeam = ", r);
                 var teams = [];
                 for (var i = 0; i < r.data.teams.length; i++) {
                     if ($scope.values.team != null) {
@@ -1249,10 +1245,12 @@ app.controller("editAdventureController", ["$scope", "$http", "$location", "$sta
         $scope.findTeam = function (name) {
             $http({
                 method: "POST",
-                url: "adventure/getTeams",
+//                url: "adventure/getTeams",
+                url: "adventure/getAllTeams",
                 api: true,
                 data: {name: name}
             }).then(function sucess(r) {
+
                 var teams = [];
                 for (var i = 0; i < r.data.teams.length; i++) {
                     if ($scope.values.team != null) {

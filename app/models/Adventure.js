@@ -50,6 +50,14 @@ module.exports = function (opts) {
         homeview: {
             type: Boolean,
             "default": true
+        },
+        temp_team: {
+            type: mongoose.Schema.ObjectId,
+            ref: "Team"
+        },
+        confirm_team: {
+            type: Boolean,
+            "default": false
         }
     });
 

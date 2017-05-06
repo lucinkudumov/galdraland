@@ -67,53 +67,92 @@ module.exports = function (opts) {
             if (!validator.isLength(validator.trim(name), 1)) {
                 return res.json({success: false, error: "Provide adventure name"});
             }
-            console.log("teamId = " + team);
+            if (team)
+                console.log("teamId = " + team);
+            else
+                console.log("teamId = null");
+            if (team != null) {
+                teamModel.findOne({_id: team/*, owner: req.user._id*/}, function (err, team) {
+                    if (err) {
+                        console.log(err);
+                        return res.json({success: false, error: "Internal server error"});
+                    } else if (team) {
+                        var adventure = new adventureModel();
+                        adventure.name = name;
+                        adventure.type = req.body.type;
+                        adventure.owner = req.user._id;
+                        adventure.team = team;
+                        adventure.image = req.body.image;
+                        adventure.tags = req.body.tags;
+                        adventure.fb_page = req.body.fb_page;
+                        adventure.start = req.body.start;
+                        adventure.end = req.body.end;
+                        adventure.description = req.body.description;
+                        adventure.link = req.body.link;
+                        adventure.homeview = true;
+                        adventure.save(function (err, adventure) {
+                            if (err) {
+                                console.log(err);
+                                return res.json({success: false, error: "Internal server error"});
+                            } else {
+                                if (team.owner.toString() != req.user._id) {
+                                    var notification = new notificationModel();
+                                    notification.master = req.user._id;
+                                    notification.slave = team.owner;
+                                    notification.team = team;
+                                    notification.adventure = adventure;
+                                    notification.save(function (err, notification) {
+                                        if (err) {
+                                            console.log(err);
+                                        } else {
 
-            teamModel.findOne({_id: team/*, owner: req.user._id*/}, function (err, team) {
-                if (err) {
-                    console.log(err);
-                    return res.json({success: false, error: "Internal server error"});
-                } else if (team) {
-                    var adventure = new adventureModel();
-                    adventure.name = name;
-                    adventure.type = req.body.type;
-                    adventure.owner = req.user._id;
-                    adventure.team = team;
-                    adventure.image = req.body.image;
-                    adventure.tags = req.body.tags;
-                    adventure.fb_page = req.body.fb_page;
-                    adventure.start = req.body.start;
-                    adventure.end = req.body.end;
-                    adventure.description = req.body.description;
-                    adventure.link = req.body.link;
-                    adventure.homeview = true;
-
-                    adventure.save(function (err, adventure) {
-                        if (err) {
-                            console.log(err);
-                            return res.json({success: false, error: "Internal server error"});
-                        } else {
-                            if (team.owner.toString() != req.user._id) {
-                                var notification = new notificationModel();
-                                notification.master = req.user._id;
-                                notification.slave = team.owner;
-                                notification.team = team;
-                                notification.adventure = adventure;
-                                notification.save(function (err, notification) {
-                                    if (err) {
-                                        console.log(err);
-                                    } else {
-
-                                    }
-                                });
+                                        }
+                                    });
+                                }
+                                return res.json({success: true, id: adventure._id});
                             }
-                            return res.json({success: true, id: adventure._id});
+                        });
+                    } else {
+                        return res.json({success: false, error: "Team not found"});
+                    }
+                });
+            } else {
+                var adventure = new adventureModel();
+                adventure.name = name;
+                adventure.type = req.body.type;
+                adventure.owner = req.user._id;
+//                adventure.team = team;
+                adventure.image = req.body.image;
+                adventure.tags = req.body.tags;
+                adventure.fb_page = req.body.fb_page;
+                adventure.start = req.body.start;
+                adventure.end = req.body.end;
+                adventure.description = req.body.description;
+                adventure.link = req.body.link;
+                adventure.homeview = true;
+                adventure.save(function (err, adventure) {
+                    if (err) {
+                        console.log(err);
+                        return res.json({success: false, error: "Internal server error"});
+                    } else {
+                        if (team.owner.toString() != req.user._id) {
+                            var notification = new notificationModel();
+                            notification.master = req.user._id;
+                            notification.slave = team.owner;
+                            notification.team = team;
+                            notification.adventure = adventure;
+                            notification.save(function (err, notification) {
+                                if (err) {
+                                    console.log(err);
+                                } else {
+
+                                }
+                            });
                         }
-                    });
-                } else {
-                    return res.json({success: false, error: "Team not found"});
-                }
-            });
+                        return res.json({success: true, id: adventure._id});
+                    }
+                });
+            }
         },
         "post#adventure/notification": function (req, res) {
             var userId = req.user._id;
@@ -184,6 +223,17 @@ module.exports = function (opts) {
 //                    return res.json({teams: teams});
 //                }
 //            });
+        },
+        "post#adventure/getAllTeams": function (req, res) {
+            var teamname = req.body.name
+            teamModel.find({name: new RegExp(teamname, 'i')}).populate("owner teamMembers").exec(function (err, teams) {
+                if (err) {
+                    console.log(err);
+                    return res.json({teams: []});
+                } else {
+                    return res.json({teams: teams});
+                }
+            });
         },
         "post#adventure/search": function (req, res) {
             var term = req.body.term;
