@@ -546,7 +546,7 @@ module.exports = function (opts) {
                         console.log(err);
                         return res.json({success: false, error: "Internal server error"});
                     } else if (team) {
-                        updateInfo.team = team;
+                        updateInfo.team = team._id;
                         adventureModel.findOneAndUpdate({_id: id, owner: req.user._id}, updateInfo, function (err, invite) {
                             if (err) {
                                 console.log(err);
