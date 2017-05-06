@@ -139,20 +139,6 @@ module.exports = function (opts) {
                         console.log(err);
                         return res.json({success: false, error: "Internal server error"});
                     } else {
-                        if (team.owner.toString() != req.user._id) {
-                            var notification = new notificationModel();
-                            notification.master = req.user._id;
-                            notification.slave = team.owner;
-                            notification.team = team;
-                            notification.adventure = adventure;
-                            notification.save(function (err, notification) {
-                                if (err) {
-                                    console.log(err);
-                                } else {
-
-                                }
-                            });
-                        }
                         return res.json({success: true, id: adventure._id});
                     }
                 });
