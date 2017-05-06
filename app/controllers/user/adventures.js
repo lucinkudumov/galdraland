@@ -608,6 +608,16 @@ module.exports = function (opts) {
                 }
             });
         },
+        "post#adventure/listbyme": function (req, res) {
+            adventureModel.find({owner: req.user._id}, function (err, advs) {
+                if (err) {
+                    console.log(err);
+                    return res.json({success: false, adventures: []});
+                } else {
+                    return res.json({success: true, adventures: advs});
+                }
+            });
+        },
         "post#adventureTag/list": function (req, res) {
             var tag = req.body.tag;
             adventureModel.find({"tags" : {$in : [tag]}}, function (err, advs) {

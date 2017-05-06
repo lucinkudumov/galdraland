@@ -1482,7 +1482,8 @@ app.controller("myAdventuresController", ["$scope", "$http", "$location", "User"
             }).then(function success(data) {
                 $scope.teams = data.data.teams;
                 if ($scope.teams.length) {
-                    return $http({method: "POST", url: "adventure/list", api: true, data: {teams: $scope.teams}});
+//                    return $http({method: "POST", url: "adventure/list", api: true, data: {teams: $scope.teams}});
+                    return $http({method: "POST", url: "adventure/listbyme", api: true, data: {teams: $scope.teams}});
                 } else {
                     $scope.loading = false;
                 }
