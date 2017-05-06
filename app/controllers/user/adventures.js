@@ -561,16 +561,23 @@ module.exports = function (opts) {
                 });
             } else {
                 console.log("has no teamID");
-                updateInfo.team = null;
-                adventureModel.findOneAndUpdate({_id: id, owner: req.user._id}, updateInfo, function (err, invite) {
+                adventureModel.findOneAndUpdate({_id: id, owner: req.user._id}, { $unset: {team : "" }}, function (err, invite) {
                     if (err) {
                         console.log(err);
                         return res.json({success: false, error: "Internal server error"});
                     } else if (invite) {
-                        console.log("update team = ", invite);
-                        return res.json({success: true});
+                        adventureModel.findOneAndUpdate({_id: id, owner: req.user._id}, updateInfo, function (err, invite) {
+                            if (err) {
+                                console.log(err);
+                                return res.json({success: false, error: "Internal server error"});
+                            } else if (invite) {
+                                console.log("update team = ", invite);
+                                return res.json({success: true});
+                            } else {
+                                return res.json({success: false, error: "Not found"});
+                            }
+                        });
                     } else {
-                        console.log("Not found");
                         return res.json({success: false, error: "Not found"});
                     }
                 });
