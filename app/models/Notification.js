@@ -21,6 +21,10 @@ module.exports = function (opts) {
         homeview: {
             type: Boolean,
             "default": false
+        },
+        notify_type: {
+            type: String,
+            required: false
         }
     });
 

@@ -105,6 +105,7 @@ module.exports = function (opts) {
                                     notification.slave = team.owner;
                                     notification.team = team;
                                     notification.adventure = adventure;
+                                    notification.notify_type = "request";
                                     notification.save(function (err, notification) {
                                         if (err) {
                                             console.log(err);
