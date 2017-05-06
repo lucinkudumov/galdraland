@@ -570,7 +570,20 @@ module.exports = function (opts) {
                                                 } else if (notification) {
                                                     return res.json({success: true});
                                                 } else {
-                                                    return res.json({success: true});
+                                                    var notification = new notificationModel();
+                                                    notification.master = req.user._id;
+                                                    notification.slave = team.owner;
+                                                    notification.team = team;
+                                                    notification.adventure = adventure;
+                                                    notification.notify_type = "request";
+                                                    notification.save(function (err, notification) {
+                                                        if (err) {
+                                                            console.log(err);
+                                                            return res.json({success: false});
+                                                        } else {
+                                                            return res.json({success: true});
+                                                        }
+                                                    });
                                                 }
                                             });
                                         } else {
