@@ -1169,6 +1169,7 @@ app.controller("editAdventureController", ["$scope", "$http", "$location", "$sta
                 $scope.end = new Date(Date.parse(data.data.adventure.end));
                 $scope.status = data.data.adventure.status;
                 $scope.team = data.data.adventure.team;
+                $scope.temp_team = data.data.adventure.temp_team;
                 $scope.type = data.data.adventure.type;
                 $scope.uploadedImage = data.data.adventure.image;
                 $scope.fb_page = data.data.adventure.fb_page;

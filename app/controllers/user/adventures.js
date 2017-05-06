@@ -507,9 +507,9 @@ module.exports = function (opts) {
                 updateInfo.link = link;
             }
 
-            if (team) {
-                updateInfo.team = team;
-            }
+//            if (team) {
+//                updateInfo.team = team;
+//            }
 
             if (fb_page) {
                 updateInfo.fb_page = fb_page;
