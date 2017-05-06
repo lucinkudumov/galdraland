@@ -2694,7 +2694,7 @@ app.controller("profileLeftSideController", ["$scope", "$http", "$location", "Us
         $scope.getAdventures = function () {
             $http({
                 method: "POST",
-                url: "adventure/list",
+                url: "adventure/listbyme",
                 api: true,
                 data: {teams: $scope.teams}
             }).then(function (r) {
@@ -4471,7 +4471,7 @@ app.controller("userViewController", ["$scope", "$http", "$stateParams", "User",
                 $scope.teams = data.data.teams;
                 $http({
                     method: "POST",
-                    url: "adventure/list",
+                    url: "adventure/listbyme",
                     api: true,
                     data: {teams: $scope.teams}
                 }).then(function (r) {
