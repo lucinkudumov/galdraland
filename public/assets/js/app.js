@@ -1055,11 +1055,14 @@ app.controller("createAdventureController", ["$scope", "$rootScope", "Upload", "
                 }
             }
             console.log("teamteam = ", $scope.values.team);
+            var teamId = ""
+            if ($scope.values.team)
+                teamId = $scope.values.team._id;
             $http({
                 method: "POST",
                 url: "adventure/create",
                 api: true,
-                data: {name: $scope.name, type: $scope.type, fb_page: $scope.fb_page, description: $scope.description, link: $scope.link, image: $scope.uploadedImage, team: $scope.values.team._id ? $scope.values.team._id : null, start: $scope.formatDate($scope.start), end: $scope.formatDate($scope.end), tags: tmpTags}
+                data: {name: $scope.name, type: $scope.type, fb_page: $scope.fb_page, description: $scope.description, link: $scope.link, image: $scope.uploadedImage, team: teamId, start: $scope.formatDate($scope.start), end: $scope.formatDate($scope.end), tags: tmpTags}
             }). then (function success(data) {
                 $location.path("/adventures/view/" + data.data.id);
                 if (post)

@@ -71,7 +71,7 @@ module.exports = function (opts) {
                 console.log("teamId = " + team);
             else
                 console.log("teamId = null");
-            if (team != null) {
+            if (team != "") {
                 teamModel.findOne({_id: team/*, owner: req.user._id*/}, function (err, team) {
                     if (err) {
                         console.log(err);
