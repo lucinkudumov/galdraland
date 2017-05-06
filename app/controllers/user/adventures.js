@@ -560,6 +560,7 @@ module.exports = function (opts) {
                 });
             } else {
                 console.log("has no teamID");
+                updateInfo.team = null;
                 adventureModel.findOneAndUpdate({_id: id, owner: req.user._id}, updateInfo, function (err, invite) {
                     if (err) {
                         console.log(err);
