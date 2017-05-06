@@ -1234,11 +1234,17 @@ app.controller("editAdventureController", ["$scope", "$http", "$location", "$sta
                         tmpTags.push($scope.tags[i].name);
                 }
             }
+
+            console.log("teamteam = ", $scope.values.team);
+            var teamId = ""
+            if ($scope.values.team)
+                teamId = $scope.values.team._id;
+
             $http({
                 method: "POST",
                 url: "adventure/update",
                 api: true,
-                data: {id: $stateParams.id, name: $scope.name, fb_page: $scope.fb_page, description: $scope.description, link: $scope.link, image: $scope.uploadedImage, tags: tmpTags, start: $scope.formatDate($scope.start), end: $scope.formatDate($scope.end), status: $scope.status, type: $scope.type}
+                data: {id: $stateParams.id, name: $scope.name, team : teamId, fb_page: $scope.fb_page, description: $scope.description, link: $scope.link, image: $scope.uploadedImage, tags: tmpTags, start: $scope.formatDate($scope.start), end: $scope.formatDate($scope.end), status: $scope.status, type: $scope.type}
             }).then  (function success(data) {
                 $location.path("/adventures/view/" + $stateParams.id);
             });
@@ -1475,11 +1481,13 @@ app.controller("myAdventuresController", ["$scope", "$http", "$location", "User"
                 api: true
             }).then(function success(data) {
                 $scope.teams = data.data.teams;
-                if ($scope.teams.length) {
-                    return $http({method: "POST", url: "adventure/list", api: true, data: {teams: $scope.teams}});
-                } else {
-                    $scope.loading = false;
-                }
+                return $http({method: "POST", url: "adventure/list", api: true, data: {teams: $scope.teams}});
+                $scope.loading = false;
+//                if ($scope.teams.length) {
+//                    return $http({method: "POST", url: "adventure/list", api: true, data: {teams: $scope.teams}});
+//                } else {
+//                    $scope.loading = false;
+//                }
             }).then(function (r) {
                 var advs = [];
                 if (r != null) {

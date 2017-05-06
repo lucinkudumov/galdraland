@@ -537,16 +537,38 @@ module.exports = function (opts) {
             if (image) {
                 updateInfo.image = image;
             }
-            adventureModel.findOneAndUpdate({_id: id, owner: req.user._id}, updateInfo, function (err, invite) {
-                if (err) {
-                    console.log(err);
-                    return res.json({success: false, error: "Internal server error"});
-                } else if (invite) {
-                    return res.json({success: true});
-                } else {
-                    return res.json({success: false, error: "Not found"});
-                }
-            });
+
+            if (team != "") {
+                teamModel.findOne({_id: team/*, owner: req.user._id*/}, function (err, team) {
+                    if (err) {
+                        console.log(err);
+                        return res.json({success: false, error: "Internal server error"});
+                    } else if (team) {
+                        updateInfo.team = team;
+                        adventureModel.findOneAndUpdate({_id: id, owner: req.user._id}, updateInfo, function (err, invite) {
+                            if (err) {
+                                console.log(err);
+                                return res.json({success: false, error: "Internal server error"});
+                            } else if (invite) {
+                                return res.json({success: true});
+                            } else {
+                                return res.json({success: false, error: "Not found"});
+                            }
+                        });
+                    }
+                });
+            } else {
+                adventureModel.findOneAndUpdate({_id: id, owner: req.user._id}, updateInfo, function (err, invite) {
+                    if (err) {
+                        console.log(err);
+                        return res.json({success: false, error: "Internal server error"});
+                    } else if (invite) {
+                        return res.json({success: true});
+                    } else {
+                        return res.json({success: false, error: "Not found"});
+                    }
+                });
+            }
         },
         "post#adventure/remove": function (req, res) {
             var id = req.body.id;
@@ -562,6 +584,16 @@ module.exports = function (opts) {
         },
         "post#adventure/list": function (req, res) {
 //            var teams = req.body.teams;
+            adventureModel.find({owner: req.user._id}, function (err, advs) {
+                if (err) {
+                    console.log(err);
+                    return res.json({success: false, adventures: []});
+                } else {
+                    return res.json({success: true, adventures: advs});
+                }
+            });
+
+            /*
             var queries = [];
 
             if (req.body.teams != null) {
@@ -577,6 +609,7 @@ module.exports = function (opts) {
                     return res.json({success: true, adventures: advs});
                 }
             });
+            */
         },
         "post#adventureTag/list": function (req, res) {
             var tag = req.body.tag;
