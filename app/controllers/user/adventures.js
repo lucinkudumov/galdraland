@@ -557,12 +557,32 @@ module.exports = function (opts) {
                                 console.log(err);
                                 return res.json({success: false, error: "Internal server error"});
                             } else if (invite) {
-                                adventureModel.findOneAndUpdate({_id: id, owner: req.user._id}, updateInfo, function (err, invite) {
+                                adventureModel.findOneAndUpdate({_id: id, owner: req.user._id}, updateInfo, function (err, adventure) {
                                     if (err) {
                                         console.log(err);
                                         return res.json({success: false, error: "Internal server error"});
-                                    } else if (invite) {
-                                        return res.json({success: true});
+                                    } else if (adventure) {
+                                        if (team.owner.toString() != req.user._id) {
+                                            notificationModel.findOneAndUpdate({adventure: adventure._id}, {$set: {notify_type : "request"}}, function (err, notification) {
+                                                if (err) {
+                                                    console.log(err);
+                                                    return res.json({success: false, error: "Internal server error"});
+                                                } else if (notification) {
+                                                    return res.json({success: true});
+                                                } else {
+                                                    return res.json({success: true});
+                                                }
+                                            });
+                                        } else {
+                                            notificationModel.findOneAndRemove({adventure: adventure._id}, function (err) {
+                                                if (err) {
+                                                    console.log(err);
+                                                    return res.json({success: false, error: "Internal server error"});
+                                                } else {
+                                                    return res.json({success: true});
+                                                }
+                                            });
+                                        }
                                     } else {
                                         return res.json({success: false, error: "Not found"});
                                     }
@@ -578,13 +598,21 @@ module.exports = function (opts) {
                         console.log(err);
                         return res.json({success: false, error: "Internal server error"});
                     } else if (invite) {
-                        adventureModel.findOneAndUpdate({_id: id, owner: req.user._id}, updateInfo, function (err, invite) {
+                        adventureModel.findOneAndUpdate({_id: id, owner: req.user._id}, updateInfo, function (err, adventure) {
                             if (err) {
                                 console.log(err);
                                 return res.json({success: false, error: "Internal server error"});
-                            } else if (invite) {
-                                console.log("update team = ", invite);
-                                return res.json({success: true});
+                            } else if (adventure) {
+                                notificationModel.findOneAndUpdate({adventure: adventure._id}, {$set: {notify_type : "delete"}}, function (err, notification) {
+                                    if (err) {
+                                        console.log(err);
+                                        return res.json({success: false, error: "Internal server error"});
+                                    } else if (notification) {
+                                        return res.json({success: true});
+                                    } else {
+                                        return res.json({success: true});
+                                    }
+                                });
                             } else {
                                 return res.json({success: false, error: "Not found"});
                             }
