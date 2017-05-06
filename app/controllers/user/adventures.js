@@ -537,10 +537,7 @@ module.exports = function (opts) {
             if (image) {
                 updateInfo.image = image;
             }
-            console.log("updateInfo = ", updateInfo);
-            console.log("teamId = " + team);
             if (team != "") {
-                console.log("has teamID");
                 teamModel.findOne({_id: team/*, owner: req.user._id*/}, function (err, team) {
                     if (err) {
                         console.log(err);
@@ -560,7 +557,6 @@ module.exports = function (opts) {
                     }
                 });
             } else {
-                console.log("has no teamID");
                 adventureModel.findOneAndUpdate({_id: id, owner: req.user._id}, { $unset: {team : "" }}, function (err, invite) {
                     if (err) {
                         console.log(err);

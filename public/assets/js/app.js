@@ -1054,7 +1054,6 @@ app.controller("createAdventureController", ["$scope", "$rootScope", "Upload", "
                         tmpTags.push($scope.tags[i].name);
                 }
             }
-            console.log("teamteam = ", $scope.values.team);
             var teamId = ""
             if ($scope.values.team)
                 teamId = $scope.values.team._id;
@@ -1236,7 +1235,6 @@ app.controller("editAdventureController", ["$scope", "$http", "$location", "$sta
                 }
             }
 
-            console.log("teamteam = ", $scope.values.team);
             var teamId = "";
             if ($scope.values.team)
                 teamId = $scope.values.team._id;
