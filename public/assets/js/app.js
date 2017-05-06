@@ -1277,12 +1277,14 @@ app.controller("editAdventureController", ["$scope", "$http", "$location", "$sta
         $scope.attachTeam = function (team) {
             $scope.values.newTeam = null;
             $scope.values.teams = [];
+            $scope.values.team = team;
             $scope.team = team;
             return false;
         }
 
         $scope.removeTeam = function () {
             $scope.team = null;
+            $scope.values.team = null;
         }
 
         $scope.setDate = function () {
