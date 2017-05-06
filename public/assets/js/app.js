@@ -4468,15 +4468,14 @@ app.controller("userViewController", ["$scope", "$http", "$stateParams", "User",
                 data: {userid: $stateParams.id}
             }).then(function (data) {
                 $scope.teams = data.data.teams;
-            });
-
-            $http({
-                method: "POST",
-                url: "adventure/list",
-                api: true,
-                data: {teams: $scope.teams}
-            }).then(function (r) {
-                $scope.adventures = r.data.adventures;
+                $http({
+                    method: "POST",
+                    url: "adventure/list",
+                    api: true,
+                    data: {teams: $scope.teams}
+                }).then(function (r) {
+                    $scope.adventures = r.data.adventures;
+                });
             });
 
             $http({
