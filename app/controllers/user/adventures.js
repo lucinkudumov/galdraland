@@ -584,16 +584,14 @@ module.exports = function (opts) {
         },
         "post#adventure/list": function (req, res) {
 //            var teams = req.body.teams;
-            adventureModel.find({owner: req.user._id}, function (err, advs) {
-                if (err) {
-                    console.log(err);
-                    return res.json({success: false, adventures: []});
-                } else {
-                    return res.json({success: true, adventures: advs});
-                }
-            });
-
-            /*
+//            adventureModel.find({owner: req.user._id}, function (err, advs) {
+//                if (err) {
+//                    console.log(err);
+//                    return res.json({success: false, adventures: []});
+//                } else {
+//                    return res.json({success: true, adventures: advs});
+//                }
+//            });
             var queries = [];
 
             if (req.body.teams != null) {
@@ -609,7 +607,6 @@ module.exports = function (opts) {
                     return res.json({success: true, adventures: advs});
                 }
             });
-            */
         },
         "post#adventureTag/list": function (req, res) {
             var tag = req.body.tag;
