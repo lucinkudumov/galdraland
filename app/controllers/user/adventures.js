@@ -544,21 +544,36 @@ module.exports = function (opts) {
                         console.log(err);
                         return res.json({success: false, error: "Internal server error"});
                     } else if (team) {
-                        updateInfo.team = team._id;
-                        adventureModel.findOneAndUpdate({_id: id, owner: req.user._id}, updateInfo, function (err, invite) {
+                        var op = {};
+                        if (team.owner.toString() != req.user._id) {
+                            updateInfo.temp_team = team._id;
+                            op = {$unset: {team:""}};
+                        } else {
+                            updateInfo.team = team._id;
+                            op = {$unset: {temp_team:""}};
+                        }
+                        adventureModel.findOneAndUpdate({_id: id, owner: req.user._id}, op, function (err, invite) {
                             if (err) {
                                 console.log(err);
                                 return res.json({success: false, error: "Internal server error"});
                             } else if (invite) {
-                                return res.json({success: true});
-                            } else {
-                                return res.json({success: false, error: "Not found"});
+                                adventureModel.findOneAndUpdate({_id: id, owner: req.user._id}, updateInfo, function (err, invite) {
+                                    if (err) {
+                                        console.log(err);
+                                        return res.json({success: false, error: "Internal server error"});
+                                    } else if (invite) {
+                                        return res.json({success: true});
+                                    } else {
+                                        return res.json({success: false, error: "Not found"});
+                                    }
+                                });
                             }
                         });
+
                     }
                 });
             } else {
-                adventureModel.findOneAndUpdate({_id: id, owner: req.user._id}, { $unset: {team : "" }}, function (err, invite) {
+                adventureModel.findOneAndUpdate({_id: id, owner: req.user._id}, { $unset: {team : "", temp_team:"" }}, function (err, invite) {
                     if (err) {
                         console.log(err);
                         return res.json({success: false, error: "Internal server error"});
