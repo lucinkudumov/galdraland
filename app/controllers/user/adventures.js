@@ -537,6 +537,7 @@ module.exports = function (opts) {
             if (image) {
                 updateInfo.image = image;
             }
+            console.log("updateInfo = ", updateInfo);
             console.log("teamId = " + team);
             if (team != "") {
                 console.log("has teamID");
