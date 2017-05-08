@@ -199,9 +199,11 @@ module.exports = function (opts) {
                                 return res.json({success: false});
                             } else {
                                 if (action == "APPROVE") {
+                                    console.log("update adventure team" , notification);
                                     var op = {};
                                     op = {$set: {team:notification.team}, $unset: {temp_team:""}};
                                     adventureModel.findOneAndUpdate({_id: notification.adventure._id}, op, function (err, adv) {
+                                        console.log(adv);
                                         if (err) {
                                             console.log(err);
                                             return res.json({success: false});
