@@ -1698,7 +1698,18 @@ app.controller("headerController", ["$scope", "$rootScope", "$http", "$location"
                             }
                             else
                                 $scope.notifications = [];
-                            refresh_feeds();
+
+                            $http({
+                                method: "POST", url: "adventure/replynotification", api: true
+                            }).then (function (result) {
+                                if (result !== undefined && result.data !== undefined && result.data.replynotifications !== undefined) {
+                                    $scope.replynotifications = result.data.replynotifications;
+                                }
+                                else
+                                    $scope.replynotifications = [];
+
+                                refresh_feeds();
+                            });
                         });
 //                        $http({
 //                            method: "GET", url: "slack/getFeeds", api: true
@@ -1777,7 +1788,20 @@ app.controller("headerController", ["$scope", "$rootScope", "$http", "$location"
             for (var i = 0; i < $scope.notifications.length; i++) {
                 var feed = $scope.notifications[i];
                 feed.category = 4;
-                feed.msg = feed.master.fullname + " has added your team '" + feed.team.name + "' in his adventure '"+feed.adventure.name + "'";
+                if (feed.notify_type == "request")
+                    feed.msg = feed.master.fullname + " has added your team '" + feed.team.name + "' in his adventure '"+feed.adventure.name + "'";
+                if (feed.notify_type == "delete")
+                    feed.msg = feed.master.fullname + " has deleted your team '" + feed.team.name + "' in his adventure '"+feed.adventure.name + "'";
+                $scope.feeds.push(feed);
+            }
+
+            for (var i = 0; i < $scope.replynotifications.length; i++) {
+                var feed = $scope.replynotifications[i];
+                feed.category = 5;
+                if (feed.notify_type == "approved")
+                    feed.msg = feed.slave.fullname + " has approved your request for including his team '" + feed.team.name + "' in your adventure '"+feed.adventure.name + "'";
+                if (feed.notify_type == "rejected")
+                    feed.msg = feed.slave.fullname + " has rejected your request for including his team '" + feed.team.name + "' in your adventure '"+feed.adventure.name + "'";
                 $scope.feeds.push(feed);
             }
         }
@@ -1924,15 +1948,27 @@ app.controller("headerController", ["$scope", "$rootScope", "$http", "$location"
         }
 
         $scope.showNotification = function (notification) {
-            $http({
-                method: "POST", url: "adventure/viewnotification", api: true, data: {id: notification._id}
-            }).then (function (result) {
-                var url = "/adventures/view/" + notification.adventure._id;
-                if ($location.path() == url)
-                    $state.reload();
-                else
-                    $location.path(url);
-            });
+//            $http({
+//                method: "POST", url: "adventure/viewnotification", api: true, data: {id: notification._id}
+//            }).then (function (result) {
+//                var url = "/adventures/view/" + notification.adventure._id;
+//                if ($location.path() == url)
+//                    $state.reload();
+//                else
+//                    $location.path(url);
+//            });
+        }
+
+        $scope.showReplyNotification = function (replynotification) {
+//            $http({
+//                method: "POST", url: "adventure/viewnotification", api: true, data: {id: notification._id}
+//            }).then (function (result) {
+//                var url = "/adventures/view/" + notification.adventure._id;
+//                if ($location.path() == url)
+//                    $state.reload();
+//                else
+//                    $location.path(url);
+//            });
         }
     }]);
 

@@ -147,7 +147,7 @@ module.exports = function (opts) {
         },
         "post#adventure/notification": function (req, res) {
             var userId = req.user._id;
-            notificationModel.find({slave: userId, homeview: false}).populate("master slave team adventure").exec(function (err, notifications) {
+            notificationModel.find({slave: userId}).populate("master slave team adventure").exec(function (err, notifications) {
                 if (err) {
                     console.log(err);
                     return res.json({notifications: []});
@@ -155,6 +155,19 @@ module.exports = function (opts) {
                     return res.json({notifications: notifications});
                 } else {
                     return res.json({notifications: []});
+                }
+            });
+        },
+        "post#adventure/replynotification": function (req, res) {
+            var userId = req.user._id;
+            notificationModel.find({master: userId}).populate("master slave team adventure").exec(function (err, replynotifications) {
+                if (err) {
+                    console.log(err);
+                    return res.json({replynotifications: []});
+                } else if (replynotifications) {
+                    return res.json({replynotifications: replynotifications});
+                } else {
+                    return res.json({replynotifications: []});
                 }
             });
         },
