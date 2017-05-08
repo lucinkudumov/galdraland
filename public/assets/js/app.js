@@ -1799,9 +1799,9 @@ app.controller("headerController", ["$scope", "$rootScope", "$http", "$location"
                 var feed = $scope.replynotifications[i];
                 feed.category = 5;
                 if (feed.notify_type == "approved")
-                    feed.msg = feed.slave.fullname + " has approved your request for including his team '" + feed.team.name + "' in your adventure '"+feed.adventure.name + "'";
+                    feed.msg = feed.slave.fullname + " has approved your request for adding his team '" + feed.team.name + "' in your adventure '"+feed.adventure.name + "'";
                 if (feed.notify_type == "rejected")
-                    feed.msg = feed.slave.fullname + " has rejected your request for including his team '" + feed.team.name + "' in your adventure '"+feed.adventure.name + "'";
+                    feed.msg = feed.slave.fullname + " has rejected your request for adding his team '" + feed.team.name + "' in your adventure '"+feed.adventure.name + "'";
                 $scope.feeds.push(feed);
             }
         }
@@ -1948,6 +1948,7 @@ app.controller("headerController", ["$scope", "$rootScope", "$http", "$location"
         }
 
         $scope.showNotification = function (notification) {
+            var id = notification._id;
             if (notification.notify_type == "request") {
                 var modalInstance = $uibModal.open({
                     templateUrl: "/assets/partials/modal/viewNotification.html",
@@ -1958,30 +1959,70 @@ app.controller("headerController", ["$scope", "$rootScope", "$http", "$location"
                         }
                     }
                 });
-            }
-            if (notification.notify_type == "delete") {
-                $http({
-                    method: "POST", url: "adventure/viewnotification", api: true, data: {id: notification._id}
-                }).then (function (result) {
-                    var url = "/adventures/view/" + notification.adventure._id;
-                    if ($location.path() == url)
-                        $state.reload();
-                    else
-                        $location.path(url);
+
+                modalInstance.result.then(function (result) {
+                    if (result.action == 'APPROVE' || result.action == 'REJECT') {
+                        $http({method: "POST", url: "adventure/applyNotification", api: true, data: {id: id, action: result.action}}).then(function (result) {
+
+                        });
+                        refresh_feeds();
+                    }
                 });
+            }
+
+            if (notification.notify_type == "delete") {
+                $scope.notificationModal = function () {
+                    var modalInstance = $uibModal.open({
+                        templateUrl: '/assets/partials/modal/yes.html',
+                        controller: "YesController",
+                        resolve: {
+                            msg: function () {
+                                return notification.msg;
+                            },
+                            title: function () {
+                                return "Notification";
+                            }
+                        }
+                    });
+                    modalInstance.result.then(function (result) {
+                        console.log(result);
+                        if (result == "YES") {
+                            console.log("yes");
+                            $http({method: "POST", url: "adventure/applyNotification", api: true, data: {id: id, action: 'delete'}}).then(function (result) {
+                            });
+                            refresh_feeds();
+                        }
+                    });
+                }
             }
         }
 
         $scope.showReplyNotification = function (replynotification) {
-            $http({
-                method: "POST", url: "adventure/viewnotification", api: true, data: {id: notification._id}
-            }).then (function (result) {
-                var url = "/adventures/view/" + notification.adventure._id;
-                if ($location.path() == url)
-                    $state.reload();
-                else
-                    $location.path(url);
-            });
+            var id = replynotification._id;
+            $scope.notificationModal = function () {
+                var modalInstance = $uibModal.open({
+                    templateUrl: '/assets/partials/modal/yes.html',
+                    controller: "YesController",
+                    resolve: {
+                        msg: function () {
+                            return notification.msg;
+                        },
+                        title: function () {
+                            return "Notification";
+                        }
+                    }
+                });
+                modalInstance.result.then(function (result) {
+                    var notification = result.model;
+                    console.log(result);
+                    if (result == "YES") {
+                        console.log("yes");
+                        $http({method: "POST", url: "adventure/applyNotification", api: true, data: {id: id, action: 'delete'}}).then(function (result) {
+                        });
+                        refresh_feeds();
+                    }
+                });
+            }
         }
     }]);
 

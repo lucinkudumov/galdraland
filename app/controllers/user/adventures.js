@@ -171,22 +171,37 @@ module.exports = function (opts) {
                 }
             });
         },
-        "post#adventure/viewnotification": function (req, res) {
+        "post#adventure/applyNotification": function (req, res) {
             var id = req.body.id;
+            var action = req.body.action;
             notificationModel.findOne({_id: id}, function (err, notification) {
                 if (err) {
                     console.log(err);
                     return res.json({success: false});
                 } else if (notification) {
-                    notification.homeview = true;
-                    notification.save(function (err) {
-                        if (err) {
-                            console.log(err);
-                            return res.json({success: false});
-                        } else {
-                            return res.json({success: true});
-                        }
-                    });
+                    if (action == "delete") {
+                        notification.remove( function (err) {
+                            if (err) {
+                                console.log(err);
+                                return res.json({success: false});
+                            } else {
+                                return res.json({success: true});
+                            }
+                        });
+                    } else {
+                        if (action == "APPROVE")
+                            notification.notify_type = "approved";
+                        if (action == "APPROVE")
+                            notification.notify_type = "rejected";
+                        notification.save(function (err) {
+                            if (err) {
+                                console.log(err);
+                                return res.json({success: false});
+                            } else {
+                                return res.json({success: true});
+                            }
+                        });
+                    }
                 } else {
                     return res.json({success: false});
                 }
