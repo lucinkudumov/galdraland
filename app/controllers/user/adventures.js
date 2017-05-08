@@ -147,7 +147,7 @@ module.exports = function (opts) {
         },
         "post#adventure/notification": function (req, res) {
             var userId = req.user._id;
-            notificationModel.find({$or:[{slave: userId}, {notify_type:'request'}, {notify_type:'delete'}]}).populate("master slave team adventure").exec(function (err, notifications) {
+            notificationModel.find({$and:[{slave: userId}, {$or:[{notify_type:'request'}, {notify_type:'delete'}]}]}).populate("master slave team adventure").exec(function (err, notifications) {
                 if (err) {
                     console.log(err);
                     return res.json({notifications: []});
@@ -160,7 +160,7 @@ module.exports = function (opts) {
         },
         "post#adventure/replynotification": function (req, res) {
             var userId = req.user._id;
-            notificationModel.find({$or:[{master: userId}, {notify_type:'approved'}, {notify_type: 'rejected'}]}).populate("master slave team adventure").exec(function (err, replynotifications) {
+            notificationModel.find({$and:[{master: userId}, {$or:[{notify_type:'approved'}, {notify_type: 'rejected'}]}]}).populate("master slave team adventure").exec(function (err, replynotifications) {
                 if (err) {
                     console.log(err);
                     return res.json({replynotifications: []});
