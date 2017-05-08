@@ -1070,6 +1070,7 @@ app.controller("createAdventureController", ["$scope", "$rootScope", "Upload", "
         }
 
         $scope.post_to_fb = function (id) {
+            console.log("create adventure with FB post");
             FB.login(function (response) {
                 console.log(response);
                 if (response.authResponse) {
@@ -1948,7 +1949,6 @@ app.controller("headerController", ["$scope", "$rootScope", "$http", "$location"
         }
 
         $scope.showNotification = function (notification) {
-            console.log("showNotification", notification);
             var id = notification._id;
             if (notification.notify_type == "request") {
                 var modalInstance = $uibModal.open({
@@ -1987,11 +1987,9 @@ app.controller("headerController", ["$scope", "$rootScope", "$http", "$location"
                     }
                 });
                 modalInstance.result.then(function (result) {
-                    console.log(result);
                     var index = $scope.notifications.indexOf(notification);
                     $scope.notifications.splice(index, 1);
                     if (result == "YES") {
-                        console.log("yes");
                         $http({method: "POST", url: "adventure/applyNotification", api: true, data: {id: id, action: 'delete'}}).then(function (result) {
                         });
                         refresh_feeds();
@@ -2001,7 +1999,6 @@ app.controller("headerController", ["$scope", "$rootScope", "$http", "$location"
         }
 
         $scope.showReplyNotification = function (replynotification) {
-            console.log("showReplyNotification", replynotification);
             var id = replynotification._id;
             var modalInstance = $uibModal.open({
                 templateUrl: '/assets/partials/modal/yes.html',
@@ -2016,11 +2013,9 @@ app.controller("headerController", ["$scope", "$rootScope", "$http", "$location"
                 }
             });
             modalInstance.result.then(function (result) {
-                console.log(result);
                 var index = $scope.replynotifications.indexOf(replynotification);
                 $scope.replynotifications.splice(index, 1);
                 if (result == "YES") {
-                    console.log("yes");
                     $http({method: "POST", url: "adventure/applyNotification", api: true, data: {id: id, action: 'delete'}}).then(function (result) {
                     });
                     refresh_feeds();
