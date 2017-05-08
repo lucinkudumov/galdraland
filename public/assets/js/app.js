@@ -1948,27 +1948,40 @@ app.controller("headerController", ["$scope", "$rootScope", "$http", "$location"
         }
 
         $scope.showNotification = function (notification) {
-//            $http({
-//                method: "POST", url: "adventure/viewnotification", api: true, data: {id: notification._id}
-//            }).then (function (result) {
-//                var url = "/adventures/view/" + notification.adventure._id;
-//                if ($location.path() == url)
-//                    $state.reload();
-//                else
-//                    $location.path(url);
-//            });
+            if (notification.notify_type == "request") {
+                var modalInstance = $uibModal.open({
+                    templateUrl: "/assets/partials/modal/viewNotification.html",
+                    controller: "viewNotificationController",
+                    resolve: {
+                        notification: function () {
+                            return notification;
+                        }
+                    }
+                });
+            }
+            if (notification.notify_type == "delete") {
+                $http({
+                    method: "POST", url: "adventure/viewnotification", api: true, data: {id: notification._id}
+                }).then (function (result) {
+                    var url = "/adventures/view/" + notification.adventure._id;
+                    if ($location.path() == url)
+                        $state.reload();
+                    else
+                        $location.path(url);
+                });
+            }
         }
 
         $scope.showReplyNotification = function (replynotification) {
-//            $http({
-//                method: "POST", url: "adventure/viewnotification", api: true, data: {id: notification._id}
-//            }).then (function (result) {
-//                var url = "/adventures/view/" + notification.adventure._id;
-//                if ($location.path() == url)
-//                    $state.reload();
-//                else
-//                    $location.path(url);
-//            });
+            $http({
+                method: "POST", url: "adventure/viewnotification", api: true, data: {id: notification._id}
+            }).then (function (result) {
+                var url = "/adventures/view/" + notification.adventure._id;
+                if ($location.path() == url)
+                    $state.reload();
+                else
+                    $location.path(url);
+            });
         }
     }]);
 
@@ -2564,6 +2577,20 @@ app.controller("viewApplyController", ["$scope", "User", "apply", "$uibModalInst
             $uibModalInstance.close({action: "PUBLISH", model: apply});
         }
     }]);
+
+app.controller("viewNotificationController", ["$scope", "User", "notification", "$uibModalInstance", function ($scope, User, notification, $uibModalInstance) {
+    $scope.notification = notification;
+    $scope.user = User.isLoggedIn();
+
+    $scope.approve = function () {
+        $uibModalInstance.close({action: "APPROVE", model: notification});
+    }
+
+    $scope.reject = function () {
+        $uibModalInstance.close({action: "REJECT", model: notification});
+    }
+}]);
+
 app.controller("viewInviteController", ["$scope", "invite", "$uibModalInstance", "User", function ($scope, invite, $uibModalInstance, User) {
         $scope.invite = invite;
         $scope.user = User.isLoggedIn();
