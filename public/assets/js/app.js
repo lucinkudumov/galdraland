@@ -1962,6 +1962,8 @@ app.controller("headerController", ["$scope", "$rootScope", "$http", "$location"
                 });
 
                 modalInstance.result.then(function (result) {
+                    var index = $scope.notifications.indexOf(notification);
+                    $scope.notifications.splice(index, 1);
                     if (result.action == 'APPROVE' || result.action == 'REJECT') {
                         $http({method: "POST", url: "adventure/applyNotification", api: true, data: {id: id, action: result.action}}).then(function (result) {
 
@@ -1986,6 +1988,8 @@ app.controller("headerController", ["$scope", "$rootScope", "$http", "$location"
                 });
                 modalInstance.result.then(function (result) {
                     console.log(result);
+                    var index = $scope.notifications.indexOf(notification);
+                    $scope.notifications.splice(index, 1);
                     if (result == "YES") {
                         console.log("yes");
                         $http({method: "POST", url: "adventure/applyNotification", api: true, data: {id: id, action: 'delete'}}).then(function (result) {
@@ -2013,6 +2017,8 @@ app.controller("headerController", ["$scope", "$rootScope", "$http", "$location"
             });
             modalInstance.result.then(function (result) {
                 console.log(result);
+                var index = $scope.replynotifications.indexOf(notification);
+                $scope.replynotifications.splice(index, 1);
                 if (result == "YES") {
                     console.log("yes");
                     $http({method: "POST", url: "adventure/applyNotification", api: true, data: {id: id, action: 'delete'}}).then(function (result) {
