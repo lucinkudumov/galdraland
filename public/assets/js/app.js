@@ -1948,6 +1948,7 @@ app.controller("headerController", ["$scope", "$rootScope", "$http", "$location"
         }
 
         $scope.showNotification = function (notification) {
+            console.log("showNotification", notification);
             var id = notification._id;
             if (notification.notify_type == "request") {
                 var modalInstance = $uibModal.open({
@@ -1971,35 +1972,6 @@ app.controller("headerController", ["$scope", "$rootScope", "$http", "$location"
             }
 
             if (notification.notify_type == "delete") {
-                $scope.notificationModal = function () {
-                    var modalInstance = $uibModal.open({
-                        templateUrl: '/assets/partials/modal/yes.html',
-                        controller: "YesController",
-                        resolve: {
-                            msg: function () {
-                                return notification.msg;
-                            },
-                            title: function () {
-                                return "Notification";
-                            }
-                        }
-                    });
-                    modalInstance.result.then(function (result) {
-                        console.log(result);
-                        if (result == "YES") {
-                            console.log("yes");
-                            $http({method: "POST", url: "adventure/applyNotification", api: true, data: {id: id, action: 'delete'}}).then(function (result) {
-                            });
-                            refresh_feeds();
-                        }
-                    });
-                }
-            }
-        }
-
-        $scope.showReplyNotification = function (replynotification) {
-            var id = replynotification._id;
-            $scope.notificationModal = function () {
                 var modalInstance = $uibModal.open({
                     templateUrl: '/assets/partials/modal/yes.html',
                     controller: "YesController",
@@ -2013,7 +1985,6 @@ app.controller("headerController", ["$scope", "$rootScope", "$http", "$location"
                     }
                 });
                 modalInstance.result.then(function (result) {
-                    var notification = result.model;
                     console.log(result);
                     if (result == "YES") {
                         console.log("yes");
@@ -2023,6 +1994,32 @@ app.controller("headerController", ["$scope", "$rootScope", "$http", "$location"
                     }
                 });
             }
+        }
+
+        $scope.showReplyNotification = function (replynotification) {
+            console.log("showReplyNotification", replynotification);
+            var id = replynotification._id;
+            var modalInstance = $uibModal.open({
+                templateUrl: '/assets/partials/modal/yes.html',
+                controller: "YesController",
+                resolve: {
+                    msg: function () {
+                        return replynotification.msg;
+                    },
+                    title: function () {
+                        return "Notification";
+                    }
+                }
+            });
+            modalInstance.result.then(function (result) {
+                console.log(result);
+                if (result == "YES") {
+                    console.log("yes");
+                    $http({method: "POST", url: "adventure/applyNotification", api: true, data: {id: id, action: 'delete'}}).then(function (result) {
+                    });
+                    refresh_feeds();
+                }
+            });
         }
     }]);
 
