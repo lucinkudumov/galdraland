@@ -191,7 +191,7 @@ module.exports = function (opts) {
                     } else {
                         if (action == "APPROVE")
                             notification.notify_type = "approved";
-                        if (action == "APPROVE")
+                        if (action == "REJECT")
                             notification.notify_type = "rejected";
                         notification.save(function (err) {
                             if (err) {

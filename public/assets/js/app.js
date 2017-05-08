@@ -2017,7 +2017,7 @@ app.controller("headerController", ["$scope", "$rootScope", "$http", "$location"
             });
             modalInstance.result.then(function (result) {
                 console.log(result);
-                var index = $scope.replynotifications.indexOf(notification);
+                var index = $scope.replynotifications.indexOf(replynotification);
                 $scope.replynotifications.splice(index, 1);
                 if (result == "YES") {
                     console.log("yes");
