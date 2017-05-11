@@ -3539,6 +3539,9 @@ app.controller("createTeamController", ["$scope", "$rootScope", "Upload", "$http
                             var htmlcontent = data1.data.msg;
                             $scope1 = $('#err').html(htmlcontent).scope();
                             $compile($('#err'))($scope1);
+                            $http({method: "POST", url: "removeTeam", api: true, data: {id: data.data.id}}).then(function () {
+
+                            });
                         } else {
                             if ($rootScope.return2Adventure == "return")
                             {
