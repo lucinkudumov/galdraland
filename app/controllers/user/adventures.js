@@ -587,13 +587,16 @@ module.exports = function (opts) {
                         console.log(err);
                         return res.json({success: false, error: "Internal server error"});
                     } else if (team) {
+                        console.log("test1", team);
                         var op = {};
                         if (team.owner.toString() != req.user._id) {
                             updateInfo.temp_team = team._id;
                             op = {$unset: {team:""}};
+                            console.log("aaa");
                         } else {
                             updateInfo.team = team._id;
                             op = {$unset: {temp_team:""}};
+                            console.log("bbb");
                         }
                         adventureModel.findOneAndUpdate({_id: id, owner: req.user._id}, op, function (err, invite) {
                             if (err) {
@@ -605,14 +608,17 @@ module.exports = function (opts) {
                                         console.log(err);
                                         return res.json({success: false, error: "Internal server error"});
                                     } else if (adventure) {
+                                        console.log("test2", adventure);
                                         if (team.owner.toString() != req.user._id) {
                                             notificationModel.findOneAndUpdate({adventure: adventure._id}, {$set: {notify_type : "request"}}, function (err, notification) {
                                                 if (err) {
                                                     console.log(err);
                                                     return res.json({success: false, error: "Internal server error"});
                                                 } else if (notification) {
+                                                    console.log("ccc", notification);
                                                     return res.json({success: true});
                                                 } else {
+                                                    console.log("ddd");
                                                     var notification = new notificationModel();
                                                     notification.master = req.user._id;
                                                     notification.slave = team.owner;
