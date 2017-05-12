@@ -610,7 +610,7 @@ module.exports = function (opts) {
                                     } else if (adventure) {
                                         console.log("test2", adventure);
                                         if (team.owner.toString() != req.user._id) {
-                                            notificationModel.findOneAndUpdate({adventure: adventure._id}, {$set: {notify_type : "request", slave : team.owner, team: team}}, function (err, notification) {
+                                            notificationModel.findOneAndUpdate({adventure: adventure._id}, {$set: {notify_type : "request", slave : team.owner, team: team._id}}, function (err, notification) {
                                                 if (err) {
                                                     console.log(err);
                                                     return res.json({success: false, error: "Internal server error"});
