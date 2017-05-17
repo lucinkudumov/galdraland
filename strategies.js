@@ -93,6 +93,7 @@ module.exports.facebook = function (opts, cb) {
               } else if (user) {
                   return done(null, user);
               } else {
+                  console.log("parse111");
                   var u = new userModel();
                   
                   u.profileId = profileJSON.id;
