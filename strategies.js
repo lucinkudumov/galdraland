@@ -93,7 +93,6 @@ module.exports.facebook = function (opts, cb) {
               } else if (user) {
                   return done(null, user);
               } else {
-                  console.log("parse111");
                   var u = new userModel();
                   
                   u.profileId = profileJSON.id;
@@ -118,7 +117,7 @@ module.exports.facebook = function (opts, cb) {
                   if (profileJSON.username) {
                       u.username = profileJSON.username;
                   }
-                  u.email = profileJSON.email;//"";
+                  u.email = profileJSON.email;
                   u.skype = "";
                   u.goals = "";
                   u.categories = "";
@@ -130,14 +129,11 @@ module.exports.facebook = function (opts, cb) {
 
                   var saveToUser = function (url) {
                       u.photo = url;
-                      console.log("parse222");
                       u.save(function (err, user) {
                           if (err) {
                               console.log(err);
                               return done(err);
                           } else {
-                              console.log("parse333");
-                              console.log(user);
                               var email = new emailModel();
                               email.userId = user._id;
                               email.email = profileJSON.email;
