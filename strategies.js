@@ -130,12 +130,14 @@ module.exports.facebook = function (opts, cb) {
 
                   var saveToUser = function (url) {
                       u.photo = url;
-
+                      console.log("parse222");
                       u.save(function (err, user) {
                           if (err) {
                               console.log(err);
                               return done(err);
                           } else {
+                              console.log("parse333");
+                              console.log(user);
                               var email = new emailModel();
                               email.userId = user._id;
                               email.email = profileJSON.email;
