@@ -30,7 +30,10 @@
                 <h2 style="color:#394b59; margin-top:0px;font-size:18px; font-weight:700;" ng-show="adventures.length > 0">ADVENTURES</h2>
                 <div style="margin-top:5px;" ng-show="adventures.length > 0" class="members-list">
                     <div style="margin-top:0px;" ng-repeat="adv in adventures">
-                        <p class="name bold" style="margin:0px; margin-left:5px; cursor: pointer; color: #1ab8f3; font-size:22px;" ng-bind="adv.name" ng-click="viewAdventure(adv)"><img src="{{adv.image}}" style="margin-left: 10px; width:50px; height:50px; border-radius: 4px;"></p>
+                        <!--<p class="name bold" style="margin:0px; margin-left:5px; cursor: pointer; color: #1ab8f3; font-size:22px;" ng-bind="adv.name" ng-click="viewAdventure(adv)"><img src="{{adv.image}}" style="margin-left: 10px; width:50px; height:50px; border-radius: 4px;"></p>-->
+                        <p>
+                        <a style="font-size:22px; margin-left:5px; color:#1ab8f3; font-weight: bold;" ng-click="viewAdventure(adv)">{{adv.name}}<img src="{{adv.image}}" style="margin-left: 10px; width:50px; height:50px; border-radius: 4px;"></a>
+                        </p>
                     </div>
                 </div>
                 <h2 style="color:#394b59; margin-top:5px;font-size:18px; font-weight:700;" ng-show="team.mission">MISSION</h2>
