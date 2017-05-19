@@ -554,6 +554,7 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
         $scope.timeEnd = "";
         $scope.ownerId = "";
         $scope.isFavorite = false;
+        $scope.applyToAdv = true;
 
         function onDayClick(day){
             console.log(day);
@@ -597,7 +598,9 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
                 if (data.data.adventure.tags && data.data.adventure.tags.length > 0) {
                     if (data.data.adventure.tags[0] == "") data.data.adventure.tags = [];
                 }
-
+                if (data.data.adventure.team && data.data.adventure.team != '') {
+                    $scope.applyToAdv = true;
+                }
                 $scope.date = new Date(data.data.adventure.start);
                 $scope.events = [
                     {
@@ -633,7 +636,18 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
                         $scope.isFavorite = true;
                     }
                 });
-
+/*
+                $http({
+                    method: "POST",
+                    url: "alreadyApplyToAdv",
+                    api: true,
+                    data: {adventure: $stateParams.id}
+                }).then(function (data) {
+                    if (data && data.data.success == true) {
+                        $scope.applyToAdv = true;
+                    }
+                });
+*/
                 $http({
                     method: "POST",
                     url: "adventure/bloglist",
@@ -642,7 +656,6 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
                 }).then(function (data) {
                         $scope.adventureblogs = data.data.adventureblogs;
                 });
-
             });
         }
 
@@ -922,7 +935,18 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
                                 if (result.teamId == '')
                                     return;
                                 $http({method: "POST", url: "sendApplyToAdv", api: true, data: {team: result.teamId, adventure: $stateParams.id, adv_user: $scope.ownerId}}).then(function (data) {
-
+                                    var modalInstance = $uibModal.open({
+                                        templateUrl: '/assets/partials/modal/yes.html',
+                                        controller: "YesController",
+                                        resolve: {
+                                            msg: function () {
+                                                return data.data.msg;
+                                            },
+                                            title: function () {
+                                                return "Apply Team To Adventure";
+                                            }
+                                        }
+                                    });
                                 });
                             }
                             send_apply_to_adv();

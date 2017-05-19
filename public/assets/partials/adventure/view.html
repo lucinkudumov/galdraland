@@ -25,7 +25,7 @@
         </div>
         <div class="col-md-4" style="padding: 0px;">
             <button ng-show="!isManager" class="btn btn-primary pull-left" ng-click="sendRecommendation()" style="padding-bottom: 1%;">Recommend it to someone</button>
-            <button ng-show="!isManager" class="btn btn-success pull-left" ng-click="sendApplyToAdv()" style="margin-left: 15px; padding-bottom: 1%;">Apply My Team</button>
+            <button ng-show="!isManager" class="btn btn-success pull-left" ng-disabled="applyToAdv" ng-click="sendApplyToAdv()" style="margin-left: 15px; padding-bottom: 1%;">Apply My Team</button>
         </div>
     </div>
     <div class="row">

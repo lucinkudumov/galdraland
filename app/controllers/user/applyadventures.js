@@ -5,6 +5,18 @@ module.exports = function (opts) {
     var applyAdvModel = opts.models.ApplyAdventure;
 
     return {
+        "post#alreadyApplyToAdv": function (req, res) {
+            applyAdvModel.findOne({team_user: req.user._id, adventure: req.body.adventure}).exec(function (err, applyAdv) {
+                if (err) {
+                    console.log(err);
+                    return res.json({success: false, msg:'Occurs Unknown Error'});
+                } else if (applyAdv) {
+                    return res.json({success: true});
+                } else {
+                    return res.json({success: false});
+                }
+            });
+        },
         "post#sendApplyToAdv": function (req, res) {
             applyAdvModel.findOne({team_user: req.user._id, adv_user: req.body.adv_user, team: req.body.team, adventure: req.body.adventure}).exec(function (err, applyAdv) {
                 if (err) {
