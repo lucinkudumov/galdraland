@@ -3,19 +3,15 @@
 </div>
 <div class="modal-body">
     <div class="form-group">
-        <ul class="unstyled invites">
-            <li>
-                <h5>Select Your Team: </h5>
-                <form role="form" class="form-inline">
-                    <div class="form-group">
-                        <select class="form-control" ng-model="selTeam" ng-class="{unselected: selTeam === '0'}">
-                            <option value="0" selected>Select Team</option>
-                            <option ng-repeat="team in values.teams" value="{{ team._id}}">{{ team.name}}</option>
-                        </select>
-                    </div>
-                </form>
-            </li>
-        </ul>
+        <div class="col-md-4">
+            <h5>Select Your Team: </h5>
+        </div>
+        <div class="col-md-8">
+            <select class="form-control" ng-model="selTeam" ng-class="{unselected: selTeam === '0'}">
+                <option value="0" selected>Select Team</option>
+                <option ng-repeat="team in values.teams" value="{{ team._id}}">{{ team.name}}</option>
+            </select>
+        </div>
     </div>
 </div>
 <div class="modal-footer">
