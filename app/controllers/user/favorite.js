@@ -19,9 +19,6 @@ module.exports = function (opts) {
                     return res.json({success: false, msg:'You have already favored'});
                 } else {
                     var ft = new favoriteTeamModel();
-                    console.log("userid = " + req.user._id);
-                    console.log("teamId = " + req.body.teamId);
-                    console.log("ownerId = " + req.body.ownerId);
                     ft.user = req.user._id;
                     ft.team = req.body.teamId;
                     ft.owner = req.body.ownerId;
@@ -167,9 +164,9 @@ module.exports = function (opts) {
         },
         "post#getFavoriteAdventure": function (req, res) {
             var adv_ids = [];
-            for (var i = 0; i < req.body.adventures.length; i++) {
-                adv_ids.push(req.body.adventures[i]._id);
-            }
+//            for (var i = 0; i < req.body.adventures.length; i++) {
+//                adv_ids.push(req.body.adventures[i]._id);
+//            }
             favoriteAdvModel.find({$and : [{user: req.user._id}, {adventure : {$nin: adv_ids}}]}).populate("user adventure").exec(function (err, favorites) {
                 if (err) {
                     console.log(err);
@@ -183,9 +180,9 @@ module.exports = function (opts) {
         },
         "post#getFavoriteTeam": function (req, res) {
             var team_ids = [];
-            for (var i = 0; i < req.body.teams.length; i++) {
-                team_ids.push(req.body.teams[i]._id);
-            }
+//            for (var i = 0; i < req.body.teams.length; i++) {
+//                team_ids.push(req.body.teams[i]._id);
+//            }
             favoriteTeamModel.find({$and : [{user: req.user._id}, {team : {$nin : team_ids}}]}).populate("user team").exec(function (err, favorites) {
                 if (err) {
                     console.log(err);
@@ -199,9 +196,9 @@ module.exports = function (opts) {
         },
         "post#getFavoriteUser": function (req, res) {
             var user_ids = [];
-            for (var i = 0; i < req.body.users.length; i++) {
-                user_ids.push(req.body.users[i]);
-            }
+//            for (var i = 0; i < req.body.users.length; i++) {
+//                user_ids.push(req.body.users[i]);
+//            }
             favoriteUserModel.find({$and : [{user: req.user._id}, {fuser : {$nin : user_ids}}]}).populate("user fuser").exec(function (err, favorites) {
                 if (err) {
                     console.log(err);
