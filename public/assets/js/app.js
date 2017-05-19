@@ -1748,7 +1748,26 @@ app.controller("headerController", ["$scope", "$rootScope", "$http", "$location"
                                 else
                                     $scope.replynotifications = [];
 
-                                refresh_feeds();
+                                $http({
+                                    method: "POST", url: "getApplyToAdv", api: true
+                                }).then (function (result) {
+                                    if (result !== undefined && result.data !== undefined && result.data.notifications !== undefined) {
+                                        $scope.applyToAdvs = result.data.applyToAdvs;
+                                    }
+                                    else
+                                        $scope.applyToAdvs = [];
+
+                                    $http({
+                                        method: "POST", url: "replyApplyToAdv", api: true
+                                    }).then (function (result) {
+                                        if (result !== undefined && result.data !== undefined && result.data.replyApplyToAdvs !== undefined) {
+                                            $scope.replyApplyToAdvs = result.data.replyApplyToAdvs;
+                                        }
+                                        else
+                                            $scope.replyApplyToAdvs = [];
+                                        refresh_feeds();
+                                    });
+                                });
                             });
                         });
 //                        $http({
@@ -1842,6 +1861,26 @@ app.controller("headerController", ["$scope", "$rootScope", "$http", "$location"
                     feed.msg = feed.slave.fullname + " has approved your request for adding his team '" + feed.team.name + "' in your adventure '"+feed.adventure.name + "'";
                 if (feed.notify_type == "rejected")
                     feed.msg = feed.slave.fullname + " has rejected your request for adding his team '" + feed.team.name + "' in your adventure '"+feed.adventure.name + "'";
+                $scope.feeds.push(feed);
+            }
+
+            for (var i = 0; i < $scope.applyToAdvs.length; i++) {
+                var feed = $scope.applyToAdvs[i];
+                feed.category = 6;
+                if (feed.apply_type == "request")
+                    feed.msg = feed.team_user.fullname + " has applied his team '" + feed.team.name + "' to your adventure '"+feed.adventure.name + "'";
+                else
+                    feed.msg = "";
+                $scope.feeds.push(feed);
+            }
+
+            for (var i = 0; i < $scope.replyApplyToAdvs.length; i++) {
+                var feed = $scope.replyApplyToAdvs[i];
+                feed.category = 7;
+                if (feed.apply_type == "approved")
+                    feed.msg = feed.adv_user.fullname + " has approved your request for adding your team '" + feed.team.name + "' to his adventure '"+feed.adventure.name + "'";
+                if (feed.apply_type == "rejected")
+                    feed.msg = feed.adv_user.fullname + " has rejected your request for adding your team '" + feed.team.name + "' to his adventure '"+feed.adventure.name + "'";
                 $scope.feeds.push(feed);
             }
         }
@@ -2056,6 +2095,57 @@ app.controller("headerController", ["$scope", "$rootScope", "$http", "$location"
                 $scope.replynotifications.splice(index, 1);
                 if (result == "YES") {
                     $http({method: "POST", url: "adventure/applyNotification", api: true, data: {id: id, action: 'delete'}}).then(function (result) {
+                    });
+                    refresh_feeds();
+                }
+            });
+        }
+
+        $scope.showApplyToAdv = function (applyToAdv) {
+            var id = applyToAdv._id;
+            if (applyToAdv.apply_type == "request") {
+                var modalInstance = $uibModal.open({
+                    templateUrl: "/assets/partials/modal/viewApplyToAdv.html",
+                    controller: "viewApplyToAdvController",
+                    resolve: {
+                        applyToAdv: function () {
+                            return applyToAdv;
+                        }
+                    }
+                });
+
+                modalInstance.result.then(function (result) {
+                    var index = $scope.applyToAdvs.indexOf(applyToAdv);
+                    $scope.applyToAdvs.splice(index, 1);
+                    if (result.action == 'APPROVE' || result.action == 'REJECT') {
+                        $http({method: "POST", url: "processApplyToAdv", api: true, data: {id: id, action: result.action}}).then(function (result) {
+
+                        });
+                        refresh_feeds();
+                    }
+                });
+            }
+        }
+
+        $scope.showReplyApplyToAdv = function (replyApplyToAdv) {
+            var id = replyApplyToAdv._id;
+            var modalInstance = $uibModal.open({
+                templateUrl: '/assets/partials/modal/yes.html',
+                controller: "YesController",
+                resolve: {
+                    msg: function () {
+                        return replyApplyToAdv.msg;
+                    },
+                    title: function () {
+                        return "Apply Team To Adventure";
+                    }
+                }
+            });
+            modalInstance.result.then(function (result) {
+                var index = $scope.replyApplyToAdvs.indexOf(replyApplyToAdv);
+                $scope.replyApplyToAdvs.splice(index, 1);
+                if (result == "YES") {
+                    $http({method: "POST", url: "processApplyToAdv", api: true, data: {id: id, action: 'delete'}}).then(function (result) {
                     });
                     refresh_feeds();
                 }
@@ -2679,6 +2769,19 @@ app.controller("viewNotificationController", ["$scope", "User", "notification", 
 
     $scope.reject = function () {
         $uibModalInstance.close({action: "REJECT", model: notification});
+    }
+}]);
+
+app.controller("viewApplyToAdvController", ["$scope", "User", "applyToAdv", "$uibModalInstance", function ($scope, User, applyToAdv, $uibModalInstance) {
+    $scope.applyToAdv = applyToAdv;
+    $scope.user = User.isLoggedIn();
+
+    $scope.approve = function () {
+        $uibModalInstance.close({action: "APPROVE", model: applyToAdv});
+    }
+
+    $scope.reject = function () {
+        $uibModalInstance.close({action: "REJECT", model: applyToAdv});
     }
 }]);
 

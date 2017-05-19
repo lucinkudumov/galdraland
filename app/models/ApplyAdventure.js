@@ -21,6 +21,10 @@ module.exports = function (opts) {
         apply_type: {
             type: String,
             required: false
+        },
+        createdAt: {
+            type : Date,
+            "default" : Date.now
         }
     });
 
