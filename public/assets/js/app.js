@@ -4868,6 +4868,13 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
         $scope.ownerId = "";
     $scope.isFavorite = false;
 
+    $scope.map = {
+        center: {
+            latitude: 56.162939,
+            longitude: 10.203921
+        },
+        zoom: 8
+    };
 
     $scope.emptyMembers = [];
     $scope.emptyRecMembers = [];
