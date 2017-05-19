@@ -5106,6 +5106,8 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
             modalInstance.result.then(function (result) {
                 if (result == "YES") {
                     var teamId = $stateParams.id;
+                    console.log("teamId = " + teamId);
+                    console.log("ownerId = " + $scope.ownerId);
                     $http({method: "POST", url: "addFavoriteTeam", api: true, data: {teamId: teamId, ownerId: $scope.ownerId}}).then(function (data) {
                         $scope.favoriteMsg = data.data.msg;
                         $scope.favoriteModal();
