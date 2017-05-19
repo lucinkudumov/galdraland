@@ -2153,25 +2153,18 @@ app.controller("headerController", ["$scope", "$rootScope", "$http", "$location"
 
         $scope.showReplyApplyToAdv = function (replyApplyToAdv) {
             var id = replyApplyToAdv._id;
-            var modalInstance = $uibModal.open({
-                templateUrl: '/assets/partials/modal/yes.html',
-                controller: "YesController",
-                resolve: {
-                    msg: function () {
-                        return replyApplyToAdv.msg;
-                    },
-                    title: function () {
-                        return "Apply Team To Adventure";
-                    }
-                }
-            });
             modalInstance.result.then(function (result) {
                 var index = $scope.replyApplyToAdvs.indexOf(replyApplyToAdv);
                 $scope.replyApplyToAdvs.splice(index, 1);
                 if (result == "YES") {
                     $http({method: "POST", url: "processApplyToAdv", api: true, data: {id: id, action: 'delete'}}).then(function (result) {
+                        var url = "/adventures/view/" + replyApplyToAdv.adventure;
+                        if ($location.path() == url)
+                            $state.reload();
+                        else
+                            $location.path(url);
                     });
-                    refresh_feeds();
+//                    refresh_feeds();
                 }
             });
         }

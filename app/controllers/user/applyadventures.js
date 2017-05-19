@@ -94,7 +94,21 @@ module.exports = function (opts) {
                                 console.log(err);
                                 return res.json({success: false});
                             } else {
-                                return res.json({success: true});
+                                if (action == "APPROVE") {
+                                    var op = {};
+                                    op = {$set: {team:applyToAdv.team}};
+                                    adventureModel.findOneAndUpdate({_id: applyToAdv.adventure}, op, function (err, adv) {
+                                        console.log(adv);
+                                        if (err) {
+                                            console.log(err);
+                                            return res.json({success: false});
+                                        } else {
+                                            return res.json({success: true});
+                                        }
+                                    });
+                                } else {
+                                    return res.json({success: true});
+                                }
                             }
                         });
                     }
