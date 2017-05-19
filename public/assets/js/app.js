@@ -554,7 +554,7 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
         $scope.timeEnd = "";
         $scope.ownerId = "";
         $scope.isFavorite = false;
-        $scope.applyToAdv = true;
+        $scope.applyToAdv = false;
 
         function onDayClick(day){
             console.log(day);
