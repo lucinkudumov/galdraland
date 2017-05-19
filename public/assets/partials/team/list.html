@@ -8,6 +8,14 @@
             <!--</div>-->
         <!--</div>-->
     <!--</div>-->
+    <ul class="nav nav-tabs" style="padding: 0px;">
+        <li class="active" style="margin-bottom: 0px; padding: 1px 2px;">
+            <a href="#tab_1" data-toggle="tab" aria-expanded="true" style="margin: 0; padding: 5px 5px;">My Team</a>
+        </li>
+        <li style="margin-bottom: 0px; padding: 1px 2px;">
+            <a href="#tab_2" data-toggle="tab" aria-expanded="false" style="margin: 0; padding: 5px 5px;">Favorite Team</a>
+        </li>
+    </ul>
     <div class="row">
         <div class="col-md-8 col-sm-8">
             <br>
@@ -23,10 +31,14 @@
                 <td>{{ t.teamMembers.length}} members</td>
                 <td>
                     <a href="/teams/view/{{ t._id}}" class="btn btn-same-size btn-primary" ng-show="user._id != t.owner._id">View</a>
-                    <!--<a href="#" class="btn btn-same-size btn-danger" ng-show="user._id != t.owner._id">Leave</a>-->
                     <a href="/teams/view/{{ t._id}}" class="btn btn-same-size btn-primary" ng-show="user._id == t.owner._id">Manage</a>
                 </td>
                 </tr>
+            </table>
+        </div>
+        <div class="col-md-8 col-sm-8">
+            <br>
+            <table class="table teams">
                 <tr ng-repeat="ft in fteams">
                     <td ng-show="ft.team.image" width="20%"><img src="{{ft.team.image}}" style="width:114px; height:80px;"/></td>
                     <td ng-show="!ft.team.image" width="20%">&nbsp;</td>
@@ -35,11 +47,11 @@
                     <td>{{ ft.team.teamMembers.length}} members</td>
                     <td>
                         <a href="/teams/view/{{ ft.team._id}}" class="btn btn-same-size btn-primary" ng-show="user._id != ft.team.owner._id">View</a>
-                        <!--<a href="#" class="btn btn-same-size btn-danger" ng-show="user._id != t.owner._id">Leave</a>-->
                         <a href="/teams/view/{{ ft.team._id}}" class="btn btn-same-size btn-primary" ng-show="user._id == ft.team.owner._id">Manage</a>
                     </td>
                 </tr>
             </table>
         </div>
+
     </div>
 </div>
