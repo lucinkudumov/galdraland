@@ -16,7 +16,7 @@
             <a href="#tab_2" data-toggle="tab" aria-expanded="false" style="margin: 0; padding: 5px 5px;">Favorite Team</a>
         </li>
     </ul>
-    <div class="row">
+    <div class="tab-content" style="margin-top: 5px;">
         <div class="tab-pane fade active in" id="tab_1">
             <div class="col-md-8 col-sm-8">
             <br>
@@ -42,7 +42,23 @@
             <div class="col-md-8 col-sm-8">
             <br>
                 <span>test</span>
-            <table class="table teams">
+                <table class="table teams">
+                    <tr ng-show="!loading && teams.length == 0 && fteams.length == 0">
+                        <td class="err-msg">No teams, <a href="/teams/create">add</a> new team now.</td>
+                    </tr>
+                    <tr ng-repeat="t in teams">
+                        <td ng-show="t.image" width="20%"><img src="{{t.image}}" style="border: 1px solid #ddd; width:114px; height:80px;"/></td>
+                        <td ng-show="!t.image" width="20%">&nbsp;</td>
+                        <td>{{ t.name}}</td>
+                        <td><rating-widget isstatic="1" ref="t._id" ></rating-widget></td>
+                        <td>{{ t.teamMembers.length}} members</td>
+                        <td>
+                            <a href="/teams/view/{{ t._id}}" class="btn btn-same-size btn-primary" ng-show="user._id != t.owner._id">View</a>
+                            <a href="/teams/view/{{ t._id}}" class="btn btn-same-size btn-primary" ng-show="user._id == t.owner._id">Manage</a>
+                        </td>
+                    </tr>
+                </table>
+                <table class="table teams">
                 <tr ng-repeat="ft in fteams">
                     <td ng-show="ft.team.image" width="20%"><img src="{{ft.team.image}}" style="width:114px; height:80px;"/></td>
                     <td ng-show="!ft.team.image" width="20%">&nbsp;</td>
@@ -54,7 +70,7 @@
                         <a href="/teams/view/{{ ft.team._id}}" class="btn btn-same-size btn-primary" ng-show="user._id == ft.team.owner._id">Manage</a>
                     </td>
                 </tr>
-            </table>
+                </table>
             </div>
         </div>
     </div>
