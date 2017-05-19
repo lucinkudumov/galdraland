@@ -893,6 +893,36 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
             });
             return false;
         }
+
+        $scope.sendApplyToAdv = function () {
+            $http({
+                method: "GET",
+                url: "getBadgesByCreateTeam",
+                api: true
+            }).then (function success(data) {
+                var teams = []
+                teams = data.data.badges;
+                console.log("teams = ", teams);
+                if (teams.length) {
+                    var modalInstance = $uibModal.open({
+                        templateUrl: "/assets/partials/modal/sendApplyToAdv.html",
+                        controller: "sendApplyToAdvController",
+                        resolve: {
+                            values: function () {
+                                return {teams: teams}
+                            }
+                        }
+                    });
+
+                    modalInstance.result.then(function (result) {
+                        if (result.type == "SEND") {
+                            console.log("sending...." + result.teamId);
+                        }
+                    });
+                }
+            });
+
+        }
         $scope.refresh();
     }]);
 app.controller("usersResultController", ["$scope", "$http", "User", "$location", function ($scope, $http, User, $location) {
@@ -2596,6 +2626,19 @@ app.controller("sendInviteController", ["$scope", "$uibModalInstance", "values",
             return re.test(email);
         }
     }]);
+
+app.controller("sendApplyToAdvController", ["$scope", "$uibModalInstance", "values", "$http", "User", function ($scope, $uibModalInstance, values, $http, User) {
+    $scope.values = angular.copy(values);
+
+    $scope.cancel = function () {
+        $uibModalInstance.close({type: "CLOSE"});
+    }
+
+    $scope.send = function () {
+        $uibModalInstance.close({type: "SEND", teamId: $scope.selTeam});
+    }
+}]);
+
 app.controller("viewApplyController", ["$scope", "User", "apply", "$uibModalInstance", function ($scope, User, apply, $uibModalInstance) {
         $scope.apply = apply;
         $scope.user = User.isLoggedIn();
