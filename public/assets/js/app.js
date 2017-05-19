@@ -900,7 +900,8 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
                 url: "getBadgesByCreateTeam",
                 api: true
             }).then (function success(data) {
-                var teams = []
+                var teams = [];
+                console.log(data);
                 teams = data.data.badges;
                 console.log("teams = ", teams);
                 if (teams.length) {
