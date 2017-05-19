@@ -2154,7 +2154,7 @@ app.controller("headerController", ["$scope", "$rootScope", "$http", "$location"
         $scope.showReplyApplyToAdv = function (replyApplyToAdv) {
             var id = replyApplyToAdv._id;
             $http({method: "POST", url: "processApplyToAdv", api: true, data: {id: id, action: 'delete'}}).then(function (result) {
-                var url = "/adventures/view/" + replyApplyToAdv.adventure;
+                var url = "/adventures/view/" + replyApplyToAdv.adventure._id;
                 if ($location.path() == url)
                     $state.reload();
                 else
