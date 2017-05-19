@@ -918,6 +918,14 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
                     modalInstance.result.then(function (result) {
                         if (result.type == "SEND") {
                             console.log("sending...." + result.teamId);
+                            function send_apply_to_adv() {
+                                if (result.teamId == '')
+                                    return;
+                                $http({method: "POST", url: "sendApplyToAdv", api: true, data: {team: result.teamId, adventure: $stateParams.id, adventure_owner: $scope.ownerId}}).then(function (data) {
+
+                                });
+                            }
+                            send_apply_to_adv();
                         }
                     });
                 }
