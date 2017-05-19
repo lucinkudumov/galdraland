@@ -897,12 +897,12 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
         $scope.sendApplyToAdv = function () {
             $http({
                 method: "GET",
-                url: "getBadgesByCreateTeam",
+                url: "myTeams",
                 api: true
             }).then (function success(data) {
                 var teams = [];
                 console.log(data);
-                teams = data.data.badges;
+                teams = data.data.teams;
                 console.log("teams = ", teams);
                 if (teams.length) {
                     var modalInstance = $uibModal.open({
