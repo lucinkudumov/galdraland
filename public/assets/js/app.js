@@ -1775,7 +1775,7 @@ app.controller("headerController", ["$scope", "$rootScope", "$http", "$location"
                                 $http({
                                     method: "POST", url: "getApplyToAdv", api: true
                                 }).then (function (result) {
-                                    if (result !== undefined && result.data !== undefined && result.data.notifications !== undefined) {
+                                    if (result !== undefined && result.data !== undefined && result.data.applyToAdvs !== undefined) {
                                         $scope.applyToAdvs = result.data.applyToAdvs;
                                     }
                                     else
