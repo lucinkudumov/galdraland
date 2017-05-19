@@ -921,7 +921,7 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
                             function send_apply_to_adv() {
                                 if (result.teamId == '')
                                     return;
-                                $http({method: "POST", url: "sendApplyToAdv", api: true, data: {team: result.teamId, adventure: $stateParams.id, adventure_owner: $scope.ownerId}}).then(function (data) {
+                                $http({method: "POST", url: "sendApplyToAdv", api: true, data: {team: result.teamId, adventure: $stateParams.id, adv_user: $scope.ownerId}}).then(function (data) {
 
                                 });
                             }
