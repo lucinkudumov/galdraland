@@ -18,7 +18,7 @@ module.exports = function (opts) {
             });
         },
         "post#sendApplyToAdv": function (req, res) {
-            applyAdvModel.findOne({team_user: req.user._id, adv_user: req.body.adv_user, team: req.body.team, adventure: req.body.adventure}).exec(function (err, applyAdv) {
+            applyAdvModel.findOne({team_user: req.user._id, adv_user: req.body.adv_user, adventure: req.body.adventure}).exec(function (err, applyAdv) {
                 if (err) {
                     console.log(err);
                     return res.json({success: false, msg:'Occurs Unknown Error'});
