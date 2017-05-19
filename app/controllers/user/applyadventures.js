@@ -3,6 +3,7 @@ var validator = require('validator'),
 
 module.exports = function (opts) {
     var applyAdvModel = opts.models.ApplyAdventure;
+    var adventureModel = opts.models.Adventure;
 
     return {
         "post#alreadyApplyToAdv": function (req, res) {
