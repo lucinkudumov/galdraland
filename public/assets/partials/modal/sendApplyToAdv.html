@@ -9,8 +9,8 @@
                 <form role="form" class="form-inline">
                     <div class="form-group">
                         <select class="form-control" ng-model="selTeam">
-                            <option value="0">Select Team</option>
-                            <option ng-repeat="values" value="{{ values._id}}">{{ values.name}}</option>
+                            <option value="0" selected>Select Team</option>
+                            <option ng-repeat="team in values.teams" value="{{ team._id}}">{{ team.name}}</option>
                         </select>
                     </div>
                 </form>
