@@ -8,34 +8,54 @@
             <!--</div>-->
         <!--</div>-->
     <!--</div>-->
-    <div class="row">
-        <div class="col-md-8 col-sm-8">
-            <br>
-            <table class="table adventures">
-                <tr ng-show="!loading && adventures.length == 0 && fadventures.length == 0">
-                    <td class="err-msg">No adventures, <a href="/adventures/create">add</a> new adventure now.</td>
-                </tr>
-                <tr ng-repeat="a in adventures">
-                    <td ng-show="a.image" width="20%"><img src="{{a.image}}" style="border: 1px solid #ddd; width:114px; height:80px;"/></td>
-                    <td>{{ a.name}}</td>
-                    <td><rating-widget isstatic="1" ref="a._id" ></rating-widget></td>
-                <td>{{ a.start + " - " + a.end}}</td>
-                <td>
-                    <a href="/adventures/view/{{ a._id}}" class="btn btn-same-size btn-primary" ng-show="user._id != a.owner">View</a>
-                    <a href="/adventures/view/{{ a._id}}" class="btn btn-same-size btn-primary" ng-show="user._id == a.owner">Manage</a>
-                </td>
-                </tr>
-                <tr ng-repeat="fa in fadventures">
-                    <td ng-show="fa.adventure.image" width="20%"><img src="{{fa.adventure.image}}" style="width:114px; height:80px;"/></td>
-                    <td>{{ fa.adventure.name}}</td>
-                    <td><rating-widget isstatic="1" ref="fa.adventure._id" ></rating-widget></td>
-                    <td>{{ fa.adventure.start + " - " + fa.adventure.end}}</td>
+    <ul class="nav nav-tabs" style="padding: 0px;">
+        <li class="active" style="margin-bottom: 0px; padding: 1px 2px;">
+            <a href="#tab_1" data-toggle="tab" aria-expanded="true" style="margin: 0; padding: 5px 5px;">My Adventures</a>
+        </li>
+        <li style="margin-bottom: 0px; padding: 1px 2px;">
+            <a href="#tab_2" data-toggle="tab" aria-expanded="false" style="margin: 0; padding: 5px 5px;">Favorite Adventures</a>
+        </li>
+    </ul>
+    <div class="tab-content" style="margin-top: 5px;">
+        <div class="tab-pane fade active in" id="tab_1">
+            <div class="col-md-8 col-sm-8">
+                <br>
+                <table class="table adventures">
+                    <tr ng-show="!loading && adventures.length == 0">
+                        <td class="err-msg">No adventures, <a href="/adventures/create">add</a> new adventure now.</td>
+                    </tr>
+                    <tr ng-repeat="a in adventures">
+                        <td ng-show="a.image" width="20%"><img src="{{a.image}}" style="border: 1px solid #ddd; width:114px; height:80px;"/></td>
+                        <td>{{ a.name}}</td>
+                        <td><rating-widget isstatic="1" ref="a._id" ></rating-widget></td>
+                    <td>{{ a.start + " - " + a.end}}</td>
                     <td>
-                        <a href="/adventures/view/{{ fa.adventure._id}}" class="btn btn-same-size btn-primary" ng-show="user._id != fa.adventure.owner">View</a>
-                        <a href="/adventures/view/{{ fa.adventure._id}}" class="btn btn-same-size btn-primary" ng-show="user._id == fa.adventure.owner">Manage</a>
+                        <a href="/adventures/view/{{ a._id}}" class="btn btn-same-size btn-primary" ng-show="user._id != a.owner">View</a>
+                        <a href="/adventures/view/{{ a._id}}" class="btn btn-same-size btn-primary" ng-show="user._id == a.owner">Manage</a>
                     </td>
-                </tr>
-            </table>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="tab_2">
+            <div class="col-md-8 col-sm-8">
+                <br>
+                <table class="table adventures">
+                    <tr ng-show="!loading && fadventures.length == 0">
+                        <td class="err-msg">No favorite adventures</td>
+                    </tr>
+                    <tr ng-repeat="fa in fadventures">
+                        <td ng-show="fa.adventure.image" width="20%"><img src="{{fa.adventure.image}}" style="width:114px; height:80px;"/></td>
+                        <td>{{ fa.adventure.name}}</td>
+                        <td><rating-widget isstatic="1" ref="fa.adventure._id" ></rating-widget></td>
+                        <td>{{ fa.adventure.start + " - " + fa.adventure.end}}</td>
+                        <td>
+                            <a href="/adventures/view/{{ fa.adventure._id}}" class="btn btn-same-size btn-primary" ng-show="user._id != fa.adventure.owner">View</a>
+                            <a href="/adventures/view/{{ fa.adventure._id}}" class="btn btn-same-size btn-primary" ng-show="user._id == fa.adventure.owner">Manage</a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
         </div>
     </div>
 </div>

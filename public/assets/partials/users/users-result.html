@@ -1,31 +1,50 @@
 <div ng-controller="usersResultController">
-    <div class="row" style="margin-top:15px;">
-        <div class="col-md-8">
-            <br>
-            <table class="table">
-                <tr ng-show="!loading && results.length == 0 && fusers.length == 0">
-                    <td class="err-msg">No Users</td>
-                </tr>
-                <tr ng-repeat="r in results">
-                    <td ng-show="r.photo"><div class="avatar" style="background-image: url('{{ r.photo}}')"></div></td>
-                    <td>{{ r.name}}</td>
-                    <!--<td>{{ r.team_role}}</td>-->
-                    <td><p ng-repeat="tr in r.team_role">{{tr}}</p></td>
-                    <td ng-show="r.href">
-                        <a href="{{r.href}}" class="btn btn-primary">View</a>
-                    </td>
-                </tr>
-                <tr ng-repeat="f in fusers">
-                    <td ng-show="f.fuser.photo"><div class="avatar" style="background-image: url('{{ f.fuser.photo}}')"></div></td>
-                    <td>{{ f.fuser.fullname}}</td>
-                    <!--<td>{{ r.team_role}}</td>-->
-                    <td>&nbsp;</td>
-                    <td ng-show="f.fuser._id">
-                        <a href="/users/view/{{f.fuser._id}}" class="btn btn-primary">View</a>
-                    </td>
-                </tr>
-            </table>
+    <ul class="nav nav-tabs" style="padding: 0px;">
+        <li class="active" style="margin-bottom: 0px; padding: 1px 2px;">
+            <a href="#tab_1" data-toggle="tab" aria-expanded="true" style="margin: 0; padding: 5px 5px;">My Users</a>
+        </li>
+        <li style="margin-bottom: 0px; padding: 1px 2px;">
+            <a href="#tab_2" data-toggle="tab" aria-expanded="false" style="margin: 0; padding: 5px 5px;">Favorite Users</a>
+        </li>
+    </ul>
+    <div class="tab-content" style="margin-top: 15px;">
+        <div class="tab-pane fade active in" id="tab_1">
+            <div class="col-md-8">
+                <br>
+                <table class="table">
+                    <tr ng-show="!loading && results.length == 0">
+                        <td class="err-msg">No Users</td>
+                    </tr>
+                    <tr ng-repeat="r in results">
+                        <td ng-show="r.photo"><div class="avatar" style="background-image: url('{{ r.photo}}')"></div></td>
+                        <td>{{ r.name}}</td>
+                        <!--<td>{{ r.team_role}}</td>-->
+                        <td><p ng-repeat="tr in r.team_role">{{tr}}</p></td>
+                        <td ng-show="r.href">
+                            <a href="{{r.href}}" class="btn btn-primary">View</a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-md-4"></div>
         </div>
-        <div class="col-md-4"></div>
+        <div class="tab-pane fade" id="tab_2">
+            <div class="col-md-8">
+                <br>
+                <table class="table">
+                    <tr ng-show="!loading && fusers.length == 0">
+                        <td class="err-msg">No Favorite Users</td>
+                    </tr>
+                    <tr ng-repeat="f in fusers">
+                        <td ng-show="f.fuser.photo"><div class="avatar" style="background-image: url('{{ f.fuser.photo}}')"></div></td>
+                        <td>{{ f.fuser.fullname}}</td>
+                        <td ng-show="f.fuser._id">
+                            <a href="/users/view/{{f.fuser._id}}" class="btn btn-primary">View</a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-md-4"></div>
+        </div>
     </div>
 </div>
