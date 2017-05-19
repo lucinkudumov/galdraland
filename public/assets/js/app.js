@@ -2638,7 +2638,7 @@ app.controller("sendInviteController", ["$scope", "$uibModalInstance", "values",
 
 app.controller("sendApplyToAdvController", ["$scope", "$uibModalInstance", "values", "$http", "User", function ($scope, $uibModalInstance, values, $http, User) {
     $scope.values = angular.copy(values);
-
+    $scope.selTeam = '0';
     $scope.cancel = function () {
         $uibModalInstance.close({type: "CLOSE"});
     }
