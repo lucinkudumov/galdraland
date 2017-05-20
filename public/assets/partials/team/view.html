@@ -88,8 +88,8 @@
                     <button ng-show="!isManager && isFavorite" class="btn btn-danger pull-left" ng-click="removeFavoriteTeam()" style="margin-top: 5px; padding-bottom: 1%;">Remove from favorites</button>
                     <button ng-show="!isManager && !isFavorite" class="btn btn-primary pull-left" ng-click="addFavoriteTeam()" style="margin-top: 5px; padding-bottom: 1%;">Add to favorites</button>
                 </div>
-                <div>
-                    <ui-gmap-google-map center='map.center' zoom='map.zoom'></ui-gmap-google-map>
+                <div map-lazy-load="/assets/js/my/gmaps_api.js">
+                    <ng-map center="41,-87" zoom="3"></ng-map>
                 </div>
             </div>
         </div>
