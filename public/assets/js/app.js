@@ -4930,7 +4930,7 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
                     $scope.adventures = data.data.advs;
                     $scope.isManager = data.data.team.owner._id == $scope.user._id;
                     $scope.ownerId = data.data.team.owner._id;
-                        
+
                     angular.extend($scope, {
                         position: {
                             lat: data.data.team.latitude,
