@@ -157,6 +157,14 @@
             <small ng-show="!roles || roles.length == 0">No Data</small>
             <small ng-repeat="r in roles">{{ r.role }}</small>
         </div>
+        <div uib-accordion-group class="panel-default" is-open="true" ng-show="latitude && latitude != '' && latitude != 0 && longitude && longitude != '' && longitude != 0">
+            <uib-accordion-heading>
+                <p>Geo Location</p>
+            </uib-accordion-heading>
+            <div ng-show="latitude && latitude != '' && latitude != 0 && longitude && longitude != '' && longitude != 0" class="col-md-12"style="padding-right: 0px;">
+                <leaflet lf-center="position" width="100%" height="380px"></leaflet>
+            </div>
+        </div>
         <div uib-accordion-group class="panel-default" is-open="true" ng-show="isFavorite">
             <uib-accordion-heading>
                 <p>List of Favorites</p>

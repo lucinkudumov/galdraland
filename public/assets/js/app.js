@@ -4703,6 +4703,14 @@ app.controller("userViewController", ["$scope", "$http", "$stateParams", "User",
         $scope.badgesData = [];
         $scope.isFavorite = false;
 
+        angular.extend($scope, {
+            position: {
+                lat: 51.505,
+                lng: -0.09,
+                zoom: 4
+            }
+        });
+    
         $scope.refresh = function () {
             $http({
                 method: "POST",
@@ -4732,6 +4740,18 @@ app.controller("userViewController", ["$scope", "$http", "$stateParams", "User",
                 $scope.looks= data.data.user.looks;
                 $scope.roles= data.data.user.roles;
                 $scope.isManager = $scope.user._id == $stateParams.id;
+
+                if (latitude && !isNaN(latitude)) {
+                    $scope.position.lat = parseFloat(latitude);
+                } else {
+                    $scope.position.lat = 0 ;
+                }
+
+                if (longitude && !isNaN(longitude)) {
+                    $scope.position.lng = parseFloat(longitude);
+                } else {
+                    $scope.position.lng = 0 ;
+                }
 
                 $http({
                     method: "POST",
