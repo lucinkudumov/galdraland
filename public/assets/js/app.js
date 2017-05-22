@@ -4940,13 +4940,13 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
                     $scope.isManager = data.data.team.owner._id == $scope.user._id;
                     $scope.ownerId = data.data.team.owner._id;
 
-                    if (data.data.team.latitude && isNaN(data.data.team.latitude)) {
+                    if (data.data.team.latitude && !isNaN(data.data.team.latitude)) {
                         $scope.position.lat = parseFloat(data.data.team.latitude);
                     } else {
                         $scope.position.lat = 0 ;
                     }
 
-                    if (data.data.team.longitude && isNaN(data.data.team.longitude)) {
+                    if (data.data.team.longitude && !isNaN(data.data.team.longitude)) {
                         $scope.position.lng = parseFloat(data.data.team.longitude);
                     } else {
                         $scope.position.lng = 0 ;
