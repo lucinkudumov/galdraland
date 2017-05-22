@@ -5231,7 +5231,7 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
             if (newValue != oldValue) {
                 console.log("new = ", newValue);
                 console.log("old = ", oldValue);
-                var htmlcontent = "<leaflet lf-center='" + newValue + "' width='100%' height='380px'></leaflet>";
+                var htmlcontent = "<leaflet lf-center=" + newValue + " width='100%' height='380px'></leaflet>";
                 var $scope2 = $('#geolocation').html(htmlcontent).scope();
                 $compile($('#geolocation'))($scope2);
             }
