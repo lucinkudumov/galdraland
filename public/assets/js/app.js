@@ -4900,7 +4900,7 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
         position: {
             lat: 51.505,
             lng: -0.09,
-            zoom: 8
+            zoom: 4
         }
     });
 
@@ -4939,13 +4939,13 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
                     $scope.adventures = data.data.advs;
                     $scope.isManager = data.data.team.owner._id == $scope.user._id;
                     $scope.ownerId = data.data.team.owner._id;
-//                    angular.extend($scope, {
-//                        position: {
-//                            lat: data.data.team.latitude,
-//                            lng: data.data.team.longitude,
-//                            zoom: 4
-//                        }
-//                    });
+                    angular.extend($scope, {
+                        position: {
+                            lat: data.data.team.latitude,
+                            lng: data.data.team.longitude,
+                            zoom: 4
+                        }
+                    });
 
                     $scope.isMember = false;
                     for (var i = 0; i < data.data.team.teamMembers.length; i++) {
