@@ -43,6 +43,12 @@ module.exports = function (opts) {
         homeview: {
             type: Boolean,
             "default": true
+        },
+        latitude: {
+            type: String
+        },
+        longitude: {
+            type: String
         }
     });
     

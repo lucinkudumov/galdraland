@@ -54,6 +54,12 @@ module.exports = function (opts) {
         temp_team: {
             type: mongoose.Schema.ObjectId,
             ref: "Team"
+        },
+        latitude: {
+            type: String
+        },
+        longitude: {
+            type: String
         }
     });
 

@@ -1144,7 +1144,7 @@ app.controller("createAdventureController", ["$scope", "$rootScope", "Upload", "
                 method: "POST",
                 url: "adventure/create",
                 api: true,
-                data: {name: $scope.name, type: $scope.type, fb_page: $scope.fb_page, description: $scope.description, link: $scope.link, image: $scope.uploadedImage, team: teamId, start: $scope.formatDate($scope.start), end: $scope.formatDate($scope.end), tags: tmpTags}
+                data: {name: $scope.name, type: $scope.type, latitude: $scope.latitude, longitude : $scope.longitude, fb_page: $scope.fb_page, description: $scope.description, link: $scope.link, image: $scope.uploadedImage, team: teamId, start: $scope.formatDate($scope.start), end: $scope.formatDate($scope.end), tags: tmpTags}
             }). then (function success(data) {
                 $location.path("/adventures/view/" + data.data.id);
                 if (post)
@@ -1256,6 +1256,8 @@ app.controller("editAdventureController", ["$scope", "$http", "$location", "$sta
                 $scope.type = data.data.adventure.type;
                 $scope.uploadedImage = data.data.adventure.image;
                 $scope.fb_page = data.data.adventure.fb_page;
+                $scope.latitude = data.data.adventure.latitude;
+                $scope.longitude = data.data.adventure.longitude;
             });
         }
 
@@ -1327,7 +1329,7 @@ app.controller("editAdventureController", ["$scope", "$http", "$location", "$sta
                 method: "POST",
                 url: "adventure/update",
                 api: true,
-                data: {id: $stateParams.id, name: $scope.name, team : teamId, fb_page: $scope.fb_page, description: $scope.description, link: $scope.link, image: $scope.uploadedImage, tags: tmpTags, start: $scope.formatDate($scope.start), end: $scope.formatDate($scope.end), status: $scope.status, type: $scope.type}
+                data: {id: $stateParams.id, name: $scope.name, team : teamId, latitude: $scope.latitude, longitude: $scope.longitude, fb_page: $scope.fb_page, description: $scope.description, link: $scope.link, image: $scope.uploadedImage, tags: tmpTags, start: $scope.formatDate($scope.start), end: $scope.formatDate($scope.end), status: $scope.status, type: $scope.type}
             }).then  (function success(data) {
                 $location.path("/adventures/view/" + $stateParams.id);
             });
@@ -3707,7 +3709,7 @@ app.controller("createTeamController", ["$scope", "$rootScope", "Upload", "$http
                 method: "POST",
                 url: "createTeam",
                 api: true,
-                data: {name: $scope.name, description: $scope.description, rols: $scope.roles, defuser: $rootScope.defUser, fb_page: $scope.fb_page, mission: $scope.mission, image: $scope.uploadedImage, tags: tmpTags}
+                data: {name: $scope.name, description: $scope.description, rols: $scope.roles, defuser: $rootScope.defUser, latitude: $scope.latitude, longitude: $scope.longitude, fb_page: $scope.fb_page, mission: $scope.mission, image: $scope.uploadedImage, tags: tmpTags}
             }).then(function (data) {
                 if (data && data.data && data.data.success == true) {
                     $http({
@@ -3819,6 +3821,8 @@ app.controller("editTeamController", ["$scope", "$http", "$location", "$statePar
             $scope.uploadedImage = data.data.team.image;
             $scope.tags = data.data.team.tags;
             $scope.fb_page = data.data.team.fb_page;
+            $scope.latitude = data.data.team.latitude;
+            $scope.longitude = data.data.team.longitude;
             $scope.mission = data.data.team.mission;
         });
         $scope.onFileSelect = function (image) {
@@ -3858,7 +3862,7 @@ app.controller("editTeamController", ["$scope", "$http", "$location", "$statePar
                 else
                     tmpTags.push($scope.tags[i].name);
             }
-            $http({method: "POST", url: "editTeam", api: true, data: {id: id, name: $scope.name, description: $scope.description, image:$scope.uploadedImage, fb_page: $scope.fb_page, mission: $scope.mission, tags:tmpTags}}).then(function (data) {
+            $http({method: "POST", url: "editTeam", api: true, data: {id: id, name: $scope.name, description: $scope.description, image:$scope.uploadedImage, latitude: $scope.latitude, longitude: $scope.longitude, fb_page: $scope.fb_page, mission: $scope.mission, tags:tmpTags}}).then(function (data) {
                 $location.path("/teams/view/" + id);
             });
         }
@@ -4888,23 +4892,6 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
         $scope.ownerId = "";
     $scope.isFavorite = false;
 
-    $scope.map = {
-        center: {
-            latitude: 56.162939,
-            longitude: 10.203921
-        },
-        zoom: 8
-    };
-
-
-    angular.extend($scope, {
-        london: {
-            lat: 51.505,
-            lng: -0.09,
-            zoom: 4
-        }
-    });
-
     $scope.emptyMembers = [];
     $scope.emptyRecMembers = [];
     $scope.slackAuthentication = false;
@@ -4943,6 +4930,14 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
                     $scope.adventures = data.data.advs;
                     $scope.isManager = data.data.team.owner._id == $scope.user._id;
                     $scope.ownerId = data.data.team.owner._id;
+                        
+                    angular.extend($scope, {
+                        position: {
+                            lat: data.data.team.latitude,
+                            lng: data.data.team.longitude,
+                            zoom: 4
+                        }
+                    });
                     $scope.isMember = false;
                     for (var i = 0; i < data.data.team.teamMembers.length; i++) {
                         if (data.data.team.teamMembers[i].user.profileId == '000000000000000000000000') {
