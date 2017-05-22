@@ -5232,9 +5232,9 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
             console.log("old = ", oldValue);
             if (newValue != oldValue) {
                 leafletData.getMap().then(function(map) {
-                    $timeout(function() {
+//                    $timeout(function() {
                         map.invalidateSize();
-                    }, 300);
+//                    }, 300);
                 });
             }
         }, true);
