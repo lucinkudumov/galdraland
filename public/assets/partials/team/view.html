@@ -88,8 +88,8 @@
                     <button ng-show="!isManager && isFavorite" class="btn btn-danger pull-left" ng-click="removeFavoriteTeam()" style="margin-top: 5px; padding-bottom: 1%;">Remove from favorites</button>
                     <button ng-show="!isManager && !isFavorite" class="btn btn-primary pull-left" ng-click="addFavoriteTeam()" style="margin-top: 5px; padding-bottom: 1%;">Add to favorites</button>
                 </div>
-                <div map-lazy-load="https://maps.google.com/maps/api/js">
-                    <ng-map center="41,-87" zoom="3"></ng-map>
+                <div>
+                    <leaflet lf-center="london" width="100%" height="480px"></leaflet>
                 </div>
             </div>
         </div>

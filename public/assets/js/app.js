@@ -1,4 +1,4 @@
-var app = angular.module("galdra", ["ngRoute", "ui.router", "ngCookies", "ui.bootstrap", "ngFileUpload", 'decipher.tags', 'ui.bootstrap.typeahead', /*'ngTagsInput',*/ "envoc.simpleCalendar", "infinite-scroll", 'ngMap'/* "uiGmapgoogle-maps", "meow.blog.view", "meow.blog.edit"*/]);
+var app = angular.module("galdra", ["ngRoute", "ui.router", "ngCookies", "ui.bootstrap", "ngFileUpload", 'decipher.tags', 'ui.bootstrap.typeahead', /*'ngTagsInput',*/ "envoc.simpleCalendar", "infinite-scroll", 'leaflet-directive'/* "uiGmapgoogle-maps", "meow.blog.view", "meow.blog.edit"*/]);
 var config = {
     //siteurl : 'http://galdraland.com:9010/'
     siteurl: 'https://galdraland-1-0.herokuapp.com/'
