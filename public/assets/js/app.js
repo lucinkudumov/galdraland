@@ -4885,7 +4885,7 @@ app.controller("userViewController", ["$scope", "$http", "$stateParams", "User",
         $scope.refresh();
     }]);
 
-app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "$stateParams", "User", "$uibModal", "$location", "$compile", "$state", 'leafletData', function ($rootScope, $scope, $http, $sce, $stateParams, User, $uibModal, $location, $compile, $state, leafletData) {
+app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "$stateParams", "User", "$uibModal", "$location", "$compile", "$state", 'leafletData', "$timeout", function ($rootScope, $scope, $http, $sce, $stateParams, User, $uibModal, $location, $compile, $state, leafletData, $timeout) {
         $scope.user = User.isLoggedIn();
         $scope.description = "";
         $scope.owner = null;
@@ -5228,9 +5228,13 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
         }, true);
 
         $scope.$watch("position", function(newValue, oldValue){
+            console.log("new = ", newValue);
+            console.log("old = ", oldValue);
             if (newValue != oldValue) {
                 leafletData.getMap().then(function(map) {
-                    map.invalidateSize();
+                    $timeout(function() {
+                        map.invalidateSize();
+                    }, 300);
                 });
             }
         }, true);
