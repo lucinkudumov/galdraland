@@ -4930,14 +4930,18 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
                     $scope.adventures = data.data.advs;
                     $scope.isManager = data.data.team.owner._id == $scope.user._id;
                     $scope.ownerId = data.data.team.owner._id;
-
-                    angular.extend($scope, {
-                        position: {
-                            lat: data.data.team.latitude,
-                            lng: data.data.team.longitude,
-                            zoom: 4
-                        }
-                    });
+                    $scope.position = {
+                        lat: data.data.team.latitude,
+                        lng: data.data.team.longitude,
+                        zoom: 8
+                    };
+//                    angular.extend($scope, {
+//                        position: {
+//                            lat: data.data.team.latitude,
+//                            lng: data.data.team.longitude,
+//                            zoom: 8
+//                        }
+//                    });
                     $scope.isMember = false;
                     for (var i = 0; i < data.data.team.teamMembers.length; i++) {
                         if (data.data.team.teamMembers[i].user.profileId == '000000000000000000000000') {
