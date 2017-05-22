@@ -4885,7 +4885,7 @@ app.controller("userViewController", ["$scope", "$http", "$stateParams", "User",
         $scope.refresh();
     }]);
 
-app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "$stateParams", "User", "$uibModal", "$location", "$compile", "$state", leafletData, function ($rootScope, $scope, $http, $sce, $stateParams, User, $uibModal, $location, $compile, $state, leafletData) {
+app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "$stateParams", "User", "$uibModal", "$location", "$compile", "$state", 'leafletData', function ($rootScope, $scope, $http, $sce, $stateParams, User, $uibModal, $location, $compile, $state, leafletData) {
         $scope.user = User.isLoggedIn();
         $scope.description = "";
         $scope.owner = null;
