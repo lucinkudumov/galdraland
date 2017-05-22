@@ -4931,11 +4931,13 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
                     $scope.adventures = data.data.advs;
                     $scope.isManager = data.data.team.owner._id == $scope.user._id;
                     $scope.ownerId = data.data.team.owner._id;
-                    $scope.position = {
-                        lat: data.data.team.latitude,
-                        lng: data.data.team.longitude,
-                        zoom: 8
-                    };
+                    angular.extend($scope, {
+                        position: {
+                            lat: data.data.team.latitude,
+                            lng: data.data.team.longitude,
+                            zoom: 4
+                        }
+                    });
 
                     $scope.isMember = false;
                     for (var i = 0; i < data.data.team.teamMembers.length; i++) {
@@ -5227,6 +5229,8 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
 
         $scope.$watch("position", function(newValue, oldValue){
             if (newValue != oldValue) {
+                console.log("new = ", newValue);
+                console.log("old = ", oldValue);
                 var htmlcontent = "<leaflet lf-center='" + newValue + "' width='100%' height='380px'></leaflet>";
                 var $scope = $('#geolocation').html(htmlcontent).scope();
                 $compile($('#geolocation'))($scope);
