@@ -556,6 +556,14 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
         $scope.isFavorite = false;
         $scope.applyToAdv = false;
 
+    angular.extend($scope, {
+        position: {
+            lat: 51.505,
+            lng: -0.09,
+            zoom: 4
+        }
+    });
+
         function onDayClick(day){
             console.log(day);
         }
@@ -637,6 +645,19 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
                 $scope.adventure = data.data.adventure;
                 $scope.isManager = data.data.adventure.owner == $scope.user._id;
                 $scope.ownerId = data.data.adventure.owner;
+
+                if (data.data.adventure.latitude && !isNaN(data.data.adventure.latitude)) {
+                    $scope.position.lat = parseFloat(data.data.adventure.latitude);
+                } else {
+                    $scope.position.lat = 0 ;
+                }
+
+                if (data.data.adventure.longitude && !isNaN(data.data.adventure.longitude)) {
+                    $scope.position.lng = parseFloat(data.data.adventure.longitude);
+                } else {
+                    $scope.position.lng = 0 ;
+                }
+
                 $http({
                     method: "POST",
                     url: "getViewUser",
@@ -4952,14 +4973,6 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
                         $scope.position.lng = 0 ;
                     }
 
-//                    angular.extend($scope, {
-//                        position: {
-//                            lat: data.data.team.latitude,
-//                            lng: data.data.team.longitude,
-//                            zoom: 4
-//                        }
-//                    });
-
                     $scope.isMember = false;
                     for (var i = 0; i < data.data.team.teamMembers.length; i++) {
                         if (data.data.team.teamMembers[i].user.profileId == '000000000000000000000000') {
@@ -5245,18 +5258,6 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
                 var htmlcontent = "<div id='fb-root'></div><script>window.fbAsyncInit = function () {FB.init({appId: '110469289012320',status: true,cookie: true,xfbml: true,version: 'v2.3'});};window.fbAsyncInit();(function (d, s, id) {var js, fjs = d.getElementsByTagName(s)[0];if (d.getElementById(id)) {return;}js = d.createElement(s);js.id = id;js.src = '//connect.facebook.net/en_US/sdk.js';fjs.parentNode.insertBefore(js, fjs);}(document, 'script', 'facebook-jssdk'));</script><div class='fb-page' data-tabs='timeline,events,messages' data-href='"+newValue+"' data-width='350' data-hide-cover='false'></div>";
                 var $scope = $('#fbPage').html(htmlcontent).scope();
                 $compile($('#fbPage'))($scope);
-            }
-        }, true);
-
-        $scope.$watch("position", function(newValue, oldValue){
-            console.log("new = ", newValue);
-            console.log("old = ", oldValue);
-            if (newValue != oldValue) {
-//                leafletData.getMap().then(function(map) {
-////                    $timeout(function() {
-//                        map.invalidateSize();
-////                    }, 300);
-//                });
             }
         }, true);
 
