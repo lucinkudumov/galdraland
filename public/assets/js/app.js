@@ -4895,6 +4895,15 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
     $scope.emptyMembers = [];
     $scope.emptyRecMembers = [];
     $scope.slackAuthentication = false;
+
+    angular.extend($scope, {
+        position: {
+            lat: 50,
+            lng: 60,
+            zoom: 8
+        }
+    });
+
         $scope.refresh = function () {
             console.log("refreshing.....");
             $http({
@@ -4930,20 +4939,20 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
                     $scope.adventures = data.data.advs;
                     $scope.isManager = data.data.team.owner._id == $scope.user._id;
                     $scope.ownerId = data.data.team.owner._id;
-                    $scope.position = {
-                        lat: data.data.team.latitude,
-                        lng: data.data.team.longitude,
-                        zoom: 8
-                    };
-                    console.log("test = ", $scope.position);
-                    angular.extend($scope, {
-                        position1: {
-                            lat: data.data.team.latitude,
-                            lng: data.data.team.longitude,
-                            zoom: 8
-                        }
-                    });
-                    console.log("test1 = ", $scope.position1);
+//                    $scope.position = {
+//                        lat: data.data.team.latitude,
+//                        lng: data.data.team.longitude,
+//                        zoom: 8
+//                    };
+//                    console.log("test = ", $scope.position);
+//                    angular.extend($scope, {
+//                        position1: {
+//                            lat: data.data.team.latitude,
+//                            lng: data.data.team.longitude,
+//                            zoom: 8
+//                        }
+//                    });
+//                    console.log("test1 = ", $scope.position1);
 
                     $scope.isMember = false;
                     for (var i = 0; i < data.data.team.teamMembers.length; i++) {
