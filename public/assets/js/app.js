@@ -3048,6 +3048,8 @@ app.controller("profileSettingsController", ["$scope", "$rootScope", "$location"
         $scope.email = "";
         $scope.location = "";
         $scope.skype = "";
+        $scope.latitude = "";
+        $scope.longitude = "";
         $scope.goals = "";
         $scope.categories = "";
         $scope.educations = [];
@@ -3068,6 +3070,8 @@ app.controller("profileSettingsController", ["$scope", "$rootScope", "$location"
             $scope.email = data.data.user.email.email;
             $scope.location = data.data.user.location;
             $scope.skype = data.data.user.skype;
+            $scope.latitude = data.data.user.latitude;
+            $scope.longitude = data.data.user.longitude;
             $scope.goals = data.data.user.goals;
             $scope.categories = data.data.user.categories;
             $scope.educations = data.data.user.educations;
@@ -3109,7 +3113,7 @@ app.controller("profileSettingsController", ["$scope", "$rootScope", "$location"
                 method: "POST",
                 url: "saveMainInformation",
                 api: true,
-                data: {username: $scope.username, fullname: $scope.fullname, email: $scope.email, location: $scope.location, skype: $scope.skype, /*goals: $scope.goals,*/ categories: $scope.categories}
+                data: {username: $scope.username, fullname: $scope.fullname, email: $scope.email, location: $scope.location, latitude : $scope.latitude, longitude : $scope.longitude, skype: $scope.skype, /*goals: $scope.goals,*/ categories: $scope.categories}
             }).then(function (data) {
                 if (data.data.success) {
                     User.update();
@@ -3540,8 +3544,26 @@ app.controller("contactController", ['$scope', '$http', '$rootScope', function($
 app.controller("profileViewController", ["$scope", "$http", "User", function ($scope, $http, User) {
     $scope.user = User.isLoggedIn();
     $scope.badgesData = [];
+    angular.extend($scope, {
+        position: {
+            lat: 51.505,
+            lng: -0.09,
+            zoom: 4
+        }
+    });
     $http.get("/api/getUserDetail").then(function (data) {
         $scope.user = data.data.user;
+        if (data.data.user.latitude && !isNaN(data.data.user.latitude)) {
+            $scope.position.lat = parseFloat(data.data.user.latitude);
+        } else {
+            $scope.position.lat = 0 ;
+        }
+
+        if (data.data.user.longitude && !isNaN(data.data.user.longitude)) {
+            $scope.position.lng = parseFloat(data.data.user.longitude);
+        } else {
+            $scope.position.lng = 0 ;
+        }
     });
 
     $http({
@@ -4693,6 +4715,8 @@ app.controller("userViewController", ["$scope", "$http", "$stateParams", "User",
                 $scope.email = data.data.user.email;
                 $scope.location = data.data.user.location;
                 $scope.skype = data.data.user.skype;
+                $scope.latitude = data.data.user.latitude;
+                $scope.longitude = data.data.user.longitude;
                 $scope.goals = data.data.user.goals;
                 $scope.categories = data.data.user.categories;
                 $scope.educations = data.data.user.educations;

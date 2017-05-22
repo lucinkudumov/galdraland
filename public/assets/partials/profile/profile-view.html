@@ -93,6 +93,14 @@
         <small ng-show="!user.roles || user.roles.length == 0">No Data, <a href="/settings">add</a> now.</small>
         <small ng-repeat="r in user.roles">{{ r.role }}</small>
         </div>
+        <div uib-accordion-group class="panel-default" is-open="true" ng-show="user.latitude && user.latitude != '' && user.latitude != 0 && user.longitude && user.longitude != '' && user.longitude != 0">
+            <uib-accordion-heading>
+                <p>Geo Location</p>
+            </uib-accordion-heading>
+            <div ng-show="user.latitude && user.latitude != '' && user.latitude != 0 && user.longitude && user.longitude != '' && user.longitude != 0" class="col-md-12"style="padding-right: 0px;">
+                <leaflet lf-center="position" width="100%" height="380px"></leaflet>
+            </div>
+        </div>
         </uib-accordion>
         <a href="/settings" class="btn btn-same-size btn-primary" style="float: right;">Edit</a>
         </blockquote>
