@@ -4935,13 +4935,16 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
                         lng: data.data.team.longitude,
                         zoom: 8
                     };
-//                    angular.extend($scope, {
-//                        position: {
-//                            lat: data.data.team.latitude,
-//                            lng: data.data.team.longitude,
-//                            zoom: 8
-//                        }
-//                    });
+                    console.log("test = ", $scope.position);
+                    angular.extend($scope, {
+                        position1: {
+                            lat: data.data.team.latitude,
+                            lng: data.data.team.longitude,
+                            zoom: 8
+                        }
+                    });
+                    console.log("test1 = ", $scope.position1);
+
                     $scope.isMember = false;
                     for (var i = 0; i < data.data.team.teamMembers.length; i++) {
                         if (data.data.team.teamMembers[i].user.profileId == '000000000000000000000000') {
