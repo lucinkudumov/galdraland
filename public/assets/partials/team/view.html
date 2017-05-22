@@ -91,13 +91,13 @@
             </div>
         </div>
     </div>
-    <div class="clearfix" style="margin-top: 10px;" ng-show="team.latitude && team.longitude">
-        <div class="row">
-            <div class="col-md-12"style="padding-right: 0px;">
-                <leaflet lf-center="position" width="100%" height="380px"></leaflet>
-            </div>
+    <div class="clearfix" style="margin-top: 10px;" ng-show="team.latitude && team.longitude"></div>
+    <div class="row">
+        <div ng-show="team.latitude && team.longitude" class="col-md-12"style="padding-right: 0px;">
+            <leaflet lf-center="position" width="100%" height="380px"></leaflet>
         </div>
     </div>
+
     <div ng-show="teamblogs.length" class="clearfix" style="border: 1px solid #CCCCCC; margin-top: 30px;"></div>
     <div class="row">
         <div class="col-md-12" ng-show="teamblogs.length" style="padding-right: 0px;">
