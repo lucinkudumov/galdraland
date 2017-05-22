@@ -4885,7 +4885,7 @@ app.controller("userViewController", ["$scope", "$http", "$stateParams", "User",
         $scope.refresh();
     }]);
 
-app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "$stateParams", "User", "$uibModal", "$location", "$compile", "$state", function ($rootScope, $scope, $http, $sce, $stateParams, User, $uibModal, $location, $compile, $state) {
+app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "$stateParams", "User", "$uibModal", "$location", "$compile", "$state", leafletData, function ($rootScope, $scope, $http, $sce, $stateParams, User, $uibModal, $location, $compile, $state, leafletData) {
         $scope.user = User.isLoggedIn();
         $scope.description = "";
         $scope.owner = null;
@@ -5229,11 +5229,11 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
 
         $scope.$watch("position", function(newValue, oldValue){
             if (newValue != oldValue) {
-                console.log("new = ", newValue);
-                console.log("old = ", oldValue);
-                var htmlcontent = "<leaflet lf-center=" + newValue + " width='100%' height='380px'></leaflet>";
-                var $scope2 = $('#geolocation').html(htmlcontent).scope();
-                $compile($('#geolocation'))($scope2);
+                leafletData.getMap().then(function(map) {
+                    $timeout(function() {
+                        map.invalidateSize();
+                    }, 300);
+                });
             }
         }, true);
 
