@@ -4896,6 +4896,14 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
     $scope.emptyRecMembers = [];
     $scope.slackAuthentication = false;
 
+    angular.extend($scope, {
+        position: {
+            lat: 51.505,
+            lng: -0.09,
+            zoom: 8
+        }
+    });
+
         $scope.refresh = function () {
             console.log("refreshing.....");
             $http({
@@ -5231,11 +5239,11 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
             console.log("new = ", newValue);
             console.log("old = ", oldValue);
             if (newValue != oldValue) {
-                leafletData.getMap().then(function(map) {
-//                    $timeout(function() {
-                        map.invalidateSize();
-//                    }, 300);
-                });
+//                leafletData.getMap().then(function(map) {
+////                    $timeout(function() {
+//                        map.invalidateSize();
+////                    }, 300);
+//                });
             }
         }, true);
 
