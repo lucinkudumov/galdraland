@@ -599,14 +599,14 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
                     if (data.data.adventure.tags[0] == "") data.data.adventure.tags = [];
                 }
                 if (data.data.adventure.team && data.data.adventure.team != '') {
-                    $scope.applyToAdv = true;
+                    $scope.applyToAdv = false;
                 }
-
                 $http({
                     method: "GET",
                     url: "myTeams",
                     api: true
                 }).then ( function success (data) {
+                    console.log("dava = ", data);
                     if (data.data.teams && data.data.teams.length > 0) {
                         for (i = 0; i < data.data.teams.length; i ++) {
                             if (data.data.teams[i].name == "GALDRALANDERS") {

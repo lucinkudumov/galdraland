@@ -41,11 +41,11 @@
                 <div style="margin-top:5px;" ng-show="adventure.link" class="members-list">
                     <a style="font-size:22px; margin-left:5px; color:#1ab8f3; font-weight: bold;" href="{{adventure.link}}" class="name">{{adventure.link}}</a>
                 </div>
-                <h2 style="color:#394b59; margin-top:5px;font-size:18px; font-weight:700;" ng-show="adventure.team">TEAM</h2>
+                <h2 style="color:#394b59; margin-top:5px;font-size:18px; font-weight:700;">TEAM</h2>
                 <div style="margin-top:5px;" ng-show="adventure.team" class="members-list">
                     <a style="font-size:22px; margin-left:5px; color:#1ab8f3; font-weight: bold;" href="/teams/view/{{adventure.team._id}}" class="name">{{adventure.team.name}}<img src="{{adventure.team.image}}" style="margin-left: 10px; width:50px; height:50px; border-radius: 4px;"></a>
+                    <button ng-show="!isManager" class="btn btn-default pull-left" ng-show="applyToAdv" ng-click="sendApplyToAdv()" style="margin-left: 15px; padding-bottom: 1%;">Apply for this adventure</button>
                 </div>
-                <button ng-show="!isManager" class="btn btn-success pull-left" ng-show="!applyToAdv" ng-click="sendApplyToAdv()" style="margin-left: 15px; padding-bottom: 1%;">Apply for this adventure</button>
                 <h2 style="color:#394b59; margin-top:5px;font-size:18px; font-weight:700;" ng-show="adventure.team">TIMELINE</h2>
                 <div style="text-align: center;">
                 <strong>{{monthName(date)}} {{date|date:'yyyy'}}</strong>
