@@ -4939,8 +4939,8 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
                     $scope.adventures = data.data.advs;
                     $scope.isManager = data.data.team.owner._id == $scope.user._id;
                     $scope.ownerId = data.data.team.owner._id;
-                    $scope.position.lat = 37;
-                    $scope.position.zoom = 13;
+                    $scope.position.lat = data.data.team.latitude;
+                    $scope.position.lng = data.data.team.longitude;
 //                    angular.extend($scope, {
 //                        position: {
 //                            lat: data.data.team.latitude,
