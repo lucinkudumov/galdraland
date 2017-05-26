@@ -4,8 +4,8 @@ var request = require('request');
 var dateFormat = require('dateformat');
 
 // Debugging
-var slackClientID = "152964900435.152966006611";
-var slackClientSecret = "c0086daa9f0fa36c1531572490d00832";
+var slackClientID = "188468856003.188694276882";
+var slackClientSecret = "0ead08787cc5d8be0b53ea06a467e632";
 
 //var slackClientID = "138423090594.145329929105";
 //var slackClientSecret = "2cee7f73e16f6a949b20b81551d9cce0";

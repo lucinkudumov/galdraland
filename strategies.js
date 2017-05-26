@@ -7,7 +7,7 @@ var passport = require("passport"),
     utils = require('./utils'),
     path = require('path'),
     cloudinary = require('cloudinary');
-var galdraGroupName = "david_galdra_test";
+    var galdraGroupName = "galdraland_channel";
 passport.serializeUser(function(user, done) {
     done(null, user);
 });
@@ -129,6 +129,7 @@ module.exports.facebook = function (opts, cb) {
 
                   var saveToUser = function (url) {
                       u.photo = url;
+
                       u.save(function (err, user) {
                           if (err) {
                               console.log(err);

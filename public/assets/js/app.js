@@ -366,8 +366,8 @@ app.config(["$urlRouterProvider", "$locationProvider", "$stateProvider", "$httpP
 app.run(["$rootScope", "$http", "$location", "User", function ($rootScope, $http, $location, User) {
 
 //      Debugging
-        $rootScope.slackClientID = "152964900435.152966006611";
-        $rootScope.slackClientSecret = "c0086daa9f0fa36c1531572490d00832";
+        $rootScope.slackClientID = "188468856003.188694276882";
+        $rootScope.slackClientSecret = "0ead08787cc5d8be0b53ea06a467e632";
 //        $rootScope.slackClientID = "138423090594.145329929105";
 //        $rootScope.slackClientSecret = "2cee7f73e16f6a949b20b81551d9cce0";
 
@@ -4710,7 +4710,7 @@ app.controller("userViewController", ["$scope", "$http", "$stateParams", "User",
                 zoom: 4
             }
         });
-    
+
         $scope.refresh = function () {
             $http({
                 method: "POST",
