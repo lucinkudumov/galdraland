@@ -302,7 +302,7 @@ module.exports = function (opts) {
             var date = new Date();
             date.setDate(date.getDate() - 7);
             var populateQuery = [{path:'user', model:'User'}, {path:'team', model: 'Team'}, {path:'owner', model: 'User'}];
-            ftModel.find({"createdAt": {$gt: date}}).populate(populateQuery).exec(function (err, fteams) {
+            ftModel.find({$and:[{"createdAt": {$gt: date}}, {"user" : {$ne: req.user._id}}]}).populate(populateQuery).exec(function (err, fteams) {
                 if (err) {
                     console.log(err);
                     return res.json({fteams: []});
