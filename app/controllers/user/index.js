@@ -208,7 +208,7 @@ module.exports = function (opts) {
             var date = new Date();
             date.setDate(date.getDate() - 7);
             var populateQuery = [{path:'user', model:'User'}, {path:'fuser', model: 'User'}];
-            fuModel.find({"createdAt": {$gt: date}}).populate(populateQuery).exec(function (err, fusers) {
+            fuModel.find({$and:[{"createdAt": {$gt: date}}, {"user" : {$ne: req.user._id}}]}).populate(populateQuery).exec(function (err, fusers) {
                 if (err) {
                     console.log(err);
                     return fusers.json({fusers: []});
