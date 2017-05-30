@@ -332,7 +332,7 @@ module.exports = function (opts) {
         "post#newAdventureHome": function (req, res) {
             var date = new Date();
             date.setDate(date.getDate() - 7);
-            adventureModel.find({"createdAt": {$gt: date}}).populate("owner").exec(function (err, adventures) {
+            adventureModel.find({$and:[{"createdAt": {$gt: date}}, {"owner": {$ne: req.user._id}}]}).populate("owner").exec(function (err, adventures) {
                 if (err) {
                     console.log(err);
                     return res.json({adventures: []});
