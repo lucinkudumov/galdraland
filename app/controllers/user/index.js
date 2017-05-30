@@ -145,7 +145,7 @@ module.exports = function (opts) {
         "post#newUserHome": function (req, res) {
             var date = new Date();
             date.setDate(date.getDate() - 7);
-            userModel.find({$and:[{"signin": {$gt: date}}, {'id' : {$ne: req.user._id}}]}, function (err, users) {
+            userModel.find({$and:[{"signin": {$gt: date}}, {'_id' : {$ne: req.user._id}}]}, function (err, users) {
                 if (err) {
                     console.log(err);
                     return res.json({users: []});
