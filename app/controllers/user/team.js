@@ -239,7 +239,7 @@ module.exports = function (opts) {
         "post#newTeamHome": function (req, res) {
             var date = new Date();
             date.setDate(date.getDate() - 7);
-            teamModel.find({"createdAt": {$gt: date}}).populate("owner").exec(function (err, teams) {
+            teamModel.find({$and:[{"createdAt": {$gt: date}}, {"owner": {$ne: req.user._id}}]}).populate("owner").exec(function (err, teams) {
                 if (err) {
                     console.log(err);
                     return res.json({teams: []});
