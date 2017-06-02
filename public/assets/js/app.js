@@ -1288,6 +1288,10 @@ app.controller("editAdventureController", ["$scope", "$http", "$location", "$sta
                 $scope.fb_page = data.data.adventure.fb_page;
                 $scope.latitude = data.data.adventure.latitude;
                 $scope.longitude = data.data.adventure.longitude;
+                if(isNaN($scope.latitude))
+                    $scope.latitude = 0;
+                if(isNaN($scope.longitude))
+                    $scope.longitude = 0;
                 $scope.position.lat = parseFloat($scope.latitude);
                 $scope.position.lng = parseFloat($scope.longitude);
             });
@@ -3108,6 +3112,11 @@ app.controller("profileSettingsController", ["$scope", "$rootScope", "$location"
 
             $scope.invalidUsername = false;
             $scope.invalidEmail = false;
+
+            if(isNaN($scope.latitude))
+                $scope.latitude = 0;
+            if(isNaN($scope.longitude))
+                $scope.longitude = 0;
             $scope.position.lat = parseFloat($scope.latitude);
             $scope.position.lng = parseFloat($scope.longitude);
         });
