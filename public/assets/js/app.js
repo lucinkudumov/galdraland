@@ -1258,6 +1258,15 @@ app.controller("editAdventureController", ["$scope", "$http", "$location", "$sta
         $scope.arr_status = ["Active", "Stopped", "Completed"];
         $scope.uploadInProgress = false;
         $scope.uploadProgress = 0;
+
+        angular.extend($scope, {
+            position: {
+                lat: 0,
+                lng: 0,
+                zoom: 4
+            }
+        });
+
         $scope.getAdventure = function () {
             $http({
                 method: "POST",
@@ -1279,6 +1288,8 @@ app.controller("editAdventureController", ["$scope", "$http", "$location", "$sta
                 $scope.fb_page = data.data.adventure.fb_page;
                 $scope.latitude = data.data.adventure.latitude;
                 $scope.longitude = data.data.adventure.longitude;
+                $scope.position.lat = parseFloat($scope.latitude);
+                $scope.position.lng = parseFloat($scope.longitude);
             });
         }
 
@@ -1345,6 +1356,9 @@ app.controller("editAdventureController", ["$scope", "$http", "$location", "$sta
             var teamId = "";
             if ($scope.values.team)
                 teamId = $scope.values.team._id;
+
+            $scope.latitude = parseFloat($scope.position.lat);
+            $scope.longitude = parseFloat($scope.position.lng);
 
             $http({
                 method: "POST",
