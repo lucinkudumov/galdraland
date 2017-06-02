@@ -1104,6 +1104,13 @@ app.controller("createAdventureController", ["$scope", "$rootScope", "Upload", "
         $scope.values.newTeam = null;
         $scope.values.teamCount = 1;
         $scope.tags = [];
+        angular.extend($scope, {
+            position: {
+                lat: 0,
+                lng: 0,
+                zoom: 4
+            }
+        });
         $scope.refresh = function () {
             $http({
                 method: "GET",
@@ -1161,6 +1168,10 @@ app.controller("createAdventureController", ["$scope", "$rootScope", "Upload", "
             var teamId = ""
             if ($scope.values.team)
                 teamId = $scope.values.team._id;
+
+            $scope.latitude = parseFloat($scope.position.lat);
+            $scope.longitude = parseFloat($scope.position.lng)
+
             $http({
                 method: "POST",
                 url: "adventure/create",
@@ -3772,6 +3783,15 @@ app.controller("searchController", ["$scope", "$http", "$location", "$stateParam
     }]);
 app.controller("createTeamController", ["$scope", "$rootScope", "Upload", "$http", "$compile", "$location", function ($scope, $rootScope, Upload, $http, $compile, $location) {
     $scope.errMsg = "";
+
+    angular.extend($scope, {
+        position: {
+            lat: 0,
+            lng: 0,
+            zoom: 4
+        }
+    });
+
         $scope.createTeam = function () {
             var post = $scope.fb_post;
             console.log("Create Team Tags = ", $scope.tags);
@@ -3782,6 +3802,10 @@ app.controller("createTeamController", ["$scope", "$rootScope", "Upload", "$http
                 else
                     tmpTags.push($scope.tags[i].name);
             }
+
+            $scope.latitude = parseFloat($scope.position.lat);
+            $scope.longitude = parseFloat($scope.position.lng);
+
             $http({
                 method: "POST",
                 url: "createTeam",
@@ -3886,6 +3910,14 @@ app.controller("editTeamController", ["$scope", "$http", "$location", "$statePar
         $scope.uploadInProgress = false;
         $scope.uploadProgress = 0;
 
+        angular.extend($scope, {
+            position: {
+                lat: 0,
+                lng: 0,
+                zoom: 4
+            }
+        });
+
         $http({
             method: "POST",
             url: "getTeam",
@@ -3901,6 +3933,12 @@ app.controller("editTeamController", ["$scope", "$http", "$location", "$statePar
             $scope.latitude = data.data.team.latitude;
             $scope.longitude = data.data.team.longitude;
             $scope.mission = data.data.team.mission;
+            if(isNaN($scope.latitude))
+                $scope.latitude = 0;
+            if(isNaN($scope.longitude))
+                $scope.longitude = 0;
+            $scope.position.lat = parseFloat($scope.latitude);
+            $scope.position.lng = parseFloat($scope.longitude);
         });
         $scope.onFileSelect = function (image) {
             console.log(image);
@@ -3939,6 +3977,10 @@ app.controller("editTeamController", ["$scope", "$http", "$location", "$statePar
                 else
                     tmpTags.push($scope.tags[i].name);
             }
+
+            $scope.latitude = parseFloat($scope.position.lat);
+            $scope.longitude = parseFloat($scope.position.lng);
+            
             $http({method: "POST", url: "editTeam", api: true, data: {id: id, name: $scope.name, description: $scope.description, image:$scope.uploadedImage, latitude: $scope.latitude, longitude: $scope.longitude, fb_page: $scope.fb_page, mission: $scope.mission, tags:tmpTags}}).then(function (data) {
                 $location.path("/teams/view/" + id);
             });

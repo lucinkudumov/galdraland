@@ -14,12 +14,18 @@
             <!--<input class="form-control" type="text" ng-model="tags" placeholder="Tags(optional)">-->
             <tags model="tags"></tags>
         </div>
+
         <div class="form-group">
-            <input class="form-control" type="text" ng-model="latitude" placeholder="Geolocation - latitude (optional)">
+            <input class="form-control" type="text" ng-model="position.lat" placeholder="Geolocation - latitude (optional)">
         </div>
         <div class="form-group">
-            <input class="form-control" type="text" ng-model="longitude" placeholder="Geolocation - longitude (optional)">
+            <input class="form-control" type="text" ng-model="position.lng" placeholder="Geolocation - longitude (optional)">
         </div>
+
+        <div class="form-group">
+            <leaflet lf-center="position" width="100%" height="250px"></leaflet>
+        </div>
+
         <div class="form-group">
             <input class="form-control" type="text" ng-model="fb_page" placeholder="FB Page(optional)">
         </div>
