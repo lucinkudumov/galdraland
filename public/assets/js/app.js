@@ -3064,6 +3064,13 @@ app.controller("profileSettingsController", ["$scope", "$rootScope", "$location"
         $scope.looks = [];
         $scope.roles = [];
 
+        angular.extend($scope, {
+            position: {
+                lat: 0,
+                lng: 0,
+                zoom: 4
+            }
+        });
         $http.get("/api/getUserDetail").then(function (data) {
             $scope.username = data.data.user.username;
             $scope.fullname = data.data.user.fullname;
@@ -3087,6 +3094,8 @@ app.controller("profileSettingsController", ["$scope", "$rootScope", "$location"
 
             $scope.invalidUsername = false;
             $scope.invalidEmail = false;
+            $scope.position.lat = $scope.latitude;
+            $scope.position.lng = $scope.longitude;
         });
 
         $scope.checkUsername = function () {
@@ -3109,6 +3118,8 @@ app.controller("profileSettingsController", ["$scope", "$rootScope", "$location"
         }
 
         $scope.saveMainInformation = function () {
+            $scope.latitude = $scope.position.lat;
+            $scope.longitude = $scope.position.lng;
             $http({
                 method: "POST",
                 url: "saveMainInformation",

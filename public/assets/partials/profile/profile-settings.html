@@ -40,11 +40,14 @@
         </div>
         <div class="form-group form-group-for-setting">
             <label class="label label-for-setting">Geo Location - latitude:</label>
-            <input class="form-control" type="text" ng-model="latitude" placeholder="Geo Location - latitude">
+            <input class="form-control" type="text" ng-model="position.lat" placeholder="Geo Location - latitude">
         </div>
         <div class="form-group form-group-for-setting">
             <label class="label label-for-setting">Geo Location - longitude:</label>
-            <input class="form-control" type="text" ng-model="longitude" placeholder="Geo Location - longitude">
+            <input class="form-control" type="text" ng-model="position.lng" placeholder="Geo Location - longitude">
+        </div>
+        <div class="form-group form-group-for-setting">
+            <leaflet lf-center="position" width="100%" height="250px"></leaflet>
         </div>
 
         <button class="btn btn-default pull-right" ng-disabled="username.length == 0 || invalidUsername || fullname.length == 0 || email.length == 0 || invalidEmail || location.length == 0" ng-click="saveMainInformation()">Save</button>
