@@ -24,6 +24,7 @@ module.exports = function (opts) {
                     url: 'https://slack.com/api/oauth.access?client_id='+slackClientID+
                         '&client_secret='+slackClientSecret+
                         '&redirect_uri=https://galdraland-1-0.herokuapp.com/api/slack/auth' +
+                        '&team=T5JDSR603' +
                         '&code=' + req.param('code')
                 }, function (err, response) {
                     if(err) {
