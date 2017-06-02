@@ -3094,8 +3094,8 @@ app.controller("profileSettingsController", ["$scope", "$rootScope", "$location"
 
             $scope.invalidUsername = false;
             $scope.invalidEmail = false;
-            $scope.position.lat = $scope.latitude;
-            $scope.position.lng = $scope.longitude;
+            $scope.position.lat = parseFloat($scope.latitude);
+            $scope.position.lng = parseFloat($scope.longitude);
         });
 
         $scope.checkUsername = function () {
@@ -3118,8 +3118,8 @@ app.controller("profileSettingsController", ["$scope", "$rootScope", "$location"
         }
 
         $scope.saveMainInformation = function () {
-            $scope.latitude = $scope.position.lat;
-            $scope.longitude = $scope.position.lng;
+            $scope.latitude = parseFloat($scope.position.lat);
+            $scope.longitude = parseFloat($scope.position.lng);
             $http({
                 method: "POST",
                 url: "saveMainInformation",
