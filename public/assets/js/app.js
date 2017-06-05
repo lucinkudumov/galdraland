@@ -3799,6 +3799,7 @@ app.controller("createTeamController", ["$scope", "$rootScope", "Upload", "$http
                 url: "getUser",
                 api: true
             }).then(function success(data) {
+                    console.log("refresh = ", data);
                 if (data.data.user.slackToken && data.data.user.slackToken != '' && data.data.user.slackUser && data.data.user.slackUser != '') {
                     console.log("has slack auth");
                     $scope.slackAuthentication = true;
