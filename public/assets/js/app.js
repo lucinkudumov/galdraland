@@ -3783,6 +3783,7 @@ app.controller("searchController", ["$scope", "$http", "$location", "$stateParam
     }]);
 app.controller("createTeamController", ["$scope", "$rootScope", "Upload", "$http", "$compile", "$location", function ($scope, $rootScope, Upload, $http, $compile, $location) {
     $scope.errMsg = "";
+    $scope.slackAuthentication = false;
 
     angular.extend($scope, {
         position: {
@@ -3791,6 +3792,18 @@ app.controller("createTeamController", ["$scope", "$rootScope", "Upload", "$http
             zoom: 4
         }
     });
+
+        $scope.refresh = function () {
+            $http({
+                method: "POST",
+                url: "getUser",
+                api: true
+            }).then(function success(data) {
+                if (data.data.user.slackToken && data.data.user.slackToken != '' && data.data.user.slackUser && data.data.user.slackUser != '') {
+                    $scope.slackAuthentication = true;
+                }
+            });
+        }
 
         $scope.createTeam = function () {
             var post = $scope.fb_post;
@@ -3813,37 +3826,39 @@ app.controller("createTeamController", ["$scope", "$rootScope", "Upload", "$http
                 data: {name: $scope.name, description: $scope.description, rols: $scope.roles, defuser: $rootScope.defUser, latitude: $scope.latitude, longitude: $scope.longitude, fb_page: $scope.fb_page, mission: $scope.mission, image: $scope.uploadedImage, tags: tmpTags}
             }).then(function (data) {
                 if (data && data.data && data.data.success == true) {
-                    $http({
-                        method: "POST",
-                        url: "slack/createChannel",
-                        api: true,
-                        data: {
-                            name : $scope.name,
-                            teamId:  data.data.id
-                        }
-                    }).then(function (data1) {
-                        console.log(data1);
-                        if (data1.data.success ==  false) {
-                            var htmlcontent = data1.data.msg;
-                            $scope1 = $('#err').html(htmlcontent).scope();
-                            $compile($('#err'))($scope1);
-                            $http({method: "POST", url: "removeTeam", api: true, data: {id: data.data.id}}).then(function () {
-
-                            });
-                        } else {
-                            if ($rootScope.return2Adventure == "return")
-                            {
-                                $rootScope.return2Adventure = "normal";
-                                $location.path("/adventures/create");
+                    if($scope.slackAuthentication == true) {
+                        $http({
+                            method: "POST",
+                            url: "slack/createChannel",
+                            api: true,
+                            data: {
+                                name : $scope.name,
+                                teamId:  data.data.id
                             }
-                            else {
-                                $location.path("/teams/view/" + data.data.id);
+                        }).then(function (data1) {
+                            console.log(data1);
+                            if (data1.data.success ==  false) {
+                                var htmlcontent = data1.data.msg;
+                                $scope1 = $('#err').html(htmlcontent).scope();
+                                $compile($('#err'))($scope1);
+                                $http({method: "POST", url: "removeTeam", api: true, data: {id: data.data.id}}).then(function () {
+
+                                });
+                            } else {
+                                if ($rootScope.return2Adventure == "return")
+                                {
+                                    $rootScope.return2Adventure = "normal";
+                                    $location.path("/adventures/create");
+                                }
+                                else {
+                                    $location.path("/teams/view/" + data.data.id);
 //                                if (post) {
 //                                    $scope.post_to_fb(data.data.id);
 //                                }
+                                }
                             }
-                        }
-                    });
+                        });
+                    }
                 } else {
                     if (data && data.data) {
                         var htmlcontent = data.data.msg;
@@ -3903,6 +3918,8 @@ app.controller("createTeamController", ["$scope", "$rootScope", "Upload", "$http
                 console.log('Error uploading file: ' + err.message || err);
             });
         }
+
+        $scope.refresh();
     }]);
 
 app.controller("editTeamController", ["$scope", "$http", "$location", "$stateParams", "Upload", function ($scope, $http, $location, $stateParams, Upload) {
@@ -3980,7 +3997,7 @@ app.controller("editTeamController", ["$scope", "$http", "$location", "$statePar
 
             $scope.latitude = parseFloat($scope.position.lat);
             $scope.longitude = parseFloat($scope.position.lng);
-            
+
             $http({method: "POST", url: "editTeam", api: true, data: {id: id, name: $scope.name, description: $scope.description, image:$scope.uploadedImage, latitude: $scope.latitude, longitude: $scope.longitude, fb_page: $scope.fb_page, mission: $scope.mission, tags:tmpTags}}).then(function (data) {
                 $location.path("/teams/view/" + id);
             });
