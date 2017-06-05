@@ -37,6 +37,35 @@ module.exports = function (opts) {
                 }
             });
         },
+        "post#slacknoauth": function (req, res) {
+            slacknoauthModel.findOne({user: req.user._id}, function (err, entry) {
+                if (err) {
+                    console.log(err);
+                    return res.json({slacknoauth: []});
+                } else {
+                    return res.json({slacknoauth: entry});
+                }
+            });
+        },
+        "post#processSlackNoAuth": function (req, res) {
+            slacknoauthModel.findOne({_id: req.body.id}, function (err, entry) {
+                if (err) {
+                    console.log(err);
+                    return res.json({success: false});
+                } else if (entry) {
+                    entry.remove(function (err, entry1) {
+                        if (err) {
+                            console.log(err);
+                            return res.json({success: false});
+                        } else {
+                            return res.json({success: true});
+                        }
+                    });
+                } else {
+                    return res.json({success: false});
+                }
+            });
+        },
         "post#getViewUser": function (req, res) {
             var userid = req.body.userid;
 

@@ -69,6 +69,12 @@
                               <button class="btn btn-primary" ng-click="showReplyApplyToAdv(i)">View</button>
                           </div>
                       </div>
+                      <div ng-show="i.category == 8">
+                          <h5>{{i.msg}}</h5>
+                          <div class="view">
+                              <button class="btn btn-primary" ng-click="showSlackNoAuth(i)">View</button>
+                          </div>
+                      </div>
                   </li>
               </ul>
             </li>

@@ -1861,7 +1861,17 @@ app.controller("headerController", ["$scope", "$rootScope", "$http", "$location"
                                         }
                                         else
                                             $scope.replyApplyToAdvs = [];
-                                        refresh_feeds();
+
+                                        $http({
+                                            method: "POST", url: "slacknoauth", api: true
+                                        }).then (function (result) {
+                                            if (result !== undefined && result.data !== undefined && result.data.slacknoauth !== undefined) {
+                                                $scope.slacknoauth = result.data.slacknoauth;
+                                            }
+                                            else
+                                                $scope.slacknoauths = null;
+                                            refresh_feeds();
+                                        });
                                     });
                                 });
                             });
@@ -1977,6 +1987,11 @@ app.controller("headerController", ["$scope", "$rootScope", "$http", "$location"
                     feed.msg = feed.adv_user.fullname + " has approved your request for adding your team '" + feed.team.name + "' to his adventure '"+feed.adventure.name + "'";
                 if (feed.apply_type == "rejected")
                     feed.msg = feed.adv_user.fullname + " has rejected your request for adding your team '" + feed.team.name + "' to his adventure '"+feed.adventure.name + "'";
+                $scope.feeds.push(feed);
+            }
+            if ($scope.slacknoauths) {
+                feed.category = 8;
+                feed.msg = "if you do not rgister with slack you cannot get any message from the teams you have joined!";
                 $scope.feeds.push(feed);
             }
         }
@@ -2227,6 +2242,16 @@ app.controller("headerController", ["$scope", "$rootScope", "$http", "$location"
             var id = replyApplyToAdv._id;
             $http({method: "POST", url: "processApplyToAdv", api: true, data: {id: id, action: 'delete'}}).then(function (result) {
                 var url = "/adventures/view/" + replyApplyToAdv.adventure._id;
+                if ($location.path() == url)
+                    $state.reload();
+                else
+                    $location.path(url);
+            });
+        }
+        $scope.showSlackNoAuth = function (slackNoAuth) {
+            var id = slackNoAuth._id;
+            $http({method: "POST", url: "processSlackNoAuth", api: true, data: {id: id, action: 'delete'}}).then(function (result) {
+                var url = "/home";
                 if ($location.path() == url)
                     $state.reload();
                 else
