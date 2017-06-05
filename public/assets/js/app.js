@@ -3800,6 +3800,7 @@ app.controller("createTeamController", ["$scope", "$rootScope", "Upload", "$http
                 api: true
             }).then(function success(data) {
                 if (data.data.user.slackToken && data.data.user.slackToken != '' && data.data.user.slackUser && data.data.user.slackUser != '') {
+                    console.log("has slack auth");
                     $scope.slackAuthentication = true;
                 }
             });
@@ -3825,8 +3826,11 @@ app.controller("createTeamController", ["$scope", "$rootScope", "Upload", "$http
                 api: true,
                 data: {name: $scope.name, description: $scope.description, rols: $scope.roles, defuser: $rootScope.defUser, latitude: $scope.latitude, longitude: $scope.longitude, fb_page: $scope.fb_page, mission: $scope.mission, image: $scope.uploadedImage, tags: tmpTags}
             }).then(function (data) {
+                console.log("aaa = ", $scope.slackAuthentication);
                 if (data && data.data && data.data.success == true) {
+                    console.log("bbb");
                     if($scope.slackAuthentication == true) {
+                        console.log("ccc");
                         $http({
                             method: "POST",
                             url: "slack/createChannel",
@@ -3836,6 +3840,7 @@ app.controller("createTeamController", ["$scope", "$rootScope", "Upload", "$http
                                 teamId:  data.data.id
                             }
                         }).then(function (data1) {
+                            console.log("ddd");
                             console.log(data1);
                             if (data1.data.success ==  false) {
                                 var htmlcontent = data1.data.msg;
@@ -3858,13 +3863,15 @@ app.controller("createTeamController", ["$scope", "$rootScope", "Upload", "$http
                                 }
                             }
                         });
-                    } else  {
+                    } else {
+                        console.log("eee");
                         if ($rootScope.return2Adventure == "return")
                         {
                             $rootScope.return2Adventure = "normal";
                             $location.path("/adventures/create");
                         }
                         else {
+                            console.log("fff");
                             $location.path("/teams/view/" + data.data.id);
                         }
                     }
