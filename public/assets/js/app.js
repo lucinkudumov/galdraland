@@ -1869,7 +1869,7 @@ app.controller("headerController", ["$scope", "$rootScope", "$http", "$location"
                                                 $scope.slacknoauth = result.data.slacknoauth;
                                             }
                                             else
-                                                $scope.slacknoauths = null;
+                                                $scope.slacknoauth = null;
                                             refresh_feeds();
                                         });
                                     });
@@ -1989,7 +1989,7 @@ app.controller("headerController", ["$scope", "$rootScope", "$http", "$location"
                     feed.msg = feed.adv_user.fullname + " has rejected your request for adding your team '" + feed.team.name + "' to his adventure '"+feed.adventure.name + "'";
                 $scope.feeds.push(feed);
             }
-            if ($scope.slacknoauths) {
+            if ($scope.slacknoauth) {
                 feed.category = 8;
                 feed.msg = "if you do not rgister with slack you cannot get any message from the teams you have joined!";
                 $scope.feeds.push(feed);

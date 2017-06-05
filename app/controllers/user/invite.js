@@ -41,8 +41,9 @@ module.exports = function (opts) {
             slacknoauthModel.findOne({user: req.user._id}, function (err, entry) {
                 if (err) {
                     console.log(err);
-                    return res.json({slacknoauth: []});
+                    return res.json({slacknoauth: null});
                 } else {
+                    console.log("aaaa = ", entry);
                     return res.json({slacknoauth: entry});
                 }
             });
