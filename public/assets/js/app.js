@@ -1865,6 +1865,7 @@ app.controller("headerController", ["$scope", "$rootScope", "$http", "$location"
                                         $http({
                                             method: "POST", url: "slacknoauth", api: true
                                         }).then (function (result) {
+                                            console.log("aaa = ", result);
                                             if (result !== undefined && result.data !== undefined && result.data.slacknoauth !== undefined) {
                                                 $scope.slacknoauth = result.data.slacknoauth;
                                             }
