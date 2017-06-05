@@ -2031,24 +2031,37 @@ app.controller("headerController", ["$scope", "$rootScope", "$http", "$location"
 //                refresh_feeds();
                 if (index > -1) {
                     if (result.action == "ACCEPT") {
-                        $http({method: "POST", url: "acceptInvite", api: true, data: {id: invite._id}});
+                        $http({method: "POST", url: "acceptInvite", api: true, data: {id: invite._id}}).then(function(result) {
+                            $http({
+                                method: "POST", url: "slacknoauth", api: true
+                            }).then (function (result) {
+                                if (result !== undefined && result.data !== undefined && result.data.slacknoauth !== undefined) {
+                                    $scope.slacknoauth = result.data.slacknoauth;
+                                }
+                                else
+                                    $scope.slacknoauth = null;
+                                refresh_feeds();
+                            });
+                        });
                     } else if (result.action == "DECLINE") {
                         $http({method: "POST", url: "rejectInvite", api: true, data: {id: invite._id}});
+                        refresh_feeds();
                     } else if (result.action == "CLOSE") {
                         $http({method: "POST", url: "closeInvite", api: true, data: {id: invite._id}});
+                        refresh_feeds();
                     } else if (result.action == "PUBLISH") {
                         /*
                          FB.login(function(){
                          FB.api('/me/feed', 'post', {message: $scope.user.fullname + " has joined the \"" + invite.team.name + "\" team on galdraland as " + invite.title});
                          }, {scope: 'publish_actions'});*/
                         $http({method: "POST", url: "closeInvite", api: true, data: {id: invite._id}});
+                        refresh_feeds();
                     }
+                } else {
+                    refresh_feeds();
                 }
-                refresh_feeds();
             });
         }
-
-
         $scope.showApply = function (apply) {
             var modalInstance = $uibModal.open({
                 templateUrl: "/assets/partials/modal/viewApply.html",
