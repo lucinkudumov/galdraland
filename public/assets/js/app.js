@@ -3794,8 +3794,9 @@ app.controller("createTeamController", ["$scope", "$rootScope", "Upload", "$http
     });
 
         $scope.refresh = function () {
+            console.log("calling refresh");
             $http({
-                method: "POST",
+                method: "GET",
                 url: "getUser",
                 api: true
             }).then(function success(data) {
