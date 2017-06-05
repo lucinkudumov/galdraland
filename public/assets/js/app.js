@@ -1993,6 +1993,8 @@ app.controller("headerController", ["$scope", "$rootScope", "$http", "$location"
             }
             console.log("ccc = ", $scope.slacknoauth);
             if ($scope.slacknoauth) {
+                console.log("ddd");
+                var feed = $scope.slacknoauth;
                 feed.category = 8;
                 feed.msg = "if you do not rgister with slack you cannot get any message from the teams you have joined!";
                 $scope.feeds.push(feed);
