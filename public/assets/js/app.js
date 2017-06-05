@@ -1865,9 +1865,7 @@ app.controller("headerController", ["$scope", "$rootScope", "$http", "$location"
                                         $http({
                                             method: "POST", url: "slacknoauth", api: true
                                         }).then (function (result) {
-                                            console.log("aaa = ", result);
                                             if (result !== undefined && result.data !== undefined && result.data.slacknoauth !== undefined) {
-                                                console.log("bbb ");
                                                 $scope.slacknoauth = result.data.slacknoauth;
                                             }
                                             else
@@ -1991,9 +1989,8 @@ app.controller("headerController", ["$scope", "$rootScope", "$http", "$location"
                     feed.msg = feed.adv_user.fullname + " has rejected your request for adding your team '" + feed.team.name + "' to his adventure '"+feed.adventure.name + "'";
                 $scope.feeds.push(feed);
             }
-            console.log("ccc = ", $scope.slacknoauth);
+
             if ($scope.slacknoauth) {
-                console.log("ddd");
                 var feed = $scope.slacknoauth;
                 feed.category = 8;
                 feed.msg = "if you do not rgister with slack you cannot get any message from the teams you have joined!";

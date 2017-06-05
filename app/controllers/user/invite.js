@@ -43,7 +43,6 @@ module.exports = function (opts) {
                     console.log(err);
                     return res.json({slacknoauth: null});
                 } else {
-                    console.log("aaaa = ", entry);
                     return res.json({slacknoauth: entry});
                 }
             });
