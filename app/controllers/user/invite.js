@@ -15,7 +15,8 @@ module.exports = function (opts) {
             teamModel = opts.models.Team,
             teamMemberModel = opts.models.TeamMember,
             inviteModel = opts.models.Invite;
-            recommendationModel = opts.models.Recommendation;
+    var recommendationModel = opts.models.Recommendation;
+    var slacknoauthModel = opts.models.SlackNoAuth;
 
     function validateEmail(email) {
         var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -318,39 +319,6 @@ module.exports = function (opts) {
                                     console.log(err);
                                     return res.json({success: false});
                                 } else {
-                                    // var teamMember = new teamMemberModel;
-                                    // teamMember.title = invite.title;
-                                    // teamMember.user = invite.toId;
-                                    // teamMember.roles = invite.roles;
-                                    // teamMember.save(function (err, member) {
-                                    //     if (err) {
-                                    //         console.log(err);
-                                    //         return res.json({success: false});
-                                    //     } else if (member) {
-                                    //         team.teamMembers.push(member);
-                                    //         team.save(function (err, uTeam) {
-                                    //             if (err) {
-                                    //                 console.log(err);
-                                    //                 return res.json({success: false});
-                                    //             } else {
-                                    //                 smtpTransport.sendMail({
-                                    //                     from: "noreply@holomathics.com",
-                                    //                     to: user.email,
-                                    //                     subject: req.user.username + " has accepted your invite to your team \"" + team.name + "\"",
-                                    //                     text: req.user.username + " has accepted your invite to your team \"" + team.name + "\"" + "\n" +
-                                    //                             "Thanks, Galdraland team",
-                                    //                     html: req.user.username + " has accepted your invite to your team \"" + team.name + "\"" + "<br>" +
-                                    //                             "Thanks, Galdraland team",
-                                    //                 }, function (err) {
-                                    //                     if (err) {
-                                    //                         console.log(err);
-                                    //                     }
-                                    //                 });
-                                    //                 return res.json({success: true});
-                                    //             }
-                                    //         });
-                                    //     }
-                                    // });
                                     teamMemberModel.findOne({_id: invite.title_id}, function (err, teamMember) {
                                         if (err) {
                                             console.log(err);
@@ -369,20 +337,30 @@ module.exports = function (opts) {
                                                             console.log(err);
                                                             return res.json({success: false});
                                                         } else {
-//                                                            smtpTransport.sendMail({
-//                                                                from: "noreply@holomathics.com",
-//                                                                to: user.email,
-//                                                                subject: req.user.username + " has accepted your invite to your team \"" + team.name + "\"",
-//                                                                text: req.user.username + " has accepted your invite to your team \"" + team.name + "\"" + "\n" +
-//                                                                        "Thanks, Galdraland team",
-//                                                                html: req.user.username + " has accepted your invite to your team \"" + team.name + "\"" + "<br>" +
-//                                                                        "Thanks, Galdraland team"
-//                                                            }, function (err) {
-//                                                                if (err) {
-//                                                                    console.log(err);
-//                                                                }
-//                                                            });
-                                                            return res.json({success: true});
+                                                            userModel.findOne({_id: req.user._id}, function (err, user) {
+                                                                if (err) {
+                                                                    console.log(err);
+                                                                    return res.json({success: false});
+                                                                } else {
+                                                                    if (user.slackUser && user.slackUser != '' && user.slackToken && user.slackToken != '') {
+                                                                        return res.json({success: true});
+                                                                    } else {
+                                                                        slacknoauthModel.findOne({user: req.user._id}, function (err, entry) {
+                                                                            if (err) {
+                                                                                console.log(err);
+                                                                                return res.json({success: false});
+                                                                            } else if(entry) {
+                                                                                return res.json({success: true});
+                                                                            } else {
+                                                                                var slacknoauth = new slacknoauthModel;
+                                                                                slacknoauth.user = req.user._id;
+                                                                                slacknoauth.save();
+                                                                                return res.json({success: true});
+                                                                            }
+                                                                        });
+                                                                    }
+                                                                }
+                                                            });
                                                         }
                                                     });
                                                 }
