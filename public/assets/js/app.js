@@ -5106,7 +5106,6 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
         lat: 51,
         lng: 0,
         focus: true,
-        message: "",
         draggable: false
     };
 
@@ -5162,15 +5161,15 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
                         markers.mainMarker.lat = $scope.position.lat;
                     } else {
                         $scope.position.lat = 0;
-                        markers.mainMarker.lat =0;
+                        $scope.markers.mainMarker.lat =0;
                     }
 
                     if (data.data.team.longitude && !isNaN(data.data.team.longitude)) {
                         $scope.position.lng = parseFloat(data.data.team.longitude);
-                        markers.mainMarker.lng = $scope.position.lng;
+                        $scope.markers.mainMarker.lng = $scope.position.lng;
                     } else {
                         $scope.position.lng = 0;
-                        markers.mainMarker.lng = 0;
+                        $scope.markers.mainMarker.lng = 0;
                     }
 
                     $scope.isMember = false;
