@@ -5102,11 +5102,22 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
     $scope.emptyRecMembers = [];
     $scope.slackAuthentication = false;
 
+    var mainMarker = {
+        lat: 51,
+        lng: 0,
+        focus: true,
+        message: "",
+        draggable: false
+    };
+
     angular.extend($scope, {
         position: {
             lat: 51.505,
             lng: -0.09,
             zoom: 4
+        },
+        markers: {
+            mainMarker: angular.copy(mainMarker)
         }
     });
 
@@ -5148,14 +5159,18 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
 
                     if (data.data.team.latitude && !isNaN(data.data.team.latitude)) {
                         $scope.position.lat = parseFloat(data.data.team.latitude);
+                        markers.mainMarker.lat = $scope.position.lat;
                     } else {
-                        $scope.position.lat = 0 ;
+                        $scope.position.lat = 0;
+                        markers.mainMarker.lat =0;
                     }
 
                     if (data.data.team.longitude && !isNaN(data.data.team.longitude)) {
                         $scope.position.lng = parseFloat(data.data.team.longitude);
+                        markers.mainMarker.lng = $scope.position.lng;
                     } else {
-                        $scope.position.lng = 0 ;
+                        $scope.position.lng = 0;
+                        markers.mainMarker.lng = 0;
                     }
 
                     $scope.isMember = false;
