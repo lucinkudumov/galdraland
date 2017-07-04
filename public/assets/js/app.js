@@ -558,8 +558,8 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
 
     angular.extend($scope, {
         position: {
-            lat: 51.505,
-            lng: -0.09,
+            lat: 59.91,
+            lng: 10.75,
             zoom: 4
         },
         markers: {
@@ -3191,11 +3191,33 @@ app.controller("profileSettingsController", ["$scope", "$rootScope", "$location"
 
         angular.extend($scope, {
             position: {
-                lat: 0,
-                lng: 0,
+                lat: 59.91,
+                lng: 10.75,
                 zoom: 4
+            },
+            markers: {
+                mainMarker: {
+                    lat: 59.91,
+                    lng: 10.75,
+                    focus: true,
+                    draggable: true
+                }
+            },
+            events: { // or just {} //all events
+                markers:{
+                    enable: [ 'dragend' ]
+                    //logic: 'emit'
+                }
             }
         });
+
+        $scope.$on("leafletDirectiveMarker.dragend", function(event, args){
+            $scope.position.lat = args.model.lat;
+            $scope.position.lng = args.model.lng;
+            $scope.markers.mainMarker.lat = args.model.lat;
+            $scope.markers.mainMarker.lng = args.model.lng;
+        });
+
         $http.get("/api/getUserDetail").then(function (data) {
             $scope.username = data.data.user.username;
             $scope.fullname = data.data.user.fullname;
@@ -3226,6 +3248,9 @@ app.controller("profileSettingsController", ["$scope", "$rootScope", "$location"
                 $scope.longitude = 0;
             $scope.position.lat = parseFloat($scope.latitude);
             $scope.position.lng = parseFloat($scope.longitude);
+            $scope.markers.mainMarker.lat = parseFloat($scope.latitude);
+            $scope.markers.mainMarker.lng = parseFloat($scope.longitude);
+
         });
 
         $scope.checkUsername = function () {
@@ -3248,8 +3273,8 @@ app.controller("profileSettingsController", ["$scope", "$rootScope", "$location"
         }
 
         $scope.saveMainInformation = function () {
-            $scope.latitude = parseFloat($scope.position.lat);
-            $scope.longitude = parseFloat($scope.position.lng);
+            $scope.latitude = parseFloat($scope.markers.mainMarker.lat);
+            $scope.longitude = parseFloat($scope.markers.mainMarker.lng);
             $http({
                 method: "POST",
                 url: "saveMainInformation",
