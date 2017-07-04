@@ -1191,10 +1191,11 @@ app.controller("createAdventureController", ["$scope", "$rootScope", "Upload", "
             if ($scope.values.team)
                 teamId = $scope.values.team._id;
 
-            $scope.latitude = parseFloat($scope.position.lat);
-            $scope.markers.mainMarker.lat = parseFloat($scope.position.lat);
-            $scope.longitude = parseFloat($scope.position.lng);
-            $scope.markers.mainMarker.lng = parseFloat($scope.position.lng)
+//            $scope.latitude = parseFloat($scope.position.lat);
+//            $scope.longitude = parseFloat($scope.position.lng);
+
+            $scope.latitude = parseFloat($scope.markers.mainMarker.lat);
+            $scope.longitude = parseFloat($scope.markers.mainMarker.lng);
 
             $http({
                 method: "POST",
