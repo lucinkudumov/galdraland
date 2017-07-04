@@ -1131,8 +1131,22 @@ app.controller("createAdventureController", ["$scope", "$rootScope", "Upload", "
                     focus: true,
                     draggable: true
                 }
+            },
+            events: { // or just {} //all events
+                markers:{
+                    enable: [ 'dragend' ]
+                    //logic: 'emit'
+                }
             }
         });
+
+        $scope.$on("leafletDirectiveMarker.dragend", function(event, args){
+            $scope.position.lat = args.model.lat;
+            $scope.position.lng = args.model.lng;
+            $scope.markers.mainMarker.lat = args.model.lat;
+            $scope.markers.mainMarker.lng = args.model.lng;
+        });
+
         $scope.refresh = function () {
             $http({
                 method: "GET",
