@@ -1120,8 +1120,8 @@ app.controller("createAdventureController", ["$scope", "$rootScope", "Upload", "
         $scope.tags = [];
         angular.extend($scope, {
             position: {
-                lat: 0,
-                lng: 0,
+                lat: 59.91,
+                lng: 10.75,
                 zoom: 4
             },
             markers: {
