@@ -566,7 +566,7 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
             mainMarker: {
                 lat: 59.91,
                 lng: 10.75,
-                message: "I want to travel here!",
+                message: "",
                 focus: true,
                 draggable: false
             }
@@ -1122,6 +1122,15 @@ app.controller("createAdventureController", ["$scope", "$rootScope", "Upload", "
                 lat: 0,
                 lng: 0,
                 zoom: 4
+            },
+            markers: {
+                mainMarker: {
+                    lat: 59.91,
+                    lng: 10.75,
+                    message: "I want to travel here!",
+                    focus: true,
+                    draggable: true
+                }
             }
         });
         $scope.refresh = function () {
@@ -1183,7 +1192,9 @@ app.controller("createAdventureController", ["$scope", "$rootScope", "Upload", "
                 teamId = $scope.values.team._id;
 
             $scope.latitude = parseFloat($scope.position.lat);
-            $scope.longitude = parseFloat($scope.position.lng)
+            $scope.markers.mainMarker.lat = parseFloat($scope.position.lat);
+            $scope.longitude = parseFloat($scope.position.lng);
+            $scope.markers.mainMarker.lng = parseFloat($scope.position.lng)
 
             $http({
                 method: "POST",
@@ -3639,7 +3650,7 @@ app.controller("profileViewController", ["$scope", "$http", "User", function ($s
             mainMarker: {
                 lat: 59.91,
                 lng: 10.75,
-                message: "I want to travel here!",
+                message: "",
                 focus: true,
                 draggable: false
             }
@@ -4867,7 +4878,7 @@ app.controller("userViewController", ["$scope", "$http", "$stateParams", "User",
                 mainMarker: {
                     lat: 59.91,
                     lng: 10.75,
-                    message: "I want to travel here!",
+                    message: "",
                     focus: true,
                     draggable: false
                 }
@@ -5138,7 +5149,7 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
             mainMarker: {
                 lat: 59.91,
                 lng: 10.75,
-                message: "I want to travel here!",
+                message: "",
                 focus: true,
                 draggable: false
             }
