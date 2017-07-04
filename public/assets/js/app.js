@@ -566,7 +566,6 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
             mainMarker: {
                 lat: 59.91,
                 lng: 10.75,
-                message: "",
                 focus: true,
                 draggable: false
             }
@@ -1193,7 +1192,8 @@ app.controller("createAdventureController", ["$scope", "$rootScope", "Upload", "
 
 //            $scope.latitude = parseFloat($scope.position.lat);
 //            $scope.longitude = parseFloat($scope.position.lng);
-
+            console.log("lat" + $scope.markers.mainMarker.lat);
+            console.log("lng" + $scope.markers.mainMarker.lng);
             $scope.latitude = parseFloat($scope.markers.mainMarker.lat);
             $scope.longitude = parseFloat($scope.markers.mainMarker.lng);
 
@@ -3651,7 +3651,6 @@ app.controller("profileViewController", ["$scope", "$http", "User", function ($s
             mainMarker: {
                 lat: 59.91,
                 lng: 10.75,
-                message: "",
                 focus: true,
                 draggable: false
             }
@@ -4879,7 +4878,6 @@ app.controller("userViewController", ["$scope", "$http", "$stateParams", "User",
                 mainMarker: {
                     lat: 59.91,
                     lng: 10.75,
-                    message: "",
                     focus: true,
                     draggable: false
                 }
@@ -5150,7 +5148,6 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
             mainMarker: {
                 lat: 59.91,
                 lng: 10.75,
-                message: "",
                 focus: true,
                 draggable: false
             }
