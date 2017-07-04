@@ -1312,8 +1312,8 @@ app.controller("editAdventureController", ["$scope", "$http", "$location", "$sta
 
         angular.extend($scope, {
             position: {
-                lat: 0,
-                lng: 0,
+                lat: 59.91,
+                lng: 10.75,
                 zoom: 4
             },
             markers: {
@@ -3712,8 +3712,8 @@ app.controller("profileViewController", ["$scope", "$http", "User", function ($s
     $scope.badgesData = [];
     angular.extend($scope, {
         position: {
-            lat: 51.505,
-            lng: -0.09,
+            lat: 59.91,
+            lng: 10.75,
             zoom: 4
         },
         markers: {
@@ -4091,8 +4091,8 @@ app.controller("editTeamController", ["$scope", "$http", "$location", "$statePar
 
         angular.extend($scope, {
             position: {
-                lat: 0,
-                lng: 0,
+                lat: 59.91,
+                lng: 10.75,
                 zoom: 4
             },
             markers: {
@@ -4983,8 +4983,8 @@ app.controller("userViewController", ["$scope", "$http", "$stateParams", "User",
 
         angular.extend($scope, {
             position: {
-                lat: 51.505,
-                lng: -0.09,
+                lat: 59.91,
+                lng: 10.75,
                 zoom: 4
             },
             markers: {
@@ -5253,8 +5253,8 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
 
     angular.extend($scope, {
         position: {
-            lat: 51.505,
-            lng: -0.09,
+            lat: 59.91,
+            lng: 10.75,
             zoom: 4
         },
         markers: {
