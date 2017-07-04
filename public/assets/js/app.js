@@ -3634,20 +3634,33 @@ app.controller("profileViewController", ["$scope", "$http", "User", function ($s
             lat: 51.505,
             lng: -0.09,
             zoom: 4
+        },
+        markers: {
+            mainMarker: {
+                lat: 59.91,
+                lng: 10.75,
+                message: "I want to travel here!",
+                focus: true,
+                draggable: false
+            }
         }
     });
     $http.get("/api/getUserDetail").then(function (data) {
         $scope.user = data.data.user;
         if (data.data.user.latitude && !isNaN(data.data.user.latitude)) {
             $scope.position.lat = parseFloat(data.data.user.latitude);
+            $scope.markers.mainMarker.lat = parseFloat(data.data.user.latitude);
         } else {
             $scope.position.lat = 0 ;
+            $scope.markers.mainMarker.lat = 0;
         }
 
         if (data.data.user.longitude && !isNaN(data.data.user.longitude)) {
             $scope.position.lng = parseFloat(data.data.user.longitude);
+            $scope.markers.mainMarker.lng = parseFloat(data.data.user.longitude);
         } else {
             $scope.position.lng = 0 ;
+            $scope.markers.mainMarker.lng = 0;
         }
     });
 
@@ -4849,6 +4862,15 @@ app.controller("userViewController", ["$scope", "$http", "$stateParams", "User",
                 lat: 51.505,
                 lng: -0.09,
                 zoom: 4
+            },
+            markers: {
+                mainMarker: {
+                    lat: 59.91,
+                    lng: 10.75,
+                    message: "I want to travel here!",
+                    focus: true,
+                    draggable: false
+                }
             }
         });
 
@@ -4884,14 +4906,18 @@ app.controller("userViewController", ["$scope", "$http", "$stateParams", "User",
 
                 if (latitude && !isNaN(latitude)) {
                     $scope.position.lat = parseFloat(latitude);
+                    $scope.markers.mainMarker.lat = parseFloat(latitude);
                 } else {
                     $scope.position.lat = 0 ;
+                    $scope.markers.mainMarker.lat = 0;
                 }
 
                 if (longitude && !isNaN(longitude)) {
                     $scope.position.lng = parseFloat(longitude);
+                    $scope.markers.mainMarker.lng = parseFloat(longitude);
                 } else {
                     $scope.position.lng = 0 ;
+                    $scope.markers.mainMarker.lng = 0;
                 }
 
                 $http({
