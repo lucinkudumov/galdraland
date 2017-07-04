@@ -162,7 +162,7 @@
                 <p>Geo Location</p>
             </uib-accordion-heading>
             <div ng-show="latitude && latitude != '' && latitude != 0 && longitude && longitude != '' && longitude != 0" class="col-md-12"style="padding-right: 0px;">
-                <leaflet lf-center="position" width="100%" height="380px"></leaflet>
+                <leaflet lf-center="position" markers="markers" width="100%" height="380px"></leaflet>
             </div>
         </div>
         <div uib-accordion-group class="panel-default" is-open="true" ng-show="isFavorite">
