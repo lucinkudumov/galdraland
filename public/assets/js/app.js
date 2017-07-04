@@ -3926,8 +3926,8 @@ app.controller("createTeamController", ["$scope", "$rootScope", "Upload", "$http
         },
         markers: {
             mainMarker: {
-                lat: 59.91,
-                lng: 10.75,
+                lat: 0,
+                lng: 0,
                 focus: true,
                 draggable: true
             }
