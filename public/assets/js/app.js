@@ -766,7 +766,7 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
 
         $scope.$watch("adventure.fb_page", function(newValue, oldValue){
             if (newValue != oldValue) {
-                var htmlcontent = "<div id='fb-root'></div><script>window.fbAsyncInit = function () {FB.init({appId: '110469289012320',status: true,cookie: true,xfbml: true,version: 'v2.3'});};window.fbAsyncInit();(function (d, s, id) {var js, fjs = d.getElementsByTagName(s)[0];if (d.getElementById(id)) {return;}js = d.createElement(s);js.id = id;js.src = '//connect.facebook.net/en_US/sdk.js';fjs.parentNode.insertBefore(js, fjs);}(document, 'script', 'facebook-jssdk'));</script><div class='fb-page' data-tabs='timeline,events,messages' data-href='"+newValue+"' data-width='400' data-hide-cover='false'></div>";
+                var htmlcontent = "<div id='fb-root'></div><script>window.fbAsyncInit = function () {FB.init({appId: '110469289012320',status: true,cookie: true,xfbml: true,version: 'v2.4'});};window.fbAsyncInit();(function (d, s, id) {var js, fjs = d.getElementsByTagName(s)[0];if (d.getElementById(id)) {return;}js = d.createElement(s);js.id = id;js.src = '//connect.facebook.net/en_US/sdk.js';fjs.parentNode.insertBefore(js, fjs);}(document, 'script', 'facebook-jssdk'));</script><div class='fb-page' data-tabs='timeline,events,messages' data-href='"+newValue+"' data-width='400' data-hide-cover='false'></div>";
                 var $scope = $('#fbPage').html(htmlcontent).scope();
                 $compile($('#fbPage'))($scope);
             }
@@ -776,7 +776,7 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
             if (newValue != oldValue) {
                 var htmlcontent = "<div id='fb-root'>" +
                     "</div>" +
-                    "<script>window.fbAsyncInit = function () {FB.init({appId: '110469289012320',status: true,cookie: true,xfbml: true,version: 'v2.3'});};window.fbAsyncInit();(function (d, s, id) {var js, fjs = d.getElementsByTagName(s)[0];if (d.getElementById(id)) {return;}js = d.createElement(s);js.id = id;js.src = '//connect.facebook.net/en_US/sdk.js';fjs.parentNode.insertBefore(js, fjs);}(document, 'script', 'facebook-jssdk'));" +
+                    "<script>window.fbAsyncInit = function () {FB.init({appId: '110469289012320',status: true,cookie: true,xfbml: true,version: 'v2.4'});};window.fbAsyncInit();(function (d, s, id) {var js, fjs = d.getElementsByTagName(s)[0];if (d.getElementById(id)) {return;}js = d.createElement(s);js.id = id;js.src = '//connect.facebook.net/en_US/sdk.js';fjs.parentNode.insertBefore(js, fjs);}(document, 'script', 'facebook-jssdk'));" +
                     "function fbshare() {" +
                     "window.open('https://www.facebook.com/sharer/sharer.php?app_id=110469289012320&sdk=joey&u=https://galdraland-1-0.herokuapp.com/adventures/view/"+newValue+"&display=popup&ref=plugin&src=share_button&description="+$scope.description+"&picture=https://galdraland-1-0.herokuapp.com"+$scope.adventure.image+"', '','width=200,height=100');" +
                     "}" +
@@ -787,7 +787,7 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
                 $compile($('#fbshare'))($scope1);
 
                 htmlcontent = "<div id='fb-root'>" +
-                    "</div><script>window.fbAsyncInit = function () {FB.init({appId: '110469289012320',status: true,cookie: true,xfbml: true,version: 'v2.3'});};window.fbAsyncInit();(function (d, s, id) {var js, fjs = d.getElementsByTagName(s)[0];if (d.getElementById(id)) {return;}js = d.createElement(s);js.id = id;js.src = '//connect.facebook.net/en_US/sdk.js';fjs.parentNode.insertBefore(js, fjs);}(document, 'script', 'facebook-jssdk'));</script>" +
+                    "</div><script>window.fbAsyncInit = function () {FB.init({appId: '110469289012320',status: true,cookie: true,xfbml: true,version: 'v2.4'});};window.fbAsyncInit();(function (d, s, id) {var js, fjs = d.getElementsByTagName(s)[0];if (d.getElementById(id)) {return;}js = d.createElement(s);js.id = id;js.src = '//connect.facebook.net/en_US/sdk.js';fjs.parentNode.insertBefore(js, fjs);}(document, 'script', 'facebook-jssdk'));</script>" +
                     "<div class='fb-comments' data-href='http://webascender.com/blog/#adv" + newValue +"' data-numposts='5' data-colorscheme='light' data-width='350'></div>";
                 $scope1 = $('#fbComment').html(htmlcontent).scope();
                 $compile($('#fbComment'))($scope1);
@@ -1654,7 +1654,7 @@ app.controller("adventureBlogViewController", ["$scope", "$http", "$sce", "$loca
 
                 /* FB commenting*/
                 var htmlcontent = "<div id='fb-root'>" +
-                    "</div><script>window.fbAsyncInit = function () {FB.init({appId: '110469289012320',status: true,cookie: true,xfbml: true,version: 'v2.3'});};window.fbAsyncInit();(function (d, s, id) {var js, fjs = d.getElementsByTagName(s)[0];if (d.getElementById(id)) {return;}js = d.createElement(s);js.id = id;js.src = '//connect.facebook.net/en_US/sdk.js';fjs.parentNode.insertBefore(js, fjs);}(document, 'script', 'facebook-jssdk'));</script>" +
+                    "</div><script>window.fbAsyncInit = function () {FB.init({appId: '110469289012320',status: true,cookie: true,xfbml: true,version: 'v2.4'});};window.fbAsyncInit();(function (d, s, id) {var js, fjs = d.getElementsByTagName(s)[0];if (d.getElementById(id)) {return;}js = d.createElement(s);js.id = id;js.src = '//connect.facebook.net/en_US/sdk.js';fjs.parentNode.insertBefore(js, fjs);}(document, 'script', 'facebook-jssdk'));</script>" +
                     "<div class='fb-comments' data-href='http://webascender.com/blog/#adventureblog" + blogid +"' data-numposts='5' data-colorscheme='light' data-width='550'></div>";
                 $scope1 = $('#fbComment').html(htmlcontent).scope();
                 $compile($('#fbComment'))($scope1);
@@ -4326,7 +4326,7 @@ app.controller("teamBlogViewController", ["$scope", "$http", "$sce", "$location"
 
             /* FB commenting*/
             var htmlcontent = "<div id='fb-root'>" +
-                "</div><script>window.fbAsyncInit = function () {FB.init({appId: '110469289012320',status: true,cookie: true,xfbml: true,version: 'v2.3'});};window.fbAsyncInit();(function (d, s, id) {var js, fjs = d.getElementsByTagName(s)[0];if (d.getElementById(id)) {return;}js = d.createElement(s);js.id = id;js.src = '//connect.facebook.net/en_US/sdk.js';fjs.parentNode.insertBefore(js, fjs);}(document, 'script', 'facebook-jssdk'));</script>" +
+                "</div><script>window.fbAsyncInit = function () {FB.init({appId: '110469289012320',status: true,cookie: true,xfbml: true,version: 'v2.4'});};window.fbAsyncInit();(function (d, s, id) {var js, fjs = d.getElementsByTagName(s)[0];if (d.getElementById(id)) {return;}js = d.createElement(s);js.id = id;js.src = '//connect.facebook.net/en_US/sdk.js';fjs.parentNode.insertBefore(js, fjs);}(document, 'script', 'facebook-jssdk'));</script>" +
                 "<div class='fb-comments' data-href='http://webascender.com/blog/#teamblog" + blogid +"' data-numposts='5' data-colorscheme='light' data-width='550'></div>";
             $scope1 = $('#fbComment').html(htmlcontent).scope();
             $compile($('#fbComment'))($scope1);
@@ -5601,7 +5601,7 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
         }
         $scope.$watch("team.fb_page", function(newValue, oldValue){
             if (newValue != oldValue) {
-                var htmlcontent = "<div id='fb-root'></div><script>window.fbAsyncInit = function () {FB.init({appId: '110469289012320',status: true,cookie: true,xfbml: true,version: 'v2.3'});};window.fbAsyncInit();(function (d, s, id) {var js, fjs = d.getElementsByTagName(s)[0];if (d.getElementById(id)) {return;}js = d.createElement(s);js.id = id;js.src = '//connect.facebook.net/en_US/sdk.js';fjs.parentNode.insertBefore(js, fjs);}(document, 'script', 'facebook-jssdk'));</script><div class='fb-page' data-tabs='timeline,events,messages' data-href='"+newValue+"' data-width='350' data-hide-cover='false'></div>";
+                var htmlcontent = "<div id='fb-root'></div><script>window.fbAsyncInit = function () {FB.init({appId: '110469289012320',status: true,cookie: true,xfbml: true,version: 'v2.4'});};window.fbAsyncInit();(function (d, s, id) {var js, fjs = d.getElementsByTagName(s)[0];if (d.getElementById(id)) {return;}js = d.createElement(s);js.id = id;js.src = '//connect.facebook.net/en_US/sdk.js';fjs.parentNode.insertBefore(js, fjs);}(document, 'script', 'facebook-jssdk'));</script><div class='fb-page' data-tabs='timeline,events,messages' data-href='"+newValue+"' data-width='350' data-hide-cover='false'></div>";
                 var $scope = $('#fbPage').html(htmlcontent).scope();
                 $compile($('#fbPage'))($scope);
             }
@@ -5610,7 +5610,7 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
         $scope.$watch("team._id", function(newValue, oldValue){
             if (newValue != oldValue) {
                 var htmlcontent = "<div id='fb-root'>" +
-                    "</div><script>window.fbAsyncInit = function () {FB.init({appId: '110469289012320',status: true,cookie: true,xfbml: true,version: 'v2.3'});};window.fbAsyncInit();(function (d, s, id) {var js, fjs = d.getElementsByTagName(s)[0];if (d.getElementById(id)) {return;}js = d.createElement(s);js.id = id;js.src = '//connect.facebook.net/en_US/sdk.js';fjs.parentNode.insertBefore(js, fjs);}(document, 'script', 'facebook-jssdk'));" +
+                    "</div><script>window.fbAsyncInit = function () {FB.init({appId: '110469289012320',status: true,cookie: true,xfbml: true,version: 'v2.4'});};window.fbAsyncInit();(function (d, s, id) {var js, fjs = d.getElementsByTagName(s)[0];if (d.getElementById(id)) {return;}js = d.createElement(s);js.id = id;js.src = '//connect.facebook.net/en_US/sdk.js';fjs.parentNode.insertBefore(js, fjs);}(document, 'script', 'facebook-jssdk'));" +
 //                    "<div class='fb-share-button' data-href='http://galdraland-1-0.herokuapp.com/teams/view/"+newValue+"' data-layout='button_count'></div>";
                     "function fbshare() {" +
                     "window.open('https://www.facebook.com/sharer/sharer.php?app_id=110469289012320&sdk=joey&u=https://galdraland-1-0.herokuapp.com/teams/view/"+newValue+"&display=popup&ref=plugin&src=share_button&description="+$scope.description+"&picture=https://galdraland-1-0.herokuapp.com"+$scope.team.image+"', '','width=200,height=100');" +
@@ -5622,7 +5622,7 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
                 $compile($('#fbshare'))($scope1);
 
                 htmlcontent = "<div id='fb-root'>" +
-                    "</div><script>window.fbAsyncInit = function () {FB.init({appId: '110469289012320',status: true,cookie: true,xfbml: true,version: 'v2.3'});};window.fbAsyncInit();(function (d, s, id) {var js, fjs = d.getElementsByTagName(s)[0];if (d.getElementById(id)) {return;}js = d.createElement(s);js.id = id;js.src = '//connect.facebook.net/en_US/sdk.js';fjs.parentNode.insertBefore(js, fjs);}(document, 'script', 'facebook-jssdk'));</script>" +
+                    "</div><script>window.fbAsyncInit = function () {FB.init({appId: '110469289012320',status: true,cookie: true,xfbml: true,version: 'v2.4'});};window.fbAsyncInit();(function (d, s, id) {var js, fjs = d.getElementsByTagName(s)[0];if (d.getElementById(id)) {return;}js = d.createElement(s);js.id = id;js.src = '//connect.facebook.net/en_US/sdk.js';fjs.parentNode.insertBefore(js, fjs);}(document, 'script', 'facebook-jssdk'));</script>" +
 //                    "<div class='fb-comments' data-href='http://galdraland-1-0.herokuapp.com/blog/#team" + newValue +"' data-numposts='5' data-colorscheme='light' data-width='350'></div>";
                     "<div class='fb-comments' data-href='http://webascender.com/blog/#team" + newValue +"' data-numposts='5' data-colorscheme='light' data-width='350'></div>";
                 $scope1 = $('#fbComment').html(htmlcontent).scope();
