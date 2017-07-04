@@ -670,6 +670,8 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
                     $scope.markers.mainMarker.lng = 0;
                 }
 
+                console.log("view adventure = lat -> " + $scope.markers.mainMarker.lat + " : lng -> " + $scope.markers.mainMarker.lng);
+
                 $http({
                     method: "POST",
                     url: "getViewUser",
@@ -1340,6 +1342,7 @@ app.controller("editAdventureController", ["$scope", "$http", "$location", "$sta
                 $scope.position.lng = parseFloat($scope.longitude);
                 $scope.markers.mainMarker.lat = parseFloat($scope.latitude);
                 $scope.markers.mainMarker.lng = parseFloat($scope.longitude);
+                console.log("get Adventure : lat -> " + $scope.markers.mainMarker.lat + " : lng -> " + $scope.markers.mainMarker.lng);
 
             });
         }
@@ -1412,6 +1415,7 @@ app.controller("editAdventureController", ["$scope", "$http", "$location", "$sta
 //            $scope.longitude = parseFloat($scope.position.lng);
             $scope.latitude = parseFloat($scope.markers.mainMarker.lat);
             $scope.longitude = parseFloat($scope.markers.mainMarker.lng);
+            console.log("save Adventure : lat -> " + $scope.markers.mainMarker.lat + " : lng -> " + $scope.markers.mainMarker.lng);
 
             $http({
                 method: "POST",
