@@ -5094,6 +5094,15 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
             lat: 51.505,
             lng: -0.09,
             zoom: 4
+        },
+        markers: {
+            mainMarker: {
+                lat: 59.91,
+                lng: 10.75,
+                message: "I want to travel here!",
+                focus: true,
+                draggable: false
+            }
         }
     });
 
