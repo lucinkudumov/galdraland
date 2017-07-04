@@ -1126,7 +1126,6 @@ app.controller("createAdventureController", ["$scope", "$rootScope", "Upload", "
                 mainMarker: {
                     lat: 59.91,
                     lng: 10.75,
-                    message: "I want to travel here!",
                     focus: true,
                     draggable: true
                 }
@@ -1300,6 +1299,14 @@ app.controller("editAdventureController", ["$scope", "$http", "$location", "$sta
                 lat: 0,
                 lng: 0,
                 zoom: 4
+            },
+            markers: {
+                mainMarker: {
+                    lat: 59.91,
+                    lng: 10.75,
+                    focus: true,
+                    draggable: true
+                }
             }
         });
 
@@ -1324,12 +1331,16 @@ app.controller("editAdventureController", ["$scope", "$http", "$location", "$sta
                 $scope.fb_page = data.data.adventure.fb_page;
                 $scope.latitude = data.data.adventure.latitude;
                 $scope.longitude = data.data.adventure.longitude;
+
                 if(isNaN($scope.latitude))
                     $scope.latitude = 0;
                 if(isNaN($scope.longitude))
                     $scope.longitude = 0;
                 $scope.position.lat = parseFloat($scope.latitude);
                 $scope.position.lng = parseFloat($scope.longitude);
+                $scope.markers.mainMarker.lat = parseFloat($scope.latitude);
+                $scope.markers.mainMarker.lng = parseFloat($scope.longitude);
+
             });
         }
 
@@ -1397,8 +1408,10 @@ app.controller("editAdventureController", ["$scope", "$http", "$location", "$sta
             if ($scope.values.team)
                 teamId = $scope.values.team._id;
 
-            $scope.latitude = parseFloat($scope.position.lat);
-            $scope.longitude = parseFloat($scope.position.lng);
+//            $scope.latitude = parseFloat($scope.position.lat);
+//            $scope.longitude = parseFloat($scope.position.lng);
+            $scope.latitude = parseFloat($scope.markers.mainMarker.lat);
+            $scope.longitude = parseFloat($scope.markers.mainMarker.lng);
 
             $http({
                 method: "POST",
