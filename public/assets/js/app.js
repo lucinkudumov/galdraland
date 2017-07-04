@@ -3920,8 +3920,8 @@ app.controller("createTeamController", ["$scope", "$rootScope", "Upload", "$http
 
     angular.extend($scope, {
         position: {
-            lat: 59.91,
-            lng: 10.75,
+            lat: 0,
+            lng: 0,
             zoom: 4
         },
         markers: {
