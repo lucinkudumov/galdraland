@@ -558,14 +558,14 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
 
     angular.extend($scope, {
         position: {
-            lat: 59.91,
-            lng: 10.75,
+            lat: 0,
+            lng: 0,
             zoom: 4
         },
         markers: {
             mainMarker: {
-                lat: 59.91,
-                lng: 10.75,
+                lat: 0,
+                lng: 0,
                 focus: true,
                 draggable: false
             }
@@ -1120,14 +1120,14 @@ app.controller("createAdventureController", ["$scope", "$rootScope", "Upload", "
         $scope.tags = [];
         angular.extend($scope, {
             position: {
-                lat: 59.91,
-                lng: 10.75,
+                lat: 0,
+                lng: 0,
                 zoom: 4
             },
             markers: {
                 mainMarker: {
-                    lat: 59.91,
-                    lng: 10.75,
+                    lat: 0,
+                    lng: 0,
                     focus: true,
                     draggable: true
                 }
@@ -1312,14 +1312,14 @@ app.controller("editAdventureController", ["$scope", "$http", "$location", "$sta
 
         angular.extend($scope, {
             position: {
-                lat: 59.91,
-                lng: 10.75,
+                lat: 0,
+                lng: 0,
                 zoom: 4
             },
             markers: {
                 mainMarker: {
-                    lat: 59.91,
-                    lng: 10.75,
+                    lat: 0,
+                    lng: 0,
                     focus: true,
                     draggable: true
                 }
@@ -3191,14 +3191,14 @@ app.controller("profileSettingsController", ["$scope", "$rootScope", "$location"
 
         angular.extend($scope, {
             position: {
-                lat: 59.91,
-                lng: 10.75,
+                lat: 0,
+                lng: 0,
                 zoom: 4
             },
             markers: {
                 mainMarker: {
-                    lat: 59.91,
-                    lng: 10.75,
+                    lat: 0,
+                    lng: 0,
                     focus: true,
                     draggable: true
                 }
@@ -3712,14 +3712,14 @@ app.controller("profileViewController", ["$scope", "$http", "User", function ($s
     $scope.badgesData = [];
     angular.extend($scope, {
         position: {
-            lat: 59.91,
-            lng: 10.75,
+            lat: 0,
+            lng: 0,
             zoom: 4
         },
         markers: {
             mainMarker: {
-                lat: 59.91,
-                lng: 10.75,
+                lat: 0,
+                lng: 0,
                 focus: true,
                 draggable: false
             }
@@ -4091,14 +4091,14 @@ app.controller("editTeamController", ["$scope", "$http", "$location", "$statePar
 
         angular.extend($scope, {
             position: {
-                lat: 59.91,
-                lng: 10.75,
+                lat: 0,
+                lng: 0,
                 zoom: 4
             },
             markers: {
                 mainMarker: {
-                    lat: 59.91,
-                    lng: 10.75,
+                    lat: 0,
+                    lng: 0,
                     focus: true,
                     draggable: true
                 }
@@ -4140,7 +4140,7 @@ app.controller("editTeamController", ["$scope", "$http", "$location", "$statePar
             $scope.position.lat = parseFloat($scope.latitude);
             $scope.position.lng = parseFloat($scope.longitude);
             $scope.markers.mainMarker.lat = parseFloat($scope.latitude);
-            $scope.markers.mainMarker.lng = parseFloat($scope.lng);
+            $scope.markers.mainMarker.lng = parseFloat($scope.longitude);
         });
         $scope.onFileSelect = function (image) {
             console.log(image);
@@ -4983,14 +4983,14 @@ app.controller("userViewController", ["$scope", "$http", "$stateParams", "User",
 
         angular.extend($scope, {
             position: {
-                lat: 59.91,
-                lng: 10.75,
+                lat: 0,
+                lng: 0,
                 zoom: 4
             },
             markers: {
                 mainMarker: {
-                    lat: 59.91,
-                    lng: 10.75,
+                    lat: 0,
+                    lng: 0,
                     focus: true,
                     draggable: false
                 }
@@ -5253,14 +5253,14 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
 
     angular.extend($scope, {
         position: {
-            lat: 59.91,
-            lng: 10.75,
+            lat: 0,
+            lng: 0,
             zoom: 4
         },
         markers: {
             mainMarker: {
-                lat: 59.91,
-                lng: 10.75,
+                lat: 0,
+                lng: 0,
                 focus: true,
                 draggable: false
             }
