@@ -5157,7 +5157,7 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
 
                     if (data.data.team.latitude && !isNaN(data.data.team.latitude)) {
                         $scope.position.lat = parseFloat(data.data.team.latitude);
-                        $scope.markers.mainMarker.lat = $scope.position.lat;
+                        $scope.markers.mainMarker.lat = parseFloat(data.data.team.latitude);
                     } else {
                         $scope.position.lat = 0;
                         $scope.markers.mainMarker.lat = 0;
@@ -5165,7 +5165,7 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
 
                     if (data.data.team.longitude && !isNaN(data.data.team.longitude)) {
                         $scope.position.lng = parseFloat(data.data.team.longitude);
-                        $scope.markers.mainMarker.lng = $scope.position.lng;
+                        $scope.markers.mainMarker.lng = parseFloat(data.data.team.longitude);
                     } else {
                         $scope.position.lng = 0;
                         $scope.markers.mainMarker.lng = 0;
