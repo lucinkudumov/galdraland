@@ -47,7 +47,7 @@
             <input class="form-control" type="text" ng-model="position.lng" placeholder="Geo Location - longitude">
         </div>
         <div class="form-group form-group-for-setting">
-            <leaflet lf-center="position" markers="markers" width="100%" height="250px"></leaflet>
+            <leaflet lf-center="position" event-broadcast="events" markers="markers" width="100%" height="250px"></leaflet>
         </div>
 
         <button class="btn btn-default pull-right" ng-disabled="username.length == 0 || invalidUsername || fullname.length == 0 || email.length == 0 || invalidEmail || location.length == 0" ng-click="saveMainInformation()">Save</button>
