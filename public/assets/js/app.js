@@ -561,6 +561,15 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
             lat: 51.505,
             lng: -0.09,
             zoom: 4
+        },
+        markers: {
+            mainMarker: {
+                lat: 59.91,
+                lng: 10.75,
+                message: "I want to travel here!",
+                focus: true,
+                draggable: false
+            }
         }
     });
 
@@ -648,14 +657,18 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
 
                 if (data.data.adventure.latitude && !isNaN(data.data.adventure.latitude)) {
                     $scope.position.lat = parseFloat(data.data.adventure.latitude);
+                    $scope.markers.mainMarker.lat = parseFloat(data.data.adventure.latitude);
                 } else {
-                    $scope.position.lat = 0 ;
+                    $scope.position.lat = 0;
+                    $scope.markers.mainMarker.lat = 0;
                 }
 
                 if (data.data.adventure.longitude && !isNaN(data.data.adventure.longitude)) {
                     $scope.position.lng = parseFloat(data.data.adventure.longitude);
+                    $scope.markers.mainMarker.lng = parseFloat(data.data.adventure.longitude);
                 } else {
                     $scope.position.lng = 0 ;
+                    $scope.markers.mainMarker.lng = 0;
                 }
 
                 $http({
