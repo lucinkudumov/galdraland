@@ -6944,6 +6944,7 @@
             },
 
             _getIconUrl: function (name) {
+                console.log("____getIconUrl1111");
                 return retina && this.options[name + 'RetinaUrl'] || this.options[name + 'Url'];
             }
         });
@@ -6993,6 +6994,7 @@
                 // `Icon.Default` will try to auto-detect the absolute location of the
                 // blue icon images. If you are placing these images in a non-standard
                 // way, set this option to point to the right absolute path.
+                console.log("_getIconUrl = " + (this.options.imagePath || IconDefault.imagePath) + Icon.prototype._getIconUrl.call(this, name));
                 return (this.options.imagePath || IconDefault.imagePath) + Icon.prototype._getIconUrl.call(this, name);
             },
 
@@ -8763,7 +8765,7 @@
 
                 // @option className: String = ''
                 // A custom class name to assign to the image. Empty by default.
-                className: '',
+                className: ''
             },
 
             initialize: function (url, bounds, options) { // (String, LatLngBounds, Object)
