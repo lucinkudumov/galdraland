@@ -6944,7 +6944,6 @@
             },
 
             _getIconUrl: function (name) {
-                console.log("____getIconUrl1111");
                 return retina && this.options[name + 'RetinaUrl'] || this.options[name + 'Url'];
             }
         });
