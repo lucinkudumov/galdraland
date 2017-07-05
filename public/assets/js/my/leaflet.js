@@ -6997,7 +6997,8 @@
                 console.log("111 = " + (this.options.imagePath || IconDefault.imagePath));
                 console.log("111 = " + Icon.prototype._getIconUrl.call(this, name));
                 console.log("_getIconUrl = " + (this.options.imagePath || IconDefault.imagePath) + Icon.prototype._getIconUrl.call(this, name));
-                return (this.options.imagePath || IconDefault.imagePath) + Icon.prototype._getIconUrl.call(this, name);
+//                return (this.options.imagePath || IconDefault.imagePath) + Icon.prototype._getIconUrl.call(this, name);
+                return Icon.prototype._getIconUrl.call(this, name);
             },
 
             _detectIconPath: function () {
