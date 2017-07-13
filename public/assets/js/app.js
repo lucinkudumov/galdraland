@@ -569,7 +569,8 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
                 focus: true,
                 draggable: false
             }
-        }
+        },
+        paths: {}
     });
 
         function onDayClick(day){
@@ -670,7 +671,8 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
                     $scope.markers.mainMarker.lng = 0;
                 }
 
-                console.log("view adventure = lat -> " + $scope.markers.mainMarker.lat + " : lng -> " + $scope.markers.mainMarker.lng);
+                $scope.paths = {};
+                $scope.paths['circle'] = {type:'circle', radius: 500*1000, latlngs:$scope.markers.mainMarker};
 
                 $http({
                     method: "POST",
@@ -3723,7 +3725,8 @@ app.controller("profileViewController", ["$scope", "$http", "User", function ($s
                 focus: true,
                 draggable: false
             }
-        }
+        },
+        paths: {}
     });
     $http.get("/api/getUserDetail").then(function (data) {
         $scope.user = data.data.user;
@@ -3742,6 +3745,8 @@ app.controller("profileViewController", ["$scope", "$http", "User", function ($s
             $scope.position.lng = 0 ;
             $scope.markers.mainMarker.lng = 0;
         }
+        $scope.paths = {};
+        $scope.paths['circle'] = {type:'circle', radius: 500*1000, latlngs:$scope.markers.mainMarker};
     });
 
     $http({
@@ -4994,7 +4999,8 @@ app.controller("userViewController", ["$scope", "$http", "$stateParams", "User",
                     focus: true,
                     draggable: false
                 }
-            }
+            },
+            paths: {}
         });
 
         $scope.refresh = function () {
@@ -5042,7 +5048,8 @@ app.controller("userViewController", ["$scope", "$http", "$stateParams", "User",
                     $scope.position.lng = 0 ;
                     $scope.markers.mainMarker.lng = 0;
                 }
-
+                $scope.paths = {};
+                $scope.paths['circle'] = {type:'circle', radius: 500*1000, latlngs:$scope.markers.mainMarker};
                 $http({
                     method: "POST",
                     url: "getBadgesByCreateAdv",
