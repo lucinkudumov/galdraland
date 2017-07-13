@@ -5048,7 +5048,7 @@ app.controller("userViewController", ["$scope", "$http", "$stateParams", "User",
                     $scope.position.lng = 0 ;
                     $scope.markers.mainMarker.lng = 0;
                 }
-                    console.log($scope.markers);
+                    console.log("aaaaa = ", $scope.markers);
                 $scope.paths = {};
                 $scope.paths['circle'] = {type:'circle', radius: 500*1000, latlngs:$scope.markers.mainMarker};
                 $http({
