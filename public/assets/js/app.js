@@ -5264,7 +5264,8 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
                 focus: true,
                 draggable: false
             }
-        }
+        },
+        paths: {}
     });
 
         $scope.refresh = function () {
@@ -5319,6 +5320,8 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
                         $scope.markers.mainMarker.lng = 0;
                     }
 
+                    $scope.paths = {};
+                    $scope.paths['circle'] = {type:'circle', radius: 500*1000, latlngs:$scope.markers.mainMarker};
                     $scope.isMember = false;
                     for (var i = 0; i < data.data.team.teamMembers.length; i++) {
                         if (data.data.team.teamMembers[i].user.profileId == '000000000000000000000000') {
