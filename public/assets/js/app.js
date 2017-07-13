@@ -5033,17 +5033,17 @@ app.controller("userViewController", ["$scope", "$http", "$stateParams", "User",
                 $scope.roles= data.data.user.roles;
                 $scope.isManager = $scope.user._id == $stateParams.id;
 
-                if (latitude && !isNaN(latitude)) {
-                    $scope.position.lat = parseFloat(latitude);
-                    $scope.markers.mainMarker.lat = parseFloat(latitude);
+                if ($scope.latitude && !isNaN($scope.latitude)) {
+                    $scope.position.lat = parseFloat($scope.latitude);
+                    $scope.markers.mainMarker.lat = parseFloat($scope.latitude);
                 } else {
                     $scope.position.lat = 0 ;
                     $scope.markers.mainMarker.lat = 0;
                 }
 
-                if (longitude && !isNaN(longitude)) {
-                    $scope.position.lng = parseFloat(longitude);
-                    $scope.markers.mainMarker.lng = parseFloat(longitude);
+                if ($scope.longitude && !isNaN($scope.longitude)) {
+                    $scope.position.lng = parseFloat($scope.longitude);
+                    $scope.markers.mainMarker.lng = parseFloat($scope.longitude);
                 } else {
                     $scope.position.lng = 0 ;
                     $scope.markers.mainMarker.lng = 0;
