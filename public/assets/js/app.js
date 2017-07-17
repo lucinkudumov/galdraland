@@ -4089,7 +4089,7 @@ app.controller("createTeamController", ["$scope", "$rootScope", "Upload", "$http
         $scope.refresh();
     }]);
 
-app.controller("editTeamController", ["$scope", "$http", "$location", "$stateParams", "Upload", function ($scope, $http, $location, $stateParams, Upload) {
+app.controller("editTeamController", ["$scope", "$http", "$location", "$stateParams", "Upload", "leafletData", function ($scope, $http, $location, $stateParams, Upload, leafletData) {
         var id = $stateParams.id;
         $scope.uploadInProgress = false;
         $scope.uploadProgress = 0;
@@ -4111,12 +4111,43 @@ app.controller("editTeamController", ["$scope", "$http", "$location", "$statePar
             controls: {
                 draw: {}
             },
-            events: { // or just {} //all events
-                markers:{
-                    enable: [ 'dragend' ]
-                    //logic: 'emit'
+            layers: {
+                baselayers: {
+                    mapbox_light: {
+                        name: 'Mapbox Light',
+                        url: 'http://api.tiles.mapbox.com/v4/{mapid}/{z}/{x}/{y}.png?access_token={apikey}',
+                        type: 'xyz',
+                        layerOptions: {
+                            apikey: 'pk.eyJ1IjoiYnVmYW51dm9scyIsImEiOiJLSURpX0pnIn0.2_9NrLz1U9bpwMQBhVk97Q',
+                            mapid: 'bufanuvols.lia22g09'
+                        },
+                        layerParams: {
+                            showOnSelector: false
+                        }
+                    }
+                },
+                overlays: {
+                    draw: {
+                        name: 'draw',
+                        type: 'group',
+                        visible: true,
+                        layerParams: {
+                            showOnSelector: false
+                        }
+                    }
                 }
             }
+        });
+
+        leafletData.getMap().then(function(map) {
+            leafletData.getLayers().then(function(baselayers) {
+                var drawnItems = baselayers.overlays.draw;
+                map.on('draw:created', function (e) {
+                    var layer = e.layer;
+                    drawnItems.addLayer(layer);
+                    console.log(JSON.stringify(layer.toGeoJSON()));
+                });
+            });
         });
 
     $scope.$on("leafletDirectiveMarker.dragend", function(event, args){
