@@ -4099,7 +4099,7 @@ app.controller("editTeamController", ["$scope", "$http", "$location", "$statePar
                 lat: 0,
                 lng: 0,
                 zoom: 4
-            },
+            }/*,
             markers: {
                 mainMarker: {
                     lat: 0,
@@ -4107,7 +4107,7 @@ app.controller("editTeamController", ["$scope", "$http", "$location", "$statePar
                     focus: true,
                     draggable: true
                 }
-            },
+            }*/,
             controls: {
                 draw: {}
             },
@@ -4119,7 +4119,7 @@ app.controller("editTeamController", ["$scope", "$http", "$location", "$statePar
                         type: 'xyz',
                         layerOptions: {
                             apikey: 'pk.eyJ1IjoiZGF2aWRtYWtvdyIsImEiOiJjajU4ZTJiNnYxY203MzJuc2V5MnpvamVlIn0.8WpLniKXRbxJ7CPu_72yVA',
-                            mapid: 'mapbox.streets'
+                            mapid: 'mapbox.outdoors'
                         },
                         layerParams: {
                             showOnSelector: false
