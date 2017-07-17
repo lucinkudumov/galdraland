@@ -4108,6 +4108,9 @@ app.controller("editTeamController", ["$scope", "$http", "$location", "$statePar
                     draggable: true
                 }
             },
+            controls: {
+                draw: {}
+            },
             events: { // or just {} //all events
                 markers:{
                     enable: [ 'dragend' ]
