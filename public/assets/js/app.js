@@ -4112,7 +4112,7 @@ app.controller("editTeamController", ["$scope", "$http", "$location", "$statePar
                 draw: {}
             },
             layers: {
-/*                baselayers: {
+                baselayers: {
                     mapbox_light: {
                         name: 'Mapbox Light',
                         url: 'http://api.tiles.mapbox.com/v4/{mapid}/{z}/{x}/{y}.png?access_token={apikey}',
@@ -4125,7 +4125,7 @@ app.controller("editTeamController", ["$scope", "$http", "$location", "$statePar
                             showOnSelector: false
                         }
                     }
-                }, */
+                },
                 overlays: {
                     draw: {
                         name: 'draw',
