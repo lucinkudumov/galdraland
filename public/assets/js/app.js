@@ -4119,7 +4119,7 @@ app.controller("editTeamController", ["$scope", "$http", "$location", "$statePar
                         type: 'xyz',
                         layerOptions: {
                             apikey: 'pk.eyJ1IjoiZGF2aWRtYWtvdyIsImEiOiJjajU4ZTJiNnYxY203MzJuc2V5MnpvamVlIn0.8WpLniKXRbxJ7CPu_72yVA',
-                            mapid: 'mapbox.outdoors'
+                            mapid: 'bufanuvols.lia22g09'
                         },
                         layerParams: {
                             showOnSelector: false
