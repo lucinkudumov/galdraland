@@ -4139,16 +4139,16 @@ app.controller("editTeamController", ["$scope", "$http", "$location", "$statePar
             }
         });
 
-        leafletData.getMap().then(function(map) {
-            leafletData.getLayers().then(function(baselayers) {
-                var drawnItems = baselayers.overlays.draw;
-                map.on('draw:created', function (e) {
-                    var layer = e.layer;
-                    drawnItems.addLayer(layer);
-                    console.log(JSON.stringify(layer.toGeoJSON()));
-                });
-            });
-        });
+//        leafletData.getMap().then(function(map) {
+//            leafletData.getLayers().then(function(baselayers) {
+//                var drawnItems = baselayers.overlays.draw;
+//                map.on('draw:created', function (e) {
+//                    var layer = e.layer;
+//                    drawnItems.addLayer(layer);
+//                    console.log(JSON.stringify(layer.toGeoJSON()));
+//                });
+//            });
+//        });
 
 //    $scope.$on("leafletDirectiveMarker.dragend", function(event, args){
 //        $scope.position.lat = args.model.lat;
