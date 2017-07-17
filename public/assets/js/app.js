@@ -4150,12 +4150,12 @@ app.controller("editTeamController", ["$scope", "$http", "$location", "$statePar
             });
         });
 
-    $scope.$on("leafletDirectiveMarker.dragend", function(event, args){
-        $scope.position.lat = args.model.lat;
-        $scope.position.lng = args.model.lng;
-        $scope.markers.mainMarker.lat = args.model.lat;
-        $scope.markers.mainMarker.lng = args.model.lng;
-    });
+//    $scope.$on("leafletDirectiveMarker.dragend", function(event, args){
+//        $scope.position.lat = args.model.lat;
+//        $scope.position.lng = args.model.lng;
+//        $scope.markers.mainMarker.lat = args.model.lat;
+//        $scope.markers.mainMarker.lng = args.model.lng;
+//    });
 
         $http({
             method: "POST",
@@ -4176,10 +4176,10 @@ app.controller("editTeamController", ["$scope", "$http", "$location", "$statePar
                 $scope.latitude = 0;
             if(isNaN($scope.longitude))
                 $scope.longitude = 0;
-            $scope.position.lat = parseFloat($scope.latitude);
-            $scope.position.lng = parseFloat($scope.longitude);
-            $scope.markers.mainMarker.lat = parseFloat($scope.latitude);
-            $scope.markers.mainMarker.lng = parseFloat($scope.longitude);
+//            $scope.position.lat = parseFloat($scope.latitude);
+//            $scope.position.lng = parseFloat($scope.longitude);
+//            $scope.markers.mainMarker.lat = parseFloat($scope.latitude);
+//            $scope.markers.mainMarker.lng = parseFloat($scope.longitude);
         });
         $scope.onFileSelect = function (image) {
             console.log(image);
@@ -4219,8 +4219,8 @@ app.controller("editTeamController", ["$scope", "$http", "$location", "$statePar
                     tmpTags.push($scope.tags[i].name);
             }
 
-            $scope.latitude = parseFloat($scope.markers.mainMarker.lat);
-            $scope.longitude = parseFloat($scope.markers.mainMarker.lng);
+//            $scope.latitude = parseFloat($scope.markers.mainMarker.lat);
+//            $scope.longitude = parseFloat($scope.markers.mainMarker.lng);
 
             $http({method: "POST", url: "editTeam", api: true, data: {id: id, name: $scope.name, description: $scope.description, image:$scope.uploadedImage, latitude: $scope.latitude, longitude: $scope.longitude, fb_page: $scope.fb_page, mission: $scope.mission, tags:tmpTags}}).then(function (data) {
                 $location.path("/teams/view/" + id);
