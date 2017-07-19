@@ -4096,8 +4096,8 @@ app.controller("editTeamController", ["$scope", "$http", "$location", "$statePar
 
         angular.extend($scope, {
             position: {
-                lat: 0,
-                lng: 0,
+                lat: 51.505,
+                lng: -0.09,
                 zoom: 4
             }/*,
             markers: {
@@ -4119,7 +4119,7 @@ app.controller("editTeamController", ["$scope", "$http", "$location", "$statePar
                         type: 'xyz',
                         layerOptions: {
                             apikey: 'pk.eyJ1IjoiZGF2aWRtYWtvdyIsImEiOiJjajU4ZTJiNnYxY203MzJuc2V5MnpvamVlIn0.8WpLniKXRbxJ7CPu_72yVA',
-                            mapid: 'mapbox.outdoors'
+                            mapid: 'mapbox.mapbox-terrain-v2'
                         },
                         layerParams: {
                             showOnSelector: false
