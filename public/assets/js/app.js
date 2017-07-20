@@ -4089,17 +4089,17 @@ app.controller("createTeamController", ["$scope", "$rootScope", "Upload", "$http
         $scope.refresh();
     }]);
 
-app.controller("editTeamController", ["$scope", "$http", "$location", "$stateParams", "Upload", "leafletData", function ($scope, $http, $location, $stateParams, Upload, leafletData) {
+app.controller("editTeamController", ["$scope", "$http", "$location", "$stateParams", "Upload", function ($scope, $http, $location, $stateParams, Upload) {
         var id = $stateParams.id;
         $scope.uploadInProgress = false;
         $scope.uploadProgress = 0;
 
         angular.extend($scope, {
             position: {
-                lat: 51.505,
-                lng: -0.09,
+                lat: 0,
+                lng: 0,
                 zoom: 4
-            }/*,
+            },
             markers: {
                 mainMarker: {
                     lat: 0,
@@ -4107,55 +4107,21 @@ app.controller("editTeamController", ["$scope", "$http", "$location", "$statePar
                     focus: true,
                     draggable: true
                 }
-            }*/,
-            controls: {
-                draw: {}
             },
-            layers: {
-                baselayers: {
-                    mapbox_light: {
-                        name: 'Mapbox Light',
-                        url: 'http://api.tiles.mapbox.com/v4/{mapid}/{z}/{x}/{y}.png?access_token={apikey}',
-                        type: 'xyz',
-                        layerOptions: {
-                            apikey: 'pk.eyJ1IjoiZGF2aWRtYWtvdyIsImEiOiJjajU4ZTJiNnYxY203MzJuc2V5MnpvamVlIn0.8WpLniKXRbxJ7CPu_72yVA',
-                            mapid: 'mapbox.mapbox-terrain-v2'
-                        },
-                        layerParams: {
-                            showOnSelector: false
-                        }
-                    }
-                },
-                overlays: {
-                    draw: {
-                        name: 'draw',
-                        type: 'group',
-                        visible: true,
-                        layerParams: {
-                            showOnSelector: false
-                        }
-                    }
+            events: { // or just {} //all events
+                markers:{
+                    enable: [ 'dragend' ]
+                    //logic: 'emit'
                 }
             }
         });
 
-        leafletData.getMap().then(function(map) {
-            leafletData.getLayers().then(function(baselayers) {
-                var drawnItems = baselayers.overlays.draw;
-                map.on('draw:created', function (e) {
-                    var layer = e.layer;
-                    drawnItems.addLayer(layer);
-                    console.log(JSON.stringify(layer.toGeoJSON()));
-                });
-            });
-        });
-
-//    $scope.$on("leafletDirectiveMarker.dragend", function(event, args){
-//        $scope.position.lat = args.model.lat;
-//        $scope.position.lng = args.model.lng;
-//        $scope.markers.mainMarker.lat = args.model.lat;
-//        $scope.markers.mainMarker.lng = args.model.lng;
-//    });
+    $scope.$on("leafletDirectiveMarker.dragend", function(event, args){
+        $scope.position.lat = args.model.lat;
+        $scope.position.lng = args.model.lng;
+        $scope.markers.mainMarker.lat = args.model.lat;
+        $scope.markers.mainMarker.lng = args.model.lng;
+    });
 
         $http({
             method: "POST",
@@ -4176,10 +4142,10 @@ app.controller("editTeamController", ["$scope", "$http", "$location", "$statePar
                 $scope.latitude = 0;
             if(isNaN($scope.longitude))
                 $scope.longitude = 0;
-//            $scope.position.lat = parseFloat($scope.latitude);
-//            $scope.position.lng = parseFloat($scope.longitude);
-//            $scope.markers.mainMarker.lat = parseFloat($scope.latitude);
-//            $scope.markers.mainMarker.lng = parseFloat($scope.longitude);
+            $scope.position.lat = parseFloat($scope.latitude);
+            $scope.position.lng = parseFloat($scope.longitude);
+            $scope.markers.mainMarker.lat = parseFloat($scope.latitude);
+            $scope.markers.mainMarker.lng = parseFloat($scope.longitude);
         });
         $scope.onFileSelect = function (image) {
             console.log(image);
@@ -4219,8 +4185,8 @@ app.controller("editTeamController", ["$scope", "$http", "$location", "$statePar
                     tmpTags.push($scope.tags[i].name);
             }
 
-//            $scope.latitude = parseFloat($scope.markers.mainMarker.lat);
-//            $scope.longitude = parseFloat($scope.markers.mainMarker.lng);
+            $scope.latitude = parseFloat($scope.markers.mainMarker.lat);
+            $scope.longitude = parseFloat($scope.markers.mainMarker.lng);
 
             $http({method: "POST", url: "editTeam", api: true, data: {id: id, name: $scope.name, description: $scope.description, image:$scope.uploadedImage, latitude: $scope.latitude, longitude: $scope.longitude, fb_page: $scope.fb_page, mission: $scope.mission, tags:tmpTags}}).then(function (data) {
                 $location.path("/teams/view/" + id);
