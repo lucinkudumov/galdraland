@@ -4099,29 +4099,69 @@ app.controller("editTeamController", ["$scope", "$http", "$location", "$statePar
                 lat: 0,
                 lng: 0,
                 zoom: 4
+            },           
+            controls: {
+                draw: {}
             },
-            markers: {
-                mainMarker: {
-                    lat: 0,
-                    lng: 0,
-                    focus: true,
-                    draggable: true
-                }
-            },
-            events: { // or just {} //all events
-                markers:{
-                    enable: [ 'dragend' ]
-                    //logic: 'emit'
+            layers: {
+                baselayers: {
+                    mapbox_light: {
+                        name: 'Mapbox Light',
+                        url: 'https://api.mapbox.com/styles/v1/mapbox/light-v9/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZGF2aWRtYWtvdyIsImEiOiJjajU4ZTJiNnYxY203MzJuc2V5MnpvamVlIn0.8WpLniKXRbxJ7CPu_72yVA',
+                        type: 'xyz',
+                        layerOptions: {
+                            apikey: 'pk.eyJ1IjoiZGF2aWRtYWtvdyIsImEiOiJjajU4ZTJiNnYxY203MzJuc2V5MnpvamVlIn0.8WpLniKXRbxJ7CPu_72yVA',
+                            mapid: 'bufanuvols.lia22g09'
+                        },
+                        layerParams: {
+                            showOnSelector: false
+                        }
+                    }
+                },
+                overlays: {
+                    draw: {
+                        name: 'draw',
+                        type: 'group',
+                        visible: true,
+                        layerParams: {
+                            showOnSelector: false
+                        }
+                    }
                 }
             }
+            // markers: {
+            //     mainMarker: {
+            //         lat: 0,
+            //         lng: 0,
+            //         focus: true,
+            //         draggable: true
+            //     }
+            // },
+            // events: { // or just {} //all events
+            //     markers:{
+            //         enable: [ 'dragend' ]
+            //         //logic: 'emit'
+            //     }
+            // }
         });
 
-    $scope.$on("leafletDirectiveMarker.dragend", function(event, args){
-        $scope.position.lat = args.model.lat;
-        $scope.position.lng = args.model.lng;
-        $scope.markers.mainMarker.lat = args.model.lat;
-        $scope.markers.mainMarker.lng = args.model.lng;
-    });
+        leafletData.getMap().then(function(map) {
+               leafletData.getLayers().then(function(baselayers) {
+                  var drawnItems = baselayers.overlays.draw;
+                  map.on('draw:created', function (e) {
+                    var layer = e.layer;
+                    drawnItems.addLayer(layer);
+                    console.log(JSON.stringify(layer.toGeoJSON()));
+                  });
+               });
+        });
+
+        $scope.$on("leafletDirectiveMarker.dragend", function(event, args){
+            $scope.position.lat = args.model.lat;
+            $scope.position.lng = args.model.lng;
+            $scope.markers.mainMarker.lat = args.model.lat;
+            $scope.markers.mainMarker.lng = args.model.lng;
+        });
 
         $http({
             method: "POST",
