@@ -1,4 +1,4 @@
-var app = angular.module("galdra", ["ngRoute", "ui.router", "ngCookies", "ui.bootstrap", "ngFileUpload", 'decipher.tags', 'ui.bootstrap.typeahead', /*'ngTagsInput',*/ "envoc.simpleCalendar", "infinite-scroll", 'leaflet-directive'/* "uiGmapgoogle-maps", "meow.blog.view", "meow.blog.edit"*/]);
+var app = angular.module("galdra", ["ngRoute", "ui.router","leaflet-directive", "ngCookies", "ui.bootstrap", "ngFileUpload", 'decipher.tags', 'ui.bootstrap.typeahead', /*'ngTagsInput',*/ "envoc.simpleCalendar", "infinite-scroll", 'leaflet-directive'/* "uiGmapgoogle-maps", "meow.blog.view", "meow.blog.edit"*/]);
 var config = {
     //siteurl : 'http://galdraland.com:9010/'
     siteurl: 'https://galdraland-1-0.herokuapp.com/'
@@ -4090,6 +4090,7 @@ app.controller("createTeamController", ["$scope", "$rootScope", "Upload", "$http
     }]);
 
 app.controller("editTeamController", ["$scope","leafletData", "$http", "$location", "$stateParams", "Upload", function ($scope, leafletData, $http, $location, $stateParams, Upload) {
+
         var id = $stateParams.id;
         $scope.uploadInProgress = false;
         $scope.uploadProgress = 0;
@@ -4269,6 +4270,63 @@ app.controller("editTeamController", ["$scope","leafletData", "$http", "$locatio
             $location.path("/teams/view/" + id);
         }
     }]);
+
+    app.controller("ControlsDrawController", ["$scope","leafletData", function ($scope, leafletData) {
+    
+        // var id = $stateParams.id;
+        // $scope.uploadInProgress = false;
+        // $scope.uploadProgress = 0;
+
+        angular.extend($scope, {
+            london: {
+                lat: 51.505,
+                lng: -0.09,
+                zoom: 4
+            },           
+            controls: {
+                draw: {}
+            },
+            layers: {
+                baselayers: {
+                    mapbox_light: {
+                        name: 'Mapbox Light',
+                        url: 'https://api.mapbox.com/styles/v1/mapbox/light-v9/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZGF2aWRtYWtvdyIsImEiOiJjajU4ZTJiNnYxY203MzJuc2V5MnpvamVlIn0.8WpLniKXRbxJ7CPu_72yVA',
+                        type: 'xyz',
+                        layerOptions: {
+                            apikey: 'pk.eyJ1IjoiZGF2aWRtYWtvdyIsImEiOiJjajU4ZTJiNnYxY203MzJuc2V5MnpvamVlIn0.8WpLniKXRbxJ7CPu_72yVA',
+                            mapid: 'bufanuvols.lia22g09'
+                        },
+                        layerParams: {
+                            showOnSelector: false
+                        }
+                    }
+                },
+                overlays: {
+                    draw: {
+                        name: 'draw',
+                        type: 'group',
+                        visible: true,
+                        layerParams: {
+                            showOnSelector: false
+                        }
+                    }
+                }
+            },
+        });
+
+        leafletData.getMap().then(function(map) {
+               leafletData.getLayers().then(function(baselayers) {
+                  var drawnItems = baselayers.overlays.draw;
+                  map.on('draw:created', function (e) {
+                    var layer = e.layer;
+                    drawnItems.addLayer(layer);
+                    console.log("mapbox successed");
+                    console.log(JSON.stringify(layer.toGeoJSON()));
+                  });
+               });
+        });
+    }]);
+
 
 app.controller("createTeamBlogController", ["$scope", "$http", "$location", "$stateParams", "Upload", function ($scope, $http, $location, $stateParams, Upload) {
     var id = $stateParams.id;
