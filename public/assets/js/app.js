@@ -4100,9 +4100,9 @@ app.controller("editTeamController", ["$scope","leafletData", "$http", "$locatio
                 lng: 0,
                 zoom: 4
             },           
-            // controls: {
-            //     draw: {}
-            // },
+            controls: {
+                draw: {}
+            },
             layers: {
                 baselayers: {
                     mapbox_light: {
