@@ -4096,14 +4096,45 @@ app.controller("editTeamController", ["$scope","leafletData", "$http", "$locatio
 
         angular.extend($scope, {
             position: {
-                lat: 0,
-                lng: 0,
+                lat: 51.505,
+                lng: -0.09,
+                zoom: 4
+            }, 
+            london: {
+                lat: 51.505,
+                lng: -0.09,
                 zoom: 4
             },           
             controls: {
                 draw: {}
             },
             layers: {
+                baselayers: {
+                    mapbox_light: {
+                        name: 'Mapbox Light',
+                        url: 'https://api.mapbox.com/styles/v1/mapbox/light-v9/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZGF2aWRtYWtvdyIsImEiOiJjajU4ZTJiNnYxY203MzJuc2V5MnpvamVlIn0.8WpLniKXRbxJ7CPu_72yVA',
+                        type: 'xyz',
+                        layerOptions: {
+                            apikey: 'pk.eyJ1IjoiZGF2aWRtYWtvdyIsImEiOiJjajU4ZTJiNnYxY203MzJuc2V5MnpvamVlIn0.8WpLniKXRbxJ7CPu_72yVA',
+                            mapid: 'bufanuvols.lia22g09'
+                        },
+                        layerParams: {
+                            showOnSelector: false
+                        }
+                    }
+                },
+                overlays: {
+                    draw: {
+                        name: 'draw',
+                        type: 'group',
+                        visible: true,
+                        layerParams: {
+                            showOnSelector: false
+                        }
+                    }
+                }
+            },
+            test_layers: {
                 baselayers: {
                     mapbox_light: {
                         name: 'Mapbox Light',
