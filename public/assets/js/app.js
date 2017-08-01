@@ -680,7 +680,7 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
 
                 $scope.paths = {};
                 if ($scope.radius != 0)
-                    $scope.paths['circle'] = {type:'circle', radius: $scope.radius*1000, latlngs:$scope.markers.mainMarker};
+                    $scope.paths['circle'] = {type:'circle', color: '#008000', weight: 1, radius: $scope.radius*1000, latlngs:$scope.markers.mainMarker};
 
                 $http({
                     method: "POST",
@@ -3775,7 +3775,7 @@ app.controller("profileViewController", ["$scope", "$http", "User", function ($s
 
         $scope.paths = {};
         if ($scope.radius != 0)
-            $scope.paths['circle'] = {type:'circle', radius: $scope.radius*1000, latlngs:$scope.markers.mainMarker};
+            $scope.paths['circle'] = {type:'circle', color: '#008000', weight: 1, radius: $scope.radius*1000, latlngs:$scope.markers.mainMarker};
     });
 
     $http({
@@ -4153,6 +4153,15 @@ app.controller("editTeamController", ["$scope", "$http", "$location", "$statePar
         $scope.markers.mainMarker.lat = args.model.lat;
         $scope.markers.mainMarker.lng = args.model.lng;
     });
+
+    $scope.$watch("radius", function(newValue, oldValue){
+        if (newValue != oldValue) {
+            $scope.paths = {};
+            if ($scope.radius != 0)
+                $scope.paths['circle'] = {type:'circle', color: '#008000', weight: 1, radius: $scope.radius*1000, latlngs:$scope.markers.mainMarker}
+
+        }
+    }, true);
 
         $http({
             method: "POST",
@@ -5099,7 +5108,7 @@ app.controller("userViewController", ["$scope", "$http", "$stateParams", "User",
 
                 $scope.paths = {};
                 if ($scope.radius != 0)
-                    $scope.paths['circle'] = {type:'circle', radius: $scope.radius*1000, latlngs:$scope.markers.mainMarker};
+                    $scope.paths['circle'] = {type:'circle', color: '#008000', weight: 1, radius: $scope.radius*1000, latlngs:$scope.markers.mainMarker};
                 $http({
                     method: "POST",
                     url: "getBadgesByCreateAdv",
@@ -5385,7 +5394,7 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
 
                     $scope.paths = {};
                     if ($scope.radius != 0)
-                        $scope.paths['circle'] = {type:'circle', radius: $scope.radius*1000, latlngs:$scope.markers.mainMarker};
+                        $scope.paths['circle'] = {type:'circle', color: '#008000', weight: 1, radius: $scope.radius*1000, latlngs:$scope.markers.mainMarker};
                     $scope.isMember = false;
                     for (var i = 0; i < data.data.team.teamMembers.length; i++) {
                         if (data.data.team.teamMembers[i].user.profileId == '000000000000000000000000') {
