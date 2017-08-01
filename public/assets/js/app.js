@@ -4185,7 +4185,7 @@ app.controller("editTeamController", ["$scope", "$http", "$location", "$statePar
 
             $scope.paths = {};
             if ($scope.radius != 0)
-                $scope.paths['circle'] = {type:'circle', radius: $scope.radius*1000, latlngs:$scope.markers.mainMarker}
+                $scope.paths['circle'] = {type:'circle', color: '#008000', weight: 1, radius: $scope.radius*1000, latlngs:$scope.markers.mainMarker}
         });
         $scope.onFileSelect = function (image) {
             console.log(image);
