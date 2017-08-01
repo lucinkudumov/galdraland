@@ -671,8 +671,15 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
                     $scope.markers.mainMarker.lng = 0;
                 }
 
+                if (data.data.adventure.radius && !isNaN(data.data.adventure.radius)) {
+                    $scope.radius = parseFloat(data.data.adventure.radius);
+                } else {
+                    $scope.radius = 0 ;
+                }
+
+
                 $scope.paths = {};
-                $scope.paths['circle'] = {type:'circle', radius: 500*1000, latlngs:$scope.markers.mainMarker};
+                $scope.paths['circle'] = {type:'circle', radius: $scope.radius*1000, latlngs:$scope.markers.mainMarker};
 
                 $http({
                     method: "POST",
@@ -1213,12 +1220,13 @@ app.controller("createAdventureController", ["$scope", "$rootScope", "Upload", "
             console.log("lng" + $scope.markers.mainMarker.lng);
             $scope.latitude = parseFloat($scope.markers.mainMarker.lat);
             $scope.longitude = parseFloat($scope.markers.mainMarker.lng);
+            $scope.radius = parseFloat($scope.radius);
 
             $http({
                 method: "POST",
                 url: "adventure/create",
                 api: true,
-                data: {name: $scope.name, type: $scope.type, latitude: $scope.latitude, longitude : $scope.longitude, fb_page: $scope.fb_page, description: $scope.description, link: $scope.link, image: $scope.uploadedImage, team: teamId, start: $scope.formatDate($scope.start), end: $scope.formatDate($scope.end), tags: tmpTags}
+                data: {name: $scope.name, type: $scope.type, latitude: $scope.latitude, longitude : $scope.longitude, radius: $scope.radius, fb_page: $scope.fb_page, description: $scope.description, link: $scope.link, image: $scope.uploadedImage, team: teamId, start: $scope.formatDate($scope.start), end: $scope.formatDate($scope.end), tags: tmpTags}
             }). then (function success(data) {
                 $location.path("/adventures/view/" + data.data.id);
                 if (post)
@@ -1362,15 +1370,20 @@ app.controller("editAdventureController", ["$scope", "$http", "$location", "$sta
                 $scope.fb_page = data.data.adventure.fb_page;
                 $scope.latitude = data.data.adventure.latitude;
                 $scope.longitude = data.data.adventure.longitude;
+                $scope.radius = data.data.adventure.radius;
 
                 if(isNaN($scope.latitude))
                     $scope.latitude = 0;
                 if(isNaN($scope.longitude))
                     $scope.longitude = 0;
+                if(isNaN($scope.radius))
+                    $scope.radius = 0;
+
                 $scope.position.lat = parseFloat($scope.latitude);
                 $scope.position.lng = parseFloat($scope.longitude);
                 $scope.markers.mainMarker.lat = parseFloat($scope.latitude);
                 $scope.markers.mainMarker.lng = parseFloat($scope.longitude);
+                $scope.radius = parseFloat($scope.radius);
                 console.log("get Adventure : lat -> " + $scope.markers.mainMarker.lat + " : lng -> " + $scope.markers.mainMarker.lng);
 
             });
@@ -1444,13 +1457,14 @@ app.controller("editAdventureController", ["$scope", "$http", "$location", "$sta
 //            $scope.longitude = parseFloat($scope.position.lng);
             $scope.latitude = parseFloat($scope.markers.mainMarker.lat);
             $scope.longitude = parseFloat($scope.markers.mainMarker.lng);
+            $scope.radius = parseFloat($scope.radius);
             console.log("save Adventure : lat -> " + $scope.markers.mainMarker.lat + " : lng -> " + $scope.markers.mainMarker.lng);
 
             $http({
                 method: "POST",
                 url: "adventure/update",
                 api: true,
-                data: {id: $stateParams.id, name: $scope.name, team : teamId, latitude: $scope.latitude, longitude: $scope.longitude, fb_page: $scope.fb_page, description: $scope.description, link: $scope.link, image: $scope.uploadedImage, tags: tmpTags, start: $scope.formatDate($scope.start), end: $scope.formatDate($scope.end), status: $scope.status, type: $scope.type}
+                data: {id: $stateParams.id, name: $scope.name, team : teamId, latitude: $scope.latitude, longitude: $scope.longitude, radius: $scope.radius, fb_page: $scope.fb_page, description: $scope.description, link: $scope.link, image: $scope.uploadedImage, tags: tmpTags, start: $scope.formatDate($scope.start), end: $scope.formatDate($scope.end), status: $scope.status, type: $scope.type}
             }).then  (function success(data) {
                 $location.path("/adventures/view/" + $stateParams.id);
             });
@@ -3177,6 +3191,7 @@ app.controller("profileSettingsController", ["$scope", "$rootScope", "$location"
         $scope.skype = "";
         $scope.latitude = "";
         $scope.longitude = "";
+        $scope.radius = "";
         $scope.goals = "";
         $scope.categories = "";
         $scope.educations = [];
@@ -3228,6 +3243,7 @@ app.controller("profileSettingsController", ["$scope", "$rootScope", "$location"
             $scope.skype = data.data.user.skype;
             $scope.latitude = data.data.user.latitude;
             $scope.longitude = data.data.user.longitude;
+            $scope.radius = data.data.user.radius;
             $scope.goals = data.data.user.goals;
             $scope.categories = data.data.user.categories;
             $scope.educations = data.data.user.educations;
@@ -3248,10 +3264,13 @@ app.controller("profileSettingsController", ["$scope", "$rootScope", "$location"
                 $scope.latitude = 0;
             if(isNaN($scope.longitude))
                 $scope.longitude = 0;
+            if(isNaN($scope.radius))
+                $scope.radius = 0;
             $scope.position.lat = parseFloat($scope.latitude);
             $scope.position.lng = parseFloat($scope.longitude);
             $scope.markers.mainMarker.lat = parseFloat($scope.latitude);
             $scope.markers.mainMarker.lng = parseFloat($scope.longitude);
+            $scope.radius = parseFloat($scope.radius);
 
         });
 
@@ -3277,11 +3296,12 @@ app.controller("profileSettingsController", ["$scope", "$rootScope", "$location"
         $scope.saveMainInformation = function () {
             $scope.latitude = parseFloat($scope.markers.mainMarker.lat);
             $scope.longitude = parseFloat($scope.markers.mainMarker.lng);
+            $scope.radius = parseFloat($scope.radius);
             $http({
                 method: "POST",
                 url: "saveMainInformation",
                 api: true,
-                data: {username: $scope.username, fullname: $scope.fullname, email: $scope.email, location: $scope.location, latitude : $scope.latitude, longitude : $scope.longitude, skype: $scope.skype, /*goals: $scope.goals,*/ categories: $scope.categories}
+                data: {username: $scope.username, fullname: $scope.fullname, email: $scope.email, location: $scope.location, latitude : $scope.latitude, longitude : $scope.longitude, radius : $scope.radius, skype: $scope.skype, /*goals: $scope.goals,*/ categories: $scope.categories}
             }).then(function (data) {
                 if (data.data.success) {
                     User.update();
@@ -3745,8 +3765,15 @@ app.controller("profileViewController", ["$scope", "$http", "User", function ($s
             $scope.position.lng = 0 ;
             $scope.markers.mainMarker.lng = 0;
         }
+
+        if (data.data.user.radius && !isNaN(data.data.user.radius)) {
+            $scope.radius = parseFloat(data.data.user.radius);
+        } else {
+            $scope.radius = 0 ;
+        }
+
         $scope.paths = {};
-        $scope.paths['circle'] = {type:'circle', radius: 500*1000, latlngs:$scope.markers.mainMarker};
+        $scope.paths['circle'] = {type:'circle', radius: $scope.radius*1000, latlngs:$scope.markers.mainMarker};
     });
 
     $http({
@@ -3977,12 +4004,13 @@ app.controller("createTeamController", ["$scope", "$rootScope", "Upload", "$http
 
             $scope.latitude = parseFloat($scope.markers.mainMarker.lat);
             $scope.longitude = parseFloat($scope.markers.mainMarker.lng);
+            $scope.radius = parseFloat($scope.radius);
 
             $http({
                 method: "POST",
                 url: "createTeam",
                 api: true,
-                data: {name: $scope.name, description: $scope.description, rols: $scope.roles, defuser: $rootScope.defUser, latitude: $scope.latitude, longitude: $scope.longitude, fb_page: $scope.fb_page, mission: $scope.mission, image: $scope.uploadedImage, tags: tmpTags}
+                data: {name: $scope.name, description: $scope.description, rols: $scope.roles, defuser: $rootScope.defUser, latitude: $scope.latitude, longitude: $scope.longitude, radius: $scope.radius, fb_page: $scope.fb_page, mission: $scope.mission, image: $scope.uploadedImage, tags: tmpTags}
             }).then(function (data) {
                 if (data && data.data && data.data.success == true) {
                     if($scope.slackAuthentication == true) {
@@ -4138,17 +4166,23 @@ app.controller("editTeamController", ["$scope", "$http", "$location", "$statePar
             $scope.fb_page = data.data.team.fb_page;
             $scope.latitude = data.data.team.latitude;
             $scope.longitude = data.data.team.longitude;
+            $scope.radius = data.data.team.radius;
             $scope.mission = data.data.team.mission;
             if(isNaN($scope.latitude))
                 $scope.latitude = 0;
             if(isNaN($scope.longitude))
                 $scope.longitude = 0;
+            if(isNaN($scope.radius))
+                $scope.radius = 0;
+
             $scope.position.lat = parseFloat($scope.latitude);
             $scope.position.lng = parseFloat($scope.longitude);
             $scope.markers.mainMarker.lat = parseFloat($scope.latitude);
             $scope.markers.mainMarker.lng = parseFloat($scope.longitude);
+            $scope.radius = parseFloat($scope.radius);
+
             $scope.paths = {};
-            $scope.paths['circle'] = {type:'circle', radius: 500*1000, latlngs:$scope.markers.mainMarker}
+            $scope.paths['circle'] = {type:'circle', radius: $scope.radius*1000, latlngs:$scope.markers.mainMarker}
         });
         $scope.onFileSelect = function (image) {
             console.log(image);
@@ -4190,8 +4224,9 @@ app.controller("editTeamController", ["$scope", "$http", "$location", "$statePar
 
             $scope.latitude = parseFloat($scope.markers.mainMarker.lat);
             $scope.longitude = parseFloat($scope.markers.mainMarker.lng);
+            $scope.radius = parseFloat($scope.radius);
 
-            $http({method: "POST", url: "editTeam", api: true, data: {id: id, name: $scope.name, description: $scope.description, image:$scope.uploadedImage, latitude: $scope.latitude, longitude: $scope.longitude, fb_page: $scope.fb_page, mission: $scope.mission, tags:tmpTags}}).then(function (data) {
+            $http({method: "POST", url: "editTeam", api: true, data: {id: id, name: $scope.name, description: $scope.description, image:$scope.uploadedImage, latitude: $scope.latitude, longitude: $scope.longitude, radius: $scope.radius, fb_page: $scope.fb_page, mission: $scope.mission, tags:tmpTags}}).then(function (data) {
                 $location.path("/teams/view/" + id);
             });
         }
@@ -5020,6 +5055,7 @@ app.controller("userViewController", ["$scope", "$http", "$stateParams", "User",
                 $scope.skype = data.data.user.skype;
                 $scope.latitude = data.data.user.latitude;
                 $scope.longitude = data.data.user.longitude;
+                $scope.radius = data.data.user.radius;
                 $scope.goals = data.data.user.goals;
                 $scope.categories = data.data.user.categories;
                 $scope.educations = data.data.user.educations;
@@ -5051,9 +5087,15 @@ app.controller("userViewController", ["$scope", "$http", "$stateParams", "User",
                     $scope.position.lng = 0 ;
                     $scope.markers.mainMarker.lng = 0;
                 }
-                    console.log("aaaaa = ", $scope.markers);
+
+                if ($scope.radius && !isNaN($scope.radius)) {
+                    $scope.radius = parseFloat($scope.radius);
+                } else {
+                    $scope.radius = 0 ;
+                }
+
                 $scope.paths = {};
-                $scope.paths['circle'] = {type:'circle', radius: 500*1000, latlngs:$scope.markers.mainMarker};
+                $scope.paths['circle'] = {type:'circle', radius: $scope.radius*1000, latlngs:$scope.markers.mainMarker};
                 $http({
                     method: "POST",
                     url: "getBadgesByCreateAdv",
@@ -5331,8 +5373,14 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
                         $scope.markers.mainMarker.lng = 0;
                     }
 
+                    if (data.data.team.radius && !isNaN(data.data.team.radius)) {
+                        $scope.radius = parseFloat(data.data.team.radius);
+                    } else {
+                        $scope.radius = 0;
+                    }
+
                     $scope.paths = {};
-                    $scope.paths['circle'] = {type:'circle', radius: 500*1000, latlngs:$scope.markers.mainMarker};
+                    $scope.paths['circle'] = {type:'circle', radius: $scope.radius*1000, latlngs:$scope.markers.mainMarker};
                     $scope.isMember = false;
                     for (var i = 0; i < data.data.team.teamMembers.length; i++) {
                         if (data.data.team.teamMembers[i].user.profileId == '000000000000000000000000') {

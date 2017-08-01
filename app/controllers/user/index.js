@@ -37,7 +37,7 @@ module.exports = function (opts) {
             });
         },
         "post#getUserById": function (req, res) {
-            userModel.findOne({_id: req.body.id}).select("_id profileId fullname username email signin photo latitude longitude skype experience goals categories slackToken slackUser").exec(function (err, user) {
+            userModel.findOne({_id: req.body.id}).select("_id profileId fullname username email signin photo latitude longitude radius skype experience goals categories slackToken slackUser").exec(function (err, user) {
                 if (err) {
                     console.log(err);
                     return res.json({success: false});
@@ -58,7 +58,7 @@ module.exports = function (opts) {
             });
         },
         "get#getUser": function (req, res) {
-            userModel.findOne({_id: req.user._id}).select("_id profileId fullname username email signin photo latitude longitude skype experience goals categories slackToken slackUser").exec(function (err, user) {
+            userModel.findOne({_id: req.user._id}).select("_id profileId fullname username email signin photo latitude longitude radius skype experience goals categories slackToken slackUser").exec(function (err, user) {
                 if (err) {
                     console.log(err);
                     return res.json({success: false});
@@ -84,7 +84,7 @@ module.exports = function (opts) {
             for (var i = 0; i < ids.length; i++)
                 queries.push({_id: ids[i]});
 
-            userModel.find({$or: queries}).select("_id profileId fullname username email signin photo latitude longitude skype experience goals categories").exec(function (err, users) {
+            userModel.find({$or: queries}).select("_id profileId fullname username email signin photo latitude longitude radius skype experience goals categories").exec(function (err, users) {
                 if (err) {
                     console.log("getUsersByIds Error = " + err);
                     return res.json({success: false});
@@ -735,6 +735,7 @@ module.exports = function (opts) {
                     skype = req.body.skype,
                     latitude = req.body.latitude,
                     longitude = req.body.longitude,
+                    radius = req.body.radius,
 //                    goals = req.body.goals;
             categories = req.body.categories;
 
@@ -749,6 +750,7 @@ module.exports = function (opts) {
                     user.skype = skype;
                     user.latitude = latitude;
                     user.longitude = longitude;
+                    user.radius = radius;
 //                    user.goals = goals;
                     user.categories = categories;
 

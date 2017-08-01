@@ -123,6 +123,10 @@ module.exports = function (opts) {
         },
         longitude: {
             type: String
+        },
+        radius: {
+            type: String,
+            "default": '0'
         }
     });
     

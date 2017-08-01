@@ -91,6 +91,7 @@ module.exports = function (opts) {
                         adventure.fb_page = req.body.fb_page;
                         adventure.latitude = req.body.latitude;
                         adventure.longitude = req.body.longitude;
+                        adventure.radius = req.body.radius;
                         adventure.start = req.body.start;
                         adventure.end = req.body.end;
                         adventure.description = req.body.description;
@@ -134,6 +135,7 @@ module.exports = function (opts) {
                 adventure.fb_page = req.body.fb_page;
                 adventure.latitude = req.body.latitude;
                 adventure.longitude = req.body.longitude;
+                adventure.radius = req.body.radius;
                 adventure.start = req.body.start;
                 adventure.end = req.body.end;
                 adventure.description = req.body.description;
@@ -536,6 +538,7 @@ module.exports = function (opts) {
                     fb_page = req.body.fb_page,
                     latitude = req.body.latitude;
                     longitude = req.body.longitude;
+                    radius = req.body.radius;
                     start = req.body.start,
                     end = req.body.end,
                     status = req.body.status,
@@ -571,6 +574,10 @@ module.exports = function (opts) {
 
             if (longitude) {
                 updateInfo.longitude = longitude;
+            }
+
+            if (radius) {
+                updateInfo.radius = radius;
             }
 
             if (tags) {

@@ -62,6 +62,7 @@ module.exports = function (opts) {
                     fb_page = req.body.fb_page,
                     latitude = req.body.latitude,
                     longitude = req.body.longitude,
+                    radius = req.body.radius,
                     mission = req.body.mission,
                     team = new teamModel();
             console.log("tags", tags);
@@ -85,6 +86,7 @@ module.exports = function (opts) {
                         team.fb_page = fb_page;
                         team.latitude = latitude;
                         team.longitude = longitude;
+                        team.radius = radius;
                         team.mission = mission;
                         team.teamMembers = [];
                         team.slackGroupId = "";
@@ -753,6 +755,7 @@ module.exports = function (opts) {
                     fb_page = req.body.fb_page,
                     latitude = req.body.latitude,
                     longitude = req.body.longitude,
+                    radius = req.body.radius,
                     mission = req.body.mission,
                     image = req.body.image;
 
@@ -768,6 +771,7 @@ module.exports = function (opts) {
                     team.fb_page = fb_page;
                     team.latitude = latitude;
                     team.longitude = longitude;
+                    team.radius = radius;
                     team.mission = mission;
                     team.save(function (err, team) {
                         if (err) {
