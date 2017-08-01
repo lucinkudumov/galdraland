@@ -1147,7 +1147,8 @@ app.controller("createAdventureController", ["$scope", "$rootScope", "Upload", "
                     enable: [ 'dragend' ]
                     //logic: 'emit'
                 }
-            }
+            },
+            paths: {}
         });
 
         $scope.$on("leafletDirectiveMarker.dragend", function(event, args){
@@ -1349,7 +1350,8 @@ app.controller("editAdventureController", ["$scope", "$http", "$location", "$sta
                     enable: [ 'dragend' ]
                     //logic: 'emit'
                 }
-            }
+            },
+            paths: {}
         });
 
         $scope.$on("leafletDirectiveMarker.dragend", function(event, args){
@@ -3244,7 +3246,8 @@ app.controller("profileSettingsController", ["$scope", "$rootScope", "$location"
                     enable: [ 'dragend' ]
                     //logic: 'emit'
                 }
-            }
+            },
+            paths: {}
         });
 
         $scope.$on("leafletDirectiveMarker.dragend", function(event, args){
