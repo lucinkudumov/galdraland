@@ -1157,6 +1157,15 @@ app.controller("createAdventureController", ["$scope", "$rootScope", "Upload", "
             $scope.markers.mainMarker.lng = args.model.lng;
         });
 
+        $scope.$watch("radius", function(newValue, oldValue){
+            if (newValue != oldValue) {
+                $scope.paths = {};
+                if ($scope.radius != 0)
+                    $scope.paths['circle'] = {type:'circle', color: '#008000', weight: 1, radius: $scope.radius*1000, latlngs:$scope.markers.mainMarker}
+
+            }
+        }, true);
+
         $scope.refresh = function () {
             $http({
                 method: "GET",
@@ -1349,6 +1358,15 @@ app.controller("editAdventureController", ["$scope", "$http", "$location", "$sta
             $scope.markers.mainMarker.lat = args.model.lat;
             $scope.markers.mainMarker.lng = args.model.lng;
         });
+
+        $scope.$watch("radius", function(newValue, oldValue){
+            if (newValue != oldValue) {
+                $scope.paths = {};
+                if ($scope.radius != 0)
+                    $scope.paths['circle'] = {type:'circle', color: '#008000', weight: 1, radius: $scope.radius*1000, latlngs:$scope.markers.mainMarker}
+
+            }
+        }, true);
 
         $scope.getAdventure = function () {
             $http({
@@ -3236,6 +3254,15 @@ app.controller("profileSettingsController", ["$scope", "$rootScope", "$location"
             $scope.markers.mainMarker.lng = args.model.lng;
         });
 
+        $scope.$watch("radius", function(newValue, oldValue){
+            if (newValue != oldValue) {
+                $scope.paths = {};
+                if ($scope.radius != 0)
+                    $scope.paths['circle'] = {type:'circle', color: '#008000', weight: 1, radius: $scope.radius*1000, latlngs:$scope.markers.mainMarker}
+
+            }
+        }, true);
+
         $http.get("/api/getUserDetail").then(function (data) {
             $scope.username = data.data.user.username;
             $scope.fullname = data.data.user.fullname;
@@ -3980,6 +4007,15 @@ app.controller("createTeamController", ["$scope", "$rootScope", "Upload", "$http
         $scope.markers.mainMarker.lat = args.model.lat;
         $scope.markers.mainMarker.lng = args.model.lng;
     });
+
+    $scope.$watch("radius", function(newValue, oldValue){
+        if (newValue != oldValue) {
+            $scope.paths = {};
+            if ($scope.radius != 0)
+                $scope.paths['circle'] = {type:'circle', color: '#008000', weight: 1, radius: $scope.radius*1000, latlngs:$scope.markers.mainMarker}
+
+        }
+    }, true);
 
         $scope.refresh = function () {
             $http({

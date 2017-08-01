@@ -42,7 +42,16 @@
         </div>
 
         <div class="form-group">
-            <leaflet lf-center="position" event-broadcast="events" markers="markers" width="100%" height="250px"></leaflet>
+            <div class="col-md-11" style="padding: 0px;">
+                <input class="form-control" type="text" ng-model="radius" placeholder="Geolocation - Radius (optional)">
+            </div>
+            <div class="col-md-1">
+                <span>Km</span>
+            </div>
+        </div>
+
+        <div class="form-group" style="margin-top: 70px;">
+            <leaflet lf-center="position" event-broadcast="events" markers="markers" paths="paths"  width="100%" height="250px"></leaflet>
         </div>
 
         <div class="form-group">
