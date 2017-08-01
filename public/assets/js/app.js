@@ -3998,7 +3998,8 @@ app.controller("createTeamController", ["$scope", "$rootScope", "Upload", "$http
                 enable: [ 'dragend' ]
                 //logic: 'emit'
             }
-        }
+        },
+        paths: {}
     });
 
     $scope.$on("leafletDirectiveMarker.dragend", function(event, args){
