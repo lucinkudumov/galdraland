@@ -4113,7 +4113,8 @@ app.controller("editTeamController", ["$scope", "$http", "$location", "$statePar
                     enable: [ 'dragend' ]
                     //logic: 'emit'
                 }
-            }
+            },
+            paths: {}
         });
 
     $scope.$on("leafletDirectiveMarker.dragend", function(event, args){
@@ -4146,6 +4147,8 @@ app.controller("editTeamController", ["$scope", "$http", "$location", "$statePar
             $scope.position.lng = parseFloat($scope.longitude);
             $scope.markers.mainMarker.lat = parseFloat($scope.latitude);
             $scope.markers.mainMarker.lng = parseFloat($scope.longitude);
+            $scope.paths = {};
+            $scope.paths['circle'] = {type:'circle', radius: 500*1000, latlngs:$scope.markers.mainMarker}
         });
         $scope.onFileSelect = function (image) {
             console.log(image);
