@@ -679,7 +679,8 @@ app.controller("adventureViewController", ["$scope", "$http", "$stateParams", "$
 
 
                 $scope.paths = {};
-                $scope.paths['circle'] = {type:'circle', radius: $scope.radius*1000, latlngs:$scope.markers.mainMarker};
+                if ($scope.radius != 0)
+                    $scope.paths['circle'] = {type:'circle', radius: $scope.radius*1000, latlngs:$scope.markers.mainMarker};
 
                 $http({
                     method: "POST",
@@ -3773,7 +3774,8 @@ app.controller("profileViewController", ["$scope", "$http", "User", function ($s
         }
 
         $scope.paths = {};
-        $scope.paths['circle'] = {type:'circle', radius: $scope.radius*1000, latlngs:$scope.markers.mainMarker};
+        if ($scope.radius != 0)
+            $scope.paths['circle'] = {type:'circle', radius: $scope.radius*1000, latlngs:$scope.markers.mainMarker};
     });
 
     $http({
@@ -4182,7 +4184,8 @@ app.controller("editTeamController", ["$scope", "$http", "$location", "$statePar
             $scope.radius = parseFloat($scope.radius);
 
             $scope.paths = {};
-            $scope.paths['circle'] = {type:'circle', radius: $scope.radius*1000, latlngs:$scope.markers.mainMarker}
+            if ($scope.radius != 0)
+                $scope.paths['circle'] = {type:'circle', radius: $scope.radius*1000, latlngs:$scope.markers.mainMarker}
         });
         $scope.onFileSelect = function (image) {
             console.log(image);
@@ -5095,7 +5098,8 @@ app.controller("userViewController", ["$scope", "$http", "$stateParams", "User",
                 }
 
                 $scope.paths = {};
-                $scope.paths['circle'] = {type:'circle', radius: $scope.radius*1000, latlngs:$scope.markers.mainMarker};
+                if ($scope.radius != 0)
+                    $scope.paths['circle'] = {type:'circle', radius: $scope.radius*1000, latlngs:$scope.markers.mainMarker};
                 $http({
                     method: "POST",
                     url: "getBadgesByCreateAdv",
@@ -5380,7 +5384,8 @@ app.controller("teamViewController", ["$rootScope", "$scope", "$http", "$sce", "
                     }
 
                     $scope.paths = {};
-                    $scope.paths['circle'] = {type:'circle', radius: $scope.radius*1000, latlngs:$scope.markers.mainMarker};
+                    if ($scope.radius != 0)
+                        $scope.paths['circle'] = {type:'circle', radius: $scope.radius*1000, latlngs:$scope.markers.mainMarker};
                     $scope.isMember = false;
                     for (var i = 0; i < data.data.team.teamMembers.length; i++) {
                         if (data.data.team.teamMembers[i].user.profileId == '000000000000000000000000') {
