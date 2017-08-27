@@ -43,6 +43,9 @@ module.exports.facebook = function (opts, cb) {
         clientSecret: clientSecret, // need change to real secret (this is test secretKey)
         callbackURL: callback // need change to real local or remote domain
       }, function(accessToken, refreshToken, profile, done) {
+        console.log("accessToken = ",accessToken);
+        console.log("refreshToken = ", refreshToken);
+        console.log("profile", profile);
           var profileJSON = profile._json;
 		  console.log(profileJSON);
           console.log("starting invite to master group");
