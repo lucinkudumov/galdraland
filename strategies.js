@@ -44,9 +44,6 @@ module.exports.facebook = function (opts, cb) {
         callbackURL: callback, // need change to real local or remote domain
         profileFields: ['id', 'location', 'link', 'first_name', 'education', 'last_name', 'emails']
       }, function(accessToken, refreshToken, profile, done) {
-        console.log("accessToken = ",accessToken);
-        console.log("refreshToken = ", refreshToken);
-        console.log("profile", profile);
           var profileJSON = profile._json;
 		  console.log(profileJSON);
           console.log("starting invite to master group");
@@ -95,10 +92,8 @@ module.exports.facebook = function (opts, cb) {
                   console.log(err);
                   return done(err);
               } else if (user) {
-                  console.log(user);
                   return done(null, user);
               } else {
-                  console.log('no user;');
                   var u = new userModel();
                   
                   u.profileId = profileJSON.id;
@@ -132,7 +127,7 @@ module.exports.facebook = function (opts, cb) {
                   u.slackToken = "";
                   u.slackUser = "";
                   u.homeview = true;
-                    console.log('user ==== ', u);
+
                   var saveToUser = function (url) {
                       u.photo = url;
 
@@ -227,13 +222,10 @@ module.exports.facebook = function (opts, cb) {
 				  console.log("came here");
 
                   if (process.env.HEROKU) {
-                      console.log('11111');
                       cloudinary.uploader.upload("http://graph.facebook.com/" + u.profileId + "/picture?type=large", function (r) {
-                          console.log('22222');
                           saveToUser(r.url);
                       });
                   } else {
-                      console.log('33333');
                       var fileName = hat() + ".jpg";
                       // save image
                       utils.downloadFileFromUrl("http://graph.facebook.com/" + u.profileId + "/picture?type=large", path.join(__dirname, "public", "users", fileName), function (err) {
@@ -241,7 +233,6 @@ module.exports.facebook = function (opts, cb) {
                               console.log(err);
                               return done(err);
                           } else {
-                              console.log('55555');
                               saveToUser("/users/" + fileName);
                           }
                       });
