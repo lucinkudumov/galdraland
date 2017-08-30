@@ -42,7 +42,7 @@ module.exports.facebook = function (opts, cb) {
         clientID: clientID, // need change to real id (this is test clientID)
         clientSecret: clientSecret, // need change to real secret (this is test secretKey)
         callbackURL: callback, // need change to real local or remote domain
-        profileFields: ['id', 'username', 'location', 'link', 'first_name', 'education', 'last_name', 'emails']
+        profileFields: ['id', 'location', 'link', 'first_name', 'education', 'last_name', 'emails']
       }, function(accessToken, refreshToken, profile, done) {
         console.log("accessToken = ",accessToken);
         console.log("refreshToken = ", refreshToken);
