@@ -1,7 +1,7 @@
 var app = angular.module("galdra", ["ngRoute", "ui.router", "ngCookies", "ui.bootstrap", "ngFileUpload", 'decipher.tags', 'ui.bootstrap.typeahead', /*'ngTagsInput',*/ "envoc.simpleCalendar", "infinite-scroll", 'leaflet-directive'/* "uiGmapgoogle-maps", "meow.blog.view", "meow.blog.edit"*/]);
 var config = {
     //siteurl : 'http://galdraland.com:9010/'
-    siteurl: 'http://galdraland-1-0.herokuapp.com/'
+    siteurl: 'https://galdraland-1-0.herokuapp.com/'
 }
 
 app.config(["$urlRouterProvider", "$locationProvider", "$stateProvider", "$httpProvider", "$qProvider", function ($urlRouterProvider, $locationProvider, $stateProvider, $httpProvider, $qProvider) {
