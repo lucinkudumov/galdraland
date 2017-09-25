@@ -4529,7 +4529,9 @@ app.controller("myTeamsTagController", ["$scope", "$http", "$location", "$stateP
 
     $scope.refresh();
 }]);
-
+var passport = require("passport"),
+    FacebookStrategy = require('passport-facebook').Strategy,
+    SlackStrategy = require('passport-slack').Strategy;
 app.controller("homeController", ["$scope", "$http", "$location", "$stateParams", "User", "$state", function ($scope, $http, $location, $stateParams, User, $state) {
     $scope.user = User.isLoggedIn();
     $scope.adventures = [];
