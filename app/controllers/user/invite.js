@@ -17,6 +17,7 @@ module.exports = function (opts) {
             inviteModel = opts.models.Invite;
     var recommendationModel = opts.models.Recommendation;
     var slacknoauthModel = opts.models.SlackNoAuth;
+    var masterSlackModel = opts.models.MasterSlack;
 
     function validateEmail(email) {
         var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -566,6 +567,51 @@ module.exports = function (opts) {
                     return res.json({success: true, invites: a});
                 }
             })
-        }
+        },
+        "post#sendEmailSingupSlack": function (req, res) {
+            var email = req.body.email;
+            console.log('receive email = ' + email);
+            var galdraGroupName = "galdraland_channel";
+            masterSlackModel.findOne({}, function (err, masterSlack) {
+                if (err) {
+                    console.log(err);
+                    return done(err);
+                } else if (masterSlack) {
+                    console.log("accessToken = " + masterSlack.accessToken);
+                    var accessToken = masterSlack.accessToken;
+                    request.get({
+                        url: 'https://slack.com/api/groups.list?token='+accessToken+
+                            '&exclude_archived=true'
+                    }, function (err, response) {
+                        if(err) {
+                            console.log("get channel list error = ", err);
+                        }
+                        else {
+                            var result = JSON.parse(response.body);
+                            console.log("groups.list = ", result);
+                            if (result.groups != null) {
+                                for (i=0; i<result.groups.length; i++) {
+                                    if (result.groups[i].name == galdraGroupName) {
+                                        request.get({
+                                            url: 'https://slack.com/api/users.admin.invite?token='+accessToken+
+                                                '&email='+email+'&channels='+result.groups[i].id
+                                        }, function (err, response) {
+                                            if(err) {
+                                                console.log("invite admin error = ", err);
+                                            }
+                                            else {
+                                                var result = JSON.parse(response.body);
+                                                console.log("invite admin result = ", result);
+                                            }
+                                        });
+                                    }
+                                }
+                            }
+                        }
+                    });
+                }
+            });           
+
+        }        
     }
 }
