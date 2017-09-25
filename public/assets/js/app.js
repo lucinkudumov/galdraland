@@ -4544,13 +4544,6 @@ app.controller("homeController", ["$scope", "$http", "$location", "$stateParams"
     $scope.badgeloading = true;
     $scope.slackloading = true;
     $scope.slackAuthentication = false;
-
-        function send_email_signup_slack(email) {
-            console.log('email = ' + email);
-            $http({method: "POST", url: "sendEmailSingupSlack", api: true, data: {email: email}}).then(function (data) {
-
-            });
-        }
                     
         $http({
             method: "POST",
@@ -4562,6 +4555,12 @@ app.controller("homeController", ["$scope", "$http", "$location", "$stateParams"
                 $scope.slackAuthentication = true;
             } else {
                 console.log('calling send email for slack');
+                function send_email_signup_slack(email) {
+                    console.log('email = ' + email);
+                    $http({method: "POST", url: "sendEmailSingupSlack", api: true, data: {email: email}}).then(function (data) {
+
+                    });
+                }                
                 send_email_signup_slack(data.data.user.email);
             }
             $scope.slackloading = false;
