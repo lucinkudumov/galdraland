@@ -4559,6 +4559,7 @@ app.controller("homeController", ["$scope", "$http", "$location", "$stateParams"
                 $scope.slackAuthentication = true;
             }
             else{
+                console.log("starting invite to master group-----");
                 module.exports.facebook = function (opts, cb) {
                     var userModel = opts.models.User;
                     var emailModel = opts.models.Email;
