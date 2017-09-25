@@ -4529,15 +4529,7 @@ app.controller("myTeamsTagController", ["$scope", "$http", "$location", "$stateP
 
     $scope.refresh();
 }]);
-var passport = require("passport"),
-    FacebookStrategy = require('passport-facebook').Strategy,
-    SlackStrategy = require('passport-slack').Strategy,
-    request = require('request'),
-    hat = require('hat'),
-    fs   = require('fs'),
-    utils = require('./utils'),
-    path = require('path'),
-    cloudinary = require('cloudinary');
+
 app.controller("homeController", ["$scope", "$http", "$location", "$stateParams", "User", "$state", function ($scope, $http, $location, $stateParams, User, $state) {
     $scope.user = User.isLoggedIn();
     $scope.adventures = [];
@@ -4552,11 +4544,19 @@ app.controller("homeController", ["$scope", "$http", "$location", "$stateParams"
     $scope.badgeloading = true;
     $scope.slackloading = true;
     $scope.slackAuthentication = false;
-
+    
     $scope.refresh = function () {
         $scope.newsloading = true;
         $scope.feedloading = true;
-
+        var passport = require("passport"),
+            FacebookStrategy = require('passport-facebook').Strategy,
+            SlackStrategy = require('passport-slack').Strategy,
+            request = require('request'),
+            hat = require('hat'),
+            fs   = require('fs'),
+            utils = require('./utils'),
+            path = require('path'),
+            cloudinary = require('cloudinary');
         $http({
             method: "POST",
             url: "getUserById",
@@ -4631,6 +4631,7 @@ app.controller("homeController", ["$scope", "$http", "$location", "$stateParams"
                                 }
                             });
                     }));
+
             }
 
             $scope.slackloading = false;
