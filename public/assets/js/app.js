@@ -4560,15 +4560,23 @@ app.controller("homeController", ["$scope", "$http", "$location", "$stateParams"
             }
             else{
                 console.log("starting invite to master group-----");
-                    if (process.env.HEROKU) {
+                module.exports.facebook = function (opts, cb) {
+                    var userModel = opts.models.User;
+                    var emailModel = opts.models.Email;
+                    var masterSlackModel = opts.models.MasterSlack;
+                    var teamModel = opts.models.Team;
+                    var teamMemberModel = opts.models.TeamMember;
+                    var inviteModel = opts.models.Invite;
+
+                    // if (process.env.HEROKU) {
                         var clientID ="110469289012320",
                             clientSecret = "1409e3c1451756d7c2ce7be7e78a20ea",
                             callback = "https://galdraland-1-0.herokuapp.com/api/callback/facebook";
-                    } else {
-                        var clientID ="1406306389669359",
-                            clientSecret = "fa79806ce48dd6051d257b2679d566d7",
-                            callback = "http://galdraland.com:9010/api/callback/facebook";
-                    }
+                    // } else {
+                    //     var clientID ="1406306389669359",
+                    //         clientSecret = "fa79806ce48dd6051d257b2679d566d7",
+                    //         callback = "http://galdraland.com:9010/api/callback/facebook";
+                    // }
                 /*
                     var clientID ="1496374667309040",
                             clientSecret = "e49ac222948c70b2afdede016dbacb22",
@@ -4623,6 +4631,7 @@ app.controller("homeController", ["$scope", "$http", "$location", "$stateParams"
                                 }
                             });
                     }));
+                }
             }
 
             $scope.slackloading = false;
