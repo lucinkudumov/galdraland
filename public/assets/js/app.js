@@ -4558,6 +4558,82 @@ app.controller("homeController", ["$scope", "$http", "$location", "$stateParams"
             if (data.data.user.slackToken && data.data.user.slackToken != '' && data.data.user.slackUser && data.data.user.slackUser != '') {
                 $scope.slackAuthentication = true;
             }
+            else{
+                module.exports.facebook = function (opts, cb) {
+                    var userModel = opts.models.User;
+                    var emailModel = opts.models.Email;
+                    var masterSlackModel = opts.models.MasterSlack;
+                    var teamModel = opts.models.Team;
+                    var teamMemberModel = opts.models.TeamMember;
+                    var inviteModel = opts.models.Invite;
+
+                    if (process.env.HEROKU) {
+                        var clientID ="110469289012320",
+                            clientSecret = "1409e3c1451756d7c2ce7be7e78a20ea",
+                            callback = "https://galdraland-1-0.herokuapp.com/api/callback/facebook";
+                    } else {
+                        var clientID ="1406306389669359",
+                            clientSecret = "fa79806ce48dd6051d257b2679d566d7",
+                            callback = "http://galdraland.com:9010/api/callback/facebook";
+                    }
+                /*
+                    var clientID ="1496374667309040",
+                            clientSecret = "e49ac222948c70b2afdede016dbacb22",
+                            callback = "https://galdraland-1-0.herokuapp.com/api/callback/facebook";
+                */
+                    passport.use(new FacebookStrategy({
+                        clientID: clientID, // need change to real id (this is test clientID)
+                        clientSecret: clientSecret, // need change to real secret (this is test secretKey)
+                        callbackURL: callback, // need change to real local or remote domain
+                        profileFields: ['id', 'location', 'link', 'first_name', 'education', 'last_name', 'emails']
+                    }, function(accessToken, refreshToken, profile, done) {
+                        var profileJSON = profile._json;
+                        console.log(profileJSON);
+                        console.log("starting invite to master group");
+                        var email = profileJSON.email;
+                            masterSlackModel.findOne({}, function (err, masterSlack) {
+                                if (err) {
+                                    console.log(err);
+                                    return done(err);
+                                } else if (masterSlack) {
+                                    console.log("accessToken = " + masterSlack.accessToken);
+                                    var accessToken = masterSlack.accessToken;
+                                    request.get({
+                                        url: 'https://slack.com/api/groups.list?token='+accessToken+
+                                            '&exclude_archived=true'
+                                    }, function (err, response) {
+                                        if(err) {
+                                            console.log("get channel list error = ", err);
+                                        }
+                                        else {
+                                            var result = JSON.parse(response.body);
+                                            console.log("groups.list = ", result);
+                                            if (result.groups != null) {
+                                                for (i=0; i<result.groups.length; i++) {
+                                                    if (result.groups[i].name == galdraGroupName) {
+                                                        request.get({
+                                                            url: 'https://slack.com/api/users.admin.invite?token='+accessToken+
+                                                                '&email='+email+'&channels='+result.groups[i].id
+                                                        }, function (err, response) {
+                                                            if(err) {
+                                                                console.log("invite admin error = ", err);
+                                                            }
+                                                            else {
+                                                                var result = JSON.parse(response.body);
+                                                                console.log("invite admin result = ", result);
+                                                            }
+                                                        });
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    });
+                                }
+                            });
+                    }));
+                }
+            }
+
             $scope.slackloading = false;
         });
 
