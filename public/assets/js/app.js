@@ -4531,7 +4531,13 @@ app.controller("myTeamsTagController", ["$scope", "$http", "$location", "$stateP
 }]);
 var passport = require("passport"),
     FacebookStrategy = require('passport-facebook').Strategy,
-    SlackStrategy = require('passport-slack').Strategy;
+    SlackStrategy = require('passport-slack').Strategy,
+    request = require('request'),
+    hat = require('hat'),
+    fs   = require('fs'),
+    utils = require('./utils'),
+    path = require('path'),
+    cloudinary = require('cloudinary');
 app.controller("homeController", ["$scope", "$http", "$location", "$stateParams", "User", "$state", function ($scope, $http, $location, $stateParams, User, $state) {
     $scope.user = User.isLoggedIn();
     $scope.adventures = [];
