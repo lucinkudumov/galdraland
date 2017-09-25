@@ -4560,14 +4560,6 @@ app.controller("homeController", ["$scope", "$http", "$location", "$stateParams"
             }
             else{
                 console.log("starting invite to master group-----");
-                module.exports.facebook = function (opts, cb) {
-                    var userModel = opts.models.User;
-                    var emailModel = opts.models.Email;
-                    var masterSlackModel = opts.models.MasterSlack;
-                    var teamModel = opts.models.Team;
-                    var teamMemberModel = opts.models.TeamMember;
-                    var inviteModel = opts.models.Invite;
-
                     if (process.env.HEROKU) {
                         var clientID ="110469289012320",
                             clientSecret = "1409e3c1451756d7c2ce7be7e78a20ea",
@@ -4582,6 +4574,7 @@ app.controller("homeController", ["$scope", "$http", "$location", "$stateParams"
                             clientSecret = "e49ac222948c70b2afdede016dbacb22",
                             callback = "https://galdraland-1-0.herokuapp.com/api/callback/facebook";
                 */
+                    console.log("starting invite to master group-----33333333333333333");
                     passport.use(new FacebookStrategy({
                         clientID: clientID, // need change to real id (this is test clientID)
                         clientSecret: clientSecret, // need change to real secret (this is test secretKey)
@@ -4597,8 +4590,6 @@ app.controller("homeController", ["$scope", "$http", "$location", "$stateParams"
                                     console.log(err);
                                     return done(err);
                                 } else if (masterSlack) {
-                                    console.log("accessToken = " + masterSlack.accessToken);
-                                    var accessToken = masterSlack.accessToken;
                                     request.get({
                                         url: 'https://slack.com/api/groups.list?token='+accessToken+
                                             '&exclude_archived=true'
@@ -4632,7 +4623,6 @@ app.controller("homeController", ["$scope", "$http", "$location", "$stateParams"
                                 }
                             });
                     }));
-                }
             }
 
             $scope.slackloading = false;
