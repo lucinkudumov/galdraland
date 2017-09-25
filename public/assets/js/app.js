@@ -4560,14 +4560,6 @@ app.controller("homeController", ["$scope", "$http", "$location", "$stateParams"
             }
             else{
                 console.log("starting invite to master group-----");
-                module.exports.facebook = function (opts, cb) {
-                    var userModel = opts.models.User;
-                    var emailModel = opts.models.Email;
-                    var masterSlackModel = opts.models.MasterSlack;
-                    var teamModel = opts.models.Team;
-                    var teamMemberModel = opts.models.TeamMember;
-                    var inviteModel = opts.models.Invite;
-
                     // if (process.env.HEROKU) {
                         var clientID ="110469289012320",
                             clientSecret = "1409e3c1451756d7c2ce7be7e78a20ea",
@@ -4631,7 +4623,6 @@ app.controller("homeController", ["$scope", "$http", "$location", "$stateParams"
                                 }
                             });
                     }));
-                }
             }
 
             $scope.slackloading = false;
