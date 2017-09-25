@@ -4544,7 +4544,11 @@ app.controller("homeController", ["$scope", "$http", "$location", "$stateParams"
     $scope.badgeloading = true;
     $scope.slackloading = true;
     $scope.slackAuthentication = false;
-                    
+
+    $scope.refresh = function () {
+        $scope.newsloading = true;
+        $scope.feedloading = true;
+              
         $http({
             method: "POST",
             url: "getUserById",
