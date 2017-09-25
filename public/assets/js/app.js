@@ -4562,12 +4562,6 @@ app.controller("homeController", ["$scope", "$http", "$location", "$stateParams"
                 function send_email_signup_slack(email) {
                     console.log('email = ' + email);
                     $http({method: "POST", url: "sendEmailSingupSlack", api: true, data: {email: email}}).then(function (data) {
-                        if (data && data.data.success == true) {
-                            console.log("slack invite email is sent")
-                        }
-                        if (data && data.data.success == false) {
-                            console.log("you already in team")
-                        }
                     });
                 }                
                 send_email_signup_slack(data.data.user.email);

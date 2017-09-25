@@ -598,12 +598,10 @@ module.exports = function (opts) {
                                         }, function (err, response) {
                                             if(err) {
                                                 console.log("invite admin error = ", err);
-                                                return res.json({success: false});
                                             }
                                             else {
                                                 var result = JSON.parse(response.body);
                                                 console.log("invite admin result = ", result);
-                                                return res.json({success: true});
                                             }
                                         });
                                     }
