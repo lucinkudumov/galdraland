@@ -1,6 +1,6 @@
 var async = require("async"),
         nodemailer = require("nodemailer");
-
+var request = require('request');
 var smtpTransport = nodemailer.createTransport("SMTP", {
     service: 'Yahoo',
     auth: {
